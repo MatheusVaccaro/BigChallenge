@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--TaskListViewController-->
+        <scene sceneID="kAK-wp-9fr">
+            <objects>
+                <viewController storyboardIdentifier="TaskListViewController" title="TaskListViewController" id="BWO-xZ-rzT" customClass="TaskListViewController" customModule="BigChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="j2g-Cu-wU6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="bOi-fR-3xO">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="taskCell" editingAccessoryType="disclosureIndicator" id="rIG-Hy-LG4" customClass="TaskTableViewCell" customModule="BigChallenge" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rIG-Hy-LG4" id="qUG-wf-Wjh">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ODM-kH-ufY">
+                                                    <rect key="frame" x="15" y="7" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="ODM-kH-ufY" secondAttribute="height" multiplier="1:1" id="Zfe-96-Kjg"/>
+                                                    </constraints>
+                                                    <state key="normal" title="X"/>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iKx-1P-ZPx">
+                                                    <rect key="frame" x="60" y="11" width="300" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="iKx-1P-ZPx" firstAttribute="leading" secondItem="ODM-kH-ufY" secondAttribute="trailing" constant="15" id="45z-aJ-tzS"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="iKx-1P-ZPx" secondAttribute="bottom" id="BKe-vx-UVv"/>
+                                                <constraint firstItem="ODM-kH-ufY" firstAttribute="top" secondItem="qUG-wf-Wjh" secondAttribute="top" constant="7" id="NSX-LJ-W9M"/>
+                                                <constraint firstItem="iKx-1P-ZPx" firstAttribute="top" secondItem="qUG-wf-Wjh" secondAttribute="topMargin" id="T4T-m2-hap"/>
+                                                <constraint firstItem="ODM-kH-ufY" firstAttribute="leading" secondItem="qUG-wf-Wjh" secondAttribute="leading" constant="15" id="coQ-xS-9aH"/>
+                                                <constraint firstAttribute="bottom" secondItem="ODM-kH-ufY" secondAttribute="bottom" constant="6.5" id="dDI-jm-E87"/>
+                                                <constraint firstAttribute="trailing" secondItem="iKx-1P-ZPx" secondAttribute="trailing" constant="15" id="pJw-B7-z2p"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="taskTitleLabel" destination="iKx-1P-ZPx" id="UzM-ja-MVi"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="y5w-1l-g0m" firstAttribute="trailing" secondItem="bOi-fR-3xO" secondAttribute="trailing" id="AJY-35-Gsu"/>
+                            <constraint firstItem="bOi-fR-3xO" firstAttribute="top" secondItem="y5w-1l-g0m" secondAttribute="top" id="F6P-MW-iGZ"/>
+                            <constraint firstItem="y5w-1l-g0m" firstAttribute="bottom" secondItem="bOi-fR-3xO" secondAttribute="bottom" id="RJ4-Cp-uQs"/>
+                            <constraint firstItem="bOi-fR-3xO" firstAttribute="leading" secondItem="y5w-1l-g0m" secondAttribute="leading" id="hdb-kN-ZaR"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="y5w-1l-g0m"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Tasks" id="Zv9-Oa-gxr">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="92A-iH-Smi">
+                            <connections>
+                                <action selector="didTapAddBarButtonItem:" destination="BWO-xZ-rzT" id="ppe-TO-gKb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="bOi-fR-3xO" id="Uwu-cU-n8a"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jZo-tM-3rt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-311.19999999999999" y="108.39580209895054"/>
+        </scene>
+    </scenes>
+</document>
