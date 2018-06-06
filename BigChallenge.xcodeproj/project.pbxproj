@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1627171020C8793900AA0024 /* BigChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1627170F20C8793900AA0024 /* BigChallengeTests.swift */; };
+		1627171E20C879AD00AA0024 /* BigChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1627171D20C879AD00AA0024 /* BigChallengeUITests.swift */; };
+		1627EBEDDA20D9C1EB6BC691 /* Pods_BigChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 558C6AF329AB768E11815BB8 /* Pods_BigChallengeTests.framework */; };
+		25A3EF9F7B0FADAB1A8E19B8 /* Pods_BigChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18C9FEFF01841372B83A1C4 /* Pods_BigChallengeUITests.framework */; };
 		C21EAD0020B741BC005F0F85 /* TaskListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EACFF20B741BC005F0F85 /* TaskListCoordinator.swift */; };
 		C21EAD0720B74757005F0F85 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD0620B74757005F0F85 /* TaskListViewController.swift */; };
 		C21EAD0B20B74F01005F0F85 /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD0A20B74F01005F0F85 /* StoryboardInstantiable.swift */; };
@@ -27,9 +31,42 @@
 		C2A1115120B9FCDB00ABB161 /* NewTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1115020B9FCDB00ABB161 /* NewTaskViewModel.swift */; };
 		C2A1115320BA036800ABB161 /* NewTaskCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1115220BA036800ABB161 /* NewTaskCoordinator.swift */; };
 		C2A1115720BB923C00ABB161 /* NewTaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1115620BB923C00ABB161 /* NewTaskTableViewController.swift */; };
+		EE3649E90DE055B9D5168F01 /* Pods_BigChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8708FC5A67C933F755CB93 /* Pods_BigChallenge.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		1627171220C8793900AA0024 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C28DC90E20B61CB6007F881A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C28DC91520B61CB6007F881A;
+			remoteInfo = BigChallenge;
+		};
+		1627172020C879AD00AA0024 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C28DC90E20B61CB6007F881A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C28DC91520B61CB6007F881A;
+			remoteInfo = BigChallenge;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		1627170D20C8793900AA0024 /* BigChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1627170F20C8793900AA0024 /* BigChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigChallengeTests.swift; sourceTree = "<group>"; };
+		1627171120C8793900AA0024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1627171B20C879AD00AA0024 /* BigChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1627171D20C879AD00AA0024 /* BigChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigChallengeUITests.swift; sourceTree = "<group>"; };
+		1627171F20C879AD00AA0024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2766B305F29EF8BE8DDEADCA /* Pods-BigChallengeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigChallengeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigChallengeUITests/Pods-BigChallengeUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		2D020A78B9BEB6EB771DFE12 /* Pods-BigChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigChallenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigChallenge/Pods-BigChallenge.debug.xcconfig"; sourceTree = "<group>"; };
+		3B2823E64B1FC7A4411311AA /* Pods-BigChallengeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigChallengeUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BigChallengeUITests/Pods-BigChallengeUITests.release.xcconfig"; sourceTree = "<group>"; };
+		558C6AF329AB768E11815BB8 /* Pods_BigChallengeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BigChallengeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		717F662667FED0B8BDFBAA0B /* Pods-BigChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigChallengeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigChallengeTests/Pods-BigChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7E8708FC5A67C933F755CB93 /* Pods_BigChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BigChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F87A6CB4388F73CB0FDA3A1 /* Pods-BigChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigChallengeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BigChallengeTests/Pods-BigChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
+		A18C9FEFF01841372B83A1C4 /* Pods_BigChallengeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BigChallengeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB08D99D8EA8EBF32B46628D /* Pods-BigChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigChallenge.release.xcconfig"; path = "Pods/Target Support Files/Pods-BigChallenge/Pods-BigChallenge.release.xcconfig"; sourceTree = "<group>"; };
 		C21EACFF20B741BC005F0F85 /* TaskListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListCoordinator.swift; sourceTree = "<group>"; };
 		C21EAD0620B74757005F0F85 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		C21EAD0A20B74F01005F0F85 /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
@@ -55,16 +92,74 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1627170A20C8793900AA0024 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1627EBEDDA20D9C1EB6BC691 /* Pods_BigChallengeTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1627171820C879AD00AA0024 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25A3EF9F7B0FADAB1A8E19B8 /* Pods_BigChallengeUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C28DC91320B61CB6007F881A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE3649E90DE055B9D5168F01 /* Pods_BigChallenge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1627170E20C8793900AA0024 /* BigChallengeTests */ = {
+			isa = PBXGroup;
+			children = (
+				1627170F20C8793900AA0024 /* BigChallengeTests.swift */,
+				1627171120C8793900AA0024 /* Info.plist */,
+			);
+			path = BigChallengeTests;
+			sourceTree = "<group>";
+		};
+		1627171C20C879AD00AA0024 /* BigChallengeUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1627171D20C879AD00AA0024 /* BigChallengeUITests.swift */,
+				1627171F20C879AD00AA0024 /* Info.plist */,
+			);
+			path = BigChallengeUITests;
+			sourceTree = "<group>";
+		};
+		45EE167F10EAE72CE5635B25 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7E8708FC5A67C933F755CB93 /* Pods_BigChallenge.framework */,
+				558C6AF329AB768E11815BB8 /* Pods_BigChallengeTests.framework */,
+				A18C9FEFF01841372B83A1C4 /* Pods_BigChallengeUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6BF08872F858F444FF435658 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2D020A78B9BEB6EB771DFE12 /* Pods-BigChallenge.debug.xcconfig */,
+				AB08D99D8EA8EBF32B46628D /* Pods-BigChallenge.release.xcconfig */,
+				717F662667FED0B8BDFBAA0B /* Pods-BigChallengeTests.debug.xcconfig */,
+				9F87A6CB4388F73CB0FDA3A1 /* Pods-BigChallengeTests.release.xcconfig */,
+				2766B305F29EF8BE8DDEADCA /* Pods-BigChallengeUITests.debug.xcconfig */,
+				3B2823E64B1FC7A4411311AA /* Pods-BigChallengeUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		C21EAD0120B745B6005F0F85 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,7 +238,11 @@
 			isa = PBXGroup;
 			children = (
 				C28DC91820B61CB6007F881A /* BigChallenge */,
+				1627170E20C8793900AA0024 /* BigChallengeTests */,
+				1627171C20C879AD00AA0024 /* BigChallengeUITests */,
 				C28DC91720B61CB6007F881A /* Products */,
+				6BF08872F858F444FF435658 /* Pods */,
+				45EE167F10EAE72CE5635B25 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -151,6 +250,8 @@
 			isa = PBXGroup;
 			children = (
 				C28DC91620B61CB6007F881A /* BigChallenge.app */,
+				1627170D20C8793900AA0024 /* BigChallengeTests.xctest */,
+				1627171B20C879AD00AA0024 /* BigChallengeUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -216,13 +317,55 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1627170C20C8793900AA0024 /* BigChallengeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1627171420C8793900AA0024 /* Build configuration list for PBXNativeTarget "BigChallengeTests" */;
+			buildPhases = (
+				C6D80CDCAD21C4B14BECB9C6 /* [CP] Check Pods Manifest.lock */,
+				1627170920C8793900AA0024 /* Sources */,
+				1627170A20C8793900AA0024 /* Frameworks */,
+				1627170B20C8793900AA0024 /* Resources */,
+				FB3674A2885660B93A7DAD30 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1627171320C8793900AA0024 /* PBXTargetDependency */,
+			);
+			name = BigChallengeTests;
+			productName = BigChallengeTests;
+			productReference = 1627170D20C8793900AA0024 /* BigChallengeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1627171A20C879AD00AA0024 /* BigChallengeUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1627172220C879AD00AA0024 /* Build configuration list for PBXNativeTarget "BigChallengeUITests" */;
+			buildPhases = (
+				9BB5C177AEAF8FEBDD7DC279 /* [CP] Check Pods Manifest.lock */,
+				1627171720C879AD00AA0024 /* Sources */,
+				1627171820C879AD00AA0024 /* Frameworks */,
+				1627171920C879AD00AA0024 /* Resources */,
+				CEE65AF455124B1F6502DF75 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1627172120C879AD00AA0024 /* PBXTargetDependency */,
+			);
+			name = BigChallengeUITests;
+			productName = BigChallengeUITests;
+			productReference = 1627171B20C879AD00AA0024 /* BigChallengeUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		C28DC91520B61CB6007F881A /* BigChallenge */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C28DC92820B61CB9007F881A /* Build configuration list for PBXNativeTarget "BigChallenge" */;
 			buildPhases = (
+				B82CD480A753E33953458C3C /* [CP] Check Pods Manifest.lock */,
 				C28DC91220B61CB6007F881A /* Sources */,
 				C28DC91320B61CB6007F881A /* Frameworks */,
 				C28DC91420B61CB6007F881A /* Resources */,
+				7B8A3E05277891C7E4FEF6D7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -239,10 +382,18 @@
 		C28DC90E20B61CB6007F881A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0930;
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Matheus Vaccaro";
 				TargetAttributes = {
+					1627170C20C8793900AA0024 = {
+						CreatedOnToolsVersion = 9.4;
+						TestTargetID = C28DC91520B61CB6007F881A;
+					};
+					1627171A20C879AD00AA0024 = {
+						CreatedOnToolsVersion = 9.4;
+						TestTargetID = C28DC91520B61CB6007F881A;
+					};
 					C28DC91520B61CB6007F881A = {
 						CreatedOnToolsVersion = 9.3;
 					};
@@ -262,11 +413,27 @@
 			projectRoot = "";
 			targets = (
 				C28DC91520B61CB6007F881A /* BigChallenge */,
+				1627170C20C8793900AA0024 /* BigChallengeTests */,
+				1627171A20C879AD00AA0024 /* BigChallengeUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1627170B20C8793900AA0024 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1627171920C879AD00AA0024 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C28DC91420B61CB6007F881A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -280,7 +447,140 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7B8A3E05277891C7E4FEF6D7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BigChallenge/Pods-BigChallenge-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BigChallenge/Pods-BigChallenge-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9BB5C177AEAF8FEBDD7DC279 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BigChallengeUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B82CD480A753E33953458C3C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BigChallenge-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C6D80CDCAD21C4B14BECB9C6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BigChallengeTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CEE65AF455124B1F6502DF75 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BigChallengeUITests/Pods-BigChallengeUITests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BigChallengeUITests/Pods-BigChallengeUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB3674A2885660B93A7DAD30 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BigChallengeTests/Pods-BigChallengeTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BigChallengeTests/Pods-BigChallengeTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		1627170920C8793900AA0024 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1627171020C8793900AA0024 /* BigChallengeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1627171720C879AD00AA0024 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1627171E20C879AD00AA0024 /* BigChallengeUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C28DC91220B61CB6007F881A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -306,6 +606,19 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		1627171320C8793900AA0024 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C28DC91520B61CB6007F881A /* BigChallenge */;
+			targetProxy = 1627171220C8793900AA0024 /* PBXContainerItemProxy */;
+		};
+		1627172120C879AD00AA0024 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C28DC91520B61CB6007F881A /* BigChallenge */;
+			targetProxy = 1627172020C879AD00AA0024 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		C28DC91D20B61CB6007F881A /* TaskList.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -326,6 +639,92 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1627171520C8793900AA0024 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 717F662667FED0B8BDFBAA0B /* Pods-BigChallengeTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 22SPKR75FE;
+				INFOPLIST_FILE = BigChallengeTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = matheusvaccaro.BigChallengeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BigChallenge.app/BigChallenge";
+			};
+			name = Debug;
+		};
+		1627171620C8793900AA0024 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F87A6CB4388F73CB0FDA3A1 /* Pods-BigChallengeTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 22SPKR75FE;
+				INFOPLIST_FILE = BigChallengeTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = matheusvaccaro.BigChallengeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BigChallenge.app/BigChallenge";
+			};
+			name = Release;
+		};
+		1627172320C879AD00AA0024 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2766B305F29EF8BE8DDEADCA /* Pods-BigChallengeUITests.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 22SPKR75FE;
+				INFOPLIST_FILE = BigChallengeUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = matheusvaccaro.BigChallengeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BigChallenge;
+			};
+			name = Debug;
+		};
+		1627172420C879AD00AA0024 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3B2823E64B1FC7A4411311AA /* Pods-BigChallengeUITests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 22SPKR75FE;
+				INFOPLIST_FILE = BigChallengeUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = matheusvaccaro.BigChallengeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BigChallenge;
+			};
+			name = Release;
+		};
 		C28DC92620B61CB9007F881A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -442,10 +841,11 @@
 		};
 		C28DC92920B61CB9007F881A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D020A78B9BEB6EB771DFE12 /* Pods-BigChallenge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D9KU92KK65;
+				DEVELOPMENT_TEAM = 22SPKR75FE;
 				INFOPLIST_FILE = "$(SRCROOT)/BigChallenge/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -460,10 +860,11 @@
 		};
 		C28DC92A20B61CB9007F881A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB08D99D8EA8EBF32B46628D /* Pods-BigChallenge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D9KU92KK65;
+				DEVELOPMENT_TEAM = 22SPKR75FE;
 				INFOPLIST_FILE = "$(SRCROOT)/BigChallenge/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -479,6 +880,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1627171420C8793900AA0024 /* Build configuration list for PBXNativeTarget "BigChallengeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1627171520C8793900AA0024 /* Debug */,
+				1627171620C8793900AA0024 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1627172220C879AD00AA0024 /* Build configuration list for PBXNativeTarget "BigChallengeUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1627172320C879AD00AA0024 /* Debug */,
+				1627172420C879AD00AA0024 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C28DC91120B61CB6007F881A /* Build configuration list for PBXProject "BigChallenge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

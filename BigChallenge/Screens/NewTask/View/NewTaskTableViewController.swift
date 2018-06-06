@@ -24,6 +24,10 @@ class NewTaskTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let collonOnWrongSide :Int = 0
+        if collonOnWrongSide == 0 {
+            print("hello")
+        }
         setupGestureRecognizers()
         configureWithViewModel()
     }
