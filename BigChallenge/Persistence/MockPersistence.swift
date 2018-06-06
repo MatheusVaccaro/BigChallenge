@@ -15,8 +15,8 @@ class MockPersistence: Persistence {
     init() {
         objects = {
             var tasks = [Task]()
-            for i in 1...2 {
-                tasks.append(Task(title: "Task \(i)"))
+            for iterator in 1...2 {
+                tasks.append(Task(title: "Task \(iterator)"))
             }
             return tasks
         }()
