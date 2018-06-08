@@ -15,10 +15,12 @@ struct Task: Storable {
         case incomplete
     }
     
+    var uuid: UUID
     var title: String
     var status: Status
     
     init(title: String = "", status: Status = .incomplete) {
+        self.uuid = UUID()
         self.title = title
         self.status = status
     }
