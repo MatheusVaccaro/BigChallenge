@@ -24,8 +24,10 @@ extension StoryboardInstantiable {
     static func instantiate() -> Self {
         let storyboard = UIStoryboard(name: storyboardName, bundle: storyboardBundle)
         
-        guard let viewController = storyboard.instantiateViewController(withIdentifier: storyboardIdentifier) as? Self else {
-            fatalError("Could not instantiate \(self)")
+        guard let viewController =
+            storyboard.instantiateViewController(withIdentifier: storyboardIdentifier) as? Self else {
+            
+                fatalError("Could not instantiate \(self)")
         }
         return viewController
     }

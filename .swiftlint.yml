@@ -13,7 +13,7 @@ excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
   - Source/ExcludedFolder
   - Source/ExcludedFile.swift
-
+  - BigChallenge/AppDelegate.swift
 # configurable rules can be customized from this configuration file
 # binary rules can set their severity level
 force_cast: warning # implicitly
@@ -23,6 +23,8 @@ force_try:
 # implicitly
 line_length: 110
 # they can set both implicitly with an array
+line_length: 
+  ignores_comments: true
 type_body_length:
   - 300 # warning
   - 400 # error
@@ -46,4 +48,6 @@ identifier_name:
     - id
     - URL
     - GlobalAPIKey
+trailing_whitespace:
+  ignores_empty_lines: true 
 reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji)

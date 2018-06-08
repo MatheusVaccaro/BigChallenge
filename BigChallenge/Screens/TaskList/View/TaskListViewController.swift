@@ -15,11 +15,9 @@ class TaskListViewController: UIViewController {
     var viewModel: TaskListViewModel?
     private var editBarButtonItem: UIBarButtonItem?
     
-    
     // MARK: - IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
-    
     
     // MARK: - ViewController Lifecycle
     
@@ -36,19 +34,18 @@ class TaskListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
     // MARK: - IBActions
     
     @IBAction func didTapAddBarButtonItem(_ sender: Any) {
         viewModel?.didTapAddButton()
     }
     
-    
     // MARK: - Functions
     
     // The default editButtonItem was not toggling the tableview's edition mode, so we coded it from scratch
     private func setupEditBarButtonItem() {
-        let editBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleEditionMode))
+        let editBarButtonItem =
+            UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleEditionMode))
         self.editBarButtonItem = editBarButtonItem
         navigationItem.leftBarButtonItem = editBarButtonItem
     }
@@ -57,17 +54,17 @@ class TaskListViewController: UIViewController {
         let barButtonItem: UIBarButtonItem
         if tableView.isEditing {
             tableView.setEditing(false, animated: true)
-            barButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleEditionMode))
+            barButtonItem =
+                UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleEditionMode))
         } else {
             tableView.setEditing(true, animated: true)
-            barButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(toggleEditionMode))
+            barButtonItem =
+                UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(toggleEditionMode))
         }
         navigationItem.leftBarButtonItem = barButtonItem
     }
     
 }
-
-
 // MARK: - StoryboardInstantiable
 
 extension TaskListViewController: StoryboardInstantiable {
@@ -81,8 +78,6 @@ extension TaskListViewController: StoryboardInstantiable {
     }
     
 }
-
-
 // MARK: - UITableViewDataSource
 
 extension TaskListViewController: UITableViewDataSource {
@@ -98,7 +93,8 @@ extension TaskListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let viewModel = viewModel,
             let task = viewModel.taskForRowAt(indexPath: indexPath),
-            let cell = tableView.dequeueReusableCell(withIdentifier: TaskTableViewCell.identifier, for: indexPath) as? TaskTableViewCell else {
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: TaskTableViewCell.identifier, for: indexPath) as? TaskTableViewCell else {
             return UITableViewCell()
         }
 
@@ -124,7 +120,7 @@ extension TaskListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-
+    // swiftlint:disable:next line_length
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             viewModel?.removeTask(at: indexPath)

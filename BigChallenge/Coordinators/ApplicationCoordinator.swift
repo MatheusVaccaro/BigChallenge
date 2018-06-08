@@ -30,7 +30,6 @@ class ApplicationCoordinator: Coordinator {
     func start() {
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
-        
         showTaskList()
     }
     
@@ -39,7 +38,4 @@ class ApplicationCoordinator: Coordinator {
         addChild(coordinator: taskListCoordinator)
         taskListCoordinator.start()
     }
-    
 }
-
-

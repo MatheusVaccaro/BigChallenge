@@ -23,6 +23,7 @@ class MockPersistence: Persistence {
     }
     
     func fetchAll<T: Storable>(_ model: T.Type) -> [T] {
+        //swiftlint:disable:next force_cast
         return objects as! [T]
     }
     

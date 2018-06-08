@@ -21,7 +21,7 @@ class TaskListCoordinator: Coordinator {
         self.persistence = persistence
         self.childrenCoordinators = []
     }
-    
+
     func start() {
         let taskListViewController = TaskListViewController.instantiate()
         self.taskListViewController = taskListViewController
@@ -29,7 +29,7 @@ class TaskListCoordinator: Coordinator {
         let taskListViewModel = TaskListViewModel(persistence: persistence)
         taskListViewModel.delegate = self
         taskListViewController.viewModel = taskListViewModel
-        
+
         presenter.pushViewController(taskListViewController, animated: true)
     }
 
@@ -46,7 +46,6 @@ class TaskListCoordinator: Coordinator {
         addChild(coordinator: newTaskCoordinator)
         newTaskCoordinator.start()
     }
-    
 }
 
 extension TaskListCoordinator: TaskListViewModelDelegate {
@@ -65,5 +64,4 @@ extension TaskListCoordinator: CoordinatorDelegate {
     func shouldDeinitCoordinator(_ coordinator: Coordinator) {
         releaseChild(coordinator: coordinator)
     }
-    
 }

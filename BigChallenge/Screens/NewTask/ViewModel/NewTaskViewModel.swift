@@ -28,7 +28,7 @@ class NewTaskViewModel {
         self.task = task
         self.isEditing = isEditing
         self.persistence = persistence
-    }    
+    }
     
     var numberOfSections: Int {
         if isEditing {
