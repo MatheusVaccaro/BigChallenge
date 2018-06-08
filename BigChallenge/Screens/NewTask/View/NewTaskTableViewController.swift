@@ -53,6 +53,11 @@ class NewTaskTableViewController: UITableViewController {
         viewModel?.didTapDoneButton()
     }
     
+    @IBAction func didEndEditingTitle(_ sender: Any) {
+        // TODO find a better way to do this
+        guard let text = titleTextField.text else { return }
+        viewModel?.task.title = text
+    }
     
     // MARK: - Functions
     

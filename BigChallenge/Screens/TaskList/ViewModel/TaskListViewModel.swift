@@ -18,14 +18,15 @@ protocol TaskListViewModelDelegate: class {
 class TaskListViewModel {
     
     private let persistence: Persistence
-    private var tasks: [Task] = []
+//    private var tasks: [Task] = []
+    private var tasks: [Task] {
+        return persistence.fetchAll(Task.self)
+    }
     
     weak var delegate: TaskListViewModelDelegate?
     
     init(persistence: Persistence) {
         self.persistence = persistence
-        
-        tasks = persistence.fetchAll(Task.self)
     }
     
     var numberOfSections: Int {
@@ -50,7 +51,7 @@ class TaskListViewModel {
     }
     
     func removeTask(at indexPath: IndexPath) {
-        tasks.remove(at: indexPath.row)
+        persistence.remove(at: indexPath.row)
     }
     
     func didSelectTask(at indexPath: IndexPath) {

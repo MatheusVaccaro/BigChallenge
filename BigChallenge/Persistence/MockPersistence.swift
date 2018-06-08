@@ -30,4 +30,8 @@ class MockPersistence: Persistence {
         objects.append(object)
     }
     
+    func remove(at index: Int) {
+        objects.remove(at: index)
+    }
+    
 }

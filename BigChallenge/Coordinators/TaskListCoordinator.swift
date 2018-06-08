@@ -11,12 +11,14 @@ import UIKit
 
 class TaskListCoordinator: Coordinator {
     
+    fileprivate let persistence: Persistence
     fileprivate let presenter: UINavigationController
     fileprivate var taskListViewController: TaskListViewController?
     var childrenCoordinators: [Coordinator]
     
-    init(presenter: UINavigationController) {
+    init(presenter: UINavigationController, persistence: Persistence) {
         self.presenter = presenter
+        self.persistence = persistence
         self.childrenCoordinators = []
     }
     
@@ -24,7 +26,7 @@ class TaskListCoordinator: Coordinator {
         let taskListViewController = TaskListViewController.instantiate()
         self.taskListViewController = taskListViewController
         
-        let taskListViewModel = TaskListViewModel(persistence: MockPersistence())
+        let taskListViewModel = TaskListViewModel(persistence: persistence)
         taskListViewModel.delegate = self
         taskListViewController.viewModel = taskListViewModel
         
@@ -32,14 +34,14 @@ class TaskListCoordinator: Coordinator {
     }
 
     fileprivate func showNewTask() {
-        let newTaskCoordinator = NewTaskCoordinator(task: Task(), isEditing: false, presenter: presenter)
+        let newTaskCoordinator = NewTaskCoordinator(task: Task(), isEditing: false, presenter: presenter, persistence: persistence)
         newTaskCoordinator.delegate = self
         addChild(coordinator: newTaskCoordinator)
         newTaskCoordinator.start()
     }
     
     fileprivate func showEditTask(_ task: Task) {
-        let newTaskCoordinator = NewTaskCoordinator(task: task, isEditing: true, presenter: presenter)
+        let newTaskCoordinator = NewTaskCoordinator(task: task, isEditing: true, presenter: presenter, persistence: persistence)
         newTaskCoordinator.delegate = self
         addChild(coordinator: newTaskCoordinator)
         newTaskCoordinator.start()
