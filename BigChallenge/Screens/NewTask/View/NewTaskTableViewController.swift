@@ -47,16 +47,11 @@ class NewTaskTableViewController: UITableViewController {
     }
     
     @IBAction func didTapDoneBarButtonItem(_ sender: Any) {
-
+        guard let titleText = titleTextField.text else { return }
+        viewModel?.task.title = titleText
         viewModel?.didTapDoneButton()
     }
-    
-    @IBAction func didEndEditingTitle(_ sender: Any) {
-        // TODO find a better way to do this
-        guard let text = titleTextField.text else { return }
-        viewModel?.task.title = text
-    }
-    
+        
     // MARK: - Functions
     
     private func configureWithViewModel() {
