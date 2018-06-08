@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Persistence {    
+protocol Persistence {
     func fetchAll<T: Storable>(_ model: T.Type) -> [T]
     func save(object: Storable)
     
