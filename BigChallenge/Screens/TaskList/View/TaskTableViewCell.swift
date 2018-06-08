@@ -15,11 +15,9 @@ class TaskTableViewCell: UITableViewCell {
     static let identifier = "taskCell"
     private var viewModel: TaskCellViewModel?
 
-    
     // MARK: - IBOutlets
     
     @IBOutlet weak var taskTitleLabel: UILabel!
-    
     
     // MARK: - TableViewCell Lifecycle
 
@@ -33,7 +31,6 @@ class TaskTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
     
     // MARK: - Functions
     

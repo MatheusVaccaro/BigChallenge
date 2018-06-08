@@ -15,14 +15,15 @@ class MockPersistence: Persistence {
     init() {
         objects = {
             var tasks = [Task]()
-            for i in 1...2 {
-                tasks.append(Task(title: "Task \(i)"))
+            for iterator in 1...2 {
+                tasks.append(Task(title: "Task \(iterator)"))
             }
             return tasks
         }()
     }
     
     func fetchAll<T: Storable>(_ model: T.Type) -> [T] {
+        //swiftlint:disable:next force_cast
         return objects as! [T]
     }
     

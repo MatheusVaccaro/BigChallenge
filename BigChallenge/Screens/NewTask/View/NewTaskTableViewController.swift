@@ -14,11 +14,9 @@ class NewTaskTableViewController: UITableViewController {
     
     var viewModel: NewTaskViewModel?
     
-    
     // MARK: - IBOutlets
     
     @IBOutlet weak var titleTextField: UITextField!
-    
     
     // MARK: - TableViewController Lifecycle
     
@@ -42,7 +40,6 @@ class NewTaskTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
     
-    
     // MARK: - IBActions
     
     @IBAction func didTapCancelBarButtonItem(_ sender: Any) {
@@ -50,6 +47,7 @@ class NewTaskTableViewController: UITableViewController {
     }
     
     @IBAction func didTapDoneBarButtonItem(_ sender: Any) {
+
         viewModel?.didTapDoneButton()
     }
     
@@ -80,7 +78,6 @@ class NewTaskTableViewController: UITableViewController {
         }
     }
     
-    
     // MARK: - TableView DataSource
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -94,7 +91,6 @@ class NewTaskTableViewController: UITableViewController {
     }
     
 }
-
 
 // MARK: - StoryboardInstantiable
 

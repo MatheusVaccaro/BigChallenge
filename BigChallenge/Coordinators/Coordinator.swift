@@ -9,27 +9,20 @@
 import Foundation
 
 protocol Coordinator: class {
-    
     var childrenCoordinators: [Coordinator] { get set }
-    
     func start()
     func addChild(coordinator: Coordinator)
     func releaseChild(coordinator: Coordinator)
-    
 }
 
 protocol CoordinatorDelegate: class {
-    
     func shouldDeinitCoordinator(_ coordinator: Coordinator)
-    
 }
 
 extension Coordinator {
-    
     func addChild(coordinator: Coordinator) {
         childrenCoordinators.append(coordinator)
     }
-    
     func releaseChild(coordinator: Coordinator) {
         childrenCoordinators.enumerated().forEach { (index, element) in
             if coordinator === element {
@@ -38,5 +31,4 @@ extension Coordinator {
             }
         }
     }
-    
 }
