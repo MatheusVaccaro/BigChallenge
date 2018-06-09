@@ -31,8 +31,21 @@ class MockPersistence: Persistence {
         objects.append(object)
     }
     
+    func remove(object: Storable) {
+        objects = objects.filter({$0.uuid != object.uuid})
+    }
+    
     func remove(at index: Int) {
         objects.remove(at: index)
     }
     
+    func update(object: Storable) {
+        objects = objects.map {
+            var mutableObject = $0
+            if $0.uuid == object.uuid {
+                mutableObject = object
+            }
+            return mutableObject
+        }
+    }
 }
