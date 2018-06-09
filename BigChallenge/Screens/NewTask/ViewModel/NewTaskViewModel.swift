@@ -77,7 +77,7 @@ class NewTaskViewModel {
     }
     
     private func updateTask() {
-        print("update task")
+        persistence.update(object: task)
     }
     
 }

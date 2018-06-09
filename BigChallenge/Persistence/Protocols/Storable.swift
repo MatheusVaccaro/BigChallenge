@@ -9,5 +9,5 @@
 import Foundation
 
 protocol Storable {
-    
+    var uuid: UUID { get }
 }
