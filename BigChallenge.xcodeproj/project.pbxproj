@@ -58,6 +58,7 @@
 		1627171B20C879AD00AA0024 /* BigChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1627171D20C879AD00AA0024 /* BigChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigChallengeUITests.swift; sourceTree = "<group>"; };
 		1627171F20C879AD00AA0024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		220D7C1C20D02E5E007EC0DD /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2766B305F29EF8BE8DDEADCA /* Pods-BigChallengeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigChallengeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigChallengeUITests/Pods-BigChallengeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2D020A78B9BEB6EB771DFE12 /* Pods-BigChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigChallenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigChallenge/Pods-BigChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		3B2823E64B1FC7A4411311AA /* Pods-BigChallengeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigChallengeUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BigChallengeUITests/Pods-BigChallengeUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -140,6 +141,7 @@
 		45EE167F10EAE72CE5635B25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				220D7C1C20D02E5E007EC0DD /* RxSwift.framework */,
 				7E8708FC5A67C933F755CB93 /* Pods_BigChallenge.framework */,
 				558C6AF329AB768E11815BB8 /* Pods_BigChallengeTests.framework */,
 				A18C9FEFF01841372B83A1C4 /* Pods_BigChallengeUITests.framework */,
@@ -461,7 +463,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		7B8A3E05277891C7E4FEF6D7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -859,15 +861,17 @@
 			baseConfigurationReference = 2D020A78B9BEB6EB771DFE12 /* Pods-BigChallenge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 22SPKR75FE;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = D9KU92KK65;
 				INFOPLIST_FILE = "$(SRCROOT)/BigChallenge/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.matheusvaccaro.BigChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bigBeanie.finalChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "01cbc432-5257-412e-929b-adf9a15d6979";
+				PROVISIONING_PROFILE_SPECIFIER = finalChallengeDev;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -878,15 +882,18 @@
 			baseConfigurationReference = AB08D99D8EA8EBF32B46628D /* Pods-BigChallenge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 22SPKR75FE;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = D9KU92KK65;
 				INFOPLIST_FILE = "$(SRCROOT)/BigChallenge/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.matheusvaccaro.BigChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bigBeanie.finalChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6c57f37c-16eb-4f17-a226-1900e05deea2";
+				PROVISIONING_PROFILE_SPECIFIER = FinalChallengeDist;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
