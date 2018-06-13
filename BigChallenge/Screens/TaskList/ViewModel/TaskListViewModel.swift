@@ -59,4 +59,8 @@ class TaskListViewModel {
         delegate?.didSelectTask(task)
     }
     
+    // MARK: - Strings
+    let editBarButtonItemTitle = NSLocalizedString("Edit", comment: "button to toggle edit in taskList")
+    let viewTitle = NSLocalizedString("Tasks", comment: "title of the tasklist tableView")
+    
 }

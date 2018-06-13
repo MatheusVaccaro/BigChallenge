@@ -42,14 +42,6 @@ class NewTaskViewModel {
         return 1
     }
     
-    var navigationItemTitle: String {
-        if isEditing {
-            return "Edit Task"
-        } else {
-            return "New Task"
-        }
-    }
-    
     func didTapCancelButton() {
         delegate?.didTapCancelButton()
     }
@@ -80,4 +72,22 @@ class NewTaskViewModel {
         persistence.update(object: task)
     }
     
+    // MARK: - Strings
+    let titleTextFieldPlaceHolder = NSLocalizedString("Title", comment: "the placeholder title for a task")
+    let doneItemTitle = NSLocalizedString("Done", comment: "done button to end editing task")
+    let cancelItemTitle = NSLocalizedString("Cancel", comment: "cancel button to cancel editing task")
+    
+    var navigationItemTitle: String {
+        var ans: String = ""
+        if isEditing {
+            ans = NSLocalizedString("Edit Task", comment: "button to edit task")
+        } else {
+            ans = NSLocalizedString("New Task", comment: "button to add new task")
+        }
+        return ans
+    }
+    
+    var deleteButtonTitle: String {
+        return NSLocalizedString("Delete Task", comment: "button used to delete a task")
+    }
 }

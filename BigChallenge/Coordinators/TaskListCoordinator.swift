@@ -34,14 +34,20 @@ class TaskListCoordinator: Coordinator {
     }
 
     fileprivate func showNewTask() {
-        let newTaskCoordinator = NewTaskCoordinator(task: Task(), isEditing: false, presenter: presenter, persistence: persistence)
+        let newTaskCoordinator = NewTaskCoordinator(task: Task(),
+                                                    isEditing: false,
+                                                    presenter: presenter,
+                                                    persistence: persistence)
         newTaskCoordinator.delegate = self
         addChild(coordinator: newTaskCoordinator)
         newTaskCoordinator.start()
     }
     
     fileprivate func showEditTask(_ task: Task) {
-        let newTaskCoordinator = NewTaskCoordinator(task: task, isEditing: true, presenter: presenter, persistence: persistence)
+        let newTaskCoordinator = NewTaskCoordinator(task: task,
+                                                    isEditing: true,
+                                                    presenter: presenter,
+                                                    persistence: persistence)
         newTaskCoordinator.delegate = self
         addChild(coordinator: newTaskCoordinator)
         newTaskCoordinator.start()

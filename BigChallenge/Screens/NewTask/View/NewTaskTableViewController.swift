@@ -16,6 +16,9 @@ class NewTaskTableViewController: UITableViewController {
     
     // MARK: - IBOutlets
     
+    @IBOutlet weak var deleteTaskButton: UILabel!
+    @IBOutlet weak var cancelItem: UIBarButtonItem!
+    @IBOutlet weak var doneItem: UIBarButtonItem!
     @IBOutlet weak var titleTextField: UITextField!
     
     // MARK: - TableViewController Lifecycle
@@ -58,7 +61,11 @@ class NewTaskTableViewController: UITableViewController {
         guard let viewModel = viewModel else { return }
         
         titleTextField.text = viewModel.task.title
+        titleTextField.placeholder = viewModel.titleTextFieldPlaceHolder
+        deleteTaskButton.text = viewModel.deleteButtonTitle
         navigationItem.title = viewModel.navigationItemTitle
+        doneItem.title = viewModel.doneItemTitle
+        cancelItem.title = viewModel.cancelItemTitle
     }
     
     private func setupGestureRecognizers() {
