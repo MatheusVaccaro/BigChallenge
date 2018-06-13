@@ -75,17 +75,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New Task" id="QJ0-ra-C8A">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="uga-ag-ZvB"/>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="56w-ov-Sub">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="uga-ag-ZvB"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="56w-ov-Sub">
                             <connections>
                                 <action selector="didTapDoneBarButtonItem:" destination="cXJ-A2-weh" id="Svu-NG-gWI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="cancelItem" destination="uga-ag-ZvB" id="ria-K6-ofx"/>
                         <outlet property="deleteTaskButton" destination="gKv-5M-9kU" id="OQ7-l4-FLu"/>
-                        <outlet property="doneItem" destination="56w-ov-Sub" id="bXm-ah-ESm"/>
                         <outlet property="titleTextField" destination="hBb-nG-qL5" id="RBH-OK-bN1"/>
                     </connections>
                 </tableViewController>

@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  BigChallenge
+
+  Created by Bruno Fulber Wide on 12/06/18.
+  Copyright © 2018 Matheus Vaccaro. All rights reserved.
+*/
+"Edit Task" ="Edit Task";
+"New Task" ="New Task";
+"Delete Task" ="Delete Task";
+"Title" ="Title";
+"Tasks" ="Tasks";

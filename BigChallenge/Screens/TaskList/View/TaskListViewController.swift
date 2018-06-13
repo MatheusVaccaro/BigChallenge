@@ -54,8 +54,7 @@ class TaskListViewController: UIViewController {
         navigationItem.leftBarButtonItem = editBarButtonItem
         
         if let viewModel = viewModel {
-            editBarButtonItem.title = viewModel.editBarButtonItemTitle
-            title = viewModel.viewTitle
+            navigationItem.title = viewModel.viewTitle
         }
     }
     
