@@ -1,0 +1,12 @@
+
+/* Class = "UIViewController"; title = "TaskListViewController"; ObjectID = "BWO-xZ-rzT"; */
+"BWO-xZ-rzT.title" = "TaskListViewController";
+
+/* Class = "UIButton"; normalTitle = "X"; ObjectID = "ODM-kH-ufY"; */
+"ODM-kH-ufY.normalTitle" = "X";
+
+/* Class = "UINavigationItem"; title = "Tasks"; ObjectID = "Zv9-Oa-gxr"; */
+"Zv9-Oa-gxr.title" = "Tasks";
+
+/* Class = "UILabel"; text = "Task"; ObjectID = "iKx-1P-ZPx"; */
+"iKx-1P-ZPx.text" = "Task";

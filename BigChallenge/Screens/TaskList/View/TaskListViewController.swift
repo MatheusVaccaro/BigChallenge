@@ -26,12 +26,13 @@ class TaskListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        setupEditBarButtonItem()
+        configureWithViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -46,11 +47,15 @@ class TaskListViewController: UIViewController {
     // MARK: - Functions
     
     // The default editButtonItem was not toggling the tableview's edition mode, so we coded it from scratch
-    private func setupEditBarButtonItem() {
+    private func configureWithViewModel() {
         let editBarButtonItem =
             UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleEditionMode))
         self.editBarButtonItem = editBarButtonItem
         navigationItem.leftBarButtonItem = editBarButtonItem
+        
+        if let viewModel = viewModel {
+            navigationItem.title = viewModel.viewTitle
+        }
     }
     
     @objc private func toggleEditionMode() {

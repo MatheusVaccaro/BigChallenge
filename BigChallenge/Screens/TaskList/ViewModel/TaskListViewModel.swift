@@ -59,4 +59,7 @@ class TaskListViewModel {
         delegate?.didSelectTask(task)
     }
     
+    // MARK: - Strings
+    let viewTitle = NSLocalizedString("Tasks", comment: "title of the tasklist tableView")
+    
 }
