@@ -27,5 +27,4 @@ struct Task: Storable {
         self.status = status
         self.descriptions = []
     }
-    
 }
