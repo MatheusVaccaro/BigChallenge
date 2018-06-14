@@ -26,6 +26,10 @@ class TaskListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        // config tableView to autolayout constraints to resize the tableCells height
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 140
+        
         configureWithViewModel()
     }
     
