@@ -61,7 +61,7 @@ class NewTaskViewModel {
     }
     
     private func deleteTask() {
-        print("delete task")
+        persistence.remove(object: task)
     }
     
     private func addTask() {

@@ -17,13 +17,13 @@ class TaskTableViewCell: UITableViewCell {
 
     // MARK: - IBOutlets
     
-    @IBOutlet weak var taskTitleLabel: UILabel!
+    @IBOutlet weak var taskTitleTextView: UITextView!
     
     // MARK: - TableViewCell Lifecycle
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        taskTitleTextView.delegate = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -37,7 +37,13 @@ class TaskTableViewCell: UITableViewCell {
     func configure(with viewModel: TaskCellViewModel) {
         self.viewModel = viewModel
         
-        taskTitleLabel.text = viewModel.title
+        taskTitleTextView.text = viewModel.title
     }
+}
 
+extension TaskTableViewCell: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        guard let text = textView.text else { return }
+        viewModel?.shouldChangeTask(title: text)
+    }
 }

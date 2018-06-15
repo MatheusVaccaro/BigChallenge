@@ -19,10 +19,12 @@ struct Task: Storable {
     var title: String
     var status: Status
     
+    var descriptions: [Description]
+    
     init(title: String = "", status: Status = .incomplete) {
         self.uuid = UUID()
         self.title = title
         self.status = status
+        self.descriptions = []
     }
-    
 }
