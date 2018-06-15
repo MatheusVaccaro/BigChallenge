@@ -34,6 +34,7 @@ class TaskListViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        // TODO: reload table view with RXSwift
         tableView.reloadData()
     }
     
@@ -104,13 +105,13 @@ extension TaskListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let viewModel = viewModel,
-            let task = viewModel.taskForRowAt(indexPath: indexPath),
+            let _ = viewModel.taskForRowAt(indexPath: indexPath),
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: TaskTableViewCell.identifier, for: indexPath) as? TaskTableViewCell else {
             return UITableViewCell()
         }
 
-        let taskCellViewModel = TaskCellViewModel(task: task)
+        let taskCellViewModel = viewModel.createCellViewModelForTask(indexPath: indexPath)
         cell.configure(with: taskCellViewModel)
         return cell
     }

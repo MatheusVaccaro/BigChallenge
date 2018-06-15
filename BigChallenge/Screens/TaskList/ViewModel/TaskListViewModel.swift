@@ -46,6 +46,11 @@ class TaskListViewModel {
         }
     }
     
+    // TODO: delete this after rx
+    func createCellViewModelForTask(indexPath: IndexPath) -> TaskCellViewModel {
+        return TaskCellViewModel(task: tasks[indexPath.row], persistence: persistence)
+    }
+    
     func didTapAddButton() {
         delegate?.didTapAddButton()
     }
