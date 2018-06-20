@@ -18,16 +18,16 @@ protocol NewTaskViewModelDelegate: class {
 
 class NewTaskViewModel {
     
-    private let persistence: Persistence
+    private let model: TaskModel
     private var isEditing: Bool
     var task: Task
     
     weak var delegate: NewTaskViewModelDelegate?
     
-    init(task: Task, isEditing: Bool, persistence: Persistence) {
+    init(task: Task, isEditing: Bool, model: TaskModel) {
         self.task = task
         self.isEditing = isEditing
-        self.persistence = persistence
+        self.model = model
     }
     
     var numberOfSections: Int {
@@ -61,15 +61,15 @@ class NewTaskViewModel {
     }
     
     private func deleteTask() {
-        persistence.remove(object: task)
+        model.remove(object: task)
     }
     
     private func addTask() {
-        persistence.save(object: task)
+        model.save(object: task)
     }
     
     private func updateTask() {
-        persistence.update(object: task)
+        model.update(object: task)
     }
     
     // MARK: - Strings
