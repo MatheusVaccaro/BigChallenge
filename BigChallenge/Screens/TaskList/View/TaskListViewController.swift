@@ -25,8 +25,8 @@ class TaskListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.delegate = self
+        tableView.dataSource = nil
+        tableView.delegate = nil
         
         // config tableView to autolayout constraints to resize the tableCells height
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -37,19 +37,20 @@ class TaskListViewController: UIViewController {
     }
     
     private func bindTableView() {
-//        guard let viewModel = viewModel else { return }
-//        viewModel.tasksObservable
-//            .bind(to: tableView.rx.items(cellIdentifier: "taskCell", cellType: TaskTableViewCell.self)) { row, element, cell in
-//
-//                let taskCellViewModel = viewModel.createCellViewModelForTask(indexPath: IndexPath(row: row, section: 0))
-//                cell.configure(with: taskCellViewModel)
-//
-//            }.disposed(by: disposeBag)
+        guard let viewModel = viewModel else { return }
+        viewModel.tasksObservable
+            .bind(to: tableView.rx.items(cellIdentifier: TaskTableViewCell.identifier,
+                                         cellType: TaskTableViewCell.self)) { row, element, cell in
+
+                let taskCellViewModel = viewModel.createCellViewModelForTask(indexPath: IndexPath(row: row, section: 0))
+                cell.configure(with: taskCellViewModel)
+
+            }.disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         // TODO: reload table view with RXSwift
-        tableView.reloadData()
+//        tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {

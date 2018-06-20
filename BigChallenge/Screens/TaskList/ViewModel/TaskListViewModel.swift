@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import RxCocoa
+import RxSwift
 
 protocol TaskListViewModelDelegate: class {
     
@@ -18,6 +20,10 @@ protocol TaskListViewModelDelegate: class {
 class TaskListViewModel {
     
     private let model: TaskModel
+    
+    var tasksObservable: Observable<[Task]> {
+        return model.objectsObservable
+    }
     
     weak var delegate: TaskListViewModelDelegate?
     
