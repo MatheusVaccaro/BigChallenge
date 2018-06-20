@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class TaskListViewController: UIViewController {
     
@@ -14,7 +16,7 @@ class TaskListViewController: UIViewController {
     
     var viewModel: TaskListViewModel?
     private var editBarButtonItem: UIBarButtonItem?
-    
+    private let disposeBag = DisposeBag()
     // MARK: - IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
@@ -31,6 +33,18 @@ class TaskListViewController: UIViewController {
         tableView.estimatedRowHeight = 140
         
         configureWithViewModel()
+        bindTableView()
+    }
+    
+    private func bindTableView() {
+//        guard let viewModel = viewModel else { return }
+//        viewModel.tasksObservable
+//            .bind(to: tableView.rx.items(cellIdentifier: "taskCell", cellType: TaskTableViewCell.self)) { row, element, cell in
+//
+//                let taskCellViewModel = viewModel.createCellViewModelForTask(indexPath: IndexPath(row: row, section: 0))
+//                cell.configure(with: taskCellViewModel)
+//
+//            }.disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {

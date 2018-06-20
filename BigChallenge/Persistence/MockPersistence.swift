@@ -40,6 +40,7 @@ class MockPersistence: Persistence {
     }
     
     func update(object: Storable) {
+        //TODO: make this equal to the taskmodel
         objects = objects.map {
             var mutableObject = $0
             if $0.uuid == object.uuid {

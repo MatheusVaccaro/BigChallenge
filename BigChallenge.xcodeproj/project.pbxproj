@@ -10,6 +10,8 @@
 		1627171020C8793900AA0024 /* BigChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1627170F20C8793900AA0024 /* BigChallengeTests.swift */; };
 		1627171E20C879AD00AA0024 /* BigChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1627171D20C879AD00AA0024 /* BigChallengeUITests.swift */; };
 		1627EBEDDA20D9C1EB6BC691 /* Pods_BigChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 558C6AF329AB768E11815BB8 /* Pods_BigChallengeTests.framework */; };
+		1659600020DAD53E00BCCDB5 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16595FFF20DAD53E00BCCDB5 /* Model.swift */; };
+		1676FC9020D99580003E2D79 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1676FC8F20D99580003E2D79 /* TaskModel.swift */; };
 		16C27A4020D2FBB200686BD5 /* Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C27A3F20D2FBB200686BD5 /* Description.swift */; };
 		2253179A20D147AD0065C9F9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2253179C20D147AD0065C9F9 /* Localizable.strings */; };
 		25A3EF9F7B0FADAB1A8E19B8 /* Pods_BigChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18C9FEFF01841372B83A1C4 /* Pods_BigChallengeUITests.framework */; };
@@ -60,6 +62,8 @@
 		1627171B20C879AD00AA0024 /* BigChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1627171D20C879AD00AA0024 /* BigChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigChallengeUITests.swift; sourceTree = "<group>"; };
 		1627171F20C879AD00AA0024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		16595FFF20DAD53E00BCCDB5 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		1676FC8F20D99580003E2D79 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		16C27A3F20D2FBB200686BD5 /* Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Description.swift; sourceTree = "<group>"; };
 		220D7C1C20D02E5E007EC0DD /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2253179820D145AD0065C9F9 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/TaskList.strings"; sourceTree = "<group>"; };
@@ -143,6 +147,15 @@
 				1627171F20C879AD00AA0024 /* Info.plist */,
 			);
 			path = BigChallengeUITests;
+			sourceTree = "<group>";
+		};
+		1676FC8E20D9946E003E2D79 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1676FC8F20D99580003E2D79 /* TaskModel.swift */,
+				16595FFF20DAD53E00BCCDB5 /* Model.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		45EE167F10EAE72CE5635B25 /* Frameworks */ = {
@@ -241,6 +254,7 @@
 			children = (
 				C21EAD1020B754AE005F0F85 /* Task.swift */,
 				16C27A3F20D2FBB200686BD5 /* Description.swift */,
+				1676FC8E20D9946E003E2D79 /* Model */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -624,9 +638,11 @@
 				C2A1113B20B8791E00ABB161 /* MockPersistence.swift in Sources */,
 				C21EAD0020B741BC005F0F85 /* TaskListCoordinator.swift in Sources */,
 				C23753B020B6463700C1CE15 /* ApplicationCoordinator.swift in Sources */,
+				1676FC9020D99580003E2D79 /* TaskModel.swift in Sources */,
 				C2A1113D20B88A2F00ABB161 /* Storable.swift in Sources */,
 				C2A1114020B8A70A00ABB161 /* TaskCellViewModel.swift in Sources */,
 				C2A1115120B9FCDB00ABB161 /* NewTaskViewModel.swift in Sources */,
+				1659600020DAD53E00BCCDB5 /* Model.swift in Sources */,
 				C21EAD0B20B74F01005F0F85 /* StoryboardInstantiable.swift in Sources */,
 				C21EAD0720B74757005F0F85 /* TaskListViewController.swift in Sources */,
 			);

@@ -26,10 +26,12 @@ class TaskListCoordinator: Coordinator {
         let taskListViewController = TaskListViewController.instantiate()
         self.taskListViewController = taskListViewController
         
-        let taskListViewModel = TaskListViewModel(persistence: persistence)
+        
+        let model = TaskModel(persistence)
+        let taskListViewModel = TaskListViewModel(model)
         taskListViewModel.delegate = self
         taskListViewController.viewModel = taskListViewModel
-
+        
         presenter.pushViewController(taskListViewController, animated: true)
     }
 
