@@ -38,6 +38,7 @@ class TaskTableViewCell: UITableViewCell {
         self.viewModel = viewModel
         
         taskTitleTextView.text = viewModel.title
+        taskTitleTextView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote)
     }
 }
 
