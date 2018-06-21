@@ -8,13 +8,19 @@
 
 import UIKit
 
+protocol TaskCellDelegate: class {
+    func shouldUpdateSize(of cell: TaskTableViewCell)
+}
+
 class TaskTableViewCell: UITableViewCell {
     
     // MARK: - Properties
 
     static let identifier = "taskCell"
+    weak var delegate: TaskCellDelegate?
     private var viewModel: TaskCellViewModel?
-
+    private var previousRect = CGRect.zero
+    
     // MARK: - IBOutlets
     
     @IBOutlet weak var taskTitleTextView: UITextView!
@@ -47,4 +53,19 @@ extension TaskTableViewCell: UITextViewDelegate {
         guard let text = textView.text else { return }
         viewModel?.shouldChangeTask(title: text)
     }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        delegate?.shouldUpdateSize(of: self)
+    }
+    
+//    func textViewDidChange(_ textView: UITextView) {
+//        let lastCharPos = textView.endOfDocument
+//
+//        let currentRect = textView.caretRect(for: lastCharPos)
+//        if currentRect.origin.y < previousRect.origin.y {
+//            guard let text = textView.text else { return }
+//            viewModel?.shouldChangeTask(title: text)
+//        }
+//        previousRect = currentRect
+//    }
 }

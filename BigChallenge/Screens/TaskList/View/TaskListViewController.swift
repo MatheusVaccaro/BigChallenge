@@ -44,6 +44,7 @@ class TaskListViewController: UIViewController {
 
                 let taskCellViewModel = viewModel.createCellViewModelForTask(indexPath: IndexPath(row: row, section: 0))
                 cell.configure(with: taskCellViewModel)
+                cell.delegate = self
 
             }.disposed(by: disposeBag)
     }
@@ -104,24 +105,33 @@ extension TaskListViewController: StoryboardInstantiable {
 
 // MARK: - UITableViewDelegate
 
-extension TaskListViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        if tableView.isEditing {
-            viewModel?.didSelectTask(at: indexPath)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    // swiftlint:disable:next line_length
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            viewModel?.removeTask(at: indexPath)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+//extension TaskListViewController: UITableViewDelegate {
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//
+//        if tableView.isEditing {
+//            viewModel?.didSelectTask(at: indexPath)
+//        }
+//    }
+//
+//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
+//
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            viewModel?.removeTask(at: indexPath)
+//            tableView.deleteRows(at: [indexPath], with: .automatic)
+//        }
+//    }
+//}
+
+extension TaskListViewController: TaskCellDelegate {
+    func shouldUpdateSize(of cell: TaskTableViewCell) {
+        UIView.performWithoutAnimation {
+            tableView.beginUpdates()
+            tableView.endUpdates()
         }
     }
 }
