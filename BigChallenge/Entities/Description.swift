@@ -8,14 +8,14 @@
 
 import UIKit
 
-struct Description: Storable {
+struct Description: Storable, Equatable {
     
-    enum `Type` {
+    enum `Type`: Equatable {
         case note
         case checklist
     }
     
-    enum Status {
+    enum Status: Equatable {
         case complete
         case incomplete
     }

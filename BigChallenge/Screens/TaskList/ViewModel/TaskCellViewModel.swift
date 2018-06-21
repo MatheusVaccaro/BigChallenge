@@ -11,11 +11,11 @@ import Foundation
 class TaskCellViewModel {
     
     private var task: Task
-    private let persistence: Persistence
+    private let model: TaskModel
     
-    init(task: Task, persistence: Persistence) {
+    init(task: Task, model: TaskModel) {
         self.task = task
-        self.persistence = persistence
+        self.model = model
     }
     
     var title: String {
@@ -33,6 +33,6 @@ class TaskCellViewModel {
     
     func shouldChangeTask(title: String) {
         task.title = title
-        persistence.update(object: task)
+        model.update(object: task)
     }
 }

@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import RxCocoa
+import RxSwift
 
 protocol TaskListViewModelDelegate: class {
     
@@ -17,16 +19,16 @@ protocol TaskListViewModelDelegate: class {
 
 class TaskListViewModel {
     
-    private let persistence: Persistence
-//    private var tasks: [Task] = []
-    private var tasks: [Task] {
-        return persistence.fetchAll(Task.self)
+    private let model: TaskModel
+    
+    var tasksObservable: Observable<[Task]> {
+        return model.objectsObservable
     }
     
     weak var delegate: TaskListViewModelDelegate?
     
-    init(persistence: Persistence) {
-        self.persistence = persistence
+    init(_ model: TaskModel) {
+        self.model = model
     }
     
     var numberOfSections: Int {
@@ -34,13 +36,13 @@ class TaskListViewModel {
     }
     
     var numberOfRowsInSection: Int {
-        return tasks.count
+        return model.count
     }
     
     func taskForRowAt(indexPath: IndexPath) -> Task? {
         let row = indexPath.row
-        if row <= tasks.count {
-            return tasks[row]
+        if row <= model.count {
+            return model.task(at: row)
         } else {
             return nil
         }
@@ -48,7 +50,7 @@ class TaskListViewModel {
     
     // TODO: delete this after rx
     func createCellViewModelForTask(indexPath: IndexPath) -> TaskCellViewModel {
-        return TaskCellViewModel(task: tasks[indexPath.row], persistence: persistence)
+        return TaskCellViewModel(task: model.task(at: indexPath.row), model: model)
     }
     
     func didTapAddButton() {
@@ -56,11 +58,11 @@ class TaskListViewModel {
     }
     
     func removeTask(at indexPath: IndexPath) {
-        persistence.remove(at: indexPath.row)
+        model.remove(at: indexPath.row)
     }
     
     func didSelectTask(at indexPath: IndexPath) {
-        let task = tasks[indexPath.row]
+        let task = model.task(at: indexPath.row)
         delegate?.didSelectTask(task)
     }
     

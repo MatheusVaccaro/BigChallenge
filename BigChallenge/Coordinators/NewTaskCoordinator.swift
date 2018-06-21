@@ -11,7 +11,7 @@ import UIKit
 
 class NewTaskCoordinator: Coordinator {
     
-    fileprivate let persistence: Persistence
+    fileprivate let model: TaskModel
     fileprivate let presenter: UINavigationController
     fileprivate var modalPresenter: UINavigationController?
     fileprivate var newTaskTableViewController: NewTaskTableViewController?
@@ -21,8 +21,8 @@ class NewTaskCoordinator: Coordinator {
     
     weak var delegate: CoordinatorDelegate?
     
-    init(task: Task, isEditing: Bool, presenter: UINavigationController, persistence: Persistence) {
-        self.persistence = persistence
+    init(task: Task, isEditing: Bool, presenter: UINavigationController, model: TaskModel) {
+        self.model = model
         self.presenter = presenter
         self.childrenCoordinators = []
         self.task = task
@@ -33,7 +33,7 @@ class NewTaskCoordinator: Coordinator {
         let newTaskTableViewController = NewTaskTableViewController.instantiate()
         self.newTaskTableViewController = newTaskTableViewController
         
-        let newTaskViewModel = NewTaskViewModel(task: task, isEditing: isEditing, persistence: persistence)
+        let newTaskViewModel = NewTaskViewModel(task: task, isEditing: isEditing, model: model)
         newTaskViewModel.delegate = self
         newTaskTableViewController.viewModel = newTaskViewModel
         

@@ -14,11 +14,13 @@ class TaskListCoordinator: Coordinator {
     fileprivate let persistence: Persistence
     fileprivate let presenter: UINavigationController
     fileprivate var taskListViewController: TaskListViewController?
+    fileprivate var model: TaskModel
     var childrenCoordinators: [Coordinator]
     
     init(presenter: UINavigationController, persistence: Persistence) {
         self.presenter = presenter
         self.persistence = persistence
+        self.model = TaskModel(persistence)
         self.childrenCoordinators = []
     }
 
@@ -26,10 +28,10 @@ class TaskListCoordinator: Coordinator {
         let taskListViewController = TaskListViewController.instantiate()
         self.taskListViewController = taskListViewController
         
-        let taskListViewModel = TaskListViewModel(persistence: persistence)
+        let taskListViewModel = TaskListViewModel(model)
         taskListViewModel.delegate = self
         taskListViewController.viewModel = taskListViewModel
-
+        
         presenter.pushViewController(taskListViewController, animated: true)
     }
 
@@ -37,7 +39,7 @@ class TaskListCoordinator: Coordinator {
         let newTaskCoordinator = NewTaskCoordinator(task: Task(),
                                                     isEditing: false,
                                                     presenter: presenter,
-                                                    persistence: persistence)
+                                                    model: model)
         newTaskCoordinator.delegate = self
         addChild(coordinator: newTaskCoordinator)
         newTaskCoordinator.start()
@@ -47,7 +49,7 @@ class TaskListCoordinator: Coordinator {
         let newTaskCoordinator = NewTaskCoordinator(task: task,
                                                     isEditing: true,
                                                     presenter: presenter,
-                                                    persistence: persistence)
+                                                    model: model)
         newTaskCoordinator.delegate = self
         addChild(coordinator: newTaskCoordinator)
         newTaskCoordinator.start()

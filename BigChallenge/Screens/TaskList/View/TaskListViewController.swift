@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class TaskListViewController: UIViewController {
     
@@ -14,7 +16,7 @@ class TaskListViewController: UIViewController {
     
     var viewModel: TaskListViewModel?
     private var editBarButtonItem: UIBarButtonItem?
-    
+    private let disposeBag = DisposeBag()
     // MARK: - IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
@@ -23,19 +25,28 @@ class TaskListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.delegate = self
+        tableView.dataSource = nil
+        tableView.delegate = nil
         
         // config tableView to autolayout constraints to resize the tableCells height
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
         
         configureWithViewModel()
+        bindTableView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        // TODO: reload table view with RXSwift
-        tableView.reloadData()
+    private func bindTableView() {
+        guard let viewModel = viewModel else { return }
+        viewModel.tasksObservable
+            .bind(to: tableView.rx.items(cellIdentifier: TaskTableViewCell.identifier,
+                                         cellType: TaskTableViewCell.self)) { row, _, cell in
+
+                let taskCellViewModel = viewModel.createCellViewModelForTask(indexPath: IndexPath(row: row, section: 0))
+                cell.configure(with: taskCellViewModel)
+                cell.delegate = self
+
+            }.disposed(by: disposeBag)
     }
     
     override func didReceiveMemoryWarning() {
@@ -91,53 +102,36 @@ extension TaskListViewController: StoryboardInstantiable {
     }
     
 }
-// MARK: - UITableViewDataSource
-
-extension TaskListViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel?.numberOfSections ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.numberOfRowsInSection ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let viewModel = viewModel,
-            let _ = viewModel.taskForRowAt(indexPath: indexPath),
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: TaskTableViewCell.identifier, for: indexPath) as? TaskTableViewCell else {
-            return UITableViewCell()
-        }
-
-        let taskCellViewModel = viewModel.createCellViewModelForTask(indexPath: indexPath)
-        cell.configure(with: taskCellViewModel)
-        return cell
-    }
-    
-}
 
 // MARK: - UITableViewDelegate
 
-extension TaskListViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        if tableView.isEditing {
-            viewModel?.didSelectTask(at: indexPath)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    // swiftlint:disable:next line_length
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            viewModel?.removeTask(at: indexPath)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+//extension TaskListViewController: UITableViewDelegate {
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//
+//        if tableView.isEditing {
+//            viewModel?.didSelectTask(at: indexPath)
+//        }
+//    }
+//
+//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
+//
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            viewModel?.removeTask(at: indexPath)
+//            tableView.deleteRows(at: [indexPath], with: .automatic)
+//        }
+//    }
+//}
+
+extension TaskListViewController: TaskCellDelegate {
+    func shouldUpdateSize(of cell: TaskTableViewCell) {
+        UIView.performWithoutAnimation {
+            tableView.beginUpdates()
+            tableView.endUpdates()
         }
     }
 }

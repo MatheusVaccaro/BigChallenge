@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct Task: Storable {
+struct Task: Storable, Equatable {
     
-    enum Status {
+    enum Status: Equatable {
         case complete
         case incomplete
     }
