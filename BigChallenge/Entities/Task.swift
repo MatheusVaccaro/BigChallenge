@@ -18,7 +18,7 @@ struct Task: Storable, Equatable {
     var uuid: UUID
     var title: String
     var status: Status
-    
+    var date: Date?
     var descriptions: [Description]
     
     init(title: String = "", status: Status = .incomplete) {
