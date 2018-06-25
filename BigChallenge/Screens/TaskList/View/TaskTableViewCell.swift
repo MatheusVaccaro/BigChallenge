@@ -24,12 +24,14 @@ class TaskTableViewCell: UITableViewCell {
     // MARK: - IBOutlets
     
     @IBOutlet weak var taskTitleTextView: UITextView!
+    @IBOutlet weak var checkButton: UIButton!
     
     // MARK: - TableViewCell Lifecycle
 
     override func awakeFromNib() {
         super.awakeFromNib()
         taskTitleTextView.delegate = self
+        checkButton.isSelected = false
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -44,7 +46,22 @@ class TaskTableViewCell: UITableViewCell {
         self.viewModel = viewModel
         
         taskTitleTextView.text = viewModel.title
-        taskTitleTextView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote)
+        taskTitleTextView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+    }
+    
+    // MARK: - IBActions
+    
+    @IBAction func didPressCheckButton(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        viewModel?.shouldCompleteTask(checkButton.isSelected)
+        
+        guard let text = taskTitleTextView.text else { return }
+        let textRange = NSRange.init(location: 0, length: text.count)
+        let attributedText = NSMutableAttributedString(string: text)
+        attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle,
+                                    value: NSUnderlineStyle.styleSingle.rawValue,
+                                    range: textRange)
+        taskTitleTextView.attributedText = attributedText
     }
 }
 
@@ -55,17 +72,12 @@ extension TaskTableViewCell: UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        delegate?.shouldUpdateSize(of: self)
+        let lastCharPos = textView.endOfDocument
+
+        let currentRect = textView.caretRect(for: lastCharPos)
+        if currentRect.origin.y < previousRect.origin.y {
+            delegate?.shouldUpdateSize(of: self)
+        }
+        previousRect = currentRect
     }
-    
-//    func textViewDidChange(_ textView: UITextView) {
-//        let lastCharPos = textView.endOfDocument
-//
-//        let currentRect = textView.caretRect(for: lastCharPos)
-//        if currentRect.origin.y < previousRect.origin.y {
-//            guard let text = textView.text else { return }
-//            viewModel?.shouldChangeTask(title: text)
-//        }
-//        previousRect = currentRect
-//    }
 }

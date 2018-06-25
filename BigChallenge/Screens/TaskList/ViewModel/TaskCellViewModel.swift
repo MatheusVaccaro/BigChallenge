@@ -35,4 +35,13 @@ class TaskCellViewModel {
         task.title = title
         model.update(object: task)
     }
+    
+    func shouldCompleteTask(_ bool: Bool) {
+        if bool {
+            task.status = .complete
+        } else {
+            task.status = .incomplete
+        }
+        model.update(object: task)
+    }
 }
