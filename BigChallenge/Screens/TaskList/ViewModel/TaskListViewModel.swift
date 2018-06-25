@@ -67,6 +67,6 @@ class TaskListViewModel {
     }
     
     // MARK: - Strings
-    let viewTitle = NSLocalizedString("Tasks", comment: "title of the tasklist tableView")
+    let viewTitle = String.taskListScreenTitle
     
 }

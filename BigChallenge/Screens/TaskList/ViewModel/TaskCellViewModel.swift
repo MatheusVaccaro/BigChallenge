@@ -25,9 +25,9 @@ class TaskCellViewModel {
     var status: String {
         switch task.status {
         case .complete:
-            return NSLocalizedString("Complete", comment: "completed cell status")
+            return String.taskCellComplete
         case .incomplete:
-            return NSLocalizedString("Incomplete", comment: "incomplete cell status")
+            return String.taskCellIncomplete
         }
     }
     

@@ -73,21 +73,21 @@ class NewTaskViewModel {
     }
     
     // MARK: - Strings
-    let titleTextFieldPlaceHolder = NSLocalizedString("Title", comment: "the placeholder title for a task")
-    let doneItemTitle = NSLocalizedString("Done", comment: "done button to end editing task")
-    let cancelItemTitle = NSLocalizedString("Cancel", comment: "cancel button to cancel editing task")
+    let titleTextFieldPlaceHolder = String.newTaskCellPlaceholder
+    let doneItemTitle = String.newTaskDone
+    let cancelItemTitle = String.newTaskCancel
     
     var navigationItemTitle: String {
         var ans: String = ""
         if isEditing {
-            ans = NSLocalizedString("Edit Task", comment: "button to edit task")
+            ans = String.newTaskScreenTitleEditing
         } else {
-            ans = NSLocalizedString("New Task", comment: "button to add new task")
+            ans = String.newTaskScreenTitleCreating
         }
         return ans
     }
     
     var deleteButtonTitle: String {
-        return NSLocalizedString("Delete Task", comment: "button used to delete a task")
+        return String.newTaskDeleteTask
     }
 }
