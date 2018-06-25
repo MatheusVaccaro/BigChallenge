@@ -5,8 +5,16 @@
   Created by Bruno Fulber Wide on 12/06/18.
   Copyright © 2018 Matheus Vaccaro. All rights reserved.
 */
-"Edit Task" = "Editar Tarefa";
-"New Task" = "Nova Tarefa";
-"Delete Task" = "Deletar Tarefa";
-"Title" = "Titulo";
-"Tasks" = "Tarefas";
+
+"newTaskTitle" = "Titulo";
+"newTaskDone" = "Pronto";
+"newTaskCancel" = "Cancelar";
+"newTaskScreenTitleEditing" = "Editar";
+"newTaskScreenTitleCreating" = "Nova";
+"newTaskDeleteTask" = "Excluir";
+"taskListScreenTitle" = "Tarefas";
+"taskCellComplete" = "Completo";
+"taskCellIncomplete" = "Incompleto";
+
+//"" = "";
+
