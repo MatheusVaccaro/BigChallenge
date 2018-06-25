@@ -54,14 +54,6 @@ class TaskTableViewCell: UITableViewCell {
     @IBAction func didPressCheckButton(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         viewModel?.shouldCompleteTask(checkButton.isSelected)
-        
-        guard let text = taskTitleTextView.text else { return }
-        let textRange = NSRange.init(location: 0, length: text.count)
-        let attributedText = NSMutableAttributedString(string: text)
-        attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle,
-                                    value: NSUnderlineStyle.styleSingle.rawValue,
-                                    range: textRange)
-        taskTitleTextView.attributedText = attributedText
     }
 }
 

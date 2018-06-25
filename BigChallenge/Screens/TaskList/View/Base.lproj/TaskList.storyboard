@@ -31,7 +31,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" usesAttributedText="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w0d-a6-tsX">
-                                                    <rect key="frame" x="50" y="11" width="318" height="38"/>
+                                                    <rect key="frame" x="55" y="11" width="313" height="38"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <attributedString key="attributedText">
                                                         <fragment>
@@ -44,9 +44,9 @@
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                                 </textView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTW-Q2-Qja">
-                                                    <rect key="frame" x="15" y="17.5" width="25" height="25"/>
+                                                    <rect key="frame" x="5" y="5" width="50" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="25" id="0x5-1U-0fA"/>
+                                                        <constraint firstAttribute="width" constant="50" id="0x5-1U-0fA"/>
                                                         <constraint firstAttribute="width" secondItem="UTW-Q2-Qja" secondAttribute="height" multiplier="1:1" id="K3y-YS-U3L"/>
                                                     </constraints>
                                                     <state key="normal" image="uncheckedBox"/>
@@ -57,10 +57,10 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="w0d-a6-tsX" firstAttribute="leading" secondItem="UTW-Q2-Qja" secondAttribute="trailing" constant="10" id="7bf-55-rq5"/>
-                                                <constraint firstItem="UTW-Q2-Qja" firstAttribute="leading" secondItem="qUG-wf-Wjh" secondAttribute="leadingMargin" id="D6I-jV-1xf"/>
+                                                <constraint firstItem="w0d-a6-tsX" firstAttribute="leading" secondItem="UTW-Q2-Qja" secondAttribute="trailing" id="7bf-55-rq5"/>
                                                 <constraint firstItem="w0d-a6-tsX" firstAttribute="bottom" secondItem="qUG-wf-Wjh" secondAttribute="bottomMargin" id="KJC-xD-W6d"/>
                                                 <constraint firstItem="UTW-Q2-Qja" firstAttribute="centerY" secondItem="qUG-wf-Wjh" secondAttribute="centerY" id="SCg-z9-j2s"/>
+                                                <constraint firstItem="UTW-Q2-Qja" firstAttribute="leading" secondItem="qUG-wf-Wjh" secondAttribute="leading" constant="5" id="Ssl-BB-8C5"/>
                                                 <constraint firstItem="w0d-a6-tsX" firstAttribute="top" secondItem="qUG-wf-Wjh" secondAttribute="topMargin" id="b7h-cy-zyF"/>
                                                 <constraint firstItem="w0d-a6-tsX" firstAttribute="trailing" secondItem="qUG-wf-Wjh" secondAttribute="trailingMargin" constant="8" id="tl4-a5-rk9"/>
                                             </constraints>
@@ -99,7 +99,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="checkedBox" width="88" height="88"/>
-        <image name="uncheckedBox" width="88" height="88"/>
+        <image name="checkedBox" width="51" height="51"/>
+        <image name="uncheckedBox" width="150" height="150"/>
     </resources>
 </document>
