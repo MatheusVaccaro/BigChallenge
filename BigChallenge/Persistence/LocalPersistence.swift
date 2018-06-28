@@ -10,16 +10,35 @@
  import CoreData
  import UIKit
  
- public class LocalPersistence: Persistence {
+class LocalPersistence: Persistence {
     
     private var objects: [Storable]
     
     init() {
+        //fetch all objects from LocalPersistance
         objects = []
+        objects = fetchAll(Task.self)
     }
     
     func fetchAll<T: Storable>(_ model: T.Type) -> [T] {
-        return objects as! [T]
+        var ans: [T] = []
+        guard
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+            let model = model as? CDStorable
+            else { print("object not CDStorable"); return ans }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: model.entityName)
+        
+        do {
+            ans = try managedContext.fetch(fetchRequest) as! [T]
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        return ans
     }
     
     func save(object: Storable) {
@@ -45,7 +64,31 @@
     }
     
     func remove(object: Storable) {
-        objects = objects.filter({$0.uuid != object.uuid})
+        guard
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+            let object = object as? CDStorable
+            else {
+                print("object not CDStorable")
+                return
+        }
+        
+        let context =
+            appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: object.entityName)
+        
+        if let result = try? context.fetch(fetchRequest) {
+            for cdObject in result where cdObject.uuid == object.uuid {
+                context.delete(cdObject)
+            }
+        }
+        
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Could not delete \(object). \(error), \(error.userInfo)")
+        }
     }
     
     func remove(at index: Int) {
@@ -64,13 +107,19 @@
  }
  
  private protocol CDStorable: Storable {
+    var entityName: String {get}
     func managedObject(for context: NSManagedObjectContext) -> NSManagedObject
  }
  
 extension Task: CDStorable {
+    
+    var entityName: String {
+        return "TaskEntity"
+    }
+    
     func managedObject(for context: NSManagedObjectContext) -> NSManagedObject {
         let entity =
-            NSEntityDescription.entity(forEntityName: "TaskEntity", in: context)!
+            NSEntityDescription.entity(forEntityName: entityName, in: context)!
         
         let object =
             NSManagedObject(entity: entity, insertInto: context)
