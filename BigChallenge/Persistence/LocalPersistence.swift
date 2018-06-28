@@ -75,7 +75,6 @@ extension Task: CDStorable {
         let object =
             NSManagedObject(entity: entity, insertInto: context)
         
-        //TODO: set task object
         object.setValue(uuid, forKey: "UUID")
         
         return object
