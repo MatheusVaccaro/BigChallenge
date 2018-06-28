@@ -32,7 +32,7 @@ class MockPersistence: Persistence {
     }
     
     func remove(object: Storable) {
-        objects = objects.filter({$0.uuid != object.uuid})
+        objects = objects.filter({$0.id != object.id})
     }
     
     func remove(at index: Int) {
@@ -40,13 +40,12 @@ class MockPersistence: Persistence {
     }
     
     func update(object: Storable) {
-        //TODO: make this equal to the taskmodel
-        objects = objects.map {
-            var mutableObject = $0
-            if $0.uuid == object.uuid {
-                mutableObject = object
+        objects =
+            objects.map {
+            if $0.id == object.id {
+                return object
             }
-            return mutableObject
+            return $0
         }
     }
 }
