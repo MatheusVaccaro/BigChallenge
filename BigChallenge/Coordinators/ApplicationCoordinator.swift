@@ -17,8 +17,7 @@ class ApplicationCoordinator: Coordinator {
     var childrenCoordinators: [Coordinator]
     
     init(window: UIWindow) {
-        // TODO: logic to select correct persistence implementation
-        self.persistence = MockPersistence()
+        self.persistence = Persistence()
         
         self.window = window
         self.rootViewController = UINavigationController()
