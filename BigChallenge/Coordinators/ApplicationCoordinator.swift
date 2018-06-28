@@ -11,7 +11,7 @@ import UIKit
 
 class ApplicationCoordinator: Coordinator {
     
-    private let persistence: Persistence
+    private let persistence: PersistenceProtocol
     private let window: UIWindow
     private let rootViewController: UINavigationController
     var childrenCoordinators: [Coordinator]

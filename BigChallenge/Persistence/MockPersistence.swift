@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MockPersistence: Persistence {
+class MockPersistence: PersistenceProtocol {
     
     private var objects: [Storable]
     

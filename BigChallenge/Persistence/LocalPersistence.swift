@@ -10,7 +10,7 @@
  import CoreData
  import UIKit
  
-class LocalPersistence: Persistence {
+class LocalPersistence: PersistenceProtocol {
     
     private var objects: [Storable]
     

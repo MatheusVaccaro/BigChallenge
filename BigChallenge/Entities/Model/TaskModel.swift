@@ -21,7 +21,7 @@ public class TaskModel {
     }
     
     private var objects: Variable<[Task]>
-    private let persistance: Persistence
+    private let persistance: PersistenceProtocol
     
     func task(at index: Int) -> Task {
         return objects.value[index]
@@ -50,7 +50,7 @@ public class TaskModel {
         persistance.update(object: object)
     }
 
-    init(_ persistence: Persistence) {
+    init(_ persistence: PersistenceProtocol) {
         self.persistance = persistence
         self.objects = Variable(persistance.fetchAll(Task.self))
     }
