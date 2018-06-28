@@ -23,19 +23,19 @@ public class Persistence: PersistenceProtocol {
         #endif
     }
     
-    func fetchAll<T>(_ model: T.Type) -> [T] where T : Storable {
+    public func fetchAll<T>(_ model: T.Type) -> [T] where T : Storable {
         return localPersistence.fetchAll(model)
     }
     
-    func save(object: Storable) {
+    public func save(object: Storable) {
         localPersistence.save(object: object)
     }
     
-    func remove(object: Storable) {
+    public func remove(object: Storable) {
         localPersistence.remove(object: object)
     }
     
-    func update(object: Storable) {
+    public func update(object: Storable) {
         localPersistence.update(object: object)
     }
     

@@ -92,6 +92,7 @@ class LocalPersistence: PersistenceProtocol {
     }
     
     func update(object: Storable) {
+        //TODO
         objects =
             objects.map {
                 if $0.uuid == object.uuid {
@@ -127,7 +128,7 @@ extension Task: CDStorable {
  }
  
  extension NSManagedObject: Storable {
-    var uuid: UUID {
+    public var uuid: UUID {
         return value(forKey: "UUID") as! UUID
     }
  }
