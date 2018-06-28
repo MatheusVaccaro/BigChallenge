@@ -10,7 +10,7 @@
  import CoreData
  import UIKit
  
- class LocalPersistence: Persistence {
+ public class LocalPersistence: Persistence {
     
     private var objects: [Storable]
     
@@ -45,7 +45,7 @@
     }
     
     func remove(object: Storable) {
-        objects = objects.filter({$0.id != object.id})
+        objects = objects.filter({$0.uuid != object.uuid})
     }
     
     func remove(at index: Int) {
@@ -55,7 +55,7 @@
     func update(object: Storable) {
         objects =
             objects.map {
-                if $0.id == object.id {
+                if $0.uuid == object.uuid {
                     return object
                 }
                 return $0
@@ -63,26 +63,27 @@
     }
  }
  
- protocol CDStorable: Storable {
+ private protocol CDStorable: Storable {
     func managedObject(for context: NSManagedObjectContext) -> NSManagedObject
  }
  
- extension Task {
+extension Task: CDStorable {
     func managedObject(for context: NSManagedObjectContext) -> NSManagedObject {
         let entity =
             NSEntityDescription.entity(forEntityName: "TaskEntity", in: context)!
         
-        let task =
+        let object =
             NSManagedObject(entity: entity, insertInto: context)
         
         //TODO: set task object
+        object.setValue(uuid, forKey: "UUID")
         
-        return task
+        return object
     }
  }
  
  extension NSManagedObject: Storable {
-    var id: String {
-        return objectID.uriRepresentation().absoluteString
+    var uuid: UUID {
+        return value(forKey: "UUID") as! UUID
     }
  }
