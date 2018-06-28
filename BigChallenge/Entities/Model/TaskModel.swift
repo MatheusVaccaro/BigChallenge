@@ -39,11 +39,6 @@ public class TaskModel {
         persistance.remove(object: object)
     }
     
-    func remove(at index: Int) {
-        objects.value.remove(at: index)
-        persistance.remove(at: index)
-    }
-    
     func update(object: Storable) {
         objects.value =
             objects.value.map {

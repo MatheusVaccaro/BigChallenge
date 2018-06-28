@@ -91,10 +91,6 @@ class LocalPersistence: Persistence {
         }
     }
     
-    func remove(at index: Int) {
-        objects.remove(at: index)
-    }
-    
     func update(object: Storable) {
         objects =
             objects.map {

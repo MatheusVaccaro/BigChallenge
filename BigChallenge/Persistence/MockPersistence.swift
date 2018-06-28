@@ -35,10 +35,6 @@ class MockPersistence: Persistence {
         objects = objects.filter({$0.uuid != object.uuid})
     }
     
-    func remove(at index: Int) {
-        objects.remove(at: index)
-    }
-    
     func update(object: Storable) {
         //TODO: make this equal to the taskmodel
         objects = objects.map {
