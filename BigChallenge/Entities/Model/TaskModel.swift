@@ -35,7 +35,7 @@ public class TaskModel {
     }
     
     func remove(object: Storable) {
-        objects.value = objects.value.filter({$0.id != object.id})
+        objects.value = objects.value.filter({$0.uuid != object.uuid})
         persistance.remove(object: object)
     }
     
@@ -45,8 +45,9 @@ public class TaskModel {
     }
     
     func update(object: Storable) {
+        //TODO: make this equal to the mockpersistance
         objects.value = objects.value.map {
-            if $0.id == object.id {
+            if $0.uuid == object.uuid {
                 if let object = object as? Task {
                     return object
                 }

@@ -20,13 +20,13 @@ struct Description: Storable, Equatable {
         case incomplete
     }
     
-    var id: String
+    var uuid: UUID
     var text: String
     var type: Type
     var status: Status
     
     init(text: String = "", type: Type = .note, status: Status = .incomplete) {
-        self.id = UUID().uuidString
+        self.uuid = UUID()
         self.text = text
         self.type = type
         self.status = status

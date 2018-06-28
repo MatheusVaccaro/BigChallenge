@@ -15,14 +15,14 @@ struct Task: Storable, Equatable {
         case incomplete
     }
     
-    var id: String
+    var uuid: UUID
     var title: String
     var status: Status
     var date: Date?
     var descriptions: [Description]
     
     init(title: String = "", status: Status = .incomplete) {
-        self.id = UUID().uuidString
+        self.uuid = UUID()
         self.title = title
         self.status = status
         self.descriptions = []
