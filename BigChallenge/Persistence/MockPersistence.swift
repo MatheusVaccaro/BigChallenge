@@ -9,22 +9,23 @@
 import Foundation
 
 class MockPersistence: PersistenceProtocol {
+    func fetch<T>(_ model: T.Type, predicate: NSPredicate? = nil, completion: (([T]) -> ())) where T : Storable {
+        completion( objects as! [T] )
+    }
+    
     
     private var objects: [Storable]
     
     init() {
         objects = {
-            var tasks = [Task]()
+            var tasks: [Task] = [] // this wont work if we target this file for Tests
+                                   // ?????????????
             for iterator in 1...2 {
-                tasks.append(Task(title: "Task \(iterator)"))
+                //TODO \o/
             }
             return tasks
         }()
-    }
-    
-    func fetchAll<T: Storable>(_ model: T.Type) -> [T] {
-        //swiftlint:disable:next force_cast
-        return objects as! [T]
+        objects = []
     }
     
     func save(object: Storable) {

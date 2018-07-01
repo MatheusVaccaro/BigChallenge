@@ -23,8 +23,8 @@ public class Persistence: PersistenceProtocol {
         #endif
     }
     
-    public func fetchAll<T>(_ model: T.Type) -> [T] where T : Storable {
-        return localPersistence.fetchAll(model)
+    public func fetch<T>(_ model: T.Type, predicate: NSPredicate? = nil, completion: (([T]) -> ())) where T : Storable {
+        localPersistence.fetch(model, predicate: predicate, completion: completion)
     }
     
     public func save(object: Storable) {

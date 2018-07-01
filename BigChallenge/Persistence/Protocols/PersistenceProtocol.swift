@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol PersistenceProtocol {
-    func fetchAll<T: Storable>(_ model: T.Type) -> [T]
+    func fetch<T : Storable>(_ model: T.Type, predicate: NSPredicate?, completion: (([T]) -> ()))
     func save(object: Storable)
     func remove(object: Storable)
 <<<<<<< Updated upstream:BigChallenge/Persistence/Protocols/Persistence.swift

@@ -17,7 +17,7 @@ class LocalPersistence: PersistenceProtocol {
         /* This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
          */
-        let container = NSPersistentContainer(name: "CheckContainer")
+        let container = NSPersistentContainer(name: "Model")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
@@ -54,96 +54,57 @@ class LocalPersistence: PersistenceProtocol {
     init() {
         //fetch all objects from LocalPersistance
         objects = []
-        objects = fetchAll(Task.self)
     }
     
-    func fetchAll<T: Storable>(_ model: T.Type) -> [T] {
-        var ans: [T] = []
-        guard
-            let model = model as? CDStorable
-            else { print("object not CDStorable"); return ans }
+    func fetch<T : Storable>(_ model: T.Type, predicate: NSPredicate? = nil, completion: (([T]) -> Void)) {
         
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: model.entityName)
+        let context = persistentContainer.viewContext
+        
+        let request =
+            NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: model))
+        
+        print(String(describing: model))
         
         do {
-            ans = try persistentContainer.viewContext.fetch(fetchRequest) as! [T]
+            var ans = try context.fetch(request)
+            if let predicate = predicate,
+                let unfilteredAns = ans as? [NSManagedObject] {
+                ans = unfilteredAns.filter { predicate.evaluate(with: $0) }
+            }
+            completion(ans as! [T])
         } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
+            print("could not fetch.  \(error), \(error.userInfo)")
         }
-        return ans
     }
     
     func save(object: Storable) {
-        guard let object =
-            object as? CDStorable else {
-                print("object not CDStorable")
-                return
-            }
-        
-        _ = object.managedObject(for: persistentContainer.viewContext)
-        
+        saveContext()
+    }
+    func update(object: Storable) {
         saveContext()
     }
     
     func remove(object: Storable) {
-        guard let object = object as? CDStorable
-            else {
-                print("object not CDStorable")
-                return
-        }
         
-        let context = persistentContainer.viewContext
+        let context =
+            persistentContainer.viewContext
         
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: object.entityName)
+        let request =
+            NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: object))
         
-        if let result = try? context.fetch(fetchRequest) {
-            for cdObject in result where cdObject.uuid == object.uuid {
-                context.delete(cdObject)
+        do {
+            let results = try? context.fetch(request)
+            if let results = results as? [NSManagedObject] {
+                for result in results where result.uuid == object.uuid {
+                    context.delete(result)
+                }
             }
         }
-        
-        saveContext()
-    }
-    
-    func update(object: Storable) {
-        objects =
-            objects.map {
-                if $0.uuid == object.uuid {
-                    return object
-                }
-                return $0
-        }
     }
  }
- 
- private protocol CDStorable: Storable {
-    var entityName: String { get }
-    func managedObject(for context: NSManagedObjectContext) -> NSManagedObject
- }
- 
-extension Task: CDStorable {
-    
-    var entityName: String {
-        return "TaskEntity"
-    }
-    
-    func managedObject(for context: NSManagedObjectContext) -> NSManagedObject {
-        let entity =
-            NSEntityDescription.entity(forEntityName: entityName, in: context)!
-        
-        let object =
-            NSManagedObject(entity: entity, insertInto: context)
-        
-        object.setValue(uuid, forKey: "UUID")
-        
-        return object
-    }
-}
  
  extension NSManagedObject: Storable {
     public var uuid: UUID {
-        return value(forKey: "UUID") as! UUID
+        return value(forKey: "id") as! UUID
     }
  }

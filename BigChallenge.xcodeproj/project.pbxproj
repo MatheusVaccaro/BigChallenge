@@ -16,15 +16,12 @@
 		223C0C0620E5293500CF39ED /* PersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0520E5293500CF39ED /* PersistenceProtocol.swift */; };
 		223C0C0820E529D600CF39ED /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0720E529D600CF39ED /* Persistence.swift */; };
 		223C0C3920E5678100CF39ED /* LocalPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0BE020E4449C00CF39ED /* LocalPersistence.swift */; };
-		223C0C3A20E5678800CF39ED /* MockPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113A20B8791E00ABB161 /* MockPersistence.swift */; };
 		223C0C3C20E5681200CF39ED /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113C20B88A2F00ABB161 /* Storable.swift */; };
 		223C0C3D20E5681500CF39ED /* PersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0520E5293500CF39ED /* PersistenceProtocol.swift */; };
-		223C0C3E20E568DE00CF39ED /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD1020B754AE005F0F85 /* Task.swift */; };
-		223C0C3F20E568E100CF39ED /* Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C27A3F20D2FBB200686BD5 /* Description.swift */; };
-		223C0C4020E5697700CF39ED /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD1020B754AE005F0F85 /* Task.swift */; };
-		223C0C4120E5697800CF39ED /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD1020B754AE005F0F85 /* Task.swift */; };
-		223C0C4220E5697B00CF39ED /* Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C27A3F20D2FBB200686BD5 /* Description.swift */; };
-		223C0C4320E5697C00CF39ED /* Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C27A3F20D2FBB200686BD5 /* Description.swift */; };
+		223C0C3E20E568DE00CF39ED /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD1020B754AE005F0F85 /* Enums.swift */; };
+		223C0C4020E5697700CF39ED /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD1020B754AE005F0F85 /* Enums.swift */; };
+		223C0C4120E5697800CF39ED /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD1020B754AE005F0F85 /* Enums.swift */; };
+		223C0C4420E6C70200CF39ED /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2286A71420E3DF2100BE92AA /* Model.xcdatamodeld */; };
 		22456D2920DC3BB000168894 /* dateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22456D2820DC3BB000168894 /* dateExtension.swift */; };
 		2253179A20D147AD0065C9F9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2253179C20D147AD0065C9F9 /* Localizable.strings */; };
 		226CEA0520E17E87008CEB97 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226CEA0420E17E87008CEB97 /* Strings.swift */; };
@@ -77,7 +74,6 @@
 		1627171F20C879AD00AA0024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16595FFF20DAD53E00BCCDB5 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		1676FC8F20D99580003E2D79 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
-		16C27A3F20D2FBB200686BD5 /* Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Description.swift; sourceTree = "<group>"; };
 		220D7C1C20D02E5E007EC0DD /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		223C0BE020E4449C00CF39ED /* LocalPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPersistence.swift; sourceTree = "<group>"; };
 		223C0C0520E5293500CF39ED /* PersistenceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceProtocol.swift; sourceTree = "<group>"; };
@@ -102,7 +98,7 @@
 		C21EAD0620B74757005F0F85 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		C21EAD0A20B74F01005F0F85 /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
 		C21EAD0E20B75211005F0F85 /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
-		C21EAD1020B754AE005F0F85 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		C21EAD1020B754AE005F0F85 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		C23753AD20B6461E00C1CE15 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		C23753AF20B6463700C1CE15 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
 		C28DC91620B61CB6007F881A /* BigChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -272,8 +268,7 @@
 		C21EAD0D20B751E8005F0F85 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				C21EAD1020B754AE005F0F85 /* Task.swift */,
-				16C27A3F20D2FBB200686BD5 /* Description.swift */,
+				C21EAD1020B754AE005F0F85 /* Enums.swift */,
 				2286A71420E3DF2100BE92AA /* Model.xcdatamodeld */,
 				1676FC8E20D9946E003E2D79 /* Model */,
 			);
@@ -636,9 +631,8 @@
 				1627171020C8793900AA0024 /* BigChallengeTests.swift in Sources */,
 				223C0C3C20E5681200CF39ED /* Storable.swift in Sources */,
 				223C0C3D20E5681500CF39ED /* PersistenceProtocol.swift in Sources */,
-				223C0C4220E5697B00CF39ED /* Description.swift in Sources */,
-				223C0C3A20E5678800CF39ED /* MockPersistence.swift in Sources */,
-				223C0C4020E5697700CF39ED /* Task.swift in Sources */,
+				223C0C4420E6C70200CF39ED /* Model.xcdatamodeld in Sources */,
+				223C0C4020E5697700CF39ED /* Enums.swift in Sources */,
 				223C0C3920E5678100CF39ED /* LocalPersistence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -647,8 +641,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				223C0C4320E5697C00CF39ED /* Description.swift in Sources */,
-				223C0C4120E5697800CF39ED /* Task.swift in Sources */,
+				223C0C4120E5697800CF39ED /* Enums.swift in Sources */,
 				1627171E20C879AD00AA0024 /* BigChallengeUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -657,12 +650,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				223C0C3F20E568E100CF39ED /* Description.swift in Sources */,
 				C2A1115720BB923C00ABB161 /* NewTaskTableViewController.swift in Sources */,
 				C2A1114220B8AED400ABB161 /* TaskTableViewCell.swift in Sources */,
 				C21EAD0F20B75211005F0F85 /* TaskListViewModel.swift in Sources */,
 				C28DC91A20B61CB6007F881A /* AppDelegate.swift in Sources */,
-				223C0C3E20E568DE00CF39ED /* Task.swift in Sources */,
+				223C0C3E20E568DE00CF39ED /* Enums.swift in Sources */,
 				C2A1115320BA036800ABB161 /* NewTaskCoordinator.swift in Sources */,
 				C23753AE20B6461E00C1CE15 /* Coordinator.swift in Sources */,
 				2286A71620E3DF2100BE92AA /* Model.xcdatamodeld in Sources */,

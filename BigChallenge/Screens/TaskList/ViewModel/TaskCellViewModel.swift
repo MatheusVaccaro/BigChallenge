@@ -19,14 +19,15 @@ class TaskCellViewModel {
     }
     
     var title: String {
-        return task.title
+        return task.title!
     }
     
+    //TODO: this looks awful
     var status: String {
         switch task.status {
-        case .complete:
+        case TaskStatus.complete.rawValue:
             return String.taskCellComplete
-        case .incomplete:
+        default:
             return String.taskCellIncomplete
         }
     }
@@ -38,9 +39,9 @@ class TaskCellViewModel {
     
     func shouldCompleteTask(_ bool: Bool) {
         if bool {
-            task.status = .complete
+            task.status = TaskStatus.complete.rawValue
         } else {
-            task.status = .incomplete
+            task.status = TaskStatus.incomplete.rawValue
         }
         model.update(object: task)
     }
