@@ -36,23 +36,12 @@ public class TaskModel {
         objects.value = objects.value.filter({$0.uuid != object.uuid})
         persistance.remove(object: object)
     }
-    
-    public func update(object: Task) {
-        objects.value =
-            objects.value.map {
-            if $0.uuid == object.uuid {
-                return object
-            }
-            return $0
-        }
-        persistance.update(object: object)
-    }
 
     init(_ persistence: PersistenceProtocol) {
         self.persistance = persistence
         self.objects = Variable([])
         persistance.fetch(Task.self, predicate: nil) {
-            self.objects = Variable( $0 as! [Task] )
+            self.objects = Variable( $0 )
         }
     }
 }

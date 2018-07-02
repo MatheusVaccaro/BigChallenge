@@ -34,7 +34,6 @@ class TaskCellViewModel {
     
     func shouldChangeTask(title: String) {
         task.title = title
-        model.update(object: task)
     }
     
     func shouldCompleteTask(_ bool: Bool) {
@@ -43,6 +42,5 @@ class TaskCellViewModel {
         } else {
             task.status = TaskStatus.incomplete.rawValue
         }
-        model.update(object: task)
     }
 }

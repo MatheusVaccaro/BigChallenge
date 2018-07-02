@@ -34,9 +34,4 @@ public class Persistence: PersistenceProtocol {
     public func remove(object: Storable) {
         localPersistence.remove(object: object)
     }
-    
-    public func update(object: Storable) {
-        localPersistence.update(object: object)
-    }
-    
 }
