@@ -21,44 +21,27 @@ public class TaskModel {
     }
     
     private var objects: Variable<[Task]>
-    private let persistance: Persistence
+    private let persistance: PersistenceProtocol
     
     func task(at index: Int) -> Task {
         return objects.value[index]
     }
     
-    func save(object: Storable) {
-        if let object = object as? Task {
-            objects.value.append(object)
-        }
+    public func save(object: Task) {
+        objects.value.append(object)
         persistance.save(object: object)
     }
     
-    func remove(object: Storable) {
+    public func remove(object: Task) {
         objects.value = objects.value.filter({$0.uuid != object.uuid})
-        persistance.remove(object: object)
-    }
-    
-    func remove(at index: Int) {
-        objects.value.remove(at: index)
-        persistance.remove(at: index)
-    }
-    
-    func update(object: Storable) {
-        //TODO: make this equal to the mockpersistance
-        objects.value = objects.value.map {
-            if $0.uuid == object.uuid {
-                if let object = object as? Task {
-                    return object
-                }
-            }
-            return $0
-        }
-        persistance.update(object: object)
+        persistance.delete(object)
     }
 
-    init(_ persistence: Persistence) {
+    init(_ persistence: PersistenceProtocol) {
         self.persistance = persistence
-        self.objects = Variable(persistance.fetchAll(Task.self))
+        self.objects = Variable([])
+        persistance.fetch(Task.self, predicate: nil) {
+            self.objects = Variable( $0 )
+        }
     }
 }

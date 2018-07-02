@@ -49,7 +49,7 @@ class NewTaskViewModel {
     func didTapDoneButton() {
         delegate?.didTapDoneButton()
         if isEditing {
-            updateTask()
+            //TODO
         } else {
             addTask()
         }
@@ -66,10 +66,6 @@ class NewTaskViewModel {
     
     private func addTask() {
         model.save(object: task)
-    }
-    
-    private func updateTask() {
-        model.update(object: task)
     }
     
     // MARK: - Strings

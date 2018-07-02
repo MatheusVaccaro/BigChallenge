@@ -11,14 +11,13 @@ import UIKit
 
 class ApplicationCoordinator: Coordinator {
     
-    private let persistence: Persistence
+    private let persistence: PersistenceProtocol
     private let window: UIWindow
     private let rootViewController: UINavigationController
     var childrenCoordinators: [Coordinator]
     
     init(window: UIWindow) {
-        // TODO: logic to select correct persistence implementation
-        self.persistence = MockPersistence()
+        self.persistence = Persistence()
         
         self.window = window
         self.rootViewController = UINavigationController()

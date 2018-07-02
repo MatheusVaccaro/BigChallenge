@@ -58,7 +58,9 @@ class TaskListViewModel {
     }
     
     func removeTask(at indexPath: IndexPath) {
-        model.remove(at: indexPath.row)
+        if let task = taskForRowAt(indexPath: indexPath) {
+            model.remove(object: task)
+        }
     }
     
     func didSelectTask(at indexPath: IndexPath) {

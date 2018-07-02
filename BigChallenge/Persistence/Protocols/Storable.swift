@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol Storable {
+public protocol Storable {
     var uuid: UUID { get }
 }
