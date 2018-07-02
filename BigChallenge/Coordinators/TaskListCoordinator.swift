@@ -36,7 +36,7 @@ class TaskListCoordinator: Coordinator {
     }
 
     fileprivate func showNewTask() {
-        let newTaskCoordinator = NewTaskCoordinator(task: Task(),
+        let newTaskCoordinator = NewTaskCoordinator(task: Task ,
                                                     isEditing: false,
                                                     presenter: presenter,
                                                     model: model)

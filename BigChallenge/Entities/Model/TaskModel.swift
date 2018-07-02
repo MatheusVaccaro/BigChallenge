@@ -34,7 +34,7 @@ public class TaskModel {
     
     public func remove(object: Task) {
         objects.value = objects.value.filter({$0.uuid != object.uuid})
-        persistance.remove(object: object)
+        persistance.delete(object)
     }
 
     init(_ persistence: PersistenceProtocol) {

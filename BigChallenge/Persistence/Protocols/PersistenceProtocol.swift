@@ -11,5 +11,5 @@ import Foundation
 public protocol PersistenceProtocol {
     func fetch<T : Storable>(_ model: T.Type, predicate: NSPredicate?, completion: (([T]) -> ()))
     func save(object: Storable)
-    func remove(object: Storable)
+    func delete(_ object: Storable)
 }

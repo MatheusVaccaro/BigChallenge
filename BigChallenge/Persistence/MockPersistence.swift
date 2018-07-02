@@ -32,7 +32,7 @@ class MockPersistence: PersistenceProtocol {
         objects.append(object)
     }
     
-    func remove(object: Storable) {
+    func delete(_ object: Storable) {
         objects = objects.filter({$0.uuid != object.uuid})
     }
     

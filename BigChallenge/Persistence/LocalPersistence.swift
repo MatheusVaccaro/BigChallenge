@@ -84,7 +84,7 @@ class LocalPersistence: PersistenceProtocol {
         saveContext()
     }
     
-    func remove(object: Storable) {
+    func delete(_ object: Storable) {
         
         let context =
             persistentContainer.viewContext
