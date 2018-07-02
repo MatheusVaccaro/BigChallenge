@@ -9,7 +9,7 @@
 import Foundation
 
 public class Persistence: PersistenceProtocol {
-    
+   
     let localPersistence: PersistenceProtocol
     let remotePersistence: PersistenceProtocol?
     
@@ -22,6 +22,11 @@ public class Persistence: PersistenceProtocol {
         remotePersistence = nil
         #endif
     }
+    
+    public func create<T>(_ model: T.Type, completion: @escaping ((T) -> ())) where T : Storable {
+        //todo
+    }
+    
     
     public func fetch<T>(_ model: T.Type, predicate: NSPredicate? = nil, completion: (([T]) -> ())) where T : Storable {
         localPersistence.fetch(model, predicate: predicate, completion: completion)
