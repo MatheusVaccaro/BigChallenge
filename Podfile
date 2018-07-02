@@ -16,6 +16,8 @@ end
 def testing_pods
     pod 'Quick'
     pod 'Nimble'
+    pod 'RxCocoa'
+    pod 'RxSwift'
 end
 
 target 'BigChallengeTests' do
