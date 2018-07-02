@@ -23,25 +23,34 @@ public class TaskModel {
     private var objects: Variable<[Task]>
     private let persistance: PersistenceProtocol
     
+    init() {
+        self.persistance = Persistence()
+        self.objects = Variable([])
+        persistance.fetch(Task.self, predicate: nil) {
+            self.objects = Variable( $0 )
+        }
+    }
+    
     func task(at index: Int) -> Task {
         return objects.value[index]
     }
     
     public func save(object: Task) {
         objects.value.append(object)
-        persistance.save(object: object)
+        persistance.save()
     }
     
     public func remove(object: Task) {
         objects.value = objects.value.filter({$0.uuid != object.uuid})
         persistance.delete(object)
     }
-
-    init(_ persistence: PersistenceProtocol) {
-        self.persistance = persistence
-        self.objects = Variable([])
-        persistance.fetch(Task.self, predicate: nil) {
-            self.objects = Variable( $0 )
-        }
+    
+    public func createTask(with title: String) -> Task {
+        let task: Task = persistance.create(Task.self)
+        task.id = UUID()
+        task.title = title
+        task.creationDate = Date()
+        return task
     }
+
 }

@@ -11,16 +11,15 @@ import UIKit
 
 class TaskListCoordinator: Coordinator {
     
-    fileprivate let persistence: PersistenceProtocol
     fileprivate let presenter: UINavigationController
-    fileprivate var taskListViewController: TaskListViewController?
-    fileprivate var model: TaskModel
     var childrenCoordinators: [Coordinator]
     
-    init(presenter: UINavigationController, persistence: PersistenceProtocol) {
+    fileprivate var taskListViewController: TaskListViewController?
+    fileprivate var model: TaskModel
+    
+    init(presenter: UINavigationController, model: TaskModel) {
         self.presenter = presenter
-        self.persistence = persistence
-        self.model = TaskModel(persistence)
+        self.model = model
         self.childrenCoordinators = []
     }
 
@@ -36,7 +35,8 @@ class TaskListCoordinator: Coordinator {
     }
 
     fileprivate func showNewTask() {
-        let newTaskCoordinator = NewTaskCoordinator(task: Task() ,
+        let task = model.createTask(with: "")
+        let newTaskCoordinator = NewTaskCoordinator(task: task,
                                                     isEditing: false,
                                                     presenter: presenter,
                                                     model: model)

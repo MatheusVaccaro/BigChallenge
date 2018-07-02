@@ -38,19 +38,12 @@
             return container
         }()
     }
-   
-    private func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
-    }
     
+    func create<T>(_ model: T.Type) -> T where T : Storable {
+        let modelName = String(describing: model)
+        let object = NSEntityDescription.insertNewObject(forEntityName: modelName, into: persistentContainer.viewContext) as! T
+        return object
+    }
     
     func fetch<T : Storable>(_ model: T.Type, predicate: NSPredicate? = nil, completion: (([T]) -> Void)) {
         
@@ -73,14 +66,7 @@
         }
     }
     
-    func create<T>(_ model: T.Type, completion: @escaping ((T) -> ())) where T : Storable {
-        //todo
-    }
-    
-    func save(object: Storable) {
-        saveContext()
-    }
-    func update(object: Storable) {
+    func save() {
         saveContext()
     }
     
@@ -101,6 +87,19 @@
             }
         }
     }
+    
+    private func saveContext () {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
+    
  }
  
  extension NSManagedObject: Storable {

@@ -10,7 +10,6 @@
 		1627171020C8793900AA0024 /* BigChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1627170F20C8793900AA0024 /* BigChallengeTests.swift */; };
 		1627171E20C879AD00AA0024 /* BigChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1627171D20C879AD00AA0024 /* BigChallengeUITests.swift */; };
 		1627EBEDDA20D9C1EB6BC691 /* Pods_BigChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 558C6AF329AB768E11815BB8 /* Pods_BigChallengeTests.framework */; };
-		1659600020DAD53E00BCCDB5 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16595FFF20DAD53E00BCCDB5 /* Model.swift */; };
 		1676FC9020D99580003E2D79 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1676FC8F20D99580003E2D79 /* TaskModel.swift */; };
 		223C0BE120E4449C00CF39ED /* LocalPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0BE020E4449C00CF39ED /* LocalPersistence.swift */; };
 		223C0C0620E5293500CF39ED /* PersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0520E5293500CF39ED /* PersistenceProtocol.swift */; };
@@ -72,7 +71,6 @@
 		1627171B20C879AD00AA0024 /* BigChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1627171D20C879AD00AA0024 /* BigChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigChallengeUITests.swift; sourceTree = "<group>"; };
 		1627171F20C879AD00AA0024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		16595FFF20DAD53E00BCCDB5 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		1676FC8F20D99580003E2D79 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		220D7C1C20D02E5E007EC0DD /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		223C0BE020E4449C00CF39ED /* LocalPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPersistence.swift; sourceTree = "<group>"; };
@@ -167,7 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				1676FC8F20D99580003E2D79 /* TaskModel.swift */,
-				16595FFF20DAD53E00BCCDB5 /* Model.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -676,7 +673,6 @@
 				C2A1113D20B88A2F00ABB161 /* Storable.swift in Sources */,
 				C2A1114020B8A70A00ABB161 /* TaskCellViewModel.swift in Sources */,
 				C2A1115120B9FCDB00ABB161 /* NewTaskViewModel.swift in Sources */,
-				1659600020DAD53E00BCCDB5 /* Model.swift in Sources */,
 				22456D2920DC3BB000168894 /* dateExtension.swift in Sources */,
 				C21EAD0B20B74F01005F0F85 /* StoryboardInstantiable.swift in Sources */,
 				223C0BE120E4449C00CF39ED /* LocalPersistence.swift in Sources */,
@@ -949,6 +945,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "00b305f4-4023-436a-b664-f6cba5c79ed2";
 				PROVISIONING_PROFILE_SPECIFIER = finalChallengeDev;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -972,6 +969,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "78172e39-28ea-4cd8-a3d9-04eeb8a67eac";
 				PROVISIONING_PROFILE_SPECIFIER = FinalChallengeDist;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -11,22 +11,27 @@ import UIKit
 
 class NewTaskCoordinator: Coordinator {
     
-    fileprivate let model: TaskModel
     fileprivate let presenter: UINavigationController
-    fileprivate var modalPresenter: UINavigationController?
-    fileprivate var newTaskTableViewController: NewTaskTableViewController?
-    fileprivate let task: Task
-    fileprivate let isEditing: Bool
     var childrenCoordinators: [Coordinator]
+    
+    fileprivate var newTaskTableViewController: NewTaskTableViewController?
+    fileprivate let model: TaskModel
+    fileprivate var task: Task
+    fileprivate let isEditing: Bool
+    fileprivate var modalPresenter: UINavigationController?
     
     weak var delegate: CoordinatorDelegate?
     
-    init(task: Task, isEditing: Bool, presenter: UINavigationController, model: TaskModel) {
+    init(task: Task? = nil, isEditing: Bool, presenter: UINavigationController, model: TaskModel) {
         self.model = model
         self.presenter = presenter
         self.childrenCoordinators = []
-        self.task = task
         self.isEditing = isEditing
+        if let task = task {
+            self.task = task
+        } else {
+            self.task = model.createTask(with: "")
+        }
     }
     
     func start() {
