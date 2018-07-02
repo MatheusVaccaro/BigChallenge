@@ -39,13 +39,13 @@
         }()
     }
     
-    func create<T>(_ model: T.Type) -> T where T : Storable {
+    func create<T: Storable>(_ model: T.Type) -> T {
         let modelName = String(describing: model)
         let object = NSEntityDescription.insertNewObject(forEntityName: modelName, into: persistentContainer.viewContext) as! T
         return object
     }
     
-    func fetch<T : Storable>(_ model: T.Type, predicate: NSPredicate? = nil, completion: (([T]) -> Void)) {
+    func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate? = nil, completion: (([T]) -> Void)) {
         
         let context = persistentContainer.viewContext
         
