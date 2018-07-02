@@ -48,11 +48,8 @@
     func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate? = nil, completion: (([T]) -> Void)) {
         
         let context = persistentContainer.viewContext
-        
-        let request =
-            NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: model))
-        
-        print(String(describing: model))
+        let entityName = String(describing: model)
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         
         do {
             var ans = try context.fetch(request)
@@ -72,19 +69,20 @@
     
     func delete(_ object: Storable) {
         
-        let context =
-            persistentContainer.viewContext
-        
-        let request =
-            NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: object))
-        
+        let context = persistentContainer.viewContext
+        let entityName = String(describing: type(of: object))
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+    
         do {
-            let results = try? context.fetch(request)
+            let results = try context.fetch(request)
             if let results = results as? [NSManagedObject] {
                 for result in results where result.uuid == object.uuid {
                     context.delete(result)
                 }
             }
+            saveContext()
+        } catch let error as NSError {
+            print("could not delete.  \(error), \(error.userInfo)")
         }
     }
     

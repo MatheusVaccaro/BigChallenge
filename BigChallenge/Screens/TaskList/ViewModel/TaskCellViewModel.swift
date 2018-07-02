@@ -37,6 +37,7 @@ class TaskCellViewModel {
     }
     
     func shouldCompleteTask(_ bool: Bool) {
+        model.remove(object: task)
         if bool {
             task.status = TaskStatus.complete.rawValue
         } else {
