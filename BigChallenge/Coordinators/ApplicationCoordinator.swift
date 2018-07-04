@@ -14,7 +14,7 @@ class ApplicationCoordinator: Coordinator {
     public var childrenCoordinators: [Coordinator]
     private let window: UIWindow
     private let rootViewController: UINavigationController
-    private let persistence: PersistenceProtocol
+    private let persistence: Persistence
     
     init(window: UIWindow) {
         self.window = window

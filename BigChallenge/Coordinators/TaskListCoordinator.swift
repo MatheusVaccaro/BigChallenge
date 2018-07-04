@@ -15,10 +15,10 @@ class TaskListCoordinator: Coordinator {
     var childrenCoordinators: [Coordinator]
     
     fileprivate var taskListViewController: TaskListViewController?
-    fileprivate let persistence: PersistenceProtocol
+    fileprivate let persistence: Persistence
     fileprivate var model: TaskModel
     
-    init(presenter: UINavigationController, model: TaskModel, persistence: PersistenceProtocol) {
+    init(presenter: UINavigationController, model: TaskModel, persistence: Persistence) {
         
         self.presenter = presenter
         self.model = model
@@ -38,7 +38,7 @@ class TaskListCoordinator: Coordinator {
     }
 
     fileprivate func showNewTask() {
-        let task = model.createTask(with: "")
+        let task = model.createTask()
         let newTaskCoordinator = NewTaskCoordinator(task: task,
                                                     isEditing: false,
                                                     presenter: presenter,

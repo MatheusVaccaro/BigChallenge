@@ -21,7 +21,7 @@ public class TagModel {
     }
     
     private var objects: Variable<[Tag]>
-    private let persistance: PersistenceProtocol
+    private let persistance: Persistence
     
     init(persistence: Persistence) {
         self.persistance = persistence

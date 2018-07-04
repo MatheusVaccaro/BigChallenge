@@ -1,15 +1,15 @@
- //
- //  MockPersistence.swift
- //  BigChallenge
- //
- //  Created by Matheus Vaccaro on 25/05/18.
- //  Copyright © 2018 Matheus Vaccaro. All rights reserved.
- //
- 
- import Foundation
- import CoreData
- 
- class LocalPersistence: PersistenceProtocol {
+//
+//  LocalPersistence.swift
+//  BigChallenge
+//
+//  Created by Matheus Vaccaro on 25/05/18.
+//  Copyright © 2018 Matheus Vaccaro. All rights reserved.
+//
+
+import Foundation
+import CoreData
+
+class LocalPersistence: PersistenceProtocol {
     
     var persistentContainer: NSPersistentContainer
     
@@ -39,13 +39,16 @@
         }()
     }
     
-    func create<T: Storable>(_ model: T.Type) -> T {
-        let modelName = String(describing: model)
-        let object = NSEntityDescription.insertNewObject(forEntityName: modelName, into: persistentContainer.viewContext) as! T
+    func create<T: Storable>(_ object: T.Type) throws -> T {
+        let modelName = String(describing: object)
+        //swiftlint:disable:next line_length
+        guard let object = NSEntityDescription.insertNewObject(forEntityName: modelName, into: persistentContainer.viewContext) as? T else {
+            throw CoreDataError.couldNotCreateObject
+        }
         return object
     }
     
-    func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate? = nil, completion: (([T]) -> Void)) {
+    func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate? = nil, completion: (([T]) -> Void)) throws {
         
         let context = persistentContainer.viewContext
         let entityName = String(describing: model)
@@ -57,22 +60,23 @@
                 let unfilteredAns = ans as? [NSManagedObject] {
                 ans = unfilteredAns.filter { predicate.evaluate(with: $0) }
             }
+            //swiftlint:disable:next force_cast
             completion(ans as! [T])
-        } catch let error as NSError {
-            print("could not fetch.  \(error), \(error.userInfo)")
+        } catch {
+            throw CoreDataError.couldNotFetchObject(reason: error.localizedDescription)
         }
     }
     
-    func save() {
-        saveContext()
+    func save() throws {
+        try saveContext()
     }
     
-    func delete(_ object: Storable) {
+    func delete(_ object: Storable) throws {
         
         let context = persistentContainer.viewContext
         let entityName = String(describing: type(of: object))
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-    
+        
         do {
             let results = try context.fetch(request)
             if let results = results as? [NSManagedObject] {
@@ -80,28 +84,36 @@
                     context.delete(result)
                 }
             }
-            saveContext()
-        } catch let error as NSError {
-            print("could not delete.  \(error), \(error.userInfo)")
+            try saveContext()
+        } catch {
+            throw CoreDataError.couldNotDeleteObject(reason: error.localizedDescription)
         }
     }
     
-    private func saveContext () {
+    private func saveContext () throws {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
                 try context.save()
             } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                throw CoreDataError.couldNotSaveContext(reason: error.localizedDescription)
             }
         }
     }
     
- }
- 
- extension NSManagedObject: Storable {
+}
+
+extension NSManagedObject: Storable {
     public var uuid: UUID {
+        //swiftlint:disable:next force_cast
         return value(forKey: "id") as! UUID
     }
- }
+}
+
+enum CoreDataError: Error {
+    case couldNotCreateObject
+    // swiftlint:disable identifier_name
+    case couldNotFetchObject(reason: String)
+    case couldNotSaveContext(reason: String)
+    case couldNotDeleteObject(reason: String)
+}

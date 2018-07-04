@@ -21,9 +21,9 @@ public class TaskModel {
     }
     
     private var objects: Variable<[Task]>
-    private let persistance: PersistenceProtocol
+    private let persistance: Persistence
     
-    init(persistence: PersistenceProtocol) {
+    init(persistence: Persistence) {
         self.persistance = persistence
         self.objects = Variable([])
         persistance.fetch(Task.self, predicate: nil) {
