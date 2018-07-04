@@ -15,19 +15,22 @@ class TaskListCoordinator: Coordinator {
     var childrenCoordinators: [Coordinator]
     
     fileprivate var taskListViewController: TaskListViewController?
+    fileprivate let persistence: PersistenceProtocol
     fileprivate var model: TaskModel
     
-    init(presenter: UINavigationController, model: TaskModel) {
+    init(presenter: UINavigationController, model: TaskModel, persistence: PersistenceProtocol) {
+        
         self.presenter = presenter
         self.model = model
         self.childrenCoordinators = []
+        self.persistence = persistence
     }
 
     func start() {
         let taskListViewController = TaskListViewController.instantiate()
         self.taskListViewController = taskListViewController
         
-        let taskListViewModel = TaskListViewModel(model)
+        let taskListViewModel = TaskListViewModel(model: model)
         taskListViewModel.delegate = self
         taskListViewController.viewModel = taskListViewModel
         
@@ -68,7 +71,6 @@ extension TaskListCoordinator: TaskListViewModelDelegate {
 }
 
 extension TaskListCoordinator: CoordinatorDelegate {
-    
     func shouldDeinitCoordinator(_ coordinator: Coordinator) {
         releaseChild(coordinator: coordinator)
     }

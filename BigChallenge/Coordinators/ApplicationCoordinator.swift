@@ -11,16 +11,17 @@ import UIKit
 
 class ApplicationCoordinator: Coordinator {
     
+    public var childrenCoordinators: [Coordinator]
     private let window: UIWindow
-    var childrenCoordinators: [Coordinator]
-    
     private let rootViewController: UINavigationController
+    private let persistence: PersistenceProtocol
     
     init(window: UIWindow) {
         self.window = window
         self.rootViewController = UINavigationController()
         self.rootViewController.navigationBar.prefersLargeTitles = true
         self.childrenCoordinators = []
+        self.persistence = Persistence()
     }
     
     func start() {
@@ -30,7 +31,9 @@ class ApplicationCoordinator: Coordinator {
     }
     
     private func showTaskList() {
-        let taskListCoordinator = TaskListCoordinator(presenter: rootViewController, model: TaskModel())
+        let taskListCoordinator = TaskListCoordinator(presenter: rootViewController,
+                                                      model: TaskModel(persistence: persistence),
+                                                      persistence: persistence)
         addChild(coordinator: taskListCoordinator)
         taskListCoordinator.start()
     }

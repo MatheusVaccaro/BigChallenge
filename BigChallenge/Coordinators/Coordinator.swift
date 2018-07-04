@@ -9,18 +9,14 @@
 import Foundation
 
 protocol Coordinator: class {
-    
     var childrenCoordinators: [Coordinator] { get set }
     func start()
     func addChild(coordinator: Coordinator)
     func releaseChild(coordinator: Coordinator)
-    
 }
 
 protocol CoordinatorDelegate: class {
-    
     func shouldDeinitCoordinator(_ coordinator: Coordinator)
-    
 }
 
 extension Coordinator {
