@@ -28,7 +28,8 @@ class TaskListCoordinator: Coordinator {
         //MARK: reminders
         CommReminders().fetchAllReminders { reminders in
             for reminder in reminders! {
-                
+                let task = model.createTask(with: reminder.title)
+                model.save(object: task)
             }
         }
     }
