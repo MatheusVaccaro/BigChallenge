@@ -24,6 +24,13 @@ class TaskListCoordinator: Coordinator {
         self.model = model
         self.childrenCoordinators = []
         self.persistence = persistence
+
+        //MARK: reminders
+        CommReminders().fetchAllReminders { reminders in
+            for reminder in reminders! {
+                
+            }
+        }
     }
 
     func start() {
