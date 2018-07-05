@@ -22,26 +22,16 @@ class TaskCellViewModel {
         return task.title!
     }
     
-    //TODO: this looks awful
     var status: String {
-        switch task.status {
-        case TaskStatus.complete.rawValue:
-            return String.taskCellComplete
-        default:
-            return String.taskCellIncomplete
-        }
+        if task.isCompleted { return String.taskCellComplete }
+        else { return String.taskCellIncomplete }
     }
     
     func shouldChangeTask(title: String) {
         task.title = title
     }
     
-    func shouldCompleteTask(_ bool: Bool) {
-        model.remove(object: task)
-        if bool {
-            task.status = TaskStatus.complete.rawValue
-        } else {
-            task.status = TaskStatus.incomplete.rawValue
-        }
+    func changedCheckButton(to bool: Bool) {
+        task.isCompleted = bool
     }
 }

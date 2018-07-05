@@ -12,6 +12,7 @@
 		1627EBEDDA20D9C1EB6BC691 /* Pods_BigChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 558C6AF329AB768E11815BB8 /* Pods_BigChallengeTests.framework */; };
 		1676FC9020D99580003E2D79 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1676FC8F20D99580003E2D79 /* TaskModel.swift */; };
 		222BFF9420ED92C7001B6BBF /* RemindersTheftAuto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222BFF9320ED92C7001B6BBF /* RemindersTheftAuto.swift */; };
+		222BFF9720EDB854001B6BBF /* RemindersImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222BFF9620EDB854001B6BBF /* RemindersImporter.swift */; };
 		223C0BE120E4449C00CF39ED /* LocalPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0BE020E4449C00CF39ED /* LocalPersistence.swift */; };
 		223C0C0620E5293500CF39ED /* PersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0520E5293500CF39ED /* PersistenceProtocol.swift */; };
 		223C0C0820E529D600CF39ED /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0720E529D600CF39ED /* Persistence.swift */; };
@@ -76,6 +77,7 @@
 		1676FC8F20D99580003E2D79 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		220D7C1C20D02E5E007EC0DD /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		222BFF9320ED92C7001B6BBF /* RemindersTheftAuto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersTheftAuto.swift; sourceTree = "<group>"; };
+		222BFF9620EDB854001B6BBF /* RemindersImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersImporter.swift; sourceTree = "<group>"; };
 		223C0BE020E4449C00CF39ED /* LocalPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPersistence.swift; sourceTree = "<group>"; };
 		223C0C0520E5293500CF39ED /* PersistenceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceProtocol.swift; sourceTree = "<group>"; };
 		223C0C0720E529D600CF39ED /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -182,6 +184,14 @@
 			path = "reminders&calendar";
 			sourceTree = "<group>";
 		};
+		222BFF9520EDB83B001B6BBF /* Importers */ = {
+			isa = PBXGroup;
+			children = (
+				222BFF9620EDB854001B6BBF /* RemindersImporter.swift */,
+			);
+			path = Importers;
+			sourceTree = "<group>";
+		};
 		45EE167F10EAE72CE5635B25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +268,7 @@
 		C21EAD0920B74EE6005F0F85 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				222BFF9520EDB83B001B6BBF /* Importers */,
 				C21EAD0A20B74F01005F0F85 /* StoryboardInstantiable.swift */,
 				2253179C20D147AD0065C9F9 /* Localizable.strings */,
 				22456D2820DC3BB000168894 /* dateExtension.swift */,
@@ -687,6 +698,7 @@
 				C23753B020B6463700C1CE15 /* ApplicationCoordinator.swift in Sources */,
 				1676FC9020D99580003E2D79 /* TaskModel.swift in Sources */,
 				C2A1113D20B88A2F00ABB161 /* Storable.swift in Sources */,
+				222BFF9720EDB854001B6BBF /* RemindersImporter.swift in Sources */,
 				C2A1114020B8A70A00ABB161 /* TaskCellViewModel.swift in Sources */,
 				C2A1115120B9FCDB00ABB161 /* NewTaskViewModel.swift in Sources */,
 				22456D2920DC3BB000168894 /* dateExtension.swift in Sources */,

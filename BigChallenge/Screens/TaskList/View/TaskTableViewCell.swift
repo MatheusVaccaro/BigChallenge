@@ -53,7 +53,7 @@ class TaskTableViewCell: UITableViewCell {
     
     @IBAction func didPressCheckButton(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        viewModel?.shouldCompleteTask(checkButton.isSelected)
+        viewModel?.changedCheckButton(to: checkButton.isSelected)
     }
 }
 

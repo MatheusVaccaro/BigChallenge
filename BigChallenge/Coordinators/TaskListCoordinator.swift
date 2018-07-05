@@ -11,9 +11,8 @@ import UIKit
 
 class TaskListCoordinator: Coordinator {
     
-    fileprivate let presenter: UINavigationController
     var childrenCoordinators: [Coordinator]
-    
+    fileprivate let presenter: UINavigationController
     fileprivate var taskListViewController: TaskListViewController?
     fileprivate let persistence: Persistence
     fileprivate var model: TaskModel
@@ -24,14 +23,6 @@ class TaskListCoordinator: Coordinator {
         self.model = model
         self.childrenCoordinators = []
         self.persistence = persistence
-
-        //MARK: reminders
-        CommReminders().fetchAllReminders { reminders in
-            for reminder in reminders! {
-                let task = model.createTask(with: reminder.title)
-                model.save(object: task)
-            }
-        }
     }
 
     func start() {

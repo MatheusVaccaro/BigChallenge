@@ -24,9 +24,7 @@ public class CommReminders {
     }
     
     public func fetchAllReminders(completion: @escaping (([EKReminder]?) -> Void)) {
-        let predicate = store.predicateForIncompleteReminders(withDueDateStarting: nil,
-                                                              ending: nil,
-                                                              calendars: nil)
+        let predicate = store.predicateForReminders(in: nil)
         
         store.fetchReminders(matching: predicate) { reminders in
             completion(reminders!)
