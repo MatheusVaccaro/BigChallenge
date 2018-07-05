@@ -20,9 +20,11 @@ protocol CoordinatorDelegate: class {
 }
 
 extension Coordinator {
+    
     func addChild(coordinator: Coordinator) {
         childrenCoordinators.append(coordinator)
     }
+    
     func releaseChild(coordinator: Coordinator) {
         childrenCoordinators.enumerated().forEach { (index, element) in
             if coordinator === element {
@@ -31,4 +33,5 @@ extension Coordinator {
             }
         }
     }
+    
 }

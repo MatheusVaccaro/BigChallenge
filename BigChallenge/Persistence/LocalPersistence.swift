@@ -1,15 +1,15 @@
- //
- //  MockPersistence.swift
- //  BigChallenge
- //
- //  Created by Matheus Vaccaro on 25/05/18.
- //  Copyright © 2018 Matheus Vaccaro. All rights reserved.
- //
- 
- import Foundation
- import CoreData
- 
- class LocalPersistence: PersistenceProtocol {
+//
+//  LocalPersistence.swift
+//  BigChallenge
+//
+//  Created by Matheus Vaccaro on 25/05/18.
+//  Copyright © 2018 Matheus Vaccaro. All rights reserved.
+//
+
+import Foundation
+import CoreData
+
+class LocalPersistence: PersistenceProtocol {
     
     var persistentContainer: NSPersistentContainer
     
@@ -38,28 +38,21 @@
             return container
         }()
     }
-   
-    private func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
+    
+    func create<T: Storable>(_ object: T.Type) throws -> T {
+        let modelName = String(describing: object)
+        //swiftlint:disable:next line_length
+        guard let object = NSEntityDescription.insertNewObject(forEntityName: modelName, into: persistentContainer.viewContext) as? T else {
+            throw CoreDataError.couldNotCreateObject
         }
+        return object
     }
     
-    
-    func fetch<T : Storable>(_ model: T.Type, predicate: NSPredicate? = nil, completion: (([T]) -> Void)) {
+    func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate? = nil, completion: (([T]) -> Void)) throws {
         
         let context = persistentContainer.viewContext
-        
-        let request =
-            NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: model))
-        
-        print(String(describing: model))
+        let entityName = String(describing: model)
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         
         do {
             var ans = try context.fetch(request)
@@ -67,44 +60,60 @@
                 let unfilteredAns = ans as? [NSManagedObject] {
                 ans = unfilteredAns.filter { predicate.evaluate(with: $0) }
             }
+            //swiftlint:disable:next force_cast
             completion(ans as! [T])
-        } catch let error as NSError {
-            print("could not fetch.  \(error), \(error.userInfo)")
+        } catch {
+            throw CoreDataError.couldNotFetchObject(reason: error.localizedDescription)
         }
     }
     
-    func create<T>(_ model: T.Type, completion: @escaping ((T) -> ())) where T : Storable {
-        //todo
+    func save() throws {
+        try saveContext()
     }
     
-    func save(object: Storable) {
-        saveContext()
-    }
-    func update(object: Storable) {
-        saveContext()
-    }
-    
-    func delete(_ object: Storable) {
+    func delete(_ object: Storable) throws {
         
-        let context =
-            persistentContainer.viewContext
-        
-        let request =
-            NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: object))
+        let context = persistentContainer.viewContext
+        let entityName = String(describing: type(of: object))
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         
         do {
-            let results = try? context.fetch(request)
+            let results = try context.fetch(request)
             if let results = results as? [NSManagedObject] {
                 for result in results where result.uuid == object.uuid {
                     context.delete(result)
                 }
             }
+            try saveContext()
+        } catch {
+            throw CoreDataError.couldNotDeleteObject(reason: error.localizedDescription)
         }
     }
- }
- 
- extension NSManagedObject: Storable {
+    
+    private func saveContext () throws {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                throw CoreDataError.couldNotSaveContext(reason: error.localizedDescription)
+            }
+        }
+    }
+    
+}
+
+extension NSManagedObject: Storable {
     public var uuid: UUID {
+        //swiftlint:disable:next force_cast
         return value(forKey: "id") as! UUID
     }
- }
+}
+
+enum CoreDataError: Error {
+    case couldNotCreateObject
+    // swiftlint:disable identifier_name
+    case couldNotFetchObject(reason: String)
+    case couldNotSaveContext(reason: String)
+    case couldNotDeleteObject(reason: String)
+}

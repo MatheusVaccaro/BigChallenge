@@ -36,19 +36,6 @@ class TaskListViewController: UIViewController {
         bindTableView()
     }
     
-    private func bindTableView() {
-        guard let viewModel = viewModel else { return }
-        viewModel.tasksObservable
-            .bind(to: tableView.rx.items(cellIdentifier: TaskTableViewCell.identifier,
-                                         cellType: TaskTableViewCell.self)) { row, _, cell in
-
-                let taskCellViewModel = viewModel.createCellViewModelForTask(indexPath: IndexPath(row: row, section: 0))
-                cell.configure(with: taskCellViewModel)
-                cell.delegate = self
-
-            }.disposed(by: disposeBag)
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -74,6 +61,19 @@ class TaskListViewController: UIViewController {
         }
     }
     
+    private func bindTableView() {
+        guard let viewModel = viewModel else { return }
+        viewModel.tasksObservable
+            .bind(to: tableView.rx.items(cellIdentifier: TaskTableViewCell.identifier,
+                                         cellType: TaskTableViewCell.self)) { row, _, cell in
+                                            
+                                            let taskCellViewModel = viewModel.createCellViewModelForTask(indexPath: IndexPath(row: row, section: 0))
+                                            cell.configure(with: taskCellViewModel)
+                                            cell.delegate = self
+                                            
+            }.disposed(by: disposeBag)
+    }
+    
     @objc private func toggleEditionMode() {
         let barButtonItem: UIBarButtonItem
         if tableView.isEditing {
@@ -89,6 +89,7 @@ class TaskListViewController: UIViewController {
     }
     
 }
+
 // MARK: - StoryboardInstantiable
 
 extension TaskListViewController: StoryboardInstantiable {

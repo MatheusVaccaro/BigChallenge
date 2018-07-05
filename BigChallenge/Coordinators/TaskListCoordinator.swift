@@ -11,24 +11,26 @@ import UIKit
 
 class TaskListCoordinator: Coordinator {
     
-    fileprivate let persistence: PersistenceProtocol
     fileprivate let presenter: UINavigationController
-    fileprivate var taskListViewController: TaskListViewController?
-    fileprivate var model: TaskModel
     var childrenCoordinators: [Coordinator]
     
-    init(presenter: UINavigationController, persistence: PersistenceProtocol) {
+    fileprivate var taskListViewController: TaskListViewController?
+    fileprivate let persistence: Persistence
+    fileprivate var model: TaskModel
+    
+    init(presenter: UINavigationController, model: TaskModel, persistence: Persistence) {
+        
         self.presenter = presenter
-        self.persistence = persistence
-        self.model = TaskModel(persistence)
+        self.model = model
         self.childrenCoordinators = []
+        self.persistence = persistence
     }
 
     func start() {
         let taskListViewController = TaskListViewController.instantiate()
         self.taskListViewController = taskListViewController
         
-        let taskListViewModel = TaskListViewModel(model)
+        let taskListViewModel = TaskListViewModel(model: model)
         taskListViewModel.delegate = self
         taskListViewController.viewModel = taskListViewModel
         
@@ -36,7 +38,8 @@ class TaskListCoordinator: Coordinator {
     }
 
     fileprivate func showNewTask() {
-        let newTaskCoordinator = NewTaskCoordinator(task: Task() ,
+        let task = model.createTask()
+        let newTaskCoordinator = NewTaskCoordinator(task: task,
                                                     isEditing: false,
                                                     presenter: presenter,
                                                     model: model)
@@ -68,7 +71,6 @@ extension TaskListCoordinator: TaskListViewModelDelegate {
 }
 
 extension TaskListCoordinator: CoordinatorDelegate {
-    
     func shouldDeinitCoordinator(_ coordinator: Coordinator) {
         releaseChild(coordinator: coordinator)
     }

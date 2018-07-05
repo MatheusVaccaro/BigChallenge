@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -76,7 +75,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New Task" id="QJ0-ra-C8A">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="uga-ag-ZvB"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="uga-ag-ZvB">
+                            <connections>
+                                <action selector="didTapCancelBarButtonItem:" destination="cXJ-A2-weh" id="q5m-tr-Z7J"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="56w-ov-Sub">
                             <connections>
                                 <action selector="didTapDoneBarButtonItem:" destination="cXJ-A2-weh" id="Svu-NG-gWI"/>

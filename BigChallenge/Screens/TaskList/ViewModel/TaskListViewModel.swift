@@ -27,7 +27,7 @@ class TaskListViewModel {
     
     weak var delegate: TaskListViewModelDelegate?
     
-    init(_ model: TaskModel) {
+    init(model: TaskModel) {
         self.model = model
     }
     
