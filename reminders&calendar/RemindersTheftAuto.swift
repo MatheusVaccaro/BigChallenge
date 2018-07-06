@@ -58,6 +58,6 @@ public class CommReminders {
                     print("failed to save reminder with error \(error)")
                 }
             }
-        }daonde 
+        }
     }
 }
