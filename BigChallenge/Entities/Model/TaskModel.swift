@@ -31,12 +31,17 @@ public class TaskModel {
         }
     }
     
+    func fetchAll() -> [Task] {
+        return objects.value
+    }
+    
     func task(at index: Int) -> Task {
         return objects.value[index]
     }
     
     public func save(object: Task) {
         objects.value.append(object)
+        RemindersImporter.save(task: object)
         persistance.save()
     }
     
