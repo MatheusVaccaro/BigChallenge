@@ -11,9 +11,8 @@ import UIKit
 
 class TaskListCoordinator: Coordinator {
     
-    fileprivate let presenter: UINavigationController
     var childrenCoordinators: [Coordinator]
-    
+    fileprivate let presenter: UINavigationController
     fileprivate var taskListViewController: TaskListViewController?
     fileprivate let persistence: Persistence
     fileprivate var model: TaskModel
@@ -28,11 +27,13 @@ class TaskListCoordinator: Coordinator {
 
     func start() {
         let taskListViewController = TaskListViewController.instantiate()
-        self.taskListViewController = taskListViewController
         
         let taskListViewModel = TaskListViewModel(model: model)
         taskListViewModel.delegate = self
+        
         taskListViewController.viewModel = taskListViewModel
+        
+        self.taskListViewController = taskListViewController
         
         presenter.pushViewController(taskListViewController, animated: true)
     }

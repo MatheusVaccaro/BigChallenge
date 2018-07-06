@@ -49,6 +49,7 @@ public class TagModel {
         let tag: Tag = persistance.create(Tag.self)
         
         tag.id = UUID()
+        tag.title = title
         
         return tag
     }

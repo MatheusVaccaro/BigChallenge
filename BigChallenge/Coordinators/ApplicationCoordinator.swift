@@ -15,6 +15,8 @@ class ApplicationCoordinator: Coordinator {
     private let window: UIWindow
     private let rootViewController: UINavigationController
     private let persistence: Persistence
+    private let taskModel: TaskModel
+    private let tagModel: TagModel
     
     init(window: UIWindow) {
         self.window = window
@@ -22,17 +24,20 @@ class ApplicationCoordinator: Coordinator {
         self.rootViewController.navigationBar.prefersLargeTitles = true
         self.childrenCoordinators = []
         self.persistence = Persistence()
+        self.taskModel = TaskModel(persistence: persistence)
+        self.tagModel = TagModel(persistence: persistence)
     }
     
     func start() {
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         showTaskList()
+        RemindersImporter(taskModel: taskModel, tagModel: tagModel).importFromReminders()
     }
     
     private func showTaskList() {
         let taskListCoordinator = TaskListCoordinator(presenter: rootViewController,
-                                                      model: TaskModel(persistence: persistence),
+                                                      model: taskModel,
                                                       persistence: persistence)
         addChild(coordinator: taskListCoordinator)
         taskListCoordinator.start()

@@ -39,5 +39,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSRemindersUsageDescription</key>
+	<string>we can import all your reminders to this app</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>dasd</string>
+	<key>NSContactsUsageDescription</key>
+	<string>adsda</string>
 </dict>
 </plist>
