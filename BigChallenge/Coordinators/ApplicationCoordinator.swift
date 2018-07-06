@@ -31,10 +31,8 @@ class ApplicationCoordinator: Coordinator {
     func start() {
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
-        
-        //TODO: REMOVE EVENTUALLY
-        RemindersImporter(taskModel: taskModel, tagModel: tagModel).importFromReminders()
         showTaskList()
+        RemindersImporter(taskModel: taskModel, tagModel: tagModel).importFromReminders()
     }
     
     private func showTaskList() {

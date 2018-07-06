@@ -27,11 +27,13 @@ class TaskListCoordinator: Coordinator {
 
     func start() {
         let taskListViewController = TaskListViewController.instantiate()
-        self.taskListViewController = taskListViewController
         
         let taskListViewModel = TaskListViewModel(model: model)
         taskListViewModel.delegate = self
+        
         taskListViewController.viewModel = taskListViewModel
+        
+        self.taskListViewController = taskListViewController
         
         presenter.pushViewController(taskListViewController, animated: true)
     }
