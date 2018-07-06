@@ -21,8 +21,15 @@ public class CommReminders {
                 print("user didnt grant reminders access")
             }
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.fetchAllReminders(completion:)), name: .EKEventStoreChanged, object: store)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc
     public func fetchAllReminders(completion: @escaping (([EKReminder]?) -> Void)) {
         let predicate = store.predicateForReminders(in: nil)
         
@@ -42,7 +49,7 @@ public class CommReminders {
         reminder.title = task.title
         reminder.calendar = calendar
         
-        //TODO save only if is new reminder
+        //save only if is new reminder
         let predicate = store.predicateForReminders(in: [calendar!])
         
         store.fetchReminders(matching: predicate) {
