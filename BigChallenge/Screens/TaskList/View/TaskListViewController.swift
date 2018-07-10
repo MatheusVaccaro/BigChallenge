@@ -21,8 +21,7 @@ class TaskListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    // MARK: - ViewController Lifecycle
-    
+    // MARK: - ViewController Lifecycle 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = nil
@@ -64,14 +63,14 @@ class TaskListViewController: UIViewController {
     private func bindTableView() {
         guard let viewModel = viewModel else { return }
         viewModel.tasksObservable
-            .bind(to: tableView.rx.items(cellIdentifier: TaskTableViewCell.identifier,
-                                         cellType: TaskTableViewCell.self)) { row, _, cell in
-                                            
-                                            let taskCellViewModel = viewModel.createCellViewModelForTask(indexPath: IndexPath(row: row, section: 0))
-                                            cell.configure(with: taskCellViewModel)
-                                            cell.delegate = self
-                                            
-            }.disposed(by: disposeBag)
+            .drive(tableView.rx.items(cellIdentifier: TaskTableViewCell.identifier,
+                                           cellType: TaskTableViewCell.self)) { (row, result, cell) in
+
+                let taskCellViewModel = viewModel.createCellViewModelForTask(indexPath: IndexPath(row: row, section: 0))
+                cell.configure(with: taskCellViewModel)
+                cell.delegate = self
+            }
+            .disposed(by: disposeBag)
     }
     
     @objc private func toggleEditionMode() {

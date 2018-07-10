@@ -54,8 +54,6 @@ class NewTaskTableViewController: UITableViewController {
     }
         
     // MARK: - Functions
-    
-    // TODO: make that a protocol
     private func configureWithViewModel() {
         guard let viewModel = viewModel else { return }
         
@@ -102,5 +100,4 @@ extension NewTaskTableViewController: StoryboardInstantiable {
     static var storyboardName: String {
         return "NewTask"
     }
-    
 }

@@ -38,6 +38,7 @@ public class CommReminders {
         }
     }
     
+    //TODO: Test
     public func save(task: Task, commit: Bool = true) {
         let reminder = EKReminder(eventStore: store)
         var calendar = store.defaultCalendarForNewReminders()
@@ -55,8 +56,6 @@ public class CommReminders {
         store.fetchReminders(matching: predicate) {
             
             let matchingReminders = $0!.filter { $0.title == reminder.title }
-            
-            print(matchingReminders.map { $0.title })
             
             if matchingReminders.isEmpty {
                 do {
