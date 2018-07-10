@@ -21,7 +21,7 @@ class TaskListViewModel {
     
     private let model: TaskModel
     
-    var tasksObservable: Observable<[Task]> {
+    var tasksObservable: Driver<[Task]> {
         return model.objectsObservable
     }
     

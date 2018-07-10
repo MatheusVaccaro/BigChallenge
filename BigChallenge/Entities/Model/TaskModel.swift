@@ -12,9 +12,10 @@ import RxSwift
 
 public class TaskModel {
     
-    var objectsObservable: Observable<[Task]> {
-        return self.objects.asObservable()
-    }
+    lazy var objectsObservable: Driver<[Task]> = {
+        return objects.asDriver()
+            .asDriver(onErrorJustReturn: [])
+    }() // TODO should this be lazy?
     
     var count: Int {
         return objects.value.count
