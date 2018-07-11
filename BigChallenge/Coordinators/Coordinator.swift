@@ -26,6 +26,7 @@ extension Coordinator {
     }
     
     func releaseChild(coordinator: Coordinator) {
+        // TODO Change to removeAll when available
         childrenCoordinators.enumerated().forEach { (index, element) in
             if coordinator === element {
                 childrenCoordinators.remove(at: index)
@@ -33,5 +34,4 @@ extension Coordinator {
             }
         }
     }
-    
 }

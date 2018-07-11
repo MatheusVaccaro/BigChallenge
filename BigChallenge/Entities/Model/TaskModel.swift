@@ -13,7 +13,8 @@ import RxSwift
 public class TaskModel {
     
     lazy var objectsObservable: Driver<[Task]> = {
-        return objects.asDriver()
+        return objects
+            .asObservable()
             .asDriver(onErrorJustReturn: [])
     }() // TODO should this be lazy?
     
@@ -47,6 +48,7 @@ public class TaskModel {
     }
     
     public func remove(object: Task) {
+        // TODO change to removeAll when available
         objects.value = objects.value.filter({$0.uuid != object.uuid})
         persistance.delete(object)
     }
