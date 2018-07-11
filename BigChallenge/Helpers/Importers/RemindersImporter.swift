@@ -15,13 +15,13 @@ public class RemindersImporter {
     
 	private let taskModel: TaskModel
     private let tagModel: TagModel
-    private let remindersDB: CommReminders
+    private let remindersDB: RemindersCommunicator
     
     // Initializes CommReminders and requests access afterwards
     private init(taskModel: TaskModel, tagModel: TagModel) {
         self.taskModel = taskModel
         self.tagModel = tagModel
-		self.remindersDB = CommReminders()
+		self.remindersDB = RemindersCommunicator()
         
         defer {
             remindersDB.delegate = self
@@ -81,19 +81,19 @@ public class RemindersImporter {
     }
 }
 
-extension RemindersImporter: CommRemindersDelegate {
+extension RemindersImporter: RemindersCommunicatorDelegate {
     
-    func commRemindersDidDetectEventStoreChange(_ commReminders: CommReminders, notification: NSNotification) {
+    func remindersCommunicatorDidDetectEventStoreChange(_ remindersCommunicator: RemindersCommunicator, notification: NSNotification) {
         // TODO Figure out how to fetch the affected reminders without duplicating the whole Reminders Store
         // So far, seems like it is impossible.
     }
     
-    func commRemindersWasGrantedAccessToReminders(_ commReminders: CommReminders) {
+    func remindersCommunicatorWasGrantedAccessToReminders(_ remindersCommunicator: RemindersCommunicator) {
         // TODO Set persistent flag to avoid importing each time the app launches.
         importFromReminders()
     }
     
-    func commRemindersWasDeniedAccessToReminders(_ commReminders: CommReminders, error: Error) {
+    func remindersCommunicatorWasDeniedAccessToReminders(_ remindersCommunicator: RemindersCommunicator, error: Error) {
         // TODO Handle access denial
     }
 }

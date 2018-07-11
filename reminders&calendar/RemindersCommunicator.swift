@@ -9,13 +9,13 @@
 import Foundation
 import EventKit
 
-public class CommReminders {
+public class RemindersCommunicator {
     
     var store: EKEventStore
     
-    weak var delegate: CommRemindersDelegate?
+    weak var delegate: RemindersCommunicatorDelegate?
     
-    init(delegate: CommRemindersDelegate? = nil) {
+    init(delegate: RemindersCommunicatorDelegate? = nil) {
         self.delegate = delegate
         self.store = EKEventStore()
     }
@@ -29,14 +29,14 @@ public class CommReminders {
     func requestAccess() {
         store.requestAccess(to: .reminder) { granted, error in
             if granted {
-                self.delegate?.commRemindersWasGrantedAccessToReminders(self)
+                self.delegate?.remindersCommunicatorWasGrantedAccessToReminders(self)
                 
                 NotificationCenter.default.addObserver(self,
                                                        selector: #selector(self.eventStoreChangedNotificationHandler(_:)),
                                                        name: .EKEventStoreChanged, object: self.store)
                 
             } else if let error = error {
-                self.delegate?.commRemindersWasDeniedAccessToReminders(self, error: error)
+                self.delegate?.remindersCommunicatorWasDeniedAccessToReminders(self, error: error)
             }
         }
     }
@@ -44,7 +44,7 @@ public class CommReminders {
     // Warns delegate about a change in the Reminders app
     @objc
     func eventStoreChangedNotificationHandler(_ notification: NSNotification) {
-        delegate?.commRemindersDidDetectEventStoreChange(self, notification: notification)
+        delegate?.remindersCommunicatorDidDetectEventStoreChange(self, notification: notification)
     }
     
     public func fetchAllReminders(completion: @escaping (([EKReminder]?) -> Void)) {
@@ -85,8 +85,8 @@ public class CommReminders {
     }
 }
 
-protocol CommRemindersDelegate: class {
-    func commRemindersWasGrantedAccessToReminders(_ commReminders: CommReminders)
-    func commRemindersWasDeniedAccessToReminders(_ commReminders: CommReminders, error: Error)
-    func commRemindersDidDetectEventStoreChange(_ commReminders: CommReminders, notification: NSNotification)
+protocol RemindersCommunicatorDelegate: class {
+    func remindersCommunicatorWasGrantedAccessToReminders(_ remindersCommunicator: RemindersCommunicator)
+    func remindersCommunicatorWasDeniedAccessToReminders(_ remindersCommunicator: RemindersCommunicator, error: Error)
+    func remindersCommunicatorDidDetectEventStoreChange(_ remindersCommunicator: RemindersCommunicator, notification: NSNotification)
 }
