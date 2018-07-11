@@ -178,13 +178,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		222BFF9220ED9295001B6BBF /* reminders&calendar */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "reminders&calendar";
-			sourceTree = "<group>";
-		};
 		222BFF9520EDB83B001B6BBF /* Importers */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,7 +310,6 @@
 		C28DC90D20B61CB6007F881A = {
 			isa = PBXGroup;
 			children = (
-				222BFF9220ED9295001B6BBF /* reminders&calendar */,
 				C28DC91820B61CB6007F881A /* BigChallenge */,
 				1627170E20C8793900AA0024 /* BigChallengeTests */,
 				1627171C20C879AD00AA0024 /* BigChallengeUITests */,
