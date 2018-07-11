@@ -15,8 +15,16 @@ class TaskListViewController: UIViewController {
     // MARK: - Properties
     
     var viewModel: TaskListViewModel?
-    private var editBarButtonItem: UIBarButtonItem?
+    private var barButtonItem: UIBarButtonItem?
     private let disposeBag = DisposeBag()
+    
+    lazy var editBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleEditionMode))
+    }()
+    lazy var doneBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(toggleEditionMode))
+    }()
+    
     // MARK: - IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
@@ -52,7 +60,7 @@ class TaskListViewController: UIViewController {
     private func configureWithViewModel() {
         let editBarButtonItem =
             UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleEditionMode))
-        self.editBarButtonItem = editBarButtonItem
+        self.barButtonItem = editBarButtonItem
         navigationItem.leftBarButtonItem = editBarButtonItem
         
         if let viewModel = viewModel {
@@ -64,9 +72,9 @@ class TaskListViewController: UIViewController {
         guard let viewModel = viewModel else { return }
         viewModel.tasksObservable
             .drive(tableView.rx.items(cellIdentifier: TaskTableViewCell.identifier,
-                                           cellType: TaskTableViewCell.self)) { (row, result, cell) in
-
-                let taskCellViewModel = viewModel.createCellViewModelForTask(indexPath: IndexPath(row: row, section: 0))
+                                           cellType: TaskTableViewCell.self)) { (_, task, cell) in
+                                            
+                let taskCellViewModel = viewModel.createCellViewModel(for: task)
                 cell.configure(with: taskCellViewModel)
                 cell.delegate = self
             }
@@ -77,12 +85,10 @@ class TaskListViewController: UIViewController {
         let barButtonItem: UIBarButtonItem
         if tableView.isEditing {
             tableView.setEditing(false, animated: true)
-            barButtonItem =
-                UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleEditionMode))
+            barButtonItem = editBarButtonItem
         } else {
             tableView.setEditing(true, animated: true)
-            barButtonItem =
-                UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(toggleEditionMode))
+            barButtonItem = doneBarButtonItem
         }
         navigationItem.leftBarButtonItem = barButtonItem
     }
