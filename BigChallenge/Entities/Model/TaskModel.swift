@@ -42,7 +42,7 @@ public class TaskModel {
     
     public func save(object: Task) {
         objects.value.append(object)
-        RemindersImporter.save(task: object)
+        RemindersImporter.instance?.save(task: object)
         persistance.save()
     }
     
