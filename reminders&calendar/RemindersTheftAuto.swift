@@ -11,25 +11,39 @@ import EventKit
 
 public class CommReminders {
     
-    var store: EKEventStore = EKEventStore()
+    var store: EKEventStore
     
-    init() {
-        store.requestAccess(to: .reminder) { granted, error in
-            if granted {
-                self.store = EKEventStore()
-            } else {
-                print("user didnt grant reminders access")
-            }
-        }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.fetchAllReminders(completion:)), name: .EKEventStoreChanged, object: store)
+    weak var delegate: CommRemindersDelegate?
+    
+    init(delegate: CommRemindersDelegate? = nil) {
+        self.delegate = delegate
+        self.store = EKEventStore()
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
+    func requestAccess() {
+        store.requestAccess(to: .reminder) { granted, error in
+            if granted {
+                self.delegate?.commRemindersWasGrantedAccessToReminders(self)
+                
+                NotificationCenter.default.addObserver(self,
+                                                       selector: #selector(self.eventStoreChangedNotificationHandler(_:)),
+                                                       name: .EKEventStoreChanged, object: self.store)
+                
+            } else if let error = error {
+                self.delegate?.commRemindersWasDeniedAccessToReminders(self, error: error)
+            }
+        }
+    }
+    
     @objc
+    func eventStoreChangedNotificationHandler(_ notification: NSNotification) {
+        delegate?.commRemindersDidDetectEventStoreChange(self, notification: notification)
+    }
+    
     public func fetchAllReminders(completion: @escaping (([EKReminder]?) -> Void)) {
         let predicate = store.predicateForReminders(in: nil)
         
@@ -66,4 +80,10 @@ public class CommReminders {
             }
         }
     }
+}
+
+protocol CommRemindersDelegate: class {
+    func commRemindersWasGrantedAccessToReminders(_ commReminders: CommReminders)
+    func commRemindersWasDeniedAccessToReminders(_ commReminders: CommReminders, error: Error)
+    func commRemindersDidDetectEventStoreChange(_ commReminders: CommReminders, notification: NSNotification)
 }
