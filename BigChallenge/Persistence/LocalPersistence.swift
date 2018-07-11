@@ -103,13 +103,6 @@ class LocalPersistence: PersistenceProtocol {
     
 }
 
-extension NSManagedObject: Storable {
-    public var uuid: UUID {
-        //swiftlint:disable:next force_cast
-        return value(forKey: "id") as! UUID
-    }
-}
-
 enum CoreDataError: Error {
     case couldNotCreateObject
     // swiftlint:disable identifier_name
