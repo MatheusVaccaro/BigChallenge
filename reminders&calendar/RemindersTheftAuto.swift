@@ -24,6 +24,8 @@ public class CommReminders {
         NotificationCenter.default.removeObserver(self)
     }
     
+    // Requests the user for access to the Reminders app
+    // Warns delegate on access grant/denial
     func requestAccess() {
         store.requestAccess(to: .reminder) { granted, error in
             if granted {
@@ -39,6 +41,7 @@ public class CommReminders {
         }
     }
     
+    // Warns delegate about a change in the Reminders app
     @objc
     func eventStoreChangedNotificationHandler(_ notification: NSNotification) {
         delegate?.commRemindersDidDetectEventStoreChange(self, notification: notification)
@@ -52,7 +55,7 @@ public class CommReminders {
         }
     }
     
-    //TODO: Test
+    // TODO Test
     public func save(task: Task, commit: Bool = true) {
         let reminder = EKReminder(eventStore: store)
         var calendar = store.defaultCalendarForNewReminders()

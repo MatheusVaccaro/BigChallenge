@@ -17,6 +17,7 @@ public class RemindersImporter {
     private let tagModel: TagModel
     private let remindersDB: CommReminders
     
+    // Initializes CommReminders and requests access afterwards
     private init(taskModel: TaskModel, tagModel: TagModel) {
         self.taskModel = taskModel
         self.tagModel = tagModel
@@ -28,12 +29,14 @@ public class RemindersImporter {
         }
     }
     
+    // Should be instantiated using this method
     public static func instantiate(taskModel: TaskModel, tagModel: TagModel) {
-        guard instance == nil else { return }
+        guard instance == nil else { return } // Forces the class to have one instance only
         
         self.instance = RemindersImporter(taskModel: taskModel, tagModel: tagModel)
     }
     
+    // Fetch all reminders; convert them to Tasks and Tags; save these afterwards
     func importFromReminders() {
         remindersDB.fetchAllReminders { reminders in
             for reminder in reminders! where !reminder.isCompleted {
@@ -46,6 +49,7 @@ public class RemindersImporter {
         }
     }
     
+    // Convert a reminder to a Task and a Tag
     private func convertTaskAndTag(from reminder: EKReminder) -> (Task, Tag) {
         let task =
             self.taskModel.createTask(with: reminder.title)
