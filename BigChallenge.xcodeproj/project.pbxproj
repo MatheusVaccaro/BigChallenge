@@ -11,7 +11,7 @@
 		1627171E20C879AD00AA0024 /* BigChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1627171D20C879AD00AA0024 /* BigChallengeUITests.swift */; };
 		1627EBEDDA20D9C1EB6BC691 /* Pods_BigChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 558C6AF329AB768E11815BB8 /* Pods_BigChallengeTests.framework */; };
 		1676FC9020D99580003E2D79 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1676FC8F20D99580003E2D79 /* TaskModel.swift */; };
-		222BFF9420ED92C7001B6BBF /* RemindersTheftAuto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222BFF9320ED92C7001B6BBF /* RemindersTheftAuto.swift */; };
+		222BFF9420ED92C7001B6BBF /* RemindersCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222BFF9320ED92C7001B6BBF /* RemindersCommunicator.swift */; };
 		222BFF9720EDB854001B6BBF /* RemindersImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222BFF9620EDB854001B6BBF /* RemindersImporter.swift */; };
 		223C0BE120E4449C00CF39ED /* LocalPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0BE020E4449C00CF39ED /* LocalPersistence.swift */; };
 		223C0C0620E5293500CF39ED /* PersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0520E5293500CF39ED /* PersistenceProtocol.swift */; };
@@ -77,7 +77,7 @@
 		1627171F20C879AD00AA0024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1676FC8F20D99580003E2D79 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		220D7C1C20D02E5E007EC0DD /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		222BFF9320ED92C7001B6BBF /* RemindersTheftAuto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersTheftAuto.swift; sourceTree = "<group>"; };
+		222BFF9320ED92C7001B6BBF /* RemindersCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersCommunicator.swift; sourceTree = "<group>"; };
 		222BFF9620EDB854001B6BBF /* RemindersImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersImporter.swift; sourceTree = "<group>"; };
 		223C0BE020E4449C00CF39ED /* LocalPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPersistence.swift; sourceTree = "<group>"; };
 		223C0C0520E5293500CF39ED /* PersistenceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceProtocol.swift; sourceTree = "<group>"; };
@@ -181,7 +181,6 @@
 		222BFF9220ED9295001B6BBF /* reminders&calendar */ = {
 			isa = PBXGroup;
 			children = (
-				222BFF9320ED92C7001B6BBF /* RemindersTheftAuto.swift */,
 			);
 			path = "reminders&calendar";
 			sourceTree = "<group>";
@@ -189,7 +188,7 @@
 		222BFF9520EDB83B001B6BBF /* Importers */ = {
 			isa = PBXGroup;
 			children = (
-				222BFF9620EDB854001B6BBF /* RemindersImporter.swift */,
+				2965C40F20F6A81D001C988E /* Reminders */,
 			);
 			path = Importers;
 			sourceTree = "<group>";
@@ -200,6 +199,15 @@
 				2299F07820F628A70074A834 /* LocationManager.swift */,
 			);
 			path = Location;
+			sourceTree = "<group>";
+		};
+		2965C40F20F6A81D001C988E /* Reminders */ = {
+			isa = PBXGroup;
+			children = (
+				222BFF9320ED92C7001B6BBF /* RemindersCommunicator.swift */,
+				222BFF9620EDB854001B6BBF /* RemindersImporter.swift */,
+			);
+			path = Reminders;
 			sourceTree = "<group>";
 		};
 		45EE167F10EAE72CE5635B25 /* Frameworks */ = {
@@ -691,7 +699,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				222BFF9420ED92C7001B6BBF /* RemindersTheftAuto.swift in Sources */,
+				222BFF9420ED92C7001B6BBF /* RemindersCommunicator.swift in Sources */,
 				C2A1115720BB923C00ABB161 /* NewTaskTableViewController.swift in Sources */,
 				C2A1114220B8AED400ABB161 /* TaskTableViewCell.swift in Sources */,
 				C21EAD0F20B75211005F0F85 /* TaskListViewModel.swift in Sources */,
@@ -983,7 +991,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bigBeanie.finalChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "00b305f4-4023-436a-b664-f6cba5c79ed2";
+				PROVISIONING_PROFILE = "23b529ed-b2f2-4db8-9f20-e4806f6e4e23";
 				PROVISIONING_PROFILE_SPECIFIER = finalChallengeDev;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 4.0;
