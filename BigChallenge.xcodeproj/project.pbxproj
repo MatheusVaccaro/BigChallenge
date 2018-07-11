@@ -181,7 +181,6 @@
 		222BFF9220ED9295001B6BBF /* reminders&calendar */ = {
 			isa = PBXGroup;
 			children = (
-				222BFF9320ED92C7001B6BBF /* RemindersCommunicator.swift */,
 			);
 			path = "reminders&calendar";
 			sourceTree = "<group>";
@@ -189,7 +188,7 @@
 		222BFF9520EDB83B001B6BBF /* Importers */ = {
 			isa = PBXGroup;
 			children = (
-				222BFF9620EDB854001B6BBF /* RemindersImporter.swift */,
+				2965C40F20F6A81D001C988E /* Reminders */,
 			);
 			path = Importers;
 			sourceTree = "<group>";
@@ -200,6 +199,15 @@
 				2299F07820F628A70074A834 /* LocationManager.swift */,
 			);
 			path = Location;
+			sourceTree = "<group>";
+		};
+		2965C40F20F6A81D001C988E /* Reminders */ = {
+			isa = PBXGroup;
+			children = (
+				222BFF9320ED92C7001B6BBF /* RemindersCommunicator.swift */,
+				222BFF9620EDB854001B6BBF /* RemindersImporter.swift */,
+			);
+			path = Reminders;
 			sourceTree = "<group>";
 		};
 		45EE167F10EAE72CE5635B25 /* Frameworks */ = {
