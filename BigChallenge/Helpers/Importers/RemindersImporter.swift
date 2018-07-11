@@ -11,24 +11,42 @@ import EventKit
 
 public class RemindersImporter {
     
-    private let taskModel: TaskModel
-    private let tagModel: TagModel
-    private static let remindersDB = CommReminders()
+    public static var instance: RemindersImporter?
     
-    init(taskModel: TaskModel, tagModel: TagModel) {
+	private let taskModel: TaskModel
+    private let tagModel: TagModel
+    private let remindersDB: CommReminders
+    
+    private init(taskModel: TaskModel, tagModel: TagModel) {
         self.taskModel = taskModel
         self.tagModel = tagModel
+		self.remindersDB = CommReminders()
+        
+        defer {
+            remindersDB.delegate = self
+            remindersDB.requestAccess()
+        }
+    }
+    
+    public static func instantiate(taskModel: TaskModel, tagModel: TagModel) {
+        guard instance == nil else { return }
+        
+        self.instance = RemindersImporter(taskModel: taskModel, tagModel: tagModel)
     }
     
     func importFromReminders() {
-        RemindersImporter.remindersDB.fetchAllReminders { reminders in
+        remindersDB.fetchAllReminders { reminders in
             for reminder in reminders! where !reminder.isCompleted {
-                self.createTask(from: reminder)
+                
+                let (task, tag) = self.convertTaskAndTag(from: reminder)
+                
+                self.taskModel.save(object: task)
+                self.tagModel.save(object: tag)
             }
         }
     }
     
-    private func createTask(from reminder: EKReminder) {
+    private func convertTaskAndTag(from reminder: EKReminder) -> (Task, Tag) {
         let task =
             self.taskModel.createTask(with: reminder.title)
         let tag =
@@ -39,23 +57,39 @@ public class RemindersImporter {
         task.completionDate = reminder.completionDate
         task.dueDate = reminder.completionDate
         task.creationDate = reminder.creationDate
-    
-        self.taskModel.save(object: task)
-        self.tagModel.save(object: tag)
+	
+        return (task, tag)
     }
     
     public func exportToReminders() {
         do {
             for task in taskModel.fetchAll() {
-                RemindersImporter.remindersDB.save(task: task, commit: false)
-                try RemindersImporter.remindersDB.store.commit()
+                remindersDB.save(task: task, commit: false)
+                try remindersDB.store.commit()
             }
         } catch let error as NSError {
             print(error)
         }
     }
     
-    public static func save(task: Task) {
+    public func save(task: Task) {
         remindersDB.save(task: task)
+    }
+}
+
+extension RemindersImporter: CommRemindersDelegate {
+    
+    func commRemindersDidDetectEventStoreChange(_ commReminders: CommReminders, notification: NSNotification) {
+        // TODO Figure out how to fetch the affected reminders without duplicating the whole Reminders Store
+        // So far, seems like it is impossible.
+    }
+    
+    func commRemindersWasGrantedAccessToReminders(_ commReminders: CommReminders) {
+        // TODO Set persistent flag to avoid importing each time the app launches.
+        importFromReminders()
+    }
+    
+    func commRemindersWasDeniedAccessToReminders(_ commReminders: CommReminders, error: Error) {
+        // TODO Handle access denial
     }
 }
