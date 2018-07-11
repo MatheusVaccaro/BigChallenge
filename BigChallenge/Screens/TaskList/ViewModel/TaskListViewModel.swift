@@ -12,6 +12,7 @@ import RxSwift
 
 protocol TaskListViewModelDelegate: class {
     
+    // TODO follow proper delegate pattern
     func didTapAddButton()
     func didSelectTask(_ task: Task)
     
@@ -31,6 +32,7 @@ class TaskListViewModel {
         self.model = model
     }
     
+    // TODO: delete this after rx
     var numberOfSections: Int {
         return 1
     }
@@ -48,9 +50,8 @@ class TaskListViewModel {
         }
     }
     
-    // TODO: delete this after rx
-    func createCellViewModelForTask(indexPath: IndexPath) -> TaskCellViewModel {
-        return TaskCellViewModel(task: model.task(at: indexPath.row), model: model)
+    func createCellViewModel(for task: Task) -> TaskCellViewModel {
+        return TaskCellViewModel(task: task, model: model)
     }
     
     func didTapAddButton() {

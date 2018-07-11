@@ -41,6 +41,7 @@ public class TagModel {
     }
     
     public func remove(object: Tag) {
+        // TODO change to removeAll when available
         objects.value = objects.value.filter({$0.uuid != object.uuid})
         persistance.delete(object)
     }
