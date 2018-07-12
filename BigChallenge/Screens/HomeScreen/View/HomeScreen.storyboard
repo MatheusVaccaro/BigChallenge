@@ -18,22 +18,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cie-Gz-Vzx">
-                                <rect key="frame" x="16" y="148" width="343" height="457"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cie-Gz-Vzx">
+                                <rect key="frame" x="15" y="156" width="345" height="451"/>
                                 <connections>
                                     <segue destination="Cdx-VN-yjd" kind="embed" identifier="taskListSegue" id="LiI-kx-V3H"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fUe-Ak-aYb">
-                                <rect key="frame" x="16" y="72" width="343" height="56"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUe-Ak-aYb">
+                                <rect key="frame" x="0.0" y="96" width="375" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="gJB-vw-5rX"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="fc3-rz-cDg" kind="embed" identifier="tagCollectionSegue" id="h6S-Ve-BxX"/>
                                 </connections>
                             </containerView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Hello, Joel" borderStyle="roundedRect" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vex-PR-Mon">
+                                <rect key="frame" x="15" y="32" width="137" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="gg3-wP-eYA"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="cie-Gz-Vzx" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="15" id="BXC-pC-xol"/>
+                            <constraint firstItem="Vex-PR-Mon" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="15" id="Beu-zI-GrG"/>
+                            <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Vex-PR-Mon" secondAttribute="trailing" constant="223" id="IYC-Jk-My7"/>
+                            <constraint firstItem="cie-Gz-Vzx" firstAttribute="top" secondItem="fUe-Ak-aYb" secondAttribute="bottom" constant="15" id="Qao-O4-dlm"/>
+                            <constraint firstItem="fUe-Ak-aYb" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" id="SKh-ZC-I5v"/>
+                            <constraint firstItem="Vex-PR-Mon" firstAttribute="top" secondItem="QKa-yH-x6F" secondAttribute="top" constant="12" id="ZR4-pm-ZQ2"/>
+                            <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="fUe-Ak-aYb" secondAttribute="trailing" id="l9d-qe-b2V"/>
+                            <constraint firstItem="QKa-yH-x6F" firstAttribute="bottom" secondItem="cie-Gz-Vzx" secondAttribute="bottom" constant="60" id="wIi-Py-J1e"/>
+                            <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="cie-Gz-Vzx" secondAttribute="trailing" constant="15" id="yev-Sb-Zry"/>
+                            <constraint firstItem="fUe-Ak-aYb" firstAttribute="top" secondItem="Vex-PR-Mon" secondAttribute="bottom" constant="15" id="zw6-eb-xjl"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="QKa-yH-x6F"/>
                     </view>
                     <connections>
@@ -59,7 +81,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="TaskList" storyboardName="TaskList" id="Cdx-VN-yjd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4lU-jr-OBY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="786" y="-406"/>
+            <point key="canvasLocation" x="759" y="-407"/>
         </scene>
     </scenes>
 </document>
