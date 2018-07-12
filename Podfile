@@ -4,7 +4,7 @@ use_frameworks!
 target 'BigChallenge' do
     pod 'RxSwift',    '~> 4.0'
     pod 'RxCocoa',    '~> 4.0'
-    pod 'SwiftLint'
+    pod 'SwiftLint', '~> 0.25.1'
 end
 
 # RxTest and RxBlocking make the most sense in the context of unit/integration tests
