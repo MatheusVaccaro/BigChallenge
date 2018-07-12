@@ -32,7 +32,7 @@ class ApplicationCoordinator: Coordinator {
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         showTaskList()
-        RemindersImporter.instantiate(taskModel: taskModel, tagModel: tagModel)
+//        RemindersImporter.instantiate(taskModel: taskModel, tagModel: tagModel)
     }
     
     private func showTaskList() {

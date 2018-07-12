@@ -55,12 +55,15 @@ class TaskListViewModel {
     }
     
     func didTapAddButton() {
+        // TODO remove
+//        let local = LocalPersistence()
+//        local.clearDatabase()
         delegate?.didTapAddButton()
     }
     
     func removeTask(at indexPath: IndexPath) {
         if let task = taskForRowAt(indexPath: indexPath) {
-            model.remove(object: task)
+            model.delete(object: task)
         }
     }
     

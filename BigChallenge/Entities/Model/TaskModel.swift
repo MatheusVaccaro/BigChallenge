@@ -43,17 +43,17 @@ public class TaskModel {
     
     public func save(object: Task) {
         objects.value.append(object)
-        RemindersImporter.instance?.save(task: object)
+//        RemindersImporter.instance?.save(task: object)
         persistance.save()
     }
     
-    public func remove(object: Task) {
+    public func delete(object: Task) {
         // TODO change to removeAll when available
         objects.value = objects.value.filter({$0.uuid != object.uuid})
         persistance.delete(object)
     }
     
-    public func createTask(with title: String = "") -> Task {
+    public func createTask(with title: String) -> Task {
         let task: Task = persistance.create(Task.self)
         
         task.id = UUID()
