@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hA5-o5-LMg">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Home Screen View Controller-->
+        <scene sceneID="g2U-RE-MH1">
+            <objects>
+                <viewController storyboardIdentifier="HomeScreenViewController" id="hA5-o5-LMg" customClass="HomeScreenViewController" customModule="BigChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="C6D-bh-Zj8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cie-Gz-Vzx">
+                                <rect key="frame" x="16" y="148" width="343" height="457"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="Cdx-VN-yjd" kind="embed" identifier="taskListSegue" id="LiI-kx-V3H"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fUe-Ak-aYb">
+                                <rect key="frame" x="16" y="72" width="343" height="56"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="fc3-rz-cDg" kind="embed" identifier="tagCollectionSegue" id="h6S-Ve-BxX"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="QKa-yH-x6F"/>
+                    </view>
+                    <connections>
+                        <outlet property="tagContainerView" destination="fUe-Ak-aYb" id="qwP-ET-avs"/>
+                        <outlet property="taskListContainerView" destination="cie-Gz-Vzx" id="ktk-MH-6by"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OAl-vn-cbj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-69.599999999999994" y="-428.63568215892059"/>
+        </scene>
+        <!--TagCollection-->
+        <scene sceneID="Ew0-ZG-eSC">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="TagCollection" storyboardName="TagCollection" id="fc3-rz-cDg" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jJ4-bM-swg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="786" y="-452"/>
+        </scene>
+        <!--TaskList-->
+        <scene sceneID="suJ-aB-Okg">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="TaskList" storyboardName="TaskList" id="Cdx-VN-yjd" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4lU-jr-OBY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="786" y="-406"/>
+        </scene>
+    </scenes>
+</document>

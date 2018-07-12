@@ -97,7 +97,7 @@ extension NewTaskTableViewController: StoryboardInstantiable {
         return "NewTaskTableViewController"
     }
     
-    static var storyboardName: String {
+    static var viewControllerID: String {
         return "NewTask"
     }
 }

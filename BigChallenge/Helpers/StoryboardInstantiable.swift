@@ -11,7 +11,7 @@ import UIKit
 
 protocol StoryboardInstantiable {
     
-    static var storyboardName: String { get }
+    static var viewControllerID: String { get }
     static var storyboardBundle: Bundle? { get }
     static var storyboardIdentifier: String { get }
     
@@ -22,10 +22,10 @@ extension StoryboardInstantiable {
     static var storyboardBundle: Bundle? { return nil }
     
     static func instantiate() -> Self {
-        let storyboard = UIStoryboard(name: storyboardName, bundle: storyboardBundle)
+        let storyboard = UIStoryboard(name: storyboardIdentifier, bundle: storyboardBundle)
         
         guard let viewController =
-            storyboard.instantiateViewController(withIdentifier: storyboardIdentifier) as? Self else {
+            storyboard.instantiateViewController(withIdentifier: viewControllerID) as? Self else {
             
                 fatalError("Could not instantiate \(self)")
         }

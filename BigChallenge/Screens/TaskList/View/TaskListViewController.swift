@@ -14,8 +14,8 @@ class TaskListViewController: UIViewController {
     
     // MARK: - Properties
     
-    var viewModel: TaskListViewModel?
-    private var barButtonItem: UIBarButtonItem?
+    var viewModel: TaskListViewModel!
+    private var barButtonItem: UIBarButtonItem!
     private let disposeBag = DisposeBag()
     
     lazy var editBarButtonItem: UIBarButtonItem = {
@@ -29,7 +29,7 @@ class TaskListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    // MARK: - ViewController Lifecycle 
+    // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = nil
@@ -99,14 +99,13 @@ class TaskListViewController: UIViewController {
 
 extension TaskListViewController: StoryboardInstantiable {
     
-    static var storyboardIdentifier: String {
+    static var viewControllerID: String {
         return "TaskListViewController"
     }
     
-    static var storyboardName: String {
+    static var storyboardIdentifier: String {
         return "TaskList"
     }
-    
 }
 
 // MARK: - UITableViewDelegate
