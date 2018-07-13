@@ -11,42 +11,39 @@ import RxCocoa
 import RxSwift
 
 protocol TaskListViewModelDelegate: class {
-    
-    // TODO follow proper delegate pattern
     func didTapAddButton()
     func didSelectTask(_ task: Task)
-    
 }
 
-class TaskListViewModel {
+public class TaskListViewModel {
     
+    public var tasksObservable: BehaviorSubject<[Task]>
     private let model: TaskModel
-    
-    var tasksObservable: Driver<[Task]> {
-        return model.objectsObservable
-    }
-    
+    private var tasks: [Task]
     weak var delegate: TaskListViewModelDelegate?
     
-    init(model: TaskModel) {
+    public init(model: TaskModel) {
         self.model = model
+        tasks = model.tasks
+        tasksObservable = BehaviorSubject<[Task]>(value: tasks)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didChangePersistence(_:)),
+                                               name: Notification.Name.NSManagedObjectContextObjectsDidChange,
+                                               object: nil)
     }
     
-    // TODO: delete this after rx
-    var numberOfSections: Int {
-        return 1
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
-    var numberOfRowsInSection: Int {
-        return model.count
-    }
-    
-    func taskForRowAt(indexPath: IndexPath) -> Task? {
-        let row = indexPath.row
-        if row <= model.count {
-            return model.task(at: row)
-        } else {
-            return nil
+    @objc private func didChangePersistence(_ notification: Notification) {
+        let dict = notification.userInfo!
+        if let objects = dict["inserted"] as? NSSet {
+            for task in objects where task is Task {
+                tasks.append(task as! Task)
+            }
+            tasksObservable.onNext( tasks )
         }
     }
     
@@ -61,14 +58,8 @@ class TaskListViewModel {
         delegate?.didTapAddButton()
     }
     
-    func removeTask(at indexPath: IndexPath) {
-        if let task = taskForRowAt(indexPath: indexPath) {
-            model.delete(object: task)
-        }
-    }
-    
     func didSelectTask(at indexPath: IndexPath) {
-        let task = model.task(at: indexPath.row)
+        let task = tasks[indexPath.row]
         delegate?.didSelectTask(task)
     }
     

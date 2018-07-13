@@ -65,17 +65,6 @@ public class RemindersImporter {
         return (task, tag)
     }
     
-    public func exportToReminders() {
-        do {
-            for task in taskModel.fetchAll() {
-                remindersDB.save(task: task, commit: false)
-                try remindersDB.store.commit()
-            }
-        } catch let error as NSError {
-            print(error)
-        }
-    }
-    
     public func save(task: Task) {
         remindersDB.save(task: task)
     }

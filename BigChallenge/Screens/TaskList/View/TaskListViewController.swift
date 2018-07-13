@@ -10,7 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class TaskListViewController: UIViewController {
+public class TaskListViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -30,7 +30,7 @@ class TaskListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - ViewController Lifecycle
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = nil
         tableView.delegate = nil
@@ -43,23 +43,24 @@ class TaskListViewController: UIViewController {
         bindTableView()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    override public func didReceiveMemoryWarning() {
         // Dispose of any resources that can be recreated.
+        super.didReceiveMemoryWarning()
     }
     
     // MARK: - IBActions
-    
     @IBAction func didTapAddBarButtonItem(_ sender: Any) {
         viewModel?.didTapAddButton()
     }
     
     // MARK: - Functions
-    
     // The default editButtonItem was not toggling the tableview's edition mode, so we coded it from scratch
     private func configureWithViewModel() {
         let editBarButtonItem =
-            UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleEditionMode))
+            UIBarButtonItem(barButtonSystemItem: .edit,
+                            target: self,
+                            action: #selector(toggleEditionMode))
+        
         self.barButtonItem = editBarButtonItem
         navigationItem.leftBarButtonItem = editBarButtonItem
         
@@ -71,9 +72,9 @@ class TaskListViewController: UIViewController {
     private func bindTableView() {
         guard let viewModel = viewModel else { return }
         viewModel.tasksObservable
-            .drive(tableView.rx.items(cellIdentifier: TaskTableViewCell.identifier,
+            .bind(to: tableView.rx.items(cellIdentifier: TaskTableViewCell.identifier,
                                            cellType: TaskTableViewCell.self)) { (_, task, cell) in
-                                            
+                
                 let taskCellViewModel = viewModel.createCellViewModel(for: task)
                 cell.configure(with: taskCellViewModel)
                 cell.delegate = self
@@ -96,7 +97,6 @@ class TaskListViewController: UIViewController {
 }
 
 // MARK: - StoryboardInstantiable
-
 extension TaskListViewController: StoryboardInstantiable {
     
     static var viewControllerID: String {

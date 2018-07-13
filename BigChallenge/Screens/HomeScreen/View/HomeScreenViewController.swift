@@ -15,8 +15,8 @@ class HomeScreenViewController: UIViewController {
     
     fileprivate var taskListViewController: TaskListViewController!
     fileprivate var tagCollectionViewController: TagCollectionViewController!
-    var taskModel: TaskModel!
-    var tagModel: TagModel!
+    var taskModel: TaskModel?
+    var tagModel: TagModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,14 +26,16 @@ class HomeScreenViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "taskListSegue" {
             if let taskListViewController = segue.destination as? TaskListViewController {
-                let taskListViewModel = TaskListViewModel(model: taskModel)
+                guard let model = taskModel else {return}
+                let taskListViewModel = TaskListViewModel(model: model)
                 taskListViewModel.delegate = self
                 taskListViewController.viewModel = taskListViewModel
                 self.taskListViewController = taskListViewController
             }
         } else if segue.identifier == "tagCollectionSegue" {
             if let tagCollectionViewController = segue.destination as? TagCollectionViewController {
-                let tagCollectionViewModel = TagCollectionViewModel(model: tagModel)
+                guard let model = tagModel else {return}
+                let tagCollectionViewModel = TagCollectionViewModel(model: model)
                 tagCollectionViewController.delegate = self
                 tagCollectionViewController.viewModel = tagCollectionViewModel
                 self.tagCollectionViewController = tagCollectionViewController

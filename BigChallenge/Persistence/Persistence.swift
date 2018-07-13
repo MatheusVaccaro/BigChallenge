@@ -15,8 +15,8 @@ public class Persistence: PersistenceProtocol {
         case inDevice
     }
    
-    let localPersistence: PersistenceProtocol
-    let remotePersistence: PersistenceProtocol?
+    private let localPersistence: LocalPersistence
+    private let remotePersistence: PersistenceProtocol?
     
     init(configuration: Configuration = .inDevice) {
         switch configuration {
@@ -27,19 +27,6 @@ public class Persistence: PersistenceProtocol {
             localPersistence = MockPersistence()
             remotePersistence = nil
         }
-        //TODO: Find better alternative to setup mock or normal persistence. DEBUG in test target only maybe?
-//        #if DEBUG
-//        localPersistence = MockPersistence()
-//        remotePersistence = nil
-//        print("--- LAUNCHING IN DEBUG MODE ---")
-//        print("--- USING MOCK PERSISTENCE ----")
-//        #else
-//        localPersistence = LocalPersistence()
-//        remotePersistence = nil
-//        print("------------ WARNING ------------")
-//        print("--- LAUNCHING IN RELEASE MODE ---")
-//        print("----- USING PROD PERSISTENCE ----")
-//        #endif
     }
     
     public func create<T: Storable>(_ model: T.Type) -> T {

@@ -12,45 +12,31 @@ import RxSwift
 
 public class TaskModel {
     
-    lazy var objectsObservable: Driver<[Task]> = {
-        return objects
-            .asObservable()
-            .asDriver(onErrorJustReturn: [])
-    }() // TODO should this be lazy?
-    
-    var count: Int {
-        return objects.value.count
-    }
-    
-    private var objects: Variable<[Task]>
+    private(set) public var tasks: [Task]
     private let persistance: Persistence
     
     init(persistence: Persistence) {
         self.persistance = persistence
-        self.objects = Variable([])
-        persistance.fetch(Task.self, predicate: nil) {
-            self.objects = Variable( $0 )
-        }
-    }
-    
-    func fetchAll() -> [Task] {
-        return objects.value
-    }
-    
-    func task(at index: Int) -> Task {
-        return objects.value[index]
+        self.tasks = []
+        persistence.fetch(Task.self) { self.tasks = $0 }
     }
     
     public func save(object: Task) {
-        objects.value.append(object)
-//        RemindersImporter.instance?.save(task: object)
+        RemindersImporter.instance?.save(task: object)
         persistance.save()
     }
     
     public func delete(object: Task) {
         // TODO change to removeAll when available
-        objects.value = objects.value.filter({$0.uuid != object.uuid})
+        tasks.append(object)
+        RemindersImporter.instance?.save(task: object)
+        persistance.save()
+    }
+    
+    public func remove(object: Task) {
+        guard let taskIndex = tasks.firstIndex(of: object) else { print("could not delete \(object) "); return }
         persistance.delete(object)
+        tasks.remove(at: taskIndex)
     }
     
     public func createTask(with title: String) -> Task {
