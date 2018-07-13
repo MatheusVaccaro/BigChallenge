@@ -38,6 +38,16 @@ class LocalPersistence: PersistenceProtocol {
             return container
         }()
     }
+
+    // todo when did change
+    var didChangeObjects: (([Storable]) -> Void)?
+    
+    @objc private func didChangePersistence(_ notification: Notification) {
+        let dict = notification.userInfo!
+        
+        // called to warn observers
+        self.didChangeObjects?([])
+    }
     
     func create<T: Storable>(_ object: T.Type) throws -> T {
         let modelName = String(describing: object)

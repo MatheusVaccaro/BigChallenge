@@ -27,6 +27,10 @@ public class Persistence: PersistenceProtocol {
             localPersistence = MockPersistence()
             remotePersistence = nil
         }
+    
+        localPersistence.didChangeObjects = {
+            print($0)
+        }
     }
     
     public func create<T: Storable>(_ model: T.Type) -> T {
