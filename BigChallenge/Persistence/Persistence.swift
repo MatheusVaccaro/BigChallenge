@@ -15,6 +15,14 @@ public class Persistence: PersistenceProtocol {
         case inDevice
     }
    
+    var didChangeTasks: (([Task]) -> Void)?
+    var didDeleteTasks: (([Task]) -> Void)?
+    var didAddTasks: (([Task]) -> Void)?
+    
+    var didChangeTags: (([Tag]) -> Void)?
+    var didDeleteTags: (([Tag]) -> Void)?
+    var didAddTags: (([Tag]) -> Void)?
+    
     private let localPersistence: LocalPersistence
     private let remotePersistence: PersistenceProtocol?
     
@@ -27,9 +35,17 @@ public class Persistence: PersistenceProtocol {
             localPersistence = MockPersistence()
             remotePersistence = nil
         }
-    
-        localPersistence.didChangeObjects = {
-            print($0)
+        
+        //Change handler
+        localPersistence.didAddObjects = { objects in
+            if let tasks = (objects.filter { $0 is Task }) as? [Task] {
+                self.didAddTasks?(tasks)
+            }
+            
+            if let tags = (objects.filter { $0 is Tag }) as? [Tag] {
+                self.didAddTags?(tags)
+            }
+            //TODO change, delete
         }
     }
     

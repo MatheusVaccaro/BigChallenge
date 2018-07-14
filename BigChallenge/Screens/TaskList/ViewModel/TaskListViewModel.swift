@@ -24,17 +24,13 @@ public class TaskListViewModel {
     
     public init(model: TaskModel) {
         self.model = model
-        tasks = model.tasks
-        tasksObservable = BehaviorSubject<[Task]>(value: tasks)
+        self.tasks = model.tasks
+        self.tasksObservable = BehaviorSubject<[Task]>(value: tasks)
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didChangePersistence(_:)),
-                                               name: Notification.Name.NSManagedObjectContextObjectsDidChange,
-                                               object: nil)
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+        model.didAddTasks = {
+            self.tasks.append(contentsOf: $0)
+            self.tasksObservable.onNext(self.tasks)
+        }
     }
     
     @objc private func didChangePersistence(_ notification: Notification) {

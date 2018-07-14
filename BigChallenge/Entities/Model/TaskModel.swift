@@ -12,13 +12,20 @@ import RxSwift
 
 public class TaskModel {
     
+    var didAddTasks: (([Task]) -> Void)?
+    
     private(set) public var tasks: [Task]
     private let persistance: Persistence
     
     init(persistence: Persistence) {
         self.persistance = persistence
         self.tasks = []
-        persistence.fetch(Task.self) { self.tasks = $0 }
+//        persistence.fetch(Task.self) { self.tasks = $0 }
+        
+        persistence.didAddTasks = {
+            self.tasks.append(contentsOf: $0)
+            self.didAddTasks?($0)
+        }
     }
     
     public func save(object: Task) {

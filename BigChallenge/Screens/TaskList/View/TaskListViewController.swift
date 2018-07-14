@@ -74,7 +74,8 @@ public class TaskListViewController: UIViewController {
         viewModel.tasksObservable
             .bind(to: tableView.rx.items(cellIdentifier: TaskTableViewCell.identifier,
                                            cellType: TaskTableViewCell.self)) { (_, task, cell) in
-                
+                                            
+                print("reloaded cell for task \(task.title)")
                 let taskCellViewModel = viewModel.createCellViewModel(for: task)
                 cell.configure(with: taskCellViewModel)
                 cell.delegate = self

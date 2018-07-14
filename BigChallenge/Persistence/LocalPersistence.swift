@@ -37,16 +37,31 @@ class LocalPersistence: PersistenceProtocol {
             })
             return container
         }()
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didChangePersistence(_:)),
+                                               name: Notification.Name.NSManagedObjectContextObjectsDidChange,
+                                               object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     // todo when did change
     var didChangeObjects: (([Storable]) -> Void)?
+    var didDeleteObjects: (([Storable]) -> Void)?
+    var didAddObjects: (([Storable]) -> Void)?
     
     @objc private func didChangePersistence(_ notification: Notification) {
         let dict = notification.userInfo!
         
-        // called to warn observers
-        self.didChangeObjects?([])
+        if let addedSet = dict[NSInsertedObjectsKey] as? NSSet,
+            let addedArray = addedSet.allObjects as? [Storable] {
+            self.didAddObjects?(addedArray)
+        }
+        //TODO if let changed
+        //TODO if let deleted
     }
     
     func create<T: Storable>(_ object: T.Type) throws -> T {
