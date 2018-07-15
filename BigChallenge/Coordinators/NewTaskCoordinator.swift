@@ -16,7 +16,7 @@ class NewTaskCoordinator: Coordinator {
     
     fileprivate var newTaskTableViewController: NewTaskTableViewController?
     fileprivate let model: TaskModel
-    fileprivate var task: Task
+    fileprivate var task: Task?
     fileprivate let isEditing: Bool
     fileprivate var modalPresenter: UINavigationController?
     
@@ -27,11 +27,7 @@ class NewTaskCoordinator: Coordinator {
         self.presenter = presenter
         self.childrenCoordinators = []
         self.isEditing = isEditing
-        if let task = task {
-            self.task = task
-        } else {
-            self.task = model.createTask(with: "")
-        }
+        self.task = task
     }
     
     func start() {

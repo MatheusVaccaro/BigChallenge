@@ -39,9 +39,7 @@ class TaskListCoordinator: Coordinator {
     }
 
     fileprivate func showNewTask() {
-        let task = model.createTask()
-        let newTaskCoordinator = NewTaskCoordinator(task: task,
-                                                    isEditing: false,
+        let newTaskCoordinator = NewTaskCoordinator(isEditing: false,
                                                     presenter: presenter,
                                                     model: model)
         newTaskCoordinator.delegate = self

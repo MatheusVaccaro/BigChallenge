@@ -7,7 +7,15 @@
 //
 
 import Foundation
+import CoreData
 
 public protocol Storable {
     var uuid: UUID { get }
+}
+
+extension NSManagedObject: Storable {
+    public var uuid: UUID {
+        //swiftlint:disable:next force_cast
+        return value(forKey: "id") as! UUID
+    }
 }

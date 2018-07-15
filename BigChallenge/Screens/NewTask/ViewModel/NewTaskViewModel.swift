@@ -20,14 +20,15 @@ class NewTaskViewModel {
     
     private let model: TaskModel
     private var isEditing: Bool
-    var task: Task
+    var task: Task?
+    var taskTitleTextField: String?
     
     weak var delegate: NewTaskViewModelDelegate?
     
-    init(task: Task, isEditing: Bool, model: TaskModel) {
-        self.task = task
+    init(task: Task?, isEditing: Bool, model: TaskModel) {
         self.isEditing = isEditing
         self.model = model
+        self.task = task
     }
     
     var numberOfSections: Int {
@@ -49,9 +50,9 @@ class NewTaskViewModel {
     func didTapDoneButton() {
         delegate?.didTapDoneButton()
         if isEditing {
-            //TODO
+            // TODO
         } else {
-            addTask()
+            createTask()
         }
     }
     
@@ -61,10 +62,14 @@ class NewTaskViewModel {
     }
     
     private func deleteTask() {
-        model.remove(object: task)
+        guard let task = task else { return }
+        model.delete(object: task)
     }
     
-    private func addTask() {
+    private func createTask() {
+        guard let taskTitle = taskTitleTextField else { return }
+        let task = model.createTask(with: taskTitle)
+        self.task = task
         model.save(object: task)
     }
     

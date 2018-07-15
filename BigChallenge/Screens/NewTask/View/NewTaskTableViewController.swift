@@ -49,7 +49,7 @@ class NewTaskTableViewController: UITableViewController {
     
     @IBAction func didTapDoneBarButtonItem(_ sender: Any) {
         guard let titleText = titleTextField.text else { return }
-        viewModel?.task.title = titleText
+        viewModel?.taskTitleTextField = titleText
         viewModel?.didTapDoneButton()
     }
         
@@ -57,7 +57,7 @@ class NewTaskTableViewController: UITableViewController {
     private func configureWithViewModel() {
         guard let viewModel = viewModel else { return }
         
-        titleTextField.text = viewModel.task.title
+        titleTextField.text = viewModel.task?.title
         titleTextField.placeholder = viewModel.titleTextFieldPlaceHolder
         deleteTaskButton.text = viewModel.deleteButtonTitle
         navigationItem.title = viewModel.navigationItemTitle
