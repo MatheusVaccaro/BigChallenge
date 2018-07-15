@@ -19,6 +19,8 @@
 		222BFF9420ED92C7001B6BBF /* RemindersCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222BFF9320ED92C7001B6BBF /* RemindersCommunicator.swift */; };
 		222BFF9720EDB854001B6BBF /* RemindersImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222BFF9620EDB854001B6BBF /* RemindersImporter.swift */; };
 		22325A7420FB8E0500E5F8C6 /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22325A7320FB8E0500E5F8C6 /* HomeScreenViewModel.swift */; };
+		22325A7720FBC3F100E5F8C6 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22325A7620FBC3F100E5F8C6 /* TagCollectionViewCell.swift */; };
+		22325A7920FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22325A7820FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift */; };
 		223C0BE120E4449C00CF39ED /* LocalPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0BE020E4449C00CF39ED /* LocalPersistence.swift */; };
 		223C0C0620E5293500CF39ED /* PersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0520E5293500CF39ED /* PersistenceProtocol.swift */; };
 		223C0C0820E529D600CF39ED /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0720E529D600CF39ED /* Persistence.swift */; };
@@ -92,6 +94,8 @@
 		222BFF9320ED92C7001B6BBF /* RemindersCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersCommunicator.swift; sourceTree = "<group>"; };
 		222BFF9620EDB854001B6BBF /* RemindersImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersImporter.swift; sourceTree = "<group>"; };
 		22325A7320FB8E0500E5F8C6 /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
+		22325A7620FBC3F100E5F8C6 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
+		22325A7820FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		223C0BE020E4449C00CF39ED /* LocalPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPersistence.swift; sourceTree = "<group>"; };
 		223C0C0520E5293500CF39ED /* PersistenceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceProtocol.swift; sourceTree = "<group>"; };
 		223C0C0720E529D600CF39ED /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -220,8 +224,7 @@
 		221BA8B420F6A16300BE2AC1 /* TagsCollection */ = {
 			isa = PBXGroup;
 			children = (
-				221BA8B520F6A18500BE2AC1 /* TagCollection.storyboard */,
-				221BA8B720F6A1DF00BE2AC1 /* TagCollectionViewController.swift */,
+				22325A7520FBBA4900E5F8C6 /* View */,
 				221BA8BB20F6A2B500BE2AC1 /* ViewModel */,
 			);
 			path = TagsCollection;
@@ -231,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				221BA8B920F6A26100BE2AC1 /* TagCollectionViewModel.swift */,
+				22325A7820FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -241,6 +245,16 @@
 				2965C40F20F6A81D001C988E /* Reminders */,
 			);
 			path = Importers;
+			sourceTree = "<group>";
+		};
+		22325A7520FBBA4900E5F8C6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				221BA8B520F6A18500BE2AC1 /* TagCollection.storyboard */,
+				221BA8B720F6A1DF00BE2AC1 /* TagCollectionViewController.swift */,
+				22325A7620FBC3F100E5F8C6 /* TagCollectionViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		2299F07720F6287F0074A834 /* Location */ = {
@@ -762,9 +776,11 @@
 				C2A1115320BA036800ABB161 /* NewTaskCoordinator.swift in Sources */,
 				C23753AE20B6461E00C1CE15 /* Coordinator.swift in Sources */,
 				2286A71620E3DF2100BE92AA /* Model.xcdatamodeld in Sources */,
+				22325A7720FBC3F100E5F8C6 /* TagCollectionViewCell.swift in Sources */,
 				223C0C0820E529D600CF39ED /* Persistence.swift in Sources */,
 				226CEA0520E17E87008CEB97 /* Strings.swift in Sources */,
 				223C0C0620E5293500CF39ED /* PersistenceProtocol.swift in Sources */,
+				22325A7920FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift in Sources */,
 				221BA8BA20F6A26100BE2AC1 /* TagCollectionViewModel.swift in Sources */,
 				2299F07920F628A70074A834 /* LocationManager.swift in Sources */,
 				2241F36920ED08340069EFE9 /* TagModel.swift in Sources */,

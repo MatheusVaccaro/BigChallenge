@@ -43,7 +43,7 @@ class HomeScreenViewController: UIViewController {
         } else if segue.identifier == "tagCollectionSegue" {
             if let tagCollectionViewController = segue.destination as? TagCollectionViewController {
                 let tagCollectionViewModel = viewModel.tagListViewModel
-                tagCollectionViewController.delegate = self
+//                tagCollectionViewController.delegate = self
                 tagCollectionViewController.viewModel = tagCollectionViewModel
                 self.tagCollectionViewController = tagCollectionViewController
             }
@@ -59,10 +59,6 @@ extension HomeScreenViewController: TaskListViewModelDelegate {
     func didSelectTask(_ task: Task) {
         //TODO
     }
-}
-
-extension HomeScreenViewController: TagCollectionDelegate {
-    
 }
 
 extension HomeScreenViewController: StoryboardInstantiable {
