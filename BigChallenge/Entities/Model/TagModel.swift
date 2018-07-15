@@ -12,7 +12,7 @@ import RxSwift
 
 public class TagModel {
     
-    var didAddTags: (([Tag]) -> Void)?
+    var didUpdateTags: (([Tag]) -> Void)?
     
     private(set) public var tags: [Tag]
     private let persistance: Persistence
@@ -22,14 +22,19 @@ public class TagModel {
         self.tags = []
         
         persistence.didAddTags = {
-            self.tags.append(contentsOf: $0)
-            self.didAddTags?($0)
+            for tag in $0 { //filter tags added by this device
+                guard !self.tags.contains(tag) else { continue }
+                self.tags.append(tag)
+            }
+            self.didUpdateTags?(self.tags)
         }
     }
     
     public func save(object: Tag) {
+        guard !tags.contains(object) else { return }
         tags.append(object)
         persistance.save()
+        didUpdateTags?(tags)
     }
     
     public func remove(object: Tag) {
@@ -39,11 +44,14 @@ public class TagModel {
     }
     
     public func createTag(with title: String = "") -> Tag {
-        let tag: Tag = persistance.create(Tag.self)
-        
-        tag.id = UUID()
-        tag.title = title
-        
-        return tag
+        if let tag = (tags.first { $0.title == title }) { return tag }
+        else { // dont create repeated tags
+            let tag: Tag = persistance.create(Tag.self)
+            
+            tag.id = UUID()
+            tag.title = title
+            
+            return tag
+        }
     }
 }

@@ -12,7 +12,7 @@ import RxSwift
 
 public class TaskModel {
     
-    var didAddTasks: (([Task]) -> Void)?
+    var didUpdateTasks: (([Task]) -> Void)?
     
     private(set) public var tasks: [Task]
     private let persistance: Persistence
@@ -20,11 +20,13 @@ public class TaskModel {
     init(persistence: Persistence) {
         self.persistance = persistence
         self.tasks = []
-//        persistence.fetch(Task.self) { self.tasks = $0 }
         
         persistence.didAddTasks = {
-            self.tasks.append(contentsOf: $0)
-            self.didAddTasks?($0)
+            for task in $0 { //filter tasks added by this device
+                guard !self.tasks.contains(task) else { continue }
+                self.tasks.append(task)
+            }
+            self.didUpdateTasks?(self.tasks)
         }
     }
     
@@ -41,7 +43,8 @@ public class TaskModel {
     }
     
     public func remove(object: Task) {
-        guard let taskIndex = tasks.firstIndex(of: object) else { print("could not delete \(object) "); return }
+        guard let taskIndex =
+            tasks.firstIndex(of: object) else { print("could not delete \(object) "); return }
         persistance.delete(object)
         tasks.remove(at: taskIndex)
     }
