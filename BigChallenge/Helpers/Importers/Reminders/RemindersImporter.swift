@@ -61,6 +61,7 @@ public class RemindersImporter {
         task.completionDate = reminder.completionDate
         task.dueDate = reminder.completionDate
         task.creationDate = reminder.creationDate
+        task.addToTags(tag)
 	
         return (task, tag)
     }

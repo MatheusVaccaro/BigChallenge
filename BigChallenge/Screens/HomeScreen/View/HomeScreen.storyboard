@@ -44,15 +44,23 @@
                             </textField>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0xD-KL-Oyh">
                                 <rect key="frame" x="15" y="592" width="345" height="60"/>
-                                <color key="backgroundColor" red="1" green="0.050281739909999998" blue="0.077347949240000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="s1Z-mq-9VF"/>
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="n8G-hH-sdN"/>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Fh-Ag-lyc">
+                                <rect key="frame" x="154.5" y="607" width="66" height="30"/>
+                                <state key="normal" title="New Task"/>
+                                <connections>
+                                    <action selector="didTapAddButton:" destination="hA5-o5-LMg" eventType="touchUpInside" id="scE-ZA-w0l"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="1Fh-Ag-lyc" firstAttribute="centerX" secondItem="0xD-KL-Oyh" secondAttribute="centerX" id="2go-Tw-oNl"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="0xD-KL-Oyh" secondAttribute="trailing" constant="15" id="A2C-oX-oOS"/>
                             <constraint firstItem="cie-Gz-Vzx" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="15" id="BXC-pC-xol"/>
                             <constraint firstItem="Vex-PR-Mon" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="15" id="Beu-zI-GrG"/>
@@ -63,6 +71,7 @@
                             <constraint firstItem="Vex-PR-Mon" firstAttribute="top" secondItem="QKa-yH-x6F" secondAttribute="top" constant="15" id="ZR4-pm-ZQ2"/>
                             <constraint firstItem="0xD-KL-Oyh" firstAttribute="top" secondItem="cie-Gz-Vzx" secondAttribute="bottom" id="ikh-0X-ElE"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="fUe-Ak-aYb" secondAttribute="trailing" id="l9d-qe-b2V"/>
+                            <constraint firstItem="1Fh-Ag-lyc" firstAttribute="centerY" secondItem="0xD-KL-Oyh" secondAttribute="centerY" id="nOz-3j-icT"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="bottom" secondItem="0xD-KL-Oyh" secondAttribute="bottom" constant="15" id="t4J-sz-R75"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="cie-Gz-Vzx" secondAttribute="trailing" constant="15" id="yev-Sb-Zry"/>
                             <constraint firstItem="fUe-Ak-aYb" firstAttribute="top" secondItem="Vex-PR-Mon" secondAttribute="bottom" constant="15" id="zw6-eb-xjl"/>

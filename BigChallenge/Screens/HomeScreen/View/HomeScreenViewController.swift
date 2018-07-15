@@ -8,58 +8,54 @@
 
 import UIKit
 
+protocol HomeScreenViewModelDelegate: class {
+    func willAddTask()
+    func wilEditTask()
+}
+
 class HomeScreenViewController: UIViewController {
+    
+    weak var delegate: HomeScreenViewModelDelegate?
     
     @IBOutlet weak var tagContainerView: UIView!
     @IBOutlet weak var taskListContainerView: UIView!
     
     fileprivate var taskListViewController: TaskListViewController!
     fileprivate var tagCollectionViewController: TagCollectionViewController!
-    var taskModel: TaskModel?
-    var tagModel: TagModel?
+    
+    var viewModel: HomeScreenViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        viewModel.tagModel.didAddTags = { _ in
+//            self.taskListViewController.filterTasks(with: nil)
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "taskListSegue" {
             if let taskListViewController = segue.destination as? TaskListViewController {
-                guard let model = taskModel else {return}
-                let taskListViewModel = TaskListViewModel(model: model)
+                let taskListViewModel = viewModel.taskListViewModel
                 taskListViewModel.delegate = self
                 taskListViewController.viewModel = taskListViewModel
                 self.taskListViewController = taskListViewController
             }
         } else if segue.identifier == "tagCollectionSegue" {
             if let tagCollectionViewController = segue.destination as? TagCollectionViewController {
-                guard let model = tagModel else {return}
-                let tagCollectionViewModel = TagCollectionViewModel(model: model)
+                let tagCollectionViewModel = viewModel.tagListViewModel
                 tagCollectionViewController.delegate = self
                 tagCollectionViewController.viewModel = tagCollectionViewModel
                 self.tagCollectionViewController = tagCollectionViewController
             }
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func didTapAddButton(_ sender: Any) {
+        delegate?.willAddTask()
     }
-    */
-
 }
 
 extension HomeScreenViewController: TaskListViewModelDelegate {
-    func didTapAddButton() {
-        //TODO
-    }
-    
     func didSelectTask(_ task: Task) {
         //TODO
     }

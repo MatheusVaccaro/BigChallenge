@@ -52,6 +52,7 @@ public class TaskModel {
         task.id = UUID()
         task.title = title
         task.creationDate = Date()
+        task.tags = []
         
         return task
     }

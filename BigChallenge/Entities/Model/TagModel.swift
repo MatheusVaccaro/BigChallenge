@@ -1,5 +1,5 @@
 //
-//  TaskModel.swift
+//  TagModel.swift
 //  BigChallenge
 //
 //  Created by Gabriel Paul on 19/06/18.
@@ -12,38 +12,30 @@ import RxSwift
 
 public class TagModel {
     
-    var objectsObservable: Observable<[Tag]> {
-        return self.objects.asObservable()
-    }
+    var didAddTags: (([Tag]) -> Void)?
     
-    var count: Int {
-        return objects.value.count
-    }
-    
-    private var objects: Variable<[Tag]>
+    private(set) public var tags: [Tag]
     private let persistance: Persistence
     
     init(persistence: Persistence) {
         self.persistance = persistence
-        self.objects = Variable([])
-        persistance.fetch(Tag.self, predicate: nil) {
-            self.objects = Variable( $0 )
+        self.tags = []
+        
+        persistence.didAddTags = {
+            self.tags.append(contentsOf: $0)
+            self.didAddTags?($0)
         }
     }
     
-    func task(at index: Int) -> Tag {
-        return objects.value[index]
-    }
-    
     public func save(object: Tag) {
-        objects.value.append(object)
+        tags.append(object)
         persistance.save()
     }
     
     public func remove(object: Tag) {
-        // TODO change to removeAll when available
-        objects.value = objects.value.filter({$0.uuid != object.uuid})
+        guard let tagIndex = tags.firstIndex(of: object) else { print("could not delete \(object) "); return }
         persistance.delete(object)
+        tags.remove(at: tagIndex)
     }
     
     public func createTag(with title: String = "") -> Tag {
@@ -54,5 +46,4 @@ public class TagModel {
         
         return tag
     }
-    
 }

@@ -16,8 +16,9 @@
 		221BA8B620F6A18500BE2AC1 /* TagCollection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221BA8B520F6A18500BE2AC1 /* TagCollection.storyboard */; };
 		221BA8B820F6A1DF00BE2AC1 /* TagCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BA8B720F6A1DF00BE2AC1 /* TagCollectionViewController.swift */; };
 		221BA8BA20F6A26100BE2AC1 /* TagCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BA8B920F6A26100BE2AC1 /* TagCollectionViewModel.swift */; };
-		222BFF9420ED92C7001B6BBF /* RemindersTheftAuto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222BFF9320ED92C7001B6BBF /* RemindersTheftAuto.swift */; };
+		222BFF9420ED92C7001B6BBF /* RemindersCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222BFF9320ED92C7001B6BBF /* RemindersCommunicator.swift */; };
 		222BFF9720EDB854001B6BBF /* RemindersImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222BFF9620EDB854001B6BBF /* RemindersImporter.swift */; };
+		22325A7420FB8E0500E5F8C6 /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22325A7320FB8E0500E5F8C6 /* HomeScreenViewModel.swift */; };
 		223C0BE120E4449C00CF39ED /* LocalPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0BE020E4449C00CF39ED /* LocalPersistence.swift */; };
 		223C0C0620E5293500CF39ED /* PersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0520E5293500CF39ED /* PersistenceProtocol.swift */; };
 		223C0C0820E529D600CF39ED /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0720E529D600CF39ED /* Persistence.swift */; };
@@ -90,6 +91,7 @@
 		221BA8BD20F6B0EF00BE2AC1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TaskList.strings; sourceTree = "<group>"; };
 		222BFF9320ED92C7001B6BBF /* RemindersCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersCommunicator.swift; sourceTree = "<group>"; };
 		222BFF9620EDB854001B6BBF /* RemindersImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersImporter.swift; sourceTree = "<group>"; };
+		22325A7320FB8E0500E5F8C6 /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
 		223C0BE020E4449C00CF39ED /* LocalPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPersistence.swift; sourceTree = "<group>"; };
 		223C0C0520E5293500CF39ED /* PersistenceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceProtocol.swift; sourceTree = "<group>"; };
 		223C0C0720E529D600CF39ED /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 		221BA8AD20F698F100BE2AC1 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				22325A7320FB8E0500E5F8C6 /* HomeScreenViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -230,14 +233,6 @@
 				221BA8B920F6A26100BE2AC1 /* TagCollectionViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		222BFF9220ED9295001B6BBF /* reminders&calendar */ = {
-			isa = PBXGroup;
-			children = (
-				222BFF9320ED92C7001B6BBF /* RemindersTheftAuto.swift */,
-			);
-			path = "reminders&calendar";
 			sourceTree = "<group>";
 		};
 		222BFF9520EDB83B001B6BBF /* Importers */ = {
@@ -776,6 +771,7 @@
 				C2A1113B20B8791E00ABB161 /* MockPersistence.swift in Sources */,
 				C21EAD0020B741BC005F0F85 /* HomeScreenCoordinator.swift in Sources */,
 				C23753B020B6463700C1CE15 /* ApplicationCoordinator.swift in Sources */,
+				22325A7420FB8E0500E5F8C6 /* HomeScreenViewModel.swift in Sources */,
 				1676FC9020D99580003E2D79 /* TaskModel.swift in Sources */,
 				C2A1113D20B88A2F00ABB161 /* Storable.swift in Sources */,
 				222BFF9720EDB854001B6BBF /* RemindersImporter.swift in Sources */,

@@ -86,7 +86,6 @@ class NewTaskTableViewController: UITableViewController {
             viewModel?.didTapDeleteTaskButton()
         }
     }
-    
 }
 
 // MARK: - StoryboardInstantiable
@@ -94,10 +93,10 @@ class NewTaskTableViewController: UITableViewController {
 extension NewTaskTableViewController: StoryboardInstantiable {
     
     static var storyboardIdentifier: String {
-        return "NewTaskTableViewController"
+        return "NewTask"
     }
     
     static var viewControllerID: String {
-        return "NewTask"
+        return "NewTaskTableViewController"
     }
 }

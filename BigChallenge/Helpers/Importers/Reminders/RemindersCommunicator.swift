@@ -55,7 +55,6 @@ public class RemindersCommunicator {
         }
     }
     
-    // TODO Test
     public func save(task: Task, commit: Bool = true) {
         let reminder = EKReminder(eventStore: store)
         var calendar = store.defaultCalendarForNewReminders()

@@ -33,23 +33,24 @@ class HomeScreenCoordinator: Coordinator {
 
     func start() {
         let homeScreenViewController = HomeScreenViewController.instantiate()
-        homeScreenViewController.tagModel = tagModel
-        homeScreenViewController.taskModel = taskModel
+        homeScreenViewController.viewModel =
+            HomeScreenViewModel(taskModel: taskModel, tagModel: tagModel)
+        homeScreenViewController.delegate = self
         
         presenter.isNavigationBarHidden = true
         presenter.pushViewController(homeScreenViewController, animated: false)
     }
 
-//    fileprivate func showNewTask() {
-//        let task = taskModel.createTask()
-//        let newTaskCoordinator = NewTaskCoordinator(task: task,
-//                                                    isEditing: false,
-//                                                    presenter: presenter,
-//                                                    model: taskModel)
-//        newTaskCoordinator.delegate = self
-//        addChild(coordinator: newTaskCoordinator)
-//        newTaskCoordinator.start()
-//    }
+    fileprivate func showNewTask() {
+        let task = taskModel.createTask()
+        let newTaskCoordinator = NewTaskCoordinator(task: task,
+                                                    isEditing: false,
+                                                    presenter: presenter,
+                                                    model: taskModel)
+        newTaskCoordinator.delegate = self
+        addChild(coordinator: newTaskCoordinator)
+        newTaskCoordinator.start()
+    }
 //
 //    fileprivate func showEditTask(_ task: Task) {
 //        let newTaskCoordinator = NewTaskCoordinator(task: task,
@@ -65,5 +66,15 @@ class HomeScreenCoordinator: Coordinator {
 extension HomeScreenCoordinator: CoordinatorDelegate {
     func shouldDeinitCoordinator(_ coordinator: Coordinator) {
         releaseChild(coordinator: coordinator)
+    }
+}
+
+extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
+    func willAddTask() {
+        showNewTask()
+    }
+    
+    func wilEditTask() {
+        print("will edit task")
     }
 }

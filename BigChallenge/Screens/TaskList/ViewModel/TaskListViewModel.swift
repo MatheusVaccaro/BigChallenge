@@ -11,16 +11,16 @@ import RxCocoa
 import RxSwift
 
 protocol TaskListViewModelDelegate: class {
-    func didTapAddButton()
     func didSelectTask(_ task: Task)
 }
 
 public class TaskListViewModel {
     
     public var tasksObservable: BehaviorSubject<[Task]>
+    weak var delegate: TaskListViewModelDelegate?
+    
     private let model: TaskModel
     private var tasks: [Task]
-    weak var delegate: TaskListViewModelDelegate?
     
     public init(model: TaskModel) {
         self.model = model
@@ -33,33 +33,22 @@ public class TaskListViewModel {
         }
     }
     
-    @objc private func didChangePersistence(_ notification: Notification) {
-        let dict = notification.userInfo!
-        if let objects = dict["inserted"] as? NSSet {
-            for task in objects where task is Task {
-                tasks.append(task as! Task)
-            }
-            tasksObservable.onNext( tasks )
-        }
+    func filterTasks(with tag: Tag? = nil) {
+        //TODO: Do
+        tasks =
+            tasks.filter { $0.tags!.contains(where: { (tag) -> Bool in
+                if let tag = tag as? Tag { return tag.title == "NotReminders" }
+                return false
+            }) }
+        tasksObservable.onNext(tasks)
     }
     
-    func createCellViewModel(for task: Task) -> TaskCellViewModel {
+    func taskCellViewModel(for task: Task) -> TaskCellViewModel {
         return TaskCellViewModel(task: task, model: model)
-    }
-    
-    func didTapAddButton() {
-        // TODO remove
-//        let local = LocalPersistence()
-//        local.clearDatabase()
-        delegate?.didTapAddButton()
     }
     
     func didSelectTask(at indexPath: IndexPath) {
         let task = tasks[indexPath.row]
         delegate?.didSelectTask(task)
     }
-    
-    // MARK: - Strings
-    let viewTitle = String.taskListScreenTitle
-    
 }
