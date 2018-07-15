@@ -11,11 +11,9 @@ import Foundation
 class TaskCellViewModel {
     
     private var task: Task
-    private let model: TaskModel
     
-    init(task: Task, model: TaskModel) {
+    init(task: Task) {
         self.task = task
-        self.model = model
     }
     
     var title: String {

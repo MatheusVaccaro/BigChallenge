@@ -36,8 +36,8 @@ public class TaskListViewController: UIViewController {
         bindTableView()
     }
     
-    public func filterTasks(with tag: Tag? = nil) {
-        viewModel.filterTasks(with: tag)
+    public func filterTasks(with tags: [Tag]? = nil) {
+        viewModel.filterTasks(with: tags)
     }
     
     override public func didReceiveMemoryWarning() {
@@ -53,13 +53,13 @@ public class TaskListViewController: UIViewController {
     }
     
     private func bindTableView() {
-        guard let viewModel = viewModel else { return }
+//        guard let viewModel = viewModel else { return } //remove
         viewModel.tasksObservable
             .bind(to: tableView.rx.items(cellIdentifier: TaskTableViewCell.identifier,
-                                           cellType: TaskTableViewCell.self)) { (_, task, cell) in
+                                         cellType: TaskTableViewCell.self)) { (_, task, cell) in
                                             
                 print("reloaded cell for task \(task.title ?? "none")")
-                let taskCellViewModel = viewModel.taskCellViewModel(for: task)
+                let taskCellViewModel = self.viewModel.taskCellViewModel(for: task)
                 cell.configure(with: taskCellViewModel)
                 cell.delegate = self
             }

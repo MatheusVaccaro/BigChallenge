@@ -27,24 +27,39 @@ public class TaskListViewModel {
         self.tasks = model.tasks
         self.tasksObservable = BehaviorSubject<[Task]>(value: tasks)
         
-        model.didAddTasks = {
-            self.tasks.append(contentsOf: $0)
+        model.didUpdateTasks = {
+            self.tasks = $0
             self.tasksObservable.onNext(self.tasks)
         }
     }
     
-    func filterTasks(with tag: Tag? = nil) {
+    func filterTasks(with tags: [Tag]? = nil) {
         //TODO: Do
-        tasks =
-            tasks.filter { $0.tags!.contains(where: { (tag) -> Bool in
-                if let tag = tag as? Tag { return tag.title == "NotReminders" }
-                return false
-            }) }
+        
+        if let tags = tags {
+            tasks =
+                tasks.filter { $0.tags!.contains(where: { (tag) -> Bool in
+                    if let tag = tag as? Tag {
+                        for tagToFilterBy in tags {
+//                            if tag == tagToFilterBy {
+//                                return true
+//                            }
+                            //TODO: Filter
+                            if tag.title == "Reminders" {
+                                return true
+                            }
+                        }
+                    }
+                    return false
+                }) }
+        } else {
+            tasks = model.tasks //TODO: recommended tags
+        }
         tasksObservable.onNext(tasks)
     }
     
     func taskCellViewModel(for task: Task) -> TaskCellViewModel {
-        return TaskCellViewModel(task: task, model: model)
+        return TaskCellViewModel(task: task)
     }
     
     func didSelectTask(at indexPath: IndexPath) {
