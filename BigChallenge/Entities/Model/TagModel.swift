@@ -21,6 +21,10 @@ public class TagModel {
         self.persistance = persistence
         self.tags = []
         
+        persistence.fetch(Tag.self) {
+            tags = $0
+        }
+        
         persistence.didAddTags = {
             for tag in $0 { //filter tags added by this device
                 guard !self.tags.contains(tag) else { continue }

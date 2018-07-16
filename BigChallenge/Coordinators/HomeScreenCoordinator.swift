@@ -42,8 +42,7 @@ class HomeScreenCoordinator: Coordinator {
     }
 
     fileprivate func showNewTask() {
-        let task = taskModel.createTask()
-        let newTaskCoordinator = NewTaskCoordinator(task: task,
+        let newTaskCoordinator = NewTaskCoordinator(task: nil,
                                                     isEditing: false,
                                                     presenter: presenter,
                                                     model: taskModel)
@@ -51,7 +50,7 @@ class HomeScreenCoordinator: Coordinator {
         addChild(coordinator: newTaskCoordinator)
         newTaskCoordinator.start()
     }
-//
+    
 //    fileprivate func showEditTask(_ task: Task) {
 //        let newTaskCoordinator = NewTaskCoordinator(task: task,
 //                                                    isEditing: true,

@@ -21,6 +21,10 @@ public class TaskModel {
         self.persistance = persistence
         self.tasks = []
         
+        persistence.fetch(Task.self) {
+            tasks = $0
+        }
+        
         persistence.didAddTasks = {
             for task in $0 { //filter tasks added by this device
                 guard !self.tasks.contains(task) else { continue }
