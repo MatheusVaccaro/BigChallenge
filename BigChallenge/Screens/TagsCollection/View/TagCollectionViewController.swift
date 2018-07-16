@@ -16,7 +16,8 @@ class TagCollectionViewController: UIViewController {
         return viewModel!.tagsObservable
     }
     
-    var viewModel: TagCollectionViewModel!    
+    var viewModel: TagCollectionViewModel!
+    var clickedTagEvent: BehaviorSubject<Tag>?
     
     @IBOutlet weak var tagsCollectionView: UICollectionView!
     
@@ -33,13 +34,22 @@ class TagCollectionViewController: UIViewController {
         .bind(to: tagsCollectionView.rx.items(cellIdentifier: TagCollectionViewCell.identifier,
                                               cellType: TagCollectionViewCell.self)) { (_, tag, cell) in
             
-            print("updating collection with tag \(tag.title)")                                              
+            print("updating collection with tag \(tag.title!)")
             let viewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
             cell.configure(with: viewModel)
                                                 
         }.disposed(by: disposeBag)
         
-        tagsCollectionView.rx.modelSelected(Tag.self)
+        // selected x item in collection
+        tagsCollectionView.rx.modelSelected(Tag.self).subscribe { event in
+            // send to viewModel
+            self.viewModel.selectedTagEvent.on(event)
+        }.disposed(by: disposeBag)
+        
+        // get list of selected elements from viewModel
+        viewModel.selectedTagsObservable.subscribe { event in
+            print("selected tags are: \( event.element!.map {$0.title} )")
+        }
         
         //TODO
         tagsCollectionView.rx.setDelegate(self).disposed(by: disposeBag)

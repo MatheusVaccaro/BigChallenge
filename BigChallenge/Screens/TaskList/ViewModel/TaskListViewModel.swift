@@ -17,6 +17,7 @@ protocol TaskListViewModelDelegate: class {
 public class TaskListViewModel {
     
     public var tasksObservable: BehaviorSubject<[Task]>
+    
     weak var delegate: TaskListViewModelDelegate?
     
     private let model: TaskModel
