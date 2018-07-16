@@ -74,21 +74,21 @@ class NewTagViewModel {
     }
     
     // MARK: - Strings
-    let titleTextFieldPlaceHolder = String.newTagCellPlaceholder
-    let doneItemTitle = String.newTagDone
-    let cancelItemTitle = String.newTagCancel
-    
-    var navigationItemTitle: String {
-        var ans: String = ""
-        if isEditing {
-            ans = String.newTagScreenTitleEditing
-        } else {
-            ans = String.newTagScreenTitleCreating
-        }
-        return ans
-    }
-    
-    var deleteButtonTitle: String {
-        return String.newTagDeleteTag
-    }
+//    let titleTextFieldPlaceHolder = String.newTagCellPlaceholder
+//    let doneItemTitle = String.newTagDone
+//    let cancelItemTitle = String.newTagCancel
+//    
+//    var navigationItemTitle: String {
+//        var ans: String = ""
+//        if isEditing {
+//            ans = String.newTagScreenTitleEditing
+//        } else {
+//            ans = String.newTagScreenTitleCreating
+//        }
+//        return ans
+//    }
+//    
+//    var deleteButtonTitle: String {
+//        return String.newTagDeleteTag
+//    }
 }

@@ -74,21 +74,21 @@ class NewTaskViewModel {
     }
     
     // MARK: - Strings
-    let titleTextFieldPlaceHolder = String.newTaskCellPlaceholder
-    let doneItemTitle = String.newTaskDone
-    let cancelItemTitle = String.newTaskCancel
+    let titleTextFieldPlaceHolder = Strings.Task.CreationScreen.taskTitlePlaceholder
+    let doneItemTitle = Strings.Task.CreationScreen.doneButton
+    let cancelItemTitle = Strings.Task.CreationScreen.cancelButton
     
     var navigationItemTitle: String {
         var ans: String = ""
         if isEditing {
-            ans = String.newTaskScreenTitleEditing
+            ans = Strings.Task.EditScreen.title
         } else {
-            ans = String.newTaskScreenTitleCreating
+            ans = Strings.Task.CreationScreen.title
         }
         return ans
     }
     
     var deleteButtonTitle: String {
-        return String.newTaskDeleteTask
+        return Strings.Task.EditScreen.deleteButton
     }
 }
