@@ -7,8 +7,12 @@
 //
 
 import Foundation
+import RxCocoa
+import RxSwift
 
 class TaskCellViewModel {
+    
+    var taskObservable: BehaviorSubject<Task>?
     
     private var task: Task
     
@@ -20,16 +24,13 @@ class TaskCellViewModel {
         return task.title!
     }
     
-    var status: String {
-        if task.isCompleted { return String.taskCellComplete }
-        else { return String.taskCellIncomplete }
-    }
-    
     func shouldChangeTask(title: String) {
         task.title = title
+        taskObservable?.onNext(task)
     }
     
     func changedCheckButton(to bool: Bool) {
         task.isCompleted = bool
+        taskObservable?.onNext(task)
     }
 }

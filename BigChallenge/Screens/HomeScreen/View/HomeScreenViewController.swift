@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 protocol HomeScreenViewModelDelegate: class {
     func willAddTask()
@@ -22,14 +24,18 @@ class HomeScreenViewController: UIViewController {
     
     fileprivate var taskListViewController: TaskListViewController!
     fileprivate var tagCollectionViewController: TagCollectionViewController!
+    private let disposeBag = DisposeBag()
     
     var viewModel: HomeScreenViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        viewModel.tagModel.didAddTags = { _ in
-//            self.taskListViewController.filterTasks(with: nil)
-//        }
+        
+        tagCollectionViewController.viewModel.selectedTagsObservable.subscribe { event in
+            self.taskListViewController.viewModel.filterTasks(with: event.element!)
+            print("selected tags are: \( event.element!.map {$0.title} )")
+        }.disposed(by: disposeBag)
+        print(taskListViewController.viewModel.tasks)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

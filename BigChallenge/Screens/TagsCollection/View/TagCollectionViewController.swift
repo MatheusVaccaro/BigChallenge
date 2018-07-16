@@ -46,11 +46,6 @@ class TagCollectionViewController: UIViewController {
             self.viewModel.selectedTagEvent.on(event)
         }.disposed(by: disposeBag)
         
-        // get list of selected elements from viewModel
-        viewModel.selectedTagsObservable.subscribe { event in
-            print("selected tags are: \( event.element!.map {$0.title} )")
-        }
-        
         //TODO
         tagsCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
     }

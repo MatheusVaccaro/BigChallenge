@@ -12,11 +12,8 @@ import RxSwift
 
 public class TaskListViewController: UIViewController {
     
-    
-    
     // MARK: - Properties
     var viewModel: TaskListViewModel!
-    private var barButtonItem: UIBarButtonItem!
     private let disposeBag = DisposeBag()
     
     // MARK: - IBOutlets
@@ -34,10 +31,6 @@ public class TaskListViewController: UIViewController {
         
         configureWithViewModel()
         bindTableView()
-    }
-    
-    public func filterTasks(with tags: [Tag]? = nil) {
-        viewModel.filterTasks(with: tags)
     }
     
     override public func didReceiveMemoryWarning() {
@@ -58,8 +51,14 @@ public class TaskListViewController: UIViewController {
             .bind(to: tableView.rx.items(cellIdentifier: TaskTableViewCell.identifier,
                                          cellType: TaskTableViewCell.self)) { (_, task, cell) in
                                             
-                print("reloaded cell for task \(task.title ?? "none")")
+                print("reloaded cell for task \(task.title ?? "none"), \((task.tags?.anyObject() as? Tag)?.title ?? "nil")")
+                                            
                 let taskCellViewModel = self.viewModel.taskCellViewModel(for: task)
+                taskCellViewModel.taskObservable?.subscribe {
+                    if let tag = $0.element {
+                        
+                    }
+                }
                 cell.configure(with: taskCellViewModel)
                 cell.delegate = self
             }

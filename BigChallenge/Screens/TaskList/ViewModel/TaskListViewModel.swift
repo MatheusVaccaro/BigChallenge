@@ -21,7 +21,7 @@ public class TaskListViewModel {
     weak var delegate: TaskListViewModelDelegate?
     
     private let model: TaskModel
-    private var tasks: [Task]
+    private(set) var tasks: [Task]
     
     public init(model: TaskModel) {
         self.model = model
@@ -34,28 +34,21 @@ public class TaskListViewModel {
         }
     }
     
-    func filterTasks(with tags: [Tag]? = nil) {
-        //TODO: Do
-        
-        if let tags = tags {
-            tasks =
-                tasks.filter { $0.tags!.contains(where: { (tag) -> Bool in
-                    if let tag = tag as? Tag {
-                        for tagToFilterBy in tags {
-//                            if tag == tagToFilterBy {
-//                                return true
-//                            }
-                            //TODO: Filter
-                            if tag.title == "Reminders" {
-                                return true
-                            }
-                        }
-                    }
-                    return false
-                }) }
-        } else {
-            tasks = model.tasks //TODO: recommended tags
+    func filterTasks(with tags: [Tag]) {
+        //TODO: make this clear to read
+        tasks = model.tasks
+
+        guard !tags.isEmpty else {
+            tasksObservable.onNext(tasks)
+            return
         }
+        
+        tasks = //filter all tags in array (and)
+            tasks.filter {
+                for tag in tags where !$0.tags!.contains(tag) { return false }
+                return true
+        }
+        
         tasksObservable.onNext(tasks)
     }
     
