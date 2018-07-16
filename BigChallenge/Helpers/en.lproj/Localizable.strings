@@ -5,6 +5,7 @@
   Created by Bruno Fulber Wide on 12/06/18.
   Copyright © 2018 Matheus Vaccaro. All rights reserved.
 */
+
 "newTaskTitle" = "New Task";
 "newTaskDone" = "Done";
 "newTaskCancel" = "Cancel";
@@ -14,3 +15,10 @@
 "taskListScreenTitle" = "Tasks";
 "taskCellComplete" = "Complete";
 "taskCellIncomplete" = "Incomplete";
+
+"newTagTitle" = "New Tag";
+"newTagDone" = "Done";
+"newTagCancel" = "Cancel";
+"newTagScreenTitleEditing" = "Edit";
+"newTagScreenTitleCreating" = "New";
+"newTagDeleteTag" = "Delete";
