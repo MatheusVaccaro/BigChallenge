@@ -45,8 +45,8 @@ public class Persistence: PersistenceProtocol {
             if let tags = (objects.filter { $0 is Tag }) as? [Tag] {
                 self.didAddTags?(tags)
             }
-            //TODO change, delete
         }
+        //TODO change, delete
     }
     
     public func create<T: Storable>(_ model: T.Type) -> T {

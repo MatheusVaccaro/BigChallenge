@@ -56,11 +56,11 @@ public class RemindersImporter {
         let tag =
             self.tagModel.createTag(with: reminder.calendar.title)
     
-        task.addToTags(tag)
         task.isCompleted = reminder.isCompleted
         task.completionDate = reminder.completionDate
         task.dueDate = reminder.completionDate
         task.creationDate = reminder.creationDate
+        
         task.addToTags(tag)
 	
         return (task, tag)

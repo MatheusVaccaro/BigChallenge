@@ -34,6 +34,10 @@ public class TagModel {
         }
     }
     
+    public func update() {
+        persistance.save()
+    }
+    
     public func save(object: Tag) {
         guard !tags.contains(object) else { return }
         tags.append(object)
@@ -41,7 +45,7 @@ public class TagModel {
         didUpdateTags?(tags)
     }
     
-    public func remove(object: Tag) {
+    public func delete(object: Tag) {
         guard let tagIndex = tags.firstIndex(of: object) else { print("could not delete \(object) "); return }
         persistance.delete(object)
         tags.remove(at: tagIndex)

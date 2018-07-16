@@ -34,21 +34,19 @@ public class TaskModel {
         }
     }
     
-    public func save(object: Task) {
-        RemindersImporter.instance?.save(task: object)
+    public func update() {
         persistance.save()
     }
     
-    public func delete(object: Task) {
-        // TODO change to removeAll when available
+    public func save(object: Task) {
+        guard !tasks.contains(object) else { return }
         tasks.append(object)
         RemindersImporter.instance?.save(task: object)
         persistance.save()
     }
     
-    public func remove(object: Task) {
-        guard let taskIndex =
-            tasks.firstIndex(of: object) else { print("could not delete \(object) "); return }
+    public func delete(object: Task) {
+        guard let taskIndex = tasks.firstIndex(of: object) else { print("could not delete \(object) "); return }
         persistance.delete(object)
         tasks.remove(at: taskIndex)
     }
@@ -59,7 +57,6 @@ public class TaskModel {
         task.id = UUID()
         task.title = title
         task.creationDate = Date()
-        task.tags = []
         
         return task
     }
