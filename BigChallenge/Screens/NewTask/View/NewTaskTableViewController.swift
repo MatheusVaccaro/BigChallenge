@@ -12,7 +12,7 @@ class NewTaskTableViewController: UITableViewController {
 
     // MARK: - Properties
     
-    var viewModel: NewTaskViewModel?
+    var viewModel: NewTaskViewModelProtocol?
     
     // MARK: - IBOutlets
     
@@ -57,10 +57,10 @@ class NewTaskTableViewController: UITableViewController {
     private func configureWithViewModel() {
         guard let viewModel = viewModel else { return }
         
-        titleTextField.text = viewModel.task?.title
-        titleTextField.placeholder = viewModel.titleTextFieldPlaceHolder
-        deleteTaskButton.text = viewModel.deleteButtonTitle
-        navigationItem.title = viewModel.navigationItemTitle
+        titleTextField.text = viewModel.taskTitle()
+        titleTextField.placeholder = viewModel.titleTextFieldPlaceholder()
+        deleteTaskButton.text = viewModel.deleteButtonTitle()
+        navigationItem.title = viewModel.navigationItemTitle()
     }
     
     private func setupGestureRecognizers() {
@@ -78,7 +78,7 @@ class NewTaskTableViewController: UITableViewController {
     // MARK: - TableView DataSource
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel?.numberOfSections ?? 0
+        return viewModel?.numberOfSections() ?? 0
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
