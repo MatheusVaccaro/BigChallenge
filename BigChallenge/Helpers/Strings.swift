@@ -6,6 +6,9 @@
 //  Copyright © 2018 Matheus Vaccaro. All rights reserved.
 //
 
+//swiftlint:disable nesting
+//swiftlint:disable type_name
+
 import Foundation
 
 struct Strings {
@@ -42,5 +45,26 @@ struct Strings {
                 NSLocalizedString("taskCellIncomplete", comment: "incomplete cell status")
         }
         
+    }
+    
+    struct Tag {
+        
+        struct CreationScreen {
+            static let title =
+                NSLocalizedString("newTagScreenTitleCreating", comment: "screen title when creating tag")
+            static let doneButton =
+                NSLocalizedString("newTagDone", comment: "the done button to create the tag")
+            static let cancelButton =
+                NSLocalizedString("newTagCancel", comment: "cancel button to cancel editing tag")
+            static let tagTitlePlaceholder =
+                NSLocalizedString("newTagTitle", comment: "placeholder title for a new tag")
+        }
+        
+        struct EditScreen {
+            static let title =
+                NSLocalizedString("newTagScreenTitleEditing", comment: "screen title when editing tag")
+            static let deleteButton =
+                NSLocalizedString("newTagDeleteTag", comment: "button used to delete tag")
+        }
     }
 }
