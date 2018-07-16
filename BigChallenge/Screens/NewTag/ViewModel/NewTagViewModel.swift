@@ -20,7 +20,7 @@ class NewTagViewModel {
     
     private let model: TagModel
     private var isEditing: Bool
-    var tag: Tag?
+    private var tag: Tag?
     var tagTitleTextField: String?
     
     weak var delegate: NewTagViewModelDelegate?
@@ -31,7 +31,7 @@ class NewTagViewModel {
         self.tag = tag
     }
     
-    var numberOfSections: Int {
+    func numberOfSections() -> Int {
         if isEditing {
             return 2
         } else {
@@ -39,7 +39,7 @@ class NewTagViewModel {
         }
     }
     
-    var numberOfRowsInSection: Int {
+    func numberOfRowsInSection() -> Int {
         return 1
     }
     
@@ -73,22 +73,54 @@ class NewTagViewModel {
         model.save(object: tag)
     }
     
+    func tagTitle() -> String? {
+        return tag?.title
+    }
+    
     // MARK: - Strings
-//    let titleTextFieldPlaceHolder = String.newTagCellPlaceholder
-//    let doneItemTitle = String.newTagDone
-//    let cancelItemTitle = String.newTagCancel
-//    
-//    var navigationItemTitle: String {
-//        var ans: String = ""
-//        if isEditing {
-//            ans = String.newTagScreenTitleEditing
-//        } else {
-//            ans = String.newTagScreenTitleCreating
-//        }
-//        return ans
-//    }
-//    
-//    var deleteButtonTitle: String {
-//        return String.newTagDeleteTag
-//    }
+    func titleTextFieldPlaceholder() -> String {
+        return Strings.Tag.CreationScreen.tagTitlePlaceholder
+    }
+    
+    func doneItemTitle() -> String {
+        return Strings.Tag.CreationScreen.doneButton
+    }
+    
+    func cancelItemTitle() -> String {
+        return Strings.Tag.CreationScreen.cancelButton
+    }
+    
+    func navigationItemTitle() -> String {
+        var ans: String = ""
+        if isEditing {
+            ans = Strings.Tag.EditScreen.title
+        } else {
+            ans = Strings.Tag.CreationScreen.title
+        }
+        return ans
+    }
+    
+    func deleteButtonTitle() -> String {
+        return Strings.Tag.EditScreen.deleteButton
+    }
+}
+
+// TODO: Use correct protocol
+extension NewTagViewModel: NewTaskViewModelProtocol {
+    var taskTitleTextField: String? {
+        get {
+            return tagTitleTextField
+        }
+        set {
+            tagTitleTextField = taskTitleTextField
+        }
+    }
+    
+    func didTapDeleteTaskButton() {
+        didTapDeleteTagButton()
+    }
+    
+    func taskTitle() -> String? {
+        return tagTitle()
+    }
 }
