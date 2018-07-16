@@ -58,6 +58,7 @@
 		C2A1115320BA036800ABB161 /* NewTaskCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1115220BA036800ABB161 /* NewTaskCoordinator.swift */; };
 		C2A1115720BB923C00ABB161 /* NewTaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1115620BB923C00ABB161 /* NewTaskTableViewController.swift */; };
 		C2C231C120FD1AB2002A2371 /* NewTagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C231C020FD1AB2002A2371 /* NewTagViewModel.swift */; };
+		C2C231C520FD41AE002A2371 /* NewTagCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C231C420FD41AE002A2371 /* NewTagCoordinator.swift */; };
 		EE3649E90DE055B9D5168F01 /* Pods_BigChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8708FC5A67C933F755CB93 /* Pods_BigChallenge.framework */; };
 /* End PBXBuildFile section */
 
@@ -142,6 +143,7 @@
 		C2A1115220BA036800ABB161 /* NewTaskCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskCoordinator.swift; sourceTree = "<group>"; };
 		C2A1115620BB923C00ABB161 /* NewTaskTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskTableViewController.swift; sourceTree = "<group>"; };
 		C2C231C020FD1AB2002A2371 /* NewTagViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTagViewModel.swift; sourceTree = "<group>"; };
+		C2C231C420FD41AE002A2371 /* NewTagCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTagCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -320,6 +322,7 @@
 				C23753AF20B6463700C1CE15 /* ApplicationCoordinator.swift */,
 				C21EACFF20B741BC005F0F85 /* HomeScreenCoordinator.swift */,
 				C2A1115220BA036800ABB161 /* NewTaskCoordinator.swift */,
+				C2C231C420FD41AE002A2371 /* NewTagCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -797,6 +800,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2C231C520FD41AE002A2371 /* NewTagCoordinator.swift in Sources */,
 				222BFF9420ED92C7001B6BBF /* RemindersCommunicator.swift in Sources */,
 				C2A1115720BB923C00ABB161 /* NewTaskTableViewController.swift in Sources */,
 				C2A1114220B8AED400ABB161 /* TaskTableViewCell.swift in Sources */,
