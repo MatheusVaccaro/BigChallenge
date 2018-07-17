@@ -12,7 +12,7 @@ import RxSwift
 
 class TaskCellViewModel {
     
-    var taskStatus: Bool { return task.isCompleted }
+    var taskIsCompleted: Bool { return task.isCompleted }
     
     var taskObservable: PublishSubject<Task>
     
@@ -21,7 +21,6 @@ class TaskCellViewModel {
     init(task: Task) {
         self.task = task
         taskObservable = PublishSubject<Task>()
-        
     }
     
     var title: String {
@@ -35,7 +34,6 @@ class TaskCellViewModel {
     
     func changedCheckButton(to bool: Bool) {
         task.isCompleted = bool
-        print(task.isCompleted)
         taskObservable.onNext(task)
     }
 }

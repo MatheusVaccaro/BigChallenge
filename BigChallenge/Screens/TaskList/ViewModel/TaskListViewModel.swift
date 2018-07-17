@@ -17,31 +17,51 @@ protocol TaskListViewModelDelegate: class {
 public class TaskListViewModel {
     
     var tasksObservable: BehaviorSubject<[Task]>
-    var taskUpdated: PublishSubject<Task>
+    var taskCompleted: PublishSubject<Task>
     weak var delegate: TaskListViewModelDelegate?
     
     private let model: TaskModel
     private(set) var tasks: [Task]
+    private(set) var completedTasks: [Task]
     private var disposeBag = DisposeBag()
     
     public init(model: TaskModel) {
         self.model = model
-        self.tasks = model.tasks
+        self.tasks = []
+        self.completedTasks = []
+        
         self.tasksObservable = BehaviorSubject<[Task]>(value: tasks)
+        self.taskCompleted = PublishSubject<Task>()
         
-        taskUpdated = PublishSubject<Task>()
-        
-        taskUpdated.subscribe { _ in print("saved"); self.model.saveContext() }.disposed(by: disposeBag)
+        taskCompleted.subscribe { event in
+            guard let task = event.element else {return}
+            self.model.saveContext()
+            
+            if let index = self.tasks.firstIndex(of: task) { // !task.iscompleted
+                self.completedTasks.append(self.tasks.remove(at: index))
+            } else if let index = self.completedTasks.firstIndex(of: task) {
+                self.tasks.append(self.completedTasks.remove(at: index))
+            }
+            
+            self.tasksObservable.onNext(self.tasks)
+        }.disposed(by: disposeBag)
         
         model.didUpdateTasks = {
-            self.tasks = $0
+            self.tasks = []
+            self.completedTasks = []
+            
+            for task in $0 {
+                if !task.isCompleted { self.tasks.append(task) }
+                else { self.completedTasks.append(task) }
+            }
+            
             self.tasksObservable.onNext(self.tasks)
         }
     }
     
     func filterTasks(with tags: [Tag]) {
         //TODO: make this clear to read
-        tasks = model.tasks
+        tasks = model.tasks.filter { !$0.isCompleted }
 
         guard !tags.isEmpty else {
             tasksObservable.onNext(tasks)
@@ -50,7 +70,7 @@ public class TaskListViewModel {
         
         tasks = //filter all tags in array (and)
             tasks.filter {
-                for tag in tags where !$0.tags!.contains(tag) { return false }
+                for tag in tags where !$0.tags!.contains(tag) && !$0.isCompleted { return false }
                 return true
         }
         

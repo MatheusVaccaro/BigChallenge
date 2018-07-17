@@ -43,14 +43,12 @@ public class TaskListViewController: UIViewController {
                                          cellType: TaskTableViewCell.self)) { (_, task, cell) in
                                             
                 print("reloaded cell for task \(task.title ?? "none"), \((task.tags?.anyObject() as? Tag)?.title ?? "nil")")
-                                            
                 let taskCellViewModel = self.viewModel.taskCellViewModel(for: task)
                 taskCellViewModel.taskObservable.subscribe {
                     if let task = $0.element {
-                        self.viewModel.taskUpdated.onNext(task)
+                        self.viewModel.taskCompleted.onNext(task)
                     }
                 }.disposed(by: self.disposeBag)
-                                            
                 cell.configure(with: taskCellViewModel)
                 cell.delegate = self
             }

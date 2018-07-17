@@ -41,7 +41,7 @@ class TaskTableViewCell: UITableViewCell {
         
         taskTitleTextView.text = viewModel.title
         taskTitleTextView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
-        checkButton.isSelected = viewModel.taskStatus
+        checkButton.isSelected = viewModel.taskIsCompleted
     }
     
     // MARK: - IBActions
