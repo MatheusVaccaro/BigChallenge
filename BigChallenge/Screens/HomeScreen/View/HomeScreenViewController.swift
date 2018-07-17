@@ -35,7 +35,6 @@ class HomeScreenViewController: UIViewController {
             self.taskListViewController.viewModel.filterTasks(with: event.element!)
             print("selected tags are: \( event.element!.map {$0.title} )")
         }.disposed(by: disposeBag)
-        print(taskListViewController.viewModel.tasks)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

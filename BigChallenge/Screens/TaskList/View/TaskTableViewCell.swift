@@ -33,12 +33,6 @@ class TaskTableViewCell: UITableViewCell {
         taskTitleTextView.delegate = self
         checkButton.isSelected = false
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
     // MARK: - Functions
     
@@ -47,6 +41,7 @@ class TaskTableViewCell: UITableViewCell {
         
         taskTitleTextView.text = viewModel.title
         taskTitleTextView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+        checkButton.isSelected = viewModel.taskIsCompleted
     }
     
     // MARK: - IBActions

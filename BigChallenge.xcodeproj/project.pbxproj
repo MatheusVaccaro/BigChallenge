@@ -39,7 +39,6 @@
 		2299F07920F628A70074A834 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299F07820F628A70074A834 /* LocationManager.swift */; };
 		25A3EF9F7B0FADAB1A8E19B8 /* Pods_BigChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18C9FEFF01841372B83A1C4 /* Pods_BigChallengeUITests.framework */; };
 		294490EE20FD297200333F11 /* TaskViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294490ED20FD297200333F11 /* TaskViewModelTests.swift */; };
-		C21EAD0020B741BC005F0F85 /* TaskListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EACFF20B741BC005F0F85 /* TaskListCoordinator.swift */; };
 		C21EAD0020B741BC005F0F85 /* HomeScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EACFF20B741BC005F0F85 /* HomeScreenCoordinator.swift */; };
 		C21EAD0720B74757005F0F85 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD0620B74757005F0F85 /* TaskListViewController.swift */; };
 		C21EAD0B20B74F01005F0F85 /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD0A20B74F01005F0F85 /* StoryboardInstantiable.swift */; };

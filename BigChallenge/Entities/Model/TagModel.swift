@@ -34,7 +34,7 @@ public class TagModel {
         }
     }
     
-    public func update() {
+    public func saveContext() {
         persistance.save()
     }
     

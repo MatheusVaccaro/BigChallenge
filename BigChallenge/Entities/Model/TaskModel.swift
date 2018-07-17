@@ -34,7 +34,7 @@ public class TaskModel {
         }
     }
     
-    public func update() {
+    public func saveContext() {
         persistance.save()
     }
     
