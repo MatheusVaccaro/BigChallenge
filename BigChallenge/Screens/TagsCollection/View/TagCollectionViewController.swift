@@ -27,6 +27,10 @@ class TagCollectionViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         bindCollectionView()
+        tagsCollectionView.allowsMultipleSelection = true
+        if let layout = tagsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.estimatedItemSize = CGSize(width: 150, height: 40)
+        }
     }
     
     func bindCollectionView() {
@@ -37,7 +41,6 @@ class TagCollectionViewController: UIViewController {
             print("updating collection with tag \(tag.title!)")
             let viewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
             cell.configure(with: viewModel)
-                                                
         }.disposed(by: disposeBag)
         
         // selected x item in collection
@@ -45,16 +48,6 @@ class TagCollectionViewController: UIViewController {
             // send to viewModel
             self.viewModel.selectedTagEvent.on(event)
         }.disposed(by: disposeBag)
-        
-        //TODO
-        tagsCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
-    }
-}
-
-extension TagCollectionViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 150, height: 50)
     }
 }
 

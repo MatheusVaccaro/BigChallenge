@@ -15,14 +15,13 @@ protocol TaskCellDelegate: class {
 class TaskTableViewCell: UITableViewCell {
     
     // MARK: - Properties
-
     static let identifier = "taskCell"
     weak var delegate: TaskCellDelegate?
+    
     private var viewModel: TaskCellViewModel?
     private var previousRect = CGRect.zero
     
     // MARK: - IBOutlets
-    
     @IBOutlet weak var taskTitleTextView: UITextView!
     @IBOutlet weak var checkButton: UIButton!
     
