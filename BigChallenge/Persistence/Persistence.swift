@@ -15,8 +15,16 @@ public class Persistence: PersistenceProtocol {
         case inDevice
     }
    
-    let localPersistence: PersistenceProtocol
-    let remotePersistence: PersistenceProtocol?
+    var didChangeTasks: (([Task]) -> Void)?
+    var didDeleteTasks: (([Task]) -> Void)?
+    var didAddTasks: (([Task]) -> Void)?
+    
+    var didChangeTags: (([Tag]) -> Void)?
+    var didDeleteTags: (([Tag]) -> Void)?
+    var didAddTags: (([Tag]) -> Void)?
+    
+    private let localPersistence: LocalPersistence
+    private let remotePersistence: PersistenceProtocol?
     
     init(configuration: Configuration = .inDevice) {
         switch configuration {
@@ -27,19 +35,18 @@ public class Persistence: PersistenceProtocol {
             localPersistence = MockPersistence()
             remotePersistence = nil
         }
-        //TODO: Find better alternative to setup mock or normal persistence. DEBUG in test target only maybe?
-//        #if DEBUG
-//        localPersistence = MockPersistence()
-//        remotePersistence = nil
-//        print("--- LAUNCHING IN DEBUG MODE ---")
-//        print("--- USING MOCK PERSISTENCE ----")
-//        #else
-//        localPersistence = LocalPersistence()
-//        remotePersistence = nil
-//        print("------------ WARNING ------------")
-//        print("--- LAUNCHING IN RELEASE MODE ---")
-//        print("----- USING PROD PERSISTENCE ----")
-//        #endif
+        
+        //Change handler
+        localPersistence.didAddObjects = { objects in
+            if let tasks = (objects.filter { $0 is Task }) as? [Task] {
+                self.didAddTasks?(tasks)
+            }
+            
+            if let tags = (objects.filter { $0 is Tag }) as? [Tag] {
+                self.didAddTags?(tags)
+            }
+        }
+        //TODO change, delete
     }
     
     public func create<T: Storable>(_ model: T.Type) -> T {

@@ -10,27 +10,17 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class TaskListViewController: UIViewController {
+public class TaskListViewController: UIViewController {
     
     // MARK: - Properties
-    
-    var viewModel: TaskListViewModel?
-    private var barButtonItem: UIBarButtonItem?
+    var viewModel: TaskListViewModel!
     private let disposeBag = DisposeBag()
     
-    lazy var editBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleEditionMode))
-    }()
-    lazy var doneBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(toggleEditionMode))
-    }()
-    
     // MARK: - IBOutlets
-    
     @IBOutlet weak var tableView: UITableView!
     
-    // MARK: - ViewController Lifecycle 
-    override func viewDidLoad() {
+    // MARK: - ViewController Lifecycle
+    override public func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = nil
         tableView.delegate = nil
@@ -43,95 +33,50 @@ class TaskListViewController: UIViewController {
         bindTableView()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    override public func didReceiveMemoryWarning() {
         // Dispose of any resources that can be recreated.
+        super.didReceiveMemoryWarning()
     }
     
     // MARK: - IBActions
-    
-    @IBAction func didTapAddBarButtonItem(_ sender: Any) {
-        viewModel?.didTapAddButton()
-    }
-    
     // MARK: - Functions
-    
     // The default editButtonItem was not toggling the tableview's edition mode, so we coded it from scratch
     private func configureWithViewModel() {
-        let editBarButtonItem =
-            UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleEditionMode))
-        self.barButtonItem = editBarButtonItem
-        navigationItem.leftBarButtonItem = editBarButtonItem
         
-        if let viewModel = viewModel {
-            navigationItem.title = viewModel.viewTitle
-        }
     }
     
     private func bindTableView() {
-        guard let viewModel = viewModel else { return }
+//        guard let viewModel = viewModel else { return } //remove
         viewModel.tasksObservable
-            .drive(tableView.rx.items(cellIdentifier: TaskTableViewCell.identifier,
-                                           cellType: TaskTableViewCell.self)) { (_, task, cell) in
+            .bind(to: tableView.rx.items(cellIdentifier: TaskTableViewCell.identifier,
+                                         cellType: TaskTableViewCell.self)) { (_, task, cell) in
                                             
-                let taskCellViewModel = viewModel.createCellViewModel(for: task)
+                print("reloaded cell for task \(task.title ?? "none"), \((task.tags?.anyObject() as? Tag)?.title ?? "nil")")
+                                            
+                let taskCellViewModel = self.viewModel.taskCellViewModel(for: task)
+                taskCellViewModel.taskObservable?.subscribe {
+                    if let tag = $0.element {
+                        
+                    }
+                }
                 cell.configure(with: taskCellViewModel)
                 cell.delegate = self
             }
             .disposed(by: disposeBag)
     }
-    
-    @objc private func toggleEditionMode() {
-        let barButtonItem: UIBarButtonItem
-        if tableView.isEditing {
-            tableView.setEditing(false, animated: true)
-            barButtonItem = editBarButtonItem
-        } else {
-            tableView.setEditing(true, animated: true)
-            barButtonItem = doneBarButtonItem
-        }
-        navigationItem.leftBarButtonItem = barButtonItem
-    }
-    
 }
 
 // MARK: - StoryboardInstantiable
-
 extension TaskListViewController: StoryboardInstantiable {
     
-    static var storyboardIdentifier: String {
+    static var viewControllerID: String {
         return "TaskListViewController"
     }
     
-    static var storyboardName: String {
+    static var storyboardIdentifier: String {
         return "TaskList"
     }
-    
 }
-
-// MARK: - UITableViewDelegate
-
-//extension TaskListViewController: UITableViewDelegate {
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//
-//        if tableView.isEditing {
-//            viewModel?.didSelectTask(at: indexPath)
-//        }
-//    }
-//
-//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
-//
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            viewModel?.removeTask(at: indexPath)
-//            tableView.deleteRows(at: [indexPath], with: .automatic)
-//        }
-//    }
-//}
 
 extension TaskListViewController: TaskCellDelegate {
     func shouldUpdateSize(of cell: TaskTableViewCell) {

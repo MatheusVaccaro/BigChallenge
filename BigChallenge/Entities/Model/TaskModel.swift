@@ -12,45 +12,43 @@ import RxSwift
 
 public class TaskModel {
     
-    lazy var objectsObservable: Driver<[Task]> = {
-        return objects
-            .asObservable()
-            .asDriver(onErrorJustReturn: [])
-    }() // TODO should this be lazy?
+    var didUpdateTasks: (([Task]) -> Void)?
     
-    var count: Int {
-        return objects.value.count
-    }
-    
-    private var objects: Variable<[Task]>
+    private(set) public var tasks: [Task]
     private let persistance: Persistence
     
     init(persistence: Persistence) {
         self.persistance = persistence
-        self.objects = Variable([])
-        persistance.fetch(Task.self, predicate: nil) {
-            self.objects = Variable( $0 )
+        self.tasks = []
+        
+        persistence.fetch(Task.self) {
+            tasks = $0
+        }
+        
+        persistence.didAddTasks = {
+            for task in $0 { //filter tasks added by this device
+                guard !self.tasks.contains(task) else { continue }
+                self.tasks.append(task)
+            }
+            self.didUpdateTasks?(self.tasks)
         }
     }
     
-    func fetchAll() -> [Task] {
-        return objects.value
-    }
-    
-    func task(at index: Int) -> Task {
-        return objects.value[index]
+    public func update() {
+        persistance.save()
     }
     
     public func save(object: Task) {
-        objects.value.append(object)
-//        RemindersImporter.instance?.save(task: object)
+        guard !tasks.contains(object) else { return }
+        tasks.append(object)
+        RemindersImporter.instance?.save(task: object)
         persistance.save()
     }
     
     public func delete(object: Task) {
-        // TODO change to removeAll when available
-        objects.value = objects.value.filter({$0.uuid != object.uuid})
+        guard let taskIndex = tasks.firstIndex(of: object) else { print("could not delete \(object) "); return }
         persistance.delete(object)
+        tasks.remove(at: taskIndex)
     }
     
     public func createTask(with title: String) -> Task {

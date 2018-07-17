@@ -1,5 +1,5 @@
 //
-//  TaskModel.swift
+//  TagModel.swift
 //  BigChallenge
 //
 //  Created by Gabriel Paul on 19/06/18.
@@ -12,47 +12,54 @@ import RxSwift
 
 public class TagModel {
     
-    var objectsObservable: Observable<[Tag]> {
-        return self.objects.asObservable()
-    }
+    var didUpdateTags: (([Tag]) -> Void)?
     
-    var count: Int {
-        return objects.value.count
-    }
-    
-    private var objects: Variable<[Tag]>
+    private(set) public var tags: [Tag]
     private let persistance: Persistence
     
     init(persistence: Persistence) {
         self.persistance = persistence
-        self.objects = Variable([])
-        persistance.fetch(Tag.self, predicate: nil) {
-            self.objects = Variable( $0 )
+        self.tags = []
+        
+        persistence.fetch(Tag.self) {
+            tags = $0
+        }
+        
+        persistence.didAddTags = {
+            for tag in $0 { //filter tags added by this device
+                guard !self.tags.contains(tag) else { continue }
+                self.tags.append(tag)
+            }
+            self.didUpdateTags?(self.tags)
         }
     }
     
-    func task(at index: Int) -> Tag {
-        return objects.value[index]
-    }
-    
-    public func save(object: Tag) {
-        objects.value.append(object)
+    public func update() {
         persistance.save()
     }
     
-    public func remove(object: Tag) {
-        // TODO change to removeAll when available
-        objects.value = objects.value.filter({$0.uuid != object.uuid})
+    public func save(object: Tag) {
+        guard !tags.contains(object) else { return }
+        tags.append(object)
+        persistance.save()
+        didUpdateTags?(tags)
+    }
+    
+    public func delete(object: Tag) {
+        guard let tagIndex = tags.firstIndex(of: object) else { print("could not delete \(object) "); return }
         persistance.delete(object)
+        tags.remove(at: tagIndex)
     }
     
     public func createTag(with title: String = "") -> Tag {
-        let tag: Tag = persistance.create(Tag.self)
-        
-        tag.id = UUID()
-        tag.title = title
-        
-        return tag
+        if let tag = (tags.first { $0.title == title }) { return tag }
+        else { // dont create repeated tags
+            let tag: Tag = persistance.create(Tag.self)
+            
+            tag.id = UUID()
+            tag.title = title
+            
+            return tag
+        }
     }
-    
 }

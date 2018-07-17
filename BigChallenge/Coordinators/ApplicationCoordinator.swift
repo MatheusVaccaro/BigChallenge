@@ -23,7 +23,8 @@ class ApplicationCoordinator: Coordinator {
         self.rootViewController = UINavigationController()
         self.rootViewController.navigationBar.prefersLargeTitles = true
         self.childrenCoordinators = []
-        self.persistence = Persistence()
+        
+        self.persistence = Persistence(configuration: .inDevice)
         self.taskModel = TaskModel(persistence: persistence)
         self.tagModel = TagModel(persistence: persistence)
     }
@@ -36,10 +37,11 @@ class ApplicationCoordinator: Coordinator {
     }
     
     private func showTaskList() {
-        let taskListCoordinator = TaskListCoordinator(presenter: rootViewController,
-                                                      model: taskModel,
-                                                      persistence: persistence)
-        addChild(coordinator: taskListCoordinator)
-        taskListCoordinator.start()
+        let homeScreenCoordinator = HomeScreenCoordinator(presenter: rootViewController,
+                                                        taskModel: taskModel,
+                                                        tagModel: tagModel,
+                                                        persistence: persistence)
+        addChild(coordinator: homeScreenCoordinator)
+        homeScreenCoordinator.start()
     }
 }

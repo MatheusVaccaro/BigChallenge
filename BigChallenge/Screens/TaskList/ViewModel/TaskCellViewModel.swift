@@ -7,31 +7,30 @@
 //
 
 import Foundation
+import RxCocoa
+import RxSwift
 
 class TaskCellViewModel {
     
-    private var task: Task
-    private let model: TaskModel
+    var taskObservable: BehaviorSubject<Task>?
     
-    init(task: Task, model: TaskModel) {
+    private var task: Task
+    
+    init(task: Task) {
         self.task = task
-        self.model = model
     }
     
     var title: String {
         return task.title!
     }
     
-    var status: String {
-        if task.isCompleted { return String.taskCellComplete }
-        else { return String.taskCellIncomplete }
-    }
-    
     func shouldChangeTask(title: String) {
         task.title = title
+        taskObservable?.onNext(task)
     }
     
     func changedCheckButton(to bool: Bool) {
         task.isCompleted = bool
+        taskObservable?.onNext(task)
     }
 }

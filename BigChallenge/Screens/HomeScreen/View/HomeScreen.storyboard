@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hA5-o5-LMg">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Home Screen View Controller-->
+        <scene sceneID="g2U-RE-MH1">
+            <objects>
+                <viewController storyboardIdentifier="HomeScreenViewController" id="hA5-o5-LMg" customClass="HomeScreenViewController" customModule="BigChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="C6D-bh-Zj8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cie-Gz-Vzx">
+                                <rect key="frame" x="15" y="135" width="345" height="457"/>
+                                <connections>
+                                    <segue destination="Cdx-VN-yjd" kind="embed" identifier="taskListSegue" id="LiI-kx-V3H"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUe-Ak-aYb">
+                                <rect key="frame" x="0.0" y="90" width="375" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="gJB-vw-5rX"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="fc3-rz-cDg" kind="embed" identifier="tagCollectionSegue" id="h6S-Ve-BxX"/>
+                                </connections>
+                            </containerView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Hello, Dory" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="41" translatesAutoresizingMaskIntoConstraints="NO" id="Vex-PR-Mon">
+                                <rect key="frame" x="15" y="35" width="145" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="gg3-wP-eYA"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0xD-KL-Oyh">
+                                <rect key="frame" x="15" y="592" width="345" height="60"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="s1Z-mq-9VF"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="n8G-hH-sdN"/>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Fh-Ag-lyc">
+                                <rect key="frame" x="154.5" y="607" width="66" height="30"/>
+                                <state key="normal" title="New Task"/>
+                                <connections>
+                                    <action selector="didTapAddButton:" destination="hA5-o5-LMg" eventType="touchUpInside" id="scE-ZA-w0l"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1Fh-Ag-lyc" firstAttribute="centerX" secondItem="0xD-KL-Oyh" secondAttribute="centerX" id="2go-Tw-oNl"/>
+                            <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="0xD-KL-Oyh" secondAttribute="trailing" constant="15" id="A2C-oX-oOS"/>
+                            <constraint firstItem="cie-Gz-Vzx" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="15" id="BXC-pC-xol"/>
+                            <constraint firstItem="Vex-PR-Mon" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="15" id="Beu-zI-GrG"/>
+                            <constraint firstItem="0xD-KL-Oyh" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="15" id="Gva-yA-yFL"/>
+                            <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="Vex-PR-Mon" secondAttribute="trailing" constant="223" id="IYC-Jk-My7"/>
+                            <constraint firstItem="cie-Gz-Vzx" firstAttribute="top" secondItem="fUe-Ak-aYb" secondAttribute="bottom" id="Qao-O4-dlm"/>
+                            <constraint firstItem="fUe-Ak-aYb" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" id="SKh-ZC-I5v"/>
+                            <constraint firstItem="Vex-PR-Mon" firstAttribute="top" secondItem="QKa-yH-x6F" secondAttribute="top" constant="15" id="ZR4-pm-ZQ2"/>
+                            <constraint firstItem="0xD-KL-Oyh" firstAttribute="top" secondItem="cie-Gz-Vzx" secondAttribute="bottom" id="ikh-0X-ElE"/>
+                            <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="fUe-Ak-aYb" secondAttribute="trailing" id="l9d-qe-b2V"/>
+                            <constraint firstItem="1Fh-Ag-lyc" firstAttribute="centerY" secondItem="0xD-KL-Oyh" secondAttribute="centerY" id="nOz-3j-icT"/>
+                            <constraint firstItem="QKa-yH-x6F" firstAttribute="bottom" secondItem="0xD-KL-Oyh" secondAttribute="bottom" constant="15" id="t4J-sz-R75"/>
+                            <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="cie-Gz-Vzx" secondAttribute="trailing" constant="15" id="yev-Sb-Zry"/>
+                            <constraint firstItem="fUe-Ak-aYb" firstAttribute="top" secondItem="Vex-PR-Mon" secondAttribute="bottom" constant="15" id="zw6-eb-xjl"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QKa-yH-x6F"/>
+                    </view>
+                    <connections>
+                        <outlet property="tagContainerView" destination="fUe-Ak-aYb" id="qwP-ET-avs"/>
+                        <outlet property="taskListContainerView" destination="cie-Gz-Vzx" id="ktk-MH-6by"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OAl-vn-cbj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-69.599999999999994" y="-428.63568215892059"/>
+        </scene>
+        <!--TagCollection-->
+        <scene sceneID="Ew0-ZG-eSC">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="TagCollection" storyboardName="TagCollection" id="fc3-rz-cDg" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jJ4-bM-swg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="782" y="-473"/>
+        </scene>
+        <!--TaskList-->
+        <scene sceneID="suJ-aB-Okg">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="TaskList" storyboardName="TaskList" id="Cdx-VN-yjd" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4lU-jr-OBY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="756" y="-429"/>
+        </scene>
+    </scenes>
+</document>

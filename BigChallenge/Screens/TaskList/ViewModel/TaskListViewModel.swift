@@ -11,68 +11,53 @@ import RxCocoa
 import RxSwift
 
 protocol TaskListViewModelDelegate: class {
-    
-    // TODO follow proper delegate pattern
-    func didTapAddButton()
     func didSelectTask(_ task: Task)
-    
 }
 
-class TaskListViewModel {
+public class TaskListViewModel {
     
-    private let model: TaskModel
-    
-    var tasksObservable: Driver<[Task]> {
-        return model.objectsObservable
-    }
+    public var tasksObservable: BehaviorSubject<[Task]>
     
     weak var delegate: TaskListViewModelDelegate?
     
-    init(model: TaskModel) {
+    private let model: TaskModel
+    private(set) var tasks: [Task]
+    
+    public init(model: TaskModel) {
         self.model = model
-    }
-    
-    // TODO: delete this after rx
-    var numberOfSections: Int {
-        return 1
-    }
-    
-    var numberOfRowsInSection: Int {
-        return model.count
-    }
-    
-    func taskForRowAt(indexPath: IndexPath) -> Task? {
-        let row = indexPath.row
-        if row <= model.count {
-            return model.task(at: row)
-        } else {
-            return nil
+        self.tasks = model.tasks
+        self.tasksObservable = BehaviorSubject<[Task]>(value: tasks)
+        
+        model.didUpdateTasks = {
+            self.tasks = $0
+            self.tasksObservable.onNext(self.tasks)
         }
     }
     
-    func createCellViewModel(for task: Task) -> TaskCellViewModel {
-        return TaskCellViewModel(task: task, model: model)
-    }
-    
-    func didTapAddButton() {
-        // TODO remove
-//        let local = LocalPersistence()
-//        local.clearDatabase()
-        delegate?.didTapAddButton()
-    }
-    
-    func removeTask(at indexPath: IndexPath) {
-        if let task = taskForRowAt(indexPath: indexPath) {
-            model.delete(object: task)
+    func filterTasks(with tags: [Tag]) {
+        //TODO: make this clear to read
+        tasks = model.tasks
+
+        guard !tags.isEmpty else {
+            tasksObservable.onNext(tasks)
+            return
         }
+        
+        tasks = //filter all tags in array (and)
+            tasks.filter {
+                for tag in tags where !$0.tags!.contains(tag) { return false }
+                return true
+        }
+        
+        tasksObservable.onNext(tasks)
+    }
+    
+    func taskCellViewModel(for task: Task) -> TaskCellViewModel {
+        return TaskCellViewModel(task: task)
     }
     
     func didSelectTask(at indexPath: IndexPath) {
-        let task = model.task(at: indexPath.row)
+        let task = tasks[indexPath.row]
         delegate?.didSelectTask(task)
     }
-    
-    // MARK: - Strings
-    let viewTitle = String.taskListScreenTitle
-    
 }

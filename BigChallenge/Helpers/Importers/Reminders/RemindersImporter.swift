@@ -56,24 +56,14 @@ public class RemindersImporter {
         let tag =
             self.tagModel.createTag(with: reminder.calendar.title)
     
-        task.addToTags(tag)
         task.isCompleted = reminder.isCompleted
         task.completionDate = reminder.completionDate
         task.dueDate = reminder.completionDate
         task.creationDate = reminder.creationDate
+        
+        task.addToTags(tag)
 	
         return (task, tag)
-    }
-    
-    public func exportToReminders() {
-        do {
-            for task in taskModel.fetchAll() {
-                remindersDB.save(task: task, commit: false)
-                try remindersDB.store.commit()
-            }
-        } catch let error as NSError {
-            print(error)
-        }
     }
     
     public func save(task: Task) {
