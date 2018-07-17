@@ -30,7 +30,7 @@ class TagCollectionViewCell: UICollectionViewCell {
         self.viewModel = viewModel
         
         contentView.layer.backgroundColor = UIColor.white.cgColor
-        contentView.layer.borderColor = UIColor.white.cgColor
+        contentView.layer.borderColor = UIColor.clear.cgColor
 
         contentView.layer.cornerRadius = 2.0
         contentView.layer.borderWidth = 1.0
@@ -53,8 +53,6 @@ class TagCollectionViewCell: UICollectionViewCell {
             newFrame.size.width =  tagUILabel.frame.size.width + 10
             layoutAttributes.frame = newFrame
             isWidthCalculated = true
-            
-            layer.shadowPath = UIBezierPath(roundedRect: newFrame, cornerRadius: contentView.layer.cornerRadius).cgPath
         }
         return layoutAttributes
     }
