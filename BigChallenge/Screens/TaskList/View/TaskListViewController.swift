@@ -33,20 +33,11 @@ public class TaskListViewController: UIViewController {
         bindTableView()
     }
     
-    override public func didReceiveMemoryWarning() {
-        // Dispose of any resources that can be recreated.
-        super.didReceiveMemoryWarning()
-    }
-    
-    // MARK: - IBActions
-    // MARK: - Functions
-    // The default editButtonItem was not toggling the tableview's edition mode, so we coded it from scratch
     private func configureWithViewModel() {
         
     }
     
     private func bindTableView() {
-//        guard let viewModel = viewModel else { return } //remove
         viewModel.tasksObservable
             .bind(to: tableView.rx.items(cellIdentifier: TaskTableViewCell.identifier,
                                          cellType: TaskTableViewCell.self)) { (_, task, cell) in
@@ -54,15 +45,24 @@ public class TaskListViewController: UIViewController {
                 print("reloaded cell for task \(task.title ?? "none"), \((task.tags?.anyObject() as? Tag)?.title ?? "nil")")
                                             
                 let taskCellViewModel = self.viewModel.taskCellViewModel(for: task)
-                taskCellViewModel.taskObservable?.subscribe {
-                    if let tag = $0.element {
-                        
+                taskCellViewModel.taskObservable.subscribe {
+                    if let task = $0.element {
+                        self.viewModel.taskUpdated.onNext(task)
                     }
-                }
+                }.disposed(by: self.disposeBag)
+                                            
                 cell.configure(with: taskCellViewModel)
                 cell.delegate = self
             }
             .disposed(by: disposeBag)
+    }
+}
+extension TaskListViewController: TaskCellDelegate {
+    func shouldUpdateSize(of cell: TaskTableViewCell) {
+        UIView.performWithoutAnimation {
+            tableView.beginUpdates()
+            tableView.endUpdates()
+        }
     }
 }
 
@@ -78,11 +78,3 @@ extension TaskListViewController: StoryboardInstantiable {
     }
 }
 
-extension TaskListViewController: TaskCellDelegate {
-    func shouldUpdateSize(of cell: TaskTableViewCell) {
-        UIView.performWithoutAnimation {
-            tableView.beginUpdates()
-            tableView.endUpdates()
-        }
-    }
-}

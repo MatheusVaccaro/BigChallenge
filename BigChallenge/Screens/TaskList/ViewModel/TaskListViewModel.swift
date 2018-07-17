@@ -16,17 +16,22 @@ protocol TaskListViewModelDelegate: class {
 
 public class TaskListViewModel {
     
-    public var tasksObservable: BehaviorSubject<[Task]>
-    
+    var tasksObservable: BehaviorSubject<[Task]>
+    var taskUpdated: PublishSubject<Task>
     weak var delegate: TaskListViewModelDelegate?
     
     private let model: TaskModel
     private(set) var tasks: [Task]
+    private var disposeBag = DisposeBag()
     
     public init(model: TaskModel) {
         self.model = model
         self.tasks = model.tasks
         self.tasksObservable = BehaviorSubject<[Task]>(value: tasks)
+        
+        taskUpdated = PublishSubject<Task>()
+        
+        taskUpdated.subscribe { _ in print("saved"); self.model.saveContext() }.disposed(by: disposeBag)
         
         model.didUpdateTasks = {
             self.tasks = $0
