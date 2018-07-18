@@ -65,7 +65,7 @@ public class TaskListViewModel {
                 else { self.completedTasks.append(task) }
             }
             
-//            self.tasksObservable.onNext(self.tasksToShow)
+            self.tasksObservable.onNext(self.tasksToShow)
         }
     }
     
@@ -78,13 +78,9 @@ public class TaskListViewModel {
             else { self.completedTasks.append(task) }
         }
         
-
-        guard !tags.isEmpty else {
-            tasksObservable.onNext(tasksToShow)
-            return
-        }
+        guard !tags.isEmpty
+            else { tasksObservable.onNext(tasksToShow); return }
         
-        //this could be better
         tasks =
             tasks.filter {
                 for tag in tags where !$0.tags!.contains(tag) { return false }
