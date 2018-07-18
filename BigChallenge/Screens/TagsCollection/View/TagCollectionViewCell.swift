@@ -7,13 +7,16 @@
 //
 
 import UIKit
-import QuartzCore
+import RxCocoa
+import RxSwift
 
 class TagCollectionViewCell: UICollectionViewCell {
 
     static let identifier = "tagCollectionCell"
     
     @IBOutlet weak var tagUILabel: UILabel!
+    
+    var touchedTagEvent: PublishSubject<UITouch>?
     
     override var isSelected: Bool {
         didSet {
@@ -27,6 +30,8 @@ class TagCollectionViewCell: UICollectionViewCell {
     private var isWidthCalculated = false
     
     func configure(with viewModel: TagCollectionViewCellViewModel) {
+        touchedTagEvent = PublishSubject()
+        
         self.viewModel = viewModel
         
         contentView.layer.backgroundColor = UIColor.white.cgColor
@@ -55,5 +60,10 @@ class TagCollectionViewCell: UICollectionViewCell {
             isWidthCalculated = true
         }
         return layoutAttributes
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {return}
+        touchedTagEvent?.onNext(touch)
     }
 }

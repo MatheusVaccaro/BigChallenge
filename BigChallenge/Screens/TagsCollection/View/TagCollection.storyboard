@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PqW-NF-QJK">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="15" id="PqW-NF-QJK">
                                     <size key="itemSize" width="50" height="40"/>
                                     <size key="headerReferenceSize" width="5" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -79,6 +79,85 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yaI-Pz-WTK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="32.833583208395808"/>
+        </scene>
+        <!--Big Tag Collection View Controller-->
+        <scene sceneID="16V-j8-R6O">
+            <objects>
+                <viewController storyboardIdentifier="BigTagCollectionViewController" id="gFP-66-Q6y" customClass="BigTagCollectionViewController" customModule="BigChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oq0-Ki-BFH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mc9-9u-tte">
+                                <rect key="frame" x="163.5" y="63" width="48" height="24"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AmP-lQ-3ng">
+                                <rect key="frame" x="0.0" y="107" width="375" height="560"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bKt-mu-ets">
+                                    <size key="itemSize" width="50" height="40"/>
+                                    <size key="headerReferenceSize" width="20" height="20"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="tagCollectionCell" id="nUu-92-rOx" customClass="TagCollectionViewCell" customModule="BigChallenge" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="0.0" width="50" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="40"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tag" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ODB-Vp-Xrw">
+                                                    <rect key="frame" x="14" y="12" width="22" height="16"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="ODB-Vp-Xrw" firstAttribute="centerX" secondItem="nUu-92-rOx" secondAttribute="centerX" id="Gtt-wz-B0c"/>
+                                            <constraint firstItem="ODB-Vp-Xrw" firstAttribute="centerY" secondItem="nUu-92-rOx" secondAttribute="centerY" id="bAR-Jg-iAf"/>
+                                        </constraints>
+                                        <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
+                                        <size key="customSize" width="50" height="40"/>
+                                        <connections>
+                                            <outlet property="tagUILabel" destination="ODB-Vp-Xrw" id="dps-OY-nNa"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Tfr-jQ-oKo">
+                                    <rect key="frame" x="0.0" y="0.0" width="20" height="560"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </collectionReusableView>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.81981678299492389" green="0.81981678299492389" blue="0.81981678299492389" alpha="0.90410958904109584" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="AmP-lQ-3ng" firstAttribute="trailing" secondItem="HOD-W3-cFI" secondAttribute="trailing" id="Hxd-06-Ia4"/>
+                            <constraint firstItem="AmP-lQ-3ng" firstAttribute="top" secondItem="mc9-9u-tte" secondAttribute="bottom" constant="20" id="WEN-Pl-06B"/>
+                            <constraint firstItem="mc9-9u-tte" firstAttribute="centerX" secondItem="HOD-W3-cFI" secondAttribute="centerX" id="a4J-5r-OvL"/>
+                            <constraint firstItem="AmP-lQ-3ng" firstAttribute="leading" secondItem="HOD-W3-cFI" secondAttribute="leading" id="aII-m6-3s6"/>
+                            <constraint firstItem="mc9-9u-tte" firstAttribute="top" secondItem="HOD-W3-cFI" secondAttribute="top" constant="43" id="mA3-uq-fQu"/>
+                            <constraint firstItem="HOD-W3-cFI" firstAttribute="bottom" secondItem="AmP-lQ-3ng" secondAttribute="bottom" id="tmD-MK-lIJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="HOD-W3-cFI"/>
+                    </view>
+                    <connections>
+                        <outlet property="tagsCollectionView" destination="AmP-lQ-3ng" id="MOs-l1-Xfb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="60H-dB-Jdc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1047" y="55"/>
         </scene>
     </scenes>
 </document>

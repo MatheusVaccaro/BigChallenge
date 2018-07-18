@@ -39,8 +39,13 @@ class TagCollectionViewController: UIViewController {
                                               cellType: TagCollectionViewCell.self)) { (_, tag, cell) in
             
             print("updating collection with tag \(tag.title!)")
-            let viewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
-            cell.configure(with: viewModel)
+            let tagViewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
+            cell.configure(with: tagViewModel)
+                                                
+            cell.touchedTagEvent?.subscribe { event in
+                guard let touch = event.element else {return}
+                if self.shouldPresentBigCollection(on: touch) { self.presentBigCollection() }
+            }
         }.disposed(by: disposeBag)
         
         tagsCollectionView.rx.modelSelected(Tag.self).subscribe { event in // selected x item in collection
@@ -50,6 +55,25 @@ class TagCollectionViewController: UIViewController {
         tagsCollectionView.rx.modelDeselected(Tag.self).subscribe { event in
             self.viewModel.selectedTagEvent.on(event)
         }.disposed(by: disposeBag)
+    }
+    
+    func shouldPresentBigCollection(on touch: UITouch) -> Bool {
+        if self.traitCollection.forceTouchCapability == .available {
+            let force = touch.force/touch.maximumPossibleForce
+            if touch.force >= touch.maximumPossibleForce/2 {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func presentBigCollection() {
+        let vc = BigTagCollectionViewController.instantiate()
+        vc.viewModel = self.viewModel
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.modalTransitionStyle = .crossDissolve
+        
+        present(vc, animated: true)
     }
 }
 
