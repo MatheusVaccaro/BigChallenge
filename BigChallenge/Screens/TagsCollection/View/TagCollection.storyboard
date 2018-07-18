@@ -55,7 +55,7 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="SBD-0Y-gw7">
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="tagsCollectionHeader" id="SBD-0Y-gw7">
                                     <rect key="frame" x="0.0" y="0.0" width="5" height="45"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
