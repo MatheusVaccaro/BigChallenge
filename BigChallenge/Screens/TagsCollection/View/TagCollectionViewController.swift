@@ -60,9 +60,9 @@ class TagCollectionViewController: UIViewController {
     func shouldPresentBigCollection(on touch: UITouch) -> Bool {
         if self.traitCollection.forceTouchCapability == .available {
             let force = touch.force/touch.maximumPossibleForce
-            if force >= 0.5 {
-                return true
-            }
+            if force >= 0.5 { return true }
+        } else if false {
+            //HANDLE LONG PRESS
         }
         return false
     }
