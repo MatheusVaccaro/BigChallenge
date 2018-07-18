@@ -10,20 +10,30 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-protocol TaskListViewModelDelegate: class {
-    func didSelectTask(_ task: Task)
-}
-
 public class TaskListViewModel {
     
     var tasksObservable: BehaviorSubject<[Task]>
     var taskCompleted: PublishSubject<Task>
-    weak var delegate: TaskListViewModelDelegate?
+    var showsCompletedTasks: Bool = false {
+        didSet {
+            print((showsCompletedTasks ? "showing" : "not showing") + " completed tasks")
+            tasksObservable.onNext(tasksToShow)
+        }
+    }
+    
+    var tasksToShow: [Task] {
+        print(tasks.map {$0.title!})
+        print(completedTasks.map {$0.title!})
+        
+        if showsCompletedTasks { return tasks + completedTasks }
+        else { return tasks }
+    }
     
     private let model: TaskModel
     private(set) var tasks: [Task]
     private(set) var completedTasks: [Task]
     private var disposeBag = DisposeBag()
+    
     
     public init(model: TaskModel) {
         self.model = model
@@ -43,7 +53,7 @@ public class TaskListViewModel {
                 self.tasks.append(self.completedTasks.remove(at: index))
             }
             
-            self.tasksObservable.onNext(self.tasks)
+            self.tasksObservable.onNext(self.tasksToShow)
         }.disposed(by: disposeBag)
         
         model.didUpdateTasks = {
@@ -55,34 +65,42 @@ public class TaskListViewModel {
                 else { self.completedTasks.append(task) }
             }
             
-            self.tasksObservable.onNext(self.tasks)
+//            self.tasksObservable.onNext(self.tasksToShow)
         }
     }
     
     func filterTasks(with tags: [Tag]) {
-        //TODO: make this clear to read
-        tasks = model.tasks.filter { !$0.isCompleted }
+        tasks = []
+        completedTasks = []
+        
+        for task in model.tasks {
+            if !task.isCompleted { self.tasks.append(task) }
+            else { self.completedTasks.append(task) }
+        }
+        
 
         guard !tags.isEmpty else {
-            tasksObservable.onNext(tasks)
+            tasksObservable.onNext(tasksToShow)
             return
         }
         
-        tasks = //filter all tags in array (and)
+        //this could be better
+        tasks =
             tasks.filter {
-                for tag in tags where !$0.tags!.contains(tag) && !$0.isCompleted { return false }
+                for tag in tags where !$0.tags!.contains(tag) { return false }
                 return true
         }
         
-        tasksObservable.onNext(tasks)
+        completedTasks =
+            completedTasks.filter {
+                for tag in tags where !$0.tags!.contains(tag) { return false }
+                return true
+        }
+        
+        tasksObservable.onNext(tasksToShow)
     }
     
     func taskCellViewModel(for task: Task) -> TaskCellViewModel {
         return TaskCellViewModel(task: task)
-    }
-    
-    func didSelectTask(at indexPath: IndexPath) {
-        let task = tasks[indexPath.row]
-        delegate?.didSelectTask(task)
     }
 }

@@ -43,9 +43,11 @@ class TagCollectionViewController: UIViewController {
             cell.configure(with: viewModel)
         }.disposed(by: disposeBag)
         
-        // selected x item in collection
-        tagsCollectionView.rx.modelSelected(Tag.self).subscribe { event in
-            // send to viewModel
+        tagsCollectionView.rx.modelSelected(Tag.self).subscribe { event in // selected x item in collection
+            self.viewModel.selectedTagEvent.on(event) // send to viewModel
+        }.disposed(by: disposeBag)
+        
+        tagsCollectionView.rx.modelDeselected(Tag.self).subscribe { event in
             self.viewModel.selectedTagEvent.on(event)
         }.disposed(by: disposeBag)
     }
