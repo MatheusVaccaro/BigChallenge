@@ -60,7 +60,7 @@ class TagCollectionViewController: UIViewController {
     func shouldPresentBigCollection(on touch: UITouch) -> Bool {
         if self.traitCollection.forceTouchCapability == .available {
             let force = touch.force/touch.maximumPossibleForce
-            if touch.force >= touch.maximumPossibleForce/2 {
+            if force >= 0.5 {
                 return true
             }
         }
@@ -68,12 +68,12 @@ class TagCollectionViewController: UIViewController {
     }
     
     func presentBigCollection() {
-        let vc = BigTagCollectionViewController.instantiate()
-        vc.viewModel = self.viewModel
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.modalTransitionStyle = .crossDissolve
+        let bigTagVC = BigTagCollectionViewController.instantiate()
+        bigTagVC.viewModel = self.viewModel
+        bigTagVC.modalPresentationStyle = .overCurrentContext
+        bigTagVC.modalTransitionStyle = .crossDissolve
         
-        present(vc, animated: true)
+        present(bigTagVC, animated: true)
     }
 }
 
