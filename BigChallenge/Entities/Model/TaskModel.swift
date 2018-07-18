@@ -46,7 +46,7 @@ public class TaskModel {
     }
     
     public func delete(object: Task) {
-        guard let taskIndex = tasks.firstIndex(of: object) else { print("could not delete \(object) "); return }
+        guard let taskIndex = tasks.index(of: object) else { print("could not delete \(object) "); return }
         persistance.delete(object)
         tasks.remove(at: taskIndex)
     }

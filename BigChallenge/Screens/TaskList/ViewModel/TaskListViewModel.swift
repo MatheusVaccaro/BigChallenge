@@ -47,9 +47,9 @@ public class TaskListViewModel {
             guard let task = event.element else {return}
             self.model.saveContext()
             
-            if let index = self.tasks.firstIndex(of: task) { // !task.iscompleted
+            if let index = self.tasks.index(of: task) { // !task.iscompleted
                 self.completedTasks.append(self.tasks.remove(at: index))
-            } else if let index = self.completedTasks.firstIndex(of: task) {
+            } else if let index = self.completedTasks.index(of: task) {
                 self.tasks.append(self.completedTasks.remove(at: index))
             }
             
