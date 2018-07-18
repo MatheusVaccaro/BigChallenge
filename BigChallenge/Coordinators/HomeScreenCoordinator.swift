@@ -60,6 +60,16 @@ class HomeScreenCoordinator: Coordinator {
 //        addChild(coordinator: newTaskCoordinator)
 //        newTaskCoordinator.start()
 //    }
+    
+    fileprivate func showNewTag() {
+        let newTagCoordinator = NewTagCoordinator(tag: nil,
+                                                  isEditing: false,
+                                                  presenter: presenter,
+                                                  model: tagModel)
+        newTagCoordinator.delegate = self
+        addChild(coordinator: newTagCoordinator)
+        newTagCoordinator.start()
+    }
 }
 
 extension HomeScreenCoordinator: CoordinatorDelegate {
@@ -69,6 +79,10 @@ extension HomeScreenCoordinator: CoordinatorDelegate {
 }
 
 extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
+    func willAddTag() {
+        showNewTag()
+    }
+    
     func willAddTask() {
         showNewTask()
     }

@@ -105,7 +105,7 @@ class NewTagViewModel {
     }
 }
 
-// TODO: Use correct protocol
+// TODO: Use correct protocol. This extension only exists because currently NewTag is reusing NewTask's viewcontroller
 extension NewTagViewModel: NewTaskViewModelProtocol {
     var taskTitleTextField: String? {
         get {

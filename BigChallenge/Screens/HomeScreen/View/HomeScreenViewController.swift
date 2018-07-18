@@ -10,9 +10,12 @@ import UIKit
 import RxCocoa
 import RxSwift
 
+// TODO: Move this to appropriate location (ViewModel)
 protocol HomeScreenViewModelDelegate: class {
     func willAddTask()
     func wilEditTask()
+    
+    func willAddTag()
 }
 
 class HomeScreenViewController: UIViewController {
@@ -61,6 +64,12 @@ class HomeScreenViewController: UIViewController {
     @IBAction func didTapAddButton(_ sender: Any) {
         delegate?.willAddTask()
     }
+    
+    // TODO: Move this to appropriate location (ViewModel)
+    @IBAction func didTapAddTagButton(_ sender: UIButton) {
+        delegate?.willAddTag()
+    }
+    
 }
 
 extension HomeScreenViewController: StoryboardInstantiable {
