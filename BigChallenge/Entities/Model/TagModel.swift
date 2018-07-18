@@ -47,11 +47,12 @@ public class TagModel {
     
     public func delete(object: Tag) {
         guard let tagIndex = tags.firstIndex(of: object) else { print("could not delete \(object) "); return }
+        // TODO change to removeAll when available
         persistance.delete(object)
         tags.remove(at: tagIndex)
     }
     
-    public func createTag(with title: String = "") -> Tag {
+    public func createTag(with title: String) -> Tag {
         if let tag = (tags.first { $0.title == title }) { return tag }
         else { // dont create repeated tags
             let tag: Tag = persistance.create(Tag.self)

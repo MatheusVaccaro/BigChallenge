@@ -16,5 +16,9 @@
 "taskCellComplete" = "Completo";
 "taskCellIncomplete" = "Incompleto";
 
-//"" = "";
-
+"newTagTitle" = "Titulo";
+"newTagDone" = "Pronto";
+"newTagCancel" = "Cancelar";
+"newTagScreenTitleEditing" = "Editar";
+"newTagScreenTitleCreating" = "Nova";
+"newTagDeleteTag" = "Excluir";

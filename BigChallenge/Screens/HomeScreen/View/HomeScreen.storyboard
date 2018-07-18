@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hA5-o5-LMg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hA5-o5-LMg">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -50,8 +50,9 @@
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="n8G-hH-sdN"/>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Fh-Ag-lyc">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Fh-Ag-lyc">
                                 <rect key="frame" x="154.5" y="607" width="66" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="New Task"/>
                                 <connections>
                                     <action selector="didTapAddButton:" destination="hA5-o5-LMg" eventType="touchUpInside" id="scE-ZA-w0l"/>
@@ -64,10 +65,17 @@
                                     <action selector="showCompletedButtonClicked:" destination="hA5-o5-LMg" eventType="touchUpInside" id="zrT-g7-EW5"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uri-se-s5q">
+                                <rect key="frame" x="30" y="607" width="60" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="New Tag"/>
+                                <connections>
+                                    <action selector="didTapAddTagButton:" destination="hA5-o5-LMg" eventType="touchUpInside" id="to1-hv-9jA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="1Fh-Ag-lyc" firstAttribute="centerX" secondItem="0xD-KL-Oyh" secondAttribute="centerX" id="2go-Tw-oNl"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="0xD-KL-Oyh" secondAttribute="trailing" constant="15" id="A2C-oX-oOS"/>
                             <constraint firstItem="cie-Gz-Vzx" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="15" id="BXC-pC-xol"/>
                             <constraint firstItem="Vex-PR-Mon" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="15" id="Beu-zI-GrG"/>
@@ -81,8 +89,8 @@
                             <constraint firstItem="0xD-KL-Oyh" firstAttribute="top" secondItem="cie-Gz-Vzx" secondAttribute="bottom" id="ikh-0X-ElE"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="7bI-vL-Uz6" secondAttribute="trailing" constant="10" id="irL-lq-plQ"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="fUe-Ak-aYb" secondAttribute="trailing" id="l9d-qe-b2V"/>
-                            <constraint firstItem="1Fh-Ag-lyc" firstAttribute="centerY" secondItem="0xD-KL-Oyh" secondAttribute="centerY" id="nOz-3j-icT"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="bottom" secondItem="0xD-KL-Oyh" secondAttribute="bottom" constant="15" id="t4J-sz-R75"/>
+                            <constraint firstAttribute="centerX" secondItem="0xD-KL-Oyh" secondAttribute="centerX" id="yEj-nF-rOH"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="cie-Gz-Vzx" secondAttribute="trailing" constant="15" id="yev-Sb-Zry"/>
                             <constraint firstItem="fUe-Ak-aYb" firstAttribute="top" secondItem="Vex-PR-Mon" secondAttribute="bottom" constant="15" id="zw6-eb-xjl"/>
                         </constraints>

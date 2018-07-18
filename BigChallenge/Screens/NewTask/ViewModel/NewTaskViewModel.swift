@@ -16,11 +16,30 @@ protocol NewTaskViewModelDelegate: class {
     
 }
 
-class NewTaskViewModel {
+protocol NewTaskViewModelProtocol {
+    
+    var taskTitleTextField: String? { get set }
+    
+    func numberOfSections() -> Int
+    func numberOfRowsInSection() -> Int
+    func didTapCancelButton()
+    func didTapDoneButton()
+    func didTapDeleteTaskButton()
+    
+    func taskTitle() -> String?
+    func titleTextFieldPlaceholder() -> String
+    func doneItemTitle() -> String
+    func cancelItemTitle() -> String
+    func navigationItemTitle() -> String
+    func deleteButtonTitle() -> String
+    
+}
+
+class NewTaskViewModel: NewTaskViewModelProtocol {
     
     private let model: TaskModel
     private var isEditing: Bool
-    var task: Task?
+    private var task: Task?
     var taskTitleTextField: String?
     
     weak var delegate: NewTaskViewModelDelegate?
@@ -31,7 +50,7 @@ class NewTaskViewModel {
         self.task = task
     }
     
-    var numberOfSections: Int {
+    func numberOfSections() -> Int {
         if isEditing {
             return 2
         } else {
@@ -39,7 +58,7 @@ class NewTaskViewModel {
         }
     }
     
-    var numberOfRowsInSection: Int {
+    func numberOfRowsInSection() -> Int {
         return 1
     }
     
@@ -73,22 +92,34 @@ class NewTaskViewModel {
         model.save(object: task)
     }
     
-    // MARK: - Strings
-    let titleTextFieldPlaceHolder = String.newTaskCellPlaceholder
-    let doneItemTitle = String.newTaskDone
-    let cancelItemTitle = String.newTaskCancel
+    func taskTitle() -> String? {
+        return task?.title
+    }
     
-    var navigationItemTitle: String {
+    // MARK: - Strings
+    func titleTextFieldPlaceholder() -> String {
+        return Strings.Task.CreationScreen.taskTitlePlaceholder
+    }
+    
+    func doneItemTitle() -> String {
+        return Strings.Task.CreationScreen.doneButton
+    }
+    
+    func cancelItemTitle() -> String {
+        return Strings.Task.CreationScreen.cancelButton
+    }
+    
+    func navigationItemTitle() -> String {
         var ans: String = ""
         if isEditing {
-            ans = String.newTaskScreenTitleEditing
+            ans = Strings.Task.EditScreen.title
         } else {
-            ans = String.newTaskScreenTitleCreating
+            ans = Strings.Task.CreationScreen.title
         }
         return ans
     }
     
-    var deleteButtonTitle: String {
-        return String.newTaskDeleteTask
+    func deleteButtonTitle() -> String {
+        return Strings.Task.EditScreen.deleteButton
     }
 }
