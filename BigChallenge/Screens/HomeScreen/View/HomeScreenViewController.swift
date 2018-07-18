@@ -41,28 +41,25 @@ class HomeScreenViewController: UIViewController {
         if segue.identifier == "taskListSegue" {
             if let taskListViewController = segue.destination as? TaskListViewController {
                 let taskListViewModel = viewModel.taskListViewModel
-                taskListViewModel.delegate = self
                 taskListViewController.viewModel = taskListViewModel
                 self.taskListViewController = taskListViewController
             }
         } else if segue.identifier == "tagCollectionSegue" {
             if let tagCollectionViewController = segue.destination as? TagCollectionViewController {
                 let tagCollectionViewModel = viewModel.tagListViewModel
-//                tagCollectionViewController.delegate = self
                 tagCollectionViewController.viewModel = tagCollectionViewModel
                 self.tagCollectionViewController = tagCollectionViewController
             }
         }
     }
     
+    @IBAction func showCompletedButtonClicked(_ sender: Any) {
+        taskListViewController.viewModel.showsCompletedTasks =
+            !taskListViewController.viewModel.showsCompletedTasks
+    }
+    
     @IBAction func didTapAddButton(_ sender: Any) {
         delegate?.willAddTask()
-    }
-}
-
-extension HomeScreenViewController: TaskListViewModelDelegate {
-    func didSelectTask(_ task: Task) {
-        //TODO
     }
 }
 

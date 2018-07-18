@@ -33,6 +33,7 @@ class TagCollectionViewModel {
         
         selectedTagEvent.subscribe { event in
             guard let tag = event.element else { return }
+            
             if let index = self.selectedTags.firstIndex(of: tag) {
                 self.selectedTags.remove(at: index)
             } else { self.selectedTags.append(tag) }
