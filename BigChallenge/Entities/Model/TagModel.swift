@@ -46,7 +46,7 @@ public class TagModel {
     }
     
     public func delete(object: Tag) {
-        guard let tagIndex = tags.firstIndex(of: object) else { print("could not delete \(object) "); return }
+        guard let tagIndex = tags.index(of: object) else { print("could not delete \(object) "); return }
         // TODO change to removeAll when available
         persistance.delete(object)
         tags.remove(at: tagIndex)
