@@ -45,7 +45,8 @@ class TagCollectionViewController: UIViewController {
             cell.touchedTagEvent?.subscribe { event in
                 guard let touch = event.element else {return}
                 if self.shouldPresentBigCollection(on: touch) { self.presentBigCollection() }
-            }
+            }.disposed(by: self.disposeBag)
+                                                
         }.disposed(by: disposeBag)
         
         tagsCollectionView.rx.modelSelected(Tag.self).subscribe { event in // selected x item in collection
@@ -69,9 +70,14 @@ class TagCollectionViewController: UIViewController {
     
     func presentBigCollection() {
         let bigTagVC = BigTagCollectionViewController.instantiate()
+        
         bigTagVC.viewModel = self.viewModel
         bigTagVC.modalPresentationStyle = .overCurrentContext
         bigTagVC.modalTransitionStyle = .crossDissolve
+        
+        bigTagVC.viewModel.selectedTagEvent.subscribe { event in
+            
+        }
         
         present(bigTagVC, animated: true)
     }

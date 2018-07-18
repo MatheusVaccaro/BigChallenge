@@ -53,6 +53,7 @@ class BigTagCollectionViewController: UIViewController {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
         dismiss(animated: true)
     }
 }

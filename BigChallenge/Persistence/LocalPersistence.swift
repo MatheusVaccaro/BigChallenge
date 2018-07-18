@@ -154,7 +154,7 @@ class LocalPersistence: PersistenceProtocol {
 
 enum CoreDataError: Error {
     case couldNotCreateObject
-    // swiftlint:disable identifier_name
+//     swiftlint:disable identifier_name
     case couldNotFetchObject(reason: String)
     case couldNotSaveContext(reason: String)
     case couldNotDeleteObject(reason: String)
