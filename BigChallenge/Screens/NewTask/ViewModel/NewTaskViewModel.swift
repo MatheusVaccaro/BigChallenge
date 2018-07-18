@@ -18,16 +18,18 @@ protocol NewTaskViewModelDelegate: class {
 
 class NewTaskViewModel: NewTaskViewModelProtocol {
     
-    private let model: TaskModel
+    private let taskModel: TaskModel
+    private let tagModel: TagModel
     private var isEditing: Bool
     private var task: Task?
     var taskTitleTextField: String?
     
     weak var delegate: NewTaskViewModelDelegate?
     
-    init(task: Task?, isEditing: Bool, model: TaskModel) {
+    init(task: Task?, isEditing: Bool, taskModel: TaskModel, tagModel: TagModel) {
         self.isEditing = isEditing
-        self.model = model
+        self.taskModel = taskModel
+        self.tagModel = tagModel
         self.task = task
     }
     
@@ -63,14 +65,14 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
     
     private func deleteTask() {
         guard let task = task else { return }
-        model.delete(object: task)
+        taskModel.delete(object: task)
     }
     
     private func createTask() {
         guard let taskTitle = taskTitleTextField else { return }
-        let task = model.createTask(with: taskTitle)
+        let task = taskModel.createTask(with: taskTitle)
         self.task = task
-        model.save(object: task)
+        taskModel.save(object: task)
     }
     
     func taskTitle() -> String? {
@@ -102,5 +104,9 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
     
     func deleteButtonTitle() -> String {
         return Strings.Task.EditScreen.deleteButton
+    }
+    
+    func tagCollectionViewModel(tagModel: TagModel) -> TagCollectionViewModel {
+        return TagCollectionViewModel(model: tagModel)
     }
 }

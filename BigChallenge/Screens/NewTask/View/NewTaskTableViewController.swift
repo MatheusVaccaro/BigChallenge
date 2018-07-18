@@ -9,10 +9,11 @@
 import UIKit
 
 class NewTaskTableViewController: UITableViewController {
-
+    
     // MARK: - Properties
     
     var viewModel: NewTaskViewModelProtocol?
+    fileprivate var tagCollectionViewController: TagCollectionViewController!
     
     // MARK: - IBOutlets
     
@@ -26,7 +27,7 @@ class NewTaskTableViewController: UITableViewController {
         setupGestureRecognizers()
         configureWithViewModel()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         titleTextField.becomeFirstResponder()
@@ -41,6 +42,17 @@ class NewTaskTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "tagCollectionSegue" {
+            if let tagCollectionViewController = segue.destination as? TagCollectionViewController {
+                let tagCollectionViewModel = viewModel?.tagCollectionViewModel(tagModel: viewModel.)
+                tagCollectionViewController.viewModel = tagCollectionViewModel
+                self.tagCollectionViewController = tagCollectionViewController
+            }
+        }
+    }
+    
     // MARK: - IBActions
     
     @IBAction func didTapCancelBarButtonItem(_ sender: Any) {
@@ -52,7 +64,7 @@ class NewTaskTableViewController: UITableViewController {
         viewModel?.taskTitleTextField = titleText
         viewModel?.didTapDoneButton()
     }
-        
+    
     // MARK: - Functions
     private func configureWithViewModel() {
         guard let viewModel = viewModel else { return }

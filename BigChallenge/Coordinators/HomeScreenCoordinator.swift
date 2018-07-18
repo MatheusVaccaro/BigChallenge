@@ -45,7 +45,8 @@ class HomeScreenCoordinator: Coordinator {
         let newTaskCoordinator = NewTaskCoordinator(task: nil,
                                                     isEditing: false,
                                                     presenter: presenter,
-                                                    model: taskModel)
+                                                    taskModel: taskModel,
+                                                    tagModel: tagModel)
         newTaskCoordinator.delegate = self
         addChild(coordinator: newTaskCoordinator)
         newTaskCoordinator.start()

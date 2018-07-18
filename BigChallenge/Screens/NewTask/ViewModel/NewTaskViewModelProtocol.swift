@@ -25,4 +25,6 @@ protocol NewTaskViewModelProtocol {
     func navigationItemTitle() -> String
     func deleteButtonTitle() -> String
     
+    func tagCollectionViewModel(tagModel: TagModel) -> TagCollectionViewModel
+    
 }
