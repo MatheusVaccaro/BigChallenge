@@ -65,6 +65,14 @@
                                     <action selector="showCompletedButtonClicked:" destination="hA5-o5-LMg" eventType="touchUpInside" id="zrT-g7-EW5"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uri-se-s5q">
+                                <rect key="frame" x="30" y="607" width="60" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="New Tag"/>
+                                <connections>
+                                    <action selector="didTapAddTagButton:" destination="hA5-o5-LMg" eventType="touchUpInside" id="to1-hv-9jA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>

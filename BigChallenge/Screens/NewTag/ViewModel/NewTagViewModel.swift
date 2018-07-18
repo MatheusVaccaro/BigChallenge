@@ -112,7 +112,7 @@ extension NewTagViewModel: NewTaskViewModelProtocol {
             return tagTitleTextField
         }
         set {
-            tagTitleTextField = taskTitleTextField
+            tagTitleTextField = newValue
         }
     }
     
