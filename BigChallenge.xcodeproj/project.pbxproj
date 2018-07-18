@@ -45,6 +45,10 @@
 		C21EAD0720B74757005F0F85 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD0620B74757005F0F85 /* TaskListViewController.swift */; };
 		C21EAD0B20B74F01005F0F85 /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD0A20B74F01005F0F85 /* StoryboardInstantiable.swift */; };
 		C21EAD0F20B75211005F0F85 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD0E20B75211005F0F85 /* TaskListViewModel.swift */; };
+		C231118E20FFC75200BCB000 /* NewTag.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C231118C20FFC75200BCB000 /* NewTag.storyboard */; };
+		C231118F20FFC75200BCB000 /* NewTagTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C231118D20FFC75200BCB000 /* NewTagTableViewController.swift */; };
+		C231119120FFC92800BCB000 /* NewTaskViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C231119020FFC92800BCB000 /* NewTaskViewModelProtocol.swift */; };
+		C231119320FFC95300BCB000 /* NewTagViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C231119220FFC95300BCB000 /* NewTagViewModelProtocol.swift */; };
 		C23753AE20B6461E00C1CE15 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23753AD20B6461E00C1CE15 /* Coordinator.swift */; };
 		C23753B020B6463700C1CE15 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23753AF20B6463700C1CE15 /* ApplicationCoordinator.swift */; };
 		C28DC91A20B61CB6007F881A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28DC91920B61CB6007F881A /* AppDelegate.swift */; };
@@ -130,6 +134,10 @@
 		C21EAD0A20B74F01005F0F85 /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
 		C21EAD0E20B75211005F0F85 /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
 		C21EAD1020B754AE005F0F85 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		C231118C20FFC75200BCB000 /* NewTag.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewTag.storyboard; sourceTree = "<group>"; };
+		C231118D20FFC75200BCB000 /* NewTagTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTagTableViewController.swift; sourceTree = "<group>"; };
+		C231119020FFC92800BCB000 /* NewTaskViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewModelProtocol.swift; sourceTree = "<group>"; };
+		C231119220FFC95300BCB000 /* NewTagViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTagViewModelProtocol.swift; sourceTree = "<group>"; };
 		C23753AD20B6461E00C1CE15 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		C23753AF20B6463700C1CE15 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
 		C28DC91620B61CB6007F881A /* BigChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -474,6 +482,7 @@
 			isa = PBXGroup;
 			children = (
 				C2A1115020B9FCDB00ABB161 /* NewTaskViewModel.swift */,
+				C231119020FFC92800BCB000 /* NewTaskViewModelProtocol.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -490,6 +499,8 @@
 		C2C231BE20FD1A68002A2371 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C231118C20FFC75200BCB000 /* NewTag.storyboard */,
+				C231118D20FFC75200BCB000 /* NewTagTableViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -498,6 +509,7 @@
 			isa = PBXGroup;
 			children = (
 				C2C231C020FD1AB2002A2371 /* NewTagViewModel.swift */,
+				C231119220FFC95300BCB000 /* NewTagViewModelProtocol.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -633,6 +645,7 @@
 				C28DC92420B61CB9007F881A /* LaunchScreen.storyboard in Resources */,
 				221BA8AF20F6991200BE2AC1 /* HomeScreen.storyboard in Resources */,
 				C28DC92120B61CB9007F881A /* Assets.xcassets in Resources */,
+				C231118E20FFC75200BCB000 /* NewTag.storyboard in Resources */,
 				C28DC91F20B61CB6007F881A /* TaskList.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -812,6 +825,7 @@
 				C2A1114220B8AED400ABB161 /* TaskTableViewCell.swift in Sources */,
 				C21EAD0F20B75211005F0F85 /* TaskListViewModel.swift in Sources */,
 				C28DC91A20B61CB6007F881A /* AppDelegate.swift in Sources */,
+				C231118F20FFC75200BCB000 /* NewTagTableViewController.swift in Sources */,
 				221BA8B320F69E5C00BE2AC1 /* HomeScreenViewController.swift in Sources */,
 				223C0C3E20E568DE00CF39ED /* Enums.swift in Sources */,
 				C2A1115320BA036800ABB161 /* NewTaskCoordinator.swift in Sources */,
@@ -822,6 +836,7 @@
 				223C0C0820E529D600CF39ED /* Persistence.swift in Sources */,
 				226CEA0520E17E87008CEB97 /* Strings.swift in Sources */,
 				223C0C0620E5293500CF39ED /* PersistenceProtocol.swift in Sources */,
+				C231119120FFC92800BCB000 /* NewTaskViewModelProtocol.swift in Sources */,
 				22325A7920FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift in Sources */,
 				225852822100C5BE0011F4B0 /* TagsCollectionView.swift in Sources */,
 				221BA8BA20F6A26100BE2AC1 /* TagCollectionViewModel.swift in Sources */,
@@ -834,6 +849,7 @@
 				1676FC9020D99580003E2D79 /* TaskModel.swift in Sources */,
 				C2A1113D20B88A2F00ABB161 /* Storable.swift in Sources */,
 				222BFF9720EDB854001B6BBF /* RemindersImporter.swift in Sources */,
+				C231119320FFC95300BCB000 /* NewTagViewModelProtocol.swift in Sources */,
 				C2A1114020B8A70A00ABB161 /* TaskCellViewModel.swift in Sources */,
 				C2A1115120B9FCDB00ABB161 /* NewTaskViewModel.swift in Sources */,
 				22456D2920DC3BB000168894 /* dateExtension.swift in Sources */,

@@ -14,7 +14,7 @@ class NewTagCoordinator: Coordinator {
     fileprivate let presenter: UINavigationController
     var childrenCoordinators: [Coordinator]
     
-    fileprivate var newTagTableViewController: NewTaskTableViewController?
+    fileprivate var newTagTableViewController: NewTagTableViewController?
     fileprivate let model: TagModel
     fileprivate var tag: Tag?
     fileprivate let isEditing: Bool
@@ -31,7 +31,7 @@ class NewTagCoordinator: Coordinator {
     }
     
     func start() {
-        let newTagTableViewController = NewTaskTableViewController.instantiate()
+        let newTagTableViewController = NewTagTableViewController.instantiate()
         self.newTagTableViewController = newTagTableViewController
         
         let newTagViewModel = NewTagViewModel(tag: tag, isEditing: isEditing, model: model)

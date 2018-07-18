@@ -16,25 +16,6 @@ protocol NewTaskViewModelDelegate: class {
     
 }
 
-protocol NewTaskViewModelProtocol {
-    
-    var taskTitleTextField: String? { get set }
-    
-    func numberOfSections() -> Int
-    func numberOfRowsInSection() -> Int
-    func didTapCancelButton()
-    func didTapDoneButton()
-    func didTapDeleteTaskButton()
-    
-    func taskTitle() -> String?
-    func titleTextFieldPlaceholder() -> String
-    func doneItemTitle() -> String
-    func cancelItemTitle() -> String
-    func navigationItemTitle() -> String
-    func deleteButtonTitle() -> String
-    
-}
-
 class NewTaskViewModel: NewTaskViewModelProtocol {
     
     private let model: TaskModel
