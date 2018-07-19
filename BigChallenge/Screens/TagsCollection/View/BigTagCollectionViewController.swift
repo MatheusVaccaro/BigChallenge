@@ -21,7 +21,7 @@ class BigTagCollectionViewController: UIViewController {
     
     @IBOutlet weak var tagsCollectionView: UICollectionView!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var TagsLabel: UILabel!
+    @IBOutlet weak var tagsLabel: UILabel!
     
     private let disposeBag = DisposeBag()
     
@@ -34,7 +34,7 @@ class BigTagCollectionViewController: UIViewController {
             layout.estimatedItemSize = CGSize(width: 150, height: 40)
         }
         
-        TagsLabel.text = Strings.Tag.CollectionScreen.title
+        tagsLabel.text = Strings.Tag.CollectionScreen.title
     }
     
     private func select(_ bool: Bool, at index: IndexPath, animated: Bool = false) {
