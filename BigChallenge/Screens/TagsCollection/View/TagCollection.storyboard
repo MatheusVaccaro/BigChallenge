@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Oak-7M-jK6">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Oak-7M-jK6" customClass="TagCollectionView" customModule="BigChallenge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
@@ -94,7 +94,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AmP-lQ-3ng">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AmP-lQ-3ng" customClass="TagCollectionView" customModule="BigChallenge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="107" width="375" height="560"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -143,7 +143,7 @@
                             <constraint firstItem="mc9-9u-tte" firstAttribute="centerX" secondItem="HOD-W3-cFI" secondAttribute="centerX" id="a4J-5r-OvL"/>
                             <constraint firstItem="AmP-lQ-3ng" firstAttribute="leading" secondItem="HOD-W3-cFI" secondAttribute="leading" id="aII-m6-3s6"/>
                             <constraint firstItem="mc9-9u-tte" firstAttribute="top" secondItem="HOD-W3-cFI" secondAttribute="top" constant="43" id="mA3-uq-fQu"/>
-                            <constraint firstItem="HOD-W3-cFI" firstAttribute="bottom" secondItem="AmP-lQ-3ng" secondAttribute="bottom" id="tmD-MK-lIJ"/>
+                            <constraint firstItem="HOD-W3-cFI" firstAttribute="bottom" secondItem="AmP-lQ-3ng" secondAttribute="bottom" priority="250" id="rhX-76-Hb3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HOD-W3-cFI"/>
                     </view>
@@ -153,7 +153,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="60H-dB-Jdc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1047" y="55"/>
+            <point key="canvasLocation" x="1045.5999999999999" y="54.422788605697157"/>
         </scene>
     </scenes>
 </document>
