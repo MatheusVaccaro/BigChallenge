@@ -31,7 +31,6 @@
 		223C0C3E20E568DE00CF39ED /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD1020B754AE005F0F85 /* Enums.swift */; };
 		223C0C4020E5697700CF39ED /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD1020B754AE005F0F85 /* Enums.swift */; };
 		223C0C4120E5697800CF39ED /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD1020B754AE005F0F85 /* Enums.swift */; };
-		223C0C4420E6C70200CF39ED /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2286A71420E3DF2100BE92AA /* Model.xcdatamodeld */; };
 		2241F36920ED08340069EFE9 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2241F36820ED08340069EFE9 /* TagModel.swift */; };
 		22456D2920DC3BB000168894 /* dateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22456D2820DC3BB000168894 /* dateExtension.swift */; };
 		2253179A20D147AD0065C9F9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2253179C20D147AD0065C9F9 /* Localizable.strings */; };
@@ -802,7 +801,6 @@
 				1627171020C8793900AA0024 /* BigChallengeTests.swift in Sources */,
 				223C0C3C20E5681200CF39ED /* Storable.swift in Sources */,
 				223C0C3D20E5681500CF39ED /* PersistenceProtocol.swift in Sources */,
-				223C0C4420E6C70200CF39ED /* Model.xcdatamodeld in Sources */,
 				223C0C4020E5697700CF39ED /* Enums.swift in Sources */,
 				223C0C3920E5678100CF39ED /* LocalPersistence.swift in Sources */,
 				2934BCCA21003E0700B6A05A /* TaskModelTests.swift in Sources */,
