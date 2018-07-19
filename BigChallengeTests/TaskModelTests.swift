@@ -29,6 +29,8 @@ class TaskModelTests: QuickSpec {
             var taskModel: TaskModel!
             var taskListViewModel: TaskListViewModel!
             var newTaskViewModel: NewTaskViewModel!
+            var initialTasks: [Task]!
+            var task: Task!
             
             beforeEach {
                 mockPersistence = Persistence(configuration: .inMemory)
@@ -47,46 +49,60 @@ class TaskModelTests: QuickSpec {
             }
             
             describe("creating a task") {
+                
                 beforeEach {
                     newTaskViewModel = NewTaskViewModel(task: nil, isEditing: false, model: taskModel)
                     newTaskViewModel.taskTitleTextField = "Title"
+                    initialTasks = taskModel.tasks
                 }
                 
-                context("confirming the creation") {
+                context("when confirming the creation") {
                     beforeEach {
                         newTaskViewModel.didTapDoneButton()
+                        // TODO Make this method more testable
+                        task = Set(initialTasks).intersection(taskModel.tasks).first
+                    }
+                    
+                    it("should create a new task") {
+                        expect(task).toNot(beNil())
+                    }
+                    
+                    it("should make the task viewable") {
+                        expect(taskListViewModel.tasksToShow).to(contain(task))
                     }
                     
                     it("should store the task in the model") {
-                        
-                    }
-                    
-                    it("should persist the task") {
-                        
-                    }
-                }
-                
-                context("") {
-                    
-                }
-                context("saving it") {
-                    it("should store the task in the model") {
-                        let task = taskModel.createTask(with: "Title")
-                        taskModel.save(object: task)
-                        
                         let allTasks = taskModel.tasks
                         
                         expect(allTasks).to(contain(task))
                     }
                     
                     it("should persist the task") {
-                        let task = taskModel.createTask(with: "Title")
-                        taskModel.save(object: task)
-                        
                         let newTaskModel = TaskModel(persistence: mockPersistence)
                         let allTasks = newTaskModel.tasks
                         
                         expect(allTasks).to(contain(task))
+                    }
+                }
+                
+                context("when cancelling the creation") {
+                    beforeEach {
+                        newTaskViewModel.didTapCancelButton()
+                    }
+                    
+                    it("should not affect the model") {
+                        let allTasks = taskModel.tasks
+                        
+                        expect(initialTasks).to(equal(allTasks))
+                    }
+                    
+                    it("should not persist the task") {
+                        let newTaskModel = TaskModel(persistence: mockPersistence)
+                        let allTasks = newTaskModel.tasks
+                        
+                        // Expect both collections to have the same content
+                        expect(initialTasks).to(contain(allTasks))
+                        expect(allTasks).to(contain(initialTasks))
                     }
                 }
             }
