@@ -21,6 +21,7 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
     private let taskModel: TaskModel
     private var isEditing: Bool
     private var task: Task?
+    var selectedTags: [Tag]
     var taskTitleTextField: String?
     
     weak var delegate: NewTaskViewModelDelegate?
@@ -29,6 +30,7 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
         self.isEditing = isEditing
         self.taskModel = taskModel
         self.task = task
+        self.selectedTags = []
     }
     
     func numberOfSections() -> Int {
@@ -74,6 +76,9 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
         guard let taskTitle = taskTitleTextField else { return }
         let task = taskModel.createTask(with: taskTitle)
         self.task = task
+        selectedTags.forEach { tag in
+            self.task?.addToTags(tag)
+        }
         taskModel.save(object: task)
     }
     

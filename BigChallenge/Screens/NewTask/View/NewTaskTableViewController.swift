@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class NewTaskTableViewController: UITableViewController {
     
@@ -15,6 +17,7 @@ class NewTaskTableViewController: UITableViewController {
     var viewModel: NewTaskViewModelProtocol?
     var tagCollectionViewModel: TagCollectionViewModel?
     fileprivate var tagCollectionViewController: TagCollectionViewController!
+    private let disposeBag = DisposeBag()
     
     // MARK: - IBOutlets
     
@@ -29,6 +32,11 @@ class NewTaskTableViewController: UITableViewController {
         setupGestureRecognizers()
         configureWithViewModel()
         configureTagCollectionViewController()
+        
+        tagCollectionViewController.viewModel.selectedTagsObservable.subscribe { event in
+            self.viewModel?.selectedTags = event.element!
+            print("selected tags are: \( event.element!.map {$0.title} )")
+            }.disposed(by: disposeBag)
     }
     
     override func viewDidAppear(_ animated: Bool) {
