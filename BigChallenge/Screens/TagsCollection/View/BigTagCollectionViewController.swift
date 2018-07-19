@@ -20,21 +20,17 @@ class BigTagCollectionViewController: UIViewController {
     var viewModel: TagCollectionViewModel!
     
     @IBOutlet weak var tagsCollectionView: UICollectionView!
+    @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
     private let disposeBag = DisposeBag()
     
-    override func viewDidLoad() { //OVERRIDE
+    override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         bindCollectionView()
         tagsCollectionView.allowsMultipleSelection = true
         if let layout = tagsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.estimatedItemSize = CGSize(width: 150, height: 40)
-        }
-        if let tagsCollection = tagsCollectionView as? TagCollectionView {
-            tagsCollection.touchedEvent.subscribe { _ in
-                self.dismiss(animated: false)
-            }.disposed(by: disposeBag)
         }
     }
     
@@ -71,6 +67,10 @@ class BigTagCollectionViewController: UIViewController {
                 
                 cell.configure(with: viewModel)
                 self.loadSelection(for: cell, tag: tag, at: index)
+                if row == self.viewModel.tags.count-1 {
+                    self.collectionViewHeightConstraint.constant =
+                        self.tagsCollectionView.collectionViewLayout.collectionViewContentSize.height
+                }
                 
             }.disposed(by: disposeBag)
         
