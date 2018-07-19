@@ -7,17 +7,23 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class NewTaskTableViewController: UITableViewController {
-
+    
     // MARK: - Properties
     
     var viewModel: NewTaskViewModelProtocol?
+    var tagCollectionViewModel: TagCollectionViewModel?
+    fileprivate var tagCollectionViewController: TagCollectionViewController!
+    private let disposeBag = DisposeBag()
     
     // MARK: - IBOutlets
     
     @IBOutlet weak var deleteTaskButton: UILabel!
     @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var tagCollectionContainerView: UIView!
     
     // MARK: - TableViewController Lifecycle
     
@@ -25,8 +31,14 @@ class NewTaskTableViewController: UITableViewController {
         super.viewDidLoad()
         setupGestureRecognizers()
         configureWithViewModel()
+        configureTagCollectionViewController()
+        
+        tagCollectionViewController.viewModel.selectedTagsObservable.subscribe { event in
+            self.viewModel?.selectedTags = event.element!
+            print("selected tags are: \( event.element!.map {$0.title} )")
+            }.disposed(by: disposeBag)
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         titleTextField.becomeFirstResponder()
@@ -52,7 +64,7 @@ class NewTaskTableViewController: UITableViewController {
         viewModel?.taskTitleTextField = titleText
         viewModel?.didTapDoneButton()
     }
-        
+    
     // MARK: - Functions
     private func configureWithViewModel() {
         guard let viewModel = viewModel else { return }
@@ -75,10 +87,32 @@ class NewTaskTableViewController: UITableViewController {
         }
     }
     
+    private func configureTagCollectionViewController() {
+        let tagCollectionViewController = TagCollectionViewController.instantiate()
+        tagCollectionViewController.viewModel = tagCollectionViewModel
+        addChildViewController(tagCollectionViewController)
+        tagCollectionViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        self.tagCollectionViewController = tagCollectionViewController
+        tagCollectionContainerView.addSubview(tagCollectionViewController.view)
+        
+        NSLayoutConstraint.activate([
+            tagCollectionViewController.view.leadingAnchor.constraint(equalTo: tagCollectionContainerView.leadingAnchor),
+            tagCollectionViewController.view.trailingAnchor.constraint(equalTo: tagCollectionContainerView.trailingAnchor),
+            tagCollectionViewController.view.topAnchor.constraint(equalTo: tagCollectionContainerView.topAnchor),
+            tagCollectionViewController.view.bottomAnchor.constraint(equalTo: tagCollectionContainerView.bottomAnchor)
+            ])
+        
+        tagCollectionViewController.didMove(toParentViewController: self)
+    }
+    
     // MARK: - TableView DataSource
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel?.numberOfSections() ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel?.numberOfRows(in: section) ?? 0
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

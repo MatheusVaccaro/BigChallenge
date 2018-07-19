@@ -16,7 +16,7 @@ protocol NewTagViewModelDelegate: class {
     
 }
 
-class NewTagViewModel {
+class NewTagViewModel: NewTagViewModelProtocol {
     
     private let model: TagModel
     private var isEditing: Bool
@@ -102,25 +102,5 @@ class NewTagViewModel {
     
     func deleteButtonTitle() -> String {
         return Strings.Tag.EditScreen.deleteButton
-    }
-}
-
-// TODO: Use correct protocol. This extension only exists because currently NewTag is reusing NewTask's viewcontroller
-extension NewTagViewModel: NewTaskViewModelProtocol {
-    var taskTitleTextField: String? {
-        get {
-            return tagTitleTextField
-        }
-        set {
-            tagTitleTextField = newValue
-        }
-    }
-    
-    func didTapDeleteTaskButton() {
-        didTapDeleteTagButton()
-    }
-    
-    func taskTitle() -> String? {
-        return tagTitle()
     }
 }

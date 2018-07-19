@@ -16,38 +16,21 @@ protocol NewTaskViewModelDelegate: class {
     
 }
 
-protocol NewTaskViewModelProtocol {
-    
-    var taskTitleTextField: String? { get set }
-    
-    func numberOfSections() -> Int
-    func numberOfRowsInSection() -> Int
-    func didTapCancelButton()
-    func didTapDoneButton()
-    func didTapDeleteTaskButton()
-    
-    func taskTitle() -> String?
-    func titleTextFieldPlaceholder() -> String
-    func doneItemTitle() -> String
-    func cancelItemTitle() -> String
-    func navigationItemTitle() -> String
-    func deleteButtonTitle() -> String
-    
-}
-
 class NewTaskViewModel: NewTaskViewModelProtocol {
     
-    private let model: TaskModel
+    private let taskModel: TaskModel
     private var isEditing: Bool
     private var task: Task?
+    var selectedTags: [Tag]
     var taskTitleTextField: String?
     
     weak var delegate: NewTaskViewModelDelegate?
     
-    init(task: Task?, isEditing: Bool, model: TaskModel) {
+    init(task: Task?, isEditing: Bool, taskModel: TaskModel) {
         self.isEditing = isEditing
-        self.model = model
+        self.taskModel = taskModel
         self.task = task
+        self.selectedTags = []
     }
     
     func numberOfSections() -> Int {
@@ -58,8 +41,12 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
         }
     }
     
-    func numberOfRowsInSection() -> Int {
-        return 1
+    func numberOfRows(in section: Int) -> Int {
+        if section == 0 {
+            return 2
+        } else {
+            return 1
+        }
     }
     
     func didTapCancelButton() {
@@ -82,14 +69,17 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
     
     private func deleteTask() {
         guard let task = task else { return }
-        model.delete(object: task)
+        taskModel.delete(object: task)
     }
     
     private func createTask() {
         guard let taskTitle = taskTitleTextField else { return }
-        let task = model.createTask(with: taskTitle)
+        let task = taskModel.createTask(with: taskTitle)
         self.task = task
-        model.save(object: task)
+        selectedTags.forEach { tag in
+            self.task?.addToTags(tag)
+        }
+        taskModel.save(object: task)
     }
     
     func taskTitle() -> String? {

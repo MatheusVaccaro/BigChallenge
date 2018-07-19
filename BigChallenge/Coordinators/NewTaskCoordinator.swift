@@ -15,15 +15,17 @@ class NewTaskCoordinator: Coordinator {
     var childrenCoordinators: [Coordinator]
     
     fileprivate var newTaskTableViewController: NewTaskTableViewController?
-    fileprivate let model: TaskModel
+    fileprivate let taskModel: TaskModel
+    fileprivate let tagModel: TagModel
     fileprivate var task: Task?
     fileprivate let isEditing: Bool
     fileprivate var modalPresenter: UINavigationController?
     
     weak var delegate: CoordinatorDelegate?
     
-    init(task: Task? = nil, isEditing: Bool, presenter: UINavigationController, model: TaskModel) {
-        self.model = model
+    init(task: Task? = nil, isEditing: Bool, presenter: UINavigationController, taskModel: TaskModel, tagModel: TagModel) {
+        self.taskModel = taskModel
+        self.tagModel = tagModel
         self.presenter = presenter
         self.childrenCoordinators = []
         self.isEditing = isEditing
@@ -34,9 +36,12 @@ class NewTaskCoordinator: Coordinator {
         let newTaskTableViewController = NewTaskTableViewController.instantiate()
         self.newTaskTableViewController = newTaskTableViewController
         
-        let newTaskViewModel = NewTaskViewModel(task: task, isEditing: isEditing, model: model)
+        let newTaskViewModel = NewTaskViewModel(task: task, isEditing: isEditing, taskModel: taskModel)
         newTaskViewModel.delegate = self
         newTaskTableViewController.viewModel = newTaskViewModel
+        
+        let tagCollectionViewModel = TagCollectionViewModel(model: tagModel)
+        newTaskTableViewController.tagCollectionViewModel = tagCollectionViewModel
         
         let modalPresenter = UINavigationController(rootViewController: newTaskTableViewController)
         self.modalPresenter = modalPresenter
