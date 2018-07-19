@@ -49,3 +49,6 @@
 
 /* button used to delete tag */
 "newTagDeleteTag" = "Excluir";
+
+/* screen title when on \"all tags\" screen */
+"CollectionScreenTitle" = "Tags";
