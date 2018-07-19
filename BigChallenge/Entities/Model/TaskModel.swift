@@ -12,14 +12,14 @@ import RxSwift
 
 public class TaskModel {
     
-    var didUpdateTasks: (([Task]) -> Void)?
-    
+    private(set) var didUpdateTasks: BehaviorSubject<[Task]>
     private(set) public var tasks: [Task]
     private let persistance: Persistence
     
     init(persistence: Persistence) {
         self.persistance = persistence
         self.tasks = []
+        self.didUpdateTasks = BehaviorSubject<[Task]>(value: tasks)
         
         persistence.fetch(Task.self) {
             tasks = $0
@@ -30,8 +30,9 @@ public class TaskModel {
                 guard !self.tasks.contains(task) else { continue }
                 self.tasks.append(task)
             }
-            self.didUpdateTasks?(self.tasks)
+            self.didUpdateTasks.onNext(self.tasks)
         }
+        didUpdateTasks.onNext(tasks)
     }
     
     public func saveContext() {
@@ -43,12 +44,14 @@ public class TaskModel {
         tasks.append(object)
         RemindersImporter.instance?.save(task: object)
         persistance.save()
+        didUpdateTasks.onNext(tasks)
     }
     
     public func delete(object: Task) {
         guard let taskIndex = tasks.index(of: object) else { print("could not delete \(object) "); return }
         persistance.delete(object)
         tasks.remove(at: taskIndex)
+        didUpdateTasks.onNext(tasks)
     }
     
     public func createTask(with title: String) -> Task {

@@ -32,11 +32,6 @@ class NewTaskTableViewController: UITableViewController {
         setupGestureRecognizers()
         configureWithViewModel()
         configureTagCollectionViewController()
-        
-        tagCollectionViewController.viewModel.selectedTagsObservable.subscribe { event in
-            self.viewModel?.selectedTags = event.element!
-            print("selected tags are: \( event.element!.map {$0.title} )")
-            }.disposed(by: disposeBag)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -103,6 +98,12 @@ class NewTaskTableViewController: UITableViewController {
             ])
         
         tagCollectionViewController.didMove(toParentViewController: self)
+        
+        tagCollectionViewController.viewModel.selectedTagsObservable.subscribe { event in
+            self.viewModel?.selectedTags = event.element!
+            print("selected tags are: \( event.element!.map {$0.title} )")
+            }.disposed(by: disposeBag)
+
     }
     
     // MARK: - TableView DataSource

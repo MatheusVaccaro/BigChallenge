@@ -12,7 +12,7 @@ import RxSwift
 
 public class TagModel {
     
-    var didUpdateTags: (([Tag]) -> Void)?
+    private(set) var didUpdateTags: BehaviorSubject<[Tag]> //(([Tag]) -> Void)?
     
     private(set) public var tags: [Tag]
     private let persistance: Persistence
@@ -20,18 +20,21 @@ public class TagModel {
     init(persistence: Persistence) {
         self.persistance = persistence
         self.tags = []
+        self.didUpdateTags = BehaviorSubject<[Tag]>(value: tags)
         
         persistence.fetch(Tag.self) {
             tags = $0
         }
         
+        
         persistence.didAddTags = {
             for tag in $0 { //filter tags added by this device
                 guard !self.tags.contains(tag) else { continue }
                 self.tags.append(tag)
+                self.didUpdateTags.onNext(self.tags)
             }
-            self.didUpdateTags?(self.tags)
         }
+        didUpdateTags.onNext(tags)
     }
     
     public func saveContext() {
@@ -42,7 +45,7 @@ public class TagModel {
         guard !tags.contains(object) else { return }
         tags.append(object)
         persistance.save()
-        didUpdateTags?(tags)
+        didUpdateTags.onNext(tags)
     }
     
     public func delete(object: Tag) {
@@ -50,6 +53,7 @@ public class TagModel {
         // TODO change to removeAll when available
         persistance.delete(object)
         tags.remove(at: tagIndex)
+        didUpdateTags.onNext(tags)
     }
     
     public func createTag(with title: String) -> Tag {
