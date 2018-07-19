@@ -66,5 +66,10 @@ struct Strings {
             static let deleteButton =
                 NSLocalizedString("newTagDeleteTag", comment: "button used to delete tag")
         }
+        
+        struct CollectionScreen {
+            static let title =
+                NSLocalizedString("CollectionScreenTitle", comment: "screen title when on \"all tags\" screen")
+        }
     }
 }

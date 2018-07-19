@@ -95,7 +95,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AmP-lQ-3ng" customClass="TagCollectionView" customModule="BigChallenge" customModuleProvider="target">
-                                <rect key="frame" x="8" y="107" width="359" height="560"/>
+                                <rect key="frame" x="40" y="107" width="295" height="560"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -141,15 +141,16 @@
                         <color key="backgroundColor" red="0.81981678299492389" green="0.81981678299492389" blue="0.81981678299492389" alpha="0.90410958904109584" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="HOD-W3-cFI" firstAttribute="trailing" secondItem="AmP-lQ-3ng" secondAttribute="trailing" constant="8" id="UvU-iV-oki"/>
+                            <constraint firstItem="HOD-W3-cFI" firstAttribute="trailing" secondItem="AmP-lQ-3ng" secondAttribute="trailing" constant="40" id="UvU-iV-oki"/>
                             <constraint firstItem="AmP-lQ-3ng" firstAttribute="top" secondItem="mc9-9u-tte" secondAttribute="bottom" constant="20" id="WEN-Pl-06B"/>
                             <constraint firstItem="mc9-9u-tte" firstAttribute="centerX" secondItem="HOD-W3-cFI" secondAttribute="centerX" id="a4J-5r-OvL"/>
-                            <constraint firstItem="AmP-lQ-3ng" firstAttribute="leading" secondItem="HOD-W3-cFI" secondAttribute="leading" constant="8" id="aII-m6-3s6"/>
+                            <constraint firstItem="AmP-lQ-3ng" firstAttribute="leading" secondItem="HOD-W3-cFI" secondAttribute="leading" constant="40" id="aII-m6-3s6"/>
                             <constraint firstItem="mc9-9u-tte" firstAttribute="top" secondItem="HOD-W3-cFI" secondAttribute="top" constant="43" id="mA3-uq-fQu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HOD-W3-cFI"/>
                     </view>
                     <connections>
+                        <outlet property="TagsLabel" destination="mc9-9u-tte" id="aJf-tC-jUW"/>
                         <outlet property="collectionViewHeightConstraint" destination="7K1-Yb-6sS" id="WWI-LT-vzM"/>
                         <outlet property="tagsCollectionView" destination="AmP-lQ-3ng" id="MOs-l1-Xfb"/>
                     </connections>

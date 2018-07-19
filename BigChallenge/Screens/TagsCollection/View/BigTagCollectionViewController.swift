@@ -21,10 +21,11 @@ class BigTagCollectionViewController: UIViewController {
     
     @IBOutlet weak var tagsCollectionView: UICollectionView!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var TagsLabel: UILabel!
     
     private let disposeBag = DisposeBag()
     
-    override func viewDidLoad() {
+    override func viewDidLoad() { // OVERRIDE
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         bindCollectionView()
@@ -32,6 +33,8 @@ class BigTagCollectionViewController: UIViewController {
         if let layout = tagsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.estimatedItemSize = CGSize(width: 150, height: 40)
         }
+        
+        TagsLabel.text = Strings.Tag.CollectionScreen.title
     }
     
     private func select(_ bool: Bool, at index: IndexPath, animated: Bool = false) {
