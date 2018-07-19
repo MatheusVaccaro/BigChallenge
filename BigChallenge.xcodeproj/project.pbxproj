@@ -16,6 +16,7 @@
 		221BA8B620F6A18500BE2AC1 /* TagCollection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221BA8B520F6A18500BE2AC1 /* TagCollection.storyboard */; };
 		221BA8B820F6A1DF00BE2AC1 /* TagCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BA8B720F6A1DF00BE2AC1 /* TagCollectionViewController.swift */; };
 		221BA8BA20F6A26100BE2AC1 /* TagCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BA8B920F6A26100BE2AC1 /* TagCollectionViewModel.swift */; };
+		22205ADD20FF7ADF007689D7 /* BigTagCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22205ADC20FF7ADF007689D7 /* BigTagCollectionViewController.swift */; };
 		222BFF9420ED92C7001B6BBF /* RemindersCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222BFF9320ED92C7001B6BBF /* RemindersCommunicator.swift */; };
 		222BFF9720EDB854001B6BBF /* RemindersImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222BFF9620EDB854001B6BBF /* RemindersImporter.swift */; };
 		22325A7420FB8E0500E5F8C6 /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22325A7320FB8E0500E5F8C6 /* HomeScreenViewModel.swift */; };
@@ -34,6 +35,7 @@
 		2241F36920ED08340069EFE9 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2241F36820ED08340069EFE9 /* TagModel.swift */; };
 		22456D2920DC3BB000168894 /* dateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22456D2820DC3BB000168894 /* dateExtension.swift */; };
 		2253179A20D147AD0065C9F9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2253179C20D147AD0065C9F9 /* Localizable.strings */; };
+		225852822100C5BE0011F4B0 /* TagsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225852812100C5BE0011F4B0 /* TagsCollectionView.swift */; };
 		226CEA0520E17E87008CEB97 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226CEA0420E17E87008CEB97 /* Strings.swift */; };
 		2286A71620E3DF2100BE92AA /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2286A71420E3DF2100BE92AA /* Model.xcdatamodeld */; };
 		2299F07920F628A70074A834 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299F07820F628A70074A834 /* LocationManager.swift */; };
@@ -94,6 +96,7 @@
 		221BA8B720F6A1DF00BE2AC1 /* TagCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewController.swift; sourceTree = "<group>"; };
 		221BA8B920F6A26100BE2AC1 /* TagCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewModel.swift; sourceTree = "<group>"; };
 		221BA8BD20F6B0EF00BE2AC1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TaskList.strings; sourceTree = "<group>"; };
+		22205ADC20FF7ADF007689D7 /* BigTagCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigTagCollectionViewController.swift; sourceTree = "<group>"; };
 		222BFF9320ED92C7001B6BBF /* RemindersCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersCommunicator.swift; sourceTree = "<group>"; };
 		222BFF9620EDB854001B6BBF /* RemindersImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersImporter.swift; sourceTree = "<group>"; };
 		22325A7320FB8E0500E5F8C6 /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
@@ -108,6 +111,7 @@
 		2253179920D145AE0065C9F9 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		2253179B20D147AD0065C9F9 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2253179D20D147B10065C9F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		225852812100C5BE0011F4B0 /* TagsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsCollectionView.swift; sourceTree = "<group>"; };
 		226CEA0420E17E87008CEB97 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		2286A71520E3DF2100BE92AA /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		2299F07820F628A70074A834 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -259,7 +263,9 @@
 			children = (
 				221BA8B520F6A18500BE2AC1 /* TagCollection.storyboard */,
 				221BA8B720F6A1DF00BE2AC1 /* TagCollectionViewController.swift */,
+				22205ADC20FF7ADF007689D7 /* BigTagCollectionViewController.swift */,
 				22325A7620FBC3F100E5F8C6 /* TagCollectionViewCell.swift */,
+				225852812100C5BE0011F4B0 /* TagsCollectionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -809,6 +815,7 @@
 				221BA8B320F69E5C00BE2AC1 /* HomeScreenViewController.swift in Sources */,
 				223C0C3E20E568DE00CF39ED /* Enums.swift in Sources */,
 				C2A1115320BA036800ABB161 /* NewTaskCoordinator.swift in Sources */,
+				22205ADD20FF7ADF007689D7 /* BigTagCollectionViewController.swift in Sources */,
 				C23753AE20B6461E00C1CE15 /* Coordinator.swift in Sources */,
 				2286A71620E3DF2100BE92AA /* Model.xcdatamodeld in Sources */,
 				22325A7720FBC3F100E5F8C6 /* TagCollectionViewCell.swift in Sources */,
@@ -816,6 +823,7 @@
 				226CEA0520E17E87008CEB97 /* Strings.swift in Sources */,
 				223C0C0620E5293500CF39ED /* PersistenceProtocol.swift in Sources */,
 				22325A7920FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift in Sources */,
+				225852822100C5BE0011F4B0 /* TagsCollectionView.swift in Sources */,
 				221BA8BA20F6A26100BE2AC1 /* TagCollectionViewModel.swift in Sources */,
 				2299F07920F628A70074A834 /* LocationManager.swift in Sources */,
 				2241F36920ED08340069EFE9 /* TagModel.swift in Sources */,

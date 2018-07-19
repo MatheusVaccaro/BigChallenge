@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import QuartzCore
+import RxCocoa
+import RxSwift
 
 class TagCollectionViewCell: UICollectionViewCell {
 
@@ -24,14 +25,11 @@ class TagCollectionViewCell: UICollectionViewCell {
     }
     
     private var viewModel: TagCollectionViewCellViewModel!
-    private var isWidthCalculated = false
     
-    func configure(with viewModel: TagCollectionViewCellViewModel) {
-        self.viewModel = viewModel
-        
+    override func awakeFromNib() {
         contentView.layer.backgroundColor = UIColor.white.cgColor
         contentView.layer.borderColor = UIColor.clear.cgColor
-
+        
         contentView.layer.cornerRadius = 2.0
         contentView.layer.borderWidth = 1.0
         contentView.layer.masksToBounds = true
@@ -41,19 +39,19 @@ class TagCollectionViewCell: UICollectionViewCell {
         layer.shadowRadius = 2.0
         layer.shadowOpacity = 0.5
         layer.masksToBounds = false
-        
+    }
+    
+    func configure(with viewModel: TagCollectionViewCellViewModel) {
+        self.viewModel = viewModel
         tagUILabel.text = viewModel.tagTitle
     }
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        if !isWidthCalculated {
-            setNeedsLayout()
-            layoutIfNeeded()
-            var newFrame = layoutAttributes.frame
-            newFrame.size.width =  tagUILabel.frame.size.width + 10
-            layoutAttributes.frame = newFrame
-            isWidthCalculated = true
-        }
+        setNeedsLayout()
+        layoutIfNeeded()
+        var newFrame = layoutAttributes.frame
+        newFrame.size.width =  tagUILabel.frame.size.width + 10
+        layoutAttributes.frame = newFrame
         return layoutAttributes
     }
 }

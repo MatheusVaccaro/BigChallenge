@@ -35,13 +35,41 @@ class TagCollectionViewController: UIViewController {
     
     func bindCollectionView() {
         viewModel.tagsObservable
-        .bind(to: tagsCollectionView.rx.items(cellIdentifier: TagCollectionViewCell.identifier,
-                                              cellType: TagCollectionViewCell.self)) { (_, tag, cell) in
+        .bind(to: tagsCollectionView.rx
+        .items(cellIdentifier: TagCollectionViewCell.identifier,
+               cellType: TagCollectionViewCell.self)) { (row, tag, cell) in
             
-            print("updating collection with tag \(tag.title!)")
-            let viewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
-            cell.configure(with: viewModel)
+                print("updating collection with tag \(tag.title!)")
+                
+                let tagViewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
+                let indexPath = IndexPath(row: row, section: 0)
+
+                cell.configure(with: tagViewModel)
+                self.loadSelection(for: cell, tag: tag, at: indexPath)
+                tagViewModel.observe(self.viewModel.selectedTagsObservable)
+                
+                tagViewModel.isSelected.subscribe { event in
+                    guard let bool = event.element else { return }
+                    cell.isSelected = bool
+                    if cell.isSelected == true {
+                        self.tagsCollectionView.selectItem(at: indexPath,
+                                                           animated: false,
+                                                           scrollPosition: UICollectionViewScrollPosition.bottom)
+                    } else {
+                        self.tagsCollectionView.deselectItem(at: indexPath, animated: true)
+                    }
+                }.disposed(by: self.disposeBag)
+                
         }.disposed(by: disposeBag)
+        
+        if let tagsCollection = tagsCollectionView as? TagCollectionView {
+            tagsCollection.touchedEvent.subscribe { event in
+                guard let touch = event.element else { return }
+                if self.shouldPresentBigCollection(on: touch) {
+                    self.presentBigCollection()
+                }
+            }
+        }
         
         tagsCollectionView.rx.modelSelected(Tag.self).subscribe { event in // selected x item in collection
             self.viewModel.selectedTagEvent.on(event) // send to viewModel
@@ -50,6 +78,47 @@ class TagCollectionViewController: UIViewController {
         tagsCollectionView.rx.modelDeselected(Tag.self).subscribe { event in
             self.viewModel.selectedTagEvent.on(event)
         }.disposed(by: disposeBag)
+    }
+    
+    private func select(_ bool: Bool, at index: IndexPath, animated: Bool = false) {
+        if bool {
+            tagsCollectionView.selectItem(at: index,
+                                          animated: animated,
+                                          scrollPosition: UICollectionViewScrollPosition.right)
+        } else {
+            tagsCollectionView.deselectItem(at: index,
+                                            animated: animated)
+        }
+    }
+    
+    private func loadSelection(for cell: UICollectionViewCell, tag: Tag, at indexPath: IndexPath) {
+        if self.viewModel.selectedTags.contains(tag) {
+            cell.isSelected = true
+            self.select(true, at: indexPath)
+        } else {
+            cell.isSelected = false
+            self.select(false, at: indexPath)
+        }
+    }
+    
+    fileprivate func shouldPresentBigCollection(on touch: UITouch) -> Bool {
+        if self.traitCollection.forceTouchCapability == .available {
+            let force = touch.force/touch.maximumPossibleForce
+            if force >= 0.5 { return true }
+        } else if false {
+            //HANDLE LONG PRESS
+        }
+        return false
+    }
+    
+    fileprivate func presentBigCollection() {
+        let bigTagVC = BigTagCollectionViewController.instantiate()
+        
+        bigTagVC.viewModel = self.viewModel
+        bigTagVC.modalPresentationStyle = .overCurrentContext
+        bigTagVC.modalTransitionStyle = .crossDissolve
+        
+        present(bigTagVC, animated: true)
     }
 }
 

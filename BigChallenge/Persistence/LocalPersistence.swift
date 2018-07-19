@@ -154,8 +154,10 @@ class LocalPersistence: PersistenceProtocol {
 
 enum CoreDataError: Error {
     case couldNotCreateObject
-    // swiftlint:disable identifier_name
+    //    TODO: tirar essa merda daqui eventualmente, ja que o linter nao funciona com o xcode9 e 10 ao mesmo tempo, dai nao da trabalhar com mais de uma pessoa ao mesmo tempo
+    //     swiftlint:disable all
     case couldNotFetchObject(reason: String)
     case couldNotSaveContext(reason: String)
     case couldNotDeleteObject(reason: String)
+//     swiftlint:enable all
 }
