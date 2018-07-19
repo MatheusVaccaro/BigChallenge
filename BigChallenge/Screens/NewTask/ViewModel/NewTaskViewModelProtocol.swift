@@ -13,7 +13,7 @@ protocol NewTaskViewModelProtocol {
     var taskTitleTextField: String? { get set }
     
     func numberOfSections() -> Int
-    func numberOfRowsInSection() -> Int
+    func numberOfRows(in section: Int) -> Int
     func didTapCancelButton()
     func didTapDoneButton()
     func didTapDeleteTaskButton()
@@ -24,7 +24,5 @@ protocol NewTaskViewModelProtocol {
     func cancelItemTitle() -> String
     func navigationItemTitle() -> String
     func deleteButtonTitle() -> String
-    
-    func tagCollectionViewModel(tagModel: TagModel) -> TagCollectionViewModel
     
 }

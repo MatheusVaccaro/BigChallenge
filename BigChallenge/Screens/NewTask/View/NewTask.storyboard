@@ -51,9 +51,6 @@
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6N-JP-Ele">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                                    <connections>
-                                                        <segue destination="TDv-Xr-NdL" kind="embed" id="QvN-oj-LRD"/>
-                                                    </connections>
                                                 </containerView>
                                             </subviews>
                                             <constraints>
@@ -110,20 +107,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="deleteTaskButton" destination="gKv-5M-9kU" id="OQ7-l4-FLu"/>
+                        <outlet property="tagCollectionContainerView" destination="X6N-JP-Ele" id="mzN-3l-1RU"/>
                         <outlet property="titleTextField" destination="hBb-nG-qL5" id="RBH-OK-bN1"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UUU-4q-HmH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="42" y="233"/>
-        </scene>
-        <!--TagCollection-->
-        <scene sceneID="A11-T6-0dK">
-            <objects>
-                <viewControllerPlaceholder storyboardName="TagCollection" id="TDv-Xr-NdL" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dTF-X2-fW5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="993" y="100"/>
         </scene>
     </scenes>
 </document>

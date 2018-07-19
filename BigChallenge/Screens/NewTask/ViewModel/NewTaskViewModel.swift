@@ -19,17 +19,15 @@ protocol NewTaskViewModelDelegate: class {
 class NewTaskViewModel: NewTaskViewModelProtocol {
     
     private let taskModel: TaskModel
-    private let tagModel: TagModel
     private var isEditing: Bool
     private var task: Task?
     var taskTitleTextField: String?
     
     weak var delegate: NewTaskViewModelDelegate?
     
-    init(task: Task?, isEditing: Bool, taskModel: TaskModel, tagModel: TagModel) {
+    init(task: Task?, isEditing: Bool, taskModel: TaskModel) {
         self.isEditing = isEditing
         self.taskModel = taskModel
-        self.tagModel = tagModel
         self.task = task
     }
     
@@ -41,8 +39,12 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
         }
     }
     
-    func numberOfRowsInSection() -> Int {
-        return 1
+    func numberOfRows(in section: Int) -> Int {
+        if section == 0 {
+            return 2
+        } else {
+            return 1
+        }
     }
     
     func didTapCancelButton() {
@@ -104,9 +106,5 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
     
     func deleteButtonTitle() -> String {
         return Strings.Task.EditScreen.deleteButton
-    }
-    
-    func tagCollectionViewModel(tagModel: TagModel) -> TagCollectionViewModel {
-        return TagCollectionViewModel(model: tagModel)
     }
 }

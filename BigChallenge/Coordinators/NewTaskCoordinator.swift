@@ -36,9 +36,12 @@ class NewTaskCoordinator: Coordinator {
         let newTaskTableViewController = NewTaskTableViewController.instantiate()
         self.newTaskTableViewController = newTaskTableViewController
         
-        let newTaskViewModel = NewTaskViewModel(task: task, isEditing: isEditing, taskModel: taskModel, tagModel: tagModel)
+        let newTaskViewModel = NewTaskViewModel(task: task, isEditing: isEditing, taskModel: taskModel)
         newTaskViewModel.delegate = self
         newTaskTableViewController.viewModel = newTaskViewModel
+        
+        let tagCollectionViewModel = TagCollectionViewModel(model: tagModel)
+        newTaskTableViewController.tagCollectionViewModel = tagCollectionViewModel
         
         let modalPresenter = UINavigationController(rootViewController: newTaskTableViewController)
         self.modalPresenter = modalPresenter
