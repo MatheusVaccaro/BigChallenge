@@ -17,6 +17,7 @@ class TagCollectionViewModel {
     
     private(set) var tags: [Tag]
     private(set) var selectedTags: [Tag]
+    
     private(set) var selectedTagEvent: PublishSubject<Tag>
 
     private let disposeBag = DisposeBag()
@@ -42,10 +43,11 @@ class TagCollectionViewModel {
             self.selectedTagsObservable.onNext(self.selectedTags)
         }.disposed(by: disposeBag)
         
-        model.didUpdateTags = {
-            self.tags = $0
+        model.didUpdateTags.subscribe {
+            self.tags = $0.element!
+            print("updated tags: \(self.tags.map {$0.title!})")
             self.tagsObservable.onNext(self.tags)
-        }
+        }.disposed(by: disposeBag)
     }
     
     func tagCollectionCellViewModel(for tag: Tag) -> TagCollectionViewCellViewModel {

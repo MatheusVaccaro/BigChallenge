@@ -56,11 +56,11 @@ public class TaskListViewModel {
             self.tasksObservable.onNext(self.tasksToShow)
         }.disposed(by: disposeBag)
         
-        model.didUpdateTasks = {
+        model.didUpdateTasks.subscribe{
             self.tasks = []
             self.completedTasks = []
             
-            for task in $0 {
+            for task in $0.element! {
                 if !task.isCompleted { self.tasks.append(task) }
                 else { self.completedTasks.append(task) }
             }

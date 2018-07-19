@@ -42,7 +42,7 @@ public class TaskListViewController: UIViewController {
             .bind(to: tableView.rx.items(cellIdentifier: TaskTableViewCell.identifier,
                                          cellType: TaskTableViewCell.self)) { (_, task, cell) in
                                             
-                print("reloaded cell for task \(task.title ?? "none"), \((task.tags?.anyObject() as? Tag)?.title ?? "nil")")
+                print("reloaded cell for task \(task.title ?? "none")")
                 let taskCellViewModel = self.viewModel.taskCellViewModel(for: task)
                 taskCellViewModel.taskObservable.subscribe {
                     if let task = $0.element {
