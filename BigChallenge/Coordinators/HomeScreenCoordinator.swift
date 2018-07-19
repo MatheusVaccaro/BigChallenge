@@ -20,8 +20,9 @@ class HomeScreenCoordinator: Coordinator {
     fileprivate let persistence: Persistence
     fileprivate var taskModel: TaskModel
     fileprivate var tagModel: TagModel
+    fileprivate var selectedTags: [Tag]
     
-    init(presenter: UINavigationController, taskModel: TaskModel, tagModel: TagModel, persistence: Persistence) {
+    init(presenter: UINavigationController, taskModel: TaskModel, tagModel: TagModel, persistence: Persistence, selectedTags: [Tag] = []) {
         
         self.presenter = presenter
         self.taskModel = taskModel
@@ -29,12 +30,15 @@ class HomeScreenCoordinator: Coordinator {
         
         self.childrenCoordinators = []
         self.persistence = persistence
+        self.selectedTags = selectedTags
     }
 
     func start() {
         let homeScreenViewController = HomeScreenViewController.instantiate()
         homeScreenViewController.viewModel =
             HomeScreenViewModel(taskModel: taskModel, tagModel: tagModel)
+        homeScreenViewController.selectedTags = selectedTags
+
         homeScreenViewController.delegate = self
         
         presenter.isNavigationBarHidden = true

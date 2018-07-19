@@ -25,11 +25,15 @@ class HomeScreenViewModel {
         return TagCollectionViewModel(model: tagModel, filtering: true)
     }()
     
-    private var taskModel: TaskModel
-    private var tagModel: TagModel
+    private(set) var taskModel: TaskModel
+    private(set) var tagModel: TagModel
     
     init(taskModel: TaskModel, tagModel: TagModel) {
         self.taskModel = taskModel
         self.tagModel = tagModel
+    }
+    
+    func tagCollectionViewModel(with selectedTags: [Tag] = []) -> TagCollectionViewModel {
+        return TagCollectionViewModel(model: tagModel, filtering: true, selectedTags: selectedTags)
     }
 }
