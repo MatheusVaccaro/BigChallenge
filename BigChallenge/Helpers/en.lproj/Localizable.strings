@@ -1,3 +1,4 @@
+
 /* 
   Localizable.strings
   BigChallenge
@@ -5,20 +6,46 @@
   Created by Bruno Fulber Wide on 12/06/18.
   Copyright © 2018 Matheus Vaccaro. All rights reserved.
 */
-
 "newTaskTitle" = "New Task";
+
+/* the done button to create the task */
 "newTaskDone" = "Done";
+
+/* cancel button to cancel editing task */
 "newTaskCancel" = "Cancel";
+
+/* screen title when editing task */
 "newTaskScreenTitleEditing" = "Edit";
+
+/* screen title when creating task */
 "newTaskScreenTitleCreating" = "New";
+
+/* button used to delete task */
 "newTaskDeleteTask" = "Delete";
+
+/* title of tasklist tableView screen */
 "taskListScreenTitle" = "Tasks";
+
+/* completed cell status */
 "taskCellComplete" = "Complete";
+
+/* incomplete cell status */
 "taskCellIncomplete" = "Incomplete";
 
+/* placeholder title for a new tag */
 "newTagTitle" = "New Tag";
+
+/* the done button to create the tag */
 "newTagDone" = "Done";
+
+/* cancel button to cancel editing tag */
 "newTagCancel" = "Cancel";
+
+/* screen title when editing tag */
 "newTagScreenTitleEditing" = "Edit";
+
+/* screen title when creating tag */
 "newTagScreenTitleCreating" = "New";
+
+/* button used to delete tag */
 "newTagDeleteTag" = "Delete";
