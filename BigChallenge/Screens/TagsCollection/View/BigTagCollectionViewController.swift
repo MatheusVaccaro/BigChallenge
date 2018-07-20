@@ -11,54 +11,22 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class BigTagCollectionViewController: UIViewController {
+class BigTagCollectionViewController: TagCollectionViewController {
     
-    public var tagsObservable: BehaviorSubject<[Tag]> {
-        return viewModel!.tagsObservable
+    override class var tagViewControllerID: String {
+        return "BigTagCollectionViewController"
     }
     
-    var viewModel: TagCollectionViewModel!
-    
-    @IBOutlet weak var tagsCollectionView: UICollectionView!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tagsLabel: UILabel!
-    
     private let disposeBag = DisposeBag()
     
-    override func viewDidLoad() { // OVERRIDE
+    override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        bindCollectionView()
-        tagsCollectionView.allowsMultipleSelection = true
-        if let layout = tagsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.estimatedItemSize = CGSize(width: 150, height: 40)
-        }
-        
         tagsLabel.text = Strings.Tag.CollectionScreen.title
     }
     
-    private func select(_ bool: Bool, at index: IndexPath, animated: Bool = false) {
-        if bool {
-            tagsCollectionView.selectItem(at: index,
-                                          animated: animated,
-                                          scrollPosition: UICollectionViewScrollPosition.right)
-        } else {
-            tagsCollectionView.deselectItem(at: index,
-                                            animated: animated)
-        }
-    }
-    
-    private func loadSelection(for cell: UICollectionViewCell, tag: Tag, at indexPath: IndexPath) {
-        if self.viewModel.selectedTags.contains(tag) {
-            cell.isSelected = true
-            self.select(true, at: indexPath)
-        } else {
-            cell.isSelected = false
-            self.select(false, at: indexPath)
-        }
-    }
-    
-    func bindCollectionView() { //OVERRIDE
+    override func bindCollectionView() {
         viewModel.tagsObservable
         .bind(to: tagsCollectionView.rx
         .items(cellIdentifier: TagCollectionViewCell.identifier,
@@ -70,6 +38,7 @@ class BigTagCollectionViewController: UIViewController {
                 
                 cell.configure(with: viewModel)
                 self.loadSelection(for: cell, tag: tag, at: index)
+                
                 if row == self.viewModel.tags.count-1 {
                     self.collectionViewHeightConstraint.constant =
                         self.tagsCollectionView.collectionViewLayout.collectionViewContentSize.height
@@ -88,15 +57,5 @@ class BigTagCollectionViewController: UIViewController {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         dismiss(animated: true)
-    }
-}
-
-extension BigTagCollectionViewController: StoryboardInstantiable {
-    static var viewControllerID: String {
-        return "BigTagCollectionViewController"
-    }
-    
-    static var storyboardIdentifier: String {
-        return "TagCollection"
     }
 }
