@@ -11,6 +11,10 @@ import RxCocoa
 import RxSwift
 
 class TagCollectionViewController: UIViewController {
+    
+    class var tagViewControllerID: String {
+        return "TagCollectionViewController"
+    }
 
     public var tagsObservable: BehaviorSubject<[Tag]> {
         return viewModel!.tagsObservable
@@ -68,7 +72,7 @@ class TagCollectionViewController: UIViewController {
                 if self.shouldPresentBigCollection(on: touch) {
                     self.presentBigCollection()
                 }
-            }
+            }.disposed(by: disposeBag)
         }
         
         tagsCollectionView.rx.modelSelected(Tag.self).subscribe { event in // selected x item in collection
@@ -91,7 +95,7 @@ class TagCollectionViewController: UIViewController {
         }
     }
     
-    private func loadSelection(for cell: UICollectionViewCell, tag: Tag, at indexPath: IndexPath) {
+    func loadSelection(for cell: UICollectionViewCell, tag: Tag, at indexPath: IndexPath) {
         if self.viewModel.selectedTags.contains(tag) {
             cell.isSelected = true
             self.select(true, at: indexPath)
@@ -124,7 +128,7 @@ class TagCollectionViewController: UIViewController {
 
 extension TagCollectionViewController: StoryboardInstantiable {
     static var viewControllerID: String {
-        return "TagCollectionViewController"
+        return self.tagViewControllerID
     }
     
     static var storyboardIdentifier: String {

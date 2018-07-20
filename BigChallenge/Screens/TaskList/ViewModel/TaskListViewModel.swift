@@ -66,7 +66,7 @@ public class TaskListViewModel {
             }
             
             self.tasksObservable.onNext(self.tasksToShow)
-        }
+        }.disposed(by: disposeBag)
     }
     
     func filterTasks(with tags: [Tag]) {
