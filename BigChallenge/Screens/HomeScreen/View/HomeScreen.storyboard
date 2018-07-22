@@ -19,15 +19,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cie-Gz-Vzx">
-                                <rect key="frame" x="15" y="135" width="345" height="457"/>
+                                <rect key="frame" x="15" y="142" width="345" height="450"/>
                                 <connections>
                                     <segue destination="Cdx-VN-yjd" kind="embed" identifier="taskListSegue" id="LiI-kx-V3H"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUe-Ak-aYb">
-                                <rect key="frame" x="0.0" y="90" width="375" height="45"/>
+                                <rect key="frame" x="0.0" y="90" width="375" height="52"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="gJB-vw-5rX"/>
+                                    <constraint firstAttribute="height" constant="52" id="gJB-vw-5rX"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="fc3-rz-cDg" kind="embed" identifier="tagCollectionSegue" id="h6S-Ve-BxX"/>

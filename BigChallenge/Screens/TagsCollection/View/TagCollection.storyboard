@@ -30,14 +30,14 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="tagCollectionCell" id="PaF-Pm-One" customClass="TagCollectionViewCell" customModule="BigChallenge" customModuleProvider="target">
-                                        <rect key="frame" x="5" y="2.5" width="50" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <rect key="frame" x="5" y="0.0" width="50" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="45"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tag" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Go-JW-NdM">
-                                                    <rect key="frame" x="14" y="12" width="22" height="16"/>
+                                                    <rect key="frame" x="14" y="14.5" width="22" height="16"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -49,7 +49,7 @@
                                             <constraint firstItem="4Go-JW-NdM" firstAttribute="centerY" secondItem="PaF-Pm-One" secondAttribute="centerY" id="fA0-F4-Zlm"/>
                                         </constraints>
                                         <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
-                                        <size key="customSize" width="50" height="40"/>
+                                        <size key="customSize" width="50" height="45"/>
                                         <connections>
                                             <outlet property="tagUILabel" destination="4Go-JW-NdM" id="Vti-1y-6wW"/>
                                         </connections>
@@ -57,7 +57,7 @@
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="tagsCollectionHeader" id="SBD-0Y-gw7">
                                     <rect key="frame" x="0.0" y="0.0" width="5" height="45"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 </collectionReusableView>
                             </collectionView>
                         </subviews>
