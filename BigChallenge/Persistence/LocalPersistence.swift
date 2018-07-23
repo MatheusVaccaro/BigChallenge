@@ -24,7 +24,6 @@ class LocalPersistence: PersistenceProtocol {
     
     weak var delegate: LocalPersistenceDelegate?
     
-    
     // MARK: - LocalPersistence Lifecycle
     
     init() {
@@ -61,7 +60,6 @@ class LocalPersistence: PersistenceProtocol {
         NotificationCenter.default.removeObserver(self)
     }
 
-    
     // MARK: - CRUD Methods
     
     func create<T: Storable>(_ object: T.Type) throws -> T {
@@ -110,7 +108,6 @@ class LocalPersistence: PersistenceProtocol {
         }
     }
     
-    
     // MARK: - CRUD Auxiliary Methods
     
     private func saveContext () throws {
@@ -122,7 +119,6 @@ class LocalPersistence: PersistenceProtocol {
             }
         }
     }
-    
     
     // MARK: - CoreData Observers Setup
     
@@ -177,7 +173,6 @@ class LocalPersistence: PersistenceProtocol {
     }
 }
 
-
 // MARK: - LocalPersistence Errors
 
 enum CoreDataError: Error {
@@ -189,7 +184,6 @@ enum CoreDataError: Error {
     case couldNotDeleteObject(reason: String)
 //     swiftlint:enable all
 }
-
 
 // MARK: - LocalPersistence Delegate
 
