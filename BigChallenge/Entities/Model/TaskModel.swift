@@ -69,7 +69,7 @@ public class TaskModel {
 extension TaskModel: TasksPersistenceDelegate {
     
     func persistence(_ persistence: Persistence, didInsertTasks tasks: [Task]) {
-        for task in tasks { 
+        for task in tasks {
             guard !self.tasks.contains(task) else { continue }
             self.tasks.append(task)
         }
