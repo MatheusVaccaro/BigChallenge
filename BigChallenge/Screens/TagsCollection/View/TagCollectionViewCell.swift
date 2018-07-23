@@ -21,17 +21,17 @@ class TagCollectionViewCell: UICollectionViewCell {
     private lazy var maskLabel: UILabel = {
         let ans = UILabel()
         
+        ans.textColor = UIColor.white
         ans.textAlignment = .center
+        ans.font = UIFont.preferredFont(forTextStyle: .title3)
         
         return ans
     }()
     
     override var isSelected: Bool {
         didSet {
-            //TODO ask vini
-//            self.contentView.backgroundColor = isSelected ? UIColor.black : UIColor.white
-//            self.tagLabel.textColor = isSelected ? UIColor.white : UIColor.black
-//            self.mask?.alpha = isSelected ? 0.75 : 1.0
+            contentView.mask = isSelected ? nil : maskLabel
+            tagUILabel.isHidden = !isSelected
         }
     }
     
@@ -39,7 +39,7 @@ class TagCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         layer.backgroundColor = UIColor.white.cgColor
-        layer.borderColor = UIColor.white.cgColor
+        layer.borderColor = UIColor.clear.cgColor
         
         layer.cornerRadius = 6.3
         layer.borderWidth = 1.0
@@ -52,11 +52,9 @@ class TagCollectionViewCell: UICollectionViewCell {
         
         createGradientLayer()
         
-        contentView.addSubview(maskLabel)
-        contentView.mask = maskLabel
+        tagUILabel.textColor = UIColor.white
         
-        tagUILabel.isHidden = true
-        maskLabel.font = tagUILabel.font
+        contentView.addSubview(maskLabel)
     }
     
     func configure(with viewModel: TagCollectionViewCellViewModel) {
@@ -83,6 +81,8 @@ class TagCollectionViewCell: UICollectionViewCell {
     private func createGradientLayer() {
         gradientLayer.startPoint = CGPoint(x: 0, y: 1)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0)
+        gradientLayer.cornerRadius = 6.3
+        gradientLayer.zPosition = -1
         
         contentView.layer.addSublayer(gradientLayer)
     }
@@ -92,6 +92,7 @@ class TagCollectionViewCell: UICollectionViewCell {
         
         maskLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         tagUILabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        
         frame.size.width = tagUILabel.frame.size.width + 8*3
         gradientLayer.frame = bounds
         maskLabel.frame = bounds
