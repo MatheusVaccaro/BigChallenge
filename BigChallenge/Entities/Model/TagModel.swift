@@ -12,6 +12,8 @@ import RxSwift
 
 public class TagModel {
     
+    // MARK: - Properties
+    
     static let tagColors = [ Colors.Tags.purpleGradient, Colors.Tags.redGradient, Colors.Tags.peachGradient, Colors.Tags.greenGradient ]
     private(set) var didUpdateTags: BehaviorSubject<[Tag]> //(([Tag]) -> Void)?
     private(set) public var tags: [Tag]
@@ -23,25 +25,22 @@ public class TagModel {
         return Int64( _nextColor % TagModel.tagColors.count )
     }
     
+    // MARK: - TagModel Lifecyce
+    
     init(persistence: Persistence) {
         self.persistance = persistence
         self.tags = []
         self.didUpdateTags = BehaviorSubject<[Tag]>(value: tags)
         self._nextColor = 0
         
+        persistance.tagsDelegate = self
         persistence.fetch(Tag.self) {
             tags = $0
         }
-        
-        persistence.didAddTags = {
-            for tag in $0 { //filter tags added by this device
-                guard !self.tags.contains(tag) else { continue }
-                self.tags.append(tag)
-                self.didUpdateTags.onNext(self.tags)
-            }
-        }
         didUpdateTags.onNext(tags)
     }
+    
+    // MARK: - CRUD Methods
     
     public func saveContext() {
         persistance.save()
@@ -73,5 +72,34 @@ public class TagModel {
             
             return tag
         }
+    }
+}
+
+// MARK: - TagPersistenceDelegate Extension
+
+extension TagModel: TagsPersistenceDelegate {
+    
+    func persistence(_ persistence: Persistence, didInsertTags tags: [Tag]) {
+        for tag in tags {
+            guard !self.tags.contains(tag) else { continue }
+            self.tags.append(tag)
+        }
+        self.didUpdateTags.onNext(self.tags)
+    }
+    
+    func persistence(_ persistence: Persistence, didUpdateTags tags: [Tag]) {
+        for tag in tags {
+            guard let index = self.tags.firstIndex(of: tag) else { continue }
+            self.tags[index] = tag
+        }
+        self.didUpdateTags.onNext(self.tags)
+    }
+    
+    func persistence(_ persistence: Persistence, didDeleteTags tags: [Tag]) {
+        for tag in tags {
+            guard let index = self.tags.firstIndex(of: tag) else { continue }
+            self.tags.remove(at: index)
+        }
+        self.didUpdateTags.onNext(self.tags)
     }
 }

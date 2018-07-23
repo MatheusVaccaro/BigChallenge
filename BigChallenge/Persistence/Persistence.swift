@@ -10,21 +10,22 @@ import Foundation
 
 public class Persistence: PersistenceProtocol {
     
+    // MARK: - Initialization Configuration Enum
+    
     enum Configuration {
         case inMemory
         case inDevice
     }
-   
-    var didChangeTasks: (([Task]) -> Void)?
-    var didDeleteTasks: (([Task]) -> Void)?
-    var didAddTasks: (([Task]) -> Void)?
-    
-    var didChangeTags: (([Tag]) -> Void)?
-    var didDeleteTags: (([Tag]) -> Void)?
-    var didAddTags: (([Tag]) -> Void)?
+
+    // MARK: - Properties
     
     private let localPersistence: LocalPersistence
     private let remotePersistence: PersistenceProtocol?
+    
+    weak var tasksDelegate: TasksPersistenceDelegate?
+    weak var tagsDelegate: TagsPersistenceDelegate?
+    
+    // MARK: - Persistence Lifecycle
     
     init(configuration: Configuration = .inDevice) {
         switch configuration {
@@ -35,19 +36,10 @@ public class Persistence: PersistenceProtocol {
             localPersistence = MockPersistence()
             remotePersistence = nil
         }
-        
-        //Change handler
-        localPersistence.didAddObjects = { objects in
-            if let tasks = (objects.filter { $0 is Task }) as? [Task] {
-                self.didAddTasks?(tasks)
-            }
-            
-            if let tags = (objects.filter { $0 is Tag }) as? [Tag] {
-                self.didAddTags?(tags)
-            }
-        }
-        //TODO change, delete
+        localPersistence.delegate = self
     }
+    
+    // MARK: - CRUD Methods
     
     public func create<T: Storable>(_ model: T.Type) -> T {
         do {
@@ -88,4 +80,57 @@ public class Persistence: PersistenceProtocol {
             fatalError("Unexpected error: \(error).")
         }
     }
+}
+
+// MARK: - Persistence Delegate
+
+// MARK: Tasks
+protocol TasksPersistenceDelegate: class {
+    func persistence(_ persistence: Persistence, didInsertTasks tasks: [Task])
+    func persistence(_ persistence: Persistence, didUpdateTasks tasks: [Task])
+    func persistence(_ persistence: Persistence, didDeleteTasks tasks: [Task])
+}
+
+// MARK: Tags
+protocol TagsPersistenceDelegate: class {
+    func persistence(_ persistence: Persistence, didInsertTags tags: [Tag])
+    func persistence(_ persistence: Persistence, didUpdateTags tags: [Tag])
+    func persistence(_ persistence: Persistence, didDeleteTags tags: [Tag])
+}
+
+// MARK: - LocalPersistenceDelegate Extension
+
+extension Persistence: LocalPersistenceDelegate {
+    
+    func localPersistence(_ localPersistence: LocalPersistence, didInsertObjects objects: [Storable]) {
+        // filter is needed because if a Task and a Tag were to be updated at the same time, the cast would fail
+        if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {
+            tasksDelegate?.persistence(self, didInsertTasks: tasks)
+        }
+        
+        if let tags = (objects.filter { $0 is Tag }) as? [Tag], !tags.isEmpty {
+            tagsDelegate?.persistence(self, didInsertTags: tags)
+        }
+    }
+    
+    func localPersistence(_ localPersistence: LocalPersistence, didUpdateObjects objects: [Storable]) {
+        if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {
+            tasksDelegate?.persistence(self, didUpdateTasks: tasks)
+        }
+        
+        if let tags = (objects.filter { $0 is Tag }) as? [Tag], !tags.isEmpty {
+            tagsDelegate?.persistence(self, didUpdateTags: tags)
+        }
+    }
+    
+    func localPersistence(_ localPersistence: LocalPersistence, didDeleteObjects objects: [Storable]) {
+        if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {
+            tasksDelegate?.persistence(self, didDeleteTasks: tasks)
+        }
+        
+        if let tags = (objects.filter { $0 is Tag }) as? [Tag], !tags.isEmpty {
+            tagsDelegate?.persistence(self, didDeleteTags: tags)
+        }
+    }
+
 }
