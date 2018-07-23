@@ -39,6 +39,7 @@
 		226CEA0520E17E87008CEB97 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226CEA0420E17E87008CEB97 /* Strings.swift */; };
 		2286A71620E3DF2100BE92AA /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2286A71420E3DF2100BE92AA /* Model.xcdatamodeld */; };
 		2299F07920F628A70074A834 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299F07820F628A70074A834 /* LocationManager.swift */; };
+		22CC1865210511CC00486B27 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CC1864210511CC00486B27 /* Colors.swift */; };
 		25A3EF9F7B0FADAB1A8E19B8 /* Pods_BigChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18C9FEFF01841372B83A1C4 /* Pods_BigChallengeUITests.framework */; };
 		2934BCCA21003E0700B6A05A /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2934BCC921003E0700B6A05A /* TaskTests.swift */; };
 		294490EE20FD297200333F11 /* TaskViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294490ED20FD297200333F11 /* TaskViewModelTests.swift */; };
@@ -121,6 +122,7 @@
 		226CEA0420E17E87008CEB97 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		2286A71520E3DF2100BE92AA /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		2299F07820F628A70074A834 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		22CC1864210511CC00486B27 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		2766B305F29EF8BE8DDEADCA /* Pods-BigChallengeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigChallengeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigChallengeUITests/Pods-BigChallengeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2934BCC921003E0700B6A05A /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		294490ED20FD297200333F11 /* TaskViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModelTests.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 				2253179C20D147AD0065C9F9 /* Localizable.strings */,
 				22456D2820DC3BB000168894 /* dateExtension.swift */,
 				226CEA0420E17E87008CEB97 /* Strings.swift */,
+				22CC1864210511CC00486B27 /* Colors.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -826,6 +829,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C2C231C520FD41AE002A2371 /* NewTagCoordinator.swift in Sources */,
+				22CC1865210511CC00486B27 /* Colors.swift in Sources */,
 				222BFF9420ED92C7001B6BBF /* RemindersCommunicator.swift in Sources */,
 				C2A1115720BB923C00ABB161 /* NewTaskTableViewController.swift in Sources */,
 				C2A1114220B8AED400ABB161 /* TaskTableViewCell.swift in Sources */,

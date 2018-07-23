@@ -12,20 +12,26 @@ import RxSwift
 
 public class TagModel {
     
+    static let tagColors = [ Colors.Tags.purpleGradient, Colors.Tags.redGradient, Colors.Tags.peachGradient, Colors.Tags.greenGradient ]
     private(set) var didUpdateTags: BehaviorSubject<[Tag]> //(([Tag]) -> Void)?
-    
     private(set) public var tags: [Tag]
+    
     private let persistance: Persistence
+    private var _nextColor: Int //TODO: save to user defaults
+    private var nextColor: Int64 {
+        _nextColor += 1
+        return Int64( _nextColor % TagModel.tagColors.count )
+    }
     
     init(persistence: Persistence) {
         self.persistance = persistence
         self.tags = []
         self.didUpdateTags = BehaviorSubject<[Tag]>(value: tags)
+        self._nextColor = 0
         
         persistence.fetch(Tag.self) {
             tags = $0
         }
-        
         
         persistence.didAddTags = {
             for tag in $0 { //filter tags added by this device
@@ -63,6 +69,7 @@ public class TagModel {
             
             tag.id = UUID()
             tag.title = title
+            tag.color = nextColor
             
             return tag
         }

@@ -11,10 +11,28 @@ import RxSwift
 import RxCocoa
 
 class TagCollectionView: UICollectionView {
+    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+        super.init(frame: frame, collectionViewLayout: layout)
+        NotificationCenter.default.addObserver(self, selector: #selector(update), name: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        NotificationCenter.default.addObserver(self, selector: #selector(update), name: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil)
+    }
+    
     var touchedEvent: PublishSubject<UITouch> = PublishSubject()
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         touchedEvent.onNext(touch)
+    }
+    
+    @objc private func update() {
+        reloadData()
     }
 }
