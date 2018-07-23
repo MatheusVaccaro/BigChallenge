@@ -69,7 +69,8 @@ class TagCollectionViewCell: UICollectionViewCell {
         gradientLayer.colors = viewModel.color
     }
     
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) ->
+        UICollectionViewLayoutAttributes {
         setNeedsLayout()
         layoutIfNeeded()
         var newFrame = layoutAttributes.frame
@@ -89,6 +90,9 @@ class TagCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        maskLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        tagUILabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        frame.size.width = tagUILabel.frame.size.width + 8*3
         gradientLayer.frame = bounds
         maskLabel.frame = bounds
     }
