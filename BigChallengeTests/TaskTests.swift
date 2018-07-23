@@ -51,7 +51,7 @@ class TaskModelTests: QuickSpec {
             describe("creating a task") {
                 
                 beforeEach {
-                    newTaskViewModel = NewTaskViewModel(task: nil, isEditing: false, model: taskModel)
+                    newTaskViewModel = NewTaskViewModel(task: nil, isEditing: false, taskModel: taskModel)
                     newTaskViewModel.taskTitleTextField = "Title"
                     initialTasks = taskModel.tasks
                 }
