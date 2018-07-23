@@ -22,8 +22,8 @@ public class TaskListViewModel {
     }
     
     var tasksToShow: [Task] {
-        print(tasks.map {$0.title!})
-        print(completedTasks.map {$0.title!})
+        print(tasks.map {$0.title ?? "Task Nil"})
+        print(completedTasks.map {$0.title ?? "Task Nil"})
         
         if showsCompletedTasks { return tasks + completedTasks }
         else { return tasks }
