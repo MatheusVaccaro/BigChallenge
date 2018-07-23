@@ -16,15 +16,14 @@ public class Persistence: PersistenceProtocol {
         case inMemory
         case inDevice
     }
-    
-    
+
     // MARK: - Properties
     
     private let localPersistence: LocalPersistence
     private let remotePersistence: PersistenceProtocol?
     
-    weak var delegate: PersistenceDelegate?
-    
+    weak var tasksDelegate: TasksPersistenceDelegate?
+    weak var tagsDelegate: TagsPersistenceDelegate?
     
     // MARK: - Persistence Lifecycle
     
@@ -37,8 +36,8 @@ public class Persistence: PersistenceProtocol {
             localPersistence = MockPersistence()
             remotePersistence = nil
         }
+        localPersistence.delegate = self
     }
-    
     
     // MARK: - CRUD Methods
     
@@ -83,29 +82,21 @@ public class Persistence: PersistenceProtocol {
     }
 }
 
-
 // MARK: - Persistence Delegate
 
-protocol PersistenceDelegate: class {
+// MARK: Tasks
+protocol TasksPersistenceDelegate: class {
     func persistence(_ persistence: Persistence, didInsertTasks tasks: [Task])
     func persistence(_ persistence: Persistence, didUpdateTasks tasks: [Task])
     func persistence(_ persistence: Persistence, didDeleteTasks tasks: [Task])
-    
+}
+
+// MARK: Tags
+protocol TagsPersistenceDelegate: class {
     func persistence(_ persistence: Persistence, didInsertTags tags: [Tag])
     func persistence(_ persistence: Persistence, didUpdateTags tags: [Tag])
     func persistence(_ persistence: Persistence, didDeleteTags tags: [Tag])
 }
-
-extension PersistenceDelegate {
-    func persistence(_ persistence: Persistence, didInsertTasks tasks: [Task]) { }
-    func persistence(_ persistence: Persistence, didUpdateTasks tasks: [Task]) { }
-    func persistence(_ persistence: Persistence, didDeleteTasks tasks: [Task]) { }
-    
-    func persistence(_ persistence: Persistence, didInsertTags tags: [Tag]) { }
-    func persistence(_ persistence: Persistence, didUpdateTags tags: [Tag]) { }
-    func persistence(_ persistence: Persistence, didDeleteTags tags: [Tag]) { }
-}
-
 
 // MARK: - LocalPersistenceDelegate Extension
 
@@ -113,31 +104,31 @@ extension Persistence: LocalPersistenceDelegate {
     
     func localPersistence(_ localPersistence: LocalPersistence, didInsertObjects objects: [Storable]) {
         if let tasks = (objects.filter { $0 is Task }) as? [Task] {
-            delegate?.persistence(self, didInsertTasks: tasks)
+            tasksDelegate?.persistence(self, didInsertTasks: tasks)
         }
         
         if let tags = (objects.filter { $0 is Tag }) as? [Tag] {
-            delegate?.persistence(self, didInsertTags: tags)
+            tagsDelegate?.persistence(self, didInsertTags: tags)
         }
     }
     
     func localPersistence(_ localPersistence: LocalPersistence, didUpdateObjects objects: [Storable]) {
         if let tasks = (objects.filter { $0 is Task }) as? [Task] {
-            delegate?.persistence(self, didUpdateTasks: tasks)
+            tasksDelegate?.persistence(self, didUpdateTasks: tasks)
         }
         
         if let tags = (objects.filter { $0 is Tag }) as? [Tag] {
-            delegate?.persistence(self, didUpdateTags: tags)
+            tagsDelegate?.persistence(self, didUpdateTags: tags)
         }
     }
     
     func localPersistence(_ localPersistence: LocalPersistence, didDeleteObjects objects: [Storable]) {
         if let tasks = (objects.filter { $0 is Task }) as? [Task] {
-            delegate?.persistence(self, didDeleteTasks: tasks)
+            tasksDelegate?.persistence(self, didDeleteTasks: tasks)
         }
         
         if let tags = (objects.filter { $0 is Tag }) as? [Tag] {
-            delegate?.persistence(self, didDeleteTags: tags)
+            tagsDelegate?.persistence(self, didDeleteTags: tags)
         }
     }
 
