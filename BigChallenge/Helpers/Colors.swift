@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 struct Colors {
+    
     struct Tags {
         
         static let purpleGradient: [CGColor] = [

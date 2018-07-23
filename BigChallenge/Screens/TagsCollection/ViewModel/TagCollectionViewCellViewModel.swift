@@ -14,7 +14,7 @@ class TagCollectionViewCellViewModel {
     
     var isSelected: BehaviorSubject<Bool>
     
-    private(set) var tag: Tag
+    private var tag: Tag
     
     private let disposeBag = DisposeBag()
     
@@ -27,8 +27,8 @@ class TagCollectionViewCellViewModel {
        return tag.title!
     }()
     
-    lazy var color: Int16 = {
-       return tag.color
+    lazy var color: [CGColor] = {
+        return TagModel.tagColors[ Int(tag.color) ]
     }()
     
     func observe(_ subject: BehaviorSubject<[Tag]>) {
