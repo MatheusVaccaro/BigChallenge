@@ -18,6 +18,14 @@ class TagCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var tagUILabel: UILabel!
     
+    private lazy var maskLabel: UILabel = {
+        let ans = UILabel()
+        
+        ans.textAlignment = .center
+        
+        return ans
+    }()
+    
     override var isSelected: Bool {
         didSet {
             //TODO ask vini
@@ -37,9 +45,9 @@ class TagCollectionViewCell: UICollectionViewCell {
         layer.borderWidth = 1.0
         layer.masksToBounds = true
         
-        layer.shadowColor = Colors.Tags.purpleGradient.first!
         layer.shadowRadius = 6.3
-        layer.shadowOpacity = 0.5
+        layer.shadowOpacity = 0.2
+        layer.shadowOffset = CGSize(width: 0, height: 4)
         layer.masksToBounds = false
         
         createGradientLayer()
@@ -56,15 +64,10 @@ class TagCollectionViewCell: UICollectionViewCell {
         
         tagUILabel.text = viewModel.tagTitle
         maskLabel.text = viewModel.tagTitle
+        
+        layer.shadowColor = viewModel.color.first!
+        gradientLayer.colors = viewModel.color
     }
-    
-    private lazy var maskLabel: UILabel = {
-       let ans = UILabel()
-        
-        ans.textAlignment = .center
-        
-        return ans
-    }()
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         setNeedsLayout()
@@ -77,8 +80,6 @@ class TagCollectionViewCell: UICollectionViewCell {
     }
     
     private func createGradientLayer() {
-        
-        gradientLayer.colors = Colors.Tags.purpleGradient
         gradientLayer.startPoint = CGPoint(x: 0, y: 1)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0)
         
