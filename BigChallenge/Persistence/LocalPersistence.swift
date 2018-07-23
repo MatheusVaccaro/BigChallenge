@@ -11,10 +11,21 @@ import CoreData
 
 class LocalPersistence: PersistenceProtocol {
     
+    // MARK: - Properties
+    
+    // This property is internal because MockPersistence needs to set it inside its init()
     internal var persistentContainer: NSPersistentContainer
-    internal lazy var viewContext = {
+    
+    private var notificationCenter = NotificationCenter.default
+    
+    private lazy var viewContext = {
        return persistentContainer.viewContext
     }()
+    
+    weak var delegate: LocalPersistenceDelegate?
+    
+    
+    // MARK: - LocalPersistence Lifecycle
     
     init() {
         self.persistentContainer = {
@@ -41,31 +52,17 @@ class LocalPersistence: PersistenceProtocol {
             return container
         }()
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didChangePersistence(_:)),
-                                               name: Notification.Name.NSManagedObjectContextObjectsDidChange,
-                                               object: nil)
+        setupContextDidChangeObserver()
+        setupContextWillSaveObserver()
+        setupContextDidSaveObserver()
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
-    // todo when did change
-    var didChangeObjects: (([Storable]) -> Void)?
-    var didDeleteObjects: (([Storable]) -> Void)?
-    var didAddObjects: (([Storable]) -> Void)?
     
-    @objc private func didChangePersistence(_ notification: Notification) {
-        let dict = notification.userInfo!
-        
-        if let addedSet = dict[NSInsertedObjectsKey] as? NSSet,
-            let addedArray = addedSet.allObjects as? [Storable] {
-            self.didAddObjects?(addedArray)
-        }
-        //TODO if let changed
-        //TODO if let deleted
-    }
+    // MARK: - CRUD Methods
     
     func create<T: Storable>(_ object: T.Type) throws -> T {
         let modelName = String(describing: object)
@@ -113,6 +110,9 @@ class LocalPersistence: PersistenceProtocol {
         }
     }
     
+    
+    // MARK: - CRUD Auxiliary Methods
+    
     private func saveContext () throws {
         if viewContext.hasChanges {
             do {
@@ -122,7 +122,63 @@ class LocalPersistence: PersistenceProtocol {
             }
         }
     }
+    
+    
+    // MARK: - CoreData Observers Setup
+    
+    private func setupContextDidChangeObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(contextDidChange(_:)),
+                                               name: Notification.Name.NSManagedObjectContextObjectsDidChange,
+                                               object: viewContext)
+    }
+    
+    @objc private func contextDidChange(_ notification: NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+        
+        if let insertSet = userInfo[NSInsertedObjectsKey] as? NSSet,
+            let insertArray = insertSet.allObjects as? [Storable] {
+            delegate?.localPersistence(self, didInsertObjects: insertArray)
+        }
+        
+        if let updateSet = userInfo[NSUpdatedObjectsKey] as? NSSet,
+            let updateArray = updateSet.allObjects as? [Storable] {
+            delegate?.localPersistence(self, didUpdateObjects: updateArray)
+        }
+        
+        if let deleteSet = userInfo[NSDeletedObjectsKey] as? NSSet,
+            let deleteArray = deleteSet.allObjects as? [Storable] {
+            delegate?.localPersistence(self, didDeleteObjects: deleteArray)
+        }
+    }
+    
+    private func setupContextWillSaveObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(contextWillSave(_:)),
+                                               name: Notification.Name.NSManagedObjectContextWillSave,
+                                               object: viewContext)
+    }
+    
+    @objc private func contextWillSave(_ notification: NSNotification) {
+        delegate?.willSaveContext(in: self)
+        
+    }
+    
+    private func setupContextDidSaveObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(contextDidSave(_:)),
+                                               name: Notification.Name.NSManagedObjectContextDidSave,
+                                               object: viewContext)
+    }
+    
+    @objc private func contextDidSave(_ notification: NSNotification) {
+        delegate?.didSaveContext(in: self)
+        
+    }
 }
+
+
+// MARK: - LocalPersistence Errors
 
 enum CoreDataError: Error {
     case couldNotCreateObject
@@ -132,4 +188,20 @@ enum CoreDataError: Error {
     case couldNotSaveContext(reason: String)
     case couldNotDeleteObject(reason: String)
 //     swiftlint:enable all
+}
+
+
+// MARK: - LocalPersistence Delegate
+
+protocol LocalPersistenceDelegate: class {
+    func localPersistence(_ localPersistence: LocalPersistence, didInsertObjects objects: [Storable])
+    func localPersistence(_ localPersistence: LocalPersistence, didUpdateObjects objects: [Storable])
+    func localPersistence(_ localPersistence: LocalPersistence, didDeleteObjects objects: [Storable])
+    func willSaveContext(in localPersistence: LocalPersistence)
+    func didSaveContext(in localPersistence: LocalPersistence)
+}
+
+extension LocalPersistenceDelegate {
+    func willSaveContext(in localPersistence: LocalPersistence) { }
+    func didSaveContext(in localPersistence: LocalPersistence) { }
 }
