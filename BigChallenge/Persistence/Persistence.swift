@@ -10,21 +10,23 @@ import Foundation
 
 public class Persistence: PersistenceProtocol {
     
+    // MARK: - Initialization Configuration Enum
+    
     enum Configuration {
         case inMemory
         case inDevice
     }
-   
-    var didChangeTasks: (([Task]) -> Void)?
-    var didDeleteTasks: (([Task]) -> Void)?
-    var didAddTasks: (([Task]) -> Void)?
     
-    var didChangeTags: (([Tag]) -> Void)?
-    var didDeleteTags: (([Tag]) -> Void)?
-    var didAddTags: (([Tag]) -> Void)?
+    
+    // MARK: - Properties
     
     private let localPersistence: LocalPersistence
     private let remotePersistence: PersistenceProtocol?
+    
+    weak var delegate: PersistenceDelegate?
+    
+    
+    // MARK: - Persistence Lifecycle
     
     init(configuration: Configuration = .inDevice) {
         switch configuration {
@@ -35,19 +37,10 @@ public class Persistence: PersistenceProtocol {
             localPersistence = MockPersistence()
             remotePersistence = nil
         }
-        
-        //Change handler
-        localPersistence.didAddObjects = { objects in
-            if let tasks = (objects.filter { $0 is Task }) as? [Task] {
-                self.didAddTasks?(tasks)
-            }
-            
-            if let tags = (objects.filter { $0 is Tag }) as? [Tag] {
-                self.didAddTags?(tags)
-            }
-        }
-        //TODO change, delete
     }
+    
+    
+    // MARK: - CRUD Methods
     
     public func create<T: Storable>(_ model: T.Type) -> T {
         do {
@@ -88,4 +81,64 @@ public class Persistence: PersistenceProtocol {
             fatalError("Unexpected error: \(error).")
         }
     }
+}
+
+
+// MARK: - Persistence Delegate
+
+protocol PersistenceDelegate: class {
+    func persistence(_ persistence: Persistence, didInsertTasks tasks: [Task])
+    func persistence(_ persistence: Persistence, didUpdateTasks tasks: [Task])
+    func persistence(_ persistence: Persistence, didDeleteTasks tasks: [Task])
+    
+    func persistence(_ persistence: Persistence, didInsertTags tags: [Tag])
+    func persistence(_ persistence: Persistence, didUpdateTags tags: [Tag])
+    func persistence(_ persistence: Persistence, didDeleteTags tags: [Tag])
+}
+
+extension PersistenceDelegate {
+    func persistence(_ persistence: Persistence, didInsertTasks tasks: [Task]) { }
+    func persistence(_ persistence: Persistence, didUpdateTasks tasks: [Task]) { }
+    func persistence(_ persistence: Persistence, didDeleteTasks tasks: [Task]) { }
+    
+    func persistence(_ persistence: Persistence, didInsertTags tags: [Tag]) { }
+    func persistence(_ persistence: Persistence, didUpdateTags tags: [Tag]) { }
+    func persistence(_ persistence: Persistence, didDeleteTags tags: [Tag]) { }
+}
+
+
+// MARK: - LocalPersistenceDelegate Extension
+
+extension Persistence: LocalPersistenceDelegate {
+    
+    func localPersistence(_ localPersistence: LocalPersistence, didInsertObjects objects: [Storable]) {
+        if let tasks = (objects.filter { $0 is Task }) as? [Task] {
+            delegate?.persistence(self, didInsertTasks: tasks)
+        }
+        
+        if let tags = (objects.filter { $0 is Tag }) as? [Tag] {
+            delegate?.persistence(self, didInsertTags: tags)
+        }
+    }
+    
+    func localPersistence(_ localPersistence: LocalPersistence, didUpdateObjects objects: [Storable]) {
+        if let tasks = (objects.filter { $0 is Task }) as? [Task] {
+            delegate?.persistence(self, didUpdateTasks: tasks)
+        }
+        
+        if let tags = (objects.filter { $0 is Tag }) as? [Tag] {
+            delegate?.persistence(self, didUpdateTags: tags)
+        }
+    }
+    
+    func localPersistence(_ localPersistence: LocalPersistence, didDeleteObjects objects: [Storable]) {
+        if let tasks = (objects.filter { $0 is Task }) as? [Task] {
+            delegate?.persistence(self, didDeleteTasks: tasks)
+        }
+        
+        if let tags = (objects.filter { $0 is Tag }) as? [Tag] {
+            delegate?.persistence(self, didDeleteTags: tags)
+        }
+    }
+
 }
