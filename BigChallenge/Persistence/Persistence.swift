@@ -103,31 +103,31 @@ protocol TagsPersistenceDelegate: class {
 extension Persistence: LocalPersistenceDelegate {
     
     func localPersistence(_ localPersistence: LocalPersistence, didInsertObjects objects: [Storable]) {
-        if let tasks = (objects.filter { $0 is Task }) as? [Task] {
+        if let tasks = objects as? [Task], !tasks.isEmpty {
             tasksDelegate?.persistence(self, didInsertTasks: tasks)
         }
         
-        if let tags = (objects.filter { $0 is Tag }) as? [Tag] {
+        if let tags = objects as? [Tag], !tags.isEmpty {
             tagsDelegate?.persistence(self, didInsertTags: tags)
         }
     }
     
     func localPersistence(_ localPersistence: LocalPersistence, didUpdateObjects objects: [Storable]) {
-        if let tasks = (objects.filter { $0 is Task }) as? [Task] {
+        if let tasks = objects as? [Task], !tasks.isEmpty {
             tasksDelegate?.persistence(self, didUpdateTasks: tasks)
         }
         
-        if let tags = (objects.filter { $0 is Tag }) as? [Tag] {
+        if let tags = objects as? [Tag], !tags.isEmpty {
             tagsDelegate?.persistence(self, didUpdateTags: tags)
         }
     }
     
     func localPersistence(_ localPersistence: LocalPersistence, didDeleteObjects objects: [Storable]) {
-        if let tasks = (objects.filter { $0 is Task }) as? [Task] {
+        if let tasks = objects as? [Task], !tasks.isEmpty {
             tasksDelegate?.persistence(self, didDeleteTasks: tasks)
         }
         
-        if let tags = (objects.filter { $0 is Tag }) as? [Tag] {
+        if let tags = objects as? [Tag], !tags.isEmpty {
             tagsDelegate?.persistence(self, didDeleteTags: tags)
         }
     }
