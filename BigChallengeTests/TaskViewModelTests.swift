@@ -18,18 +18,35 @@ class TaskListViewModelTests: QuickSpec {
         
         describe("a TaskListViewModel") {
             var taskListViewModel: TaskListViewModel!
+            var taskModel: TaskModel!
             
             beforeEach {
                 let mockPersistence = Persistence(configuration: .inMemory)
-                let taskModel = TaskModel(persistence: mockPersistence)
+                taskModel = TaskModel(persistence: mockPersistence)
                 taskListViewModel = TaskListViewModel(model: taskModel)
+                let task = taskModel.createTask(with: "Test Task")
+                taskModel.save(object: task)
             }
             
-            describe("title") {
-                it("should be localized") {
-                    let localizedTitle = String.taskListScreenTitle
-                    expect(taskListViewModel.viewTitle).to(equal(localizedTitle))
+            describe("list") {
+                it("should be capable of create new tasks") {
+                    let task = taskModel.createTask(with: "Test Task 2")
+                    taskModel.save(object: task)
+                    
+                    expect(taskListViewModel.tasks.contains(task)).to(beTrue())
                 }
+
+                it("should be capable of delete tasks") {
+                    guard let task = taskListViewModel.tasks.first else { return }
+                    taskModel.delete(object: task)
+                    
+                    expect(taskListViewModel.tasks.contains(task)).to(beFalse())
+                }
+                
+                it("should have tasks") {
+                    expect(taskListViewModel.tasks.count).to(beGreaterThan(0))
+                }
+                
             }
         }
     }
