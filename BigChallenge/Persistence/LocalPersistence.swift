@@ -122,31 +122,6 @@ class LocalPersistence: PersistenceProtocol {
             }
         }
     }
-    
-    func clearDatabase() {
-        
-        let entityName = "Task"
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        do {
-            try viewContext.execute(batchDeleteRequest)
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-//        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-//        let result = try! viewContext.fetch(request) as! [NSManagedObject]
-//        result.forEach {
-//            viewContext.delete($0)
-//        }
-//        do {
-//            try viewContext.save()
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-    }
-    
 }
 
 enum CoreDataError: Error {
