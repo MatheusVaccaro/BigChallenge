@@ -12,6 +12,7 @@
 		1627EBEDDA20D9C1EB6BC691 /* Pods_BigChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 558C6AF329AB768E11815BB8 /* Pods_BigChallengeTests.framework */; };
 		1676FC9020D99580003E2D79 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1676FC8F20D99580003E2D79 /* TaskModel.swift */; };
 		16EC6CEA21065B2500797D9C /* TagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EC6CE921065B2500797D9C /* TagTests.swift */; };
+		16FDC13521068D25008FA931 /* AddTagColletionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FDC13421068D25008FA931 /* AddTagColletionViewCell.swift */; };
 		221BA8AF20F6991200BE2AC1 /* HomeScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221BA8AE20F6991200BE2AC1 /* HomeScreen.storyboard */; };
 		221BA8B320F69E5C00BE2AC1 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BA8B220F69E5C00BE2AC1 /* HomeScreenViewController.swift */; };
 		221BA8B620F6A18500BE2AC1 /* TagCollection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221BA8B520F6A18500BE2AC1 /* TagCollection.storyboard */; };
@@ -97,6 +98,7 @@
 		1627171F20C879AD00AA0024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1676FC8F20D99580003E2D79 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		16EC6CE921065B2500797D9C /* TagTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTests.swift; sourceTree = "<group>"; };
+		16FDC13421068D25008FA931 /* AddTagColletionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagColletionViewCell.swift; sourceTree = "<group>"; };
 		220D7C1C20D02E5E007EC0DD /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		221BA8AE20F6991200BE2AC1 /* HomeScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeScreen.storyboard; sourceTree = "<group>"; };
 		221BA8B220F69E5C00BE2AC1 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				22205ADC20FF7ADF007689D7 /* BigTagCollectionViewController.swift */,
 				22325A7620FBC3F100E5F8C6 /* TagCollectionViewCell.swift */,
 				225852812100C5BE0011F4B0 /* TagsCollectionView.swift */,
+				16FDC13421068D25008FA931 /* AddTagColletionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -851,6 +854,7 @@
 				2286A71620E3DF2100BE92AA /* Model.xcdatamodeld in Sources */,
 				22325A7720FBC3F100E5F8C6 /* TagCollectionViewCell.swift in Sources */,
 				223C0C0820E529D600CF39ED /* Persistence.swift in Sources */,
+				16FDC13521068D25008FA931 /* AddTagColletionViewCell.swift in Sources */,
 				226CEA0520E17E87008CEB97 /* Strings.swift in Sources */,
 				223C0C0620E5293500CF39ED /* PersistenceProtocol.swift in Sources */,
 				C231119120FFC92800BCB000 /* NewTaskViewModelProtocol.swift in Sources */,

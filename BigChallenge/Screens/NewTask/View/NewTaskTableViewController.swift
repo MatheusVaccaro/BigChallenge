@@ -91,17 +91,21 @@ class NewTaskTableViewController: UITableViewController {
         tagCollectionContainerView.addSubview(tagCollectionViewController.view)
         
         NSLayoutConstraint.activate([
-            tagCollectionViewController.view.leadingAnchor.constraint(equalTo: tagCollectionContainerView.leadingAnchor),
-            tagCollectionViewController.view.trailingAnchor.constraint(equalTo: tagCollectionContainerView.trailingAnchor),
-            tagCollectionViewController.view.topAnchor.constraint(equalTo: tagCollectionContainerView.topAnchor),
-            tagCollectionViewController.view.bottomAnchor.constraint(equalTo: tagCollectionContainerView.bottomAnchor)
+            tagCollectionViewController.view
+                .leadingAnchor.constraint(equalTo: tagCollectionContainerView.leadingAnchor),
+            tagCollectionViewController.view
+                .trailingAnchor.constraint(equalTo: tagCollectionContainerView.trailingAnchor),
+            tagCollectionViewController.view
+                .topAnchor.constraint(equalTo: tagCollectionContainerView.topAnchor),
+            tagCollectionViewController.view
+                .bottomAnchor.constraint(equalTo: tagCollectionContainerView.bottomAnchor)
             ])
         
         tagCollectionViewController.didMove(toParentViewController: self)
         
         tagCollectionViewController.viewModel.selectedTagsObservable.subscribe { event in
             self.viewModel?.selectedTags = event.element!
-            print("selected tags are: \( event.element!.map {$0.title} )")
+            print("selected tags are: \(event.element!.map {$0.title})")
             }.disposed(by: disposeBag)
 
     }
