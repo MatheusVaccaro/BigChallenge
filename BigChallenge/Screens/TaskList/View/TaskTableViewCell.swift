@@ -12,6 +12,12 @@ protocol TaskCellDelegate: class {
     func shouldUpdateSize(of cell: TaskTableViewCell)
 }
 
+enum CellType {
+    case top
+    case middle
+    case bottom
+}
+
 class TaskTableViewCell: UITableViewCell {
     
     // MARK: - Properties
@@ -41,6 +47,10 @@ class TaskTableViewCell: UITableViewCell {
         taskTitleTextView.text = viewModel.title
         taskTitleTextView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
         checkButton.isSelected = viewModel.taskIsCompleted
+    }
+    
+    func configure(with position: CellType) {
+        
     }
     
     // MARK: - IBActions

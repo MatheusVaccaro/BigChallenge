@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import RxCocoa
 import RxSwift
 
@@ -23,7 +24,7 @@ public class TaskListViewModel {
         }
     }
     
-    var tasksToShow: [Task] { //TODO: TEMPORARY: CHANGE THIS WHEN LIST HAS TWO SECTIONS
+    var tasksToShow: [Task] {
         if showsCompletedTasks { return secondaryTasks + completedTasks }
         else { return secondaryTasks }
     }
@@ -87,8 +88,13 @@ public class TaskListViewModel {
         return TaskCellViewModel(task: task)
     }
     
+
     func shouldGoToAddTask() {
         self.shouldAddTask.onNext(true)
+    }
+
+    func viewForHeader(in section: Int) -> UIView? {
+        return nil //TODO: vini's desing
     }
     
     //MARK: Helpers

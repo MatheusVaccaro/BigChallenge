@@ -47,7 +47,20 @@ public class TaskListViewController: UIViewController {
     }
     
     private func bindTableView() {
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionedTaskModel>(
+        let dataSource = createDataSource()
+        
+        tableView
+            .rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        viewModel.tasksObservable
+            .map { return [SectionedTaskModel(items: $0.0), SectionedTaskModel(items: $0.1)] }
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+    }
+    
+    fileprivate func createDataSource() -> RxTableViewSectionedReloadDataSource<SectionedTaskModel> {
+        let ans = RxTableViewSectionedReloadDataSource<SectionedTaskModel>(
             configureCell: {(dataSource, table, indexPath, task) in
                 let cell = table.dequeueReusableCell(withIdentifier: TaskTableViewCell.identifier, for: indexPath) as! TaskTableViewCell
                 
@@ -57,10 +70,21 @@ public class TaskListViewController: UIViewController {
                     if let task = $0.element {
                         self.viewModel.taskCompleted.onNext(task)
                     }
-                }.disposed(by: self.disposeBag)
+                    }.disposed(by: self.disposeBag)
                 
                 cell.configure(with: taskCellViewModel)
                 cell.delegate = self
+                
+                if indexPath.section == 0 {
+                    switch indexPath.row {
+                    case 0:
+                        cell.configure(with: .top)
+                    case self.viewModel.mainTasks.count:
+                        cell.configure(with: .bottom)
+                    default:
+                        cell.configure(with: .middle)
+                    }
+                }
                 
                 return cell
             })
@@ -71,20 +95,19 @@ public class TaskListViewController: UIViewController {
             }
         }.disposed(by: disposeBag)
         
-        dataSource.titleForHeaderInSection = { dataSource, index in
-            if index == 0 {
-                return ""
-            } else {
-                return "Also Tagged:"
-            }
-        }
-        
-        viewModel.tasksObservable
-            .map { return [SectionedTaskModel(items: $0.0), SectionedTaskModel(items: $0.1)] }
-            .bind(to: tableView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
+        return ans
     }
+    
 }
+
+extension TaskListViewController: UITableViewDelegate {
+    
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return viewModel.viewForHeader(in: section)
+    }
+    
+}
+
 extension TaskListViewController: TaskCellDelegate {
     func shouldUpdateSize(of cell: TaskTableViewCell) {
         UIView.performWithoutAnimation {
