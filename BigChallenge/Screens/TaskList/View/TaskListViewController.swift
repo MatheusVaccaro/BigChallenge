@@ -7,8 +7,22 @@
 //
 
 import UIKit
-import RxCocoa
 import RxSwift
+import RxCocoa
+import RxDataSources
+
+struct SectionedTaskModel {
+    var items: [Task]
+}
+
+extension SectionedTaskModel: SectionModelType {
+    init(original: SectionedTaskModel, items: [Task]) {
+        self = original
+        self.items = items
+    }
+    
+    typealias Item = Task
+}
 
 public class TaskListViewController: UIViewController {
     
@@ -29,35 +43,46 @@ public class TaskListViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
         
-        configureWithViewModel()
         bindTableView()
     }
     
-    private func configureWithViewModel() {
-        
-    }
-    
     private func bindTableView() {
-        viewModel.tasksObservable
-            .bind(to: tableView.rx.items(cellIdentifier: TaskTableViewCell.identifier,
-                                         cellType: TaskTableViewCell.self)) { (_, task, cell) in
-                                            
-                print("reloaded cell for task \(task.title ?? "none")")
+        let dataSource = RxTableViewSectionedReloadDataSource<SectionedTaskModel>(
+            configureCell: {(dataSource, table, indexPath, task) in
+                let cell = table.dequeueReusableCell(withIdentifier: TaskTableViewCell.identifier, for: indexPath) as! TaskTableViewCell
+                
                 let taskCellViewModel = self.viewModel.taskCellViewModel(for: task)
+                
                 taskCellViewModel.taskObservable.subscribe {
                     if let task = $0.element {
                         self.viewModel.taskCompleted.onNext(task)
                     }
                 }.disposed(by: self.disposeBag)
+                
                 cell.configure(with: taskCellViewModel)
                 cell.delegate = self
-            }.disposed(by: disposeBag)
-        
+                
+                return cell
+            })
+
         tableView.rx.didEndDragging.subscribe { _ in
             if self.tableView.contentOffset.y < -50.0 {
                 self.viewModel.shouldGoToAddTask()
             }
         }.disposed(by: disposeBag)
+        
+        dataSource.titleForHeaderInSection = { dataSource, index in
+            if index == 0 {
+                return ""
+            } else {
+                return "Also Tagged:"
+            }
+        }
+        
+        viewModel.tasksObservable
+            .map { return [SectionedTaskModel(items: $0.0), SectionedTaskModel(items: $0.1)] }
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
     }
 }
 extension TaskListViewController: TaskCellDelegate {
