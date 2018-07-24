@@ -89,7 +89,7 @@ extension TagModel: TagsPersistenceDelegate {
     
     func persistence(_ persistence: Persistence, didUpdateTags tags: [Tag]) {
         for tag in tags {
-            guard let index = self.tags.firstIndex(of: tag) else { continue }
+            guard let index = self.tags.index(of: tag) else { continue }
             self.tags[index] = tag
         }
         self.didUpdateTags.onNext(self.tags)
@@ -97,7 +97,7 @@ extension TagModel: TagsPersistenceDelegate {
     
     func persistence(_ persistence: Persistence, didDeleteTags tags: [Tag]) {
         for tag in tags {
-            guard let index = self.tags.firstIndex(of: tag) else { continue }
+            guard let index = self.tags.index(of: tag) else { continue }
             self.tags.remove(at: index)
         }
         self.didUpdateTags.onNext(self.tags)

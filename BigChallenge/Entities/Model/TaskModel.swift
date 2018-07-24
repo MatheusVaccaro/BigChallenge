@@ -78,7 +78,7 @@ extension TaskModel: TasksPersistenceDelegate {
     
     func persistence(_ persistence: Persistence, didUpdateTasks tasks: [Task]) {
         for task in tasks {
-            guard let index = self.tasks.firstIndex(of: task) else { continue }
+            guard let index = self.tasks.index(of: task) else { continue }
             self.tasks[index] = task
         }
         self.didUpdateTasks.onNext(self.tasks)
@@ -86,7 +86,7 @@ extension TaskModel: TasksPersistenceDelegate {
     
     func persistence(_ persistence: Persistence, didDeleteTasks tasks: [Task]) {
         for task in tasks {
-            guard let index = self.tasks.firstIndex(of: task) else { continue }
+            guard let index = self.tasks.index(of: task) else { continue }
             self.tasks.remove(at: index)
         }
         self.didUpdateTasks.onNext(self.tasks)
