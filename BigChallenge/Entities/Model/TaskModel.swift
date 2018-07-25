@@ -41,7 +41,7 @@ public class TaskModel {
     public func save(_ task: Task) {
         guard !tasks.contains(task) else { return }
         tasks.append(task)
-        RemindersImporter.instance?.save(task: task)
+        RemindersImporter.instance?.saveTaskToReminders(object)
         persistance.save()
         didUpdateTasks.onNext(tasks)
     }

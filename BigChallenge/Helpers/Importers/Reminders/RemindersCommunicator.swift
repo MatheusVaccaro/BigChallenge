@@ -11,7 +11,7 @@ import EventKit
 
 public class RemindersCommunicator {
     
-    var store: EKEventStore
+    let store: EKEventStore
     
     weak var delegate: RemindersCommunicatorDelegate?
     

@@ -43,7 +43,7 @@ public class RemindersImporter {
     }
     
     // Fetch all reminders; convert them to Tasks and Tags; save these afterwards
-    func importFromReminders() {
+    func importTasksFromReminders() {
         remindersDB.fetchAllReminders { reminders in
             guard let reminders = reminders else { return }
             
@@ -105,7 +105,7 @@ public class RemindersImporter {
         return (task, tag)
     }
     
-    public func save(task: Task) {
+    public func saveTaskToReminders(_ task: Task) {
         remindersDB.save(task: task)
     }
 }
@@ -120,7 +120,7 @@ extension RemindersImporter: RemindersCommunicatorDelegate {
     
     func remindersCommunicatorWasGrantedAccessToReminders(_ remindersCommunicator: RemindersCommunicator) {
         // TODO Set persistent flag to avoid importing each time the app launches.
-        importFromReminders()
+        importTasksFromReminders()
     }
     
     func remindersCommunicatorWasDeniedAccessToReminders(_ remindersCommunicator: RemindersCommunicator, error: Error) {
