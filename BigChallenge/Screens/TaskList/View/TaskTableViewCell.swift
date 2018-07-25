@@ -13,10 +13,7 @@ protocol TaskCellDelegate: class {
 }
 
 enum CellType {
-    case top
-    case middle
-    case bottom
-    case topAndBottom
+    case main
     case none
 }
 
@@ -30,11 +27,13 @@ class TaskTableViewCell: UITableViewCell {
     private var previousRect = CGRect.zero
     private lazy var gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
-        layer.frame = checkButton.frame
+        
+        layer.frame = checkButton.imageView!.frame
         layer.startPoint = CGPoint(x: 0, y: 1)
         layer.endPoint = CGPoint(x: 1, y: 0)
         layer.zPosition = -1
-        layer.mask = checkButton.imageView?.layer
+        layer.mask = checkButton.imageView!.layer
+        
         return layer
     }()
     
@@ -49,9 +48,9 @@ class TaskTableViewCell: UITableViewCell {
         super.awakeFromNib()
         taskTitleTextView.delegate = self
         checkButton.isSelected = false
+        checkButton.layer.addSublayer(gradientLayer)
         
-        layer.addSublayer(gradientLayer)
-        layer.shadowRadius = 6.3
+        layer.shadowOpacity = 1
         layer.shadowOffset = CGSize(width: 0, height: 0)
     }
     
@@ -69,22 +68,12 @@ class TaskTableViewCell: UITableViewCell {
     func layout(with position: CellType) {
         clipsToBounds = true
         
-        backgroundColor = UIColor.white
-        layer.shadowColor = UIColor.black.cgColor
-        
         print("task: \(viewModel?.title ?? "nil"), \(position)")
         
         switch position {
-        case .top:
-            layer.cornerRadius = 6.3
-            layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        case .middle:
-            layer.cornerRadius = 0
-        case .bottom:
-            layer.cornerRadius = 6.3
-            layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        case .topAndBottom:
-            layer.cornerRadius = 6.3
+        case .main:
+            layer.shadowColor = UIColor.black.cgColor
+            backgroundColor = UIColor.white
         case .none:
             backgroundColor = UIColor.clear
             layer.shadowColor = UIColor.clear.cgColor
@@ -96,6 +85,10 @@ class TaskTableViewCell: UITableViewCell {
     @IBAction func didPressCheckButton(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         viewModel?.changedCheckButton(to: checkButton.isSelected)
+    }
+    
+    override func layoutSubviews() {
+        gradientLayer.frame = checkButton.bounds
     }
 }
 

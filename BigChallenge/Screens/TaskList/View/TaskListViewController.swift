@@ -43,6 +43,7 @@ public class TaskListViewController: UIViewController {
         tableView.estimatedRowHeight = 60
         
         bindTableView()
+        tableView.sectionFooterHeight = 0
     }
     
     private func bindTableView() {
@@ -60,18 +61,7 @@ public class TaskListViewController: UIViewController {
     
     fileprivate func layout(cell: TaskTableViewCell, with indexPath: IndexPath) {
         if indexPath.section == 0 {
-            if self.viewModel.mainTasks.count == 1 {
-                cell.layout(with: .topAndBottom)
-            } else {
-                switch indexPath.row {
-                case 0:
-                    cell.layout(with: .top)
-                case self.viewModel.mainTasks.count-1:
-                    cell.layout(with: .bottom)
-                default:
-                    cell.layout(with: .middle)
-                }
-            }
+            cell.layout(with: .main)
         } else {
             cell.layout(with: .none)
         }
@@ -104,17 +94,43 @@ public class TaskListViewController: UIViewController {
             }
         }.disposed(by: disposeBag)
         
-        ans.titleForHeaderInSection = { task, index in
-            return index == 0 ? "section 1" : "section 2"
-        }
-        
         return ans
     }
 }
 
 extension TaskListViewController: UITableViewDelegate {
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        guard !viewModel.mainTasks.isEmpty else { return 0 }
+        return section == 0 ? 18.5 : 0
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        guard !viewModel.mainTasks.isEmpty else { return 0 }
+        return section == 0 ? 8 : 0
+    }
+    
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return viewModel.viewForHeader(in: section)
+        guard section == 0 else { return nil }
+        let headerView = UIView(frame: view.frame)
+        
+//        let recommendedTag = ...
+        
+        headerView.layer.backgroundColor = UIColor.white.cgColor
+        headerView.layer.cornerRadius = 6.3
+        headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
+        return headerView
+    }
+    
+    public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard section == 0 else { return nil }
+        let footerView = UIView(frame: view.frame)
+        
+        footerView.layer.backgroundColor = UIColor.white.cgColor
+        footerView.layer.cornerRadius = 6.3
+        footerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        
+        return footerView
     }
 }
 
