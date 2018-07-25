@@ -27,6 +27,11 @@ class TaskCellViewModel {
         return task.title!
     }
     
+    var checkButtonGradient: [CGColor] {
+        let index = (task.tags?.allObjects.first as? Tag)?.color ?? 0
+        return TagModel.tagColors[Int(index)]
+    }
+    
     func shouldChangeTask(title: String) {
         task.title = title
         taskObservable.onNext(task)

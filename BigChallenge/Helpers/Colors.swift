@@ -11,6 +11,11 @@ import UIKit
 
 struct Colors {
     
+    static let backGroundGradient: [CGColor] = [
+        UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1).cgColor,
+        UIColor(red: 235/255, green: 239/255, blue: 250/255, alpha: 1).cgColor
+    ]
+    
     struct Tags {
         
         static let purpleGradient: [CGColor] = [

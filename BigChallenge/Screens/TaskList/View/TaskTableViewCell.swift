@@ -28,6 +28,15 @@ class TaskTableViewCell: UITableViewCell {
     
     private var viewModel: TaskCellViewModel?
     private var previousRect = CGRect.zero
+    private lazy var gradientLayer: CAGradientLayer = {
+        let layer = CAGradientLayer()
+        layer.frame = checkButton.frame
+        layer.startPoint = CGPoint(x: 0, y: 1)
+        layer.endPoint = CGPoint(x: 1, y: 0)
+        layer.zPosition = -1
+        layer.mask = checkButton.imageView?.layer
+        return layer
+    }()
     
     // MARK: - IBOutlets
     @IBOutlet weak var taskTitleTextView: UITextView!
@@ -40,6 +49,8 @@ class TaskTableViewCell: UITableViewCell {
         taskTitleTextView.delegate = self
         checkButton.isSelected = false
         
+        layer.addSublayer(gradientLayer)
+        
         layer.shadowRadius = 6.3
         layer.shadowOffset = CGSize(width: 0, height: 0)
     }
@@ -49,6 +60,7 @@ class TaskTableViewCell: UITableViewCell {
     func configure(with viewModel: TaskCellViewModel) {
         self.viewModel = viewModel
         
+        gradientLayer.colors = viewModel.checkButtonGradient
         taskTitleTextView.text = viewModel.title
         taskTitleTextView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
         checkButton.isSelected = viewModel.taskIsCompleted

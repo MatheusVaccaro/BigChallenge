@@ -21,10 +21,24 @@ class HomeScreenViewController: UIViewController {
     fileprivate var tagCollectionViewController: TagCollectionViewController!
     private let disposeBag = DisposeBag()
     
+    private lazy var gradientLayer: CAGradientLayer = {
+        let layer = CAGradientLayer()
+        
+        layer.frame = view.frame
+        layer.startPoint = CGPoint(x: 0, y: 0.5)
+        layer.endPoint = CGPoint(x: 1, y: 0.5)
+        layer.colors = Colors.backGroundGradient
+        layer.zPosition = -1
+        
+        return layer
+    }()
+    
     var viewModel: HomeScreenViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.layer.addSublayer(gradientLayer)
         
         tagCollectionViewController.viewModel.selectedTagsObservable.subscribe { event in
             self.taskListViewController.viewModel.filterTasks(with: event.element!)
