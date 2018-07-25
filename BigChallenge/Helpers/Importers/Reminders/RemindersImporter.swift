@@ -69,12 +69,12 @@ public class RemindersImporter {
         let hasFoundEquivalentTask = taskModel.tasks.contains { task -> Bool in
             
             // Checks if a task is a Reminders import
-            guard let reminderInfo = task.importData?.remindersImportData else { return false }
+            guard let reminderData = task.importData?.remindersImportData else { return false }
             
             // Checks if the task is associated with the reminder
             let isEquivalentTask =
-                reminderInfo.calendarItemExternalIdentifier == reminder.calendarItemExternalIdentifier ||
-           		reminderInfo.calendarItemIdentifier == reminder.calendarItemIdentifier
+                reminderData.calendarItemExternalIdentifier == reminder.calendarItemExternalIdentifier ||
+           		reminderData.calendarItemIdentifier == reminder.calendarItemIdentifier
             
             return isEquivalentTask
         }
@@ -82,10 +82,19 @@ public class RemindersImporter {
         return hasFoundEquivalentTask
     }
     
+    private func getEquivalentTaskForReminder(_ reminder: EKReminder) -> Task? {
+        let equivalentTask = taskModel.tasks.first { task -> Bool in
+            guard let remindersData = task.importData?.remindersImportData else { return false }
+            
+            return remindersData.calendarItemExternalIdentifier == reminder.calendarItemExternalIdentifier ||
+                   remindersData.calendarItemIdentifier == reminder.calendarItemIdentifier
+        }
+        
+        return equivalentTask
+    }
+    
     // Convert a reminder to a Task and a Tag
-    private func convertTaskAndTag(from reminder: EKReminder) -> (Task, Tag) {
-        let attributes: [TaskModel.Attributes : Any] =
-            [.title : reminder.title]
+    private func convertTaskAndTag(from reminder: EKReminder) -> (task: Task, tag: Tag) {
         let task =
             self.taskModel.createTask(with: attributes)
         let tag =
@@ -111,11 +120,21 @@ public class RemindersImporter {
 }
 
 extension RemindersImporter: RemindersCommunicatorDelegate {
-    
-    func remindersCommunicatorDidDetectEventStoreChange(_ remindersCommunicator: RemindersCommunicator,
-                                                        notification: NSNotification) {
-        // TODO Figure out how to fetch the affected reminders without duplicating the whole Reminders Store
-        // So far, seems like it is impossible.
+    //swiftlint:disable line_length
+    func remindersCommunicatorDidDetectEventStoreChange(_ remindersCommunicator: RemindersCommunicator, notification: NSNotification) {
+        remindersCommunicator.fetchAllReminders { reminders in
+            guard let reminders = reminders else { return }
+            
+            // Set of all tasks originating from Reminders - even those not yet imported.
+            let remindersSet = Set(reminders.map({ self.getEquivalentTaskForReminder($0) ?? self.convertTaskAndTag(from: $0).task }))
+            let modelSet = Set(self.taskModel.tasks)
+            
+            let tasksToDelete = modelSet.subtracting(remindersSet)	// Originates from reminders being deleted.
+            tasksToDelete.forEach({ self.taskModel.delete(object: $0) })
+            
+            let newTasks = remindersSet.subtracting(modelSet)		// New reminders not yet imported.
+            newTasks.forEach({ self.taskModel.save(object: $0) })
+        }
     }
     
     func remindersCommunicatorWasGrantedAccessToReminders(_ remindersCommunicator: RemindersCommunicator) {
@@ -125,5 +144,6 @@ extension RemindersImporter: RemindersCommunicatorDelegate {
     
     func remindersCommunicatorWasDeniedAccessToReminders(_ remindersCommunicator: RemindersCommunicator, error: Error) {
         // TODO Handle access denial
+        // Sounds like a great candidate for RX
     }
 }
