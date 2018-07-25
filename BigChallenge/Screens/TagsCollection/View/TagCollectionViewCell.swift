@@ -14,7 +14,17 @@ class TagCollectionViewCell: UICollectionViewCell {
 
     static let identifier = "tagCollectionCell"
     
-    private var gradientLayer = CAGradientLayer()
+    private lazy var gradientLayer: CAGradientLayer = {
+        let layer = CAGradientLayer()
+        
+        layer.startPoint = CGPoint(x: 0, y: 1)
+        layer.endPoint = CGPoint(x: 1, y: 0)
+        layer.cornerRadius = 6.3
+        layer.zPosition = -1
+        
+        contentView.layer.addSublayer(layer)
+        return layer
+    }()
     
     @IBOutlet weak var tagUILabel: UILabel!
     
@@ -50,8 +60,6 @@ class TagCollectionViewCell: UICollectionViewCell {
         layer.shadowOffset = CGSize(width: 0, height: 4)
         layer.masksToBounds = false
         
-        createGradientLayer()
-        
         tagUILabel.textColor = UIColor.white
         
         contentView.addSubview(maskLabel)
@@ -76,15 +84,6 @@ class TagCollectionViewCell: UICollectionViewCell {
         layoutAttributes.frame = newFrame
         
         return layoutAttributes
-    }
-    
-    private func createGradientLayer() {
-        gradientLayer.startPoint = CGPoint(x: 0, y: 1)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 0)
-        gradientLayer.cornerRadius = 6.3
-        gradientLayer.zPosition = -1
-        
-        contentView.layer.addSublayer(gradientLayer)
     }
     
     override func layoutSubviews() {
