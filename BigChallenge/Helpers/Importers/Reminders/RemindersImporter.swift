@@ -91,6 +91,10 @@ public class RemindersImporter {
         task.creationDate = reminder.creationDate
         
         task.addToTags(tag)
+        
+        taskModel.associateTask(task,
+                                with: .remindersDataPacket(id: reminder.calendarItemIdentifier,
+                                                           externalId: reminder.calendarItemIdentifier))
 	
         return (task, tag)
     }
