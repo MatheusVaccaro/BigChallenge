@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cie-Gz-Vzx">
-                                <rect key="frame" x="0.0" y="155" width="375" height="437"/>
+                                <rect key="frame" x="8" y="155" width="359" height="437"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
@@ -81,11 +81,11 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="rfq-QF-os3" firstAttribute="centerY" secondItem="0xD-KL-Oyh" secondAttribute="centerY" id="5fM-dZ-JGb"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="0xD-KL-Oyh" secondAttribute="trailing" constant="15" id="A2C-oX-oOS"/>
-                            <constraint firstItem="cie-Gz-Vzx" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" id="BXC-pC-xol"/>
+                            <constraint firstItem="cie-Gz-Vzx" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="8" id="BXC-pC-xol"/>
                             <constraint firstItem="Vex-PR-Mon" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="15" id="Beu-zI-GrG"/>
                             <constraint firstItem="0xD-KL-Oyh" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="15" id="Gva-yA-yFL"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="Vex-PR-Mon" secondAttribute="trailing" constant="223" id="IYC-Jk-My7"/>
@@ -100,7 +100,7 @@
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="fUe-Ak-aYb" secondAttribute="trailing" id="l9d-qe-b2V"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="bottom" secondItem="0xD-KL-Oyh" secondAttribute="bottom" constant="15" id="t4J-sz-R75"/>
                             <constraint firstAttribute="centerX" secondItem="0xD-KL-Oyh" secondAttribute="centerX" id="yEj-nF-rOH"/>
-                            <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="cie-Gz-Vzx" secondAttribute="trailing" id="yev-Sb-Zry"/>
+                            <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="cie-Gz-Vzx" secondAttribute="trailing" constant="8" id="yev-Sb-Zry"/>
                             <constraint firstItem="fUe-Ak-aYb" firstAttribute="top" secondItem="Vex-PR-Mon" secondAttribute="bottom" constant="15" id="zw6-eb-xjl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QKa-yH-x6F"/>
