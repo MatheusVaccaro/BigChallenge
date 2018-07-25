@@ -12,6 +12,11 @@ protocol TaskCellDelegate: class {
     func shouldUpdateSize(of cell: TaskTableViewCell)
 }
 
+enum CellType {
+    case main
+    case none
+}
+
 class TaskTableViewCell: UITableViewCell {
     
     // MARK: - Properties
@@ -20,10 +25,22 @@ class TaskTableViewCell: UITableViewCell {
     
     private var viewModel: TaskCellViewModel?
     private var previousRect = CGRect.zero
+    private lazy var gradientLayer: CAGradientLayer = {
+        let layer = CAGradientLayer()
+        
+        layer.frame = checkButton.imageView!.frame
+        layer.startPoint = CGPoint(x: 0, y: 1)
+        layer.endPoint = CGPoint(x: 1, y: 0)
+        layer.zPosition = -1
+        layer.mask = checkButton.imageView!.layer
+        
+        return layer
+    }()
     
     // MARK: - IBOutlets
     @IBOutlet weak var taskTitleTextView: UITextView!
     @IBOutlet weak var checkButton: UIButton!
+    @IBOutlet weak var tagsLabel: UILabel!
     
     // MARK: - TableViewCell Lifecycle
 
@@ -31,6 +48,10 @@ class TaskTableViewCell: UITableViewCell {
         super.awakeFromNib()
         taskTitleTextView.delegate = self
         checkButton.isSelected = false
+        checkButton.layer.addSublayer(gradientLayer)
+        
+        layer.shadowOpacity = 1
+        layer.shadowOffset = CGSize(width: 0, height: 0)
     }
     
     // MARK: - Functions
@@ -38,9 +59,25 @@ class TaskTableViewCell: UITableViewCell {
     func configure(with viewModel: TaskCellViewModel) {
         self.viewModel = viewModel
         
+        gradientLayer.colors = viewModel.checkButtonGradient
         taskTitleTextView.text = viewModel.title
-        taskTitleTextView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+        tagsLabel.text = viewModel.tagsDescription
         checkButton.isSelected = viewModel.taskIsCompleted
+    }
+    
+    func layout(with position: CellType) {
+        clipsToBounds = true
+        
+        print("task: \(viewModel?.title ?? "nil"), \(position)")
+        
+        switch position {
+        case .main:
+            layer.shadowColor = UIColor.black.cgColor
+            backgroundColor = UIColor.white
+        case .none:
+            backgroundColor = UIColor.clear
+            layer.shadowColor = UIColor.clear.cgColor
+        }
     }
     
     // MARK: - IBActions
@@ -48,6 +85,10 @@ class TaskTableViewCell: UITableViewCell {
     @IBAction func didPressCheckButton(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         viewModel?.changedCheckButton(to: checkButton.isSelected)
+    }
+    
+    override func layoutSubviews() {
+        gradientLayer.frame = checkButton.bounds
     }
 }
 

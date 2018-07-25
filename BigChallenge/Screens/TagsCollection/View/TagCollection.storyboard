@@ -58,7 +58,7 @@
                                 </cells>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="VCI-8H-Ucx" firstAttribute="trailing" secondItem="Oak-7M-jK6" secondAttribute="trailing" id="JO6-cP-Bmf"/>
                             <constraint firstItem="VCI-8H-Ucx" firstAttribute="bottom" secondItem="Oak-7M-jK6" secondAttribute="bottom" id="XKT-S4-SXS"/>

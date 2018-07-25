@@ -7,83 +7,70 @@
 //
 
 import Foundation
+import UIKit
 import RxCocoa
 import RxSwift
 
 public class TaskListViewModel {
     
-    var tasksObservable: BehaviorSubject<[Task]>
+    var tasksObservable: BehaviorSubject<([Task], [Task])>
     var taskCompleted: PublishSubject<Task>
     var shouldAddTask: BehaviorSubject<Bool>
+    
     var showsCompletedTasks: Bool = false {
         didSet {
             print((showsCompletedTasks ? "showing" : "not showing") + " completed tasks")
-            tasksObservable.onNext(tasksToShow)
+            tasksObservable.onNext((mainTasks, tasksToShow))
         }
     }
     
     var tasksToShow: [Task] {
-        print(tasks.map {$0.title ?? "Task Nil"})
-        print(completedTasks.map {$0.title ?? "Task Nil"})
-        
-        if showsCompletedTasks { return tasks + completedTasks }
-        else { return tasks }
+        if showsCompletedTasks { return secondaryTasks + completedTasks }
+        else { return secondaryTasks }
     }
     
-    private let model: TaskModel
-    private(set) var tasks: [Task]
+    private(set) var mainTasks: [Task]
+    private(set) var secondaryTasks: [Task]
+//    here i declare multiple arrays for completed and uncomplete tasks
+//    so that you dont need to filer the array everytime you complete a task
     private(set) var completedTasks: [Task]
+    fileprivate var tagsBeingUsed: [Tag]
+
+    private let model: TaskModel
     private var disposeBag = DisposeBag()
     
     public init(model: TaskModel) {
         self.model = model
-        self.tasks = []
+        self.mainTasks = []
+        self.secondaryTasks = []
         self.completedTasks = []
+        self.tagsBeingUsed = []
         
-        self.tasksObservable = BehaviorSubject<[Task]>(value: tasks)
         self.taskCompleted = PublishSubject<Task>()
         self.shouldAddTask = BehaviorSubject<Bool>(value: false)
+        self.tasksObservable = BehaviorSubject<([Task], [Task])>(value: (mainTasks, secondaryTasks))
         
-        taskCompleted.subscribe { event in
-            guard let task = event.element else {return}
-            self.model.saveContext()
-            
-            if let index = self.tasks.index(of: task) { // !task.iscompleted
-                self.completedTasks.append(self.tasks.remove(at: index))
-            } else if let index = self.completedTasks.index(of: task) {
-                self.tasks.append(self.completedTasks.remove(at: index))
-            }
-            
-            self.tasksObservable.onNext(self.tasksToShow)
-        }.disposed(by: disposeBag)
-        
-        model.didUpdateTasks.subscribe{
-            self.tasks = []
-            self.completedTasks = []
-            
-            for task in $0.element! {
-                if !task.isCompleted { self.tasks.append(task) }
-                else { self.completedTasks.append(task) }
-            }
-            
-            self.tasksObservable.onNext(self.tasksToShow)
-        }.disposed(by: disposeBag)
+        subscribeToCompletedTask()
+        subscribeToModelUpdate()
     }
     
+    /** filters the taskList with selected tags */
     func filterTasks(with tags: [Tag]) {
-        tasks = []
+        self.tagsBeingUsed = tags
+        mainTasks = []
+        secondaryTasks = []
         completedTasks = []
         
         for task in model.tasks {
-            if !task.isCompleted { self.tasks.append(task) }
-            else { self.completedTasks.append(task) }
+            appendTask(task)
         }
         
         guard !tags.isEmpty
-            else { tasksObservable.onNext(tasksToShow); return }
+            else { tasksObservable.onNext((mainTasks, tasksToShow)); return }
         
-        tasks =
-            tasks.filter {
+        // filter tasks that dont containt any of the tags selected
+        secondaryTasks =
+            secondaryTasks.filter {
                 for tag in tags where !$0.tags!.contains(tag) { return false }
                 return true
         }
@@ -94,14 +81,62 @@ public class TaskListViewModel {
                 return true
         }
         
-        tasksObservable.onNext(tasksToShow)
+        tasksObservable.onNext((mainTasks, tasksToShow))
     }
     
     func taskCellViewModel(for task: Task) -> TaskCellViewModel {
         return TaskCellViewModel(task: task)
     }
-    
+
     func shouldGoToAddTask() {
         self.shouldAddTask.onNext(true)
+    }
+    
+    //MARK: Helpers
+    /**
+     verifies that task contains only one tag, which is the current selected tag
+     */
+    fileprivate func isMainTask(_ task: Task) -> Bool {
+        let tags = (task.tags?.allObjects as! [Tag])
+        
+        return tags.count == tagsBeingUsed.count &&
+            tags.map { $0.title! }.sorted() == tagsBeingUsed.map { $0.title! }.sorted()
+    }
+    
+    /** appends a centain task to the appropriate array inside taskListViewModel */
+    fileprivate func appendTask(_ task: Task) {
+        if !task.isCompleted {
+            if isMainTask(task) { // this whould be better as a one-line if ;-;
+                mainTasks.append(task)
+            } else {
+                secondaryTasks.append(task)
+            }
+        } else {
+            completedTasks.append(task)
+        }
+    }
+    
+    fileprivate func subscribeToModelUpdate() {
+        model.didUpdateTasks.subscribe{
+            self.mainTasks = []
+            self.secondaryTasks = []
+            self.completedTasks = []
+            
+            for task in $0.element! {
+                self.appendTask(task)
+            }
+            
+            self.tasksObservable.onNext((self.mainTasks, self.tasksToShow))
+            }.disposed(by: disposeBag)
+    }
+    
+    fileprivate func subscribeToCompletedTask() {
+        taskCompleted.subscribe { event in
+            
+            guard let task = event.element else {return}
+            self.model.saveContext() // saving the context updated the view, also
+            
+            self.tasksObservable.onNext((self.mainTasks, self.tasksToShow))
+            }.disposed(by: disposeBag)
     }
 }

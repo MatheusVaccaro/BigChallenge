@@ -14,7 +14,17 @@ class TagCollectionViewCell: UICollectionViewCell {
 
     static let identifier = "tagCollectionCell"
     
-    private var gradientLayer = CAGradientLayer()
+    private lazy var gradientLayer: CAGradientLayer = {
+        let layer = CAGradientLayer()
+        
+        layer.startPoint = CGPoint(x: 0, y: 1)
+        layer.endPoint = CGPoint(x: 1, y: 0)
+        layer.cornerRadius = 6.3
+        layer.zPosition = -1
+        
+        contentView.layer.addSublayer(layer)
+        return layer
+    }()
     
     @IBOutlet weak var tagUILabel: UILabel!
     
@@ -22,8 +32,8 @@ class TagCollectionViewCell: UICollectionViewCell {
         let ans = UILabel()
         
         ans.textColor = UIColor.white
-        ans.textAlignment = .center
-        ans.font = UIFont.preferredFont(forTextStyle: .title3)
+        ans.textAlignment = tagUILabel.textAlignment
+        ans.font = tagUILabel.font
         
         return ans
     }()
@@ -38,6 +48,8 @@ class TagCollectionViewCell: UICollectionViewCell {
     private var viewModel: TagCollectionViewCellViewModel!
     
     override func awakeFromNib() {
+        tagUILabel.font = UIFont.font(sized: 19, weight: .medium, with: .title3)
+        
         layer.backgroundColor = UIColor.white.cgColor
         layer.borderColor = UIColor.clear.cgColor
         
@@ -49,8 +61,6 @@ class TagCollectionViewCell: UICollectionViewCell {
         layer.shadowOpacity = 0.2
         layer.shadowOffset = CGSize(width: 0, height: 4)
         layer.masksToBounds = false
-        
-        createGradientLayer()
         
         tagUILabel.textColor = UIColor.white
         
@@ -76,15 +86,6 @@ class TagCollectionViewCell: UICollectionViewCell {
         layoutAttributes.frame = newFrame
         
         return layoutAttributes
-    }
-    
-    private func createGradientLayer() {
-        gradientLayer.startPoint = CGPoint(x: 0, y: 1)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 0)
-        gradientLayer.cornerRadius = 6.3
-        gradientLayer.zPosition = -1
-        
-        contentView.layer.addSublayer(gradientLayer)
     }
     
     override func layoutSubviews() {
