@@ -62,6 +62,45 @@ public class TaskModel {
         
         return task
     }
+    
+    public func update(_ task: Task, with dictionary: [Attributes : Any]) {
+        if let completionDate = dictionary[.completionDate] as? Date {
+            task.completionDate = completionDate
+        }
+        if let creationDate = dictionary[.creationDate] as? Date {
+            task.creationDate = creationDate
+        }
+        if let dates = dictionary[.dates] as? [Date] {
+            task.dates = dates
+        }
+        if let dueDate = dictionary[.dueDate] as? Date {
+            task.dueDate = dueDate
+        }
+        if let id = dictionary[.id] as? UUID {
+            task.id = id
+        }
+        if let isCompleted = dictionary[.isCompleted] as? Bool {
+            task.isCompleted = isCompleted
+        }
+        if let notes = dictionary[.notes] as? String {
+            task.notes = notes
+        }
+        if let title = dictionary[.title] as? String {
+            task.title = title
+        }
+    }
+    
+    // The attributes of the Task class, mapped according to CoreData
+    public enum Attributes {
+        case completionDate
+        case creationDate
+        case dates
+        case dueDate
+        case id
+        case isCompleted
+        case notes
+        case title
+    }
 }
 
 // MARK: - TaskPersistenceDelegate Extension
