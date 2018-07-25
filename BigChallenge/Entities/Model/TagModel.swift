@@ -14,7 +14,11 @@ public class TagModel {
     
     // MARK: - Properties
     
-    static let tagColors = [ Colors.Tags.purpleGradient, Colors.Tags.redGradient, Colors.Tags.peachGradient, Colors.Tags.greenGradient ]
+    static let tagColors = [ UIColor.Tags.purpleGradient,
+                             UIColor.Tags.redGradient,
+                             UIColor.Tags.peachGradient,
+                             UIColor.Tags.greenGradient ]
+    
     private(set) var didUpdateTags: BehaviorSubject<[Tag]> //(([Tag]) -> Void)?
     private(set) public var tags: [Tag]
     

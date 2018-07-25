@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct Colors {
+extension UIColor {
     
     static let backGroundGradient: [CGColor] = [
         UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1).cgColor,
