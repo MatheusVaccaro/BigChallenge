@@ -51,8 +51,13 @@ public class TaskListViewController: UIViewController {
                 }.disposed(by: self.disposeBag)
                 cell.configure(with: taskCellViewModel)
                 cell.delegate = self
+            }.disposed(by: disposeBag)
+        
+        tableView.rx.didEndDragging.subscribe { _ in
+            if self.tableView.contentOffset.y < -50.0 {
+                self.viewModel.shouldGoToAddTask()
             }
-            .disposed(by: disposeBag)
+        }.disposed(by: disposeBag)
     }
 }
 extension TaskListViewController: TaskCellDelegate {
@@ -75,4 +80,3 @@ extension TaskListViewController: StoryboardInstantiable {
         return "TaskList"
     }
 }
-
