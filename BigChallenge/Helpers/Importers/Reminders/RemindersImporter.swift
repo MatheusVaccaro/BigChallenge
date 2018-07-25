@@ -122,12 +122,14 @@ public class RemindersImporter {
 extension RemindersImporter: RemindersCommunicatorDelegate {
     //swiftlint:disable line_length
     func remindersCommunicatorDidDetectEventStoreChange(_ remindersCommunicator: RemindersCommunicator, notification: NSNotification) {
+        
+        // Check for changes between the model and the reminders store and update the model accordingly
         remindersCommunicator.fetchAllReminders { reminders in
             guard let reminders = reminders else { return }
             
             // Set of all tasks originating from Reminders - even those not yet imported.
             let remindersSet = Set(reminders.map({ self.getEquivalentTaskForReminder($0) ?? self.convertTaskAndTag(from: $0).task }))
-            let modelSet = Set(self.taskModel.tasks)
+            let modelSet = Set(self.taskModel.tasks.filter({ $0.importData?.remindersImportData != nil }))
             
             let tasksToDelete = modelSet.subtracting(remindersSet)	// Originates from reminders being deleted.
             tasksToDelete.forEach({ self.taskModel.delete(object: $0) })
