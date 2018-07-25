@@ -39,7 +39,9 @@ public class RemindersImporter {
     // Fetch all reminders; convert them to Tasks and Tags; save these afterwards
     func importFromReminders() {
         remindersDB.fetchAllReminders { reminders in
-            for reminder in reminders! where !reminder.isCompleted {
+            guard let reminders = reminders else { return }
+            
+            for reminder in reminders where !self.checkImportStatusForReminder(reminder) {
                 
                 let (task, tag) = self.convertTaskAndTag(from: reminder)
                 
@@ -47,6 +49,31 @@ public class RemindersImporter {
                 self.tagModel.save(object: tag)
             }
         }
+    }
+    
+    /**
+     Checks if a reminder has already been imported and converted into a task (i.e. has an equivalent task).
+     
+     - Parameter reminder: The reminder to check the import status of.
+     
+     - Returns: ```true``` if the reminder has been imported into a task.
+     			```false``` if the reminder has not been imported into a task.
+     */
+    private func checkImportStatusForReminder(_ reminder: EKReminder) -> Bool {
+        let hasFoundEquivalentTask = taskModel.tasks.contains { task -> Bool in
+            
+            // Checks if a task is a Reminders import
+            guard let reminderInfo = task.importData?.remindersImportData else { return false }
+            
+            // Checks if the task is associated with the reminder
+            let isEquivalentTask =
+                reminderInfo.calendarItemExternalIdentifier == reminder.calendarItemExternalIdentifier ||
+           		reminderInfo.calendarItemIdentifier == reminder.calendarItemIdentifier
+            
+            return isEquivalentTask
+        }
+        
+        return hasFoundEquivalentTask
     }
     
     // Convert a reminder to a Task and a Tag
