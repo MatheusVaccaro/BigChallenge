@@ -10,14 +10,6 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-// TODO: Move this to appropriate location (ViewModel)
-protocol HomeScreenViewModelDelegate: class {
-    func willAddTask()
-    func wilEditTask()
-    
-    func willAddTag()
-}
-
 class HomeScreenViewController: UIViewController {
     
     weak var delegate: HomeScreenViewModelDelegate?
@@ -36,7 +28,7 @@ class HomeScreenViewController: UIViewController {
         
         tagCollectionViewController.viewModel.selectedTagsObservable.subscribe { event in
             self.taskListViewController.viewModel.filterTasks(with: event.element!)
-            print("selected tags are: \( event.element!.map {$0.title} )")
+            print("selected tags are: \(event.element!.map {$0.title})")
         }.disposed(by: disposeBag)
     }
     
@@ -69,7 +61,6 @@ class HomeScreenViewController: UIViewController {
     @IBAction func didTapAddTagButton(_ sender: UIButton) {
         delegate?.willAddTag()
     }
-    
 }
 
 extension HomeScreenViewController: StoryboardInstantiable {
