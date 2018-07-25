@@ -36,8 +36,7 @@ public class TaskListViewController: UIViewController {
     // MARK: - ViewController Lifecycle
     override public func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = nil
-        tableView.delegate = nil
+        tableView.backgroundColor = UIColor.clear
         
         // config tableView to autolayout constraints to resize the tableCells height
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -59,6 +58,25 @@ public class TaskListViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
+    fileprivate func layout(cell: TaskTableViewCell, with indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            if self.viewModel.mainTasks.count == 1 {
+                cell.layout(with: .topAndBottom)
+            } else {
+                switch indexPath.row {
+                case 0:
+                    cell.layout(with: .top)
+                case self.viewModel.mainTasks.count-1:
+                    cell.layout(with: .bottom)
+                default:
+                    cell.layout(with: .middle)
+                }
+            }
+        } else {
+            cell.layout(with: .none)
+        }
+    }
+    
     fileprivate func createDataSource() -> RxTableViewSectionedReloadDataSource<SectionedTaskModel> {
         let ans = RxTableViewSectionedReloadDataSource<SectionedTaskModel>(
             configureCell: {(dataSource, table, indexPath, task) in
@@ -75,16 +93,7 @@ public class TaskListViewController: UIViewController {
                 cell.configure(with: taskCellViewModel)
                 cell.delegate = self
                 
-                if indexPath.section == 0 {
-                    switch indexPath.row {
-                    case 0:
-                        cell.configure(with: .top)
-                    case self.viewModel.mainTasks.count:
-                        cell.configure(with: .bottom)
-                    default:
-                        cell.configure(with: .middle)
-                    }
-                }
+                self.layout(cell: cell, with: indexPath)
                 
                 return cell
             })
@@ -95,17 +104,18 @@ public class TaskListViewController: UIViewController {
             }
         }.disposed(by: disposeBag)
         
+        ans.titleForHeaderInSection = { task, index in
+            return index == 0 ? "section 1" : "section 2"
+        }
+        
         return ans
     }
-    
 }
 
 extension TaskListViewController: UITableViewDelegate {
-    
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return viewModel.viewForHeader(in: section)
     }
-    
 }
 
 extension TaskListViewController: TaskCellDelegate {

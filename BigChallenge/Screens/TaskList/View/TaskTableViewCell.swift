@@ -16,6 +16,8 @@ enum CellType {
     case top
     case middle
     case bottom
+    case topAndBottom
+    case none
 }
 
 class TaskTableViewCell: UITableViewCell {
@@ -37,6 +39,9 @@ class TaskTableViewCell: UITableViewCell {
         super.awakeFromNib()
         taskTitleTextView.delegate = self
         checkButton.isSelected = false
+        
+        layer.shadowRadius = 6.3
+        layer.shadowOffset = CGSize(width: 0, height: 0)
     }
     
     // MARK: - Functions
@@ -49,8 +54,29 @@ class TaskTableViewCell: UITableViewCell {
         checkButton.isSelected = viewModel.taskIsCompleted
     }
     
-    func configure(with position: CellType) {
+    func layout(with position: CellType) {
+        clipsToBounds = true
         
+        backgroundColor = UIColor.white
+        layer.shadowColor = UIColor.black.cgColor
+        
+        print("task: \(viewModel?.title ?? "nil"), \(position)")
+        
+        switch position {
+        case .top:
+            layer.cornerRadius = 6.3
+            layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        case .middle:
+            layer.cornerRadius = 0
+        case .bottom:
+            layer.cornerRadius = 6.3
+            layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        case .topAndBottom:
+            layer.cornerRadius = 6.3
+        case .none:
+            backgroundColor = UIColor.clear
+            layer.shadowColor = UIColor.clear.cgColor
+        }
     }
     
     // MARK: - IBActions
