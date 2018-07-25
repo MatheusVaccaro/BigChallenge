@@ -41,6 +41,7 @@ class TaskTableViewCell: UITableViewCell {
     // MARK: - IBOutlets
     @IBOutlet weak var taskTitleTextView: UITextView!
     @IBOutlet weak var checkButton: UIButton!
+    @IBOutlet weak var tagsLabel: UILabel!
     
     // MARK: - TableViewCell Lifecycle
 
@@ -50,7 +51,6 @@ class TaskTableViewCell: UITableViewCell {
         checkButton.isSelected = false
         
         layer.addSublayer(gradientLayer)
-        
         layer.shadowRadius = 6.3
         layer.shadowOffset = CGSize(width: 0, height: 0)
     }
@@ -62,7 +62,7 @@ class TaskTableViewCell: UITableViewCell {
         
         gradientLayer.colors = viewModel.checkButtonGradient
         taskTitleTextView.text = viewModel.title
-        taskTitleTextView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+        tagsLabel.text = viewModel.tagsDescription
         checkButton.isSelected = viewModel.taskIsCompleted
     }
     

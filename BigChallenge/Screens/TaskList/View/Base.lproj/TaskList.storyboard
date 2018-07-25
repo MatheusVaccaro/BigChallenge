@@ -31,15 +31,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="interactive" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w0d-a6-tsX">
-                                                    <rect key="frame" x="55" y="11" width="313" height="32"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" textContentType="name"/>
-                                                </textView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTW-Q2-Qja">
-                                                    <rect key="frame" x="5" y="5" width="50" height="50"/>
+                                                    <rect key="frame" x="8" y="5" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="0x5-1U-0fA"/>
                                                         <constraint firstAttribute="width" secondItem="UTW-Q2-Qja" secondAttribute="height" multiplier="1:1" id="K3y-YS-U3L"/>
@@ -50,18 +43,36 @@
                                                         <action selector="didPressCheckButton:" destination="rIG-Hy-LG4" eventType="touchUpInside" id="FGg-0F-Hre"/>
                                                     </connections>
                                                 </button>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-9" translatesAutoresizingMaskIntoConstraints="NO" id="FWt-xm-b6x">
+                                                    <rect key="frame" x="80" y="8.5" width="281" height="43.5"/>
+                                                    <subviews>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="interactive" editable="NO" text="i am a task" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w0d-a6-tsX">
+                                                            <rect key="frame" x="0.0" y="0.0" width="281" height="38"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" textContentType="name"/>
+                                                        </textView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdm-fv-zF5">
+                                                            <rect key="frame" x="0.0" y="29" width="281" height="14.5"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="w0d-a6-tsX" firstAttribute="leading" secondItem="UTW-Q2-Qja" secondAttribute="trailing" id="7bf-55-rq5"/>
-                                                <constraint firstAttribute="bottom" secondItem="w0d-a6-tsX" secondAttribute="bottom" constant="17" id="Ptn-we-71m"/>
-                                                <constraint firstItem="UTW-Q2-Qja" firstAttribute="centerY" secondItem="qUG-wf-Wjh" secondAttribute="centerY" id="SCg-z9-j2s"/>
-                                                <constraint firstItem="UTW-Q2-Qja" firstAttribute="leading" secondItem="qUG-wf-Wjh" secondAttribute="leading" constant="5" id="Ssl-BB-8C5"/>
-                                                <constraint firstItem="w0d-a6-tsX" firstAttribute="top" secondItem="qUG-wf-Wjh" secondAttribute="topMargin" id="b7h-cy-zyF"/>
-                                                <constraint firstItem="w0d-a6-tsX" firstAttribute="trailing" secondItem="qUG-wf-Wjh" secondAttribute="trailingMargin" constant="8" id="tl4-a5-rk9"/>
+                                                <constraint firstItem="FWt-xm-b6x" firstAttribute="leading" secondItem="UTW-Q2-Qja" secondAttribute="trailing" constant="22" id="6Oa-iE-SY4"/>
+                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="FWt-xm-b6x" secondAttribute="trailing" constant="14" id="7lr-77-3hn"/>
+                                                <constraint firstAttribute="bottom" secondItem="UTW-Q2-Qja" secondAttribute="bottom" constant="5" id="Ady-yn-1gf"/>
+                                                <constraint firstItem="UTW-Q2-Qja" firstAttribute="leading" secondItem="qUG-wf-Wjh" secondAttribute="leading" constant="8" id="Ssl-BB-8C5"/>
+                                                <constraint firstItem="FWt-xm-b6x" firstAttribute="centerY" secondItem="UTW-Q2-Qja" secondAttribute="centerY" id="USt-8c-IK4"/>
+                                                <constraint firstItem="UTW-Q2-Qja" firstAttribute="top" secondItem="qUG-wf-Wjh" secondAttribute="top" constant="5" id="tfr-UF-BAi"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="checkButton" destination="UTW-Q2-Qja" id="1e4-6b-LeQ"/>
+                                            <outlet property="tagsLabel" destination="mdm-fv-zF5" id="d1X-WT-2cA"/>
                                             <outlet property="taskTitleTextView" destination="w0d-a6-tsX" id="60H-js-wGo"/>
                                         </connections>
                                     </tableViewCell>
