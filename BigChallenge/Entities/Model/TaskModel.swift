@@ -143,3 +143,40 @@ extension TaskModel: TasksPersistenceDelegate {
         self.didUpdateTasks.onNext(self.tasks)
     }
 }
+
+// MARK: - Imports
+
+extension TaskModel {
+    
+    /**
+     Associates a task to import data. Import data is determined by the import's source.
+     Once a task has been associated to a import data of some type, it cannot be associated to import data of another type.
+     
+     - Parameters
+     	- task: The task to associate import data to.
+     	- importDataPacket: The import data to associate a task with.
+     */
+    func associateTask(_ task: Task, with importDataPacket: ImportDataPacket) {
+        // Check if task has import data of the same type as importDataPacket or no data at all
+        guard task.importData?.type == importDataPacket.type || task.importData == nil else { return }
+        guard let taskContext = task.managedObjectContext else { return }
+        
+        // Initializes ImportData object
+        let importDataContainer = ImportData(context: taskContext)
+        task.importData = importDataContainer
+        
+        // Associates task with import data
+        switch importDataPacket {
+        case .remindersDataPacket(let id, let externalId):
+            let remindersImportData = RemindersImportData(context: taskContext)
+
+            remindersImportData.calendarItemIdentifier = id
+            remindersImportData.calendarItemExternalIdentifier = externalId
+
+            task.importData?.remindersImportData = remindersImportData
+        }
+        
+        // Commits import data association
+        persistance.save()
+    }
+}
