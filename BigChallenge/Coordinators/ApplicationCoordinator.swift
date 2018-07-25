@@ -34,6 +34,7 @@ class ApplicationCoordinator: Coordinator {
         window.makeKeyAndVisible()
         showTaskList()
         RemindersImporter.instantiate(taskModel: taskModel, tagModel: tagModel)
+        RemindersImporter.instance?.attemptToImport()
     }
     
     private func showTaskList() {

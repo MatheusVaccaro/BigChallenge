@@ -17,7 +17,7 @@ public class RemindersImporter {
     private let tagModel: TagModel
     private let remindersDB: RemindersCommunicator
     
-    // Initializes CommReminders and requests access afterwards
+    // Initializes RemindersCommunicator
     private init(taskModel: TaskModel, tagModel: TagModel) {
         self.taskModel = taskModel
         self.tagModel = tagModel
@@ -25,8 +25,14 @@ public class RemindersImporter {
         
         defer {
             remindersDB.delegate = self
-            remindersDB.requestAccess()
         }
+    }
+    
+    /**
+     Attempts to start the import procedure.
+ 	*/
+    func attemptToImport() {
+        remindersDB.requestAccess()
     }
     
     // Should be instantiated using this method
