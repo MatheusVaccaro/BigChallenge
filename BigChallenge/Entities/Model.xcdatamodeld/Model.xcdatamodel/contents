@@ -5,6 +5,16 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="checklistItems" inverseEntity="Task" syncable="YES"/>
     </entity>
+    <entity name="ImportData" representedClassName="ImportData" syncable="YES" codeGenerationType="class">
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="remindersImportData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RemindersImportData" inverseName="importData" inverseEntity="RemindersImportData" syncable="YES"/>
+        <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="importData" inverseEntity="Task" syncable="YES"/>
+    </entity>
+    <entity name="RemindersImportData" representedClassName="RemindersImportData" syncable="YES" codeGenerationType="class">
+        <attribute name="calendarItemExternalIdentifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="calendarItemIdentifier" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="importData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ImportData" inverseName="remindersImportData" inverseEntity="ImportData" syncable="YES"/>
+    </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
         <attribute name="color" optional="YES" attributeType="Integer 64" minValueString="0" maxValueString="4" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="dates" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -23,11 +33,14 @@
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" minValueString="0" syncable="YES"/>
         <relationship name="checklistItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChecklistItem" inverseName="task" inverseEntity="ChecklistItem" syncable="YES"/>
+        <relationship name="importData" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ImportData" inverseName="task" inverseEntity="ImportData" syncable="YES"/>
         <relationship name="tags" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="tasks" inverseEntity="Tag" syncable="YES"/>
     </entity>
     <elements>
         <element name="ChecklistItem" positionX="-261" positionY="-360" width="128" height="90"/>
         <element name="Tag" positionX="-436.5546875" positionY="-377.390625" width="128" height="135"/>
         <element name="Task" positionX="-81.23828125" positionY="-452.66796875" width="128" height="195"/>
+        <element name="RemindersImportData" positionX="-234" positionY="-360" width="128" height="90"/>
+        <element name="ImportData" positionX="-225" positionY="-351" width="128" height="90"/>
     </elements>
 </model>
