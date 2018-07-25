@@ -36,6 +36,13 @@ class HomeScreenViewController: UIViewController {
         if segue.identifier == "taskListSegue" {
             if let taskListViewController = segue.destination as? TaskListViewController {
                 let taskListViewModel = viewModel.taskListViewModel
+                taskListViewModel.shouldAddTask.subscribe { event in
+                    if let shouldAddTask = event.element {
+                        if shouldAddTask {
+                            self.delegate?.willAddTask()
+                        }
+                    }
+                }.disposed(by: disposeBag)
                 taskListViewController.viewModel = taskListViewModel
                 self.taskListViewController = taskListViewController
             }

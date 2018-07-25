@@ -14,6 +14,7 @@ public class TaskListViewModel {
     
     var tasksObservable: BehaviorSubject<[Task]>
     var taskCompleted: PublishSubject<Task>
+    var shouldAddTask: BehaviorSubject<Bool>
     var showsCompletedTasks: Bool = false {
         didSet {
             print((showsCompletedTasks ? "showing" : "not showing") + " completed tasks")
@@ -34,7 +35,6 @@ public class TaskListViewModel {
     private(set) var completedTasks: [Task]
     private var disposeBag = DisposeBag()
     
-    
     public init(model: TaskModel) {
         self.model = model
         self.tasks = []
@@ -42,6 +42,7 @@ public class TaskListViewModel {
         
         self.tasksObservable = BehaviorSubject<[Task]>(value: tasks)
         self.taskCompleted = PublishSubject<Task>()
+        self.shouldAddTask = BehaviorSubject<Bool>(value: false)
         
         taskCompleted.subscribe { event in
             guard let task = event.element else {return}
@@ -98,5 +99,9 @@ public class TaskListViewModel {
     
     func taskCellViewModel(for task: Task) -> TaskCellViewModel {
         return TaskCellViewModel(task: task)
+    }
+    
+    func shouldGoToAddTask() {
+        self.shouldAddTask.onNext(true)
     }
 }
