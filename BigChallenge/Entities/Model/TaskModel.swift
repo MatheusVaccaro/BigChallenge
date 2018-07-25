@@ -175,8 +175,5 @@ extension TaskModel {
 
             task.importData?.remindersImportData = remindersImportData
         }
-        
-        // Commits import data association
-        persistance.save()
     }
 }
