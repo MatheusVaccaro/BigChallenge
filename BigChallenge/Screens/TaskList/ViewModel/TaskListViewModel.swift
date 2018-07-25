@@ -34,7 +34,7 @@ public class TaskListViewModel {
 //    here i declare multiple arrays for completed and uncomplete tasks
 //    so that you dont need to filer the array everytime you complete a task
     private(set) var completedTasks: [Task]
-    fileprivate var tagsBeingUsed: [Tag]?
+    fileprivate var tagsBeingUsed: [Tag]
 
     private let model: TaskModel
     private var disposeBag = DisposeBag()
@@ -44,6 +44,7 @@ public class TaskListViewModel {
         self.mainTasks = []
         self.secondaryTasks = []
         self.completedTasks = []
+        self.tagsBeingUsed = []
         
         self.taskCompleted = PublishSubject<Task>()
         self.shouldAddTask = BehaviorSubject<Bool>(value: false)
@@ -105,7 +106,8 @@ public class TaskListViewModel {
     fileprivate func isMainTask(_ task: Task) -> Bool {
         let tags = (task.tags?.allObjects as! [Tag])
         
-        return tags == tagsBeingUsed
+        return tags.count == tagsBeingUsed.count &&
+            tags.map { $0.title! }.sorted() == tagsBeingUsed.map { $0.title! }.sorted()
     }
     
     /** appends a centain task to the appropriate array inside taskListViewModel */
