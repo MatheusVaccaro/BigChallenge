@@ -32,8 +32,8 @@ class TagCollectionViewCell: UICollectionViewCell {
         let ans = UILabel()
         
         ans.textColor = UIColor.white
-        ans.textAlignment = .center
-        ans.font = UIFont.preferredFont(forTextStyle: .title3)
+        ans.textAlignment = tagUILabel.textAlignment
+        ans.font = tagUILabel.font
         
         return ans
     }()
@@ -48,6 +48,8 @@ class TagCollectionViewCell: UICollectionViewCell {
     private var viewModel: TagCollectionViewCellViewModel!
     
     override func awakeFromNib() {
+        tagUILabel.font = UIFont.font(sized: 19, weight: .medium, with: .title3)
+        
         layer.backgroundColor = UIColor.white.cgColor
         layer.borderColor = UIColor.clear.cgColor
         

@@ -57,7 +57,6 @@ public class TaskListViewModel {
     /** filters the taskList with selected tags */
     func filterTasks(with tags: [Tag]) {
         self.tagsBeingUsed = tags
-        
         mainTasks = []
         secondaryTasks = []
         completedTasks = []
@@ -88,18 +87,12 @@ public class TaskListViewModel {
     func taskCellViewModel(for task: Task) -> TaskCellViewModel {
         return TaskCellViewModel(task: task)
     }
-    
 
     func shouldGoToAddTask() {
         self.shouldAddTask.onNext(true)
     }
-
-    func viewForHeader(in section: Int) -> UIView? {
-        return nil //TODO: vini's desing
-    }
     
     //MARK: Helpers
-    
     /**
      verifies that task contains only one tag, which is the current selected tag
      */
