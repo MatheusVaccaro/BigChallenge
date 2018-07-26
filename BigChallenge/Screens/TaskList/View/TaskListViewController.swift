@@ -69,7 +69,9 @@ public class TaskListViewController: UIViewController {
     fileprivate func createDataSource() -> RxTableViewSectionedReloadDataSource<SectionedTaskModel> {
         let ans = RxTableViewSectionedReloadDataSource<SectionedTaskModel>(
             configureCell: {(dataSource, table, indexPath, task) in
-                let cell = table.dequeueReusableCell(withIdentifier: TaskTableViewCell.identifier, for: indexPath) as! TaskTableViewCell
+                let cell =
+                    table.dequeueReusableCell(withIdentifier: TaskTableViewCell.identifier,
+                                              for: indexPath) as! TaskTableViewCell
                 
                 let taskCellViewModel = self.viewModel.taskCellViewModel(for: task)
                 
