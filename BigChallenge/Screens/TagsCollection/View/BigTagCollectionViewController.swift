@@ -28,11 +28,16 @@ class BigTagCollectionViewController: TagCollectionViewController {
     
     override func bindCollectionView() {
         viewModel.tagsObservable
+            .map { return [Item(tag: nil)] + $0.map { Item(tag: $0) } }
         .bind(to: tagsCollectionView.rx
         .items(cellIdentifier: TagCollectionViewCell.identifier,
-               cellType: TagCollectionViewCell.self)) { (row, tag, cell) in
-                        
-                print("updating collection with tag \(tag.title!)")
+               cellType: TagCollectionViewCell.self)) { (row, item, cell) in
+                
+                guard let tag = item.tag else {
+                    cell.configure()
+                    return
+                }
+//                print("updating collection with tag \(tag.title!)")
                 let viewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
                 let index = IndexPath(row: row, section: 0)
                 
