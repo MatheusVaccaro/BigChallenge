@@ -28,7 +28,7 @@ class TaskCellViewModel {
     }()
     
     lazy var tagsDescription: String = {
-        guard !task.tags!.allObjects.isEmpty else { return " " }
+        guard !task.tags!.allObjects.isEmpty else { return "" }
         var ans = ""
         
         let tagArray = (task.tags?.allObjects as! [Tag]).map { $0.title ?? "nil" }
