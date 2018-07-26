@@ -96,7 +96,7 @@ public class TaskListViewController: UIViewController {
         return ans
     }
     
-    fileprivate func textHeaderView(with text: String, and color: UIColor) -> UIView {
+    fileprivate func textHeaderView(with text: String, colored color: UIColor) -> UIView {
         
         let label = UILabel()
         label.font = UIFont.font(sized: 13, weight: .regular, with: .footnote)
@@ -130,7 +130,8 @@ extension TaskListViewController: UITableViewDelegate {
         let headerView = UIView(frame: view.frame)
 
         guard section == 0 else {
-            headerView.addSubview(textHeaderView(with: "Also tagged:", and: UIColor.purple))
+            headerView.addSubview(textHeaderView(with: Strings.Task.ListScreen.section2HeaderTitle,
+                                                 colored: UIColor.purple))
             return headerView
         }
         
@@ -145,7 +146,8 @@ extension TaskListViewController: UITableViewDelegate {
         headerView.addSubview(cardView)
 
         if viewModel.tagsBeingUsed.isEmpty {
-            headerView.addSubview(textHeaderView(with: "Recommended:", and: UIColor.darkGray))
+            headerView.addSubview(textHeaderView(with: Strings.Task.ListScreen.recommendedHeaderTitle,
+                                                 colored: UIColor.darkGray))
         }
         
         return headerView

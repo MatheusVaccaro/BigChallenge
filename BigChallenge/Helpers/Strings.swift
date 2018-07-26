@@ -34,8 +34,11 @@ struct Strings {
         }
         
         struct ListScreen {
-            static let title =
-                NSLocalizedString("taskListScreenTitle", comment: "title of tasklist tableView screen")
+            static let recommendedHeaderTitle =
+                NSLocalizedString("recommendedHeaderTitle", comment: "header title for 'recommended' section ")
+            
+            static let section2HeaderTitle =
+                NSLocalizedString("section2HeaderTitle", comment: "header title for 'also tagged:' section ")
         }
         
         struct Cell {

@@ -23,9 +23,6 @@
 /* button used to delete task */
 "newTaskDeleteTask" = "Excluir";
 
-/* title of tasklist tableView screen */
-"taskListScreenTitle" = "Tarefas";
-
 /* completed cell status */
 "taskCellComplete" = "Completo";
 
@@ -52,3 +49,9 @@
 
 /* screen title when on \"all tags\" screen */
 "CollectionScreenTitle" = "Tags";
+
+/* header title for 'recommended' section  */
+"recommendedHeaderTitle" = "Recomendado:";
+
+/* header title for 'also tagged:' section  */
+"section2HeaderTitle" = "Tambem marcado com:";
