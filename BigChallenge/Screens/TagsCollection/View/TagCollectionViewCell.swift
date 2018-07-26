@@ -14,7 +14,13 @@ class TagCollectionViewCell: UICollectionViewCell {
 
     static let identifier = "tagCollectionCell"
     
-    private lazy var gradientLayer: CAGradientLayer = {
+    enum Kind {
+        case tag
+        case add
+    }
+    var kind: Kind = .tag
+    
+    lazy var gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
         
         layer.startPoint = CGPoint(x: 0, y: 1)
@@ -28,7 +34,7 @@ class TagCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var tagUILabel: UILabel!
     
-    private lazy var maskLabel: UILabel = {
+    lazy var maskLabel: UILabel = {
         let ans = UILabel()
         
         ans.textColor = UIColor.white
@@ -40,8 +46,14 @@ class TagCollectionViewCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            contentView.mask = isSelected ? nil : maskLabel
-            tagUILabel.isHidden = !isSelected
+            switch kind {
+            case .tag:
+                contentView.mask = isSelected ? nil : maskLabel
+                tagUILabel.isHidden = !isSelected
+            case .add:
+                break
+                //code
+            }
         }
     }
     
@@ -67,7 +79,14 @@ class TagCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(maskLabel)
     }
     
-    func configure(with viewModel: TagCollectionViewCellViewModel) {
+    func configure(with viewModel: TagCollectionViewCellViewModel? = nil) {
+        
+        guard let viewModel = viewModel else {
+            configureDefault()
+            
+            return
+        }
+        
         self.viewModel = viewModel
         
         tagUILabel.text = viewModel.tagTitle
@@ -76,6 +95,16 @@ class TagCollectionViewCell: UICollectionViewCell {
         layer.shadowColor = viewModel.color.first!
         gradientLayer.colors = viewModel.color
     }
+    
+    func configureDefault() {
+        tagUILabel.text = "+"
+        maskLabel.text = "+"
+        gradientLayer.colors = UIColor.Tags.redGradient
+        contentView.mask = maskLabel
+        tagUILabel.isHidden = true
+        kind = .add
+    }
+    
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) ->
         UICollectionViewLayoutAttributes {
