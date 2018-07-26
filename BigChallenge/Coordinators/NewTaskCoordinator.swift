@@ -40,7 +40,7 @@ class NewTaskCoordinator: Coordinator {
         newTaskViewModel.delegate = self
         newTaskTableViewController.viewModel = newTaskViewModel
         
-        let tagCollectionViewModel = TagCollectionViewModel(model: tagModel)
+        let tagCollectionViewModel = TagCollectionViewModel(model: tagModel, filtering: false)
         newTaskTableViewController.tagCollectionViewModel = tagCollectionViewModel
         
         let modalPresenter = UINavigationController(rootViewController: newTaskTableViewController)
