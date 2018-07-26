@@ -41,8 +41,22 @@ class HomeScreenViewController: UIViewController {
         
         view.layer.addSublayer(gradientLayer) // background gradient layer
         bigTitle.font = UIFont.font(sized: 41, weight: .medium, with: .largeTitle)
+        bigTitle.adjustsFontForContentSizeCategory = true
         
         observeSelectedTags()
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateContentSize),
+                                               name: NSNotification.Name.UIContentSizeCategoryDidChange,
+                                               object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc fileprivate func updateContentSize() {
+        bigTitle.font = UIFont.font(sized: 41, weight: .medium, with: .largeTitle)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
