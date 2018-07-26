@@ -99,7 +99,7 @@ class HomeScreenViewController: UIViewController {
         tagCollectionViewController.viewModel.selectedTagsObservable
             .subscribe { event in
                 self.taskListViewController.viewModel.filterTasks(with: event.element!)
-                print("selected tags are: \( event.element!.map { $0.title } )")
+                print("selected tags are: \(event.element!.map { $0.title })")
             }.disposed(by: disposeBag)
     }
 }

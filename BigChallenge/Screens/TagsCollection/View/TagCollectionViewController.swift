@@ -71,7 +71,6 @@ class TagCollectionViewController: UIViewController {
                         self.tagsCollectionView.deselectItem(at: indexPath, animated: true)
                     }
                 }.disposed(by: self.disposeBag)
-                
         }.disposed(by: disposeBag)
         
         if let tagsCollection = tagsCollectionView as? TagCollectionView {

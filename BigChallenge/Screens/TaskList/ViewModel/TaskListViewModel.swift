@@ -25,8 +25,9 @@ public class TaskListViewModel {
     }
     
     var tasksToShow: [Task] {
-        if showsCompletedTasks { return secondaryTasks + completedTasks }
-        else { return secondaryTasks }
+        if showsCompletedTasks {
+            return secondaryTasks + completedTasks
+        } else { return secondaryTasks }
     }
     
     //    here i declare multiple arrays for completed and uncomplete tasks
@@ -92,7 +93,7 @@ public class TaskListViewModel {
         self.shouldAddTask.onNext(true)
     }
     
-    //MARK: Helpers
+    // MARK: Helpers
     /**
      verifies that task contains only one tag, which is the current selected tag
      */
@@ -117,7 +118,7 @@ public class TaskListViewModel {
     }
     
     fileprivate func subscribeToModelUpdate() {
-        model.didUpdateTasks.subscribe{
+        model.didUpdateTasks.subscribe {
             self.mainTasks = []
             self.secondaryTasks = []
             self.completedTasks = []
@@ -133,7 +134,7 @@ public class TaskListViewModel {
     fileprivate func subscribeToCompletedTask() {
         taskCompleted.subscribe { event in
             
-            guard let task = event.element else {return}
+            guard event.element != nil else {return}
             self.model.saveContext() // saving the context updated the view, also
             
             self.tasksObservable.onNext((self.mainTasks, self.tasksToShow))

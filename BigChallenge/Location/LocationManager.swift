@@ -36,7 +36,8 @@ class LocationManager: NSObject {
     
     func stopMonitoring(region: CLCircularRegion) {
         for region in manager.monitoredRegions {
-            guard let circularRegion = region as? CLCircularRegion, circularRegion.identifier == region.identifier else { continue }
+            guard let circularRegion = region as? CLCircularRegion,
+                circularRegion.identifier == region.identifier else { continue }
             manager.stopMonitoring(for: circularRegion)
         }
     }
