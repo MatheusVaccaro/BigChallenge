@@ -43,7 +43,6 @@ public class TaskListViewController: UIViewController {
         tableView.estimatedRowHeight = 60
         
         bindTableView()
-        tableView.sectionFooterHeight = 0
     }
     
     private func bindTableView() {
@@ -70,7 +69,9 @@ public class TaskListViewController: UIViewController {
     fileprivate func createDataSource() -> RxTableViewSectionedReloadDataSource<SectionedTaskModel> {
         let ans = RxTableViewSectionedReloadDataSource<SectionedTaskModel>(
             configureCell: {(dataSource, table, indexPath, task) in
-                let cell = table.dequeueReusableCell(withIdentifier: TaskTableViewCell.identifier, for: indexPath) as! TaskTableViewCell
+                let cell =
+                    table.dequeueReusableCell(withIdentifier: TaskTableViewCell.identifier,
+                                              for: indexPath) as! TaskTableViewCell
                 
                 let taskCellViewModel = self.viewModel.taskCellViewModel(for: task)
                 
@@ -96,6 +97,25 @@ public class TaskListViewController: UIViewController {
         
         return ans
     }
+    
+    fileprivate func textHeaderView(with text: String, colored color: UIColor) -> UIView {
+        
+        let label = UILabel()
+        label.font = UIFont.font(sized: 13, weight: .regular, with: .footnote)
+        label.textColor = UIColor.white
+        label.text = text
+        label.sizeToFit()
+        label.frame.origin = CGPoint(x: 8, y: 3)
+        
+        let frame = CGRect(x: 8, y: 0, width: 150, height: 21)
+        let headerView = UIView(frame: frame)
+        headerView.backgroundColor = color
+        headerView.layer.cornerRadius = 6.3
+        headerView.addSubview(label)
+        headerView.frame.size = CGSize(width: label.frame.size.width + 16, height: label.frame.size.height + 6)
+        
+        return headerView
+    }
 }
 
 extension TaskListViewController: UITableViewDelegate {
@@ -105,30 +125,50 @@ extension TaskListViewController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        guard !viewModel.mainTasks.isEmpty else { return 0 }
-        return section == 0 ? 8 : 0
+        return viewModel.mainTasks.isEmpty ? 0 : 46
     }
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard section == 0 else { return nil }
+        guard !viewModel.mainTasks.isEmpty else { return nil }
         let headerView = UIView(frame: view.frame)
+
+        guard section == 0 else {
+            headerView.addSubview(textHeaderView(with: Strings.Task.ListScreen.section2HeaderTitle,
+                                                 colored: UIColor.purple))
+            return headerView
+        }
         
-//        let recommendedTag = ...
+        let cardView = UIView(frame: headerView.bounds)
         
-        headerView.layer.backgroundColor = UIColor.white.cgColor
-        headerView.layer.cornerRadius = 6.3
-        headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        cardView.frame.size.height = 8
+        cardView.frame.origin.y = 10.5
+        cardView.layer.cornerRadius = 6.3
+        cardView.backgroundColor = UIColor.white
+        cardView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
+        headerView.addSubview(cardView)
+
+        if viewModel.tagsBeingUsed.isEmpty {
+            headerView.addSubview(textHeaderView(with: Strings.Task.ListScreen.recommendedHeaderTitle,
+                                                 colored: UIColor.darkGray))
+        }
         
         return headerView
     }
     
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard section == 0 else { return nil }
+        guard !viewModel.mainTasks.isEmpty && section == 0 else { return nil }
+        
         let footerView = UIView(frame: view.frame)
         
-        footerView.layer.backgroundColor = UIColor.white.cgColor
-        footerView.layer.cornerRadius = 6.3
-        footerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        let cardView = UIView(frame: footerView.bounds)
+        
+        cardView.frame.size.height = 8
+        cardView.layer.cornerRadius = 6.3
+        cardView.backgroundColor = UIColor.white
+        cardView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        
+        footerView.addSubview(cardView)
         
         return footerView
     }
