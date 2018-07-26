@@ -19,7 +19,7 @@ public class TagModel {
                              UIColor.Tags.peachGradient,
                              UIColor.Tags.greenGradient ]
     
-    private(set) var didUpdateTags: BehaviorSubject<[Tag]> //(([Tag]) -> Void)?
+    private(set) var didUpdateTags: BehaviorSubject<[Tag]>
     private(set) public var tags: [Tag]
     
     private let persistance: Persistence
@@ -66,8 +66,9 @@ public class TagModel {
     }
     
     public func createTag(with title: String) -> Tag {
-        if let tag = (tags.first { $0.title == title }) { return tag }
-        else { // dont create repeated tags
+        if let tag = (tags.first { $0.title == title }) {
+            return tag
+        } else { // dont create repeated tags
             let tag: Tag = persistance.create(Tag.self)
             
             tag.id = UUID()

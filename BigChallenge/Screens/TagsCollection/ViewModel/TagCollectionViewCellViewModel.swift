@@ -34,8 +34,9 @@ class TagCollectionViewCellViewModel {
     func observe(_ subject: BehaviorSubject<[Tag]>) {
         subject.subscribe { event in
             if let selectedTags = event.element {
-                if selectedTags.contains(self.tag) { self.isSelected.onNext(true) }
-                else { self.isSelected.onNext(false) }
+                if selectedTags.contains(self.tag) {
+                    self.isSelected.onNext(true)
+                } else { self.isSelected.onNext(false) }
             }
         }.disposed(by: disposeBag)
     }

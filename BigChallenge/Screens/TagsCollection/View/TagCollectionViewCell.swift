@@ -105,7 +105,6 @@ class TagCollectionViewCell: UICollectionViewCell {
         kind = .add
     }
     
-    
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) ->
         UICollectionViewLayoutAttributes {
         setNeedsLayout()

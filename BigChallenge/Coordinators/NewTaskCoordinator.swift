@@ -23,7 +23,12 @@ class NewTaskCoordinator: Coordinator {
     
     weak var delegate: CoordinatorDelegate?
     
-    init(task: Task? = nil, isEditing: Bool, presenter: UINavigationController, taskModel: TaskModel, tagModel: TagModel) {
+    init(task: Task? = nil,
+         isEditing: Bool,
+         presenter: UINavigationController,
+         taskModel: TaskModel,
+         tagModel: TagModel) {
+        
         self.taskModel = taskModel
         self.tagModel = tagModel
         self.presenter = presenter

@@ -73,7 +73,8 @@ public class RemindersImporter {
 
 extension RemindersImporter: RemindersCommunicatorDelegate {
     
-    func remindersCommunicatorDidDetectEventStoreChange(_ remindersCommunicator: RemindersCommunicator, notification: NSNotification) {
+    func remindersCommunicatorDidDetectEventStoreChange(_ remindersCommunicator: RemindersCommunicator,
+                                                        notification: NSNotification) {
         // TODO Figure out how to fetch the affected reminders without duplicating the whole Reminders Store
         // So far, seems like it is impossible.
     }

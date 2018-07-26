@@ -32,8 +32,8 @@ public class RemindersCommunicator {
                 self.delegate?.remindersCommunicatorWasGrantedAccessToReminders(self)
                 
                 NotificationCenter.default.addObserver(self,
-                                                       selector: #selector(self.eventStoreChangedNotificationHandler(_:)),
-                                                       name: .EKEventStoreChanged, object: self.store)
+                                                    selector: #selector(self.eventStoreChangedNotificationHandler(_:)),
+                                                    name: .EKEventStoreChanged, object: self.store)
                 
             } else if let error = error {
                 self.delegate?.remindersCommunicatorWasDeniedAccessToReminders(self, error: error)
@@ -87,5 +87,6 @@ public class RemindersCommunicator {
 protocol RemindersCommunicatorDelegate: class {
     func remindersCommunicatorWasGrantedAccessToReminders(_ remindersCommunicator: RemindersCommunicator)
     func remindersCommunicatorWasDeniedAccessToReminders(_ remindersCommunicator: RemindersCommunicator, error: Error)
-    func remindersCommunicatorDidDetectEventStoreChange(_ remindersCommunicator: RemindersCommunicator, notification: NSNotification)
+    func remindersCommunicatorDidDetectEventStoreChange(_ remindersCommunicator: RemindersCommunicator,
+                                                        notification: NSNotification)
 }
