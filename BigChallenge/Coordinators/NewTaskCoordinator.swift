@@ -14,7 +14,7 @@ class NewTaskCoordinator: Coordinator {
     fileprivate let presenter: UINavigationController
     var childrenCoordinators: [Coordinator]
     
-    fileprivate var newTaskTableViewController: NewTaskTableViewController?
+    fileprivate var newTaskViewController: NewTaskViewController?
     fileprivate let taskModel: TaskModel
     fileprivate let tagModel: TagModel
     fileprivate let selectedTags: [Tag]
@@ -41,22 +41,23 @@ class NewTaskCoordinator: Coordinator {
     }
     
     func start() {
-        let newTaskTableViewController = NewTaskTableViewController.instantiate()
-        self.newTaskTableViewController = newTaskTableViewController
+        let newTaskViewController = NewTaskViewController.instantiate()
+        self.newTaskViewController = newTaskViewController
         
         let newTaskViewModel = NewTaskViewModel(task: task,
                                                 isEditing: isEditing,
                                                 taskModel: taskModel)
         newTaskViewModel.delegate = self
-        newTaskTableViewController.viewModel = newTaskViewModel
+        newTaskViewController.viewModel = newTaskViewModel
         
         let tagCollectionViewModel = TagCollectionViewModel(model: tagModel,
                                                             filtering: false,
                                                             selectedTags: selectedTags)
         
-        newTaskTableViewController.tagCollectionViewModel = tagCollectionViewModel
+        newTaskViewController.tagCollectionViewModel = tagCollectionViewModel
         
-        let modalPresenter = UINavigationController(rootViewController: newTaskTableViewController)
+        let modalPresenter = UINavigationController(rootViewController: newTaskViewController)
+        modalPresenter.isNavigationBarHidden = true
         self.modalPresenter = modalPresenter
         
         presenter.present(modalPresenter, animated: true, completion: nil)
