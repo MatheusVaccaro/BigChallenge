@@ -2,6 +2,7 @@
 use_frameworks!
 
 target 'BigChallenge' do
+	platform :ios, '11.0'
     pod 'RxSwift',    '~> 4.0'
     pod 'RxCocoa',    '~> 4.0'
     pod 'SwiftLint', '~> 0.25.0'
@@ -15,10 +16,11 @@ end
 # end
 
 def testing_pods
+    platform :ios, '11.0'
     pod 'Quick'
     pod 'Nimble'
-    pod 'RxCocoa'
-    pod 'RxSwift'
+    pod 'RxCocoa', '~> 4.0'
+    pod 'RxSwift', '~> 4.0'
 end
 
 target 'BigChallengeTests' do
