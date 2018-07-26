@@ -29,12 +29,12 @@ public class TaskListViewModel {
         else { return secondaryTasks }
     }
     
+    //    here i declare multiple arrays for completed and uncomplete tasks
+    //    so that you dont need to filer the array everytime you complete a task
     private(set) var mainTasks: [Task]
     private(set) var secondaryTasks: [Task]
-//    here i declare multiple arrays for completed and uncomplete tasks
-//    so that you dont need to filer the array everytime you complete a task
     private(set) var completedTasks: [Task]
-    fileprivate var tagsBeingUsed: [Tag]
+    private(set) var tagsBeingUsed: [Tag]
 
     private let model: TaskModel
     private var disposeBag = DisposeBag()

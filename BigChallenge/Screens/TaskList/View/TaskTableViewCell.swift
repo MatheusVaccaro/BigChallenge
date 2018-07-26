@@ -52,6 +52,9 @@ class TaskTableViewCell: UITableViewCell {
         
         layer.shadowOpacity = 1
         layer.shadowOffset = CGSize(width: 0, height: 0)
+        
+        taskTitleTextView.font = UIFont.font(sized: 19, weight: .medium, with: .body)
+        tagsLabel.font = UIFont.font(sized: 14, weight: .regular, with: .footnote)
     }
     
     // MARK: - Functions
@@ -66,10 +69,6 @@ class TaskTableViewCell: UITableViewCell {
     }
     
     func layout(with position: CellType) {
-        clipsToBounds = true
-        
-        print("task: \(viewModel?.title ?? "nil"), \(position)")
-        
         switch position {
         case .main:
             layer.shadowColor = UIColor.black.cgColor
