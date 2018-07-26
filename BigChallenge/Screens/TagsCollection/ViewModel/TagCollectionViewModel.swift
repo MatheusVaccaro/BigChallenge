@@ -52,11 +52,11 @@ class TagCollectionViewModel {
                 
                 if filtering {
                     self.tags = self.model.tags.filter {
-                        let ans = self.selectedTags.isEmpty ||
-                            self.selectedTags.contains($0) ||
-                            !$0.tasks!.allObjects.isEmpty
-                        print("\(ans) for \($0.title!)")
-                        return ans
+                        return self.selectedTags.isEmpty || //no tag is selected
+                            self.selectedTags.contains($0) || // tag is selected
+                            !(($0.tasks!.allObjects as! [Task]) //tag has tasks in common
+                                .filter { $0.tags!.contains(tag) })
+                                .isEmpty
                     }
                     
                     self.tagsObservable.onNext(self.tags)
