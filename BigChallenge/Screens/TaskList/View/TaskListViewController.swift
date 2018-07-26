@@ -127,6 +127,7 @@ extension TaskListViewController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard !viewModel.mainTasks.isEmpty else { return nil }
         let headerView = UIView(frame: view.frame)
 
         guard section == 0 else {

@@ -24,53 +24,49 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="taskCell" editingAccessoryType="disclosureIndicator" rowHeight="71" id="rIG-Hy-LG4" customClass="TaskTableViewCell" customModule="BigChallenge" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="375" height="71"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="taskCell" editingAccessoryType="disclosureIndicator" rowHeight="66" id="rIG-Hy-LG4" customClass="TaskTableViewCell" customModule="BigChallenge" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rIG-Hy-LG4" id="qUG-wf-Wjh">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="Zck-ve-jZm">
-                                                    <rect key="frame" x="3" y="8" width="369" height="55"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTW-Q2-Qja">
+                                                    <rect key="frame" x="8" y="8" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="CP0-vU-esn"/>
+                                                        <constraint firstAttribute="height" constant="50" id="UNS-po-xCo"/>
+                                                    </constraints>
+                                                    <state key="normal" image="uncheckedBox"/>
+                                                    <state key="selected" image="checkedBox"/>
+                                                    <connections>
+                                                        <action selector="didPressCheckButton:" destination="rIG-Hy-LG4" eventType="touchUpInside" id="FGg-0F-Hre"/>
+                                                    </connections>
+                                                </button>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="FWt-xm-b6x">
+                                                    <rect key="frame" x="74" y="6.5" width="92" height="53.5"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTW-Q2-Qja">
-                                                            <rect key="frame" x="0.0" y="13" width="50" height="29"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="50" id="CP0-vU-esn"/>
-                                                                <constraint firstAttribute="width" secondItem="UTW-Q2-Qja" secondAttribute="height" multiplier="75:44" id="Qqq-cj-NPR"/>
-                                                            </constraints>
-                                                            <state key="normal" image="uncheckedBox"/>
-                                                            <state key="selected" image="checkedBox"/>
-                                                            <connections>
-                                                                <action selector="didPressCheckButton:" destination="rIG-Hy-LG4" eventType="touchUpInside" id="FGg-0F-Hre"/>
-                                                            </connections>
-                                                        </button>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-9" translatesAutoresizingMaskIntoConstraints="NO" id="FWt-xm-b6x">
-                                                            <rect key="frame" x="72" y="6" width="297" height="43.5"/>
-                                                            <subviews>
-                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="interactive" editable="NO" text="i am a task" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w0d-a6-tsX">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="297" height="38"/>
-                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" textContentType="name"/>
-                                                                </textView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdm-fv-zF5">
-                                                                    <rect key="frame" x="0.0" y="29" width="297" height="14.5"/>
-                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                </label>
-                                                            </subviews>
-                                                        </stackView>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="interactive" editable="NO" text="i am a task" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w0d-a6-tsX">
+                                                            <rect key="frame" x="0.0" y="0.0" width="92" height="38"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" textContentType="name"/>
+                                                        </textView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdm-fv-zF5">
+                                                            <rect key="frame" x="0.0" y="39" width="92" height="14.5"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </label>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="Zck-ve-jZm" secondAttribute="trailing" constant="3" id="5pf-iU-vnx"/>
-                                                <constraint firstAttribute="bottom" secondItem="Zck-ve-jZm" secondAttribute="bottom" constant="8" id="LXz-8l-hzV"/>
-                                                <constraint firstItem="Zck-ve-jZm" firstAttribute="leading" secondItem="qUG-wf-Wjh" secondAttribute="leading" constant="3" id="cH1-Ad-VuM"/>
-                                                <constraint firstItem="Zck-ve-jZm" firstAttribute="top" secondItem="qUG-wf-Wjh" secondAttribute="top" constant="8" id="qCU-cc-KkH"/>
+                                                <constraint firstAttribute="bottom" secondItem="UTW-Q2-Qja" secondAttribute="bottom" constant="8" id="BdD-Ca-vlR"/>
+                                                <constraint firstItem="FWt-xm-b6x" firstAttribute="leading" secondItem="UTW-Q2-Qja" secondAttribute="trailing" constant="16" id="FFs-az-ftH"/>
+                                                <constraint firstItem="FWt-xm-b6x" firstAttribute="centerY" secondItem="UTW-Q2-Qja" secondAttribute="centerY" id="fe6-Ax-2rv"/>
+                                                <constraint firstItem="UTW-Q2-Qja" firstAttribute="top" secondItem="qUG-wf-Wjh" secondAttribute="top" constant="8" id="hFF-O4-ldS"/>
+                                                <constraint firstItem="UTW-Q2-Qja" firstAttribute="leading" secondItem="qUG-wf-Wjh" secondAttribute="leading" constant="8" id="j6a-br-B1C"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

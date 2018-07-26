@@ -53,6 +53,10 @@ class TaskTableViewCell: UITableViewCell {
         layer.shadowOpacity = 1
         layer.shadowOffset = CGSize(width: 0, height: 0)
         
+        taskTitleTextView.textContainerInset =
+            UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        taskTitleTextView.textContainer.lineFragmentPadding = 0
+        
         taskTitleTextView.font = UIFont.font(sized: 19, weight: .medium, with: .body)
         tagsLabel.font = UIFont.font(sized: 14, weight: .regular, with: .footnote)
     }
