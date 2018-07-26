@@ -47,7 +47,7 @@ public class RemindersImporter {
         remindersDB.fetchAllReminders { reminders in
             guard let reminders = reminders else { return }
             
-            for reminder in reminders where !self.checkImportStatusForReminder(reminder) {
+            for reminder in reminders where !self.checkImportStatus(for: reminder) {
                 
                 let (task, tag) = self.convertTaskAndTag(from: reminder)
                 
@@ -65,7 +65,7 @@ public class RemindersImporter {
      - Returns: ```true``` if the reminder has been imported into a task.
      			```false``` if the reminder has not been imported into a task.
      */
-    private func checkImportStatusForReminder(_ reminder: EKReminder) -> Bool {
+    private func checkImportStatus(for reminder: EKReminder) -> Bool {
         let hasFoundEquivalentTask = taskModel.tasks.contains { task -> Bool in
             
             // Checks if a task is a Reminders import
@@ -82,7 +82,7 @@ public class RemindersImporter {
         return hasFoundEquivalentTask
     }
     
-    private func getEquivalentTaskForReminder(_ reminder: EKReminder) -> Task? {
+    private func getEquivalentTask(for reminder: EKReminder) -> Task? {
         let equivalentTask = taskModel.tasks.first { task -> Bool in
             guard let remindersData = task.importData?.remindersImportData else { return false }
             
@@ -114,7 +114,7 @@ public class RemindersImporter {
         return (task, tag)
     }
     
-    public func saveTaskToReminders(_ task: Task) {
+    public func exportTaskToReminders(_ task: Task) {
         remindersDB.save(task: task)
     }
 }
@@ -128,7 +128,7 @@ extension RemindersImporter: RemindersCommunicatorDelegate {
             guard let reminders = reminders else { return }
             
             // Set of all tasks originating from Reminders - even those not yet imported.
-            let remindersSet = Set(reminders.map({ self.getEquivalentTaskForReminder($0) ?? self.convertTaskAndTag(from: $0).task }))
+            let remindersSet = Set(reminders.map({ self.getEquivalentTask(for: $0) ?? self.convertTaskAndTag(from: $0).task }))
             let modelSet = Set(self.taskModel.tasks.filter({ $0.importData?.remindersImportData != nil }))
             
             let tasksToDelete = modelSet.subtracting(remindersSet)	// Originates from reminders being deleted.
