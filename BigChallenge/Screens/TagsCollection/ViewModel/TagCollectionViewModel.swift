@@ -17,13 +17,12 @@ class TagCollectionViewModel {
     
     private(set) var tags: [Tag]
     private(set) var selectedTags: [Tag]
-    
     private(set) var selectedTagEvent: PublishSubject<Tag>
 
     private let disposeBag = DisposeBag()
     private var model: TagModel
     
-    init(model: TagModel) {
+    init(model: TagModel, filtering: Bool) {
         self.model = model
         self.tags = model.tags
         self.selectedTags = []
@@ -32,26 +31,46 @@ class TagCollectionViewModel {
         selectedTagsObservable = BehaviorSubject<[Tag]>(value: [])
         selectedTagEvent = PublishSubject<Tag>()
         
-        selectedTagEvent.subscribe { event in
-            guard let tag = event.element else { return }
-            
-            if let index = self.selectedTags.index(of: tag) {
-                self.selectedTags.remove(at: index)
-            } else { self.selectedTags.append(tag) }
-            
-            //TODO: remove unecessary tags here (by looking at existing tasks)
-            self.selectedTagsObservable.onNext(self.selectedTags)
-        }.disposed(by: disposeBag)
-        
-        model.didUpdateTags.subscribe {
-            self.tags = $0.element!
-            print("updated tags: \(self.tags.map {$0.title!})")
-            self.tagsObservable.onNext(self.tags)
-        }.disposed(by: disposeBag)
+        subscribeToSelectedTag(filtering: filtering)
+        subscribeToModel()
     }
     
     func tagCollectionCellViewModel(for tag: Tag) -> TagCollectionViewCellViewModel {
         return TagCollectionViewCellViewModel(with: tag)
+    }
+    
+    fileprivate func subscribeToSelectedTag(filtering: Bool) {
+        selectedTagEvent
+            .subscribe { event in
+                guard let tag = event.element else { return }
+            
+                if let index = self.selectedTags.index(of: tag) {
+                    self.selectedTags.remove(at: index)
+                } else { self.selectedTags.append(tag) }
+
+                self.selectedTagsObservable.onNext(self.selectedTags)
+                
+                if filtering {
+                    self.tags = self.model.tags.filter {
+                        return self.selectedTags.isEmpty || //no tag is selected
+                            self.selectedTags.contains($0) || // tag is selected
+                            !(($0.tasks!.allObjects as! [Task]) //tag has tasks in common
+                                .filter { $0.tags!.contains(tag) })
+                                .isEmpty
+                    }
+                    
+                    self.tagsObservable.onNext(self.tags)
+                }
+            }.disposed(by: disposeBag)
+    }
+    
+    fileprivate func subscribeToModel() {
+        model.didUpdateTags
+            .subscribe {
+            self.tags = $0.element!
+            print("updated tags: \(self.tags.map {$0.title!})")
+            self.tagsObservable.onNext(self.tags)
+            }.disposed(by: disposeBag)
     }
     
 }

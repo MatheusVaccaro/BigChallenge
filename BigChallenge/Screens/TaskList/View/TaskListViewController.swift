@@ -133,6 +133,7 @@ extension TaskListViewController: UITableViewDelegate {
         let headerView = UIView(frame: view.frame)
 
         guard section == 0 else {
+            guard !viewModel.secondaryTasks.isEmpty else { return nil }
             headerView.addSubview(textHeaderView(with: Strings.Task.ListScreen.section2HeaderTitle,
                                                  colored: UIColor.purple))
             return headerView

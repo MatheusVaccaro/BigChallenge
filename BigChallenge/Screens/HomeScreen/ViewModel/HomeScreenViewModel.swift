@@ -22,7 +22,7 @@ class HomeScreenViewModel {
     }()
     
     lazy var tagListViewModel: TagCollectionViewModel = {
-        return TagCollectionViewModel(model: tagModel)
+        return TagCollectionViewModel(model: tagModel, filtering: true)
     }()
     
     private var taskModel: TaskModel

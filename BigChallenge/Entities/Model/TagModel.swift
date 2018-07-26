@@ -73,6 +73,7 @@ public class TagModel {
             tag.id = UUID()
             tag.title = title
             tag.color = nextColor
+            tag.tasks = []
             
             return tag
         }

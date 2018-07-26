@@ -91,7 +91,6 @@ class HomeScreenViewController: UIViewController {
         delegate?.willAddTask()
     }
     
-    // TODO: Move this to appropriate location (ViewModel)
     @IBAction func didTapAddTagButton(_ sender: UIButton) {
         delegate?.willAddTag()
     }
