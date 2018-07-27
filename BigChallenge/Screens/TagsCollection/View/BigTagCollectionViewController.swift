@@ -37,10 +37,8 @@ class BigTagCollectionViewController: TagCollectionViewController {
                     cell.configure()
                     return
                 }
-//                print("updating collection with tag \(tag.title!)")
                 let viewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
                 let index = IndexPath(row: row, section: 0)
-                
                 cell.configure(with: viewModel)
                 self.loadSelection(for: cell, tag: tag, at: index)
                 
@@ -51,12 +49,14 @@ class BigTagCollectionViewController: TagCollectionViewController {
                 
             }.disposed(by: disposeBag)
         
-        tagsCollectionView.rx.modelSelected(Tag.self).subscribe { event in // selected x item in collection
-            self.viewModel.selectedTagEvent.on(event) // send to viewModel
+        tagsCollectionView.rx.modelSelected(Item.self).subscribe { event in
+            guard let tag = event.element?.tag else { return }
+            self.viewModel.selectedTagEvent.onNext(tag)
         }.disposed(by: disposeBag)
         
-        tagsCollectionView.rx.modelDeselected(Tag.self).subscribe { event in
-            self.viewModel.selectedTagEvent.on(event)
+        tagsCollectionView.rx.modelDeselected(Item.self).subscribe { event in
+            guard let tag = event.element?.tag else { return }
+            self.viewModel.selectedTagEvent.onNext(tag)
         }.disposed(by: disposeBag)
     }
     

@@ -18,6 +18,7 @@ class TagCollectionViewCell: UICollectionViewCell {
         case tag
         case add
     }
+    
     var kind: Kind = .tag
     
     lazy var gradientLayer: CAGradientLayer = {
@@ -83,17 +84,15 @@ class TagCollectionViewCell: UICollectionViewCell {
         
         guard let viewModel = viewModel else {
             configureDefault()
-            
             return
         }
         
         self.viewModel = viewModel
-        
         tagUILabel.text = viewModel.tagTitle
         maskLabel.text = viewModel.tagTitle
-        
         layer.shadowColor = viewModel.color.first!
         gradientLayer.colors = viewModel.color
+        kind = .tag
     }
     
     func configureDefault() {

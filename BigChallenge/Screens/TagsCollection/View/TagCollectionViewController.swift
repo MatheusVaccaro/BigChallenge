@@ -52,23 +52,24 @@ class TagCollectionViewController: UIViewController {
                     cell.configure()
                     return
                 }
-//                print("updating collection with tag \(tag.title!)")
+                
                 let tagViewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
                 let indexPath = IndexPath(row: row, section: 0)
-
                 cell.configure(with: tagViewModel)
+                print("updating collection with tag \(tag.title!), type \(cell.kind) at \(row)")
+                
                 self.loadSelection(for: cell, tag: tag, at: indexPath)
                 tagViewModel.observe(self.viewModel.selectedTagsObservable)
-                
                 tagViewModel.isSelected.subscribe { event in
                     guard let bool = event.element else { return }
                     cell.isSelected = bool
-                    if cell.isSelected == true {
+                    if cell.isSelected {
                         self.tagsCollectionView.selectItem(at: indexPath,
                                                            animated: false,
                                                            scrollPosition: UICollectionViewScrollPosition.bottom)
                     } else {
-                        self.tagsCollectionView.deselectItem(at: indexPath, animated: true)
+                        self.tagsCollectionView.deselectItem(at: indexPath,
+                                                             animated: false)
                     }
                 }.disposed(by: self.disposeBag)
         }.disposed(by: disposeBag)
@@ -82,12 +83,14 @@ class TagCollectionViewController: UIViewController {
             }.disposed(by: disposeBag)
         }
         
-        tagsCollectionView.rx.modelSelected(Tag.self).subscribe { event in // selected x item in collection
-            self.viewModel.selectedTagEvent.on(event) // send to viewModel
+        tagsCollectionView.rx.modelSelected(Item.self).subscribe { event in
+            guard let tag = event.element?.tag else { return }
+            self.viewModel.selectedTagEvent.onNext(tag)
         }.disposed(by: disposeBag)
         
-        tagsCollectionView.rx.modelDeselected(Tag.self).subscribe { event in
-            self.viewModel.selectedTagEvent.on(event)
+        tagsCollectionView.rx.modelDeselected(Item.self).subscribe { event in
+            guard let tag = event.element?.tag else { return }
+            self.viewModel.selectedTagEvent.onNext(tag)
         }.disposed(by: disposeBag)
     }
     

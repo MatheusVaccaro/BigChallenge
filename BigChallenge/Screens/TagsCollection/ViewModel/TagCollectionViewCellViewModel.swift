@@ -36,7 +36,9 @@ class TagCollectionViewCellViewModel {
             if let selectedTags = event.element {
                 if selectedTags.contains(self.tag) {
                     self.isSelected.onNext(true)
-                } else { self.isSelected.onNext(false) }
+                } else {
+                    self.isSelected.onNext(false)
+                }
             }
         }.disposed(by: disposeBag)
     }
