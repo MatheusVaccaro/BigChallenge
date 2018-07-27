@@ -43,7 +43,7 @@ public class RemindersImporter {
                 
                 let (task, tag) = self.convertTaskAndTag(from: reminder)
                 
-                self.taskModel.save(object: task)
+                self.taskModel.save(task)
                 self.tagModel.save(object: tag)
             }
         }
@@ -51,8 +51,10 @@ public class RemindersImporter {
     
     // Convert a reminder to a Task and a Tag
     private func convertTaskAndTag(from reminder: EKReminder) -> (Task, Tag) {
+        let attributes: [TaskModel.Attributes : Any] =
+            [.title : reminder.title]
         let task =
-            self.taskModel.createTask(with: reminder.title)
+            self.taskModel.createTask(with: attributes)
         let tag =
             self.tagModel.createTag(with: reminder.calendar.title)
     

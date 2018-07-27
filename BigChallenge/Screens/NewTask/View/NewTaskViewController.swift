@@ -1,8 +1,8 @@
 //
-//  NewTaskTableViewController.swift
+//  NewTaskViewController.swift
 //  BigChallenge
 //
-//  Created by Matheus Vaccaro on 27/05/18.
+//  Created by Matheus Vaccaro on 25/07/18.
 //  Copyright © 2018 Matheus Vaccaro. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class NewTaskTableViewController: UITableViewController {
+class NewTaskViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -21,22 +21,24 @@ class NewTaskTableViewController: UITableViewController {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var deleteTaskButton: UILabel!
-    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var taskTitleTextView: UITextView!
+    @IBOutlet weak var taskNotesTextView: UITextView!
     @IBOutlet weak var tagCollectionContainerView: UIView!
     
-    // MARK: - TableViewController Lifecycle
+    // MARK: - NewTaskViewController Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupGestureRecognizers()
         configureWithViewModel()
         configureTagCollectionViewController()
+        configureTaskTitleTextView()
+        configureTaskNotesTextView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        titleTextField.becomeFirstResponder()
+        //        taskTitleTextView.becomeFirstResponder()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -44,30 +46,32 @@ class NewTaskTableViewController: UITableViewController {
         dismissKeyboard()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
     // MARK: - IBActions
     
-    @IBAction func didTapCancelBarButtonItem(_ sender: Any) {
+    @IBAction func didTapCancelButton(_ sender: UIButton) {
         viewModel?.didTapCancelButton()
     }
     
-    @IBAction func didTapDoneBarButtonItem(_ sender: Any) {
-        guard let titleText = titleTextField.text else { return }
-        viewModel?.taskTitleTextField = titleText
+    @IBAction func didTapSaveButton(_ sender: UIButton) {
+        guard let taskTitle = taskTitleTextView.text else { return }
+        viewModel?.taskTitleText = taskTitle
+        
+        guard let taskNotes = taskNotesTextView.text else { return }
+        viewModel?.taskNotesText = taskNotes
+        
         viewModel?.didTapDoneButton()
     }
     
+    @IBAction func didTapMoreOptions(_ sender: UIButton) {
+    }
+    
     // MARK: - Functions
+    
     private func configureWithViewModel() {
         guard let viewModel = viewModel else { return }
-        
-        titleTextField.text = viewModel.taskTitle()
-        titleTextField.placeholder = viewModel.titleTextFieldPlaceholder()
-        deleteTaskButton.text = viewModel.deleteButtonTitle()
-        navigationItem.title = viewModel.navigationItemTitle()
+        if let taskTitle = viewModel.taskTitle() {
+            taskTitleTextView.text = taskTitle
+        }
     }
     
     private func setupGestureRecognizers() {
@@ -77,9 +81,7 @@ class NewTaskTableViewController: UITableViewController {
     }
     
     @objc private func dismissKeyboard() {
-        if titleTextField.isEditing {
-            titleTextField.resignFirstResponder()
-        }
+        view.endEditing(true)
     }
     
     private func configureTagCollectionViewController() {
@@ -107,35 +109,26 @@ class NewTaskTableViewController: UITableViewController {
             self.viewModel?.selectedTags = event.element!
             print("selected tags are: \(event.element!.map {$0.title})")
             }.disposed(by: disposeBag)
-
     }
     
-    // MARK: - TableView DataSource
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel?.numberOfSections() ?? 0
+    private func configureTaskTitleTextView() {
+        taskTitleTextView.textContainer.lineBreakMode = .byTruncatingTail
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.numberOfRows(in: section) ?? 0
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
-            viewModel?.didTapDeleteTaskButton()
-        }
+    private func configureTaskNotesTextView() {
+        taskNotesTextView.textContainer.lineBreakMode = .byTruncatingTail
     }
 }
 
 // MARK: - StoryboardInstantiable
 
-extension NewTaskTableViewController: StoryboardInstantiable {
+extension NewTaskViewController: StoryboardInstantiable {
     
     static var storyboardIdentifier: String {
         return "NewTask"
     }
     
     static var viewControllerID: String {
-        return "NewTaskTableViewController"
+        return "NewTaskViewController"
     }
 }

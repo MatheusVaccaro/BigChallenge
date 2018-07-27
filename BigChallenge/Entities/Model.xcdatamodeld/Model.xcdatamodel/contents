@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14296.2" systemVersion="18A336e" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Description" representedClassName="Description" syncable="YES" codeGenerationType="class">
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="taskDescription" inverseEntity="Task" syncable="YES"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14270.11" systemVersion="" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ChecklistItem" representedClassName="ChecklistItem" syncable="YES" codeGenerationType="class">
+        <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="checklistItems" inverseEntity="Task" syncable="YES"/>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
         <attribute name="color" optional="YES" attributeType="Integer 64" minValueString="0" maxValueString="4" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -17,17 +16,18 @@
     <entity name="Task" representedClassName="Task" syncable="YES" codeGenerationType="class">
         <attribute name="completionDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="dates" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="dates" optional="YES" attributeType="Transformable" customClassName="[Date]" syncable="YES"/>
         <attribute name="dueDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="isCompleted" attributeType="Boolean" minValueString="0" maxValueString="1" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" minValueString="0" syncable="YES"/>
+        <relationship name="checklistItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChecklistItem" inverseName="task" inverseEntity="ChecklistItem" syncable="YES"/>
         <relationship name="tags" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="tasks" inverseEntity="Tag" syncable="YES"/>
-        <relationship name="taskDescription" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Description" inverseName="task" inverseEntity="Description" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Description" positionX="258.99609375" positionY="-407.51171875" width="128" height="105"/>
+        <element name="ChecklistItem" positionX="-261" positionY="-360" width="128" height="90"/>
         <element name="Tag" positionX="-436.5546875" positionY="-377.390625" width="128" height="135"/>
-        <element name="Task" positionX="-81.23828125" positionY="-452.66796875" width="128" height="180"/>
+        <element name="Task" positionX="-81.23828125" positionY="-452.66796875" width="128" height="195"/>
     </elements>
 </model>

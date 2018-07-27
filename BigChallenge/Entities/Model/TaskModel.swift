@@ -38,29 +38,80 @@ public class TaskModel {
         persistance.save()
     }
     
-    public func save(object: Task) {
-        guard !tasks.contains(object) else { return }
-        tasks.append(object)
-        RemindersImporter.instance?.save(task: object)
+    public func save(_ task: Task) {
+        guard !tasks.contains(task) else { return }
+        tasks.append(task)
+        RemindersImporter.instance?.save(task: task)
         persistance.save()
         didUpdateTasks.onNext(tasks)
     }
     
-    public func delete(object: Task) {
-        guard let taskIndex = tasks.index(of: object) else { print("could not delete \(object) "); return }
-        persistance.delete(object)
+    public func delete(_ task: Task) {
+        guard let taskIndex = tasks.index(of: task) else { print("could not delete \(task) "); return }
+        persistance.delete(task)
         tasks.remove(at: taskIndex)
         didUpdateTasks.onNext(tasks)
     }
     
-    public func createTask(with title: String) -> Task {
+    public func createTask(with attributes: [Attributes : Any]) -> Task {
         let task: Task = persistance.create(Task.self)
         
-        task.id = UUID()
+        let id = attributes[.id] as? UUID ?? UUID()
+        let title = attributes[.title] as? String ?? ""
+        let notes = attributes[.notes] as? String ?? ""
+        let creationDate = attributes[.creationDate] as? Date ?? Date()
+        let isCompleted = attributes[.isCompleted] as? Bool ?? false
+        
+        task.id = id
         task.title = title
-        task.creationDate = Date()
+        task.notes = notes
+        task.creationDate = creationDate
+        task.isCompleted = isCompleted
+        
+        if let completionDate = attributes[.completionDate] as? Date {
+            task.completionDate = completionDate
+        }
+        
+        if let dueDate = attributes[.dueDate] as? Date {
+            task.dueDate = dueDate
+        }
         
         return task
+    }
+    
+    public func update(_ task: Task, with attributes: [Attributes : Any]) {
+        if let completionDate = attributes[.completionDate] as? Date {
+            task.completionDate = completionDate
+        }
+        if let creationDate = attributes[.creationDate] as? Date {
+            task.creationDate = creationDate
+        }
+        if let dueDate = attributes[.dueDate] as? Date {
+            task.dueDate = dueDate
+        }
+        if let id = attributes[.id] as? UUID {
+            task.id = id
+        }
+        if let isCompleted = attributes[.isCompleted] as? Bool {
+            task.isCompleted = isCompleted
+        }
+        if let notes = attributes[.notes] as? String {
+            task.notes = notes
+        }
+        if let title = attributes[.title] as? String {
+            task.title = title
+        }
+    }
+    
+    // The attributes of the Task class, mapped according to CoreData
+    public enum Attributes {
+        case completionDate
+        case creationDate
+        case dueDate
+        case id
+        case isCompleted
+        case notes
+        case title
     }
 }
 

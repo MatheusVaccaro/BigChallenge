@@ -9,11 +9,10 @@
 import Foundation
 
 protocol NewTaskViewModelDelegate: class {
-    
     func didTapCancelButton()
     func didTapDoneButton()
     func didTapDeleteTaskButton()
-    
+    func didTapMoreOptionsButton()
 }
 
 class NewTaskViewModel: NewTaskViewModelProtocol {
@@ -21,8 +20,10 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
     private let taskModel: TaskModel
     private var isEditing: Bool
     private var task: Task?
+    var taskTitleText: String?
     var selectedTags: [Tag]
-    var taskTitleTextField: String?
+    var taskNotesText: String?
+    var dueDate: Date?
     
     weak var delegate: NewTaskViewModelDelegate?
     
@@ -67,23 +68,36 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
         deleteTask()
     }
     
+    func didTapMoreOptionsButton() {
+        delegate?.didTapMoreOptionsButton()
+    }
+    
     private func deleteTask() {
         guard let task = task else { return }
-        taskModel.delete(object: task)
+        taskModel.delete(task)
     }
     
     private func createTask() {
-        guard let taskTitle = taskTitleTextField else { return }
-        let task = taskModel.createTask(with: taskTitle)
+        guard let taskTitle = taskTitleText else { return }
+        guard let taskNotes = taskNotesText else { return }
+        let attributes: [TaskModel.Attributes : Any] = [
+            .title : taskTitle,
+            .notes : taskNotes
+        ]
+        let task = taskModel.createTask(with: attributes)
         self.task = task
         selectedTags.forEach { tag in
             self.task?.addToTags(tag)
         }
-        taskModel.save(object: task)
+        taskModel.save(task)
     }
     
     func taskTitle() -> String? {
         return task?.title
+    }
+    
+    func taskNotes() -> String? {
+        return task?.notes
     }
     
     // MARK: - Strings
