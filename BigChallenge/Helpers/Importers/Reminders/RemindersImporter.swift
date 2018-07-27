@@ -16,12 +16,14 @@ public class RemindersImporter {
 	private let taskModel: TaskModel
     private let tagModel: TagModel
     private let remindersDB: RemindersCommunicator
-    
+    private(set) var isImporting: Bool
+
     // Initializes RemindersCommunicator
     private init(taskModel: TaskModel, tagModel: TagModel) {
         self.taskModel = taskModel
         self.tagModel = tagModel
 		self.remindersDB = RemindersCommunicator()
+        self.isImporting = false
         
         defer {
             remindersDB.delegate = self
@@ -44,8 +46,10 @@ public class RemindersImporter {
     
     // Fetch all reminders; convert them to Tasks and Tags; save these afterwards
     func importTasksFromReminders() {
-        remindersDB.fetchAllReminders { reminders in
-            guard let reminders = reminders else { return }
+        isImporting = true
+        
+        remindersDB.fetchAllReminders { allReminders in
+            guard let reminders = allReminders?.filter({ !$0.isCompleted }) else { return }
             
             for reminder in reminders where !self.checkImportStatus(for: reminder) {
                 
@@ -54,6 +58,8 @@ public class RemindersImporter {
                 self.taskModel.save(task)
                 self.tagModel.save(object: tag)
             }
+            
+            self.isImporting = false
         }
     }
     
@@ -107,25 +113,45 @@ public class RemindersImporter {
         
         task.addToTags(tag)
         
-        taskModel.associateTask(task,
-                                with: .remindersDataPacket(id: reminder.calendarItemIdentifier,
-                                                           externalId: reminder.calendarItemIdentifier))
+        taskModel.associateTask(task, with: reminder.dataPacket)
 	
         return (task, tag)
     }
     
     public func exportTaskToReminders(_ task: Task) {
-        remindersDB.save(task: task)
-    }
-}
+        guard !isImporting else { return }
+        
+        let reminder = remindersDB.createReminder()
 
-extension RemindersImporter: RemindersCommunicatorDelegate {
-    //swiftlint:disable line_length
-    func remindersCommunicatorDidDetectEventStoreChange(_ remindersCommunicator: RemindersCommunicator, notification: NSNotification) {
+        update(reminder, withDataFrom: task)
+        taskModel.associateTask(task, with: reminder.dataPacket)
+		
+        remindersDB.save(reminder)
+    }
+    
+    private func update(_ reminder: EKReminder, withDataFrom task: Task) {
+        reminder.isCompleted = task.isCompleted
+        reminder.title = task.title
+        reminder.completionDate = task.completionDate
+        if let dueDate = task.dueDate {
+            reminder.dueDateComponents = Calendar.current.dateComponents([.year, .month, .day,
+                                                                          .hour, .minute], from: dueDate)
+        }
+        // TODO Implement a better way to figure out what list to save the reminder to.
+        if let tag = task.tags?.anyObject() as? Tag,
+           let calendar = remindersDB.getCalendars().first(where: { $0.title == tag.title }) {
+            reminder.calendar = calendar
+        } else {
+            reminder.calendar = remindersDB.getDefaultCalendar()
+        }
+    }
+    
+    private func sync() {
+        guard !isImporting else { return }
         
         // Check for changes between the model and the reminders store and update the model accordingly
-        remindersCommunicator.fetchAllReminders { reminders in
-            guard let reminders = reminders else { return }
+        remindersDB.fetchAllReminders { allReminders in
+            guard let reminders = allReminders?.filter({ !$0.isCompleted }) else { return }
             
             // Set of all tasks originating from Reminders - even those not yet imported.
             let remindersSet = Set(reminders.map({ self.getEquivalentTask(for: $0) ?? self.convertTaskAndTag(from: $0).task }))
@@ -137,6 +163,13 @@ extension RemindersImporter: RemindersCommunicatorDelegate {
             let newTasks = remindersSet.subtracting(modelSet)		// New reminders not yet imported.
             newTasks.forEach({ self.taskModel.save(object: $0) })
         }
+    }
+}
+
+extension RemindersImporter: RemindersCommunicatorDelegate {
+    //swiftlint:disable line_length
+    func remindersCommunicatorDidDetectEventStoreChange(_ remindersCommunicator: RemindersCommunicator, notification: NSNotification) {
+        sync()
     }
     
     func remindersCommunicatorWasGrantedAccessToReminders(_ remindersCommunicator: RemindersCommunicator) {
