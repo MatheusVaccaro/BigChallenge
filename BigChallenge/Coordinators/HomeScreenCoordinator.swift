@@ -20,7 +20,6 @@ class HomeScreenCoordinator: Coordinator {
     fileprivate let persistence: Persistence
     fileprivate var taskModel: TaskModel
     fileprivate var tagModel: TagModel
-    fileprivate var selectedTags: [Tag]
     
     init(presenter: UINavigationController, taskModel: TaskModel, tagModel: TagModel, persistence: Persistence, selectedTags: [Tag] = []) {
         
@@ -30,14 +29,12 @@ class HomeScreenCoordinator: Coordinator {
         
         self.childrenCoordinators = []
         self.persistence = persistence
-        self.selectedTags = selectedTags
     }
 
     func start() {
         let homeScreenViewController = HomeScreenViewController.instantiate()
         homeScreenViewController.viewModel =
             HomeScreenViewModel(taskModel: taskModel, tagModel: tagModel)
-        homeScreenViewController.selectedTags = selectedTags
 
         homeScreenViewController.delegate = self
         
@@ -45,12 +42,13 @@ class HomeScreenCoordinator: Coordinator {
         presenter.pushViewController(homeScreenViewController, animated: false)
     }
 
-    fileprivate func showNewTask() {
+    fileprivate func showNewTask(selectedTags: [Tag]) {
         let newTaskCoordinator = NewTaskCoordinator(task: nil,
                                                     isEditing: false,
                                                     presenter: presenter,
                                                     taskModel: taskModel,
-                                                    tagModel: tagModel)
+                                                    tagModel: tagModel,
+                                                    selectedTags: selectedTags)
         newTaskCoordinator.delegate = self
         addChild(coordinator: newTaskCoordinator)
         newTaskCoordinator.start()
@@ -84,12 +82,12 @@ extension HomeScreenCoordinator: CoordinatorDelegate {
 }
 
 extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
-    func willAddTag() {
-        showNewTag()
+    func willAddTask(selectedTags: [Tag]) {
+        showNewTask(selectedTags: selectedTags)
     }
     
-    func willAddTask() {
-        showNewTask()
+    func willAddTag() {
+        showNewTag()
     }
     
     func wilEditTask() {

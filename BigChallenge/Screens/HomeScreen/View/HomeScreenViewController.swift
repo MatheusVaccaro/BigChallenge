@@ -74,7 +74,7 @@ class HomeScreenViewController: UIViewController {
                 taskListViewModel.shouldAddTask.subscribe { event in
                     if let shouldAddTask = event.element {
                         if shouldAddTask {
-                            self.delegate?.willAddTask()
+                            self.delegate?.willAddTask(selectedTags: self.tagCollectionViewController.viewModel.selectedTags )
                         }
                     }
                 }.disposed(by: disposeBag)
