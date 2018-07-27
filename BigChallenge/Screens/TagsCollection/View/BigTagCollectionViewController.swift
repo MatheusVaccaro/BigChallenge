@@ -29,23 +29,24 @@ class BigTagCollectionViewController: TagCollectionViewController {
     override func bindCollectionView() {
         viewModel.tagsObservable
             .map { return [Item(tag: nil)] + $0.map { Item(tag: $0) } }
-        .bind(to: tagsCollectionView.rx
-        .items(cellIdentifier: TagCollectionViewCell.identifier,
-               cellType: TagCollectionViewCell.self)) { (row, item, cell) in
+            .bind(to: tagsCollectionView.rx
+                .items(cellIdentifier: TagCollectionViewCell.identifier,
+                       cellType: TagCollectionViewCell.self)) { (row, item, cell) in
                 
-                guard let tag = item.tag else {
-                    cell.configure()
-                    return
-                }
-                let viewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
-                let index = IndexPath(row: row, section: 0)
-                cell.configure(with: viewModel)
-                self.loadSelection(for: cell, tag: tag, at: index)
+                        guard let tag = item.tag else {
+                            cell.configure()
+                            return
+                        }
+                        
+                        let viewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
+                        let index = IndexPath(row: row, section: 0)
+                        cell.configure(with: viewModel)
+                        self.loadSelection(for: cell, tag: tag, at: index)
                 
-                if row == self.viewModel.tags.count-1 {
-                    self.collectionViewHeightConstraint.constant =
-                        self.tagsCollectionView.collectionViewLayout.collectionViewContentSize.height
-                }
+                        if row == self.viewModel.tags.count-1 {
+                            self.collectionViewHeightConstraint.constant =
+                                self.tagsCollectionView.collectionViewLayout.collectionViewContentSize.height
+                        }
                 
             }.disposed(by: disposeBag)
         

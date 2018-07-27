@@ -22,6 +22,7 @@ class TagCollectionViewController: UIViewController {
     
     var viewModel: TagCollectionViewModel!
     var clickedTagEvent: BehaviorSubject<Tag>?
+    private(set) var addTagEvent: PublishSubject<Bool>?
     
     @IBOutlet weak var tagsCollectionView: UICollectionView!
     
@@ -29,6 +30,7 @@ class TagCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addTagEvent = PublishSubject<Bool>()
         // Do any additional setup after loading the view.
         bindCollectionView()
         tagsCollectionView.allowsMultipleSelection = true
@@ -50,28 +52,17 @@ class TagCollectionViewController: UIViewController {
                 
                 guard let tag = item.tag else {
                     cell.configure()
+                    cell.clickedAddTag.subscribe { _ in
+                        self.addTagEvent?.onNext(true)
+                    }.disposed(by: self.disposeBag)
                     return
                 }
                 
                 let tagViewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
                 let indexPath = IndexPath(row: row, section: 0)
                 cell.configure(with: tagViewModel)
-                print("updating collection with tag \(tag.title!), type \(cell.kind) at \(row)")
-                
                 self.loadSelection(for: cell, tag: tag, at: indexPath)
-                tagViewModel.observe(self.viewModel.selectedTagsObservable)
-                tagViewModel.isSelected.subscribe { event in
-                    guard let bool = event.element else { return }
-                    cell.isSelected = bool
-                    if cell.isSelected {
-                        self.tagsCollectionView.selectItem(at: indexPath,
-                                                           animated: false,
-                                                           scrollPosition: UICollectionViewScrollPosition.bottom)
-                    } else {
-                        self.tagsCollectionView.deselectItem(at: indexPath,
-                                                             animated: false)
-                    }
-                }.disposed(by: self.disposeBag)
+//                print("updating collection with tag \(tag.title ?? "nil"), type \(cell.kind) at \(row)")
         }.disposed(by: disposeBag)
         
         if let tagsCollection = tagsCollectionView as? TagCollectionView {
@@ -92,6 +83,10 @@ class TagCollectionViewController: UIViewController {
             guard let tag = event.element?.tag else { return }
             self.viewModel.selectedTagEvent.onNext(tag)
         }.disposed(by: disposeBag)
+    }
+    
+    private func clickedAddButton() {
+        
     }
     
     private func select(_ bool: Bool, at index: IndexPath, animated: Bool = false) {

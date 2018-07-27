@@ -22,13 +22,13 @@ class TagCollectionViewModel {
     private let disposeBag = DisposeBag()
     private var model: TagModel
     
-    init(model: TagModel, filtering: Bool) {
+    init(model: TagModel, filtering: Bool, selectedTags: [Tag] = []) {
         self.model = model
+        self.selectedTags = selectedTags
         self.tags = model.tags
-        self.selectedTags = []
         
         tagsObservable = BehaviorSubject<[Tag]>(value: tags)
-        selectedTagsObservable = BehaviorSubject<[Tag]>(value: [])
+        selectedTagsObservable = BehaviorSubject<[Tag]>(value: selectedTags)
         selectedTagEvent = PublishSubject<Tag>()
         
         subscribeToSelectedTag(filtering: filtering)

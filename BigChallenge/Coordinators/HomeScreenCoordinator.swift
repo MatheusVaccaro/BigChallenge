@@ -21,7 +21,7 @@ class HomeScreenCoordinator: Coordinator {
     fileprivate var taskModel: TaskModel
     fileprivate var tagModel: TagModel
     
-    init(presenter: UINavigationController, taskModel: TaskModel, tagModel: TagModel, persistence: Persistence) {
+    init(presenter: UINavigationController, taskModel: TaskModel, tagModel: TagModel, persistence: Persistence, selectedTags: [Tag] = []) {
         
         self.presenter = presenter
         self.taskModel = taskModel
@@ -35,18 +35,20 @@ class HomeScreenCoordinator: Coordinator {
         let homeScreenViewController = HomeScreenViewController.instantiate()
         homeScreenViewController.viewModel =
             HomeScreenViewModel(taskModel: taskModel, tagModel: tagModel)
+
         homeScreenViewController.delegate = self
         
         presenter.isNavigationBarHidden = true
         presenter.pushViewController(homeScreenViewController, animated: false)
     }
 
-    fileprivate func showNewTask() {
+    fileprivate func showNewTask(selectedTags: [Tag]) {
         let newTaskCoordinator = NewTaskCoordinator(task: nil,
                                                     isEditing: false,
                                                     presenter: presenter,
                                                     taskModel: taskModel,
-                                                    tagModel: tagModel)
+                                                    tagModel: tagModel,
+                                                    selectedTags: selectedTags)
         newTaskCoordinator.delegate = self
         addChild(coordinator: newTaskCoordinator)
         newTaskCoordinator.start()
@@ -80,12 +82,12 @@ extension HomeScreenCoordinator: CoordinatorDelegate {
 }
 
 extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
-    func willAddTag() {
-        showNewTag()
+    func willAddTask(selectedTags: [Tag]) {
+        showNewTask(selectedTags: selectedTags)
     }
     
-    func willAddTask() {
-        showNewTask()
+    func willAddTag() {
+        showNewTag()
     }
     
     func wilEditTask() {

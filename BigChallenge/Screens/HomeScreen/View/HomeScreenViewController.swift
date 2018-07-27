@@ -35,6 +35,7 @@ class HomeScreenViewController: UIViewController {
     }()
     
     var viewModel: HomeScreenViewModel!
+    var selectedTags: [Tag] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,11 +45,18 @@ class HomeScreenViewController: UIViewController {
         bigTitle.adjustsFontForContentSizeCategory = true
         
         observeSelectedTags()
+        observeClickedAddTag()
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateContentSize),
                                                name: NSNotification.Name.UIContentSizeCategoryDidChange,
                                                object: nil)
+        
+        tagCollectionViewController.viewModel.selectedTagsObservable.subscribe { event in
+            self.taskListViewController.viewModel.filterTasks(with: event.element!)
+            print("selected tags are: \( event.element!.map { $0.title } )")
+            }.disposed(by: disposeBag)
+
     }
     
     deinit {
@@ -66,7 +74,7 @@ class HomeScreenViewController: UIViewController {
                 taskListViewModel.shouldAddTask.subscribe { event in
                     if let shouldAddTask = event.element {
                         if shouldAddTask {
-                            self.delegate?.willAddTask()
+                            self.delegate?.willAddTask(selectedTags: self.tagCollectionViewController.viewModel.selectedTags )
                         }
                     }
                 }.disposed(by: disposeBag)
@@ -75,7 +83,7 @@ class HomeScreenViewController: UIViewController {
             }
         } else if segue.identifier == "tagCollectionSegue" {
             if let tagCollectionViewController = segue.destination as? TagCollectionViewController {
-                let tagCollectionViewModel = viewModel.tagListViewModel
+                let tagCollectionViewModel = viewModel.tagCollectionViewModel(with: selectedTags) //TODO add option to open with selected tags
                 tagCollectionViewController.viewModel = tagCollectionViewModel
                 self.tagCollectionViewController = tagCollectionViewController
             }
@@ -87,12 +95,10 @@ class HomeScreenViewController: UIViewController {
             !taskListViewController.viewModel.showsCompletedTasks
     }
     
-    @IBAction func didTapAddButton(_ sender: Any) {
-        delegate?.willAddTask()
-    }
-    
-    @IBAction func didTapAddTagButton(_ sender: UIButton) {
-        delegate?.willAddTag()
+    fileprivate func observeClickedAddTag() {
+        tagCollectionViewController.addTagEvent?.subscribe { _ in
+            self.delegate?.willAddTag()
+        }.disposed(by: disposeBag)
     }
     
     fileprivate func observeSelectedTags() {
