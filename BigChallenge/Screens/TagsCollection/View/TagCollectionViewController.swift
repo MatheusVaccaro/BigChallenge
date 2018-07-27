@@ -61,22 +61,8 @@ class TagCollectionViewController: UIViewController {
                 let tagViewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
                 let indexPath = IndexPath(row: row, section: 0)
                 cell.configure(with: tagViewModel)
-                print("updating collection with tag \(tag.title!), type \(cell.kind) at \(row)")
-                
                 self.loadSelection(for: cell, tag: tag, at: indexPath)
-                tagViewModel.observe(self.viewModel.selectedTagsObservable)
-                tagViewModel.isSelected.subscribe { event in
-                    guard let bool = event.element else { return }
-                    cell.isSelected = bool
-                    if cell.isSelected {
-                        self.tagsCollectionView.selectItem(at: indexPath,
-                                                           animated: false,
-                                                           scrollPosition: UICollectionViewScrollPosition.bottom)
-                    } else {
-                        self.tagsCollectionView.deselectItem(at: indexPath,
-                                                             animated: false)
-                    }
-                }.disposed(by: self.disposeBag)
+//                print("updating collection with tag \(tag.title ?? "nil"), type \(cell.kind) at \(row)")
         }.disposed(by: disposeBag)
         
         if let tagsCollection = tagsCollectionView as? TagCollectionView {

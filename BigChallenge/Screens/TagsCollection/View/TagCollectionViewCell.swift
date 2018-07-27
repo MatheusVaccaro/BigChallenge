@@ -49,18 +49,17 @@ class TagCollectionViewCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
+            print("isSelected \(viewModel?.tagTitle ?? "+") \(kind) = \(isSelected)")
             contentView.mask = isSelected ? nil : maskLabel
             tagUILabel.isHidden = !isSelected
-            
             if kind == .add, isSelected {
                 clickedAddTag.onNext(true)
                 isSelected = false
             }
-            
         }
     }
     
-    private var viewModel: TagCollectionViewCellViewModel!
+    private(set) var viewModel: TagCollectionViewCellViewModel?
     
     override func awakeFromNib() {
         tagUILabel.font = UIFont.font(sized: 19, weight: .medium, with: .title3)
@@ -80,6 +79,7 @@ class TagCollectionViewCell: UICollectionViewCell {
         tagUILabel.textColor = UIColor.white
         
         contentView.addSubview(maskLabel)
+        kind = .tag
     }
     
     func configure(with viewModel: TagCollectionViewCellViewModel? = nil) {
@@ -100,9 +100,12 @@ class TagCollectionViewCell: UICollectionViewCell {
     func configureDefault() {
         tagUILabel.text = "+"
         maskLabel.text = "+"
+        
+        layer.shadowColor = UIColor.black.cgColor
         gradientLayer.colors = UIColor.Tags.redGradient
         contentView.mask = maskLabel
         tagUILabel.isHidden = true
+        
         kind = .add
     }
     
