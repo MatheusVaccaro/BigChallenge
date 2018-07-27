@@ -17,6 +17,7 @@ class NewTaskCoordinator: Coordinator {
     fileprivate var newTaskTableViewController: NewTaskTableViewController?
     fileprivate let taskModel: TaskModel
     fileprivate let tagModel: TagModel
+    fileprivate let selectedTags: [Tag]
     fileprivate var task: Task?
     fileprivate let isEditing: Bool
     fileprivate var modalPresenter: UINavigationController?
@@ -27,7 +28,8 @@ class NewTaskCoordinator: Coordinator {
          isEditing: Bool,
          presenter: UINavigationController,
          taskModel: TaskModel,
-         tagModel: TagModel) {
+         tagModel: TagModel,
+         selectedTags: [Tag] = []) {
         
         self.taskModel = taskModel
         self.tagModel = tagModel
@@ -35,17 +37,23 @@ class NewTaskCoordinator: Coordinator {
         self.childrenCoordinators = []
         self.isEditing = isEditing
         self.task = task
+        self.selectedTags = selectedTags
     }
     
     func start() {
         let newTaskTableViewController = NewTaskTableViewController.instantiate()
         self.newTaskTableViewController = newTaskTableViewController
         
-        let newTaskViewModel = NewTaskViewModel(task: task, isEditing: isEditing, taskModel: taskModel)
+        let newTaskViewModel = NewTaskViewModel(task: task,
+                                                isEditing: isEditing,
+                                                taskModel: taskModel)
         newTaskViewModel.delegate = self
         newTaskTableViewController.viewModel = newTaskViewModel
         
-        let tagCollectionViewModel = TagCollectionViewModel(model: tagModel, filtering: false)
+        let tagCollectionViewModel = TagCollectionViewModel(model: tagModel,
+                                                            filtering: false,
+                                                            selectedTags: selectedTags)
+        
         newTaskTableViewController.tagCollectionViewModel = tagCollectionViewModel
         
         let modalPresenter = UINavigationController(rootViewController: newTaskTableViewController)

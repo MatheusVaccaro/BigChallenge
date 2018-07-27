@@ -11,7 +11,6 @@ import Foundation
 protocol HomeScreenViewModelDelegate: class {
     func willAddTask()
     func wilEditTask()
-    
     func willAddTag()
 }
 
