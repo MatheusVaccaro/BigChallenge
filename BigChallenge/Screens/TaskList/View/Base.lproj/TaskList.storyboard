@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BWO-xZ-rzT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BWO-xZ-rzT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -66,6 +66,7 @@
                                                 <constraint firstItem="FWt-xm-b6x" firstAttribute="leading" secondItem="UTW-Q2-Qja" secondAttribute="trailing" constant="16" id="FFs-az-ftH"/>
                                                 <constraint firstItem="FWt-xm-b6x" firstAttribute="top" secondItem="qUG-wf-Wjh" secondAttribute="top" constant="8" id="Q8t-Ft-bDM"/>
                                                 <constraint firstItem="FWt-xm-b6x" firstAttribute="centerY" secondItem="UTW-Q2-Qja" secondAttribute="centerY" id="fe6-Ax-2rv"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FWt-xm-b6x" secondAttribute="trailing" constant="20" id="gQc-2f-orf"/>
                                                 <constraint firstItem="UTW-Q2-Qja" firstAttribute="leading" secondItem="qUG-wf-Wjh" secondAttribute="leading" constant="8" id="j6a-br-B1C"/>
                                             </constraints>
                                         </tableViewCellContentView>
