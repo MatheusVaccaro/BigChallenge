@@ -63,6 +63,18 @@ class NewTaskCoordinator: Coordinator {
         presenter.present(modalPresenter, animated: true, completion: nil)
     }
     
+    fileprivate func showMoreOptions() {
+        // init moreOptions coordinator
+        // moreOptionsCoordinator presenter SHOULD be modalPresenter in this case
+        // set coordinator's delegate to self
+        // call addChild(moreOptionsCoordinator)
+        // call .start() of moreOptionsCoordinator
+        
+        // IMPORTANT!
+        // Use this Coordinator as exemple
+        // Remember to call shouldDeinitCoordinator when needed
+    }
+    
 }
 
 extension NewTaskCoordinator: NewTaskViewModelDelegate {
@@ -77,6 +89,10 @@ extension NewTaskCoordinator: NewTaskViewModelDelegate {
     
     func didTapDeleteTaskButton() {
         dismissViewController()
+    }
+    
+    func didTapMoreOptionsButton() {
+        showMoreOptions()
     }
     
     private func dismissViewController() {

@@ -9,11 +9,10 @@
 import Foundation
 
 protocol NewTaskViewModelDelegate: class {
-    
     func didTapCancelButton()
     func didTapDoneButton()
     func didTapDeleteTaskButton()
-    
+    func didTapMoreOptionsButton()
 }
 
 class NewTaskViewModel: NewTaskViewModelProtocol {
@@ -67,6 +66,10 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
     func didTapDeleteTaskButton() {
         delegate?.didTapDeleteTaskButton()
         deleteTask()
+    }
+    
+    func didTapMoreOptionsButton() {
+        delegate?.didTapMoreOptionsButton()
     }
     
     private func deleteTask() {
