@@ -47,14 +47,18 @@ class TagCollectionViewCell: UICollectionViewCell {
         return ans
     }()
     
+    private var isPresenting: Bool = false
+    
     override var isSelected: Bool {
         didSet {
             print("isSelected \(viewModel?.tagTitle ?? "+") \(kind) = \(isSelected)")
             contentView.mask = isSelected ? nil : maskLabel
             tagUILabel.isHidden = !isSelected
-            if kind == .add, isSelected {
+            if kind == .add, isSelected, !isPresenting {
+                isPresenting = true
                 clickedAddTag.onNext(true)
                 isSelected = false
+                isPresenting = false
             }
         }
     }
@@ -105,7 +109,6 @@ class TagCollectionViewCell: UICollectionViewCell {
         gradientLayer.colors = UIColor.Tags.redGradient
         contentView.mask = maskLabel
         tagUILabel.isHidden = true
-        
         kind = .add
     }
     
