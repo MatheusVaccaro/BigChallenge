@@ -44,6 +44,7 @@ class HomeScreenViewController: UIViewController {
         bigTitle.adjustsFontForContentSizeCategory = true
         
         observeSelectedTags()
+        observeClickedAddTag()
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateContentSize),
@@ -87,12 +88,10 @@ class HomeScreenViewController: UIViewController {
             !taskListViewController.viewModel.showsCompletedTasks
     }
     
-    @IBAction func didTapAddButton(_ sender: Any) {
-        delegate?.willAddTask()
-    }
-    
-    @IBAction func didTapAddTagButton(_ sender: UIButton) {
-        delegate?.willAddTag()
+    fileprivate func observeClickedAddTag() {
+        tagCollectionViewController.addTagEvent?.subscribe { _ in
+            self.delegate?.willAddTag()
+        }.disposed(by: disposeBag)
     }
     
     fileprivate func observeSelectedTags() {

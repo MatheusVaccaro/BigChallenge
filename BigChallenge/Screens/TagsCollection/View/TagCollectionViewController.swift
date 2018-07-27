@@ -22,6 +22,7 @@ class TagCollectionViewController: UIViewController {
     
     var viewModel: TagCollectionViewModel!
     var clickedTagEvent: BehaviorSubject<Tag>?
+    private(set) var addTagEvent: PublishSubject<Bool>?
     
     @IBOutlet weak var tagsCollectionView: UICollectionView!
     
@@ -29,6 +30,7 @@ class TagCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addTagEvent = PublishSubject<Bool>()
         // Do any additional setup after loading the view.
         bindCollectionView()
         tagsCollectionView.allowsMultipleSelection = true
@@ -50,6 +52,9 @@ class TagCollectionViewController: UIViewController {
                 
                 guard let tag = item.tag else {
                     cell.configure()
+                    cell.clickedAddTag.subscribe { _ in
+                        self.addTagEvent?.onNext(true)
+                    }.disposed(by: self.disposeBag)
                     return
                 }
                 
@@ -92,6 +97,10 @@ class TagCollectionViewController: UIViewController {
             guard let tag = event.element?.tag else { return }
             self.viewModel.selectedTagEvent.onNext(tag)
         }.disposed(by: disposeBag)
+    }
+    
+    private func clickedAddButton() {
+        
     }
     
     private func select(_ bool: Bool, at index: IndexPath, animated: Bool = false) {
