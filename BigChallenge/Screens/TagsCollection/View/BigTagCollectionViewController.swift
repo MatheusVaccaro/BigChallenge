@@ -37,10 +37,8 @@ class BigTagCollectionViewController: TagCollectionViewController {
                     cell.configure()
                     return
                 }
-//                print("updating collection with tag \(tag.title!)")
                 let viewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
                 let index = IndexPath(row: row, section: 0)
-                
                 cell.configure(with: viewModel)
                 self.loadSelection(for: cell, tag: tag, at: index)
                 
