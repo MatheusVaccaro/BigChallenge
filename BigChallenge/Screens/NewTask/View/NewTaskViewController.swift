@@ -32,12 +32,13 @@ class NewTaskViewController: UIViewController {
         setupGestureRecognizers()
         configureWithViewModel()
         configureTagCollectionViewController()
-        configureTextViews()
+        configureTaskTitleTextView()
+        configureTaskNotesTextView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        taskTitleTextView.becomeFirstResponder()
+        //        taskTitleTextView.becomeFirstResponder()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -110,8 +111,11 @@ class NewTaskViewController: UIViewController {
             }.disposed(by: disposeBag)
     }
     
-    private func configureTextViews() {
+    private func configureTaskTitleTextView() {
         taskTitleTextView.textContainer.lineBreakMode = .byTruncatingTail
+    }
+    
+    private func configureTaskNotesTextView() {
         taskNotesTextView.textContainer.lineBreakMode = .byTruncatingTail
     }
 }

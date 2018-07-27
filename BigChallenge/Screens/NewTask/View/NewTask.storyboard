@@ -37,6 +37,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="38"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="A task with a name that spans two lines"/>
+                                </userDefinedRuntimeAttributes>
                             </textView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9cv-ai-cYf">
                                 <rect key="frame" x="8" y="176.5" width="359" height="120"/>
@@ -72,6 +75,9 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Winning an Apple Design Award is no easy task. First we need a good app, but making apps is hard work. We’ll need tasks"/>
+                                </userDefinedRuntimeAttributes>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
@@ -100,13 +106,13 @@
                     </view>
                     <connections>
                         <outlet property="tagCollectionContainerView" destination="9cv-ai-cYf" id="WSf-i7-KTM"/>
-                        <outlet property="taskNotesTextView" destination="Mds-bY-Dz6" id="QyD-XR-YUu"/>
-                        <outlet property="taskTitleTextView" destination="zoS-0P-P3X" id="PvM-3k-y6x"/>
+                        <outlet property="taskNotesTextView" destination="Mds-bY-Dz6" id="UDp-Ji-KM5"/>
+                        <outlet property="taskTitleTextView" destination="zoS-0P-P3X" id="O0c-B6-WQq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zAh-je-YlH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1317.5999999999999" y="251.42428785607197"/>
+            <point key="canvasLocation" x="1143" y="224"/>
         </scene>
     </scenes>
     <resources>

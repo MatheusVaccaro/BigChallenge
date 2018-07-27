@@ -22,13 +22,12 @@
         <attribute name="isCompleted" attributeType="Boolean" minValueString="0" maxValueString="1" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" minValueString="0" syncable="YES"/>
-        <relationship name="tags" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="tasks" inverseEntity="Tag" syncable="YES"/>
         <relationship name="checklistItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChecklistItem" inverseName="task" inverseEntity="ChecklistItem" syncable="YES"/>
-        <relationship name="tags" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="task" inverseEntity="Tag" syncable="YES"/>
+        <relationship name="tags" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="tasks" inverseEntity="Tag" syncable="YES"/>
     </entity>
     <elements>
+        <element name="ChecklistItem" positionX="-261" positionY="-360" width="128" height="90"/>
         <element name="Tag" positionX="-436.5546875" positionY="-377.390625" width="128" height="135"/>
         <element name="Task" positionX="-81.23828125" positionY="-452.66796875" width="128" height="195"/>
-        <element name="ChecklistItem" positionX="-261" positionY="-360" width="128" height="90"/>
     </elements>
 </model>
