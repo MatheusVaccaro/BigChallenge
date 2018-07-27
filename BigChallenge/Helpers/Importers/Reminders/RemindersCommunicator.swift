@@ -49,6 +49,12 @@ public class RemindersCommunicator {
         }
     }
     
+    public func fetchIncompleteReminders(completion: @escaping ([EKReminder]?) -> Void) {
+        let predicate = store.predicateForIncompleteReminders(withDueDateStarting: nil, ending: nil, calendars: nil)
+        
+        store.fetchReminders(matching: predicate, completion: completion)
+    }
+    
     // Warns delegate about a change in the Reminders app
     @objc
     func eventStoreChangedNotificationHandler(_ notification: NSNotification) {

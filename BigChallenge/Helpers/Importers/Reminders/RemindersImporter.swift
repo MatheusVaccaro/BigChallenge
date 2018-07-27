@@ -45,11 +45,15 @@ public class RemindersImporter {
     }
     
     // Fetch all reminders; convert them to Tasks and Tags; save these afterwards
-    func importTasksFromReminders() {
+    private func importTasksFromReminders() {
         isImporting = true
         
-        remindersDB.fetchAllReminders { allReminders in
-            guard let reminders = allReminders?.filter({ !$0.isCompleted }) else { return }
+        remindersDB.fetchIncompleteReminders { incompleteReminders in
+            guard let reminders = incompleteReminders else {
+                self.isImporting = false
+                
+                return
+            }
             
             for reminder in reminders where !self.checkImportStatus(for: reminder) {
                 
