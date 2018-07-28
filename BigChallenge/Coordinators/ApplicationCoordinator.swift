@@ -21,7 +21,7 @@ class ApplicationCoordinator: Coordinator {
     init(window: UIWindow) {
         self.window = window
         self.rootViewController = UINavigationController()
-        self.rootViewController.navigationBar.prefersLargeTitles = true
+        self.rootViewController.isNavigationBarHidden = true
         self.childrenCoordinators = []
         
         self.persistence = Persistence(configuration: .inDevice)
