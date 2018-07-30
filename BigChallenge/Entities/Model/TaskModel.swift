@@ -14,14 +14,16 @@ public class TaskModel {
     
     // MARK: - Properties
     
+    weak var delegate: TaskModelDelegate?
     private(set) var didUpdateTasks: BehaviorSubject<[Task]>
     private(set) public var tasks: [Task]
     private let persistance: Persistence
 
     // MARK: - TaskModel Lifecycle
     
-    init(persistence: Persistence) {
+    init(persistence: Persistence, delegate: TaskModelDelegate? = nil) {
         self.persistance = persistence
+        self.delegate = delegate
         self.tasks = []
         self.didUpdateTasks = BehaviorSubject<[Task]>(value: tasks)
         
@@ -42,8 +44,9 @@ public class TaskModel {
         guard !tasks.contains(object) else { return }
         tasks.append(object)
         persistance.save()
-        RemindersImporter.instance?.exportTaskToReminders(object)
         didUpdateTasks.onNext(tasks)
+        
+        delegate?.taskModel(self, didSave: object)
     }
     
     public func delete(_ task: Task) {
@@ -51,6 +54,8 @@ public class TaskModel {
         tasks.remove(at: taskIndex)
         persistance.delete(task)
         didUpdateTasks.onNext(tasks)
+        
+        delegate?.taskModel(self, didDelete: object)
     }
     
     public func createTask(with attributes: [Attributes : Any]) -> Task {
@@ -75,6 +80,8 @@ public class TaskModel {
         if let dueDate = attributes[.dueDate] as? Date {
             task.dueDate = dueDate
         }
+        
+        delegate?.taskModel(self, didCreate: task)
         
         return task
     }
@@ -113,6 +120,18 @@ public class TaskModel {
         case notes
         case title
     }
+}
+
+protocol TaskModelDelegate: class {
+    func taskModel(_ taskModel: TaskModel, didSave task: Task)
+    func taskModel(_ taskModel: TaskModel, didDelete task: Task)
+    func taskModel(_ taskModel: TaskModel, didCreate task: Task)
+}
+
+extension TaskModelDelegate {
+    func taskModel(_ taskModel: TaskModel, didSave task: Task) { }
+    func taskModel(_ taskModel: TaskModel, didDelete task: Task) { }
+    func taskModel(_ taskModel: TaskModel, didCreate task: Task) { }
 }
 
 // MARK: - TaskPersistenceDelegate Extension

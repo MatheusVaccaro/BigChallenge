@@ -25,8 +25,10 @@ class ApplicationCoordinator: Coordinator {
         self.childrenCoordinators = []
         
         self.persistence = Persistence(configuration: .inDevice)
-        self.taskModel = TaskModel(persistence: persistence)
         self.tagModel = TagModel(persistence: persistence)
+        
+        self.taskModel = TaskModel(persistence: persistence)
+        self.taskModel.delegate = self
     }
     
     func start() {
@@ -44,5 +46,11 @@ class ApplicationCoordinator: Coordinator {
                                                         persistence: persistence)
         addChild(coordinator: homeScreenCoordinator)
         homeScreenCoordinator.start()
+    }
+}
+
+extension ApplicationCoordinator: TaskModelDelegate {
+    func taskModel(_ taskModel: TaskModel, didSave task: Task) {
+        RemindersImporter.instance?.exportTaskToReminders(task)
     }
 }
