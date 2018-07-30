@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Location Input View Controller-->
+        <!--Location Input View-->
         <scene sceneID="aWs-84-C5r">
             <objects>
-                <viewController storyboardIdentifier="LocationInputView" id="VTM-Bh-5nV" customClass="LocationInputViewController" customModule="BigChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationInputView" id="VTM-Bh-5nV" customClass="LocationInputView" customModule="BigChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uRF-86-IZj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="290"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,11 +21,16 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhI-q9-g2L">
                                 <rect key="frame" x="8" y="100" width="359" height="190"/>
                             </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uAV-hR-jlL">
+                                <rect key="frame" x="8" y="100" width="359" height="190"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="csW-O8-Nof">
                                 <rect key="frame" x="8" y="0.0" width="359" height="29"/>
                                 <segments>
                                     <segment title="First"/>
-                                    <segment title="Second"/>
+                                    <segment title="Leaving"/>
                                 </segments>
                                 <connections>
                                     <action selector="segmentedControlSelected:" destination="VTM-Bh-5nV" eventType="valueChanged" id="uIt-LY-712"/>
@@ -38,7 +43,7 @@
                                     <outlet property="delegate" destination="VTM-Bh-5nV" id="jdH-aq-yHr"/>
                                 </connections>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RVD-cG-cTQ">
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RVD-cG-cTQ">
                                 <rect key="frame" x="8" y="100" width="359" height="190"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -73,11 +78,15 @@
                         <constraints>
                             <constraint firstItem="csW-O8-Nof" firstAttribute="leading" secondItem="3HN-rQ-WpB" secondAttribute="leading" constant="8" id="4xZ-9U-ZUU"/>
                             <constraint firstItem="3HN-rQ-WpB" firstAttribute="trailing" secondItem="csW-O8-Nof" secondAttribute="trailing" constant="8" id="8m0-hZ-xV7"/>
+                            <constraint firstItem="uAV-hR-jlL" firstAttribute="leading" secondItem="nhI-q9-g2L" secondAttribute="leading" id="GEb-cj-JE5"/>
                             <constraint firstItem="nhI-q9-g2L" firstAttribute="top" secondItem="zBP-90-CYB" secondAttribute="bottom" constant="8" id="GMu-tF-4Ll"/>
                             <constraint firstItem="RVD-cG-cTQ" firstAttribute="trailing" secondItem="nhI-q9-g2L" secondAttribute="trailing" id="HBa-eR-maK"/>
+                            <constraint firstItem="uAV-hR-jlL" firstAttribute="bottom" secondItem="nhI-q9-g2L" secondAttribute="bottom" id="Ho3-eM-1x2"/>
                             <constraint firstItem="zBP-90-CYB" firstAttribute="leading" secondItem="3HN-rQ-WpB" secondAttribute="leading" id="Imx-Xq-xNJ"/>
                             <constraint firstItem="3HN-rQ-WpB" firstAttribute="trailing" secondItem="nhI-q9-g2L" secondAttribute="trailing" constant="8" id="MwN-ZR-TUX"/>
                             <constraint firstItem="nhI-q9-g2L" firstAttribute="leading" secondItem="3HN-rQ-WpB" secondAttribute="leading" constant="8" id="Wch-pW-5qT"/>
+                            <constraint firstItem="uAV-hR-jlL" firstAttribute="top" secondItem="nhI-q9-g2L" secondAttribute="top" id="cjn-92-2dA"/>
+                            <constraint firstItem="uAV-hR-jlL" firstAttribute="trailing" secondItem="nhI-q9-g2L" secondAttribute="trailing" id="eS4-rn-ezR"/>
                             <constraint firstItem="zBP-90-CYB" firstAttribute="top" secondItem="csW-O8-Nof" secondAttribute="bottom" constant="8" id="fFV-Rl-fHc"/>
                             <constraint firstItem="RVD-cG-cTQ" firstAttribute="leading" secondItem="nhI-q9-g2L" secondAttribute="leading" id="ilC-wh-QzY"/>
                             <constraint firstItem="RVD-cG-cTQ" firstAttribute="bottom" secondItem="nhI-q9-g2L" secondAttribute="bottom" id="pUo-md-9ON"/>
@@ -90,6 +99,7 @@
                     </view>
                     <size key="freeformSize" width="375" height="290"/>
                     <connections>
+                        <outlet property="accessibilityMapView" destination="uAV-hR-jlL" id="ryj-4J-nwX"/>
                         <outlet property="mapView" destination="nhI-q9-g2L" id="O2z-KN-qap"/>
                         <outlet property="searchBar" destination="zBP-90-CYB" id="T74-x2-xKx"/>
                         <outlet property="searchResultsTableView" destination="RVD-cG-cTQ" id="ksl-Up-wtA"/>

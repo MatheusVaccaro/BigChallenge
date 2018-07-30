@@ -75,4 +75,24 @@ struct Strings {
                 NSLocalizedString("CollectionScreenTitle", comment: "screen title when on \"all tags\" screen")
         }
     }
+    
+    struct LocationInputView {
+        static let arrivingString = NSLocalizedString("arrivingLocationInputView",
+                                                      comment: "string for selecting arriving location")
+        
+        static let leavingString = NSLocalizedString("leavingLocationInputView",
+                                                     comment: "String for selecting leaving location")
+        
+        static let accessibilitylabelMap = NSLocalizedString("mapViewAccessibilitylabel",
+                                                             comment: "description of map to voiceOver users")
+        
+        static let accessibilityValueEmptyMap = NSLocalizedString("mapViewAccessibilityValueEmpty",
+                                                                  comment: "description of empty value of map for voiceOver users")
+        
+        static let accessibilityValueMap = NSLocalizedString("%d meters from %s",
+                                                             comment: "accessibility value on map for voiceOver users")
+        
+        static let accessibilityHintSearchBar = NSLocalizedString("SearchBarHint",
+                                                                  comment: "accessibility hint on searchBar for voiceOver users")
+    }
 }

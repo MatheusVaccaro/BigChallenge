@@ -32,14 +32,18 @@ class HomeScreenCoordinator: Coordinator {
     }
 
     func start() {
-        let homeScreenViewController = HomeScreenViewController.instantiate()
-        homeScreenViewController.viewModel =
-            HomeScreenViewModel(taskModel: taskModel, tagModel: tagModel)
-
-        homeScreenViewController.delegate = self
-        
-        presenter.isNavigationBarHidden = true
-        presenter.pushViewController(homeScreenViewController, animated: false)
+        showMapView()
+//        let homeScreenViewController = HomeScreenViewController.instantiate()
+//        homeScreenViewController.viewModel =
+//            HomeScreenViewModel(taskModel: taskModel, tagModel: tagModel)
+//
+//        homeScreenViewController.delegate = self
+//        presenter.pushViewController(homeScreenViewController, animated: false)
+    }
+    
+    fileprivate func showMapView() {
+        let locationInputView = LocationInputView.instantiate()
+        presenter.pushViewController(locationInputView, animated: false)
     }
 
     fileprivate func showNewTask(selectedTags: [Tag]) {
