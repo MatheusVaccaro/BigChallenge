@@ -114,11 +114,14 @@ class NewTaskViewController: UIViewController, TaskFramePresentable {
     
     private func configureTaskTitleTextView() {
         taskTitleTextView.textContainer.lineBreakMode = .byTruncatingTail
-        taskTitleTextView.placeholder = "fon"
+        taskTitleTextView.placeholderColor = .darkGray
+        taskTitleTextView.placeholder = "A task with a name that spans two lines"
     }
     
     private func configureTaskNotesTextView() {
         taskNotesTextView.textContainer.lineBreakMode = .byTruncatingTail
+        taskNotesTextView.placeholderColor = .darkGray
+        taskNotesTextView.placeholder = "Winning an Apple Design Award is no easy task. First we need a good app, but making apps is hard work. We’ll need tasks"
     }
 }
 
