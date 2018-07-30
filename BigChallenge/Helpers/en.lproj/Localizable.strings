@@ -55,3 +55,21 @@
 
 /* header title for 'also tagged:' section  */
 "section2HeaderTitle" = "Also tagged:";
+
+/* accessibility value on map for voiceOver users */
+"%d meters from %s" = "%d meters from %s";
+
+/* string for selecting arriving location */
+"arrivingLocationInputView" = "Arriving";
+
+/* String for selecting leaving location */
+"leavingLocationInputView" = "Leaving";
+
+/* description of map to voiceOver users */
+"mapViewAccessibilitylabel" = "Map";
+
+/* description of empty value of map for voiceOver users */
+"mapViewAccessibilityValueEmpty" = "Location";
+
+/* accessibility hint on searchBar for voiceOver users */
+"SearchBarHint" = "tap to search location";
