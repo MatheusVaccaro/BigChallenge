@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class NewTaskViewController: UIViewController {
+class NewTaskViewController: UIViewController, TaskFramePresentable {
     
     // MARK: - Properties
     
@@ -62,7 +62,7 @@ class NewTaskViewController: UIViewController {
         viewModel?.didTapDoneButton()
     }
     
-    @IBAction func didTapMoreOptions(_ sender: UIButton) {
+    @IBAction func didTapMoreOptionsButton(_ sender: UIButton) {
     }
     
     // MARK: - Functions
