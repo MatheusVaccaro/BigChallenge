@@ -6,7 +6,7 @@
   Created by Bruno Fulber Wide on 12/06/18.
   Copyright © 2018 Matheus Vaccaro. All rights reserved.
 */
-"newTaskTitle" = "Titulo";
+"newTaskTitle" = "Título";
 
 /* the done button to create the task */
 "newTaskDone" = "Pronto";
@@ -30,7 +30,7 @@
 "taskCellIncomplete" = "Incompleto";
 
 /* placeholder title for a new tag */
-"newTagTitle" = "Titulo";
+"newTagTitle" = "Título";
 
 /* the done button to create the tag */
 "newTagDone" = "Pronto";
@@ -73,3 +73,7 @@
 
 /* accessibility hint on searchBar for voiceOver users */
 "SearchBarHint" = "toque para buscar lugares";
+"section2HeaderTitle" = "Também marcado com:";
+
+/* placeholder title for notification */
+"notificationTitle" = "Sua task está esperando";
