@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import UITextView_Placeholder
 
 class NewTaskViewController: UIViewController, TaskFramePresentable {
     
@@ -113,6 +114,7 @@ class NewTaskViewController: UIViewController, TaskFramePresentable {
     
     private func configureTaskTitleTextView() {
         taskTitleTextView.textContainer.lineBreakMode = .byTruncatingTail
+        taskTitleTextView.placeholder = "fon"
     }
     
     private func configureTaskNotesTextView() {
