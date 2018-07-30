@@ -20,4 +20,9 @@ public enum ImportDataPacket {
         case .remindersDataPacket: return 1 	// Reminders
         }
     }
+    
+    static func from(_ remindersData: RemindersImportData) -> ImportDataPacket {
+        return .remindersDataPacket(id: remindersData.calendarItemIdentifier!,
+                                    externalId: remindersData.calendarItemExternalIdentifier)
+    }
 }

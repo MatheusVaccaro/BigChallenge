@@ -55,6 +55,21 @@ public class RemindersCommunicator {
         store.fetchReminders(matching: predicate, completion: completion)
     }
     
+    public func fetchReminder(withIdentifier identifier: String) -> EKReminder? {
+        // TODO Deal with calendarExternalIdentifier
+    	return store.calendarItem(withIdentifier: identifier) as? EKReminder
+    }
+    
+    public func fetchReminder(withExternalIdentifier identifier: String) -> EKReminder? {
+        return store.calendarItems(withExternalIdentifier: identifier).first as? EKReminder
+    }
+    
+    public func fetchReminder(identifiedBy dataPacket: ImportDataPacket) -> EKReminder? {
+        guard case .remindersDataPacket(let id, let externalId) = dataPacket else { return nil }
+        
+        return fetchReminder(withIdentifier: id) ?? fetchReminder(withExternalIdentifier: externalId ?? "")
+    }
+    
     // Warns delegate about a change in the Reminders app
     @objc
     func eventStoreChangedNotificationHandler(_ notification: NSNotification) {

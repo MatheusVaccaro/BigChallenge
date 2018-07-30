@@ -24,12 +24,9 @@ public class RemindersImporter {
         self.taskModel = taskModel
         self.tagModel = tagModel
 		self.remindersDB = RemindersCommunicator()
+        defer { remindersDB.delegate = self }
         self.isImporting = false
         self.isSyncing = false
-        
-        defer {
-            remindersDB.delegate = self
-        }
     }
     
     /**
@@ -81,12 +78,12 @@ public class RemindersImporter {
         let hasFoundEquivalentTask = taskModel.tasks.contains { task -> Bool in
             
             // Checks if a task is a Reminders import
-            guard let reminderData = task.importData?.remindersImportData else { return false }
+            guard let remindersData = task.importData?.remindersImportData else { return false }
             
             // Checks if the task is associated with the reminder
             let isEquivalentTask =
-                reminderData.calendarItemExternalIdentifier == reminder.calendarItemExternalIdentifier ||
-           		reminderData.calendarItemIdentifier == reminder.calendarItemIdentifier
+                remindersData.calendarItemExternalIdentifier == reminder.calendarItemExternalIdentifier ||
+           		remindersData.calendarItemIdentifier == reminder.calendarItemIdentifier
             
             return isEquivalentTask
         }
@@ -127,8 +124,17 @@ public class RemindersImporter {
     public func exportTaskToReminders(_ task: Task) {
         guard !isImporting && !isSyncing else { return }
         
-        let reminder = remindersDB.createReminder()
-
+        // Attempts to retrieve an already existing reminder associated with the task
+        let existingReminder: EKReminder? = {
+            if let remindersData = task.importData?.remindersImportData {
+                let dataPacket = ImportDataPacket.from(remindersData)
+                return remindersDB.fetchReminder(identifiedBy: dataPacket)
+            } else { return nil }
+        }()
+        
+        // Creates a new reminder if there isn't one associated with the task
+        let reminder = existingReminder ?? remindersDB.createReminder()
+    
         update(reminder, withDataFrom: task)
         taskModel.associateTask(task, with: reminder.dataPacket)
 		
