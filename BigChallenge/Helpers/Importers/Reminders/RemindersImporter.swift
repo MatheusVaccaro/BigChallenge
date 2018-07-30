@@ -17,6 +17,7 @@ public class RemindersImporter {
     private let tagModel: TagModel
     private let remindersDB: RemindersCommunicator
     private(set) var isImporting: Bool
+    private(set) var isSyncing: Bool
 
     // Initializes RemindersCommunicator
     private init(taskModel: TaskModel, tagModel: TagModel) {
@@ -24,6 +25,7 @@ public class RemindersImporter {
         self.tagModel = tagModel
 		self.remindersDB = RemindersCommunicator()
         self.isImporting = false
+        self.isSyncing = false
         
         defer {
             remindersDB.delegate = self
@@ -123,7 +125,7 @@ public class RemindersImporter {
     }
     
     public func exportTaskToReminders(_ task: Task) {
-        guard !isImporting else { return }
+        guard !isImporting && !isSyncing else { return }
         
         let reminder = remindersDB.createReminder()
 
@@ -150,22 +152,33 @@ public class RemindersImporter {
         }
     }
     
-    private func sync() {
-        guard !isImporting else { return }
+    /**
+     Calculates the differences between the Reminders store and ours.
+     Updates our store based on said differences.
+     Triggered when detecting a Reminders store change event.
+     */
+    private func syncWithReminders() {
+        guard !isImporting && !isSyncing else { return }
+        
+        isSyncing = true
         
         // Check for changes between the model and the reminders store and update the model accordingly
         remindersDB.fetchAllReminders { allReminders in
             guard let reminders = allReminders?.filter({ !$0.isCompleted }) else { return }
             
             // Set of all tasks originating from Reminders - even those not yet imported.
-            let remindersSet = Set(reminders.map({ self.getEquivalentTask(for: $0) ?? self.convertTaskAndTag(from: $0).task }))
+            let remindersSet = Set(reminders.map {
+                self.getEquivalentTask(for: $0) ?? self.convertTaskAndTag(from: $0).task
+            })
             let modelSet = Set(self.taskModel.tasks.filter({ $0.importData?.remindersImportData != nil }))
-            
-            let tasksToDelete = modelSet.subtracting(remindersSet)	// Originates from reminders being deleted.
-            tasksToDelete.forEach({ self.taskModel.delete(object: $0) })
             
             let newTasks = remindersSet.subtracting(modelSet)		// New reminders not yet imported.
             newTasks.forEach({ self.taskModel.save(object: $0) })
+            
+            let tasksToDelete = modelSet.subtracting(remindersSet)	// Reminders that were deleted in Reminders
+            tasksToDelete.forEach({ self.taskModel.delete(object: $0) })
+            
+            self.isSyncing = false
         }
     }
 }
@@ -173,7 +186,7 @@ public class RemindersImporter {
 extension RemindersImporter: RemindersCommunicatorDelegate {
     //swiftlint:disable line_length
     func remindersCommunicatorDidDetectEventStoreChange(_ remindersCommunicator: RemindersCommunicator, notification: NSNotification) {
-        sync()
+        syncWithReminders()
     }
     
     func remindersCommunicatorWasGrantedAccessToReminders(_ remindersCommunicator: RemindersCommunicator) {
