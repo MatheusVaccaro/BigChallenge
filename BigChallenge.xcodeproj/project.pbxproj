@@ -68,6 +68,7 @@
 		C2A1115320BA036800ABB161 /* NewTaskCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1115220BA036800ABB161 /* NewTaskCoordinator.swift */; };
 		C2C231C120FD1AB2002A2371 /* NewTagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C231C020FD1AB2002A2371 /* NewTagViewModel.swift */; };
 		C2C231C520FD41AE002A2371 /* NewTagCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C231C420FD41AE002A2371 /* NewTagCoordinator.swift */; };
+		C2DD9A28210D262D00E9B89B /* TaskFrameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DD9A27210D262D00E9B89B /* TaskFrameViewController.swift */; };
 		EE3649E90DE055B9D5168F01 /* Pods_BigChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8708FC5A67C933F755CB93 /* Pods_BigChallenge.framework */; };
 /* End PBXBuildFile section */
 
@@ -163,6 +164,7 @@
 		C2A1115220BA036800ABB161 /* NewTaskCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskCoordinator.swift; sourceTree = "<group>"; };
 		C2C231C020FD1AB2002A2371 /* NewTagViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTagViewModel.swift; sourceTree = "<group>"; };
 		C2C231C420FD41AE002A2371 /* NewTagCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTagCoordinator.swift; sourceTree = "<group>"; };
+		C2DD9A27210D262D00E9B89B /* TaskFrameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskFrameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -485,6 +487,7 @@
 			children = (
 				C2A1114620B9F6EF00ABB161 /* NewTask.storyboard */,
 				C25F5AA82108FEB3001E1561 /* NewTaskViewController.swift */,
+				C2DD9A27210D262D00E9B89B /* TaskFrameViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -862,6 +865,7 @@
 				C2A1113B20B8791E00ABB161 /* MockPersistence.swift in Sources */,
 				C21EAD0020B741BC005F0F85 /* HomeScreenCoordinator.swift in Sources */,
 				C23753B020B6463700C1CE15 /* ApplicationCoordinator.swift in Sources */,
+				C2DD9A28210D262D00E9B89B /* TaskFrameViewController.swift in Sources */,
 				22325A7420FB8E0500E5F8C6 /* HomeScreenViewModel.swift in Sources */,
 				1676FC9020D99580003E2D79 /* TaskModel.swift in Sources */,
 				C2A1113D20B88A2F00ABB161 /* Storable.swift in Sources */,

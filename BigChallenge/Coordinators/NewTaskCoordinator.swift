@@ -14,6 +14,7 @@ class NewTaskCoordinator: Coordinator {
     fileprivate let presenter: UINavigationController
     var childrenCoordinators: [Coordinator]
     
+    fileprivate var taskFrameViewController: TaskFrameViewController?
     fileprivate var newTaskViewController: NewTaskViewController?
     fileprivate let taskModel: TaskModel
     fileprivate let tagModel: TagModel
@@ -43,20 +44,23 @@ class NewTaskCoordinator: Coordinator {
     func start() {
         let newTaskViewController = NewTaskViewController.instantiate()
         self.newTaskViewController = newTaskViewController
-        
+
         let newTaskViewModel = NewTaskViewModel(task: task,
                                                 isEditing: isEditing,
                                                 taskModel: taskModel)
         newTaskViewModel.delegate = self
         newTaskViewController.viewModel = newTaskViewModel
-        
+
         let tagCollectionViewModel = TagCollectionViewModel(model: tagModel,
                                                             filtering: false,
                                                             selectedTags: selectedTags)
-        
         newTaskViewController.tagCollectionViewModel = tagCollectionViewModel
+    
+        let taskFrameViewController = TaskFrameViewController.instantiate()
+        self.taskFrameViewController = taskFrameViewController
+        taskFrameViewController.configurePageViewController(with: [newTaskViewController])
         
-        let modalPresenter = UINavigationController(rootViewController: newTaskViewController)
+        let modalPresenter = UINavigationController(rootViewController: taskFrameViewController)
         modalPresenter.isNavigationBarHidden = true
         self.modalPresenter = modalPresenter
         
