@@ -113,12 +113,14 @@ class NewTaskViewController: UIViewController, TaskFramePresentable {
     }
     
     private func configureTaskTitleTextView() {
+        taskTitleTextView.font = UIFont.font(sized: 38, weight: .bold, with: .title1)
         taskTitleTextView.textContainer.lineBreakMode = .byTruncatingTail
         taskTitleTextView.placeholderColor = .darkGray
         taskTitleTextView.placeholder = "A task with a name that spans two lines"
     }
     
     private func configureTaskNotesTextView() {
+        taskNotesTextView.font = UIFont.font(sized: 14, weight: .regular, with: .body)
         taskNotesTextView.textContainer.lineBreakMode = .byTruncatingTail
         taskNotesTextView.placeholderColor = .darkGray
         taskNotesTextView.placeholder = "Winning an Apple Design Award is no easy task. First we need a good app, but making apps is hard work. We’ll need tasks"
