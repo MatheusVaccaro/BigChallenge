@@ -17,6 +17,7 @@ class ApplicationCoordinator: Coordinator {
     private let persistence: Persistence
     private let taskModel: TaskModel
     private let tagModel: TagModel
+    private let remindersImporter: RemindersImporter
     
     init(window: UIWindow) {
         self.window = window
@@ -25,15 +26,19 @@ class ApplicationCoordinator: Coordinator {
         self.childrenCoordinators = []
         
         self.persistence = Persistence(configuration: .inDevice)
-        self.taskModel = TaskModel(persistence: persistence)
         self.tagModel = TagModel(persistence: persistence)
+        
+        self.taskModel = TaskModel(persistence: persistence)
+        defer { self.taskModel.delegate = self }
+        
+        self.remindersImporter = RemindersImporter(taskModel: taskModel, tagModel: tagModel)
     }
     
     func start() {
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         showTaskList()
-//        RemindersImporter.instantiate(taskModel: taskModel, tagModel: tagModel)
+        remindersImporter.attemptToImport()
     }
     
     private func showTaskList() {
@@ -43,5 +48,12 @@ class ApplicationCoordinator: Coordinator {
                                                         persistence: persistence)
         addChild(coordinator: homeScreenCoordinator)
         homeScreenCoordinator.start()
+    }
+}
+
+extension ApplicationCoordinator: TaskModelDelegate {
+    
+    func taskModel(_ taskModel: TaskModel, didSave task: Task) {
+        remindersImporter.exportTaskToReminders(task)
     }
 }

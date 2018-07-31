@@ -11,7 +11,7 @@ import EventKit
 
 public class RemindersCommunicator {
     
-    var store: EKEventStore
+    private let store: EKEventStore
     
     weak var delegate: RemindersCommunicatorDelegate?
     
@@ -41,45 +41,68 @@ public class RemindersCommunicator {
         }
     }
     
+    public func fetchAllReminders(completion: @escaping (([Reminder]?) -> Void)) {
+        let predicate = store.predicateForReminders(in: nil)
+        
+        store.fetchReminders(matching: predicate) { reminders in
+            completion(reminders)
+        }
+    }
+    
+    public func fetchIncompleteReminders(completion: @escaping ([Reminder]?) -> Void) {
+        let predicate = store.predicateForIncompleteReminders(withDueDateStarting: nil, ending: nil, calendars: nil)
+        
+        store.fetchReminders(matching: predicate, completion: completion)
+    }
+    
+    public func fetchReminder(withIdentifier identifier: String) -> Reminder? {
+        // TODO Deal with calendarExternalIdentifier
+    	return store.calendarItem(withIdentifier: identifier) as? EKReminder
+    }
+    
+    public func fetchReminder(withExternalIdentifier identifier: String) -> Reminder? {
+        return store.calendarItems(withExternalIdentifier: identifier).first as? EKReminder
+    }
+    
+    public func fetchReminder(identifiedBy dataPacket: ImportDataPacket) -> Reminder? {
+        guard case .remindersDataPacket(let id, let externalId) = dataPacket else { return nil }
+        
+        return fetchReminder(withIdentifier: id) ?? fetchReminder(withExternalIdentifier: externalId ?? "")
+    }
+    
     // Warns delegate about a change in the Reminders app
     @objc
     func eventStoreChangedNotificationHandler(_ notification: NSNotification) {
         delegate?.remindersCommunicatorDidDetectEventStoreChange(self, notification: notification)
     }
     
-    public func fetchAllReminders(completion: @escaping (([EKReminder]?) -> Void)) {
-        let predicate = store.predicateForReminders(in: nil)
+    // MARK: Reminder creation
+    
+    public func createReminder() -> Reminder {
+        let reminder = EKReminder(eventStore: store)
         
-        store.fetchReminders(matching: predicate) { reminders in
-            completion(reminders!)
-        }
+        return reminder
     }
     
-    public func save(task: Task, commit: Bool = true) {
-        let reminder = EKReminder(eventStore: store)
-        var calendar = store.defaultCalendarForNewReminders()
-        
-        if let tagTitle = (task.tags?.anyObject() as? Tag)?.title {
-            calendar = store.calendars(for: .reminder).first { $0.title == tagTitle }
+    public func getCalendars() -> [EKCalendar] {
+        return store.calendars(for: .reminder)
+    }
+    
+    public func getDefaultCalendar() -> EKCalendar {
+        guard let defaultCalendar = store.defaultCalendarForNewReminders() else {
+            fatalError("No default calendar for new reminders has been set.")
         }
         
-        reminder.title = task.title
-        reminder.calendar = calendar
+        return defaultCalendar
+    }
+    
+    public func save(_ reminder: Reminder) {
+        guard let ekReminder = reminder as? EKReminder else { return }
         
-        //save only if is new reminder
-        let predicate = store.predicateForReminders(in: [calendar!])
-        
-        store.fetchReminders(matching: predicate) {
-            
-            let matchingReminders = $0!.filter { $0.title == reminder.title }
-            
-            if matchingReminders.isEmpty {
-                do {
-                    try self.store.save(reminder, commit: true)
-                } catch let error as NSError {
-                    print("failed to save reminder with error \(error)")
-                }
-            }
+        do {
+            try store.save(ekReminder, commit: true)
+        } catch let error {
+            fatalError(error.localizedDescription)
         }
     }
 }
@@ -89,4 +112,12 @@ protocol RemindersCommunicatorDelegate: class {
     func remindersCommunicatorWasDeniedAccessToReminders(_ remindersCommunicator: RemindersCommunicator, error: Error)
     func remindersCommunicatorDidDetectEventStoreChange(_ remindersCommunicator: RemindersCommunicator,
                                                         notification: NSNotification)
+}
+
+extension EKReminder: Reminder {
+
+    public var dataPacket: ImportDataPacket {
+        return ImportDataPacket.remindersDataPacket(id: calendarItemIdentifier,
+                                                    externalId: calendarItemExternalIdentifier)
+    }
 }

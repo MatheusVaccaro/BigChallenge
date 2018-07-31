@@ -17,9 +17,11 @@ class TaskCellViewModel {
     var taskObservable: PublishSubject<Task>
     
     private var task: Task
+    private var taskModel: TaskModel
     
-    init(task: Task) {
+    init(task: Task, taskModel: TaskModel) {
         self.task = task
+        self.taskModel = taskModel
         taskObservable = PublishSubject<Task>()
     }
     
@@ -53,7 +55,11 @@ class TaskCellViewModel {
     }
     
     func changedCheckButton(to bool: Bool) {
-        task.isCompleted = bool
+        let attributes: [TaskModel.Attributes : Any] = [.isCompleted: true,
+                                                        .completionDate: Date()]
+        taskModel.update(task, with: attributes)
+        taskModel.save(task)
+        
         taskObservable.onNext(task)
     }
 }
