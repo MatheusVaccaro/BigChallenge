@@ -119,27 +119,16 @@ public class TaskListViewModel {
     
     fileprivate func subscribeToModelUpdate() {
         model.didUpdateTasks.subscribe {
-            self.mainTasks = []
-            self.secondaryTasks = []
-            self.completedTasks = []
-            
-            for task in $0.element! {
-                self.appendTask(task)
-            }
-            
-            self.tasksObservable.onNext((self.mainTasks, self.tasksToShow))
+            self.filterTasks(with: self.tagsBeingUsed)
             }.disposed(by: disposeBag)
     }
     
     fileprivate func subscribeToCompletedTask() {
         taskCompleted.subscribe { event in
-            
             guard let task = event.element else { return }
-            
-            self.model.save(task)
-            
+
+            self.model.save(task) // model updated handles changing the arrays
             self.tasksObservable.onNext((self.mainTasks, self.tasksToShow))
-            
         }.disposed(by: disposeBag)
     }
 }
