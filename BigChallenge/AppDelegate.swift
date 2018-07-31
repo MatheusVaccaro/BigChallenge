@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // MARK: Application Coordinator
         startApplicationCoordinator(with: window)
+        
+        requestAuthorizationForNotifications()
         
         return true
     }
@@ -52,6 +55,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let applicationCoordinator = ApplicationCoordinator(window: window)
         self.applicationCoordinator = applicationCoordinator
         applicationCoordinator.start()
+    }
+    
+    func requestAuthorizationForNotifications() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in })
     }
     
 }

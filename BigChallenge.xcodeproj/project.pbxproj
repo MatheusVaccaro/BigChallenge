@@ -12,6 +12,8 @@
 		1627EBEDDA20D9C1EB6BC691 /* Pods_BigChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 558C6AF329AB768E11815BB8 /* Pods_BigChallengeTests.framework */; };
 		1676FC9020D99580003E2D79 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1676FC8F20D99580003E2D79 /* TaskModel.swift */; };
 		16EC6CEA21065B2500797D9C /* TagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EC6CE921065B2500797D9C /* TagTests.swift */; };
+		16FDC139210BB237008FA931 /* NotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FDC138210BB237008FA931 /* NotificationTests.swift */; };
+		16FDC13C210F809A008FA931 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FDC13B210F809A008FA931 /* NotificationManager.swift */; };
 		221BA8AF20F6991200BE2AC1 /* HomeScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221BA8AE20F6991200BE2AC1 /* HomeScreen.storyboard */; };
 		221BA8B320F69E5C00BE2AC1 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BA8B220F69E5C00BE2AC1 /* HomeScreenViewController.swift */; };
 		221BA8B620F6A18500BE2AC1 /* TagCollection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221BA8B520F6A18500BE2AC1 /* TagCollection.storyboard */; };
@@ -102,6 +104,8 @@
 		1627171F20C879AD00AA0024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1676FC8F20D99580003E2D79 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		16EC6CE921065B2500797D9C /* TagTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTests.swift; sourceTree = "<group>"; };
+		16FDC138210BB237008FA931 /* NotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTests.swift; sourceTree = "<group>"; };
+		16FDC13B210F809A008FA931 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		220D7C1C20D02E5E007EC0DD /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		221BA8AE20F6991200BE2AC1 /* HomeScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeScreen.storyboard; sourceTree = "<group>"; };
 		221BA8B220F69E5C00BE2AC1 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +216,7 @@
 				294490ED20FD297200333F11 /* TaskViewModelTests.swift */,
 				16EC6CE921065B2500797D9C /* TagTests.swift */,
 				29B6302721102B6A006D7A8A /* RemindersImporterTests.swift */,
+				16FDC138210BB237008FA931 /* NotificationTests.swift */,
 			);
 			path = BigChallengeTests;
 			sourceTree = "<group>";
@@ -232,6 +237,14 @@
 				2241F36820ED08340069EFE9 /* TagModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		16FDC13A210F8080008FA931 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				16FDC13B210F809A008FA931 /* NotificationManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		221BA8AA20F698D000BE2AC1 /* HomeScreen */ = {
@@ -485,6 +498,7 @@
 				C21EAD0120B745B6005F0F85 /* Resources */,
 				C2A1113720B878CC00ABB161 /* Persistence */,
 				2299F07720F6287F0074A834 /* Location */,
+				16FDC13A210F8080008FA931 /* Managers */,
 			);
 			path = BigChallenge;
 			sourceTree = "<group>";
@@ -859,6 +873,7 @@
 				223C0C4020E5697700CF39ED /* Enums.swift in Sources */,
 				223C0C3920E5678100CF39ED /* LocalPersistence.swift in Sources */,
 				2934BCCA21003E0700B6A05A /* TaskTests.swift in Sources */,
+				16FDC139210BB237008FA931 /* NotificationTests.swift in Sources */,
 				294490EE20FD297200333F11 /* TaskViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -895,6 +910,7 @@
 				29BEED5F2107E946008E2202 /* ImportDataPacket.swift in Sources */,
 				223C0C0620E5293500CF39ED /* PersistenceProtocol.swift in Sources */,
 				C231119120FFC92800BCB000 /* NewTaskViewModelProtocol.swift in Sources */,
+				16FDC13C210F809A008FA931 /* NotificationManager.swift in Sources */,
 				228BAD442108C22400E74AA9 /* Fonts.swift in Sources */,
 				22325A7920FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift in Sources */,
 				225852822100C5BE0011F4B0 /* TagsCollectionView.swift in Sources */,
