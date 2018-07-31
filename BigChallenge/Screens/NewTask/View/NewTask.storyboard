@@ -37,7 +37,7 @@
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LNj-xf-0N7">
-                                <rect key="frame" x="0.0" y="69" width="375" height="549"/>
+                                <rect key="frame" x="0.0" y="68.5" width="375" height="549.5"/>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaA-a0-O5B">
                                 <rect key="frame" x="216" y="564" width="114" height="103"/>
@@ -88,7 +88,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="549"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" text="A task with a name that spans two lines" translatesAutoresizingMaskIntoConstraints="NO" id="al3-n2-yBh">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="al3-n2-yBh">
                                 <rect key="frame" x="8" y="20" width="359" height="92"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -96,9 +96,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="38"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="A task with a name that spans two lines"/>
-                                </userDefinedRuntimeAttributes>
                             </textView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jkA-FZ-sKg">
                                 <rect key="frame" x="8" y="128" width="359" height="120"/>
@@ -108,14 +105,11 @@
                                     <constraint firstAttribute="height" constant="120" id="woN-sJ-p04"/>
                                 </constraints>
                             </containerView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" text="Winning an Apple Design Award is no easy task. First we need a good app, but making apps is hard work. We’ll need tasks" translatesAutoresizingMaskIntoConstraints="NO" id="Rot-Aq-Hm9">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="Rot-Aq-Hm9">
                                 <rect key="frame" x="47" y="278" width="281" height="224"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Winning an Apple Design Award is no easy task. First we need a good app, but making apps is hard work. We’ll need tasks"/>
-                                </userDefinedRuntimeAttributes>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
