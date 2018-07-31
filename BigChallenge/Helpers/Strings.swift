@@ -95,4 +95,9 @@ struct Strings {
         static let accessibilityHintSearchBar = NSLocalizedString("SearchBarHint",
                                                                   comment: "accessibility hint on searchBar for voiceOver users")
     }
+    
+    struct Notification {
+        static let placeholderTitle =
+            NSLocalizedString("notificationTitle", comment: "placeholder for notification title")
+    }
 }

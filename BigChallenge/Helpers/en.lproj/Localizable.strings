@@ -73,3 +73,6 @@
 
 /* accessibility hint on searchBar for voiceOver users */
 "SearchBarHint" = "tap to search location";
+
+/* placeholder title for notification */
+"notificationTitle" = "Your task waits";
