@@ -41,7 +41,7 @@ public class RemindersCommunicator {
         }
     }
     
-    public func fetchAllReminders(completion: @escaping (([EKReminder]?) -> Void)) {
+    public func fetchAllReminders(completion: @escaping (([Reminder]?) -> Void)) {
         let predicate = store.predicateForReminders(in: nil)
         
         store.fetchReminders(matching: predicate) { reminders in
@@ -49,22 +49,22 @@ public class RemindersCommunicator {
         }
     }
     
-    public func fetchIncompleteReminders(completion: @escaping ([EKReminder]?) -> Void) {
+    public func fetchIncompleteReminders(completion: @escaping ([Reminder]?) -> Void) {
         let predicate = store.predicateForIncompleteReminders(withDueDateStarting: nil, ending: nil, calendars: nil)
         
         store.fetchReminders(matching: predicate, completion: completion)
     }
     
-    public func fetchReminder(withIdentifier identifier: String) -> EKReminder? {
+    public func fetchReminder(withIdentifier identifier: String) -> Reminder? {
         // TODO Deal with calendarExternalIdentifier
     	return store.calendarItem(withIdentifier: identifier) as? EKReminder
     }
     
-    public func fetchReminder(withExternalIdentifier identifier: String) -> EKReminder? {
+    public func fetchReminder(withExternalIdentifier identifier: String) -> Reminder? {
         return store.calendarItems(withExternalIdentifier: identifier).first as? EKReminder
     }
     
-    public func fetchReminder(identifiedBy dataPacket: ImportDataPacket) -> EKReminder? {
+    public func fetchReminder(identifiedBy dataPacket: ImportDataPacket) -> Reminder? {
         guard case .remindersDataPacket(let id, let externalId) = dataPacket else { return nil }
         
         return fetchReminder(withIdentifier: id) ?? fetchReminder(withExternalIdentifier: externalId ?? "")
@@ -78,7 +78,7 @@ public class RemindersCommunicator {
     
     // MARK: Reminder creation
     
-    public func createReminder() -> EKReminder {
+    public func createReminder() -> Reminder {
         let reminder = EKReminder(eventStore: store)
         
         return reminder
@@ -96,9 +96,11 @@ public class RemindersCommunicator {
         return defaultCalendar
     }
     
-    public func save(_ reminder: EKReminder) {
+    public func save(_ reminder: Reminder) {
+        guard let ekReminder = reminder as? EKReminder else { return }
+        
         do {
-            try store.save(reminder, commit: true)
+            try store.save(ekReminder, commit: true)
         } catch let error {
             fatalError(error.localizedDescription)
         }
@@ -112,8 +114,9 @@ protocol RemindersCommunicatorDelegate: class {
                                                         notification: NSNotification)
 }
 
-extension EKReminder {
-    var dataPacket: ImportDataPacket {
+extension EKReminder: Reminder {
+
+    public var dataPacket: ImportDataPacket {
         return ImportDataPacket.remindersDataPacket(id: calendarItemIdentifier,
                                                     externalId: calendarItemExternalIdentifier)
     }

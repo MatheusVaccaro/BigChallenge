@@ -19,10 +19,10 @@ public class RemindersImporter {
     private(set) var isImporting: Bool
     private(set) var isSyncing: Bool
 
-    init(taskModel: TaskModel, tagModel: TagModel) {
+    init(taskModel: TaskModel, tagModel: TagModel, communicator: RemindersCommunicator = RemindersCommunicator()) {
         self.taskModel = taskModel
         self.tagModel = tagModel
-		self.remindersDB = RemindersCommunicator()
+		self.remindersDB = communicator
         defer { remindersDB.delegate = self }
         self.isImporting = false
         self.isSyncing = false
@@ -37,7 +37,7 @@ public class RemindersImporter {
     }
 
     /**
-     This method fetches all reminders from the Reminders internal store,
+     This method fetches all incomplete reminders from the Reminders internal store,
      converts them to tasks and tags, and then finally saves them to our own store.
      */
     private func importTasksFromReminders() {
@@ -70,7 +70,7 @@ public class RemindersImporter {
      - Returns: ```true``` if the reminder has been imported into a task.
      			```false``` if the reminder has not been imported into a task.
      */
-    private func checkImportStatus(for reminder: EKReminder) -> Bool {
+    private func checkImportStatus(for reminder: Reminder) -> Bool {
         let hasFoundEquivalentTask = taskModel.tasks.contains { task -> Bool in
             
             // Checks if a task is a Reminders import
@@ -95,7 +95,7 @@ public class RemindersImporter {
      - Returns: a ```task``` if there is one associated with the ```reminder``` or
      ```nil``` if there isn't one.
      */
-    private func getEquivalentTask(for reminder: EKReminder) -> Task? {
+    private func getEquivalentTask(for reminder: Reminder) -> Task? {
         let equivalentTask = taskModel.tasks.first { task -> Bool in
             guard let remindersData = task.importData?.remindersImportData else { return false }
             
@@ -107,9 +107,9 @@ public class RemindersImporter {
     }
     
     // Convert a reminder to a Task and a Tag
-    private func convertTaskAndTag(from reminder: EKReminder) -> (task: Task, tag: Tag) {
+    private func convertTaskAndTag(from reminder: Reminder) -> (task: Task, tag: Tag) {
         let attributes: [TaskModel.Attributes : Any] =
-            [.title : reminder.title]
+            [.title : reminder.title ?? ""]
         let task = taskModel.createTask(with: attributes)
         let tag = tagModel.createTag(with: reminder.calendar.title)
     
@@ -130,11 +130,13 @@ public class RemindersImporter {
      
      - Parameter task: The task to export.
      */
-    public func exportTaskToReminders(_ task: Task) {
-        guard !isImporting && !isSyncing else { return }
+    
+    @discardableResult
+    public func exportTaskToReminders(_ task: Task) -> Reminder? {
+        guard !isImporting && !isSyncing else { return nil }
         
         // Attempts to retrieve an already existing reminder associated with the task
-        let existingReminder: EKReminder? = {
+        let existingReminder: Reminder? = {
             if let remindersData = task.importData?.remindersImportData {
                 let dataPacket = ImportDataPacket.from(remindersData)
                 return remindersDB.fetchReminder(identifiedBy: dataPacket)
@@ -148,6 +150,8 @@ public class RemindersImporter {
         taskModel.associate(task, with: reminder.dataPacket)
 		
         remindersDB.save(reminder)
+        
+        return reminder
     }
     
     /**
@@ -157,14 +161,16 @@ public class RemindersImporter {
      	- reminder: The reminder to be updated.
         - task: The data source to update the reminder with.
      */
-    private func update(_ reminder: EKReminder, withDataFrom task: Task) {
+    private func update(_ reminder: Reminder, withDataFrom task: Task) {
         reminder.isCompleted = task.isCompleted
         reminder.title = task.title
         reminder.completionDate = task.completionDate
+        
         if let dueDate = task.dueDate {
             reminder.dueDateComponents = Calendar.current.dateComponents([.year, .month, .day,
                                                                           .hour, .minute], from: dueDate)
         }
+        
         // TODO Implement a better way to figure out what list to save the reminder to.
         if let tag = task.tags?.anyObject() as? Tag,
            let calendar = remindersDB.getCalendars().first(where: { $0.title == tag.title }) {
@@ -220,4 +226,16 @@ extension RemindersImporter: RemindersCommunicatorDelegate {
         // TODO Handle access denial
         // Sounds like a great candidate for RX
     }
+}
+
+public protocol Reminder: class {
+    var isCompleted: Bool { get set }
+    var title: String! { get set }
+    var completionDate: Date? { get set }
+    var dueDateComponents: DateComponents? { get set }
+    var calendar: EKCalendar! { get set }
+    var creationDate: Date? { get }
+    var calendarItemExternalIdentifier: String! { get }
+    var calendarItemIdentifier: String { get }
+    var dataPacket: ImportDataPacket { get }
 }
