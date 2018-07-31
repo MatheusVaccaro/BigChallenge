@@ -86,7 +86,7 @@ public class TaskListViewModel {
     }
     
     func taskCellViewModel(for task: Task) -> TaskCellViewModel {
-        return TaskCellViewModel(task: task)
+        return TaskCellViewModel(task: task, taskModel: model)
     }
 
     func shouldGoToAddTask() {
@@ -134,10 +134,12 @@ public class TaskListViewModel {
     fileprivate func subscribeToCompletedTask() {
         taskCompleted.subscribe { event in
             
-            guard event.element != nil else {return}
-            self.model.saveContext() // saving the context updated the view, also
+            guard let task = event.element else { return }
+            
+            self.model.save(task)
             
             self.tasksObservable.onNext((self.mainTasks, self.tasksToShow))
-            }.disposed(by: disposeBag)
+            
+        }.disposed(by: disposeBag)
     }
 }

@@ -36,10 +36,6 @@ public class TaskModel {
     
     // MARK: - CRUD Methods
     
-    public func saveContext() {
-        persistance.save()
-    }
-    
     public func save(_ task: Task) {
         if !tasks.contains(task) {
             tasks.append(task)
