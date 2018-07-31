@@ -59,8 +59,6 @@ class NewTagTableViewController: UITableViewController {
         
         titleTextField.text = viewModel.tagTitle()
         titleTextField.placeholder = viewModel.titleTextFieldPlaceholder()
-        deleteTagButton.text = viewModel.deleteButtonTitle()
-        navigationItem.title = viewModel.navigationItemTitle()
     }
     
     private func setupGestureRecognizers() {

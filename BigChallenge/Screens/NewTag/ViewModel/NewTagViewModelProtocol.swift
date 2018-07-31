@@ -20,9 +20,5 @@ protocol NewTagViewModelProtocol {
     
     func tagTitle() -> String?
     func titleTextFieldPlaceholder() -> String
-    func doneItemTitle() -> String
-    func cancelItemTitle() -> String
-    func navigationItemTitle() -> String
-    func deleteButtonTitle() -> String
     
 }

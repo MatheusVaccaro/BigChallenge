@@ -81,26 +81,4 @@ class NewTagViewModel: NewTagViewModelProtocol {
     func titleTextFieldPlaceholder() -> String {
         return Strings.Tag.CreationScreen.tagTitlePlaceholder
     }
-    
-    func doneItemTitle() -> String {
-        return Strings.Tag.CreationScreen.doneButton
-    }
-    
-    func cancelItemTitle() -> String {
-        return Strings.Tag.CreationScreen.cancelButton
-    }
-    
-    func navigationItemTitle() -> String {
-        var ans: String = ""
-        if isEditing {
-            ans = Strings.Tag.EditScreen.title
-        } else {
-            ans = Strings.Tag.CreationScreen.title
-        }
-        return ans
-    }
-    
-    func deleteButtonTitle() -> String {
-        return Strings.Tag.EditScreen.deleteButton
-    }
 }

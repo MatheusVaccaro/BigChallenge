@@ -104,26 +104,4 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
     func titleTextFieldPlaceholder() -> String {
         return Strings.Task.CreationScreen.taskTitlePlaceholder
     }
-    
-    func doneItemTitle() -> String {
-        return Strings.Task.CreationScreen.doneButton
-    }
-    
-    func cancelItemTitle() -> String {
-        return Strings.Task.CreationScreen.cancelButton
-    }
-    
-    func navigationItemTitle() -> String {
-        var ans: String = ""
-        if isEditing {
-            ans = Strings.Task.EditScreen.title
-        } else {
-            ans = Strings.Task.CreationScreen.title
-        }
-        return ans
-    }
-    
-    func deleteButtonTitle() -> String {
-        return Strings.Task.EditScreen.deleteButton
-    }
 }
