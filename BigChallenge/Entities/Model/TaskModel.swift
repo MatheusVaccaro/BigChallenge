@@ -41,7 +41,6 @@ public class TaskModel {
             tasks.append(task)
         }
         persistance.save()
-        didUpdateTasks.onNext(tasks)
         
         delegate?.taskModel(self, didSave: task)
     }
@@ -50,7 +49,6 @@ public class TaskModel {
         guard let taskIndex = tasks.index(of: task) else { print("could not delete \(task) "); return }
         tasks.remove(at: taskIndex)
         persistance.delete(task)
-        didUpdateTasks.onNext(tasks)
         
         delegate?.taskModel(self, didDelete: task)
     }
