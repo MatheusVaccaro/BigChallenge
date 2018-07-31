@@ -41,12 +41,12 @@ public class TaskModel {
     }
     
     public func save(_ task: Task) {
-        guard !tasks.contains(object) else { return }
-        tasks.append(object)
+        guard !tasks.contains(task) else { return }
+        tasks.append(task)
         persistance.save()
         didUpdateTasks.onNext(tasks)
         
-        delegate?.taskModel(self, didSave: object)
+        delegate?.taskModel(self, didSave: task)
     }
     
     public func delete(_ task: Task) {
@@ -55,7 +55,7 @@ public class TaskModel {
         persistance.delete(task)
         didUpdateTasks.onNext(tasks)
         
-        delegate?.taskModel(self, didDelete: object)
+        delegate?.taskModel(self, didDelete: task)
     }
     
     public func createTask(with attributes: [Attributes : Any]) -> Task {

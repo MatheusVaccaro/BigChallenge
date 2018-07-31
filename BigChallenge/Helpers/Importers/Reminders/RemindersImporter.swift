@@ -104,6 +104,8 @@ public class RemindersImporter {
     
     // Convert a reminder to a Task and a Tag
     private func convertTaskAndTag(from reminder: EKReminder) -> (task: Task, tag: Tag) {
+        let attributes: [TaskModel.Attributes : Any] =
+            [.title : reminder.title]
         let task =
             self.taskModel.createTask(with: attributes)
         let tag =
@@ -179,10 +181,10 @@ public class RemindersImporter {
             let modelSet = Set(self.taskModel.tasks.filter({ $0.importData?.remindersImportData != nil }))
             
             let newTasks = remindersSet.subtracting(modelSet)		// New reminders not yet imported.
-            newTasks.forEach({ self.taskModel.save(object: $0) })
+            newTasks.forEach({ self.taskModel.save($0) })
             
             let tasksToDelete = modelSet.subtracting(remindersSet)	// Reminders that were deleted in Reminders
-            tasksToDelete.forEach({ self.taskModel.delete(object: $0) })
+            tasksToDelete.forEach({ self.taskModel.delete($0) })
             
             self.isSyncing = false
         }
