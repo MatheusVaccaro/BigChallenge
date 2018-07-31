@@ -19,8 +19,7 @@ public class RemindersImporter {
     private(set) var isImporting: Bool
     private(set) var isSyncing: Bool
 
-    // Initializes RemindersCommunicator
-    private init(taskModel: TaskModel, tagModel: TagModel) {
+    init(taskModel: TaskModel, tagModel: TagModel) {
         self.taskModel = taskModel
         self.tagModel = tagModel
 		self.remindersDB = RemindersCommunicator()
@@ -31,19 +30,16 @@ public class RemindersImporter {
     
     /**
      Attempts to start the import procedure.
+     If sucessful, will import all reminders that have not been imported yet.
  	*/
     func attemptToImport() {
         remindersDB.requestAccess()
     }
-    
-    // Should be instantiated using this method
-    public static func instantiate(taskModel: TaskModel, tagModel: TagModel) {
-        guard instance == nil else { return } // Forces the class to have one instance only
-        
-        self.instance = RemindersImporter(taskModel: taskModel, tagModel: tagModel)
-    }
-    
-    // Fetch all reminders; convert them to Tasks and Tags; save these afterwards
+
+    /**
+     This method fetches all reminders from the Reminders internal store,
+     converts them to tasks and tags, and then finally saves them to our own store.
+     */
     private func importTasksFromReminders() {
         isImporting = true
         
@@ -91,6 +87,14 @@ public class RemindersImporter {
         return hasFoundEquivalentTask
     }
     
+    /**
+     Searches for the task associated with a specific reminder.
+     
+     - Parameter reminder: The reminder to check the import status of.
+     
+     - Returns: a ```task``` if there is one associated with the ```reminder``` or
+     ```nil``` if there isn't one.
+     */
     private func getEquivalentTask(for reminder: EKReminder) -> Task? {
         let equivalentTask = taskModel.tasks.first { task -> Bool in
             guard let remindersData = task.importData?.remindersImportData else { return false }
@@ -106,10 +110,8 @@ public class RemindersImporter {
     private func convertTaskAndTag(from reminder: EKReminder) -> (task: Task, tag: Tag) {
         let attributes: [TaskModel.Attributes : Any] =
             [.title : reminder.title]
-        let task =
-            self.taskModel.createTask(with: attributes)
-        let tag =
-            self.tagModel.createTag(with: reminder.calendar.title)
+        let task = taskModel.createTask(with: attributes)
+        let tag = tagModel.createTag(with: reminder.calendar.title)
     
         task.isCompleted = reminder.isCompleted
         task.completionDate = reminder.completionDate
@@ -118,11 +120,16 @@ public class RemindersImporter {
         
         task.addToTags(tag)
         
-        taskModel.associateTask(task, with: reminder.dataPacket)
+        taskModel.associate(task, with: reminder.dataPacket)
 	
         return (task, tag)
     }
     
+    /**
+     Exports a new task to Reminders or updates the existing reminder associated with one.
+     
+     - Parameter task: The task to export.
+     */
     public func exportTaskToReminders(_ task: Task) {
         guard !isImporting && !isSyncing else { return }
         
@@ -138,11 +145,18 @@ public class RemindersImporter {
         let reminder = existingReminder ?? remindersDB.createReminder()
     
         update(reminder, withDataFrom: task)
-        taskModel.associateTask(task, with: reminder.dataPacket)
+        taskModel.associate(task, with: reminder.dataPacket)
 		
         remindersDB.save(reminder)
     }
     
+    /**
+     Updates a reminder with relevant data from a task.
+     
+     - Parameters
+     	- reminder: The reminder to be updated.
+        - task: The data source to update the reminder with.
+     */
     private func update(_ reminder: EKReminder, withDataFrom task: Task) {
         reminder.isCompleted = task.isCompleted
         reminder.title = task.title

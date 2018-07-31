@@ -176,7 +176,7 @@ extension TaskModel {
      	- task: The task to associate import data to.
      	- importDataPacket: The import data to associate a task with.
      */
-    func associateTask(_ task: Task, with importDataPacket: ImportDataPacket) {
+    func associate(_ task: Task, with importDataPacket: ImportDataPacket) {
         // Check if task has import data of the same type as importDataPacket or no data at all
         guard task.importData?.type == importDataPacket.type || task.importData == nil else { return }
         guard let taskContext = task.managedObjectContext else { return }
