@@ -23,9 +23,5 @@ protocol NewTaskViewModelProtocol {
     
     func taskTitle() -> String?
     func titleTextFieldPlaceholder() -> String
-    func doneItemTitle() -> String
-    func cancelItemTitle() -> String
-    func navigationItemTitle() -> String
-    func deleteButtonTitle() -> String
     
 }
