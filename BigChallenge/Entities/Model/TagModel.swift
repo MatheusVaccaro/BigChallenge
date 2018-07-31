@@ -54,7 +54,6 @@ public class TagModel {
         guard !tags.contains(object) else { return }
         tags.append(object)
         persistance.save()
-        didUpdateTags.onNext(tags)
     }
     
     public func delete(object: Tag) {
@@ -62,7 +61,6 @@ public class TagModel {
         // TODO change to removeAll when available
         persistance.delete(object)
         tags.remove(at: tagIndex)
-        didUpdateTags.onNext(tags)
     }
     
     public func createTag(with title: String) -> Tag {

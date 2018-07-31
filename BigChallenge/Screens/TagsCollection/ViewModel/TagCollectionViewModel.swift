@@ -16,6 +16,7 @@ class TagCollectionViewModel {
     var selectedTagsObservable: BehaviorSubject<[Tag]>
     
     private(set) var tags: [Tag]
+    private(set) var filteredTags: [Tag]
     private(set) var selectedTags: [Tag]
     private(set) var selectedTagEvent: PublishSubject<Tag>
 
@@ -26,6 +27,7 @@ class TagCollectionViewModel {
         self.model = model
         self.selectedTags = selectedTags
         self.tags = model.tags
+        self.filteredTags = self.tags
         
         tagsObservable = BehaviorSubject<[Tag]>(value: tags)
         selectedTagsObservable = BehaviorSubject<[Tag]>(value: selectedTags)
@@ -51,15 +53,14 @@ class TagCollectionViewModel {
                 self.selectedTagsObservable.onNext(self.selectedTags)
                 
                 if filtering {
-                    self.tags = self.model.tags.filter {
+                    self.filteredTags = self.model.tags.filter {
                         return self.selectedTags.isEmpty || //no tag is selected
                             self.selectedTags.contains($0) || // tag is selected
                             !(($0.tasks!.allObjects as! [Task]) //tag has tasks in common
                                 .filter { $0.tags!.contains(tag) })
                                 .isEmpty
                     }
-                    
-                    self.tagsObservable.onNext(self.tags)
+                    self.tagsObservable.onNext(self.filteredTags)
                 }
             }.disposed(by: disposeBag)
     }
@@ -67,9 +68,12 @@ class TagCollectionViewModel {
     fileprivate func subscribeToModel() {
         model.didUpdateTags
             .subscribe {
-            self.tags = $0.element!
-            print("updated tags: \(self.tags.map {$0.title!})")
-            self.tagsObservable.onNext(self.tags)
+                guard self.tags != $0.element else { return }
+                self.tags = $0.element!
+                self.filteredTags = self.tags
+                
+                print("updated tags: \(self.tags.map {$0.title!})")
+                self.tagsObservable.onNext(self.filteredTags)
             }.disposed(by: disposeBag)
     }
     

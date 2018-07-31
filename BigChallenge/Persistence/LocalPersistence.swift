@@ -140,9 +140,7 @@ class LocalPersistence: PersistenceProtocol {
         if let updateSet = userInfo[NSUpdatedObjectsKey] as? NSSet,
             let updateArray = updateSet.allObjects as? [Storable] {
             delegate?.localPersistence(self, didUpdateObjects: updateArray)
-        }
-        
-        if let deleteSet = userInfo[NSDeletedObjectsKey] as? NSSet,
+        } else if let deleteSet = userInfo[NSDeletedObjectsKey] as? NSSet,
             let deleteArray = deleteSet.allObjects as? [Storable] {
             delegate?.localPersistence(self, didDeleteObjects: deleteArray)
         }
