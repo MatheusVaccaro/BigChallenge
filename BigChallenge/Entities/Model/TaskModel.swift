@@ -41,8 +41,9 @@ public class TaskModel {
     }
     
     public func save(_ task: Task) {
-        guard !tasks.contains(task) else { return }
-        tasks.append(task)
+        if !tasks.contains(task) {
+            tasks.append(task)
+        }
         persistance.save()
         didUpdateTasks.onNext(tasks)
         
@@ -108,6 +109,8 @@ public class TaskModel {
         if let title = attributes[.title] as? String {
             task.title = title
         }
+        
+        delegate?.taskModel(self, didUpdate: task, with: attributes)
     }
     
     // The attributes of the Task class, mapped according to CoreData
@@ -126,12 +129,14 @@ protocol TaskModelDelegate: class {
     func taskModel(_ taskModel: TaskModel, didSave task: Task)
     func taskModel(_ taskModel: TaskModel, didDelete task: Task)
     func taskModel(_ taskModel: TaskModel, didCreate task: Task)
+    func taskModel(_ taskModel: TaskModel, didUpdate task: Task, with attributes: [TaskModel.Attributes: Any])
 }
 
 extension TaskModelDelegate {
     func taskModel(_ taskModel: TaskModel, didSave task: Task) { }
     func taskModel(_ taskModel: TaskModel, didDelete task: Task) { }
     func taskModel(_ taskModel: TaskModel, didCreate task: Task) { }
+    func taskModel(_ taskModel: TaskModel, didUpdate task: Task, with attributes: [TaskModel.Attributes: Any]) { }
 }
 
 // MARK: - TaskPersistenceDelegate Extension
