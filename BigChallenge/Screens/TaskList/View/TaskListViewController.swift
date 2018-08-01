@@ -48,13 +48,7 @@ public class TaskListViewController: UIViewController {
         tableView.estimatedRowHeight = 60
         tableView.estimatedSectionHeaderHeight = 18.5
         tableView.estimatedSectionFooterHeight = 46
-        
-        alsoTaggedHeader =
-            textHeaderView(with: Strings.Task.ListScreen.section2HeaderTitle,
-                           colored: UIColor.purple)
-        
-        heightOfHeaderTag = alsoTaggedHeader.bounds.size.height
-        
+                
         bindTableView()
     }
     
@@ -130,6 +124,14 @@ public class TaskListViewController: UIViewController {
         headerView.frame.size = CGSize(width: label.frame.size.width + 16, height: label.frame.size.height + 6)
         
         return headerView
+    }
+    
+    public override func viewDidLayoutSubviews() {
+        alsoTaggedHeader =
+            textHeaderView(with: Strings.Task.ListScreen.section2HeaderTitle,
+                           colored: UIColor.purple)
+        
+        heightOfHeaderTag = alsoTaggedHeader.bounds.size.height
     }
 }
 
