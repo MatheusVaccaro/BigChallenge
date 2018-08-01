@@ -29,6 +29,8 @@ public class TaskListViewController: UIViewController {
     // MARK: - Properties
     var viewModel: TaskListViewModel!
     private let disposeBag = DisposeBag()
+    fileprivate var heightOfHeaderTag: CGFloat!
+    private var alsoTaggedHeader: UIView!
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -46,6 +48,12 @@ public class TaskListViewController: UIViewController {
         tableView.estimatedRowHeight = 60
         tableView.estimatedSectionHeaderHeight = 18.5
         tableView.estimatedSectionFooterHeight = 46
+        
+        alsoTaggedHeader =
+            textHeaderView(with: Strings.Task.ListScreen.section2HeaderTitle,
+                           colored: UIColor.purple)
+        
+        heightOfHeaderTag = alsoTaggedHeader.bounds.size.height
         
         bindTableView()
     }
@@ -120,12 +128,9 @@ public class TaskListViewController: UIViewController {
         headerView.layer.cornerRadius = 6.3
         headerView.addSubview(label)
         headerView.frame.size = CGSize(width: label.frame.size.width + 16, height: label.frame.size.height + 6)
-        heightOfHeaderTag = headerView.bounds.size.height
         
         return headerView
     }
-    
-    fileprivate var heightOfHeaderTag: CGFloat = 8
 }
 
 extension TaskListViewController: UITableViewDelegate {
@@ -145,8 +150,7 @@ extension TaskListViewController: UITableViewDelegate {
 
         guard section == 0 else {
             guard !viewModel.secondaryTasks.isEmpty else { return nil }
-            headerView.addSubview(textHeaderView(with: Strings.Task.ListScreen.section2HeaderTitle,
-                                                 colored: UIColor.purple))
+            headerView.addSubview(alsoTaggedHeader)
             return headerView
         }
         
