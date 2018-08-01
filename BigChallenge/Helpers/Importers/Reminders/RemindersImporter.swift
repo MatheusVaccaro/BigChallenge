@@ -43,8 +43,8 @@ public class RemindersImporter {
     private func importTasksFromReminders() {
         isImporting = true
         
-        remindersDB.fetchIncompleteReminders { incompleteReminders in
-            guard let reminders = incompleteReminders else {
+        remindersDB.fetchAllReminders { allReminders in
+            guard let reminders = allReminders else {
                 self.isImporting = false
                 
                 return
@@ -192,7 +192,7 @@ public class RemindersImporter {
         
         // Check for changes between the model and the reminders store and update the model accordingly
         remindersDB.fetchAllReminders { allReminders in
-            guard let reminders = allReminders?.filter({ !$0.isCompleted }) else { return }
+            guard let reminders = allReminders else { return }
             
             // Set of all tasks originating from Reminders - even those not yet imported.
             let remindersSet = Set(reminders.map {

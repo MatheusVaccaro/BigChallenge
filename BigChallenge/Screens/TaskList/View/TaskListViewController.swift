@@ -35,6 +35,10 @@ public class TaskListViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
     
+    fileprivate var contentOffsetScrollDown: CGFloat {
+        return tableView.contentOffset.y - (tableView.contentSize.height - tableView.bounds.height)
+    }
+    
     // MARK: - ViewController Lifecycle
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -99,8 +103,10 @@ public class TaskListViewController: UIViewController {
             })
 
         tableView.rx.didEndDragging.subscribe { _ in
-            if self.tableView.contentOffset.y < -50.0 {
+            if self.tableView.contentOffset.y < -100.0 {
                 self.viewModel.shouldGoToAddTask()
+             } else if self.contentOffsetScrollDown > 100.0 {
+                self.viewModel.showsCompletedTasks = !self.viewModel.showsCompletedTasks
             }
         }.disposed(by: disposeBag)
         

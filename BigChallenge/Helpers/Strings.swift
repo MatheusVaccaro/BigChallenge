@@ -8,6 +8,7 @@
 
 //swiftlint:disable nesting
 //swiftlint:disable type_name
+//swiftlint:disable line_length
 
 import Foundation
 
@@ -32,8 +33,10 @@ struct Strings {
     struct Tag {
         
         struct CreationScreen {
-            static let tagTitlePlaceholder = //TODO
-                NSLocalizedString("newTagTitle", comment: "placeholder title for a new tag")
+            static let tagTitlePlaceholder =
+                NSLocalizedString("newTagTitlePlaceHolder", comment: "placeholder title for a new tag")
+            static let tagDescriptionPlaceholder =
+                NSLocalizedString("newTagDescriptionPlaceholder", comment: "placeholder title for a new tag description")
         }
         
         struct CollectionScreen {

@@ -49,17 +49,16 @@ class TaskCellViewModel {
         return TagModel.tagColors[Int(index)]
     }
     
-    func shouldChangeTask(title: String) {
-        task.title = title
-        taskObservable.onNext(task)
+    func changeTextTitle(to title: String) {
+        let attributes: [TaskModel.Attributes : Any] = [.title: title]
+        taskModel.update(task, with: attributes)
+        taskModel.save(task)
     }
     
     func changedCheckButton(to bool: Bool) {
-        let attributes: [TaskModel.Attributes : Any] = [.isCompleted: true,
+        let attributes: [TaskModel.Attributes : Any] = [.isCompleted: bool,
                                                         .completionDate: Date()]
         taskModel.update(task, with: attributes)
         taskModel.save(task)
-        
-        taskObservable.onNext(task)
     }
 }
