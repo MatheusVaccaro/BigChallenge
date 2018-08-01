@@ -65,6 +65,7 @@
 		29A4F8832110EFD500AE4FA1 /* DateSelectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8822110EFD500AE4FA1 /* DateSelectorTests.swift */; };
 		29A4F8852110F04600AE4FA1 /* DateSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8842110F04600AE4FA1 /* DateSelectorViewModel.swift */; };
 		29A4F8892111061A00AE4FA1 /* Task+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8882111061A00AE4FA1 /* Task+Extension.swift */; };
+		29A4F88B21125C1C00AE4FA1 /* DateSelectorViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F88A21125C1C00AE4FA1 /* DateSelectorViewModelProtocol.swift */; };
 		29B6302821102B6A006D7A8A /* RemindersImporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6302721102B6A006D7A8A /* RemindersImporterTests.swift */; };
 		29BEED5F2107E946008E2202 /* ImportDataPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BEED5E2107E946008E2202 /* ImportDataPacket.swift */; };
 		C21EAD0020B741BC005F0F85 /* HomeScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EACFF20B741BC005F0F85 /* HomeScreenCoordinator.swift */; };
@@ -195,6 +196,7 @@
 		29A4F8822110EFD500AE4FA1 /* DateSelectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorTests.swift; sourceTree = "<group>"; };
 		29A4F8842110F04600AE4FA1 /* DateSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorViewModel.swift; sourceTree = "<group>"; };
 		29A4F8882111061A00AE4FA1 /* Task+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Extension.swift"; sourceTree = "<group>"; };
+		29A4F88A21125C1C00AE4FA1 /* DateSelectorViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorViewModelProtocol.swift; sourceTree = "<group>"; };
 		29B6302721102B6A006D7A8A /* RemindersImporterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersImporterTests.swift; sourceTree = "<group>"; };
 		29BEED5E2107E946008E2202 /* ImportDataPacket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportDataPacket.swift; sourceTree = "<group>"; };
 		2D020A78B9BEB6EB771DFE12 /* Pods-BigChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigChallenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigChallenge/Pods-BigChallenge.debug.xcconfig"; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 			isa = PBXGroup;
 			children = (
 				29A4F8842110F04600AE4FA1 /* DateSelectorViewModel.swift */,
+				29A4F88A21125C1C00AE4FA1 /* DateSelectorViewModelProtocol.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1137,6 +1140,7 @@
 				C2A1113D20B88A2F00ABB161 /* Storable.swift in Sources */,
 				22D84C65210BF4D1004B8969 /* LocationInputView.swift in Sources */,
 				222BFF9720EDB854001B6BBF /* RemindersImporter.swift in Sources */,
+				29A4F88B21125C1C00AE4FA1 /* DateSelectorViewModelProtocol.swift in Sources */,
 				C25F5AA92108FEB3001E1561 /* NewTaskViewController.swift in Sources */,
 				C231119320FFC95300BCB000 /* NewTagViewModelProtocol.swift in Sources */,
 				C29742D021124F1600A1D213 /* MoreOptionsTableViewCellViewModel.swift in Sources */,
