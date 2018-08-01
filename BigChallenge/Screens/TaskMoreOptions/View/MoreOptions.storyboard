@@ -68,6 +68,26 @@
                                             <outlet property="title" destination="Loo-HK-HT2" id="tYu-IY-4wj"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="UP9-qG-8FT">
+                                        <rect key="frame" x="0.0" y="110" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UP9-qG-8FT" id="aAV-sg-3Gt">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vgl-RE-pmE">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="vgl-RE-pmE" secondAttribute="trailing" id="4Zk-gU-LTx"/>
+                                                <constraint firstAttribute="bottom" secondItem="vgl-RE-pmE" secondAttribute="bottom" id="GQZ-GO-qs5"/>
+                                                <constraint firstItem="vgl-RE-pmE" firstAttribute="top" secondItem="aAV-sg-3Gt" secondAttribute="top" id="PCG-c2-ezW"/>
+                                                <constraint firstItem="vgl-RE-pmE" firstAttribute="leading" secondItem="aAV-sg-3Gt" secondAttribute="leading" id="XiD-jS-tcT"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>

@@ -72,12 +72,16 @@ extension MoreOptionsViewController: UITableViewDataSource {
         }
         
         let cellViewModel: MoreOptionsTableViewCellViewModelProtocol
-        if indexPath.row == 0 {
+        if indexPath.row == 0 && !locationCellIsConfigured {
             cellViewModel = viewModel.locationViewModel()
-        } else if indexPath.row == 1 {
+            locationCellIsConfigured = true
+        } else if indexPath.row == 1 && !timeCellIsConfigured {
             cellViewModel = viewModel.timeViewModel()
+            timeCellIsConfigured = true
         } else {
-            return UITableViewCell()
+            let cell = UITableViewCell()
+            cell.backgroundColor = .orange
+            return cell
         }
         
         cell.configure(with: cellViewModel)
@@ -94,24 +98,26 @@ extension MoreOptionsViewController: UITableViewDelegate {
         guard let viewModel = viewModel else { return }
 
         let row = indexPath.row
+        let cell = tableView.cellForRow(at: indexPath)
+        let cellIndex = IndexPath(row: indexPath.row + 1, section: indexPath.section)
         
-        if row == 0 {
+        if row == 0 && cell is MoreOptionsTableViewCell {
             if viewModel.isShowingLocationCell {
                 viewModel.collapseLocationCell()
-                tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.deleteRows(at: [cellIndex], with: .top)
             } else {
                 viewModel.showLocationCell()
-                tableView.insertRows(at: [indexPath], with: .automatic)
+                tableView.insertRows(at: [cellIndex], with: .automatic)
             }
         }
 
-        if row == 1 {
+        if (row == 1 && cell is MoreOptionsTableViewCell) || (row == 2 && cell is MoreOptionsTableViewCell) {
             if viewModel.isShowingTimeCell {
                 viewModel.collapseTimeCell()
-                tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.deleteRows(at: [cellIndex], with: .top)
             } else {
                 viewModel.showTimeCell()
-                tableView.insertRows(at: [indexPath], with: .automatic)
+                tableView.insertRows(at: [cellIndex], with: .automatic)
             }
         }
     }
