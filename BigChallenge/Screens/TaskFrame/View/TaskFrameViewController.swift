@@ -39,7 +39,6 @@ class TaskFrameViewController: UIViewController {
     
     // MARK: - IBActions
     
-    //change delegate to viewModel
     @IBAction func didTapCancelButton(_ sender: UIButton) {
         guard let currentPageIndex = currentPageIndex else { return }
         guard let currentPage = pages[currentPageIndex] as? FrameContent else { return }
@@ -178,7 +177,7 @@ extension TaskFrameViewController: UIScrollViewDelegate {
 extension TaskFrameViewController: StoryboardInstantiable {
     
     static var storyboardIdentifier: String {
-        return "NewTask"
+        return "TaskFrame"
     }
     
     static var viewControllerID: String {

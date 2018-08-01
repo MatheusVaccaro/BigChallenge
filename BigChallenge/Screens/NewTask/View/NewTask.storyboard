@@ -1,91 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Task Frame View Controller-->
-        <scene sceneID="qPi-FH-ttM">
-            <objects>
-                <viewController storyboardIdentifier="TaskFrameViewController" id="j3U-xa-CcF" customClass="TaskFrameViewController" customModule="BigChallenge" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="bPb-kA-2fI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LZr-a8-Q83">
-                                <rect key="frame" x="317" y="20" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="LZr-a8-Q83" secondAttribute="height" multiplier="1:1" id="BY0-lw-CL4"/>
-                                    <constraint firstAttribute="height" constant="50" id="YvW-Dk-Ry7"/>
-                                </constraints>
-                                <state key="normal" image="closeButton"/>
-                                <connections>
-                                    <action selector="didTapCancelButton:" destination="j3U-xa-CcF" eventType="touchUpInside" id="AeZ-Wi-zaE"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CGM-Yh-Oqv">
-                                <rect key="frame" x="0.0" y="618" width="375" height="49"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LNj-xf-0N7">
-                                <rect key="frame" x="0.0" y="70" width="375" height="548"/>
-                            </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaA-a0-O5B">
-                                <rect key="frame" x="216" y="564" width="114" height="103"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="gaA-a0-O5B" secondAttribute="height" multiplier="114:103" id="Ut2-7J-cb9"/>
-                                    <constraint firstAttribute="height" constant="103" id="pim-3l-zH5"/>
-                                </constraints>
-                                <state key="normal" image="doneButton"/>
-                                <connections>
-                                    <action selector="didTapSaveButton:" destination="j3U-xa-CcF" eventType="touchUpInside" id="1dZ-1O-Lzp"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G8B-Mo-XKI">
-                                <rect key="frame" x="45" y="572" width="85" height="85"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="G8B-Mo-XKI" secondAttribute="height" multiplier="1:1" id="oPe-CS-0gC"/>
-                                    <constraint firstAttribute="height" constant="85" id="ySe-ky-bpM"/>
-                                </constraints>
-                                <state key="normal" image="settingsButton"/>
-                                <connections>
-                                    <action selector="didTapMoreOptionsButton:" destination="j3U-xa-CcF" eventType="touchUpInside" id="A53-Ah-P3e"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="lFI-TO-qiw" firstAttribute="bottom" secondItem="G8B-Mo-XKI" secondAttribute="bottom" constant="10" id="40P-LW-Nl3"/>
-                            <constraint firstItem="G8B-Mo-XKI" firstAttribute="leading" secondItem="lFI-TO-qiw" secondAttribute="leading" constant="45" id="45U-zl-uOL"/>
-                            <constraint firstItem="LNj-xf-0N7" firstAttribute="top" secondItem="LZr-a8-Q83" secondAttribute="bottom" id="6YK-lv-xNm"/>
-                            <constraint firstItem="LNj-xf-0N7" firstAttribute="trailing" secondItem="lFI-TO-qiw" secondAttribute="trailing" id="KGD-Rj-pgT"/>
-                            <constraint firstItem="CGM-Yh-Oqv" firstAttribute="bottom" secondItem="bPb-kA-2fI" secondAttribute="bottom" id="TRL-rF-aVZ"/>
-                            <constraint firstItem="CGM-Yh-Oqv" firstAttribute="top" secondItem="gaA-a0-O5B" secondAttribute="bottom" constant="-49" id="TdK-Jm-Tin"/>
-                            <constraint firstItem="LNj-xf-0N7" firstAttribute="leading" secondItem="lFI-TO-qiw" secondAttribute="leading" id="U7e-q8-BSb"/>
-                            <constraint firstItem="CGM-Yh-Oqv" firstAttribute="leading" secondItem="lFI-TO-qiw" secondAttribute="leading" id="W1p-ch-7nX"/>
-                            <constraint firstItem="gaA-a0-O5B" firstAttribute="bottom" secondItem="lFI-TO-qiw" secondAttribute="bottom" id="mSp-vQ-rnY"/>
-                            <constraint firstItem="lFI-TO-qiw" firstAttribute="trailing" secondItem="CGM-Yh-Oqv" secondAttribute="trailing" id="noc-Hn-K2c"/>
-                            <constraint firstItem="LZr-a8-Q83" firstAttribute="top" secondItem="lFI-TO-qiw" secondAttribute="top" id="paV-X9-bUP"/>
-                            <constraint firstItem="lFI-TO-qiw" firstAttribute="trailing" secondItem="gaA-a0-O5B" secondAttribute="trailing" constant="45" id="qMQ-PJ-LCS"/>
-                            <constraint firstItem="CGM-Yh-Oqv" firstAttribute="top" secondItem="LNj-xf-0N7" secondAttribute="bottom" id="s6B-mg-C49"/>
-                            <constraint firstItem="lFI-TO-qiw" firstAttribute="trailing" secondItem="LZr-a8-Q83" secondAttribute="trailing" constant="8" id="xaE-ON-qdQ"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="lFI-TO-qiw"/>
-                    </view>
-                    <connections>
-                        <outlet property="containerView" destination="LNj-xf-0N7" id="nj7-vK-mOm"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zAh-je-YlH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1141.5999999999999" y="223.53823088455775"/>
-        </scene>
         <!--New Task View Controller-->
         <scene sceneID="lM0-20-gYl">
             <objects>
@@ -145,9 +69,4 @@
             <point key="canvasLocation" x="2074" y="224"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="closeButton" width="17" height="16"/>
-        <image name="doneButton" width="114" height="103"/>
-        <image name="settingsButton" width="85" height="85"/>
-    </resources>
 </document>
