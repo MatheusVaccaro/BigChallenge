@@ -41,7 +41,6 @@ public class TaskModel {
             tasks.append(task)
         }
         persistance.save()
-        
         delegate?.taskModel(self, didSave: task)
     }
     
@@ -49,7 +48,6 @@ public class TaskModel {
         guard let taskIndex = tasks.index(of: task) else { print("could not delete \(task) "); return }
         tasks.remove(at: taskIndex)
         persistance.delete(task)
-        
         delegate?.taskModel(self, didDelete: task)
     }
     
@@ -67,6 +65,7 @@ public class TaskModel {
         task.notes = notes
         task.creationDate = creationDate
         task.isCompleted = isCompleted
+        task.tags = []
         
         if let completionDate = attributes[.completionDate] as? Date {
             task.completionDate = completionDate

@@ -119,6 +119,7 @@ public class TaskListViewModel {
     
     fileprivate func subscribeToModelUpdate() {
         model.didUpdateTasks.subscribe {
+            guard $0.element != nil else { return }
             self.filterTasks(with: self.tagsBeingUsed)
             }.disposed(by: disposeBag)
     }
@@ -126,9 +127,7 @@ public class TaskListViewModel {
     fileprivate func subscribeToCompletedTask() {
         taskCompleted.subscribe { event in
             guard let task = event.element else { return }
-
             self.model.save(task) // model updated handles changing the arrays
-            self.tasksObservable.onNext((self.mainTasks, self.tasksToShow))
         }.disposed(by: disposeBag)
     }
 }
