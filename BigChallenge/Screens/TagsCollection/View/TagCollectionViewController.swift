@@ -62,7 +62,6 @@ class TagCollectionViewController: UIViewController {
                 let indexPath = IndexPath(row: row, section: 0)
                 cell.configure(with: tagViewModel)
                 self.loadSelection(for: cell, tag: tag, at: indexPath)
-//                print("updating collection with tag \(tag.title ?? "nil"), type \(cell.kind) at \(row)")
         }.disposed(by: disposeBag)
         
         if let tagsCollection = tagsCollectionView as? TagCollectionView {

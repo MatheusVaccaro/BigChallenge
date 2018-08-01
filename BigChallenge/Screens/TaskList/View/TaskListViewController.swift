@@ -40,9 +40,12 @@ public class TaskListViewController: UIViewController {
         
         // config tableView to autolayout constraints to resize the tableCells height
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 60
         tableView.sectionHeaderHeight = UITableViewAutomaticDimension
         tableView.sectionFooterHeight = UITableViewAutomaticDimension
+        
+        tableView.estimatedRowHeight = 60
+        tableView.estimatedSectionHeaderHeight = 18.5
+        tableView.estimatedSectionFooterHeight = 46
         
         bindTableView()
     }
@@ -55,13 +58,15 @@ public class TaskListViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.tasksObservable
-            .map { return [SectionedTaskModel(items: $0.0), SectionedTaskModel(items: $0.1)] }
-            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .map {
+                return [SectionedTaskModel(items: $0.0), // divide tasks in main and secondary sections
+                        SectionedTaskModel(items: $0.1)].filter { !$0.items.isEmpty } // filter empty sections
+            }.bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }
     
     fileprivate func layout(cell: TaskTableViewCell, with indexPath: IndexPath) {
-        if indexPath.section == 0 {
+        if indexPath.section == 0, !viewModel.mainTasks.isEmpty {
             cell.layout(with: .main)
         } else {
             cell.layout(with: .none)
@@ -115,15 +120,18 @@ public class TaskListViewController: UIViewController {
         headerView.layer.cornerRadius = 6.3
         headerView.addSubview(label)
         headerView.frame.size = CGSize(width: label.frame.size.width + 16, height: label.frame.size.height + 6)
+        heightOfHeaderTag = headerView.bounds.size.height
         
         return headerView
     }
+    
+    fileprivate var heightOfHeaderTag: CGFloat = 8
 }
 
 extension TaskListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         guard !viewModel.mainTasks.isEmpty else { return 0 }
-        return section == 0 ? 18.5 : 0
+        return 10.5 + heightOfHeaderTag
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -132,6 +140,7 @@ extension TaskListViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard !viewModel.mainTasks.isEmpty else { return nil }
+        
         let headerView = UIView(frame: view.frame)
 
         guard section == 0 else {
@@ -144,7 +153,7 @@ extension TaskListViewController: UITableViewDelegate {
         let cardView = UIView(frame: headerView.bounds)
         
         cardView.frame.size.height = 8
-        cardView.frame.origin.y = 10.5
+        cardView.frame.origin.y = tableView.delegate!.tableView!(tableView, heightForHeaderInSection: section) - 8
         cardView.layer.cornerRadius = 6.3
         cardView.backgroundColor = UIColor.white
         cardView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
