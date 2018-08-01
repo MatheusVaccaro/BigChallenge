@@ -113,7 +113,7 @@ class NewTaskViewController: UIViewController, TaskFramePresentable {
     }
     
     private func configureTaskTitleTextView() {
-        taskTitleTextView.font = UIFont.font(sized: 38, weight: .bold, with: .title1)
+        taskTitleTextView.font = UIFont.font(sized: 38.0, weight: .bold, with: .title1, fontName: .barlow)
         taskTitleTextView.textContainer.lineBreakMode = .byTruncatingTail
         taskTitleTextView.placeholderColor = UIColor.lightGray.withAlphaComponent(0.5)
         taskTitleTextView.becomeFirstResponder()
