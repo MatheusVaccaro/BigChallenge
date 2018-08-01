@@ -98,7 +98,7 @@ class TaskTableViewCell: UITableViewCell {
 extension TaskTableViewCell: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         guard let text = textView.text else { return }
-        viewModel?.shouldChangeTask(title: text)
+        viewModel?.changeTextTitle(to: text)
     }
     
     func textViewDidChange(_ textView: UITextView) {

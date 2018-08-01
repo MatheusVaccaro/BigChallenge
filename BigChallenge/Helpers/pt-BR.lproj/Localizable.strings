@@ -8,45 +8,6 @@
 */
 "newTaskTitle" = "Título";
 
-/* the done button to create the task */
-"newTaskDone" = "Pronto";
-
-/* cancel button to cancel editing task */
-"newTaskCancel" = "Cancelar";
-
-/* screen title when editing task */
-"newTaskScreenTitleEditing" = "Editar";
-
-/* screen title when creating task */
-"newTaskScreenTitleCreating" = "Nova";
-
-/* button used to delete task */
-"newTaskDeleteTask" = "Excluir";
-
-/* completed cell status */
-"taskCellComplete" = "Completo";
-
-/* incomplete cell status */
-"taskCellIncomplete" = "Incompleto";
-
-/* placeholder title for a new tag */
-"newTagTitle" = "Título";
-
-/* the done button to create the tag */
-"newTagDone" = "Pronto";
-
-/* cancel button to cancel editing tag */
-"newTagCancel" = "Cancelar";
-
-/* screen title when editing tag */
-"newTagScreenTitleEditing" = "Editar";
-
-/* screen title when creating tag */
-"newTagScreenTitleCreating" = "Nova";
-
-/* button used to delete tag */
-"newTagDeleteTag" = "Excluir";
-
 /* screen title when on \"all tags\" screen */
 "CollectionScreenTitle" = "Tags";
 
@@ -76,3 +37,9 @@
 
 /* placeholder title for notification */
 "notificationTitle" = "Sua task está esperando";
+
+/* placeholder title for a new tag description */
+"newTagDescriptionPlaceholder" = "Adicione uma nota";
+
+/* placeholder title for a new tag */
+"newTagTitlePlaceHolder" = "Titulo";

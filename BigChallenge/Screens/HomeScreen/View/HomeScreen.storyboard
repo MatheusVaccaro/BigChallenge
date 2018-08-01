@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hA5-o5-LMg">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,11 +15,11 @@
             <objects>
                 <viewController storyboardIdentifier="HomeScreenViewController" id="hA5-o5-LMg" customClass="HomeScreenViewController" customModule="BigChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C6D-bh-Zj8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cie-Gz-Vzx">
-                                <rect key="frame" x="8" y="155" width="359" height="512"/>
+                                <rect key="frame" x="8" y="209" width="359" height="569"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
@@ -27,7 +27,7 @@
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUe-Ak-aYb">
-                                <rect key="frame" x="0.0" y="90" width="375" height="65"/>
+                                <rect key="frame" x="0.0" y="114" width="375" height="65"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -37,15 +37,8 @@
                                     <segue destination="fc3-rz-cDg" kind="embed" identifier="tagCollectionSegue" id="h6S-Ve-BxX"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7bI-vL-Uz6">
-                                <rect key="frame" x="248" y="40" width="117" height="30"/>
-                                <state key="normal" title="Show Completed"/>
-                                <connections>
-                                    <action selector="showCompletedButtonClicked:" destination="hA5-o5-LMg" eventType="touchUpInside" id="zrT-g7-EW5"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, Dory" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PrB-8h-Asu">
-                                <rect key="frame" x="8" y="37" width="140.5" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PrB-8h-Asu">
+                                <rect key="frame" x="8" y="61" width="66.666666666666671" height="36"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -53,17 +46,14 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="PrB-8h-Asu" firstAttribute="top" secondItem="QKa-yH-x6F" secondAttribute="top" constant="17" id="BAW-7M-1CL"/>
                             <constraint firstItem="cie-Gz-Vzx" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="8" id="BXC-pC-xol"/>
                             <constraint firstItem="cie-Gz-Vzx" firstAttribute="bottom" secondItem="QKa-yH-x6F" secondAttribute="bottom" id="Mlh-Oq-gNo"/>
-                            <constraint firstItem="fUe-Ak-aYb" firstAttribute="top" secondItem="7bI-vL-Uz6" secondAttribute="bottom" constant="20" id="Mva-Ar-yWL"/>
-                            <constraint firstItem="cie-Gz-Vzx" firstAttribute="top" secondItem="fUe-Ak-aYb" secondAttribute="bottom" id="Qao-O4-dlm"/>
+                            <constraint firstItem="cie-Gz-Vzx" firstAttribute="top" secondItem="fUe-Ak-aYb" secondAttribute="bottom" constant="30" id="Qao-O4-dlm"/>
                             <constraint firstItem="fUe-Ak-aYb" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" id="SKh-ZC-I5v"/>
-                            <constraint firstItem="7bI-vL-Uz6" firstAttribute="centerY" secondItem="PrB-8h-Asu" secondAttribute="centerY" id="YTg-uJ-K6i"/>
-                            <constraint firstItem="7bI-vL-Uz6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PrB-8h-Asu" secondAttribute="trailing" constant="5" id="bLX-XX-tap"/>
                             <constraint firstItem="PrB-8h-Asu" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="8" id="bht-La-lz4"/>
-                            <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="7bI-vL-Uz6" secondAttribute="trailing" constant="10" id="irL-lq-plQ"/>
+                            <constraint firstItem="fUe-Ak-aYb" firstAttribute="top" secondItem="PrB-8h-Asu" secondAttribute="bottom" constant="17" id="ct2-OT-yVw"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="fUe-Ak-aYb" secondAttribute="trailing" id="l9d-qe-b2V"/>
-                            <constraint firstItem="7bI-vL-Uz6" firstAttribute="top" secondItem="QKa-yH-x6F" secondAttribute="top" constant="20" id="wLA-q2-6wz"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="cie-Gz-Vzx" secondAttribute="trailing" constant="8" id="yev-Sb-Zry"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QKa-yH-x6F"/>

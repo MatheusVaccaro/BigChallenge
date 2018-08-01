@@ -90,11 +90,6 @@ class HomeScreenViewController: UIViewController {
         }
     }
     
-    @IBAction func showCompletedButtonClicked(_ sender: Any) {
-        taskListViewController.viewModel.showsCompletedTasks =
-            !taskListViewController.viewModel.showsCompletedTasks
-    }
-    
     fileprivate func observeClickedAddTag() {
         tagCollectionViewController.addTagEvent?.subscribe { _ in
             self.delegate?.willAddTag()
