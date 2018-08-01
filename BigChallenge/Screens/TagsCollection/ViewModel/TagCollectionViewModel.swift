@@ -19,7 +19,6 @@ class TagCollectionViewModel {
     private(set) var filteredTags: [Tag]
     private(set) var selectedTags: [Tag]
     private(set) var selectedTagEvent: PublishSubject<Tag>
-
     private let disposeBag = DisposeBag()
     private var model: TagModel
     
