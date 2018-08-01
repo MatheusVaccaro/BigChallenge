@@ -119,7 +119,7 @@ extension TaskFrameViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let pageIndex = pages.firstIndex(of: viewController) else { return nil }
+        guard let pageIndex = pages.index(of: viewController) else { return nil }
         let previousIndex = pageIndex - 1
         currentPageIndex = previousIndex
         guard previousIndex >= 0 else { return nil }
@@ -129,7 +129,7 @@ extension TaskFrameViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let pageIndex = pages.firstIndex(of: viewController) else { return nil }
+        guard let pageIndex = pages.index(of: viewController) else { return nil }
         let nextIndex = pageIndex + 1
         currentPageIndex = nextIndex
         guard nextIndex < pages.count else { return nil }

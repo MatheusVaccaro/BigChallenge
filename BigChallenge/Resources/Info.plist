@@ -20,27 +20,27 @@
 	<string>3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-    <key>UIAppFonts</key>
-    <array>
-        <string>Barlow-ExtraLight</string>
-        <string>Barlow-Light</string>
-        <string>Barlow-Medium</string>
-        <string>Barlow-Regular</string>
-        <string>Barlow-ExtraLightItalic</string>
-        <string>Barlow-Italic</string>
-        <string>Barlow-LightItalic</string>
-        <string>Barlow-MediumItalic</string>
-        <string>Barlow-Black</string>
-        <string>Barlow-Bold</string>
-        <string>Barlow-ExtraBold</string>
-        <string>Barlow-SemiBold</string>
-        <string>Barlow-BlackItalic</string>
-        <string>Barlow-BoldItalic</string>
-        <string>Barlow-ExtraBoldItalic</string>
-        <string>Barlow-SemiBoldItalic</string>
-        <string>Barlow-Thin</string>
-        <string>Barlow-ThinItalic</string>
-    </array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Barlow-ExtraLight.ttf</string>
+		<string>Barlow-Light.ttf</string>
+		<string>Barlow-Medium.ttf</string>
+		<string>Barlow-Regular.ttf</string>
+		<string>Barlow-ExtraLightItalic.ttf</string>
+		<string>Barlow-Italic.ttf</string>
+		<string>Barlow-LightItalic.ttf</string>
+		<string>Barlow-MediumItalic.ttf</string>
+		<string>Barlow-Black.ttf</string>
+		<string>Barlow-Bold.ttf</string>
+		<string>Barlow-ExtraBold.ttf</string>
+		<string>Barlow-SemiBold.ttf</string>
+		<string>Barlow-BlackItalic.ttf</string>
+		<string>Barlow-BoldItalic.ttf</string>
+		<string>Barlow-ExtraBoldItalic.ttf</string>
+		<string>Barlow-SemiBoldItalic.ttf</string>
+		<string>Barlow-Thin.ttf</string>
+		<string>Barlow-ThinItalic.ttf</string>
+	</array>
 	<key>NSCalendarsUsageDescription</key>
 	<string>dasd</string>
 	<key>NSContactsUsageDescription</key>
