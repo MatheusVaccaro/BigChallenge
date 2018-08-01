@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--More Options View Controller-->
+        <scene sceneID="lEs-7N-meS">
+            <objects>
+                <viewController storyboardIdentifier="MoreOptionsViewController" id="tJO-TH-F9i" customClass="MoreOptionsViewController" customModule="BigChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ard-7Y-5Mm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="549"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="s4O-RU-C88">
+                                <rect key="frame" x="0.0" y="20" width="375" height="529"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MoreOptionsTableViewCell" rowHeight="82" id="E9R-JP-LAW" customClass="MoreOptionsTableViewCell" customModule="BigChallenge" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="82"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="E9R-JP-LAW" id="YLv-ce-FRQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XQs-Uq-8Y0">
+                                                    <rect key="frame" x="16" y="0.0" width="68" height="68"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="68" id="dhn-d9-tV6"/>
+                                                        <constraint firstAttribute="width" constant="68" id="tIp-n7-8WN"/>
+                                                    </constraints>
+                                                    <state key="normal" image="locationButton"/>
+                                                    <state key="selected" title="Y"/>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Loo-HK-HT2">
+                                                    <rect key="frame" x="92" y="6" width="97" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yS3-fr-GC8">
+                                                    <rect key="frame" x="92" y="36" width="38" height="18"/>
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                                    <color key="textColor" red="0.75626671314239502" green="0.77213770151138306" blue="0.8011816143989563" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Loo-HK-HT2" firstAttribute="leading" secondItem="XQs-Uq-8Y0" secondAttribute="trailing" constant="8" id="HUr-uq-Nuh"/>
+                                                <constraint firstItem="XQs-Uq-8Y0" firstAttribute="top" secondItem="YLv-ce-FRQ" secondAttribute="top" id="O1a-Vw-bhC"/>
+                                                <constraint firstItem="yS3-fr-GC8" firstAttribute="leading" secondItem="XQs-Uq-8Y0" secondAttribute="trailing" constant="8" id="QOD-uf-I5K"/>
+                                                <constraint firstItem="yS3-fr-GC8" firstAttribute="top" secondItem="Loo-HK-HT2" secondAttribute="bottom" id="oKd-4u-Um6"/>
+                                                <constraint firstItem="Loo-HK-HT2" firstAttribute="top" secondItem="YLv-ce-FRQ" secondAttribute="top" constant="6" id="piy-ZJ-tCF"/>
+                                                <constraint firstItem="XQs-Uq-8Y0" firstAttribute="leading" secondItem="YLv-ce-FRQ" secondAttribute="leading" constant="16" id="sjO-Lh-D3x"/>
+                                                <constraint firstAttribute="bottom" secondItem="XQs-Uq-8Y0" secondAttribute="bottom" id="zRc-if-lcv"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="button" destination="XQs-Uq-8Y0" id="6X3-Yf-RK2"/>
+                                            <outlet property="subtitle" destination="yS3-fr-GC8" id="OvQ-Sb-Bdb"/>
+                                            <outlet property="title" destination="Loo-HK-HT2" id="tYu-IY-4wj"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="iqX-hM-5lK" firstAttribute="bottom" secondItem="s4O-RU-C88" secondAttribute="bottom" id="88f-Ka-dNC"/>
+                            <constraint firstItem="iqX-hM-5lK" firstAttribute="trailing" secondItem="s4O-RU-C88" secondAttribute="trailing" id="PLq-kR-hSC"/>
+                            <constraint firstItem="s4O-RU-C88" firstAttribute="top" secondItem="iqX-hM-5lK" secondAttribute="top" id="diW-Wa-n2k"/>
+                            <constraint firstItem="s4O-RU-C88" firstAttribute="leading" secondItem="iqX-hM-5lK" secondAttribute="leading" id="psr-pW-scz"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="iqX-hM-5lK"/>
+                    </view>
+                    <size key="freeformSize" width="375" height="549"/>
+                    <connections>
+                        <outlet property="tableView" destination="s4O-RU-C88" id="Ba6-hX-Xay"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H3q-7E-Ekv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2177" y="-1083"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="locationButton" width="68" height="68"/>
+    </resources>
+</document>
