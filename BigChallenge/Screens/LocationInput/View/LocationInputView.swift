@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 protocol LocationInputDelegate: class {
-    func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion)
+    func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool)
 }
 
 class LocationInputView: UIViewController {
@@ -27,7 +27,7 @@ class LocationInputView: UIViewController {
     
     private(set) var outputlocation: CLCircularRegion? {
         didSet {
-            delegate?.locationInput(self, didFind: outputlocation!)
+            delegate?.locationInput(self, didFind: outputlocation!, arriving: arriving)
         }
     }
     private(set) var arriving: Bool = true
@@ -48,7 +48,7 @@ class LocationInputView: UIViewController {
     
     @IBAction func segmentedControlSelected(_ sender: Any) {
         guard let location = outputlocation else { return }
-        delegate?.locationInput(self, didFind: location)
+        delegate?.locationInput(self, didFind: location, arriving: arriving)
     }
     
     fileprivate func setupSegmentedControl() {
