@@ -62,6 +62,9 @@
 		25A3EF9F7B0FADAB1A8E19B8 /* Pods_BigChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18C9FEFF01841372B83A1C4 /* Pods_BigChallengeUITests.framework */; };
 		2934BCCA21003E0700B6A05A /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2934BCC921003E0700B6A05A /* TaskTests.swift */; };
 		294490EE20FD297200333F11 /* TaskViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294490ED20FD297200333F11 /* TaskViewModelTests.swift */; };
+		29A4F8832110EFD500AE4FA1 /* DateSelectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8822110EFD500AE4FA1 /* DateSelectorTests.swift */; };
+		29A4F8852110F04600AE4FA1 /* DateSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8842110F04600AE4FA1 /* DateSelectorViewModel.swift */; };
+		29A4F8892111061A00AE4FA1 /* Task+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8882111061A00AE4FA1 /* Task+Extension.swift */; };
 		29B6302821102B6A006D7A8A /* RemindersImporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6302721102B6A006D7A8A /* RemindersImporterTests.swift */; };
 		29BEED5F2107E946008E2202 /* ImportDataPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BEED5E2107E946008E2202 /* ImportDataPacket.swift */; };
 		C21EAD0020B741BC005F0F85 /* HomeScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EACFF20B741BC005F0F85 /* HomeScreenCoordinator.swift */; };
@@ -189,6 +192,9 @@
 		2766B305F29EF8BE8DDEADCA /* Pods-BigChallengeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigChallengeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigChallengeUITests/Pods-BigChallengeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2934BCC921003E0700B6A05A /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		294490ED20FD297200333F11 /* TaskViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModelTests.swift; sourceTree = "<group>"; };
+		29A4F8822110EFD500AE4FA1 /* DateSelectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorTests.swift; sourceTree = "<group>"; };
+		29A4F8842110F04600AE4FA1 /* DateSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorViewModel.swift; sourceTree = "<group>"; };
+		29A4F8882111061A00AE4FA1 /* Task+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Extension.swift"; sourceTree = "<group>"; };
 		29B6302721102B6A006D7A8A /* RemindersImporterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersImporterTests.swift; sourceTree = "<group>"; };
 		29BEED5E2107E946008E2202 /* ImportDataPacket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportDataPacket.swift; sourceTree = "<group>"; };
 		2D020A78B9BEB6EB771DFE12 /* Pods-BigChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigChallenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigChallenge/Pods-BigChallenge.debug.xcconfig"; sourceTree = "<group>"; };
@@ -277,6 +283,7 @@
 				16EC6CE921065B2500797D9C /* TagTests.swift */,
 				29B6302721102B6A006D7A8A /* RemindersImporterTests.swift */,
 				16FDC138210BB237008FA931 /* NotificationTests.swift */,
+				29A4F8822110EFD500AE4FA1 /* DateSelectorTests.swift */,
 			);
 			path = BigChallengeTests;
 			sourceTree = "<group>";
@@ -294,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				1676FC8F20D99580003E2D79 /* TaskModel.swift */,
+				29A4F8882111061A00AE4FA1 /* Task+Extension.swift */,
 				2241F36820ED08340069EFE9 /* TagModel.swift */,
 			);
 			path = Model;
@@ -463,6 +471,22 @@
 			path = Reminders;
 			sourceTree = "<group>";
 		};
+		29A4F8862110F05200AE4FA1 /* DateSelector */ = {
+			isa = PBXGroup;
+			children = (
+				29A4F8872110F05D00AE4FA1 /* ViewModel */,
+			);
+			path = DateSelector;
+			sourceTree = "<group>";
+		};
+		29A4F8872110F05D00AE4FA1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				29A4F8842110F04600AE4FA1 /* DateSelectorViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		45EE167F10EAE72CE5635B25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -519,6 +543,7 @@
 				C29742C121123CE300A1D213 /* TaskFrame */,
 				C2A1114320B9F65200ABB161 /* NewTask */,
 				C29742C621123DCD00A1D213 /* TaskMoreOptions */,
+				29A4F8862110F05200AE4FA1 /* DateSelector */,
 				22D84C5E210BEFE4004B8969 /* LocationInput */,
 				C21EAD0420B74710005F0F85 /* TaskList */,
 			);
@@ -1043,6 +1068,7 @@
 				223C0C3D20E5681500CF39ED /* PersistenceProtocol.swift in Sources */,
 				223C0C4020E5697700CF39ED /* Enums.swift in Sources */,
 				223C0C3920E5678100CF39ED /* LocalPersistence.swift in Sources */,
+				29A4F8832110EFD500AE4FA1 /* DateSelectorTests.swift in Sources */,
 				2934BCCA21003E0700B6A05A /* TaskTests.swift in Sources */,
 				16FDC139210BB237008FA931 /* NotificationTests.swift in Sources */,
 				294490EE20FD297200333F11 /* TaskViewModelTests.swift in Sources */,
@@ -1082,6 +1108,7 @@
 				22ED5955211A7C21008EAD7D /* MKRadiusCircleRenderer.swift in Sources */,
 				2286A71620E3DF2100BE92AA /* Model.xcdatamodeld in Sources */,
 				22325A7720FBC3F100E5F8C6 /* TagCollectionViewCell.swift in Sources */,
+				29A4F8892111061A00AE4FA1 /* Task+Extension.swift in Sources */,
 				223C0C0820E529D600CF39ED /* Persistence.swift in Sources */,
 				226CEA0520E17E87008CEB97 /* Strings.swift in Sources */,
 				29BEED5F2107E946008E2202 /* ImportDataPacket.swift in Sources */,
@@ -1095,6 +1122,7 @@
 				225852822100C5BE0011F4B0 /* TagsCollectionView.swift in Sources */,
 				221BA8BA20F6A26100BE2AC1 /* TagCollectionViewModel.swift in Sources */,
 				222888DC211873DD0093EEF7 /* LocationTableViewCell.swift in Sources */,
+				29A4F8852110F04600AE4FA1 /* DateSelectorViewModel.swift in Sources */,
 				2299F07920F628A70074A834 /* LocationManager.swift in Sources */,
 				2241F36920ED08340069EFE9 /* TagModel.swift in Sources */,
 				C2A1113B20B8791E00ABB161 /* MockPersistence.swift in Sources */,
