@@ -63,8 +63,6 @@ class HomeScreenViewController: UIViewController {
         
         activity.isEligibleForPublicIndexing = true
         
-        activity.title = selectedTags.map { $0.title! }.description
-        
         //restore
         activity.userInfo = ["selectedTags": selectedTags]
         
@@ -120,6 +118,7 @@ class HomeScreenViewController: UIViewController {
     fileprivate func observeSelectedTags() {
         tagCollectionViewController.viewModel.selectedTagsObservable
             .subscribe { event in
+                self.selectedTags = event.element ?? []
                 if let activity = self.userActivity { self.updateUserActivityState(activity) }
                 self.taskListViewController.viewModel.filterTasks(with: event.element!)
                 print("selected tags are: \(event.element!.map { $0.title })")
@@ -128,6 +127,13 @@ class HomeScreenViewController: UIViewController {
     
     override func updateUserActivityState(_ activity: NSUserActivity) {
         activity.userInfo!["selectedTags"] = selectedTags
+        activity.keywords =
+            Set<String>(selectedTags.map { $0.title! })
+        
+        activity.title =
+            selectedTags.map { $0.title! }.description
+        
+        print(activity.keywords)
         activity.becomeCurrent()
     }
 }
