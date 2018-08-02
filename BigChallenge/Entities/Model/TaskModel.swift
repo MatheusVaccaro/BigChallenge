@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 import RxCocoa
 import RxSwift
 
@@ -59,20 +60,28 @@ public class TaskModel {
         let notes = attributes[.notes] as? String ?? ""
         let creationDate = attributes[.creationDate] as? Date ?? Date()
         let isCompleted = attributes[.isCompleted] as? Bool ?? false
+        let tags = attributes[.tags] as? [Tag] ?? []
+        let arriving = attributes[.arriving] as? Bool ?? false
         
         task.id = id
         task.title = title
         task.notes = notes
         task.creationDate = creationDate
         task.isCompleted = isCompleted
-        task.tags = []
+        task.tags = NSSet(array: tags)
         
         if let completionDate = attributes[.completionDate] as? Date {
             task.completionDate = completionDate
         }
-        
         if let dueDate = attributes[.dueDate] as? Date {
             task.dueDate = dueDate
+        }
+        if let region = attributes[.region] as? CLCircularRegion {
+            let regionData =
+                NSKeyedArchiver.archivedData(withRootObject: region)
+            task.regionData = regionData
+            task.arriving = arriving
+//            let region = NSKeyedUnarchiver.unarchiveObject(with: regionData!) as! CLCircularRegion
         }
         
         delegate?.taskModel(self, didCreate: task)
@@ -115,6 +124,9 @@ public class TaskModel {
         case isCompleted
         case notes
         case title
+        case tags
+        case region
+        case arriving
     }
 }
 
