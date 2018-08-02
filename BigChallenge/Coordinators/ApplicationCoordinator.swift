@@ -18,12 +18,14 @@ class ApplicationCoordinator: Coordinator {
     private let taskModel: TaskModel
     private let tagModel: TagModel
     private let remindersImporter: RemindersImporter
+    private let selectedTags: [Tag]
     
-    init(window: UIWindow) {
+    init(window: UIWindow, selectedTags: [Tag] = []) {
         self.window = window
         self.rootViewController = UINavigationController()
         self.rootViewController.isNavigationBarHidden = true
         self.childrenCoordinators = []
+        self.selectedTags = selectedTags
         
         self.persistence = Persistence(configuration: .inDevice)
         self.tagModel = TagModel(persistence: persistence)
@@ -45,7 +47,8 @@ class ApplicationCoordinator: Coordinator {
         let homeScreenCoordinator = HomeScreenCoordinator(presenter: rootViewController,
                                                         taskModel: taskModel,
                                                         tagModel: tagModel,
-                                                        persistence: persistence)
+                                                        persistence: persistence,
+                                                        selectedTags: selectedTags)
         addChild(coordinator: homeScreenCoordinator)
         homeScreenCoordinator.start()
     }
