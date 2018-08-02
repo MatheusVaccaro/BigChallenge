@@ -30,11 +30,13 @@ class LocationInputView: UIViewController {
             delegate?.locationInput(self, didFind: outputlocation!, arriving: arriving)
         }
     }
+    
     private(set) var arriving: Bool = true
     
     // MARK: - Internal
-    var tableViewData: [MKMapItem] = []
-    let locationManager = CLLocationManager()
+    fileprivate var tableViewData: [MKMapItem] = []
+    fileprivate let locationManager = CLLocationManager()
+    fileprivate var placeName: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,9 +78,9 @@ class LocationInputView: UIViewController {
     }
     
     fileprivate func setupMapView() {
+        guard let mapView = mapView as? RadiusMapView else { return }
+        mapView.outputDelegate = self
         mapView.layer.cornerRadius = 6.3
-        mapView.delegate = self
-        
         mapView.accessibilityElementsHidden = true
 
         accessibilityMapView.isAccessibilityElement = true
@@ -94,22 +96,6 @@ class LocationInputView: UIViewController {
         
         searchResultsTableView.isHidden = true
         searchResultsTableView.layer.cornerRadius = 6.3
-    }
-}
-
-extension LocationInputView: MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        if let overlay = overlay as? MKCircle {
-            let circleRenderer = MKCircleRenderer(circle: overlay)
-            
-            circleRenderer.fillColor = UIColor.blue.withAlphaComponent(0.2)
-            circleRenderer.strokeColor = UIColor.blue.withAlphaComponent(0.8)
-            circleRenderer.lineWidth = 3
-            
-            return circleRenderer
-        } else {
-            return MKOverlayRenderer()
-        }
     }
 }
 
@@ -161,38 +147,20 @@ extension LocationInputView: UITableViewDelegate {
         let place = tableViewData[indexPath.row]
         guard let location = place.placemark.location else { return }
         
+        mapView.removeOverlays(mapView.overlays)
+        mapView.removeAnnotations(mapView.annotations)
         locationManager.stopUpdatingLocation()
+        tableView.isHidden = true
+        searchBar.resignFirstResponder() // dismiss keyboard
         
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
                                             longitude: location.coordinate.longitude)
         
-        tableView.isHidden = true
-        searchBar.resignFirstResponder() // dismiss keyboard
+        let circle = MKCircle(center: center, radius: 100)
         
-        let circularRegion = CLCircularRegion(center: center,
-                                      radius: 100,
-                                      identifier: "searchResultLocation")
-        
-        let span = MKCoordinateSpanMake(0.01, 0.01)
-        let region = MKCoordinateRegion(center: location.coordinate,
-                                        span: span)
-        
-        let circle = MKCircle(center: circularRegion.center,
-                              radius: circularRegion.radius)
-        
-        let point = MKPointAnnotation()
-        point.coordinate = center
-        
-        //"\(Int(circularRegion.radius).description) meters from \(place.placemark.name ?? "desired location")"
-        let localizedString = Strings.LocationInputView.accessibilityValueMap
-        accessibilityMapView.accessibilityValue = String.localizedStringWithFormat(localizedString,
-                                                                                   Int(circularRegion.radius),
-                                                                                   (place.placemark.name ?? "desired location"))
-        mapView.addAnnotation(point)
         mapView.showsUserLocation = false
+        placeName = (place.placemark.name ?? "desired location")
         mapView.add(circle)
-        mapView.setRegion(region, animated: true)
-        outputlocation = circularRegion
     }
 }
 
@@ -218,6 +186,18 @@ extension LocationInputView: CLLocationManagerDelegate {
                          didFailWithError error: Error) {
         print("error: \(error)")
     }
+}
+
+extension LocationInputView: RadiusMapViewDelegate {
+    func radiusMapView(_ radiusMapView: RadiusMapView, didFind region: CLCircularRegion) {
+        let localizedString = Strings.LocationInputView.accessibilityValueMap
+        accessibilityMapView.accessibilityValue = String.localizedStringWithFormat(localizedString,
+                                                                                   Int(region.radius),
+                                                                                   placeName) //TODO
+        outputlocation = region
+    }
+    
+    
 }
 
 extension LocationInputView: StoryboardInstantiable {
