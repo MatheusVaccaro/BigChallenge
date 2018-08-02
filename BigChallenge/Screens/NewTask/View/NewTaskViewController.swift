@@ -114,10 +114,12 @@ class NewTaskViewController: UIViewController, TaskFramePresentable {
     
     private func configureTaskTitleTextView() {
         taskTitleTextView.font = UIFont.font(sized: 38.0, weight: .bold, with: .title1, fontName: .barlow)
-        taskTitleTextView.textContainer.lineBreakMode = .byTruncatingTail
         taskTitleTextView.placeholderColor = UIColor.lightGray.withAlphaComponent(0.5)
         taskTitleTextView.becomeFirstResponder()
         taskTitleTextView.placeholder = Strings.Tag.CreationScreen.tagTitlePlaceholder
+        taskTitleTextView.textContainerInset =
+            UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        taskTitleTextView.textContainer.lineFragmentPadding = 0
     }
     
     private func configureTaskNotesTextView() {
