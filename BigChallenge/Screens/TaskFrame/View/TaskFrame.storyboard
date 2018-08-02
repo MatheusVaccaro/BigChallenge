@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Task Frame View Controller-->
+        <scene sceneID="Gax-Gg-nae">
+            <objects>
+                <viewController storyboardIdentifier="TaskFrameViewController" id="sz6-ta-buS" customClass="TaskFrameViewController" customModule="BigChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LqC-63-FwU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJM-bF-hml">
+                                <rect key="frame" x="317" y="20" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="9kx-DG-lfn"/>
+                                    <constraint firstAttribute="width" secondItem="IJM-bF-hml" secondAttribute="height" multiplier="1:1" id="Rn1-dV-ovM"/>
+                                </constraints>
+                                <state key="normal" image="closeButton"/>
+                                <connections>
+                                    <action selector="didTapCancelButton:" destination="sz6-ta-buS" eventType="touchUpInside" id="mvw-bz-cZm"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vqf-9Q-5TW">
+                                <rect key="frame" x="0.0" y="618" width="375" height="49"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ih-d8-tH9">
+                                <rect key="frame" x="0.0" y="70" width="375" height="548"/>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nP4-Nl-e1W">
+                                <rect key="frame" x="216" y="564" width="114" height="103"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="103" id="44C-fN-gYh"/>
+                                    <constraint firstAttribute="width" secondItem="nP4-Nl-e1W" secondAttribute="height" multiplier="114:103" id="fJq-fB-0xo"/>
+                                </constraints>
+                                <state key="normal" image="doneButton"/>
+                                <connections>
+                                    <action selector="didTapSaveButton:" destination="sz6-ta-buS" eventType="touchUpInside" id="ZTw-OE-iqE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YpV-Ep-zcu">
+                                <rect key="frame" x="45" y="572" width="85" height="85"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="YpV-Ep-zcu" secondAttribute="height" multiplier="1:1" id="7t6-Jl-OPf"/>
+                                    <constraint firstAttribute="height" constant="85" id="Fsc-qd-pvh"/>
+                                </constraints>
+                                <state key="normal" image="settingsButton"/>
+                                <connections>
+                                    <action selector="didTapMoreOptionsButton:" destination="sz6-ta-buS" eventType="touchUpInside" id="ZN2-HC-aNr"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Vqf-9Q-5TW" firstAttribute="top" secondItem="8ih-d8-tH9" secondAttribute="bottom" id="JRo-aC-tOX"/>
+                            <constraint firstItem="8ih-d8-tH9" firstAttribute="top" secondItem="IJM-bF-hml" secondAttribute="bottom" id="OXY-Iv-0Qp"/>
+                            <constraint firstItem="Vqf-9Q-5TW" firstAttribute="bottom" secondItem="LqC-63-FwU" secondAttribute="bottom" id="RTH-1O-eoA"/>
+                            <constraint firstItem="IJM-bF-hml" firstAttribute="top" secondItem="l3r-Z7-lkW" secondAttribute="top" id="RaG-T7-hGV"/>
+                            <constraint firstItem="8ih-d8-tH9" firstAttribute="leading" secondItem="l3r-Z7-lkW" secondAttribute="leading" id="VHE-Dm-n46"/>
+                            <constraint firstItem="8ih-d8-tH9" firstAttribute="trailing" secondItem="l3r-Z7-lkW" secondAttribute="trailing" id="YhU-Yb-bQW"/>
+                            <constraint firstItem="YpV-Ep-zcu" firstAttribute="leading" secondItem="l3r-Z7-lkW" secondAttribute="leading" constant="45" id="cTG-sF-iPQ"/>
+                            <constraint firstItem="l3r-Z7-lkW" firstAttribute="trailing" secondItem="Vqf-9Q-5TW" secondAttribute="trailing" id="dik-zO-SuM"/>
+                            <constraint firstItem="l3r-Z7-lkW" firstAttribute="trailing" secondItem="nP4-Nl-e1W" secondAttribute="trailing" constant="45" id="e2S-xJ-d1R"/>
+                            <constraint firstItem="Vqf-9Q-5TW" firstAttribute="leading" secondItem="l3r-Z7-lkW" secondAttribute="leading" id="fhM-VF-mKV"/>
+                            <constraint firstItem="l3r-Z7-lkW" firstAttribute="bottom" secondItem="YpV-Ep-zcu" secondAttribute="bottom" constant="10" id="jlO-qY-Eyc"/>
+                            <constraint firstItem="nP4-Nl-e1W" firstAttribute="bottom" secondItem="l3r-Z7-lkW" secondAttribute="bottom" id="kNx-9K-8rB"/>
+                            <constraint firstItem="l3r-Z7-lkW" firstAttribute="trailing" secondItem="IJM-bF-hml" secondAttribute="trailing" constant="8" id="o3t-I4-Eq5"/>
+                            <constraint firstItem="Vqf-9Q-5TW" firstAttribute="top" secondItem="nP4-Nl-e1W" secondAttribute="bottom" constant="-49" id="oyN-ti-vQn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="l3r-Z7-lkW"/>
+                    </view>
+                    <connections>
+                        <outlet property="containerView" destination="8ih-d8-tH9" id="o7d-bG-ifq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IHI-Bh-7Y5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1141.5999999999999" y="223.53823088455775"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="closeButton" width="17" height="16"/>
+        <image name="doneButton" width="114" height="103"/>
+        <image name="settingsButton" width="85" height="85"/>
+    </resources>
+</document>

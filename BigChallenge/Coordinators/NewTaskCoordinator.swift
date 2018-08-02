@@ -16,6 +16,7 @@ class NewTaskCoordinator: Coordinator {
     
     fileprivate var taskFrameViewController: TaskFrameViewController?
     fileprivate var newTaskViewController: NewTaskViewController?
+    fileprivate var moreOptionsViewController: MoreOptionsViewController?
     fileprivate let taskModel: TaskModel
     fileprivate let tagModel: TagModel
     fileprivate let selectedTags: [Tag]
@@ -42,6 +43,7 @@ class NewTaskCoordinator: Coordinator {
     }
     
     func start() {
+        // New Task
         let newTaskViewController = NewTaskViewController.instantiate()
         self.newTaskViewController = newTaskViewController
 
@@ -51,15 +53,36 @@ class NewTaskCoordinator: Coordinator {
         newTaskViewModel.delegate = self
         newTaskViewController.viewModel = newTaskViewModel
 
+        // Tag Collection
         let tagCollectionViewModel = TagCollectionViewModel(model: tagModel,
                                                             filtering: false,
                                                             selectedTags: selectedTags)
         newTaskViewController.tagCollectionViewModel = tagCollectionViewModel
+        
+        // More Options
+        let moreOptionsViewController = MoreOptionsViewController.instantiate()
+        
+        let moreOptionsViewModel = MoreOptionsViewModel()
+        moreOptionsViewController.viewModel = moreOptionsViewModel
+        self.moreOptionsViewController = moreOptionsViewController
+        
+        let locationInputViewController = LocationInputView.instantiate()
+        
+        let testVC = UIViewController()
+        testVC.view.backgroundColor = .orange
+        
+        let testVC2 = UIViewController()
+        testVC2.view.backgroundColor = .blue
+        
+        moreOptionsViewController.locationCellContent = locationInputViewController
+        moreOptionsViewController.timeCellContent = testVC2
     
+        // Task Frame
         let taskFrameViewController = TaskFrameViewController.instantiate()
         self.taskFrameViewController = taskFrameViewController
-        taskFrameViewController.configurePageViewController(with: [newTaskViewController])
+        taskFrameViewController.configurePageViewController(with: [newTaskViewController, moreOptionsViewController])
         
+        // Modal Presenter
         let modalPresenter = UINavigationController(rootViewController: taskFrameViewController)
         modalPresenter.isNavigationBarHidden = true
         self.modalPresenter = modalPresenter

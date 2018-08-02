@@ -23,6 +23,7 @@ class TaskFrameViewController: UIViewController {
     private var pageViewController: UIPageViewController?
     private var pages: [UIViewController] = []
     private var currentPageIndex: Int?
+    private var pendingPageIndex: Int?
     
     // MARK: - IBOutlets
     
@@ -38,7 +39,6 @@ class TaskFrameViewController: UIViewController {
     
     // MARK: - IBActions
     
-    //change delegate to viewModel
     @IBAction func didTapCancelButton(_ sender: UIButton) {
         guard let currentPageIndex = currentPageIndex else { return }
         guard let currentPage = pages[currentPageIndex] as? FrameContent else { return }
@@ -111,6 +111,18 @@ class TaskFrameViewController: UIViewController {
 
 extension TaskFrameViewController: UIPageViewControllerDelegate {
     
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        if let viewController = pendingViewControllers.first,
+            let pageIndex = pages.firstIndex(of: viewController) {
+            pendingPageIndex = pageIndex
+        }
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        if completed {
+            currentPageIndex = pendingPageIndex
+        }
+    }
 }
 
 // MARK: - UIPageViewControllerDataSource
@@ -121,7 +133,6 @@ extension TaskFrameViewController: UIPageViewControllerDataSource {
                             viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let pageIndex = pages.index(of: viewController) else { return nil }
         let previousIndex = pageIndex - 1
-        currentPageIndex = previousIndex
         guard previousIndex >= 0 else { return nil }
         guard pages.count > previousIndex else { return nil }
         return pages[previousIndex]
@@ -131,7 +142,6 @@ extension TaskFrameViewController: UIPageViewControllerDataSource {
                             viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let pageIndex = pages.index(of: viewController) else { return nil }
         let nextIndex = pageIndex + 1
-        currentPageIndex = nextIndex
         guard nextIndex < pages.count else { return nil }
         guard pages.count > nextIndex else { return nil }
         return pages[nextIndex]
@@ -167,7 +177,7 @@ extension TaskFrameViewController: UIScrollViewDelegate {
 extension TaskFrameViewController: StoryboardInstantiable {
     
     static var storyboardIdentifier: String {
-        return "NewTask"
+        return "TaskFrame"
     }
     
     static var viewControllerID: String {
