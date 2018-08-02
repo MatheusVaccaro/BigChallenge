@@ -15,16 +15,41 @@ protocol NewTaskViewModelDelegate: class {
     func didTapMoreOptionsButton()
 }
 
+protocol NewTaskViewModelOutputDelegate: class {
+    func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateTitle title: String?)
+    func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateTags tags: [Tag]?)
+    func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateDueDate dueDate: Date?)
+    func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateNotes notes: String?)
+}
+
 class NewTaskViewModel: NewTaskViewModelProtocol {
     
     private let taskModel: TaskModel
     private var isEditing: Bool
     private var task: Task?
-    var taskTitleText: String?
-    var selectedTags: [Tag]
-    var taskNotesText: String?
-    var dueDate: Date?
+    var taskTitleText: String? {
+        didSet {
+            outputDelegate?.newTask(self, didUpdateTitle: taskTitleText)
+        }
+    }
+    var selectedTags: [Tag] {
+        didSet {
+            outputDelegate?.newTask(self, didUpdateTags: selectedTags)
+        }
+    }
+    var taskNotesText: String? {
+        didSet {
+            outputDelegate?.newTask(self, didUpdateNotes: taskNotesText)
+        }
+    }
     
+    var dueDate: Date? {
+        didSet {
+            outputDelegate?.newTask(self, didUpdateDueDate: dueDate)
+        }
+    }
+    
+    weak var outputDelegate: NewTaskViewModelOutputDelegate?
     weak var delegate: NewTaskViewModelDelegate?
     
     init(task: Task?, isEditing: Bool, taskModel: TaskModel) {
@@ -56,11 +81,11 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
     
     func didTapDoneButton() {
         delegate?.didTapDoneButton()
-        if isEditing {
-            // TODO
-        } else {
-            createTask()
-        }
+//        if isEditing {
+//            // TODO
+//        } else {
+//            createTask()
+//        }
     }
     
     func didTapDeleteTaskButton() {
@@ -77,20 +102,20 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
         taskModel.delete(task)
     }
     
-    private func createTask() {
-        guard let taskTitle = taskTitleText else { return }
-        guard let taskNotes = taskNotesText else { return }
-        let attributes: [TaskModel.Attributes : Any] = [
-            .title : taskTitle,
-            .notes : taskNotes
-        ]
-        let task = taskModel.createTask(with: attributes)
-        self.task = task
-        selectedTags.forEach { tag in
-            self.task?.addToTags(tag)
-        }
-        taskModel.save(task)
-    }
+//    private func createTask() {
+//        guard let taskTitle = taskTitleText else { return }
+//        guard let taskNotes = taskNotesText else { return }
+//        let attributes: [TaskModel.Attributes : Any] = [
+//            .title : taskTitle,
+//            .notes : taskNotes
+//        ]
+//        let task = taskModel.createTask(with: attributes)
+//        self.task = task
+//        selectedTags.forEach { tag in
+//            self.task?.addToTags(tag)
+//        }
+//        taskModel.save(task)
+//    }
     
     func taskTitle() -> String? {
         return task?.title

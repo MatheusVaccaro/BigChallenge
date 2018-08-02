@@ -14,7 +14,7 @@ class NewTaskCoordinator: Coordinator {
     fileprivate let presenter: UINavigationController
     var childrenCoordinators: [Coordinator]
     
-    fileprivate var taskFrameViewController: TaskFrameViewController?
+    fileprivate var taskFrameViewController: CreationFrameViewController?
     fileprivate var newTaskViewController: NewTaskViewController?
     fileprivate var moreOptionsViewController: MoreOptionsViewController?
     fileprivate let taskModel: TaskModel
@@ -62,23 +62,18 @@ class NewTaskCoordinator: Coordinator {
         // More Options
         let moreOptionsViewController = MoreOptionsViewController.instantiate()
         
-        let moreOptionsViewModel = MoreOptionsViewModel()
+        let locationInputViewController = LocationInputView.instantiate()
+
+        let moreOptionsViewModel = MoreOptionsViewModel(locationInputViewController.viewModel)
         moreOptionsViewController.viewModel = moreOptionsViewModel
         self.moreOptionsViewController = moreOptionsViewController
-        
-        let locationInputViewController = LocationInputView.instantiate()
-        
-        let testVC = UIViewController()
-        testVC.view.backgroundColor = .orange
-        
-        let testVC2 = UIViewController()
-        testVC2.view.backgroundColor = .blue
-        
         moreOptionsViewController.locationCellContent = locationInputViewController
-        moreOptionsViewController.timeCellContent = testVC2
     
         // Task Frame
-        let taskFrameViewController = TaskFrameViewController.instantiate()
+        let taskFrameViewController = CreationFrameViewController.instantiate()
+        taskFrameViewController.viewModel = CreationFrameViewModel(mainInfoViewModel: newTaskViewModel,
+                                                                   detailViewModel: moreOptionsViewModel,
+                                                                   taskModel: taskModel)
         self.taskFrameViewController = taskFrameViewController
         taskFrameViewController.configurePageViewController(with: [newTaskViewController, moreOptionsViewController])
         
@@ -111,6 +106,7 @@ extension NewTaskCoordinator: NewTaskViewModelDelegate {
     }
     
     func didTapDoneButton() {
+        taskFrameViewController?.viewModel.createTaskIfPossible()
         dismissViewController()
     }
     
