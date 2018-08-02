@@ -46,21 +46,40 @@ class HomeScreenViewController: UIViewController {
         
         observeSelectedTags()
         observeClickedAddTag()
+        setupNSUserActivity()
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateContentSize),
                                                name: NSNotification.Name.UIContentSizeCategoryDidChange,
                                                object: nil)
-        
-        tagCollectionViewController.viewModel.selectedTagsObservable.subscribe { event in
-            self.taskListViewController.viewModel.filterTasks(with: event.element!)
-            print("selected tags are: \( event.element!.map { $0.title } )")
-            }.disposed(by: disposeBag)
-
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    func setupNSUserActivity() {
+        let activity = NSUserActivity(activityType: "com.bigBeanie.finalChallenge.selectedTags")
+        
+        activity.isEligibleForPublicIndexing = true
+        
+        activity.title = selectedTags.map { $0.title! }.description
+        
+        //restore
+        activity.userInfo = ["selectedTags": selectedTags]
+        
+        //search
+        activity.isEligibleForSearch = true
+        activity.keywords = Set<String>(selectedTags.map { $0.title! })
+        
+        activity.isEligibleForHandoff = true
+        
+        //siri shortcut
+        if #available(iOS 12.0, *) {
+            activity.isEligibleForPrediction = true
+        }
+        
+        userActivity = activity
     }
     
     @objc fileprivate func updateContentSize() {
@@ -74,7 +93,8 @@ class HomeScreenViewController: UIViewController {
                 taskListViewModel.shouldAddTask.subscribe { event in
                     if let shouldAddTask = event.element {
                         if shouldAddTask {
-                            self.delegate?.willAddTask(selectedTags: self.tagCollectionViewController.viewModel.selectedTags )
+                            self.delegate?
+                                .willAddTask(selectedTags: self.tagCollectionViewController.viewModel.selectedTags )
                         }
                     }
                 }.disposed(by: disposeBag)
@@ -83,7 +103,8 @@ class HomeScreenViewController: UIViewController {
             }
         } else if segue.identifier == "tagCollectionSegue" {
             if let tagCollectionViewController = segue.destination as? TagCollectionViewController {
-                let tagCollectionViewModel = viewModel.tagCollectionViewModel(with: selectedTags) //TODO add option to open with selected tags
+                let tagCollectionViewModel =
+                    viewModel.tagCollectionViewModel(with: selectedTags) //TODO add option to open with selected tags
                 tagCollectionViewController.viewModel = tagCollectionViewModel
                 self.tagCollectionViewController = tagCollectionViewController
             }
@@ -99,9 +120,15 @@ class HomeScreenViewController: UIViewController {
     fileprivate func observeSelectedTags() {
         tagCollectionViewController.viewModel.selectedTagsObservable
             .subscribe { event in
+                if let activity = self.userActivity { self.updateUserActivityState(activity) }
                 self.taskListViewController.viewModel.filterTasks(with: event.element!)
                 print("selected tags are: \(event.element!.map { $0.title })")
             }.disposed(by: disposeBag)
+    }
+    
+    override func updateUserActivityState(_ activity: NSUserActivity) {
+        activity.userInfo!["selectedTags"] = selectedTags
+        activity.becomeCurrent()
     }
 }
 
