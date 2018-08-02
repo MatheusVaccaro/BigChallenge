@@ -35,7 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = window
         
         // MARK: Application Coordinator
-        startApplicationCoordinator(with: window)
+        let tags = userActivity.userInfo!["selectedTags"] as? [Tag]
+        startApplicationCoordinator(with: window, selectedTags: tags ?? [])
         
         return true
     }
