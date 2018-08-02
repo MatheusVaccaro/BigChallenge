@@ -7,19 +7,28 @@
 //
 
 import Foundation
+import CoreLocation
+
+protocol MoreOptionsViewModelDelegate: class {
+    func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool)
+}
 
 class MoreOptionsViewModel: MoreOptionsViewModelProtocol {
     
+    weak var delegate: MoreOptionsViewModelDelegate?
+    let locationInputViewModel: LocationInputViewModel
     private var numberOfRowsInSection0: Int
     private var numberOfRowsInSection1: Int
     private(set) var isShowingLocationCell: Bool
     private(set) var isShowingTimeCell: Bool
     
-    init() {
+    init(_ locationInputViewModel: LocationInputViewModel) {
         self.numberOfRowsInSection0 = 0
         self.numberOfRowsInSection1 = 0
         self.isShowingLocationCell = false
         self.isShowingTimeCell = false
+        self.locationInputViewModel = locationInputViewModel
+        locationInputViewModel.delegate = self
     }
     
     func numberOfRows(in section: Int) -> Int {
@@ -71,5 +80,10 @@ class MoreOptionsViewModel: MoreOptionsViewModelProtocol {
     func timeViewModel() -> MoreOptionsTableViewCellViewModelProtocol {
         return TimeTableViewCellViewModel()
     }
-    
+}
+
+extension MoreOptionsViewModel: LocationInputDelegate {
+    func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool) {
+        delegate?.locationInput(locationInputView, didFind: location, arriving: arriving)
+    }
 }

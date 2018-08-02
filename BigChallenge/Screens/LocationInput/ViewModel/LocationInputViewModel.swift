@@ -7,8 +7,15 @@
 //
 
 import Foundation
+import CoreLocation
+
+protocol LocationInputDelegate: class {
+    func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool)
+}
 
 class LocationInputViewModel {
+    
+    public weak var delegate: LocationInputDelegate?
     
     var placeName = "desired location"
     let searchBarHint = Strings.LocationInputView.accessibilityHintSearchBar
