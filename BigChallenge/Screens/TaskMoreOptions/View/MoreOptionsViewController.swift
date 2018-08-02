@@ -13,6 +13,8 @@ class MoreOptionsViewController: UIViewController, TaskFramePresentable {
     // MARK: - Properties
     
     var viewModel: MoreOptionsViewModelProtocol?
+    var locationCellContent: UIViewController?
+    var timeCellContent: UIViewController?
     
     private var locationCellIsConfigured: Bool = false
     private var timeCellIsConfigured: Bool = false
@@ -71,21 +73,70 @@ extension MoreOptionsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
+        let row = indexPath.row
         let cellViewModel: MoreOptionsTableViewCellViewModelProtocol
-        if indexPath.row == 0 && !locationCellIsConfigured {
+        if row == 0 && !locationCellIsConfigured {
             cellViewModel = viewModel.locationViewModel()
+            cell.configure(with: cellViewModel)
             locationCellIsConfigured = true
-        } else if indexPath.row == 1 && !timeCellIsConfigured {
+        } else if row == 1 && !timeCellIsConfigured {
             cellViewModel = viewModel.timeViewModel()
+            cell.configure(with: cellViewModel)
             timeCellIsConfigured = true
+        } else if row == 1 && viewModel.isShowingLocationCell {
+            //configure location vc
+            guard let locationCellContent = locationCellContent else { return UITableViewCell() }
+            locationCellContent.view.translatesAutoresizingMaskIntoConstraints = false
+            cell.addSubview(locationCellContent.view)
+            
+            NSLayoutConstraint.activate([
+                locationCellContent.view
+                    .leadingAnchor.constraint(equalTo: cell.leadingAnchor),
+                locationCellContent.view
+                    .trailingAnchor.constraint(equalTo: cell.trailingAnchor),
+                locationCellContent.view
+                    .topAnchor.constraint(equalTo: cell.topAnchor),
+                locationCellContent.view
+                    .bottomAnchor.constraint(equalTo: cell.bottomAnchor)
+                ])
+            
+        } else if (row == 2 && viewModel.isShowingTimeCell) || (row == 3 && viewModel.isShowingTimeCell) {
+            //configure time vc
+            guard let timeCellContent = timeCellContent else { return UITableViewCell() }
+            timeCellContent.view.translatesAutoresizingMaskIntoConstraints = false
+            cell.addSubview(timeCellContent.view)
+            
+            NSLayoutConstraint.activate([
+                timeCellContent.view
+                    .leadingAnchor.constraint(equalTo: cell.leadingAnchor),
+                timeCellContent.view
+                    .trailingAnchor.constraint(equalTo: cell.trailingAnchor),
+                timeCellContent.view
+                    .topAnchor.constraint(equalTo: cell.topAnchor),
+                timeCellContent.view
+                    .bottomAnchor.constraint(equalTo: cell.bottomAnchor)
+                ])
+            
         } else {
-            let cell = UITableViewCell()
-            cell.backgroundColor = .orange
-            return cell
+            return UITableViewCell()
         }
         
-        cell.configure(with: cellViewModel)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let viewModel = viewModel else { return 82 }
+        
+        let row = indexPath.row
+        
+        if row == 1 && viewModel.isShowingLocationCell {
+            return locationCellContent?.view.frame.height ?? 82
+            
+        } else if (row == 2 && viewModel.isShowingTimeCell) || (row == 3 && viewModel.isShowingTimeCell) {
+            return timeCellContent?.view.frame.height ?? 82
+        } else {
+            return 82
+        }
     }
     
 }
