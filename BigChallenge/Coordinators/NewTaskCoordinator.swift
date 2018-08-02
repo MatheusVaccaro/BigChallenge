@@ -65,6 +65,13 @@ class NewTaskCoordinator: Coordinator {
         let moreOptionsViewModel = MoreOptionsViewModel()
         moreOptionsViewController.viewModel = moreOptionsViewModel
         self.moreOptionsViewController = moreOptionsViewController
+        
+        let testVC = UIViewController()
+        testVC.view.backgroundColor = .orange
+        
+        let locationInputViewController = LocationInputView.instantiate()
+        moreOptionsViewController.locationCellContent = locationInputViewController
+        moreOptionsViewController.timeCellContent = testVC
     
         // Task Frame
         let taskFrameViewController = TaskFrameViewController.instantiate()
