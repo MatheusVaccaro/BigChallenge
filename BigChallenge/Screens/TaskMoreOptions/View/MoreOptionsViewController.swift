@@ -16,9 +16,6 @@ class MoreOptionsViewController: UIViewController, TaskFramePresentable {
     var locationCellContent: UIViewController?
     var timeCellContent: UIViewController?
     
-    private var locationCellIsConfigured: Bool = false
-    private var timeCellIsConfigured: Bool = false
-    
     // MARK: - IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
@@ -51,7 +48,30 @@ class MoreOptionsViewController: UIViewController, TaskFramePresentable {
         tableView.dataSource = self
         tableView.bounces = false
     }
-
+    
+    @objc fileprivate func toggleLocationCell() {
+        guard let viewModel = viewModel else { return }
+        if viewModel.isShowingLocationCell {
+            viewModel.collapseLocationCell()
+            tableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .top)
+        } else {
+            viewModel.showLocationCell()
+            tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+        }
+    }
+    
+    @objc fileprivate func toggleTimeCell() {
+        guard let viewModel = viewModel else { return }
+        if viewModel.isShowingTimeCell {
+            viewModel.collapseTimeCell()
+            tableView.deleteRows(at: [IndexPath(row: 0, section: 1)], with: .top)
+        } else {
+            viewModel.showTimeCell()
+            tableView.insertRows(at: [IndexPath(row: 0, section: 1)], with: .automatic)
+            
+        }
+    }
+    
 }
 
 // MARK: - UITableViewDataSourceDataSource
@@ -67,25 +87,11 @@ extension MoreOptionsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let viewModel = viewModel,
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MoreOptionsTableViewCell",
-                                                       for: indexPath) as? MoreOptionsTableViewCell else {
-            return UITableViewCell()
-        }
+        let cell = UITableViewCell()
+        let section = indexPath.section
         
-        let row = indexPath.row
-        let cellViewModel: MoreOptionsTableViewCellViewModelProtocol
-        if row == 0 && !locationCellIsConfigured {
-            cellViewModel = viewModel.locationViewModel()
-            cell.configure(with: cellViewModel)
-            locationCellIsConfigured = true
-        } else if row == 1 && !timeCellIsConfigured {
-            cellViewModel = viewModel.timeViewModel()
-            cell.configure(with: cellViewModel)
-            timeCellIsConfigured = true
-        } else if row == 1 && viewModel.isShowingLocationCell {
-            //configure location vc
-            guard let locationCellContent = locationCellContent else { return UITableViewCell() }
+        if let locationCellContent = locationCellContent, section == 0 {
+            locationCellContent.view.frame.size.height = 290
             locationCellContent.view.translatesAutoresizingMaskIntoConstraints = false
             cell.addSubview(locationCellContent.view)
             
@@ -99,12 +105,11 @@ extension MoreOptionsViewController: UITableViewDataSource {
                 locationCellContent.view
                     .bottomAnchor.constraint(equalTo: cell.bottomAnchor)
                 ])
-            
-        } else if (row == 2 && viewModel.isShowingTimeCell) || (row == 3 && viewModel.isShowingTimeCell) {
-            //configure time vc
-            guard let timeCellContent = timeCellContent else { return UITableViewCell() }
-            timeCellContent.view.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        if let timeCellContent = timeCellContent, section == 1 {
             cell.addSubview(timeCellContent.view)
+            timeCellContent.view.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([
                 timeCellContent.view
@@ -116,62 +121,78 @@ extension MoreOptionsViewController: UITableViewDataSource {
                 timeCellContent.view
                     .bottomAnchor.constraint(equalTo: cell.bottomAnchor)
                 ])
-            
-        } else {
-            return UITableViewCell()
         }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let viewModel = viewModel else { return 82 }
-        
-        let row = indexPath.row
-        
-        if row == 1 && viewModel.isShowingLocationCell {
-            return locationCellContent?.view.frame.height ?? 82
-            
-        } else if (row == 2 && viewModel.isShowingTimeCell) || (row == 3 && viewModel.isShowingTimeCell) {
-            return timeCellContent?.view.frame.height ?? 82
-        } else {
-            return 82
+        let section = indexPath.section
+        let defaultValue: CGFloat = 50
+        if section == 0 {
+            return locationCellContent?.view.frame.height ?? defaultValue
         }
+        if section == 1 {
+            return timeCellContent?.view.frame.height ?? defaultValue
+        }
+        return defaultValue
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let viewModel = viewModel else { return nil }
+        let headerViewController = HeaderViewController.instantiate()
+        if section == 0 {
+            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggleLocationCell))
+            headerViewController.view.addGestureRecognizer(gestureRecognizer)
+//            headerViewController.viewModel = viewModel.locationViewModel()
+            headerViewController.configure(with: viewModel.locationViewModel())
+            return headerViewController.view
+        }
+        if section == 1 {
+            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggleTimeCell))
+            headerViewController.view.addGestureRecognizer(gestureRecognizer)
+//            headerViewController.viewModel = viewModel.timeViewModel()
+            headerViewController.configure(with: viewModel.timeViewModel())
+            return headerViewController.view
+        }
+        return nil
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 82
+    }
 }
 
 // MARK: - UITableViewDelegate
 
 extension MoreOptionsViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let viewModel = viewModel else { return }
-
-        let row = indexPath.row
-        let cell = tableView.cellForRow(at: indexPath)
-        let cellIndex = IndexPath(row: indexPath.row + 1, section: indexPath.section)
-        
-        if row == 0 && cell is MoreOptionsTableViewCell {
-            if viewModel.isShowingLocationCell {
-                viewModel.collapseLocationCell()
-                tableView.deleteRows(at: [cellIndex], with: .top)
-            } else {
-                viewModel.showLocationCell()
-                tableView.insertRows(at: [cellIndex], with: .automatic)
-            }
-        }
-
-        if (row == 1 && cell is MoreOptionsTableViewCell) || (row == 2 && cell is MoreOptionsTableViewCell) {
-            if viewModel.isShowingTimeCell {
-                viewModel.collapseTimeCell()
-                tableView.deleteRows(at: [cellIndex], with: .top)
-            } else {
-                viewModel.showTimeCell()
-                tableView.insertRows(at: [cellIndex], with: .automatic)
-            }
-        }
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        guard let viewModel = viewModel else { return }
+//
+//        let row = indexPath.row
+//        let cell = tableView.cellForRow(at: indexPath)
+//        let cellIndex = IndexPath(row: indexPath.row + 1, section: indexPath.section)
+//
+//        if row == 0 && cell is MoreOptionsTableViewCell {
+//            if viewModel.isShowingLocationCell {
+//                viewModel.collapseLocationCell()
+//                tableView.deleteRows(at: [cellIndex], with: .top)
+//            } else {
+//                viewModel.showLocationCell()
+//                tableView.insertRows(at: [cellIndex], with: .automatic)
+//            }
+//        }
+//
+//        if (row == 1 && cell is MoreOptionsTableViewCell) || (row == 2 && cell is MoreOptionsTableViewCell) {
+//            if viewModel.isShowingTimeCell {
+//                viewModel.collapseTimeCell()
+//                tableView.deleteRows(at: [cellIndex], with: .top)
+//            } else {
+//                viewModel.showTimeCell()
+//                tableView.insertRows(at: [cellIndex], with: .automatic)
+//            }
+//        }
+//    }
     
 }
 

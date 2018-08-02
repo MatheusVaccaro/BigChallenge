@@ -10,49 +10,57 @@ import Foundation
 
 class MoreOptionsViewModel: MoreOptionsViewModelProtocol {
     
-    private var numberOfRows: Int
+    private var numberOfRowsInSection0: Int
+    private var numberOfRowsInSection1: Int
     private(set) var isShowingLocationCell: Bool
     private(set) var isShowingTimeCell: Bool
     
     init() {
-        self.numberOfRows = 2
+        self.numberOfRowsInSection0 = 0
+        self.numberOfRowsInSection1 = 0
         self.isShowingLocationCell = false
         self.isShowingTimeCell = false
     }
     
     func numberOfRows(in section: Int) -> Int {
-        return numberOfRows
+        if section == 0 {
+            return numberOfRowsInSection0
+        } else if section == 1 {
+            return numberOfRowsInSection1
+        } else {
+            return 0
+        }
     }
     
     func numberOfSections() -> Int {
-        return 1
+        return 2
     }
     
     func showLocationCell() {
         if !isShowingLocationCell {
             isShowingLocationCell.toggle()
-            numberOfRows += 1
+            numberOfRowsInSection0 += 1
         }
     }
     
     func collapseLocationCell() {
         if isShowingLocationCell {
             isShowingLocationCell.toggle()
-            numberOfRows -= 1
+            numberOfRowsInSection0 -= 1
         }
     }
     
     func showTimeCell() {
         if !isShowingTimeCell {
             isShowingTimeCell.toggle()
-            numberOfRows += 1
+            numberOfRowsInSection1 += 1
         }
     }
     
     func collapseTimeCell() {
         if isShowingTimeCell {
             isShowingTimeCell.toggle()
-            numberOfRows -= 1
+            numberOfRowsInSection1 -= 1
         }
     }
     

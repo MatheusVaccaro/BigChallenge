@@ -12,23 +12,11 @@
 		1627EBEDDA20D9C1EB6BC691 /* Pods_BigChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 558C6AF329AB768E11815BB8 /* Pods_BigChallengeTests.framework */; };
 		1676FC9020D99580003E2D79 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1676FC8F20D99580003E2D79 /* TaskModel.swift */; };
 		16E8DDC9211205E8004F66D6 /* Barlow-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC6211205C6004F66D6 /* Barlow-Black.ttf */; };
-		16E8DDCA211205E8004F66D6 /* Barlow-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDBB211205C3004F66D6 /* Barlow-BlackItalic.ttf */; };
 		16E8DDCB211205E8004F66D6 /* Barlow-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDB8211205C2004F66D6 /* Barlow-Bold.ttf */; };
-		16E8DDCC211205E8004F66D6 /* Barlow-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDBE211205C4004F66D6 /* Barlow-BoldItalic.ttf */; };
-		16E8DDCD211205E8004F66D6 /* Barlow-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDB7211205C2004F66D6 /* Barlow-ExtraBold.ttf */; };
 		16E8DDCE211205E8004F66D6 /* Barlow-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDBD211205C4004F66D6 /* Barlow-ExtraBoldItalic.ttf */; };
-		16E8DDCF211205E8004F66D6 /* Barlow-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC3211205C5004F66D6 /* Barlow-ExtraLight.ttf */; };
-		16E8DDD0211205E8004F66D6 /* Barlow-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDB9211205C3004F66D6 /* Barlow-ExtraLightItalic.ttf */; };
-		16E8DDD1211205E8004F66D6 /* Barlow-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC7211205C6004F66D6 /* Barlow-Italic.ttf */; };
-		16E8DDD2211205E8004F66D6 /* Barlow-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC4211205C5004F66D6 /* Barlow-Light.ttf */; };
-		16E8DDD3211205E8004F66D6 /* Barlow-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDBC211205C3004F66D6 /* Barlow-LightItalic.ttf */; };
 		16E8DDD4211205E8004F66D6 /* Barlow-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDBA211205C3004F66D6 /* Barlow-Medium.ttf */; };
 		16E8DDD5211205E8004F66D6 /* Barlow-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDBF211205C4004F66D6 /* Barlow-MediumItalic.ttf */; };
-		16E8DDD6211205E8004F66D6 /* Barlow-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC0211205C4004F66D6 /* Barlow-Regular.ttf */; };
-		16E8DDD7211205E8004F66D6 /* Barlow-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC2211205C5004F66D6 /* Barlow-SemiBold.ttf */; };
 		16E8DDD8211205E8004F66D6 /* Barlow-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC5211205C5004F66D6 /* Barlow-SemiBoldItalic.ttf */; };
-		16E8DDD9211205E8004F66D6 /* Barlow-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC1211205C4004F66D6 /* Barlow-Thin.ttf */; };
-		16E8DDDA211205E8004F66D6 /* Barlow-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDB6211205C1004F66D6 /* Barlow-ThinItalic.ttf */; };
 		16EC6CEA21065B2500797D9C /* TagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EC6CE921065B2500797D9C /* TagTests.swift */; };
 		16FDC139210BB237008FA931 /* NotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FDC138210BB237008FA931 /* NotificationTests.swift */; };
 		16FDC13C210F809A008FA931 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FDC13B210F809A008FA931 /* NotificationManager.swift */; };
@@ -92,6 +80,7 @@
 		C29742D021124F1600A1D213 /* MoreOptionsTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29742CF21124F1600A1D213 /* MoreOptionsTableViewCellViewModel.swift */; };
 		C29742D2211257A600A1D213 /* TimeTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29742D1211257A600A1D213 /* TimeTableViewCellViewModel.swift */; };
 		C29742D4211257B600A1D213 /* LocationTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29742D3211257B600A1D213 /* LocationTableViewCellViewModel.swift */; };
+		C29742D62112CBFF00A1D213 /* HeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29742D52112CBFF00A1D213 /* HeaderViewController.swift */; };
 		C2A1113B20B8791E00ABB161 /* MockPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113A20B8791E00ABB161 /* MockPersistence.swift */; };
 		C2A1113D20B88A2F00ABB161 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113C20B88A2F00ABB161 /* Storable.swift */; };
 		C2A1114020B8A70A00ABB161 /* TaskCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113F20B8A70A00ABB161 /* TaskCellViewModel.swift */; };
@@ -223,6 +212,7 @@
 		C29742CF21124F1600A1D213 /* MoreOptionsTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		C29742D1211257A600A1D213 /* TimeTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		C29742D3211257B600A1D213 /* LocationTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		C29742D52112CBFF00A1D213 /* HeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewController.swift; sourceTree = "<group>"; };
 		C2A1113A20B8791E00ABB161 /* MockPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPersistence.swift; sourceTree = "<group>"; };
 		C2A1113C20B88A2F00ABB161 /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		C2A1113F20B8A70A00ABB161 /* TaskCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellViewModel.swift; sourceTree = "<group>"; };
@@ -651,6 +641,7 @@
 				C29742C921123E2D00A1D213 /* MoreOptions.storyboard */,
 				C2DD9A3221114ADD00E9B89B /* MoreOptionsViewController.swift */,
 				C2DD9A3421114FBC00E9B89B /* MoreOptionsTableViewCell.swift */,
+				C29742D52112CBFF00A1D213 /* HeaderViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -854,23 +845,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16E8DDB22110F865004F66D6 /* Barlow-Thin.ttf in Resources */,
 				C29742CA21123E2D00A1D213 /* MoreOptions.storyboard in Resources */,
-				16E8DDA52110F865004F66D6 /* Barlow-BoldItalic.ttf in Resources */,
-				16E8DDA82110F865004F66D6 /* Barlow-ExtraLight.ttf in Resources */,
 				22D84C63210BF1E3004B8969 /* LocationInputView.storyboard in Resources */,
 				16E8DDC9211205E8004F66D6 /* Barlow-Black.ttf in Resources */,
 				221BA8B620F6A18500BE2AC1 /* TagCollection.storyboard in Resources */,
-				16E8DDAB2110F865004F66D6 /* Barlow-Light.ttf in Resources */,
-				16E8DDAA2110F865004F66D6 /* Barlow-Italic.ttf in Resources */,
-				16E8DDB32110F865004F66D6 /* Barlow-ThinItalic.ttf in Resources */,
 				C29742C521123D3400A1D213 /* TaskFrame.storyboard in Resources */,
-				16E8DDA32110F865004F66D6 /* Barlow-BlackItalic.ttf in Resources */,
-				16E8DDAF2110F865004F66D6 /* Barlow-Regular.ttf in Resources */,
-				16E8DDAC2110F865004F66D6 /* Barlow-LightItalic.ttf in Resources */,
-				16E8DDB02110F865004F66D6 /* Barlow-SemiBold.ttf in Resources */,
-				16E8DDA92110F865004F66D6 /* Barlow-ExtraLightItalic.ttf in Resources */,
-				16E8DDA62110F865004F66D6 /* Barlow-ExtraBold.ttf in Resources */,
 				2253179A20D147AD0065C9F9 /* Localizable.strings in Resources */,
 				C2A1114720B9F6EF00ABB161 /* NewTask.storyboard in Resources */,
 				C28DC92420B61CB9007F881A /* LaunchScreen.storyboard in Resources */,
@@ -1118,6 +1097,7 @@
 				C21EAD0720B74757005F0F85 /* TaskListViewController.swift in Sources */,
 				C29742D2211257A600A1D213 /* TimeTableViewCellViewModel.swift in Sources */,
 				221BA8B820F6A1DF00BE2AC1 /* TagCollectionViewController.swift in Sources */,
+				C29742D62112CBFF00A1D213 /* HeaderViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
