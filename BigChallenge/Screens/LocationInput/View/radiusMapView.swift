@@ -31,18 +31,18 @@ class RadiusMapView: MKMapView {
         isScrollEnabled = false
     }
     
-    weak var outputDelegate: RadiusMapViewDelegate?
-    
-    private(set) var circularRegion: CLCircularRegion? {
+    public var arriving: Bool = true {
         didSet {
-            guard circularRegion != nil else { return }
-            outputDelegate?.radiusMapView(self, didFind: circularRegion!)
+            changeCircle(adding: 0)
         }
     }
     
+    weak var outputDelegate: RadiusMapViewDelegate?
+    
+    private(set) var circularRegion: CLCircularRegion?
+    
     fileprivate var startLocation: CGPoint?
     fileprivate var totalDistance: CGFloat = 0
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
@@ -63,8 +63,14 @@ class RadiusMapView: MKMapView {
             self.totalDistance = distanceX
             self.startLocation = currentLocation
             
-            changeCircle(with: Double(totalDistance * 5)) // raise multiplier based on distance
+            changeCircle(adding: Double(totalDistance * 5)) // raise multiplier based on distance
         }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        guard let region = circularRegion else { return }
+        outputDelegate?.radiusMapView(self, didFind: region)
     }
     
     override func add(_ overlay: MKOverlay) {
@@ -89,7 +95,7 @@ class RadiusMapView: MKMapView {
         }
     }
     
-    fileprivate func changeCircle(with radius: Double) {
+    fileprivate func changeCircle(adding radius: Double) {
         guard let circleOverlay = overlays.first as? MKCircle else { return }
         let newRadius = circleOverlay.radius + radius
         
@@ -107,7 +113,10 @@ extension RadiusMapView: MKMapViewDelegate {
         if let overlay = overlay as? MKCircle {
             let circleRenderer = MKCircleRenderer(circle: overlay)
             
-            circleRenderer.fillColor = UIColor.blue.withAlphaComponent(0.2)
+            circleRenderer.fillColor =
+                arriving
+                ? UIColor.blue.withAlphaComponent(0.2)
+                : UIColor.clear
             circleRenderer.strokeColor = UIColor.blue.withAlphaComponent(0.8)
             circleRenderer.lineWidth = 3
             

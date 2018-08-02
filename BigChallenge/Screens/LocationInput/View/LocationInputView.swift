@@ -18,7 +18,7 @@ class LocationInputView: UIViewController {
     // MARK: - Storyboard
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var mapView: RadiusMapView!
     @IBOutlet weak var searchResultsTableView: UITableView!
     @IBOutlet weak var accessibilityMapView: UIView!
     
@@ -31,7 +31,13 @@ class LocationInputView: UIViewController {
         }
     }
     
-    private(set) var arriving: Bool = true
+    private(set) var arriving: Bool = true {
+        didSet {
+            guard let location = outputlocation else { return }
+            mapView.arriving = arriving
+            delegate?.locationInput(self, didFind: location, arriving: arriving)
+        }
+    }
     
     // MARK: - Internal
     fileprivate var tableViewData: [MKMapItem] = []
@@ -49,8 +55,7 @@ class LocationInputView: UIViewController {
     }
     
     @IBAction func segmentedControlSelected(_ sender: Any) {
-        guard let location = outputlocation else { return }
-        delegate?.locationInput(self, didFind: location, arriving: arriving)
+        arriving = segmentedControl.selectedSegmentIndex == 0
     }
     
     fileprivate func setupSegmentedControl() {
@@ -78,7 +83,6 @@ class LocationInputView: UIViewController {
     }
     
     fileprivate func setupMapView() {
-        guard let mapView = mapView as? RadiusMapView else { return }
         mapView.outputDelegate = self
         mapView.layer.cornerRadius = 6.3
         mapView.accessibilityElementsHidden = true
@@ -195,8 +199,8 @@ extension LocationInputView: RadiusMapViewDelegate {
                                                                                    Int(region.radius),
                                                                                    placeName) //TODO
         outputlocation = region
+        print(region.radius)
     }
-    
     
 }
 
