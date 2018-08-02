@@ -75,8 +75,10 @@ class NewTaskCoordinator: Coordinator {
                                                                    detailViewModel: moreOptionsViewModel,
                                                                    taskModel: taskModel)
         self.taskFrameViewController = taskFrameViewController
-        taskFrameViewController.configurePageViewController(with: [newTaskViewController, moreOptionsViewController])
+        newTaskViewController.delegate = taskFrameViewController
         
+        taskFrameViewController.configurePageViewController(with: [newTaskViewController, moreOptionsViewController])
+
         // Modal Presenter
         let modalPresenter = UINavigationController(rootViewController: taskFrameViewController)
         modalPresenter.isNavigationBarHidden = true

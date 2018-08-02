@@ -20,6 +20,7 @@ class NewTaskViewController: UIViewController, CreationFramePresentable {
     fileprivate var tagCollectionViewController: TagCollectionViewController!
     private let disposeBag = DisposeBag()
     
+    weak var delegate: TaskFrameDelegate?
     // MARK: - IBOutlets
     
     @IBOutlet weak var taskTitleTextView: UITextView!
@@ -35,6 +36,7 @@ class NewTaskViewController: UIViewController, CreationFramePresentable {
         configureTagCollectionViewController()
         configureTaskTitleTextView()
         configureTaskNotesTextView()
+        taskTitleTextView.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -140,5 +142,11 @@ extension NewTaskViewController: StoryboardInstantiable {
     
     static var viewControllerID: String {
         return "NewTaskViewController"
+    }
+}
+
+extension NewTaskViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        delegate?.shouldEnableDoneButton(!textView.text.isEmpty)
     }
 }
