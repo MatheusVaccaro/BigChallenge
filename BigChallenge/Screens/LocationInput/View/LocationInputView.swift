@@ -42,7 +42,7 @@ class LocationInputView: UIViewController {
     // MARK: - Internal
     fileprivate var tableViewData: [MKMapItem] = []
     fileprivate let locationManager = CLLocationManager()
-    fileprivate var placeName: String!
+    fileprivate let viewModel = LocationInputViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,8 +59,8 @@ class LocationInputView: UIViewController {
     }
     
     fileprivate func setupSegmentedControl() {
-        let arrivingString = Strings.LocationInputView.arrivingString
-        let leavingString = Strings.LocationInputView.leavingString
+        let arrivingString = viewModel.arrivingString
+        let leavingString = viewModel.leavingString
         
         segmentedControl.setTitle(arrivingString, forSegmentAt: 0)
         segmentedControl.setTitle(leavingString, forSegmentAt: 1)
@@ -79,7 +79,7 @@ class LocationInputView: UIViewController {
         searchBar.barStyle = .default
         searchBar.searchBarStyle = .minimal
         
-        searchBar.accessibilityHint = Strings.LocationInputView.accessibilityHintSearchBar
+        searchBar.accessibilityHint = viewModel.searchBarHint
     }
     
     fileprivate func setupMapView() {
@@ -88,10 +88,8 @@ class LocationInputView: UIViewController {
         mapView.accessibilityElementsHidden = true
 
         accessibilityMapView.isAccessibilityElement = true
-        accessibilityMapView.accessibilityLabel =
-            Strings.LocationInputView.accessibilitylabelMap
-        accessibilityMapView.accessibilityValue =
-            Strings.LocationInputView.accessibilityValueEmptyMap
+        accessibilityMapView.accessibilityLabel = viewModel.mapViewAccessibilityLabel
+        accessibilityMapView.accessibilityValue = viewModel.mapViewAccessibilityValueEmpty
     }
     
     fileprivate func setupTableView() {
@@ -100,6 +98,14 @@ class LocationInputView: UIViewController {
         
         searchResultsTableView.isHidden = true
         searchResultsTableView.layer.cornerRadius = 6.3
+    }
+}
+
+extension LocationInputView: RadiusMapViewDelegate {
+    func radiusMapView(_ radiusMapView: RadiusMapView, didFind region: CLCircularRegion) {
+        accessibilityMapView.accessibilityValue = viewModel.accessibilityValue(for: Int(region.radius))
+        outputlocation = region
+        print(region.radius)
     }
 }
 
@@ -163,7 +169,9 @@ extension LocationInputView: UITableViewDelegate {
         let circle = MKCircle(center: center, radius: 100)
         
         mapView.showsUserLocation = false
-        placeName = (place.placemark.name ?? "desired location")
+        if let name = place.placemark.name {
+            viewModel.placeName = name
+        }
         mapView.add(circle)
     }
 }
@@ -190,18 +198,6 @@ extension LocationInputView: CLLocationManagerDelegate {
                          didFailWithError error: Error) {
         print("error: \(error)")
     }
-}
-
-extension LocationInputView: RadiusMapViewDelegate {
-    func radiusMapView(_ radiusMapView: RadiusMapView, didFind region: CLCircularRegion) {
-        let localizedString = Strings.LocationInputView.accessibilityValueMap
-        accessibilityMapView.accessibilityValue = String.localizedStringWithFormat(localizedString,
-                                                                                   Int(region.radius),
-                                                                                   placeName) //TODO
-        outputlocation = region
-        print(region.radius)
-    }
-    
 }
 
 extension LocationInputView: StoryboardInstantiable {
