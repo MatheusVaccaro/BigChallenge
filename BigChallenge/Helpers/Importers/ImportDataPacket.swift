@@ -8,11 +8,12 @@
 
 import Foundation
 
+//swiftlint:disable all
+
 /**
  Abstraction of data coming from external import sources.
 */
 public enum ImportDataPacket {
-    //swiftlint:disable
     case remindersDataPacket(id: String, externalId: String?) // 1
     
     // Assigns an identifier to each import source. Required for CoreData.
@@ -27,3 +28,5 @@ public enum ImportDataPacket {
                                     externalId: remindersData.calendarItemExternalIdentifier)
     }
 }
+
+//swiftlint:enable all
