@@ -9,10 +9,6 @@
 import UIKit
 import MapKit
 
-protocol LocationInputDelegate: class {
-    func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool)
-}
-
 class LocationInputView: UIViewController {
 
     // MARK: - Storyboard
@@ -21,13 +17,11 @@ class LocationInputView: UIViewController {
     @IBOutlet weak var mapView: RadiusMapView!
     @IBOutlet weak var searchResultsTableView: UITableView!
     @IBOutlet weak var accessibilityMapView: UIView!
-    
-    // MARK: - Public
-    public weak var delegate: LocationInputDelegate?
+    let viewModel = LocationInputViewModel()
     
     private(set) var outputlocation: CLCircularRegion? {
         didSet {
-            delegate?.locationInput(self, didFind: outputlocation!, arriving: arriving)
+            viewModel.delegate?.locationInput(self, didFind: outputlocation!, arriving: arriving)
         }
     }
     
@@ -35,14 +29,13 @@ class LocationInputView: UIViewController {
         didSet {
             guard let location = outputlocation else { return }
             mapView.arriving = arriving
-            delegate?.locationInput(self, didFind: location, arriving: arriving)
+            viewModel.delegate?.locationInput(self, didFind: location, arriving: arriving)
         }
     }
     
     // MARK: - Internal
     fileprivate var tableViewData: [MKMapItem] = []
     fileprivate let locationManager = CLLocationManager()
-    fileprivate let viewModel = LocationInputViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()

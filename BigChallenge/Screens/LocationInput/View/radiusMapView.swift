@@ -39,7 +39,11 @@ class RadiusMapView: MKMapView {
     
     weak var outputDelegate: RadiusMapViewDelegate?
     
-    private(set) var circularRegion: CLCircularRegion?
+    private(set) var circularRegion: CLCircularRegion? {
+        didSet {
+            outputDelegate?.radiusMapView(self, didFind: circularRegion!)
+        }
+    }
     
     fileprivate var startLocation: CGPoint?
     fileprivate var totalDistance: CGFloat = 0
@@ -65,12 +69,6 @@ class RadiusMapView: MKMapView {
             
             changeCircle(adding: Double(totalDistance * 5)) // raise multiplier based on distance
         }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        guard let region = circularRegion else { return }
-        outputDelegate?.radiusMapView(self, didFind: region)
     }
     
     override func add(_ overlay: MKOverlay) {
