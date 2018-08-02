@@ -8,18 +8,18 @@
 
 import UIKit
 
-protocol TaskFramePresentable {
+protocol CreationFramePresentable {
     func didTapCancelButton(_ sender: UIButton)
     func didTapMoreOptionsButton(_ sender: UIButton)
     func didTapSaveButton(_ sender: UIButton)
 }
 
-class TaskFrameViewController: UIViewController {
+class CreationFrameViewController: UIViewController {
 
-    typealias FrameContent = TaskFramePresentable & UIViewController
+    typealias FrameContent = CreationFramePresentable & UIViewController
     
     // MARK: - Properties
-
+    var viewModel: CreationFrameViewModel!
     private var pageViewController: UIPageViewController?
     private var pages: [UIViewController] = []
     private var currentPageIndex: Int?
@@ -109,7 +109,7 @@ class TaskFrameViewController: UIViewController {
 
 // MARK: - UIPageViewControllerDelegate
 
-extension TaskFrameViewController: UIPageViewControllerDelegate {
+extension CreationFrameViewController: UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         if let viewController = pendingViewControllers.first,
@@ -127,7 +127,7 @@ extension TaskFrameViewController: UIPageViewControllerDelegate {
 
 // MARK: - UIPageViewControllerDataSource
 
-extension TaskFrameViewController: UIPageViewControllerDataSource {
+extension CreationFrameViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -151,7 +151,7 @@ extension TaskFrameViewController: UIPageViewControllerDataSource {
 
 // MARK: - UIScrollViewDelegate
 
-extension TaskFrameViewController: UIScrollViewDelegate {
+extension CreationFrameViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if currentPageIndex == 0 && scrollView.contentOffset.x < scrollView.bounds.size.width {
@@ -174,7 +174,7 @@ extension TaskFrameViewController: UIScrollViewDelegate {
 
 // MARK: - StoryboardInstantiable
 
-extension TaskFrameViewController: StoryboardInstantiable {
+extension CreationFrameViewController: StoryboardInstantiable {
     
     static var storyboardIdentifier: String {
         return "TaskFrame"
