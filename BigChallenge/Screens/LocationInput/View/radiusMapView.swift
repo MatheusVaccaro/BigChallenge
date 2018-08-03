@@ -67,7 +67,8 @@ class RadiusMapView: MKMapView {
             self.totalDistance = distanceX
             self.startLocation = currentLocation
             
-            changeCircle(adding: Double(totalDistance * 5)) // raise multiplier based on distance
+            let multiplier = 100 * region.span.latitudeDelta
+            changeCircle(adding: Double(totalDistance * CGFloat(multiplier))) // raise multiplier based on distance
         }
     }
     
@@ -97,7 +98,7 @@ class RadiusMapView: MKMapView {
         guard let circleOverlay = overlays.first as? MKCircle else { return }
         let newRadius = circleOverlay.radius + radius
         
-        guard newRadius > 100 && newRadius < 100000 else { return }
+        guard newRadius > 100 && newRadius < 1000000 else { return }
         
         remove(circleOverlay)
         let newOverlay = MKCircle(center: circleOverlay.coordinate,
