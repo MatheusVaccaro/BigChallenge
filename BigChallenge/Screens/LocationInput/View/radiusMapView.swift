@@ -98,7 +98,7 @@ class RadiusMapView: MKMapView {
         guard let circleOverlay = overlays.first as? MKCircle else { return }
         let newRadius = circleOverlay.radius + radius
         
-        guard newRadius > 100 && newRadius < 1000000 else { return }
+        guard newRadius >= 100 && newRadius <= 1000000 else { return }
         
         remove(circleOverlay)
         let newOverlay = MKCircle(center: circleOverlay.coordinate,
@@ -110,16 +110,23 @@ class RadiusMapView: MKMapView {
 extension RadiusMapView: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let overlay = overlay as? MKCircle {
-            let circleRenderer = MKCircleRenderer(circle: overlay)
-            
-            circleRenderer.fillColor =
-                arriving
-                ? UIColor.blue.withAlphaComponent(0.2)
-                : UIColor.clear
-            circleRenderer.strokeColor = UIColor.blue.withAlphaComponent(0.8)
-            circleRenderer.lineWidth = 3
-            
-            return circleRenderer
+            if arriving {
+                let circleRenderer = MKCircleRenderer(circle: overlay)
+                
+                circleRenderer.fillColor = UIColor.blue.withAlphaComponent(0.2)
+                circleRenderer.strokeColor = UIColor.blue.withAlphaComponent(0.8)
+                circleRenderer.lineWidth = 3
+                
+                return circleRenderer
+            } else {
+                let invertedRenderer = MKInvertedCircleOverlayRenderer(circle: overlay)
+                
+                invertedRenderer.fillColor = UIColor.blue.withAlphaComponent(0.2)
+                invertedRenderer.strokeColor = UIColor.blue
+                invertedRenderer.diameter = 100
+                
+                return invertedRenderer
+            }
         } else {
             return MKOverlayRenderer()
         }
