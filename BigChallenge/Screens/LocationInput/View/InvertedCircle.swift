@@ -12,43 +12,59 @@ import MapKit
 
 class MKInvertedCircleOverlayRenderer: MKOverlayRenderer {
     
-    var diameter: Double
     var fillColor: UIColor = UIColor.red
     var strokeColor: UIColor = UIColor.blue
     var lineWidth: CGFloat = 3
+    var circle: MKCircle
     
     init(circle: MKCircle) {
-        diameter = circle.radius*2
+        self.circle = circle
         super.init(overlay: circle)
     }
     
     override func draw(_ mapRect: MKMapRect, zoomScale: MKZoomScale, in context: CGContext) {
-        let path = UIBezierPath(rect: CGRect(x: mapRect.origin.x,
-                                             y: mapRect.origin.y,
-                                             width: mapRect.size.width,
-                                             height: mapRect.size.height))
+        let path = UIBezierPath(rect: rect(for: MKMapRectWorld))
         
-        let radiusInMap = diameter * MKMapPointsPerMeterAtLatitude(overlay.coordinate.latitude)
-        
-        let mapSize: MKMapSize = MKMapSize(width: radiusInMap, height: radiusInMap)
-        
-        let regionOrigin = MKMapPointForCoordinate(overlay.coordinate)
-        var regionRect: MKMapRect = MKMapRect(origin: regionOrigin, size: mapSize)
-        regionRect = MKMapRectOffset(regionRect, -radiusInMap/2, -radiusInMap/2)
-        regionRect = MKMapRectIntersection(regionRect, MKMapRectWorld)
-        
-        let excludePath: UIBezierPath = UIBezierPath(roundedRect: CGRect(x: regionRect.origin.x,
-                                                                         y: regionRect.origin.y,
-                                                                         width: regionRect.size.width,
-                                                                         height: regionRect.size.height),
-                                                     cornerRadius: CGFloat(regionRect.size.width) / 2)
+        let excludePath: UIBezierPath = UIBezierPath(roundedRect: CGRect(x: circle.coordinate.latitude,
+                                                                         y: circle.coordinate.longitude,
+                                                                         width: circle.boundingMapRect.size.width,
+                                                                         height: circle.boundingMapRect.size.height),
+                                                     cornerRadius: CGFloat(circle.boundingMapRect.size.width))
         
         context.setFillColor(fillColor.cgColor)
-        context.setStrokeColor(strokeColor.cgColor)
-        context.setLineWidth(lineWidth)
         
         path.append(excludePath)
         context.addPath(path.cgPath)
         context.fillPath(using: .evenOdd)
+        
+        context.addPath(excludePath.cgPath)
+        context.setLineWidth(9 / zoomScale)
+        context.setStrokeColor(strokeColor.cgColor)
+        context.strokePath()
+        
+        //line showing circle radius
+        let lineBeginPoint = CGPoint(x: excludePath.bounds.midX, y: excludePath.bounds.midY)
+        let lineEndPoint = CGPoint(x: excludePath.bounds.maxX, y: excludePath.bounds.midY)
+        let linePath: UIBezierPath = UIBezierPath()
+        linePath.move(to: lineBeginPoint)
+        linePath.addLine(to: lineEndPoint)
+        
+        context.addPath(linePath.cgPath)
+        context.setLineWidth(6/zoomScale)
+        context.setStrokeColor(UIColor.black.cgColor)
+        context.setLineDash(phase: 1, lengths: [20 / zoomScale, 10 / zoomScale])
+        context.strokePath()
+        
+        // circle at the end of the line above
+        let circleSize: CGFloat = 30/zoomScale
+        let circleRect = CGRect(origin: CGPoint(x: lineEndPoint.x - (circleSize/2), y: lineEndPoint.y - (circleSize/2)),
+                                size: CGSize(width: circleSize, height: circleSize))
+        
+        let circlePath: UIBezierPath =
+            UIBezierPath(roundedRect: circleRect, cornerRadius: circleSize)
+        
+        context.addPath(circlePath.cgPath)
+        context.setFillColor(UIColor.black.cgColor)
+        context.fillPath()
     }
 }
