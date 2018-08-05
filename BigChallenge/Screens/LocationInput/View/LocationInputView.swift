@@ -27,8 +27,8 @@ class LocationInputView: UIViewController {
     
     private(set) var arriving: Bool = true {
         didSet {
-            guard let location = outputlocation else { return }
             mapView.arriving = arriving
+            guard let location = outputlocation else { return }
             viewModel.delegate?.locationInput(self, didFind: location, arriving: arriving)
         }
     }
@@ -98,7 +98,6 @@ extension LocationInputView: RadiusMapViewDelegate {
     func radiusMapView(_ radiusMapView: RadiusMapView, didFind region: CLCircularRegion) {
         accessibilityMapView.accessibilityValue = viewModel.accessibilityValue(for: Int(region.radius))
         outputlocation = region
-        print(region.radius)
     }
 }
 
