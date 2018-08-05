@@ -73,13 +73,12 @@ class RadiusMapView: MKMapView {
     }
     
     override func add(_ overlay: MKOverlay) {
-        super.add(overlay)
         if let circle = overlay as? MKCircle {
             circularRegion = CLCircularRegion(center: circle.coordinate,
                                               radius: circle.radius,
                                               identifier: "outPutRegion")
             
-            let spanToFit = 0.0001 * circle.radius
+            let spanToFit = circle.radius * 2 * 0.00001
             let span = MKCoordinateSpanMake(spanToFit, spanToFit)
             let region = MKCoordinateRegion(center: circle.coordinate,
                                             span: span)
@@ -92,6 +91,7 @@ class RadiusMapView: MKMapView {
                 addAnnotation(point)
             }
         }
+        super.add(overlay)
     }
     
     fileprivate func changeCircle(adding radius: Double) {
@@ -123,7 +123,6 @@ extension RadiusMapView: MKMapViewDelegate {
                 
                 invertedRenderer.fillColor = UIColor.blue.withAlphaComponent(0.2)
                 invertedRenderer.strokeColor = UIColor.blue
-                invertedRenderer.diameter = 100
                 
                 return invertedRenderer
             }
