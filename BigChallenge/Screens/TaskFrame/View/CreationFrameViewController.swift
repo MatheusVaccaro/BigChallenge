@@ -14,6 +14,10 @@ protocol CreationFramePresentable {
     func didTapSaveButton(_ sender: UIButton)
 }
 
+protocol TaskFrameDelegate: class {
+    func shouldEnableDoneButton(_ bool: Bool)
+}
+
 class CreationFrameViewController: UIViewController {
 
     typealias FrameContent = CreationFramePresentable & UIViewController
@@ -27,6 +31,7 @@ class CreationFrameViewController: UIViewController {
     
     // MARK: - IBOutlets
     
+    @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var containerView: UIView!
     
     // MARK: - TaskFrameViewController Lifecycle
@@ -35,6 +40,7 @@ class CreationFrameViewController: UIViewController {
         super.viewDidLoad()
         setupPageViewController()
         disablePageViewControllerBounce()
+        doneButton.isEnabled = false
     }
     
     // MARK: - IBActions
@@ -54,6 +60,7 @@ class CreationFrameViewController: UIViewController {
     @IBAction func didTapSaveButton(_ sender: UIButton) {
         guard let currentPageIndex = currentPageIndex else { return }
         guard let currentPage = pages[currentPageIndex] as? FrameContent else { return }
+        
         currentPage.didTapSaveButton(sender)
     }
     
@@ -169,6 +176,15 @@ extension CreationFrameViewController: UIScrollViewDelegate {
             targetContentOffset.pointee = CGPoint(x: scrollView.bounds.size.width, y: 0)
         }
     }
+}
+
+// MARK: - TaskFrameDelegate
+
+extension TaskFrameViewController: TaskFrameDelegate {
+    func shouldEnableDoneButton(_ bool: Bool) {
+        doneButton.isEnabled = bool
+    }
+    
     
 }
 
