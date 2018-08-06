@@ -15,6 +15,8 @@ protocol RadiusMapViewDelegate: class {
 
 class RadiusMapView: MKMapView {
     
+    var viewModel: RadiusMapViewModel!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         initialize()
@@ -26,6 +28,7 @@ class RadiusMapView: MKMapView {
     }
     
     func initialize() {
+        viewModel = RadiusMapViewModel()
         delegate = self
         isZoomEnabled = false
         isScrollEnabled = false
@@ -78,7 +81,7 @@ class RadiusMapView: MKMapView {
                                               radius: circle.radius,
                                               identifier: "outPutRegion")
             
-            let spanToFit = circle.radius * 2 * 0.00001
+            let spanToFit = viewModel.spanToFit(circle: circle)
             let span = MKCoordinateSpanMake(spanToFit, spanToFit)
             let region = MKCoordinateRegion(center: circle.coordinate,
                                             span: span)
@@ -98,7 +101,7 @@ class RadiusMapView: MKMapView {
         guard let circleOverlay = overlays.first as? MKCircle else { return }
         let newRadius = circleOverlay.radius + radius
         
-        guard newRadius >= 100 && newRadius <= 1000000 else { return }
+        guard viewModel.shouldReplaceOverlay(with: newRadius) else { return }
         
         remove(circleOverlay)
         let newOverlay = MKCircle(center: circleOverlay.coordinate,

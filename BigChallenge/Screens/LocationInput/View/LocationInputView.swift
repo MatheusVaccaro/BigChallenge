@@ -68,11 +68,17 @@ class LocationInputView: UIViewController {
     
     fileprivate func setupSearchBar() {
         searchBar.delegate = self
-        
         searchBar.barStyle = .default
         searchBar.searchBarStyle = .minimal
-        
         searchBar.accessibilityHint = viewModel.searchBarHint
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font =
+            UIFont.font(sized: 17, weight: .regular, with: .body)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        searchBar.reloadInputViews()
+        searchResultsTableView.reloadInputViews()
     }
     
     fileprivate func setupMapView() {
@@ -88,7 +94,6 @@ class LocationInputView: UIViewController {
     fileprivate func setupTableView() {
         searchResultsTableView.dataSource = self
         searchResultsTableView.delegate = self
-        
         searchResultsTableView.isHidden = true
         searchResultsTableView.layer.cornerRadius = 6.3
     }
@@ -129,17 +134,42 @@ extension LocationInputView: UISearchBarDelegate {
 
 extension LocationInputView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "searchResultCell",
-                                                 for: indexPath)
+        guard let cell = tableView
+            .dequeueReusableCell(withIdentifier: "searchResultCell",
+                                 for: indexPath) as? LocationTableViewCell else { return UITableViewCell() }
         
-        cell.textLabel?.text = tableViewData[indexPath.row].name
-        cell.detailTextLabel?.text = tableViewData[indexPath.row].placemark.name
+        cell.titleLabel.text = tableViewData[indexPath.row].name
+        cell.subtitleLabel.text = tableViewData[indexPath.row].placemark.fullAddress
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(tableViewData.count)
         return tableViewData.count
+    }
+}
+
+extension MKPlacemark {
+    var fullAddress: String {
+        let firstSpace =
+            (subThoroughfare != nil && thoroughfare != nil) ? " - " : ""
+        
+        let comma = (subThoroughfare != nil || thoroughfare != nil) &&
+                    (subAdministrativeArea != nil || administrativeArea != nil) ? ", " : ""
+        
+        let secondSpace =
+            (subAdministrativeArea != nil || administrativeArea != nil) ? " - " : ""
+        
+        let addressLine = String(
+            format:"%@%@%@%@%@%@%@",
+            thoroughfare ?? "", comma, // street name,
+            subThoroughfare ?? "", firstSpace, // street number -?
+            locality ?? "", secondSpace, // city -?
+            administrativeArea ?? "" // state
+        )
+        
+        return addressLine
     }
 }
 
