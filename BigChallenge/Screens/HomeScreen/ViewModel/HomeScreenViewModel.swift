@@ -81,9 +81,10 @@ class HomeScreenViewModel {
         activity.isEligibleForSearch = true
         activity.isEligibleForHandoff = true
         activity.isEligibleForPublicIndexing = true
-        if #available(iOS 12.0, *) {
-            activity.isEligibleForPrediction = true
-        }
+        //TODO: uncomment when available
+//        if #available(iOS 12.0, *) {
+//            activity.isEligibleForPrediction = true
+//        }
         
         return activity
     }
