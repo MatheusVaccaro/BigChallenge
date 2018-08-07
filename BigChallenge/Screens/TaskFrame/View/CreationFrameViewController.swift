@@ -153,7 +153,6 @@ extension CreationFrameViewController: UIPageViewControllerDataSource {
         guard pages.count > nextIndex else { return nil }
         return pages[nextIndex]
     }
-    
 }
 
 // MARK: - UIScrollViewDelegate
@@ -189,7 +188,6 @@ extension CreationFrameViewController: TaskFrameDelegate {
 // MARK: - StoryboardInstantiable
 
 extension CreationFrameViewController: StoryboardInstantiable {
-    
     static var storyboardIdentifier: String {
         return "TaskFrame"
     }
