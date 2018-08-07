@@ -172,7 +172,7 @@ extension TaskListViewController: UITableViewDelegate {
         
         headerView.addSubview(cardView)
 
-        if viewModel.tagsBeingUsed.isEmpty {
+        if viewModel.selectedTags.isEmpty {
             headerView.addSubview(textHeaderView(with: Strings.Task.ListScreen.recommendedHeaderTitle,
                                                  colored: UIColor.darkGray))
         }

@@ -35,7 +35,7 @@ public class TaskListViewModel {
     private(set) var mainTasks: [Task]
     private(set) var secondaryTasks: [Task]
     private(set) var completedTasks: [Task]
-    private(set) var tagsBeingUsed: [Tag]
+    private(set) var selectedTags: [Tag]
 
     private let model: TaskModel
     private var disposeBag = DisposeBag()
@@ -45,7 +45,7 @@ public class TaskListViewModel {
         self.mainTasks = []
         self.secondaryTasks = []
         self.completedTasks = []
-        self.tagsBeingUsed = []
+        self.selectedTags = []
         
         self.taskCompleted = PublishSubject<Task>()
         self.shouldAddTask = BehaviorSubject<Bool>(value: false)
@@ -57,7 +57,7 @@ public class TaskListViewModel {
     
     /** filters the taskList with selected tags */
     func filterTasks(with tags: [Tag]) {
-        self.tagsBeingUsed = tags
+        self.selectedTags = tags
         mainTasks = []
         secondaryTasks = []
         completedTasks = []
@@ -100,8 +100,8 @@ public class TaskListViewModel {
     fileprivate func isMainTask(_ task: Task) -> Bool {
         let tags = (task.tags?.allObjects as! [Tag])
         
-        return tags.count == tagsBeingUsed.count &&
-            tags.map { $0.title! }.sorted() == tagsBeingUsed.map { $0.title! }.sorted()
+        return tags.count == selectedTags.count &&
+            tags.map { $0.title! }.sorted() == selectedTags.map { $0.title! }.sorted()
     }
     
     /** appends a centain task to the appropriate array inside taskListViewModel */
@@ -120,7 +120,7 @@ public class TaskListViewModel {
     fileprivate func subscribeToModelUpdate() {
         model.didUpdateTasks.subscribe {
             guard $0.element != nil else { return }
-            self.filterTasks(with: self.tagsBeingUsed)
+            self.filterTasks(with: self.selectedTags)
             }.disposed(by: disposeBag)
     }
     
