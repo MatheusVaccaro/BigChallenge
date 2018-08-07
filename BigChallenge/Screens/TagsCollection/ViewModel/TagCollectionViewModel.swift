@@ -80,8 +80,8 @@ class TagCollectionViewModel {
         filteredTags = model.tags.filter {
             return (selectedTags.isEmpty ||                          //no tag is selected, or
                 selectedTags.contains($0) ||                        //tag is selected, or
-                !(($0.tasks!.allObjects as! [Task])                 //tag has tasks in common
-                    .filter { $0.tags!.contains(tag) }).isEmpty)
+                !(($0.tasks!.allObjects as! [Task])                 //tag has uncompleted tasks in common
+                    .filter { !$0.isCompleted && $0.tags!.contains(tag) }).isEmpty)
         }
         tagsObservable.onNext(filteredTags)
     }

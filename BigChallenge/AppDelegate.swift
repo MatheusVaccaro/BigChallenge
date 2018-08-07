@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let window = UIWindow(frame: UIScreen.main.bounds)
         self.window = window
-        requestAuthorizationForNotifications()
         
         if let options = launchOptions {
             guard options[UIApplicationLaunchOptionsKey.userActivityDictionary] == nil else { return true }
@@ -39,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Helper Methods
     func startApplicationCoordinator(with window: UIWindow, selectedTagIDs: [String]) {
+        requestAuthorizationForNotifications()
         let applicationCoordinator = ApplicationCoordinator(window: window, selectedTagIDs: selectedTagIDs)
         self.applicationCoordinator = applicationCoordinator
         applicationCoordinator.start()
@@ -47,5 +47,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func requestAuthorizationForNotifications() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in })
     }
-    
 }
