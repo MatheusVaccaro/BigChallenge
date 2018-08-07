@@ -79,7 +79,7 @@ class RadiusMapView: MKMapView {
         if let circle = overlay as? MKCircle {
             circularRegion = CLCircularRegion(center: circle.coordinate,
                                               radius: circle.radius,
-                                              identifier: "outPutRegion")
+                                              identifier: String(describing: circle.coordinate))
             
             let spanToFit = viewModel.spanToFit(circle: circle)
             let span = MKCoordinateSpanMake(spanToFit, spanToFit)
