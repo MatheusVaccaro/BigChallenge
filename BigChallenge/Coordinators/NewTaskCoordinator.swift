@@ -70,17 +70,17 @@ class NewTaskCoordinator: Coordinator {
         moreOptionsViewController.locationCellContent = locationInputViewController
     
         // Task Frame
-        let taskFrameViewController = CreationFrameViewController.instantiate()
-        taskFrameViewController.viewModel = CreationFrameViewModel(mainInfoViewModel: newTaskViewModel,
+        let creationFrameViewController = CreationFrameViewController.instantiate()
+        creationFrameViewController.viewModel = CreationFrameViewModel(mainInfoViewModel: newTaskViewModel,
                                                                    detailViewModel: moreOptionsViewModel,
                                                                    taskModel: taskModel)
-        self.taskFrameViewController = taskFrameViewController
-        newTaskViewController.delegate = taskFrameViewController
+        self.taskFrameViewController = creationFrameViewController
+        newTaskViewController.delegate = creationFrameViewController
         
-        taskFrameViewController.configurePageViewController(with: [newTaskViewController, moreOptionsViewController])
+        creationFrameViewController.configurePageViewController(with: [newTaskViewController, moreOptionsViewController])
 
         // Modal Presenter
-        let modalPresenter = UINavigationController(rootViewController: taskFrameViewController)
+        let modalPresenter = UINavigationController(rootViewController: creationFrameViewController)
         modalPresenter.isNavigationBarHidden = true
         self.modalPresenter = modalPresenter
         
