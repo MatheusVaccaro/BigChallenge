@@ -18,6 +18,7 @@ class TagCollectionViewModel {
     private(set) var tags: [Tag]
     private(set) var filteredTags: [Tag]
     private(set) var selectedTags: [Tag]
+    
     private(set) var selectedTagEvent: PublishSubject<Tag>
     private let disposeBag = DisposeBag()
     private var model: TagModel
@@ -54,7 +55,6 @@ class TagCollectionViewModel {
                 
                 if filtering {
                     self.filterTags(with: tag)
-                    self.tagsObservable.onNext(self.filteredTags)
                 }
             }.disposed(by: disposeBag)
     }
@@ -73,11 +73,11 @@ class TagCollectionViewModel {
 
     fileprivate func filterTags(with tag: Tag) {
         filteredTags = model.tags.filter {
-            return selectedTags.isEmpty || //no tag is selected
-                selectedTags.contains($0) || // tag is selected
-                !(($0.tasks!.allObjects as! [Task]) //tag has tasks in common
-                    .filter { $0.tags!.contains(tag) })
-                    .isEmpty
+            return (selectedTags.isEmpty ||                          //no tag is selected, or
+                selectedTags.contains($0) ||                        //tag is selected, or
+                !(($0.tasks!.allObjects as! [Task])                 //tag has tasks in common
+                    .filter { $0.tags!.contains(tag) }).isEmpty)
         }
+        tagsObservable.onNext(filteredTags)
     }
 }

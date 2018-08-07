@@ -45,7 +45,7 @@ class TagCollectionViewController: UIViewController {
     
     func bindCollectionView() {
         viewModel.tagsObservable
-            .map { return $0.map { Item(tag: $0) } + [Item(tag: nil)] }
+            .map { return ($0.filter{ self.viewModel.selectedTags.isEmpty ? true : self.viewModel.selectedTags.first != $0 }).map { Item(tag: $0) } + [Item(tag: nil)] }
             .bind(to: tagsCollectionView.rx
             .items(cellIdentifier: TagCollectionViewCell.identifier,
                cellType: TagCollectionViewCell.self)) { (row, item, cell) in

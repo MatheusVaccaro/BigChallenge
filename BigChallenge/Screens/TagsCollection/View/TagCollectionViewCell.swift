@@ -51,7 +51,6 @@ class TagCollectionViewCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            print("isSelected \(viewModel?.tagTitle ?? "+") \(kind) = \(isSelected)")
             contentView.mask = isSelected ? nil : maskLabel
             tagUILabel.isHidden = !isSelected
             if kind == .add, isSelected, !isPresenting {

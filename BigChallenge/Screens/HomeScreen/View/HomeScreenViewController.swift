@@ -88,6 +88,7 @@ class HomeScreenViewController: UIViewController {
         tagCollectionViewController.viewModel.selectedTagsObservable
             .subscribe { event in
                 self.viewModel.updateSelectedTagsIfNeeded(event.element)
+                self.bigTitle.text = self.viewModel.bigTitleText
                 if let activity = self.userActivity { self.updateUserActivityState(activity) }
                 self.taskListViewController.viewModel.filterTasks(with: event.element!)
             }.disposed(by: disposeBag)
