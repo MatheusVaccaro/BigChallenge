@@ -16,23 +16,76 @@ protocol HomeScreenViewModelDelegate: class {
 
 class HomeScreenViewModel {
     
+    private(set) var selectedTags: [Tag]
+    private(set) var taskModel: TaskModel
+    private(set) var tagModel: TagModel
+    
+    init(taskModel: TaskModel, tagModel: TagModel, selectedTags: [Tag]) {
+        self.taskModel = taskModel
+        self.tagModel = tagModel
+        self.selectedTags = selectedTags
+    }
+    
     lazy var taskListViewModel: TaskListViewModel = {
         return TaskListViewModel(model: taskModel)
     }()
     
     lazy var tagListViewModel: TagCollectionViewModel = {
-        return TagCollectionViewModel(model: tagModel, filtering: true)
+        return TagCollectionViewModel(model: tagModel, filtering: true, selectedTags: selectedTags)
     }()
-    
-    private(set) var taskModel: TaskModel
-    private(set) var tagModel: TagModel
-    
-    init(taskModel: TaskModel, tagModel: TagModel) {
-        self.taskModel = taskModel
-        self.tagModel = tagModel
-    }
     
     func tagCollectionViewModel(with selectedTags: [Tag] = []) -> TagCollectionViewModel {
         return TagCollectionViewModel(model: tagModel, filtering: true, selectedTags: selectedTags)
     }
+    
+    func updateSelectedTagsIfNeeded(_ tags: [Tag]?) {
+        selectedTags = tags ?? []
+        print("selected tags are: \(selectedTags.map { $0.title })")
+    }
+    
+    func updateUserActivity(_ activity: NSUserActivity) {
+        activity.addUserInfoEntries(from: ["selectedTagIDs" : selectedTags.map { $0.id!.description }])
+        
+        activity.keywords =
+            Set<String>(selectedTags.map { $0.title! })
+        
+        activity.title = userActivityTitle
+        
+        activity.becomeCurrent()
+    }
+    
+    fileprivate var userActivityTitle: String {
+        var ans = ""
+        guard !selectedTags.isEmpty else { return ans }
+        
+        var tags = (selectedTags.map { $0.title! })
+        
+        while tags.count > 1 {
+            ans += "\(tags.removeFirst()), "
+        }
+        
+        ans += tags.removeFirst()
+        
+        return ans
+    }
+    
+    var userActivity: NSUserActivity {
+        let activity = NSUserActivity(activityType: "com.bigBeanie.finalChallenge.selectedTags")
+        
+        activity.userInfo =
+            ["selectedTagIDs": selectedTags.map { $0.id!.description }]
+        
+        activity.keywords =
+            Set<String>(selectedTags.map { $0.title! })
+        
+        activity.isEligibleForSearch = true
+        activity.isEligibleForHandoff = true
+        activity.isEligibleForPublicIndexing = true
+        if #available(iOS 12.0, *) {
+            activity.isEligibleForPrediction = true
+        }
+        
+        return activity
+    }
+    
 }
