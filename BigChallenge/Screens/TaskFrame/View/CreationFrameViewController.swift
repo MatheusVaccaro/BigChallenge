@@ -180,12 +180,10 @@ extension CreationFrameViewController: UIScrollViewDelegate {
 
 // MARK: - TaskFrameDelegate
 
-extension TaskFrameViewController: TaskFrameDelegate {
+extension CreationFrameViewController: TaskFrameDelegate {
     func shouldEnableDoneButton(_ bool: Bool) {
         doneButton.isEnabled = bool
     }
-    
-    
 }
 
 // MARK: - StoryboardInstantiable
