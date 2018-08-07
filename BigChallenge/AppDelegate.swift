@@ -18,33 +18,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let window = UIWindow(frame: UIScreen.main.bounds)
         self.window = window
+        requestAuthorizationForNotifications()
+        
+        if let options = launchOptions {
+            guard options[UIApplicationLaunchOptionsKey.userActivityDictionary] == nil else { return true }
+        }
         
         // MARK: Application Coordinator
-        startApplicationCoordinator(with: window)
-        
-        requestAuthorizationForNotifications()
+        startApplicationCoordinator(with: window, selectedTagIDs: [])
         
         return true
     }
     
-    private func application(_ application: UIApplication,
-                     continue userActivity: NSUserActivity,
-                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        self.window = window
-        
-        // MARK: Application Coordinator
-        let tags = userActivity.userInfo!["selectedTags"] as? [Tag]
-        startApplicationCoordinator(with: window, selectedTags: tags ?? [])
-        
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        let tagIDs = userActivity.userInfo!["selectedTagIDs"] as? [String]
+        startApplicationCoordinator(with: window!, selectedTagIDs: tagIDs ?? [])
         return true
     }
     
     // MARK: - Helper Methods
-    func startApplicationCoordinator(with window: UIWindow, selectedTags: [Tag] = []) {
-        let applicationCoordinator = ApplicationCoordinator(window: window,
-                                                            selectedTags: selectedTags)
+    func startApplicationCoordinator(with window: UIWindow, selectedTagIDs: [String]) {
+        let applicationCoordinator = ApplicationCoordinator(window: window, selectedTagIDs: selectedTagIDs)
         self.applicationCoordinator = applicationCoordinator
         applicationCoordinator.start()
     }

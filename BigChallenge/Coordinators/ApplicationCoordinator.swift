@@ -20,20 +20,20 @@ class ApplicationCoordinator: Coordinator {
     private let remindersImporter: RemindersImporter
     private let selectedTags: [Tag]
     
-    init(window: UIWindow, selectedTags: [Tag] = []) {
+    init(window: UIWindow, selectedTagIDs: [String]) {
         self.window = window
         self.rootViewController = UINavigationController()
         self.rootViewController.isNavigationBarHidden = true
         self.childrenCoordinators = []
-        self.selectedTags = selectedTags
-        
         self.persistence = Persistence(configuration: .inDevice)
         self.tagModel = TagModel(persistence: persistence)
-        
         self.taskModel = TaskModel(persistence: persistence)
-        defer { self.taskModel.delegate = self }
-        
-        self.remindersImporter = RemindersImporter(taskModel: taskModel, tagModel: tagModel)
+        self.selectedTags =
+            tagModel.tags.filter { selectedTagIDs.contains($0.id!.description) }
+        print(selectedTags.map { $0.title! })
+        self.remindersImporter =
+            RemindersImporter(taskModel: taskModel, tagModel: tagModel)
+        self.taskModel.delegate = self
     }
     
     func start() {

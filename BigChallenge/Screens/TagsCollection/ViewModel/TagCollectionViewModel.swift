@@ -22,10 +22,10 @@ class TagCollectionViewModel {
     private let disposeBag = DisposeBag()
     private var model: TagModel
     
-    init(model: TagModel, filtering: Bool, selectedTags: [Tag] = []) {
+    init(model: TagModel, filtering: Bool, selectedTags: [Tag]) {
         self.model = model
-        self.selectedTags = selectedTags
         self.tags = model.tags
+        self.selectedTags = []
         self.filteredTags = self.tags
         
         tagsObservable = BehaviorSubject<[Tag]>(value: tags)
@@ -34,6 +34,7 @@ class TagCollectionViewModel {
         
         subscribeToSelectedTag(filtering: filtering)
         subscribeToModel()
+        for tag in selectedTags { selectedTagEvent.onNext(tag) }
     }
     
     func tagCollectionCellViewModel(for tag: Tag) -> TagCollectionViewCellViewModel {
@@ -52,13 +53,7 @@ class TagCollectionViewModel {
                 self.selectedTagsObservable.onNext(self.selectedTags)
                 
                 if filtering {
-                    self.filteredTags = self.model.tags.filter {
-                        return self.selectedTags.isEmpty || //no tag is selected
-                            self.selectedTags.contains($0) || // tag is selected
-                            !(($0.tasks!.allObjects as! [Task]) //tag has tasks in common
-                                .filter { $0.tags!.contains(tag) })
-                                .isEmpty
-                    }
+                    self.filterTags(with: tag)
                     self.tagsObservable.onNext(self.filteredTags)
                 }
             }.disposed(by: disposeBag)
@@ -75,5 +70,14 @@ class TagCollectionViewModel {
                 self.tagsObservable.onNext(self.filteredTags)
             }.disposed(by: disposeBag)
     }
-    
+
+    fileprivate func filterTags(with tag: Tag) {
+        filteredTags = model.tags.filter {
+            return selectedTags.isEmpty || //no tag is selected
+                selectedTags.contains($0) || // tag is selected
+                !(($0.tasks!.allObjects as! [Task]) //tag has tasks in common
+                    .filter { $0.tags!.contains(tag) })
+                    .isEmpty
+        }
+    }
 }
