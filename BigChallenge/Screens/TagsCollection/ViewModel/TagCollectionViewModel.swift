@@ -47,6 +47,20 @@ class TagCollectionViewModel {
             selectedTagEvent.onNext(tag)
         }
     }
+    
+    func sortMostTasksIn(_ tags: [Tag]) -> [Tag] {
+        return tags.sorted {
+            let completedTasks1 = ($0.tasks!.allObjects as! [Task]).filter { !$0.isCompleted }
+            let completedTasks2 = ($1.tasks!.allObjects as! [Task]).filter { !$0.isCompleted }
+            
+            return completedTasks1.count > completedTasks2.count
+        }
+    }
+    
+    func removeBigTitleTag(_ tags: [Tag]) -> [Tag] {
+        return tags.filter { selectedTags.isEmpty ? true : selectedTags.first != $0 }
+    }
+    
     fileprivate func subscribeToSelectedTag(filtering: Bool) {
         selectedTagEvent
             .subscribe { event in
