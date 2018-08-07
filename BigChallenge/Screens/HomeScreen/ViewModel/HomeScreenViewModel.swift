@@ -30,7 +30,7 @@ class HomeScreenViewModel {
         return TaskListViewModel(model: taskModel)
     }()
     
-    lazy var tagListViewModel: TagCollectionViewModel = {
+    lazy var tagCollectionViewModel: TagCollectionViewModel = {
         return TagCollectionViewModel(model: tagModel, filtering: true, selectedTags: selectedTags)
     }()
     
@@ -75,10 +75,6 @@ class HomeScreenViewModel {
         //        }
         
         return activity
-    }
-    
-    func tagCollectionViewModel(with selectedTags: [Tag] = []) -> TagCollectionViewModel {
-        return TagCollectionViewModel(model: tagModel, filtering: true, selectedTags: selectedTags)
     }
     
     func updateSelectedTagsIfNeeded(_ tags: [Tag]?) {

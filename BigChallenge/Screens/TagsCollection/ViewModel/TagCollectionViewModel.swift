@@ -42,6 +42,11 @@ class TagCollectionViewModel {
         return TagCollectionViewCellViewModel(with: tag)
     }
     
+    func unSelectBigTitle() {
+        if let tag = selectedTags.first {
+            selectedTagEvent.onNext(tag)
+        }
+    }
     fileprivate func subscribeToSelectedTag(filtering: Bool) {
         selectedTagEvent
             .subscribe { event in
