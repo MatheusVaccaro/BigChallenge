@@ -118,14 +118,18 @@ class CreationFrameViewController: UIViewController {
 
 extension CreationFrameViewController: UIPageViewControllerDelegate {
     
-    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            willTransitionTo pendingViewControllers: [UIViewController]) {
         if let viewController = pendingViewControllers.first,
             let pageIndex = pages.firstIndex(of: viewController) {
             pendingPageIndex = pageIndex
         }
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            didFinishAnimating finished: Bool,
+                            previousViewControllers: [UIViewController],
+                            transitionCompleted completed: Bool) {
         if completed {
             currentPageIndex = pendingPageIndex
         }

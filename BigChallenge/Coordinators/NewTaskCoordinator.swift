@@ -77,7 +77,8 @@ class NewTaskCoordinator: Coordinator {
         self.taskFrameViewController = creationFrameViewController
         newTaskViewController.delegate = creationFrameViewController
         
-        creationFrameViewController.configurePageViewController(with: [newTaskViewController, moreOptionsViewController])
+        creationFrameViewController
+            .configurePageViewController(with: [newTaskViewController, moreOptionsViewController])
 
         // Modal Presenter
         let modalPresenter = UINavigationController(rootViewController: creationFrameViewController)

@@ -41,13 +41,7 @@ class RadiusMapView: MKMapView {
     }
     
     weak var outputDelegate: RadiusMapViewDelegate?
-    
-    private(set) var circularRegion: CLCircularRegion? {
-        didSet {
-            outputDelegate?.radiusMapView(self, didFind: circularRegion!)
-        }
-    }
-    
+        
     fileprivate var startLocation: CGPoint?
     fileprivate var totalDistance: CGFloat = 0
     
@@ -77,10 +71,6 @@ class RadiusMapView: MKMapView {
     
     override func add(_ overlay: MKOverlay) {
         if let circle = overlay as? MKCircle {
-            circularRegion = CLCircularRegion(center: circle.coordinate,
-                                              radius: circle.radius,
-                                              identifier: String(describing: circle.coordinate))
-            
             let spanToFit = viewModel.spanToFit(circle: circle)
             let span = MKCoordinateSpanMake(spanToFit, spanToFit)
             let region = MKCoordinateRegion(center: circle.coordinate,
@@ -106,6 +96,10 @@ class RadiusMapView: MKMapView {
         remove(circleOverlay)
         let newOverlay = MKCircle(center: circleOverlay.coordinate,
                                   radius: newRadius)
+        outputDelegate?.radiusMapView(self,
+                                      didFind: CLCircularRegion(center: newOverlay.coordinate,
+                                                                radius: newRadius,
+                                                                identifier: String(describing: newOverlay.coordinate)))
         add(newOverlay)
     }
 }

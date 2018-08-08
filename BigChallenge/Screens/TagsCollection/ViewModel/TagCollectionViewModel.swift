@@ -19,6 +19,7 @@ class TagCollectionViewModel {
     private(set) var tags: [Tag]
     private(set) var filteredTags: [Tag]
     private(set) var selectedTags: [Tag]
+    let filtering: Bool
     
     private let disposeBag = DisposeBag()
     private var model: TagModel
@@ -33,6 +34,7 @@ class TagCollectionViewModel {
         self.tags = model.tags
         self.selectedTags = []
         self.filteredTags = self.tags
+        self.filtering = filtering
         
         tagsObservable = BehaviorSubject<[Tag]>(value: tags)
         selectedTagsObservable = BehaviorSubject<[Tag]>(value: selectedTags)
@@ -59,9 +61,10 @@ class TagCollectionViewModel {
     
     func sortMostTasksIn(_ tags: [Tag]) -> [Tag] {
         return tags.sorted {
+            //swiftlint:disable force_cast
             let completedTasks1 = ($0.tasks!.allObjects as! [Task]).filter { !$0.isCompleted }
             let completedTasks2 = ($1.tasks!.allObjects as! [Task]).filter { !$0.isCompleted }
-            
+            //swiftlint:enable force_cast
             return completedTasks1.count > completedTasks2.count
         }
     }

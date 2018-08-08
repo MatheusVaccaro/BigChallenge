@@ -52,7 +52,6 @@ class CreationFrameViewModel {
         let task = taskModel.createTask(with: attributes)
         taskModel.save(task)
     }
-    
 }
 
 extension CreationFrameViewModel: NewTaskViewModelOutputDelegate {
@@ -72,7 +71,6 @@ extension CreationFrameViewModel: NewTaskViewModelOutputDelegate {
         taskNotes = notes ?? ""
     }
 }
-
 
 extension CreationFrameViewModel: MoreOptionsViewModelDelegate {
     func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool) {
