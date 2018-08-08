@@ -33,10 +33,6 @@ class MoreOptionsViewController: UIViewController, CreationFramePresentable {
         print("didTapMoreOptionsButton")
     }
     
-    func didTapSaveButton(_ sender: UIButton) {
-        print("didTapSaveButton")
-    }
-    
     // MARK: - Functions
     
     private func setupTableView() {

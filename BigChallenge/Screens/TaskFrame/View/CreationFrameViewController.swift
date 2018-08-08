@@ -10,7 +10,6 @@ import UIKit
 
 protocol CreationFramePresentable {
     func didTapMoreOptionsButton(_ sender: UIButton)
-    func didTapSaveButton(_ sender: UIButton)
 }
 
 protocol TaskFrameDelegate: class {
@@ -55,9 +54,6 @@ class CreationFrameViewController: UIViewController {
     }
     
     @IBAction func didTapSaveButton(_ sender: UIButton) {
-        guard let currentPageIndex = currentPageIndex else { return }
-        guard let currentPage = pages[currentPageIndex] as? FrameContent else { return }
-        currentPage.didTapSaveButton(sender)
         viewModel.didTapSaveButton()
     }
     
