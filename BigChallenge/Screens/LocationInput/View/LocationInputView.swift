@@ -19,13 +19,14 @@ class LocationInputView: UIViewController {
     @IBOutlet weak var accessibilityMapView: UIView!
     let viewModel = LocationInputViewModel()
     
-    private(set) var outputlocation: CLCircularRegion? {
+    var outputlocation: CLCircularRegion? {
         didSet {
+            accessibilityMapView.accessibilityValue = viewModel.accessibilityValue(for: Int(outputlocation!.radius))
             viewModel.delegate?.locationInput(self, didFind: outputlocation!, arriving: arriving)
         }
     }
     
-    private(set) var arriving: Bool = true {
+    var arriving: Bool = true {
         didSet {
             mapView.arriving = arriving
             guard let location = outputlocation else { return }
@@ -39,6 +40,10 @@ class LocationInputView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let location = outputlocation {
+            addCircle(on: location)
+        }
         
         setupSegmentedControl()
         setupLocationManager()
@@ -98,12 +103,12 @@ class LocationInputView: UIViewController {
         searchResultsTableView.isHidden = true
         searchResultsTableView.layer.cornerRadius = 6.3
     }
-}
-
-extension LocationInputView: RadiusMapViewDelegate {
-    func radiusMapView(_ radiusMapView: RadiusMapView, didFind region: CLCircularRegion) {
-        accessibilityMapView.accessibilityValue = viewModel.accessibilityValue(for: Int(region.radius))
-        outputlocation = region
+    
+    fileprivate func addCircle(on location: CLCircularRegion) {
+        locationManager.stopUpdatingLocation()
+        mapView.showsUserLocation = false
+        let circle = MKCircle(center: location.center, radius: location.radius)
+        mapView.add(circle)
     }
 }
 
@@ -151,51 +156,31 @@ extension LocationInputView: UITableViewDataSource {
     }
 }
 
-extension MKPlacemark {
-    var fullAddress: String {
-        let firstSpace =
-            (subThoroughfare != nil && thoroughfare != nil) ? " - " : ""
-        
-        let comma = (subThoroughfare != nil || thoroughfare != nil) &&
-                    (subAdministrativeArea != nil || administrativeArea != nil) ? ", " : ""
-        
-        let secondSpace =
-            (subAdministrativeArea != nil || administrativeArea != nil) ? " - " : ""
-        
-        let addressLine = String(
-            format:"%@%@%@%@%@%@%@",
-            thoroughfare ?? "", comma, // street name,
-            subThoroughfare ?? "", firstSpace, // street number -?
-            locality ?? "", secondSpace, // city -?
-            administrativeArea ?? "" // state
-        )
-        
-        return addressLine
-    }
-}
-
 extension LocationInputView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let place = tableViewData[indexPath.row]
         guard let location = place.placemark.location else { return }
+        if let name = place.placemark.name { viewModel.placeName = name }
         
         mapView.removeOverlays(mapView.overlays)
         mapView.removeAnnotations(mapView.annotations)
-        locationManager.stopUpdatingLocation()
         tableView.isHidden = true
         searchBar.resignFirstResponder() // dismiss keyboard
         
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
                                             longitude: location.coordinate.longitude)
         
-        let circle = MKCircle(center: center, radius: 100)
-        
-        mapView.showsUserLocation = false
-        if let name = place.placemark.name {
-            viewModel.placeName = name
-        }
-        mapView.add(circle)
+        outputlocation = CLCircularRegion(center: center,
+                                          radius: 100,
+                                          identifier: String(describing: center))
+        addCircle(on: outputlocation!)
+    }
+}
+
+extension LocationInputView: RadiusMapViewDelegate {
+    func radiusMapView(_ radiusMapView: RadiusMapView, didFind region: CLCircularRegion) {
+        outputlocation = region
     }
 }
 
