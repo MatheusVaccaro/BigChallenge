@@ -114,7 +114,7 @@ extension CreationFrameViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController,
                             willTransitionTo pendingViewControllers: [UIViewController]) {
         if let viewController = pendingViewControllers.first,
-            let pageIndex = pages.firstIndex(of: viewController) {
+            let pageIndex = pages.index(of: viewController) {
             pendingPageIndex = pageIndex
         }
     }

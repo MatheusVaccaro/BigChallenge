@@ -47,28 +47,28 @@ class MoreOptionsViewModel: MoreOptionsViewModelProtocol {
     
     func showLocationCell() {
         if !isShowingLocationCell {
-            isShowingLocationCell.toggle()
+            isShowingLocationCell = !isShowingLocationCell
             numberOfRowsInSection0 += 1
         }
     }
     
     func collapseLocationCell() {
         if isShowingLocationCell {
-            isShowingLocationCell.toggle()
+            isShowingLocationCell = !isShowingLocationCell
             numberOfRowsInSection0 -= 1
         }
     }
     
     func showTimeCell() {
         if !isShowingTimeCell {
-            isShowingTimeCell.toggle()
+            isShowingTimeCell = !isShowingTimeCell
             numberOfRowsInSection1 += 1
         }
     }
     
     func collapseTimeCell() {
         if isShowingTimeCell {
-            isShowingTimeCell.toggle()
+            isShowingTimeCell = !isShowingTimeCell
             numberOfRowsInSection1 -= 1
         }
     }
