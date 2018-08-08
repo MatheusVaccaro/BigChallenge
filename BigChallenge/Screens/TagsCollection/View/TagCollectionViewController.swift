@@ -47,29 +47,19 @@ class TagCollectionViewController: UIViewController {
     
     func bindCollectionView() {
         viewModel.tagsObservable
-            .map { return self.viewModel.removeBigTitleTag($0) }
+            .map {
+                return self.viewModel.filtering
+                    ? self.viewModel.removeBigTitleTag($0)
+                    : $0
+            }
             .map { return self.viewModel.sortMostTasksIn($0) }
             .map { return $0.map { Item(tag: $0) } + [Item(tag: nil)] } // map add button
             .bind(to: tagsCollectionView.rx
             .items(cellIdentifier: TagCollectionViewCell.identifier,
                cellType: TagCollectionViewCell.self)) { (row, item, cell) in
                 
-                guard let tag = item.tag else {
-                    cell.configure()
-                    cell.clickedAddTag.subscribe { _ in
-                        self.addTagEvent?.onNext(true)
-                    }.disposed(by: self.disposeBag)
-                    return
-                }
+                self.configureCell(row: row, item: item, cell: cell)
                 
-                cell.longPressedTag.subscribe {
-                    self.handleLongPressIn(tag: $0.element!)
-                }.disposed(by: self.disposeBag)
-                
-                let tagViewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
-                let indexPath = IndexPath(row: row, section: 0)
-                cell.configure(with: tagViewModel)
-                self.loadSelection(for: cell, tag: tag, at: indexPath)
         }.disposed(by: disposeBag)
         
         if let tagsCollection = tagsCollectionView as? TagCollectionView {
@@ -134,6 +124,25 @@ class TagCollectionViewController: UIViewController {
             cell.isSelected = false
             self.select(false, at: indexPath)
         }
+    }
+    
+    fileprivate func configureCell(row: Int, item: Item, cell: TagCollectionViewCell) {
+        guard let tag = item.tag else {
+            cell.configure()
+            cell.clickedAddTag.subscribe { _ in
+                self.addTagEvent?.onNext(true)
+                }.disposed(by: self.disposeBag)
+            return
+        }
+        
+        cell.longPressedTag.subscribe {
+            self.handleLongPressIn(tag: $0.element!)
+            }.disposed(by: self.disposeBag)
+        
+        let tagViewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
+        let indexPath = IndexPath(row: row, section: 0)
+        cell.configure(with: tagViewModel)
+        self.loadSelection(for: cell, tag: tag, at: indexPath)
     }
     
     fileprivate func shouldPresentBigCollection(on touch: UITouch) -> Bool {
