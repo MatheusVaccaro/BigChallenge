@@ -61,9 +61,10 @@ class TagCollectionViewModel {
     
     func sortMostTasksIn(_ tags: [Tag]) -> [Tag] {
         return tags.sorted {
+            //swiftlint:disable force_cast
             let completedTasks1 = ($0.tasks!.allObjects as! [Task]).filter { !$0.isCompleted }
             let completedTasks2 = ($1.tasks!.allObjects as! [Task]).filter { !$0.isCompleted }
-            
+            //swiftlint:enable force_cast
             return completedTasks1.count > completedTasks2.count
         }
     }
