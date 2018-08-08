@@ -114,20 +114,9 @@ extension RadiusMapView: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let overlay = overlay as? MKCircle {
             if arriving {
-                let circleRenderer = MKCircleRenderer(circle: overlay)
-                
-                circleRenderer.fillColor = UIColor.blue.withAlphaComponent(0.2)
-                circleRenderer.strokeColor = UIColor.blue.withAlphaComponent(0.8)
-                circleRenderer.lineWidth = 3
-                
-                return circleRenderer
+                return MKRadiusCircleRenderer(circle: overlay)
             } else {
-                let invertedRenderer = MKInvertedCircleOverlayRenderer(circle: overlay)
-                
-                invertedRenderer.fillColor = UIColor.blue.withAlphaComponent(0.2)
-                invertedRenderer.strokeColor = UIColor.blue
-                
-                return invertedRenderer
+                return MKInvertedCircleOverlayRenderer(circle: overlay)
             }
         } else {
             return MKOverlayRenderer()
