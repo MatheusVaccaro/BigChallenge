@@ -9,7 +9,6 @@
 import UIKit
 
 protocol CreationFramePresentable {
-    func didTapCancelButton(_ sender: UIButton)
     func didTapMoreOptionsButton(_ sender: UIButton)
     func didTapSaveButton(_ sender: UIButton)
 }
@@ -46,9 +45,7 @@ class CreationFrameViewController: UIViewController {
     // MARK: - IBActions
     
     @IBAction func didTapCancelButton(_ sender: UIButton) {
-        guard let currentPageIndex = currentPageIndex else { return }
-        guard let currentPage = pages[currentPageIndex] as? FrameContent else { return }
-        currentPage.didTapCancelButton(sender)
+        viewModel.didTapCancelButton()
     }
     
     @IBAction func didTapMoreOptionsButton(_ sender: UIButton) {
@@ -60,8 +57,8 @@ class CreationFrameViewController: UIViewController {
     @IBAction func didTapSaveButton(_ sender: UIButton) {
         guard let currentPageIndex = currentPageIndex else { return }
         guard let currentPage = pages[currentPageIndex] as? FrameContent else { return }
-        
         currentPage.didTapSaveButton(sender)
+        viewModel.didTapSaveButton()
     }
     
     // MARK: - Functions

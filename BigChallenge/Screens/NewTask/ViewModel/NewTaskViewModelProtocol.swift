@@ -17,8 +17,6 @@ protocol NewTaskViewModelProtocol {
     
     func numberOfSections() -> Int
     func numberOfRows(in section: Int) -> Int
-    func didTapCancelButton()
-    func didTapDoneButton()
     func didTapDeleteTaskButton()
     
     func taskTitle() -> String?

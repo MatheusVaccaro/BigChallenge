@@ -9,6 +9,11 @@
 import Foundation
 import CoreLocation
 
+protocol CreationFrameViewModelDelegate: class {
+    func didTapCancelButton()
+    func didTapSaveButton()
+}
+
 class CreationFrameViewModel {
     
     fileprivate var taskModel: TaskModel
@@ -19,6 +24,8 @@ class CreationFrameViewModel {
     fileprivate var taskRegion: CLCircularRegion?
     fileprivate var taskArriving: Bool = false
     fileprivate var taskDueDate: Date?
+    
+    weak var delegate: CreationFrameViewModelDelegate?
     
     init(mainInfoViewModel: NewTaskViewModel,
          detailViewModel: MoreOptionsViewModel,
@@ -34,7 +41,16 @@ class CreationFrameViewModel {
         return true
     }
     
-    func createTaskIfPossible() {
+    func didTapCancelButton() {
+        delegate?.didTapCancelButton()
+    }
+    
+    func didTapSaveButton() {
+        createTaskIfPossible()
+        delegate?.didTapSaveButton()
+    }
+    
+    private func createTaskIfPossible() {
         var attributes: [TaskModel.Attributes : Any] = [
             .title : taskTitle,
             .tags : taskTags,

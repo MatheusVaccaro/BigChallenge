@@ -29,10 +29,6 @@ class MoreOptionsViewController: UIViewController, CreationFramePresentable {
     
     // MARK: - TaskFramePresentable
     
-    func didTapCancelButton(_ sender: UIButton) {
-        print("didTapCancelButton")
-    }
-    
     func didTapMoreOptionsButton(_ sender: UIButton) {
         print("didTapMoreOptionsButton")
     }
