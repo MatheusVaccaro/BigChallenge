@@ -31,7 +31,6 @@ class NewTaskViewController: UIViewController, CreationFramePresentable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupGestureRecognizers()
         configureWithViewModel()
         configureTagCollectionViewController()
         configureTaskTitleTextView()
@@ -41,12 +40,12 @@ class NewTaskViewController: UIViewController, CreationFramePresentable {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //        taskTitleTextView.becomeFirstResponder()
+        taskTitleTextView.becomeFirstResponder()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        dismissKeyboard()
+        view.endEditing(true)
     }
     
     // MARK: - IBActions
@@ -75,16 +74,6 @@ class NewTaskViewController: UIViewController, CreationFramePresentable {
         if let taskTitle = viewModel.taskTitle() {
             taskTitleTextView.text = taskTitle
         }
-    }
-    
-    private func setupGestureRecognizers() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tapGestureRecognizer.cancelsTouchesInView = false
-        view.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
-    @objc private func dismissKeyboard() {
-        view.endEditing(true)
     }
     
     private func configureTagCollectionViewController() {
