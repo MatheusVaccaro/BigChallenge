@@ -70,7 +70,7 @@ class NewTagViewModel: NewTagViewModelProtocol {
         guard let tagTitle = tagTitleTextField else { return }
         let tag = model.createTag(with: tagTitle)
         self.tag = tag
-        model.save(object: tag)
+        model.save(tag)
     }
     
     func tagTitle() -> String? {

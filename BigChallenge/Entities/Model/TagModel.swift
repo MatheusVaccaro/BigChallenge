@@ -50,9 +50,8 @@ public class TagModel {
         persistance.save()
     }
     
-    public func save(object: Tag) {
-        guard !tags.contains(object) else { return }
-        tags.append(object)
+    public func save(_ tag: Tag) {
+        if !tags.contains(tag) { tags.append(tag) }
         persistance.save() // delegate manages the array
     }
     

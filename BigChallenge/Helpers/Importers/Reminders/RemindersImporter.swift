@@ -55,7 +55,7 @@ public class RemindersImporter {
                 let (task, tag) = self.convertTaskAndTag(from: reminder)
                 
                 self.taskModel.save(task)
-                self.tagModel.save(object: tag)
+                self.tagModel.save(tag)
             }
             
             self.isImporting = false
