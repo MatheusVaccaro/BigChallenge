@@ -15,6 +15,7 @@ class HomeScreenViewController: UIViewController {
     weak var delegate: HomeScreenViewModelDelegate?
     var viewModel: HomeScreenViewModel!
     
+    @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     @IBOutlet weak var tagContainerView: UIView!
     @IBOutlet weak var taskListContainerView: UIView!
     @IBOutlet weak var bigTitle: UILabel!
@@ -71,7 +72,7 @@ class HomeScreenViewController: UIViewController {
         } else if segue.identifier == "tagCollectionSegue" {
             if let tagCollectionViewController = segue.destination as? TagCollectionViewController {
                 let tagCollectionViewModel =
-                    viewModel.tagCollectionViewModel(with: viewModel.selectedTags)
+                    viewModel.tagCollectionViewModel
                 tagCollectionViewController.viewModel = tagCollectionViewModel
                 self.tagCollectionViewController = tagCollectionViewController
             }
@@ -88,9 +89,14 @@ class HomeScreenViewController: UIViewController {
         tagCollectionViewController.viewModel.selectedTagsObservable
             .subscribe { event in
                 self.viewModel.updateSelectedTagsIfNeeded(event.element)
+                self.bigTitle.text = self.viewModel.bigTitleText
                 if let activity = self.userActivity { self.updateUserActivityState(activity) }
                 self.taskListViewController.viewModel.filterTasks(with: event.element!)
             }.disposed(by: disposeBag)
+    }
+    
+    @IBAction func didTapBigTitle(_ sender: Any) {
+        viewModel.tagCollectionViewModel.unSelectBigTitle()
     }
     
     override func updateUserActivityState(_ activity: NSUserActivity) {

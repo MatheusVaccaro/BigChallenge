@@ -30,28 +30,16 @@ class HomeScreenViewModel {
         return TaskListViewModel(model: taskModel)
     }()
     
-    lazy var tagListViewModel: TagCollectionViewModel = {
+    lazy var tagCollectionViewModel: TagCollectionViewModel = {
         return TagCollectionViewModel(model: tagModel, filtering: true, selectedTags: selectedTags)
     }()
     
-    func tagCollectionViewModel(with selectedTags: [Tag] = []) -> TagCollectionViewModel {
-        return TagCollectionViewModel(model: tagModel, filtering: true, selectedTags: selectedTags)
-    }
-    
-    func updateSelectedTagsIfNeeded(_ tags: [Tag]?) {
-        selectedTags = tags ?? []
-        print("selected tags are: \(selectedTags.map { $0.title })")
-    }
-    
-    func updateUserActivity(_ activity: NSUserActivity) {
-        activity.addUserInfoEntries(from: ["selectedTagIDs" : selectedTags.map { $0.id!.description }])
-        
-        activity.keywords =
-            Set<String>(selectedTags.map { $0.title! })
-        
-        activity.title = userActivityTitle
-        
-        activity.becomeCurrent()
+    var bigTitleText: String {
+        if let tag = selectedTags.first {
+            return tag.title!
+        } else {
+            return "Hello"
+        }
     }
     
     fileprivate var userActivityTitle: String {
@@ -82,11 +70,26 @@ class HomeScreenViewModel {
         activity.isEligibleForHandoff = true
         activity.isEligibleForPublicIndexing = true
         //TODO: uncomment when available
-//        if #available(iOS 12.0, *) {
-//            activity.isEligibleForPrediction = true
-//        }
+        //        if #available(iOS 12.0, *) {
+        //            activity.isEligibleForPrediction = true
+        //        }
         
         return activity
     }
     
+    func updateSelectedTagsIfNeeded(_ tags: [Tag]?) {
+        selectedTags = tags ?? []
+        print("selected tags are: \(selectedTags.map { $0.title })")
+    }
+    
+    func updateUserActivity(_ activity: NSUserActivity) {
+        activity.addUserInfoEntries(from: ["selectedTagIDs" : selectedTags.map { $0.id!.description }])
+        
+        activity.keywords =
+            Set<String>(selectedTags.map { $0.title! })
+        
+        activity.title = userActivityTitle
+        
+        activity.becomeCurrent()
+    }
 }

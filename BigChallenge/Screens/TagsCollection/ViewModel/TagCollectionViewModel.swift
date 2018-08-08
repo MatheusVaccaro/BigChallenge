@@ -18,6 +18,7 @@ class TagCollectionViewModel {
     private(set) var tags: [Tag]
     private(set) var filteredTags: [Tag]
     private(set) var selectedTags: [Tag]
+    
     private(set) var selectedTagEvent: PublishSubject<Tag>
     private let disposeBag = DisposeBag()
     private var model: TagModel
@@ -41,6 +42,25 @@ class TagCollectionViewModel {
         return TagCollectionViewCellViewModel(with: tag)
     }
     
+    func unSelectBigTitle() {
+        if let tag = selectedTags.first {
+            selectedTagEvent.onNext(tag)
+        }
+    }
+    
+    func sortMostTasksIn(_ tags: [Tag]) -> [Tag] {
+        return tags.sorted {
+            let completedTasks1 = ($0.tasks!.allObjects as! [Task]).filter { !$0.isCompleted }
+            let completedTasks2 = ($1.tasks!.allObjects as! [Task]).filter { !$0.isCompleted }
+            
+            return completedTasks1.count > completedTasks2.count
+        }
+    }
+    
+    func removeBigTitleTag(_ tags: [Tag]) -> [Tag] {
+        return tags.filter { selectedTags.isEmpty ? true : selectedTags.first != $0 }
+    }
+    
     fileprivate func subscribeToSelectedTag(filtering: Bool) {
         selectedTagEvent
             .subscribe { event in
@@ -54,7 +74,6 @@ class TagCollectionViewModel {
                 
                 if filtering {
                     self.filterTags(with: tag)
-                    self.tagsObservable.onNext(self.filteredTags)
                 }
             }.disposed(by: disposeBag)
     }
@@ -73,11 +92,11 @@ class TagCollectionViewModel {
 
     fileprivate func filterTags(with tag: Tag) {
         filteredTags = model.tags.filter {
-            return selectedTags.isEmpty || //no tag is selected
-                selectedTags.contains($0) || // tag is selected
-                !(($0.tasks!.allObjects as! [Task]) //tag has tasks in common
-                    .filter { $0.tags!.contains(tag) })
-                    .isEmpty
+            return (selectedTags.isEmpty ||                          //no tag is selected, or
+                selectedTags.contains($0) ||                        //tag is selected, or
+                !(($0.tasks!.allObjects as! [Task])                 //tag has uncompleted tasks in common
+                    .filter { !$0.isCompleted && $0.tags!.contains(tag) }).isEmpty)
         }
+        tagsObservable.onNext(filteredTags)
     }
 }

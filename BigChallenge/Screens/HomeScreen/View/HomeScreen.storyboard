@@ -37,11 +37,15 @@
                                     <segue destination="fc3-rz-cDg" kind="embed" identifier="tagCollectionSegue" id="h6S-Ve-BxX"/>
                                 </connections>
                             </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PrB-8h-Asu">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PrB-8h-Asu">
                                 <rect key="frame" x="8" y="61" width="66.666666666666671" height="36"/>
+                                <gestureRecognizers/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="1je-7r-bFK" appends="YES" id="Loi-vg-kBT"/>
+                                </connections>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -61,10 +65,16 @@
                     <connections>
                         <outlet property="bigTitle" destination="PrB-8h-Asu" id="5tW-9y-1bj"/>
                         <outlet property="tagContainerView" destination="fUe-Ak-aYb" id="qwP-ET-avs"/>
+                        <outlet property="tapGestureRecognizer" destination="1je-7r-bFK" id="msN-uc-OZP"/>
                         <outlet property="taskListContainerView" destination="cie-Gz-Vzx" id="ktk-MH-6by"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OAl-vn-cbj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="1je-7r-bFK">
+                    <connections>
+                        <action selector="didTapBigTitle:" destination="hA5-o5-LMg" id="grb-sb-T6e"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-69.599999999999994" y="-428.63568215892059"/>
         </scene>
