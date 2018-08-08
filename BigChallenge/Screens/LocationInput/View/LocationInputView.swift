@@ -70,6 +70,7 @@ class LocationInputView: UIViewController {
         searchBar.delegate = self
         searchBar.barStyle = .default
         searchBar.searchBarStyle = .minimal
+        searchBar.placeholder = viewModel.searchBarPlaceholder
         searchBar.accessibilityHint = viewModel.searchBarHint
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font =
             UIFont.font(sized: 17, weight: .regular, with: .body)

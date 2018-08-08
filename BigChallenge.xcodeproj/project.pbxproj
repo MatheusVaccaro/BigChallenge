@@ -57,6 +57,7 @@
 		22CC1865210511CC00486B27 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CC1864210511CC00486B27 /* Colors.swift */; };
 		22D84C63210BF1E3004B8969 /* LocationInputView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22D84C62210BF1E3004B8969 /* LocationInputView.storyboard */; };
 		22D84C65210BF4D1004B8969 /* LocationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D84C64210BF4D1004B8969 /* LocationInputView.swift */; };
+		22ED5955211A7C21008EAD7D /* MKRadiusCircleRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ED5954211A7C21008EAD7D /* MKRadiusCircleRenderer.swift */; };
 		25A3EF9F7B0FADAB1A8E19B8 /* Pods_BigChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18C9FEFF01841372B83A1C4 /* Pods_BigChallengeUITests.framework */; };
 		2934BCCA21003E0700B6A05A /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2934BCC921003E0700B6A05A /* TaskTests.swift */; };
 		294490EE20FD297200333F11 /* TaskViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294490ED20FD297200333F11 /* TaskViewModelTests.swift */; };
@@ -182,6 +183,7 @@
 		22CC1864210511CC00486B27 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		22D84C62210BF1E3004B8969 /* LocationInputView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationInputView.storyboard; sourceTree = "<group>"; };
 		22D84C64210BF4D1004B8969 /* LocationInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputView.swift; sourceTree = "<group>"; };
+		22ED5954211A7C21008EAD7D /* MKRadiusCircleRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKRadiusCircleRenderer.swift; sourceTree = "<group>"; };
 		2766B305F29EF8BE8DDEADCA /* Pods-BigChallengeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigChallengeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigChallengeUITests/Pods-BigChallengeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2934BCC921003E0700B6A05A /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		294490ED20FD297200333F11 /* TaskViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModelTests.swift; sourceTree = "<group>"; };
@@ -422,6 +424,7 @@
 			isa = PBXGroup;
 			children = (
 				22D84C5F210BF12C004B8969 /* View */,
+				22D84C66210BF4D8004B8969 /* ViewModel */,
 			);
 			path = LocationInput;
 			sourceTree = "<group>";
@@ -433,8 +436,8 @@
 				22D84C64210BF4D1004B8969 /* LocationInputView.swift */,
 				2255B3AB211295DD00F2F37C /* radiusMapView.swift */,
 				228946382113F1A4009D05CB /* InvertedCircle.swift */,
+				22ED5954211A7C21008EAD7D /* MKRadiusCircleRenderer.swift */,
 				222888DB211873DD0093EEF7 /* LocationTableViewCell.swift */,
-				22D84C66210BF4D8004B8969 /* ViewModel */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1072,6 +1075,7 @@
 				22205ADD20FF7ADF007689D7 /* BigTagCollectionViewController.swift in Sources */,
 				228946352113999A009D05CB /* CreationFrameViewModel.swift in Sources */,
 				C23753AE20B6461E00C1CE15 /* Coordinator.swift in Sources */,
+				22ED5955211A7C21008EAD7D /* MKRadiusCircleRenderer.swift in Sources */,
 				2286A71620E3DF2100BE92AA /* Model.xcdatamodeld in Sources */,
 				22325A7720FBC3F100E5F8C6 /* TagCollectionViewCell.swift in Sources */,
 				223C0C0820E529D600CF39ED /* Persistence.swift in Sources */,

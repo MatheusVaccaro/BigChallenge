@@ -14,14 +14,19 @@ class TagCollectionViewModel {
     
     var tagsObservable: BehaviorSubject<[Tag]>
     var selectedTagsObservable: BehaviorSubject<[Tag]>
+    private(set) var selectedTagEvent: PublishSubject<Tag>
     
     private(set) var tags: [Tag]
     private(set) var filteredTags: [Tag]
     private(set) var selectedTags: [Tag]
     
-    private(set) var selectedTagEvent: PublishSubject<Tag>
     private let disposeBag = DisposeBag()
     private var model: TagModel
+    
+    let alertControllerTitle = Strings.Tag.CollectionScreen.alertControllerTitle
+    let alertControllerMessage = Strings.Tag.CollectionScreen.alertControllerMessage
+    let deleteActionTitle = Strings.Tag.CollectionScreen.deleteActionTitle
+    let cancelActionTitle = Strings.Tag.CollectionScreen.cancelActionTitle
     
     init(model: TagModel, filtering: Bool, selectedTags: [Tag]) {
         self.model = model
@@ -46,6 +51,10 @@ class TagCollectionViewModel {
         if let tag = selectedTags.first {
             selectedTagEvent.onNext(tag)
         }
+    }
+    
+    func delete(tag: Tag) {
+        model.delete(object: tag)
     }
     
     func sortMostTasksIn(_ tags: [Tag]) -> [Tag] {

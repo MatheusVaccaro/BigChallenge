@@ -15,6 +15,7 @@ class TagCollectionViewCell: UICollectionViewCell {
     static let identifier = "tagCollectionCell"
     
     private(set) var clickedAddTag: PublishSubject<Bool> = PublishSubject()
+    private(set) var longPressedTag: PublishSubject<Tag> = PublishSubject()
     
     enum Kind {
         case tag
@@ -64,6 +65,8 @@ class TagCollectionViewCell: UICollectionViewCell {
     
     private(set) var viewModel: TagCollectionViewCellViewModel?
     
+    private var longPressRecognizer: UILongPressGestureRecognizer!
+    
     override func awakeFromNib() {
         tagUILabel.font = UIFont.font(sized: 19, weight: .medium, with: .title3)
         
@@ -83,6 +86,18 @@ class TagCollectionViewCell: UICollectionViewCell {
         
         contentView.addSubview(maskLabel)
         kind = .tag
+        
+        longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        contentView.addGestureRecognizer(longPressRecognizer!)
+    }
+    
+    deinit {
+        contentView.removeGestureRecognizer(longPressRecognizer)
+    }
+    
+    @objc private func handleLongPress() {
+        guard let viewModel = viewModel else { return }
+        longPressedTag.onNext(viewModel.tag)
     }
     
     func configure(with viewModel: TagCollectionViewCellViewModel? = nil) {
@@ -101,9 +116,9 @@ class TagCollectionViewCell: UICollectionViewCell {
     }
     
     func configureDefault() {
+        contentView.removeGestureRecognizer(longPressRecognizer)
         tagUILabel.text = "+"
         maskLabel.text = "+"
-        
         layer.shadowColor = UIColor.black.cgColor
         gradientLayer.colors = UIColor.Tags.redGradient
         contentView.mask = maskLabel

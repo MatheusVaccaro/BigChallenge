@@ -17,7 +17,7 @@ class LocationInputViewModel {
     
     public weak var delegate: LocationInputDelegate?
     
-    var placeName = "desired location"
+    var placeName = Strings.LocationInputView.defaultPlaceName
     let searchBarHint = Strings.LocationInputView.accessibilityHintSearchBar
     let mapViewAccessibilityLabel =
         Strings.LocationInputView.accessibilitylabelMap
@@ -25,6 +25,7 @@ class LocationInputViewModel {
         Strings.LocationInputView.accessibilityValueEmptyMap
     let arrivingString = Strings.LocationInputView.arrivingString
     let leavingString = Strings.LocationInputView.leavingString
+    let searchBarPlaceholder = Strings.LocationInputView.searchBarPlaceholder
     
     func accessibilityValue(for radius: Int) -> String {
         let localizedString = Strings.LocationInputView.accessibilityValueMap

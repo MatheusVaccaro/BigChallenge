@@ -12,7 +12,7 @@ import RxSwift
 
 class TagCollectionViewCellViewModel {
     
-    private var tag: Tag
+    private(set) var tag: Tag
     
     private let disposeBag = DisposeBag()
     
