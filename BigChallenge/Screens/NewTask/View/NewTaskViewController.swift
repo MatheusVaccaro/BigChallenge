@@ -114,6 +114,7 @@ class NewTaskViewController: UIViewController, CreationFramePresentable {
     }
     
     private func configureTaskNotesTextView() {
+        taskNotesTextView.delegate = self
         taskNotesTextView.font = UIFont.font(sized: 14, weight: .regular, with: .body)
         taskNotesTextView.textContainer.lineBreakMode = .byTruncatingTail
         taskNotesTextView.placeholderColor = UIColor.lightGray.withAlphaComponent(0.5)

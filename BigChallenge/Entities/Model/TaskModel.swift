@@ -36,20 +36,14 @@ public class TaskModel {
     }
     
     // MARK: - CRUD Methods
-    
     public func save(_ task: Task) {
-        if !tasks.contains(task) {
-            tasks.append(task)
-        }
-        persistance.save()
-        delegate?.taskModel(self, didSave: task)
+        if !tasks.contains(task) { tasks.append(task) }
+        persistance.save() // delegate manages the array
     }
     
     public func delete(_ task: Task) {
-        guard let taskIndex = tasks.index(of: task) else { print("could not delete \(task) "); return }
-        tasks.remove(at: taskIndex)
-        persistance.delete(task)
-        delegate?.taskModel(self, didDelete: task)
+        guard tasks.contains(task) else { print("could not delete \(task) "); return }
+        persistance.delete(task) // delegate manages the array
     }
     
     public func createTask(with attributes: [Attributes : Any]) -> Task {
