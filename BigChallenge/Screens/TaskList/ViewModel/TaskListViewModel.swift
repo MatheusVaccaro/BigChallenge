@@ -93,12 +93,6 @@ public class TaskListViewModel {
         self.shouldAddTask.onNext(true)
     }
     
-    func shouldShowCompletedTasks(_ tableView: UITableView) -> Bool {
-        return tableView.contentSize.height < tableView.bounds.height
-            ? tableView.contentOffset.y > 110
-            : tableView.contentOffset.y + tableView.bounds.height + 110 > tableView.contentSize.height
-    }
-    
     // MARK: Helpers
     /**
      verifies that task contains only one tag, which is the current selected tag

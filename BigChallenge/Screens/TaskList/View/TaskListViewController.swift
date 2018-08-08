@@ -52,6 +52,10 @@ public class TaskListViewController: UIViewController {
         bindTableView()
     }
     
+    public override func viewDidAppear(_ animated: Bool) {
+        resetFeedback()
+    }
+    
     private func bindTableView() {
         let dataSource = createDataSource()
         
@@ -97,11 +101,32 @@ public class TaskListViewController: UIViewController {
                 
                 return cell
             })
+        
+        tableView.rx.willBeginDragging.subscribe { _ in
+            self.resetFeedback()
+            self.prepareFeedback()
+        }.disposed(by: disposeBag)
+        
+        tableView.rx.didScroll.subscribe { _ in
+            if !self.lightImpactOcurred, self.tableView.contentOffset.y < -50.0 {
+                self.triggerImpact(.light)
+            } else if !self.mediumImpactOcurred, self.tableView.contentOffset.y < -110.0 {
+                self.triggerImpact(.medium)
+            } else if !self.lightImpactOcurred, self.shouldTriggerMediumImpact(self.tableView) {
+                self.triggerImpact(.light)
+            } else if !self.mediumImpactOcurred, self.shouldShowCompletedTasks(self.tableView) {
+                self.triggerImpact(.medium)
+            }
+        }.disposed(by: disposeBag)
 
         tableView.rx.didEndDragging.subscribe { _ in
-            if self.tableView.contentOffset.y < -100.0 {
+            if self.mediumImpactOcurred {
+                self.triggerImpact(.heavy)
+            }
+            
+            if self.tableView.contentOffset.y < -110.0 {
                 self.viewModel.shouldGoToAddTask()
-             } else if self.viewModel.shouldShowCompletedTasks(self.tableView) {
+             } else if self.shouldShowCompletedTasks(self.tableView) {
                 self.viewModel.showsCompletedTasks = !self.viewModel.showsCompletedTasks
             }
         }.disposed(by: disposeBag)
@@ -134,6 +159,54 @@ public class TaskListViewController: UIViewController {
                            colored: UIColor.purple)
         
         heightOfHeaderTag = alsoTaggedHeader.bounds.size.height
+    }
+    
+    // MARK: - Haptics
+    fileprivate var feedbackGenerator: UIImpactFeedbackGenerator?
+    fileprivate var lightImpactOcurred: Bool = false
+    fileprivate var heavyImpactOcurred: Bool = false
+    fileprivate var mediumImpactOcurred: Bool = false
+    
+    fileprivate func prepareFeedback() {
+        print("preparing feedback")
+        feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+        feedbackGenerator?.prepare()
+    }
+    
+    fileprivate func triggerImpact(_ style: UIImpactFeedbackStyle) {
+        print("triggered \(style.rawValue) impact")
+        self.feedbackGenerator?.impactOccurred()
+        switch style {
+        case .light:
+            lightImpactOcurred = true
+            feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+            feedbackGenerator?.prepare()
+        case .medium:
+            mediumImpactOcurred = true
+            feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+            feedbackGenerator?.prepare()
+        case .heavy:
+            heavyImpactOcurred = true
+        }
+    }
+    
+    fileprivate func resetFeedback() {
+        feedbackGenerator = nil
+        mediumImpactOcurred = false
+        heavyImpactOcurred = false
+        lightImpactOcurred = false
+    }
+    
+    fileprivate func shouldShowCompletedTasks(_ tableView: UITableView) -> Bool {
+        return tableView.contentSize.height < tableView.bounds.height
+            ? tableView.contentOffset.y > 110
+            : tableView.contentOffset.y + tableView.bounds.height + 110 > tableView.contentSize.height
+    }
+    
+    fileprivate func shouldTriggerMediumImpact(_ tableView: UITableView) -> Bool {
+        return tableView.contentSize.height < tableView.bounds.height
+            ? tableView.contentOffset.y > 60
+            : tableView.contentOffset.y + tableView.bounds.height + 60 > tableView.contentSize.height
     }
 }
 
