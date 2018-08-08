@@ -74,6 +74,37 @@ public class TagModel {
             return tag
         }
     }
+    
+    public func update(_ tag: Tag, with attributes: [Attributes : Any]) {
+        if let color = attributes[.color] as? Int64 {
+            tag.color = color
+        }
+        if let dates = attributes[.dates] as? [Date] {
+            tag.dates = dates
+        }
+        if let dueDate = attributes[.dueDate] as? Date {
+            tag.dueDate = dueDate
+        }
+        if let id = attributes[.id] as? UUID {
+            tag.id = id
+        }
+        if let title = attributes[.title] as? String {
+            tag.title = title
+        }
+        if let tasks = attributes[.tasks] as? [Task] {
+            tag.tasks = NSSet(array: tasks)
+        }
+    }
+    
+    // The attributes of the Tag class, mapped according to CoreData
+    public enum Attributes {
+        case color
+        case dates
+        case dueDate
+        case id
+        case title
+        case tasks
+    }
 }
 
 // MARK: - TagPersistenceDelegate Extension
