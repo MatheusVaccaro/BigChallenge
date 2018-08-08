@@ -68,7 +68,9 @@ class NewTagViewModel: NewTagViewModelProtocol {
     
     private func createTag() {
         guard let tagTitle = tagTitleTextField else { return }
-        let tag = model.createTag(with: tagTitle)
+        let attributes: [TagModel.Attributes : Any] =
+            [.title : tagTitle as Any]
+        let tag = model.createTag(with: attributes)
         self.tag = tag
         model.save(tag)
     }

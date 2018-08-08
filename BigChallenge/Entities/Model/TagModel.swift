@@ -76,23 +76,27 @@ public class TagModel {
     }
     
     public func createTag(with attributes: [Attributes : Any]) -> Tag {
-        let tag = persistance.create(Tag.self)
-        
-        let color = attributes[.color] as? Int64 ?? nextColor
-        let dates = attributes[.dates] as? [Date] ?? []
-        let dueDate = attributes[.dueDate] as? Date ?? Date()
-        let id = attributes[.id] as? UUID ?? UUID()
         let title = attributes[.title] as? String ?? ""
-        let tasks = attributes[.tasks] as? [Task] ?? []
-        
-        tag.color = color
-        tag.dates = dates
-        tag.dueDate = dueDate
-        tag.id = id
-        tag.title = title
-        tag.tasks = NSSet(array: tasks)
-        
-        return tag
+        if let tag = (tags.first { $0.title == title }) {
+            return tag
+        } else {
+            let tag = persistance.create(Tag.self)
+            
+            let color = attributes[.color] as? Int64 ?? nextColor
+            let dates = attributes[.dates] as? [Date] ?? []
+            let dueDate = attributes[.dueDate] as? Date ?? Date()
+            let id = attributes[.id] as? UUID ?? UUID()
+            let tasks = attributes[.tasks] as? [Task] ?? []
+            
+            tag.color = color
+            tag.dates = dates
+            tag.dueDate = dueDate
+            tag.id = id
+            tag.title = title
+            tag.tasks = NSSet(array: tasks)
+            
+            return tag
+        }
     }
     
     public func update(_ tag: Tag, with attributes: [Attributes : Any]) {
