@@ -55,7 +55,7 @@ public class RemindersImporter {
                 let (task, tag) = self.convertTaskAndTag(from: reminder)
                 
                 self.taskModel.save(task)
-                self.tagModel.save(object: tag)
+                self.tagModel.save(tag)
             }
             
             self.isImporting = false
@@ -108,17 +108,18 @@ public class RemindersImporter {
     
     // Convert a reminder to a Task and a Tag
     private func convertTaskAndTag(from reminder: Reminder) -> (task: Task, tag: Tag) {
-        let attributes: [TaskModel.Attributes : Any] =
-            [.title : reminder.title ?? ""]
-        let task = taskModel.createTask(with: attributes)
-        let tag = tagModel.createTag(with: reminder.calendar.title)
-    
-        task.isCompleted = reminder.isCompleted
-        task.completionDate = reminder.completionDate
-        task.dueDate = reminder.completionDate
-        task.creationDate = reminder.creationDate
+        let tagAttributes: [TagModel.Attributes : Any] =
+            [.title : reminder.calendar.title as Any]
+        let tag = tagModel.createTag(with: tagAttributes)
         
-        task.addToTags(tag)
+        let taskAttributes: [TaskModel.Attributes : Any] =
+            [.title : reminder.title as Any,
+             .isCompleted : reminder.isCompleted as Any,
+             .completionDate : reminder.completionDate as Any,
+             .dueDate : reminder.completionDate as Any,
+             .creationDate : reminder.creationDate as Any,
+             .tags : [tag] as Any]
+        let task = taskModel.createTask(with: taskAttributes)
         
         taskModel.associate(task, with: reminder.dataPacket)
 	

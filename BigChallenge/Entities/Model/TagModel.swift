@@ -50,9 +50,8 @@ public class TagModel {
         persistance.save()
     }
     
-    public func save(object: Tag) {
-        guard !tags.contains(object) else { return }
-        tags.append(object)
+    public func save(_ tag: Tag) {
+        if !tags.contains(tag) { tags.append(tag) }
         persistance.save() // delegate manages the array
     }
     
@@ -61,19 +60,59 @@ public class TagModel {
         persistance.delete(object) // delegate manages the array
     }
     
-    public func createTag(with title: String) -> Tag {
+    public func createTag(with attributes: [Attributes : Any]) -> Tag {
+        let title = attributes[.title] as? String ?? ""
         if let tag = (tags.first { $0.title == title }) {
             return tag
-        } else { // dont create repeated tags
-            let tag: Tag = persistance.create(Tag.self)
+        } else {
+            let tag = persistance.create(Tag.self)
             
-            tag.id = UUID()
+            let color = attributes[.color] as? Int64 ?? nextColor
+            let dates = attributes[.dates] as? [Date] ?? []
+            let dueDate = attributes[.dueDate] as? Date ?? Date()
+            let id = attributes[.id] as? UUID ?? UUID()
+            let tasks = attributes[.tasks] as? [Task] ?? []
+            
+            tag.color = color
+            tag.dates = dates
+            tag.dueDate = dueDate
+            tag.id = id
             tag.title = title
-            tag.color = nextColor
-            tag.tasks = []
+            tag.tasks = NSSet(array: tasks)
             
             return tag
         }
+    }
+    
+    public func update(_ tag: Tag, with attributes: [Attributes : Any]) {
+        if let color = attributes[.color] as? Int64 {
+            tag.color = color
+        }
+        if let dates = attributes[.dates] as? [Date] {
+            tag.dates = dates
+        }
+        if let dueDate = attributes[.dueDate] as? Date {
+            tag.dueDate = dueDate
+        }
+        if let id = attributes[.id] as? UUID {
+            tag.id = id
+        }
+        if let title = attributes[.title] as? String {
+            tag.title = title
+        }
+        if let tasks = attributes[.tasks] as? [Task] {
+            tag.tasks = NSSet(array: tasks)
+        }
+    }
+    
+    // The attributes of the Tag class, mapped according to CoreData
+    public enum Attributes {
+        case color
+        case dates
+        case dueDate
+        case id
+        case title
+        case tasks
     }
 }
 
