@@ -50,20 +50,6 @@ class NewTaskViewController: UIViewController, CreationFramePresentable {
     
     // MARK: - IBActions
     
-    @IBAction func didTapCancelButton(_ sender: UIButton) {
-        viewModel?.didTapCancelButton()
-    }
-    
-    @IBAction func didTapSaveButton(_ sender: UIButton) {
-        guard let taskTitle = taskTitleTextView.text else { return }
-        viewModel?.taskTitleText = taskTitle
-        
-        guard let taskNotes = taskNotesTextView.text else { return }
-        viewModel?.taskNotesText = taskNotes
-        
-        viewModel?.didTapDoneButton()
-    }
-    
     @IBAction func didTapMoreOptionsButton(_ sender: UIButton) {
     }
     
@@ -146,5 +132,13 @@ extension NewTaskViewController: UITextViewDelegate {
             return false
         }
         return true
+    }
+    
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        if textView === taskTitleTextView {
+            viewModel?.taskTitleText = textView.text
+        } else {
+            viewModel?.taskNotesText = textView.text
+        }
     }
 }

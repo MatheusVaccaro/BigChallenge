@@ -9,8 +9,6 @@
 import Foundation
 
 protocol NewTaskViewModelDelegate: class {
-    func didTapCancelButton()
-    func didTapDoneButton()
     func didTapDeleteTaskButton()
     func didTapMoreOptionsButton()
 }
@@ -75,19 +73,6 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
         }
     }
     
-    func didTapCancelButton() {
-        delegate?.didTapCancelButton()
-    }
-    
-    func didTapDoneButton() {
-        delegate?.didTapDoneButton()
-//        if isEditing {
-//            // TODO
-//        } else {
-//            createTask()
-//        }
-    }
-    
     func didTapDeleteTaskButton() {
         delegate?.didTapDeleteTaskButton()
         deleteTask()
@@ -101,21 +86,6 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
         guard let task = task else { return }
         taskModel.delete(task)
     }
-    
-//    private func createTask() {
-//        guard let taskTitle = taskTitleText else { return }
-//        guard let taskNotes = taskNotesText else { return }
-//        let attributes: [TaskModel.Attributes : Any] = [
-//            .title : taskTitle,
-//            .notes : taskNotes
-//        ]
-//        let task = taskModel.createTask(with: attributes)
-//        self.task = task
-//        selectedTags.forEach { tag in
-//            self.task?.addToTags(tag)
-//        }
-//        taskModel.save(task)
-//    }
     
     func taskTitle() -> String? {
         return task?.title

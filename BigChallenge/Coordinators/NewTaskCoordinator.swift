@@ -50,10 +50,8 @@ class NewTaskCoordinator: Coordinator {
         let newTaskViewModel = NewTaskViewModel(task: task,
                                                 isEditing: isEditing,
                                                 taskModel: taskModel)
-        newTaskViewModel.delegate = self
         newTaskViewController.viewModel = newTaskViewModel
 
-        // Tag Collection
         let tagCollectionViewModel = TagCollectionViewModel(model: tagModel,
                                                             filtering: false,
                                                             selectedTags: selectedTags)
@@ -71,9 +69,11 @@ class NewTaskCoordinator: Coordinator {
     
         // Task Frame
         let creationFrameViewController = CreationFrameViewController.instantiate()
-        creationFrameViewController.viewModel = CreationFrameViewModel(mainInfoViewModel: newTaskViewModel,
-                                                                   detailViewModel: moreOptionsViewModel,
-                                                                   taskModel: taskModel)
+        let creationFrameViewModel = CreationFrameViewModel(mainInfoViewModel: newTaskViewModel,
+                                                           detailViewModel: moreOptionsViewModel,
+                                                           taskModel: taskModel)
+        creationFrameViewModel.delegate = self
+        creationFrameViewController.viewModel = creationFrameViewModel
         self.taskFrameViewController = creationFrameViewController
         newTaskViewController.delegate = creationFrameViewController
         
@@ -102,23 +102,14 @@ class NewTaskCoordinator: Coordinator {
     
 }
 
-extension NewTaskCoordinator: NewTaskViewModelDelegate {
+extension NewTaskCoordinator: CreationFrameViewModelDelegate {
     
     func didTapCancelButton() {
         dismissViewController()
     }
     
-    func didTapDoneButton() {
-        taskFrameViewController?.viewModel.createTaskIfPossible()
+    func didTapSaveButton() {
         dismissViewController()
-    }
-    
-    func didTapDeleteTaskButton() {
-        dismissViewController()
-    }
-    
-    func didTapMoreOptionsButton() {
-        showMoreOptions()
     }
     
     private func dismissViewController() {
