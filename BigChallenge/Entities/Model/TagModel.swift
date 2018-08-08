@@ -60,21 +60,6 @@ public class TagModel {
         persistance.delete(object) // delegate manages the array
     }
     
-    public func createTag(with title: String) -> Tag {
-        if let tag = (tags.first { $0.title == title }) {
-            return tag
-        } else { // dont create repeated tags
-            let tag: Tag = persistance.create(Tag.self)
-            
-            tag.id = UUID()
-            tag.title = title
-            tag.color = nextColor
-            tag.tasks = []
-            
-            return tag
-        }
-    }
-    
     public func createTag(with attributes: [Attributes : Any]) -> Tag {
         let title = attributes[.title] as? String ?? ""
         if let tag = (tags.first { $0.title == title }) {
