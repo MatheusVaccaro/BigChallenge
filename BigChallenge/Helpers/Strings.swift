@@ -40,8 +40,11 @@ struct Strings {
         }
         
         struct CollectionScreen {
-            static let title =
-                NSLocalizedString("CollectionScreenTitle", comment: "screen title when on \"all tags\" screen")
+            static let title = NSLocalizedString("CollectionScreenTitle", comment: "screen title when on \"all tags\" screen")
+            static let alertControllerTitle = NSLocalizedString("alertControllerTitle", comment: "title for alert sheet used to edit tag")
+            static let alertControllerMessage = NSLocalizedString("alertControllerMessage", comment: "message of alert sheet used to edit tag")
+            static let deleteActionTitle = NSLocalizedString("deleteActionTitle", comment: "delete button title on edit action sheet")
+            static let cancelActionTitle = NSLocalizedString("cancelActionTitle", comment: "cancel button title on edit action sheet")
         }
     }
     
@@ -51,6 +54,10 @@ struct Strings {
         
         static let leavingString = NSLocalizedString("leavingLocationInputView",
                                                      comment: "String for selecting leaving location")
+        
+        static let searchBarPlaceholder = NSLocalizedString("searchBarPlaceholder", comment: "placeHolder for searchBar that searches locations")
+        
+        static let defaultPlaceName = NSLocalizedString("defaultPlaceName", comment: "default place when reading location name in voiceOver")
         
         static let accessibilitylabelMap = NSLocalizedString("mapViewAccessibilitylabel",
                                                              comment: "description of map to voiceOver users")

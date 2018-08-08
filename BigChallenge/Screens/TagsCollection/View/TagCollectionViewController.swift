@@ -20,13 +20,15 @@ class TagCollectionViewController: UIViewController {
         return viewModel!.tagsObservable
     }
     
-    var viewModel: TagCollectionViewModel!
-    var clickedTagEvent: BehaviorSubject<Tag>?
-    private(set) var addTagEvent: PublishSubject<Bool>?
-    
     @IBOutlet weak var tagsCollectionView: UICollectionView!
     
+    var viewModel: TagCollectionViewModel!
+    fileprivate var presentingActionSheet: Bool = false
+    
+    var clickedTagEvent: BehaviorSubject<Tag>?
+    private(set) var addTagEvent: PublishSubject<Bool>?
     private let disposeBag = DisposeBag()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +62,10 @@ class TagCollectionViewController: UIViewController {
                     return
                 }
                 
+                cell.longPressedTag.subscribe {
+                    self.handleLongPressIn(tag: $0.element!)
+                }.disposed(by: self.disposeBag)
+                
                 let tagViewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
                 let indexPath = IndexPath(row: row, section: 0)
                 cell.configure(with: tagViewModel)
@@ -86,8 +92,27 @@ class TagCollectionViewController: UIViewController {
         }.disposed(by: disposeBag)
     }
     
-    private func clickedAddButton() {
+    func handleLongPressIn(tag: Tag) {
+        guard !presentingActionSheet else { return }
+        presentingActionSheet = true
+        let actionsheet = UIAlertController(title: viewModel.alertControllerTitle,
+                                            message: viewModel.alertControllerMessage,
+                                            preferredStyle: .actionSheet)
         
+        let deleteAction = UIAlertAction(title: viewModel.deleteActionTitle, style: .destructive) { _ in
+            self.viewModel.delete(tag: tag)
+            self.presentingActionSheet = false
+        }
+        
+        let cancelAction = UIAlertAction(title: viewModel.cancelActionTitle, style: .cancel) { _ in
+            print("Cancelled")
+            self.presentingActionSheet = false
+        }
+        
+        actionsheet.addAction(deleteAction)
+        actionsheet.addAction(cancelAction)
+        
+        present(actionsheet, animated: true, completion: nil)
     }
     
     private func select(_ bool: Bool, at index: IndexPath, animated: Bool = false) {
@@ -114,9 +139,7 @@ class TagCollectionViewController: UIViewController {
     fileprivate func shouldPresentBigCollection(on touch: UITouch) -> Bool {
         if self.traitCollection.forceTouchCapability == .available {
             let force = touch.force/touch.maximumPossibleForce
-            if force >= 0.5 { return true }
-        } else if false {
-            //HANDLE LONG PRESS
+            if force >= 0.5 { return true } // TODO move to viewModel
         }
         return false
     }
