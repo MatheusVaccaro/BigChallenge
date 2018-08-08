@@ -117,10 +117,9 @@ public class RemindersImporter {
              .isCompleted : reminder.isCompleted as Any,
              .completionDate : reminder.completionDate as Any,
              .dueDate : reminder.completionDate as Any,
-             .creationDate : reminder.creationDate as Any]
+             .creationDate : reminder.creationDate as Any,
+             .tags : [tag] as Any]
         let task = taskModel.createTask(with: taskAttributes)
-        
-        task.addToTags(tag)
         
         taskModel.associate(task, with: reminder.dataPacket)
 	
