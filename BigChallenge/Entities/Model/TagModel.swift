@@ -53,14 +53,12 @@ public class TagModel {
     public func save(object: Tag) {
         guard !tags.contains(object) else { return }
         tags.append(object)
-        persistance.save()
+        persistance.save() // delegate manages the array
     }
     
     public func delete(object: Tag) {
-        guard let tagIndex = tags.index(of: object) else { print("could not delete \(object) "); return }
-        // TODO change to removeAll when available
-        persistance.delete(object)
-        tags.remove(at: tagIndex)
+        guard tags.contains(object) else { print("could not delete \(object) "); return }
+        persistance.delete(object) // delegate manages the array
     }
     
     public func createTag(with title: String) -> Tag {

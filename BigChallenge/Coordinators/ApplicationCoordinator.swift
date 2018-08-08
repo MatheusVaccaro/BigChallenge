@@ -41,6 +41,7 @@ class ApplicationCoordinator: Coordinator {
         window.makeKeyAndVisible()
         showTaskList()
         remindersImporter.attemptToImport()
+        UITextField.appearance().keyboardAppearance = .light
     }
     
     private func showTaskList() {
