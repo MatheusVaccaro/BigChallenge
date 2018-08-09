@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol CreationFramePresentable {
     func didTapMoreOptionsButton(_ sender: UIButton)
 }
 
-protocol TaskFrameDelegate: class {
-    func shouldEnableDoneButton(_ bool: Bool)
+protocol CreationFrameViewModelProtocol {
+    func didTapCancelButton()
+    func didTapSaveButton()
+    var doneButtonObservable: BehaviorSubject<Bool> { get }
 }
 
 class CreationFrameViewController: UIViewController {
@@ -21,11 +24,13 @@ class CreationFrameViewController: UIViewController {
     typealias FrameContent = CreationFramePresentable & UIViewController
     
     // MARK: - Properties
-    var viewModel: CreationFrameViewModel!
+    
+    var viewModel: CreationFrameViewModelProtocol!
     private var pageViewController: UIPageViewController?
     private var pages: [UIViewController] = []
     private var currentPageIndex: Int?
     private var pendingPageIndex: Int?
+    private let disposeBag = DisposeBag()
     
     // MARK: - IBOutlets
     
@@ -38,7 +43,7 @@ class CreationFrameViewController: UIViewController {
         super.viewDidLoad()
         setupPageViewController()
         disablePageViewControllerBounce()
-        doneButton.isEnabled = false
+        subscribeToEnableDoneButton()
     }
     
     // MARK: - IBActions
@@ -99,6 +104,12 @@ class CreationFrameViewController: UIViewController {
                 break
             }
         }
+    }
+    
+    private func subscribeToEnableDoneButton() {
+        viewModel.doneButtonObservable.subscribe {
+            self.doneButton.isEnabled = $0.element!
+            }.disposed(by: disposeBag)
     }
     
     func configurePageViewController(with pages: [FrameContent]) {
@@ -171,14 +182,6 @@ extension CreationFrameViewController: UIScrollViewDelegate {
         } else if currentPageIndex == pages.count - 1 && scrollView.contentOffset.x >= scrollView.bounds.size.width {
             targetContentOffset.pointee = CGPoint(x: scrollView.bounds.size.width, y: 0)
         }
-    }
-}
-
-// MARK: - TaskFrameDelegate
-
-extension CreationFrameViewController: TaskFrameDelegate {
-    func shouldEnableDoneButton(_ bool: Bool) {
-        doneButton.isEnabled = bool
     }
 }
 

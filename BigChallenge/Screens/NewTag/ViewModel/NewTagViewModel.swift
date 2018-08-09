@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol NewTagViewModelDelegate: class {
     
@@ -16,7 +17,15 @@ protocol NewTagViewModelDelegate: class {
     
 }
 
-class NewTagViewModel {
+class NewTagViewModel: NewTagViewModelProtocol {
+    var colorIndex: Int64?
+    
+    var location: CLLocation?
+    
+    var placeholder: String {
+        return titleTextFieldPlaceholder()
+    }
+    
     
     private let model: TagModel
     private var isEditing: Bool

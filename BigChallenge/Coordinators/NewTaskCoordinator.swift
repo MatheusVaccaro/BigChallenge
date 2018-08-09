@@ -83,7 +83,6 @@ class NewTaskCoordinator: Coordinator {
         creationFrameViewModel.delegate = self
         creationFrameViewController.viewModel = creationFrameViewModel
         self.taskFrameViewController = creationFrameViewController
-        newTaskViewController.delegate = creationFrameViewController
         
         creationFrameViewController
             .configurePageViewController(with: [newTaskViewController, moreOptionsViewController])

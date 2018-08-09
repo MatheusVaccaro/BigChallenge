@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import RxSwift
 
 protocol CreationFrameViewModelDelegate: class {
     func didTapCancelButton()
@@ -17,8 +18,11 @@ protocol CreationFrameViewModelDelegate: class {
 class CreationFrameViewModel {
     
     fileprivate var taskModel: TaskModel
-    
-    fileprivate var taskTitle: String!
+    fileprivate var taskTitle: String? {
+        didSet {
+            doneButtonObservable.onNext(shouldEnableDoneButton)
+        }
+    }
     fileprivate var taskTags: [Tag] = []
     fileprivate var taskNotes: String = ""
     fileprivate var taskRegion: CLCircularRegion?
@@ -27,13 +31,15 @@ class CreationFrameViewModel {
     fileprivate var taskDueDate: DateComponents?
     fileprivate var taskFrequency: NotificationOptions.Frequency?
     
+    let doneButtonObservable: BehaviorSubject<Bool>
+    
     weak var delegate: CreationFrameViewModelDelegate?
     
     init(mainInfoViewModel: NewTaskViewModel,
          detailViewModel: MoreOptionsViewModel,
          taskModel: TaskModel) {
         self.taskModel = taskModel
-        
+        doneButtonObservable = BehaviorSubject<Bool>(value: false)
         mainInfoViewModel.outputDelegate = self
         detailViewModel.delegate = self
     }
@@ -43,16 +49,9 @@ class CreationFrameViewModel {
         return true
     }
     
-    func didTapCancelButton() {
-        delegate?.didTapCancelButton()
-    }
-    
-    func didTapSaveButton() {
-        createTaskIfPossible()
-        delegate?.didTapSaveButton()
-    }
-    
     private func createTaskIfPossible() {
+        guard let taskTitle = taskTitle else { return }
+        
         var attributes: [TaskModel.Attributes : Any] = [
             .title : taskTitle,
             .tags : taskTags,
@@ -77,7 +76,7 @@ class CreationFrameViewModel {
 
 extension CreationFrameViewModel: NewTaskViewModelOutputDelegate {
     func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateTitle title: String?) {
-        taskTitle = title ?? ""
+        taskTitle = title
     }
     
     func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateTags tags: [Tag]?) {
@@ -110,4 +109,22 @@ extension CreationFrameViewModel: MoreOptionsViewModelDelegate {
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectFrequency frequency: NotificationOptions.Frequency) {
         taskFrequency = frequency
     }
+}
+
+extension CreationFrameViewModel: CreationFrameViewModelProtocol {
+    
+    fileprivate var shouldEnableDoneButton: Bool {
+        guard let taskTitle = taskTitle else { return false }
+        return !taskTitle.isEmpty
+    }
+
+    func didTapCancelButton() {
+        delegate?.didTapCancelButton()
+    }
+    
+    func didTapSaveButton() {
+        createTaskIfPossible()
+        delegate?.didTapSaveButton()
+    }
+    
 }

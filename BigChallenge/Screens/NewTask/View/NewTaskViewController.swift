@@ -19,8 +19,7 @@ class NewTaskViewController: UIViewController, CreationFramePresentable {
     var tagCollectionViewModel: TagCollectionViewModel?
     fileprivate var tagCollectionViewController: TagCollectionViewController!
     private let disposeBag = DisposeBag()
-    
-    weak var delegate: TaskFrameDelegate?
+
     // MARK: - IBOutlets
     
     @IBOutlet weak var taskTitleTextView: UITextView!
@@ -122,9 +121,6 @@ extension NewTaskViewController: StoryboardInstantiable {
 }
 
 extension NewTaskViewController: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        delegate?.shouldEnableDoneButton(!textView.text.isEmpty)
-    }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {

@@ -7,18 +7,14 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol NewTagViewModelProtocol {
     
-    var tagTitleTextField: String? { get set }
-    
-    func numberOfSections() -> Int
-    func numberOfRowsInSection() -> Int
-    func didTapCancelButton()
-    func didTapDoneButton()
+    var tagTitle: String? { get set }
+    var colorIndex: Int64? { get set }
+    var location: CLLocation? { get set }
+    var placeholder: String { get }
+
     func didTapDeleteTagButton()
-    
-    func tagTitle() -> String?
-    func titleTextFieldPlaceholder() -> String
-    
 }
