@@ -162,6 +162,7 @@ class TagCollectionViewController: UIViewController {
         bigTagVC.modalPresentationStyle = .overCurrentContext
         bigTagVC.modalTransitionStyle = .crossDissolve
         
+        resignFirstResponder()
         present(bigTagVC, animated: true)
     }
 }
