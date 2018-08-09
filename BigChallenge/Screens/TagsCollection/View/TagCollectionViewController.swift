@@ -29,7 +29,6 @@ class TagCollectionViewController: UIViewController {
     private(set) var addTagEvent: PublishSubject<Bool>?
     private let disposeBag = DisposeBag()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         addTagEvent = PublishSubject<Bool>()
@@ -68,6 +67,7 @@ class TagCollectionViewController: UIViewController {
                 if self.shouldPresentBigCollection(on: touch) {
                     self.presentBigCollection()
                 }
+                self.resetImpactFeedback()
             }.disposed(by: disposeBag)
         }
         
@@ -86,6 +86,7 @@ class TagCollectionViewController: UIViewController {
     
     func presentActionSheet(for tag: Tag) {
         guard !presentingActionSheet else { return }
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         presentingActionSheet = true
         let actionsheet = UIAlertController(title: viewModel.alertControllerTitle,
                                             message: viewModel.alertControllerMessage,
@@ -150,9 +151,25 @@ class TagCollectionViewController: UIViewController {
     fileprivate func shouldPresentBigCollection(on touch: UITouch) -> Bool {
         if self.traitCollection.forceTouchCapability == .available {
             let force = touch.force/touch.maximumPossibleForce
-            if force >= 0.5 { return true } // TODO move to viewModel
+            if !mediumImpactOcurred, force >= 0.5 {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                mediumImpactOcurred = true
+                return true
+            } else if !heavyImpactOcurred, force >= 0.7 {
+                UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+                heavyImpactOcurred = true
+                return true
+            }
         }
         return false
+    }
+    
+    fileprivate var mediumImpactOcurred: Bool = false
+    fileprivate var heavyImpactOcurred: Bool = false
+    
+    fileprivate func resetImpactFeedback() {
+        mediumImpactOcurred = false
+        heavyImpactOcurred = false
     }
     
     fileprivate func presentBigCollection() {
