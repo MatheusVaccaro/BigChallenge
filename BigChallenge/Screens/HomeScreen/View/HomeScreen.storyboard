@@ -45,6 +45,7 @@
                                 <nil key="highlightedColor"/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="1je-7r-bFK" appends="YES" id="Loi-vg-kBT"/>
+                                    <outletCollection property="gestureRecognizers" destination="XBm-Wj-u5v" appends="YES" id="29o-Jz-oO7"/>
                                 </connections>
                             </label>
                         </subviews>
@@ -65,7 +66,6 @@
                     <connections>
                         <outlet property="bigTitle" destination="PrB-8h-Asu" id="5tW-9y-1bj"/>
                         <outlet property="tagContainerView" destination="fUe-Ak-aYb" id="qwP-ET-avs"/>
-                        <outlet property="tapGestureRecognizer" destination="1je-7r-bFK" id="msN-uc-OZP"/>
                         <outlet property="taskListContainerView" destination="cie-Gz-Vzx" id="ktk-MH-6by"/>
                     </connections>
                 </viewController>
@@ -75,6 +75,11 @@
                         <action selector="didTapBigTitle:" destination="hA5-o5-LMg" id="grb-sb-T6e"/>
                     </connections>
                 </tapGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="XBm-Wj-u5v">
+                    <connections>
+                        <action selector="didLongpressBigTitle:" destination="hA5-o5-LMg" id="xFa-mT-ZW9"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-69.599999999999994" y="-428.63568215892059"/>
         </scene>

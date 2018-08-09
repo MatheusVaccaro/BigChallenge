@@ -42,6 +42,10 @@ class HomeScreenViewModel {
         }
     }
     
+    func unSelectBigTitle(tag: Tag) {
+        tagCollectionViewModel.selectedTagEvent.onNext(tag)
+    }
+    
     fileprivate var userActivityTitle: String {
         var ans = ""
         guard !selectedTags.isEmpty else { return ans }

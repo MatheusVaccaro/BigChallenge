@@ -29,7 +29,6 @@ class TagCollectionViewController: UIViewController {
     private(set) var addTagEvent: PublishSubject<Bool>?
     private let disposeBag = DisposeBag()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         addTagEvent = PublishSubject<Bool>()
@@ -68,22 +67,26 @@ class TagCollectionViewController: UIViewController {
                 if self.shouldPresentBigCollection(on: touch) {
                     self.presentBigCollection()
                 }
+                self.resetImpactFeedback()
             }.disposed(by: disposeBag)
         }
         
         tagsCollectionView.rx.modelSelected(Item.self).subscribe { event in
             guard let tag = event.element?.tag else { return }
+            UISelectionFeedbackGenerator().selectionChanged()
             self.viewModel.selectedTagEvent.onNext(tag)
         }.disposed(by: disposeBag)
         
         tagsCollectionView.rx.modelDeselected(Item.self).subscribe { event in
             guard let tag = event.element?.tag else { return }
+            UISelectionFeedbackGenerator().selectionChanged()
             self.viewModel.selectedTagEvent.onNext(tag)
         }.disposed(by: disposeBag)
     }
     
-    func handleLongPressIn(tag: Tag) {
+    func presentActionSheet(for tag: Tag) {
         guard !presentingActionSheet else { return }
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         presentingActionSheet = true
         let actionsheet = UIAlertController(title: viewModel.alertControllerTitle,
                                             message: viewModel.alertControllerMessage,
@@ -136,8 +139,8 @@ class TagCollectionViewController: UIViewController {
         }
         
         cell.longPressedTag.subscribe {
-            self.handleLongPressIn(tag: $0.element!)
-            }.disposed(by: self.disposeBag)
+            self.presentActionSheet(for: $0.element!)
+        }.disposed(by: self.disposeBag)
         
         let tagViewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
         let indexPath = IndexPath(row: row, section: 0)
@@ -148,9 +151,25 @@ class TagCollectionViewController: UIViewController {
     fileprivate func shouldPresentBigCollection(on touch: UITouch) -> Bool {
         if self.traitCollection.forceTouchCapability == .available {
             let force = touch.force/touch.maximumPossibleForce
-            if force >= 0.5 { return true } // TODO move to viewModel
+            if !mediumImpactOcurred, force >= 0.5 {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                mediumImpactOcurred = true
+                return true
+            } else if !heavyImpactOcurred, force >= 0.7 {
+                UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+                heavyImpactOcurred = true
+                return true
+            }
         }
         return false
+    }
+    
+    fileprivate var mediumImpactOcurred: Bool = false
+    fileprivate var heavyImpactOcurred: Bool = false
+    
+    fileprivate func resetImpactFeedback() {
+        mediumImpactOcurred = false
+        heavyImpactOcurred = false
     }
     
     fileprivate func presentBigCollection() {
@@ -160,6 +179,7 @@ class TagCollectionViewController: UIViewController {
         bigTagVC.modalPresentationStyle = .overCurrentContext
         bigTagVC.modalTransitionStyle = .crossDissolve
         
+        resignFirstResponder()
         present(bigTagVC, animated: true)
     }
 }

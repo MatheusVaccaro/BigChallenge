@@ -19,7 +19,7 @@ class TagCollectionViewModel {
     private(set) var tags: [Tag]
     private(set) var filteredTags: [Tag]
     private(set) var selectedTags: [Tag]
-    let filtering: Bool
+    var filtering: Bool
     
     private let disposeBag = DisposeBag()
     private var model: TagModel
@@ -40,19 +40,13 @@ class TagCollectionViewModel {
         selectedTagsObservable = BehaviorSubject<[Tag]>(value: selectedTags)
         selectedTagEvent = PublishSubject<Tag>()
         
-        subscribeToSelectedTag(filtering: filtering)
+        subscribeToSelectedTag()
         subscribeToModel()
         for tag in selectedTags { selectedTagEvent.onNext(tag) }
     }
     
     func tagCollectionCellViewModel(for tag: Tag) -> TagCollectionViewCellViewModel {
         return TagCollectionViewCellViewModel(with: tag)
-    }
-    
-    func unSelectBigTitle() {
-        if let tag = selectedTags.first {
-            selectedTagEvent.onNext(tag)
-        }
     }
     
     func delete(tag: Tag) {
@@ -73,7 +67,7 @@ class TagCollectionViewModel {
         return tags.filter { selectedTags.isEmpty ? true : selectedTags.first != $0 }
     }
     
-    fileprivate func subscribeToSelectedTag(filtering: Bool) {
+    fileprivate func subscribeToSelectedTag() {
         selectedTagEvent
             .subscribe { event in
                 guard let tag = event.element else { return }
@@ -83,8 +77,8 @@ class TagCollectionViewModel {
                 } else { self.selectedTags.append(tag) }
 
                 self.selectedTagsObservable.onNext(self.selectedTags)
-                
-                if filtering {
+                print(self.filtering)
+                if self.filtering {
                     self.filterTags(with: tag)
                 }
             }.disposed(by: disposeBag)
@@ -96,6 +90,12 @@ class TagCollectionViewModel {
                 guard self.tags != $0.element else { return }
                 self.tags = $0.element!
                 self.filteredTags = self.tags
+                
+                for tag in self.selectedTags where !self.tags.contains(tag) {
+                    let index = self.selectedTags.index(of: tag)!
+                    self.selectedTags.remove(at: index)
+                    self.selectedTagsObservable.onNext(self.selectedTags)
+                }
                 
                 print("updated tags: \(self.tags.map {$0.title!})")
                 self.tagsObservable.onNext(self.filteredTags)
