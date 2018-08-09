@@ -19,7 +19,7 @@ class TagCollectionViewModel {
     private(set) var tags: [Tag]
     private(set) var filteredTags: [Tag]
     private(set) var selectedTags: [Tag]
-    let filtering: Bool
+    var filtering: Bool
     
     private let disposeBag = DisposeBag()
     private var model: TagModel
@@ -40,7 +40,7 @@ class TagCollectionViewModel {
         selectedTagsObservable = BehaviorSubject<[Tag]>(value: selectedTags)
         selectedTagEvent = PublishSubject<Tag>()
         
-        subscribeToSelectedTag(filtering: filtering)
+        subscribeToSelectedTag()
         subscribeToModel()
         for tag in selectedTags { selectedTagEvent.onNext(tag) }
     }
@@ -73,7 +73,7 @@ class TagCollectionViewModel {
         return tags.filter { selectedTags.isEmpty ? true : selectedTags.first != $0 }
     }
     
-    fileprivate func subscribeToSelectedTag(filtering: Bool) {
+    fileprivate func subscribeToSelectedTag() {
         selectedTagEvent
             .subscribe { event in
                 guard let tag = event.element else { return }
@@ -83,8 +83,8 @@ class TagCollectionViewModel {
                 } else { self.selectedTags.append(tag) }
 
                 self.selectedTagsObservable.onNext(self.selectedTags)
-                
-                if filtering {
+                print(self.filtering)
+                if self.filtering {
                     self.filterTags(with: tag)
                 }
             }.disposed(by: disposeBag)
