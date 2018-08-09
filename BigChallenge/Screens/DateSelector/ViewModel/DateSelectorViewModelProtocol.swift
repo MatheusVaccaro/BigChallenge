@@ -7,13 +7,18 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol DateSelectorViewModelProtocol {
     var delegate: DateSelectorViewModelDelegate? { get set }
     
-    var date: DateComponents? { get }
-    var timeOfDay: DateComponents? { get }
-    var frequency: NotificationOptions.Frequency? { get }
+    var date: Variable<DateComponents?> { get }
+    var timeOfDay: Variable<DateComponents?> { get }
+    var frequency: Variable<NotificationOptions.Frequency?> { get }
+    
+    var dateObservable: Observable<DateComponents?> { get }
+    var timeOfDayObservable: Observable<DateComponents?> { get }
+    var frequencyObservable: Observable<NotificationOptions.Frequency?> { get }
     
     func selectDate(_ date: DateComponents)
     func selectTimeOfDay(_ timeOfDay: DateComponents)

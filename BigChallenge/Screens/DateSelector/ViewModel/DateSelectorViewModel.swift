@@ -13,12 +13,26 @@ class DateSelectorViewModel: DateSelectorViewModelProtocol {
     
     weak var delegate: DateSelectorViewModelDelegate?
     
-    private(set) var date: DateComponents?
-    private(set) var timeOfDay: DateComponents?
-    private(set) var frequency: NotificationOptions.Frequency?
+    private(set) var date: Variable<DateComponents?>
+    private(set) var timeOfDay: Variable<DateComponents?>
+    private(set) var frequency: Variable<NotificationOptions.Frequency?>
+    
+    var dateObservable: Observable<DateComponents?> {
+        return date.asObservable()
+    }
+    var timeOfDayObservable: Observable<DateComponents?> {
+        return timeOfDay.asObservable()
+    }
+    var frequencyObservable: Observable<NotificationOptions.Frequency?> {
+        return frequency.asObservable()
+    }
     
     init(delegate: DateSelectorViewModelDelegate? = nil) {
         self.delegate = delegate
+        
+        self.date = Variable(nil)
+        self.timeOfDay = Variable(nil)
+        self.frequency = Variable(nil)
     }
     
     func selectDate(_ date: DateComponents) { }
