@@ -12,16 +12,16 @@ import Nimble
 @testable
 import BigChallenge
 
-class DateSelectTests: QuickSpec {
+class DateInputTests: QuickSpec {
     
     override func spec() {
         describe("a DateSelectorViewModel") {
             
-            var dateSelectorViewModel: DateSelectorViewModel!
+            var dateSelectorViewModel: DateInputViewModel!
             var mockDateSelectorDelegate: DateSelectorMockDelegate!
             
             beforeEach {
-                dateSelectorViewModel = DateSelectorViewModel()
+                dateSelectorViewModel = DateInputViewModel()
                 mockDateSelectorDelegate = DateSelectorMockDelegate()
                 dateSelectorViewModel.delegate = mockDateSelectorDelegate
             }
@@ -175,19 +175,19 @@ class DateSelectorMockDelegate: DateSelectorViewModelDelegate {
     var providedTimeOfDay: DateComponents?
     var providedFrequency: NotificationOptions.Frequency?
     
-    func dateSelectorViewModel(_ dateSelectorViewModel: DateSelectorViewModelProtocol, didFinishSelecting notificationOptions: NotificationOptions) {
+    func dateSelectorViewModel(_ dateSelectorViewModel: DateInputViewModelProtocol, didFinishSelecting notificationOptions: NotificationOptions) {
         providedNotificationOptions = notificationOptions
     }
     
-    func dateSelectorViewModel(_ dateSelectorViewModel: DateSelectorViewModelProtocol, didSelectDate date: DateComponents) {
+    func dateSelectorViewModel(_ dateSelectorViewModel: DateInputViewModelProtocol, didSelectDate date: DateComponents) {
         providedDate = date
     }
     
-    func dateSelectorViewModel(_ dateSelectorViewModel: DateSelectorViewModelProtocol, didSelectTimeOfDay timeOfDay: DateComponents) {
+    func dateSelectorViewModel(_ dateSelectorViewModel: DateInputViewModelProtocol, didSelectTimeOfDay timeOfDay: DateComponents) {
         providedTimeOfDay = timeOfDay
     }
     
-    func dateSelectorViewModel(_ dateSelectorViewModel: DateSelectorViewModelProtocol, didSelect frequency: NotificationOptions.Frequency) {
+    func dateSelectorViewModel(_ dateSelectorViewModel: DateInputViewModelProtocol, didSelect frequency: NotificationOptions.Frequency) {
         providedFrequency = frequency
     }
 }

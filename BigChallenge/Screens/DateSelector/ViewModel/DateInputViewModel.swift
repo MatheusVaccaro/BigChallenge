@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class DateSelectorViewModel: DateSelectorViewModelProtocol {
+class DateInputViewModel: DateInputViewModelProtocol {
     
     weak var delegate: DateSelectorViewModelDelegate?
     
@@ -89,8 +89,8 @@ class DateSelectorViewModel: DateSelectorViewModelProtocol {
 
 protocol DateSelectorViewModelDelegate: class {
     //swiftlint:disable next line_length
-    func dateSelectorViewModel(_ dateSelectorViewModel: DateSelectorViewModelProtocol, didFinishSelecting notificationOptions: NotificationOptions)
-    func dateSelectorViewModel(_ dateSelectorViewModel: DateSelectorViewModelProtocol, didSelectDate date: DateComponents)
-    func dateSelectorViewModel(_ dateSelectorViewModel: DateSelectorViewModelProtocol, didSelectTimeOfDay timeOfDay: DateComponents)
-    func dateSelectorViewModel(_ dateSelectorViewModel: DateSelectorViewModelProtocol, didSelect frequency: NotificationOptions.Frequency)
+    func dateSelectorViewModel(_ dateSelectorViewModel: DateInputViewModelProtocol, didFinishSelecting notificationOptions: NotificationOptions)
+    func dateSelectorViewModel(_ dateSelectorViewModel: DateInputViewModelProtocol, didSelectDate date: DateComponents)
+    func dateSelectorViewModel(_ dateSelectorViewModel: DateInputViewModelProtocol, didSelectTimeOfDay timeOfDay: DateComponents)
+    func dateSelectorViewModel(_ dateSelectorViewModel: DateInputViewModelProtocol, didSelect frequency: NotificationOptions.Frequency)
 }

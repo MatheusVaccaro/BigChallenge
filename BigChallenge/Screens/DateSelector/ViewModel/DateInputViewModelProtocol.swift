@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-protocol DateSelectorViewModelProtocol {
+protocol DateInputViewModelProtocol {
     var delegate: DateSelectorViewModelDelegate? { get set }
     
     var date: Variable<DateComponents?> { get }
