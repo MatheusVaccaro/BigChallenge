@@ -35,13 +35,56 @@ class DateSelectorViewModel: DateSelectorViewModelProtocol {
         self.frequency = Variable(nil)
     }
     
-    func selectDate(_ date: DateComponents) { }
-    func selectTimeOfDay(_ timeOfDay: DateComponents) { }
-    func select(frequency: NotificationOptions.Frequency) {}
+    func selectDate(_ date: DateComponents) {
+        guard let day = date.day, let month = date.month, let year = date.year else { return }
+        
+        let dateComponents = DateComponents(year: year, month: month, day: day)
+        
+        self.date.value = dateComponents
+        delegate?.dateSelectorViewModel(self, didSelectDate: dateComponents)
+    }
     
-    func selectTomorrow() { }
-    func selectNextWeek() { }
-    func selectNextMonth() { }
+    func selectTimeOfDay(_ timeOfDay: DateComponents) {
+        guard let hour = timeOfDay.hour, let minute = timeOfDay.minute else { return }
+        
+        let dateComponents = DateComponents(hour: hour, minute: minute)
+        
+        self.timeOfDay.value = dateComponents
+        delegate?.dateSelectorViewModel(self, didSelectTimeOfDay: dateComponents)
+    }
+    
+    func select(frequency: NotificationOptions.Frequency) {
+    	self.frequency.value = frequency
+        delegate?.dateSelectorViewModel(self, didSelect: frequency)
+    }
+    
+    func selectTomorrow() {
+        let today = Date()
+        guard let tomorrow = Calendar.current.date(byAdding: DateComponents(day: 1),
+                                                   to: today, wrappingComponents: false) else { return }
+        
+        let tomorrowComponents = Calendar.current.dateComponents([.year, .month, .day], from: tomorrow)
+        
+        selectDate(tomorrowComponents)
+    }
+    
+    func selectNextWeek() {
+        let today = Date()
+        guard let nextWeek = Calendar.current.date(byAdding: DateComponents(day: 7),
+                                                   to: today, wrappingComponents: false) else { return }
+        
+        let nextWeekComponents = Calendar.current.dateComponents([.year, .month, .day], from: nextWeek)
+        selectDate(nextWeekComponents)
+    }
+    
+    func selectNextMonth() {
+        let today = Date()
+        guard let nextMonth = Calendar.current.date(byAdding: DateComponents(day: 30),
+                                                    to: today, wrappingComponents: false) else { return }
+        
+        let nextMonthComponents = Calendar.current.dateComponents([.year, .month, .day], from: nextMonth)
+        selectDate(nextMonthComponents)
+    }
 }
 
 protocol DateSelectorViewModelDelegate: class {
