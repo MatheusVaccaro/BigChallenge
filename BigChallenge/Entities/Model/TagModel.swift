@@ -68,13 +68,13 @@ public class TagModel {
         } else {
             let tag = persistance.create(Tag.self)
             
-            let color = attributes[.color] as? Int64 ?? nextColor
+            let colorIndex = attributes[.colorIndex] as? Int64 ?? nextColor
             let dates = attributes[.dates] as? [Date] ?? []
             let dueDate = attributes[.dueDate] as? Date ?? Date()
             let id = attributes[.id] as? UUID ?? UUID()
             let tasks = attributes[.tasks] as? [Task] ?? []
             
-            tag.color = color
+            tag.colorIndex = colorIndex
             tag.dates = dates
             tag.dueDate = dueDate
             tag.id = id
@@ -86,8 +86,8 @@ public class TagModel {
     }
     
     public func update(_ tag: Tag, with attributes: [Attributes : Any]) {
-        if let color = attributes[.color] as? Int64 {
-            tag.color = color
+        if let color = attributes[.colorIndex] as? Int64 {
+            tag.colorIndex = color
         }
         if let dates = attributes[.dates] as? [Date] {
             tag.dates = dates
@@ -109,7 +109,7 @@ public class TagModel {
     
     // The attributes of the Tag class, mapped according to CoreData
     public enum Attributes {
-        case color
+        case colorIndex
         case dates
         case dueDate
         case id

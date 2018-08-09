@@ -25,6 +25,6 @@ class TagCollectionViewCellViewModel {
     }()
     
     lazy var color: [CGColor] = {
-        return TagModel.tagColors[ Int(tag.color) ]
+        return TagModel.tagColors[ Int(tag.colorIndex) ]
     }()
 }
