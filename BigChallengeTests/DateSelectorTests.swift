@@ -35,7 +35,7 @@ class DateSelectTests: QuickSpec {
                 }
                 
                 it("should store day, month and year data") {
-                    let dateData = dateSelectorViewModel.date
+                    let dateData = dateSelectorViewModel.date.value
                     let dayData = dateData?.day
                     let monthData = dateData?.month
                     let yearData = dateData?.year
@@ -46,13 +46,13 @@ class DateSelectTests: QuickSpec {
                 }
                 
                 it("should store valid date data") {
-                    let dateData = dateSelectorViewModel.date
+                    let dateData = dateSelectorViewModel.date.value
 
                     expect(dateData?.isValidDate).to(beTrue())
                 }
                 
                 it("should notify its delegate about it") {
-                    let internalDate = dateSelectorViewModel.date
+                    let internalDate = dateSelectorViewModel.date.value
                     let providedDate = mockDateSelectorDelegate.providedDate
                     
                     expect(providedDate).toNot(beNil())
@@ -69,7 +69,7 @@ class DateSelectTests: QuickSpec {
                 }
                 
                 it("should store hour and minute data") {
-                    let timeOfDayData = dateSelectorViewModel.timeOfDay
+                    let timeOfDayData = dateSelectorViewModel.timeOfDay.value
                     
                     let hourData = timeOfDayData?.hour
                     let minuteData = timeOfDayData?.minute
@@ -79,13 +79,13 @@ class DateSelectTests: QuickSpec {
                 }
                 
                 it("should store valid data") {
-                    let timeOfDayData = dateSelectorViewModel.timeOfDay
+                    let timeOfDayData = dateSelectorViewModel.timeOfDay.value
                     
                     expect(timeOfDayData?.isValidDate).to(beTrue())
                 }
                 
                 it("should notify its delegate about it") {
-                    let internalTimeOfDay = dateSelectorViewModel.timeOfDay
+                    let internalTimeOfDay = dateSelectorViewModel.timeOfDay.value
                     let providedTimeOfDay = mockDateSelectorDelegate.providedTimeOfDay
                     
                     expect(providedTimeOfDay).toNot(beNil())
@@ -121,7 +121,7 @@ class DateSelectTests: QuickSpec {
                 }
                 
                 it("should select the day after today") {
-                    guard let internalDate = dateSelectorViewModel.date,
+                    guard let internalDate = dateSelectorViewModel.date.value,
                           let selectedDate = Calendar.current.date(from: internalDate) else { fail("DateSelectorViewModel internal date data after selecting tomorrow was nil."); return }
                     
                     let isSelectedDateInTomorrow = Calendar.current.isDateInTomorrow(selectedDate)
@@ -136,7 +136,7 @@ class DateSelectTests: QuickSpec {
                 }
                 
                 it("should select a date equal to the same weekday of today, but in the next week") {
-                    guard let internalDate = dateSelectorViewModel.date,
+                    guard let internalDate = dateSelectorViewModel.date.value,
                           let selectedDate = Calendar.current.date(from: internalDate) else { fail("DateSelectorViewModel internal date data after selecting next month was nil."); return }
                     
                     guard let sameWeekdayOfTodayInNextWeek = Calendar.current.date(byAdding: DateComponents(day: 7), to: Date()) else { fail("Error when creating a date 7 days from now."); return }
@@ -154,7 +154,7 @@ class DateSelectTests: QuickSpec {
                 }
                 
                 it("should select the date equal to thirty days after today") {
-                    guard let internalDate = dateSelectorViewModel.date,
+                    guard let internalDate = dateSelectorViewModel.date.value,
                           let selectedDate = Calendar.current.date(from: internalDate) else { fail("DateSelectorViewModel internal date data after selecting next month was nil."); return }
                     
                     guard let thirtyDaysAfterToday = Calendar.current.date(byAdding: DateComponents(day: 30), to: Date()) else { fail("Error when creating a date thirty days from now."); return }
