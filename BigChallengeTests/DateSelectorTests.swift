@@ -48,7 +48,7 @@ class DateSelectTests: QuickSpec {
                 it("should store valid date data") {
                     let dateData = dateSelectorViewModel.date.value
 
-                    expect(dateData?.isValidDate).to(beTrue())
+                    expect(dateData?.isValidDate(in: Calendar.current)).to(beTrue())
                 }
                 
                 it("should notify its delegate about it") {
@@ -81,7 +81,7 @@ class DateSelectTests: QuickSpec {
                 it("should store valid data") {
                     let timeOfDayData = dateSelectorViewModel.timeOfDay.value
                     
-                    expect(timeOfDayData?.isValidDate).to(beTrue())
+                    expect(timeOfDayData?.isValidDate(in: Calendar.current)).to(beTrue())
                 }
                 
                 it("should notify its delegate about it") {
