@@ -97,6 +97,12 @@ class TagCollectionViewModel {
                 self.tags = $0.element!
                 self.filteredTags = self.tags
                 
+                for tag in self.selectedTags where !self.tags.contains(tag) {
+                    let index = self.selectedTags.index(of: tag)!
+                    self.selectedTags.remove(at: index)
+                    self.selectedTagsObservable.onNext(self.selectedTags)
+                }
+                
                 print("updated tags: \(self.tags.map {$0.title!})")
                 self.tagsObservable.onNext(self.filteredTags)
             }.disposed(by: disposeBag)
