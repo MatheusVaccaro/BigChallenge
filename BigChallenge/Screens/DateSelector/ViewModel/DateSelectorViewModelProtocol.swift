@@ -15,9 +15,6 @@ protocol DateSelectorViewModelProtocol {
     var timeOfDay: DateComponents? { get }
     var frequency: NotificationOptions.Frequency? { get }
     
-    func showDateSelector()
-    func showTimeOfDaySelector()
-    
     func selectDate(_ date: DateComponents)
     func selectTimeOfDay(_ timeOfDay: DateComponents)
     func select(frequency: NotificationOptions.Frequency)

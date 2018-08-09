@@ -164,32 +164,6 @@ class DateSelectTests: QuickSpec {
                     expect(isSelectedDateEqualToThirtyDaysAfterToday).to(beTrue())
                 }
             }
-            
-            context("when selecting the date selector") {
-                
-                beforeEach {
-                    dateSelectorViewModel.showDateSelector()
-                }
-                
-                it("should display the date selector") {
-                    let currentSelector = dateSelectorViewModel.currentSelector
-                    
-                    expect(currentSelector).to(equal(.date))
-                }
-            }
-            
-            context("when selecting the time of day selector") {
-                
-                beforeEach {
-                    dateSelectorViewModel.showDateSelector()
-                }
-                
-                it("should display the time of day selector") {
-                    let currentSelector = dateSelectorViewModel.currentSelector
-                    
-                    expect(currentSelector).to(equal(.timeOfDay))
-                }
-            }
         }
     }
 }

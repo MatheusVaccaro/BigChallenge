@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class DateSelectorViewModel: DateSelectorViewModelProtocol {
     
@@ -15,15 +16,10 @@ class DateSelectorViewModel: DateSelectorViewModelProtocol {
     private(set) var date: DateComponents?
     private(set) var timeOfDay: DateComponents?
     private(set) var frequency: NotificationOptions.Frequency?
-    private(set) var currentSelector: TimeSelector
     
     init(delegate: DateSelectorViewModelDelegate? = nil) {
         self.delegate = delegate
-        self.currentSelector = .date
     }
-    
-    func showTimeOfDaySelector() { }
-    func showDateSelector() { }
     
     func selectDate(_ date: DateComponents) { }
     func selectTimeOfDay(_ timeOfDay: DateComponents) { }
@@ -32,11 +28,6 @@ class DateSelectorViewModel: DateSelectorViewModelProtocol {
     func selectTomorrow() { }
     func selectNextWeek() { }
     func selectNextMonth() { }
-    
-    enum TimeSelector {
-        case date
-        case timeOfDay
-    }
 }
 
 protocol DateSelectorViewModelDelegate: class {
