@@ -15,8 +15,6 @@ class HomeScreenViewController: UIViewController {
     weak var delegate: HomeScreenViewModelDelegate?
     var viewModel: HomeScreenViewModel!
     
-//    @IBOutlet var longPressGestureRecognizer: UILongPressGestureRecognizer!
-//    @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     @IBOutlet weak var tagContainerView: UIView!
     @IBOutlet weak var taskListContainerView: UIView!
     @IBOutlet weak var bigTitle: UILabel!
@@ -97,7 +95,10 @@ class HomeScreenViewController: UIViewController {
     }
     
     @IBAction func didTapBigTitle(_ sender: Any) {
-        viewModel.tagCollectionViewModel.unSelectBigTitle()
+        if let tag = viewModel.selectedTags.first {
+            UISelectionFeedbackGenerator().selectionChanged()
+            viewModel.unSelectBigTitle(tag: tag)
+        }
     }
     
     @IBAction func didLongpressBigTitle(_ sender: Any) {

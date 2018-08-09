@@ -73,11 +73,13 @@ class TagCollectionViewController: UIViewController {
         
         tagsCollectionView.rx.modelSelected(Item.self).subscribe { event in
             guard let tag = event.element?.tag else { return }
+            UISelectionFeedbackGenerator().selectionChanged()
             self.viewModel.selectedTagEvent.onNext(tag)
         }.disposed(by: disposeBag)
         
         tagsCollectionView.rx.modelDeselected(Item.self).subscribe { event in
             guard let tag = event.element?.tag else { return }
+            UISelectionFeedbackGenerator().selectionChanged()
             self.viewModel.selectedTagEvent.onNext(tag)
         }.disposed(by: disposeBag)
     }

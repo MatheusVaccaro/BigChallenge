@@ -51,6 +51,7 @@ class TagCollectionViewModel {
     
     func unSelectBigTitle() {
         if let tag = selectedTags.first {
+            UISelectionFeedbackGenerator().selectionChanged()
             selectedTagEvent.onNext(tag)
         }
     }
