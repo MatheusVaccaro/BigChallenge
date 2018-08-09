@@ -16,6 +16,8 @@ class TagCollectionViewModel {
     var selectedTagsObservable: BehaviorSubject<[Tag]>
     private(set) var selectedTagEvent: PublishSubject<Tag>
     
+    var presentingActionSheet: Bool = false
+    
     private(set) var tags: [Tag]
     private(set) var filteredTags: [Tag]
     private(set) var selectedTags: [Tag]

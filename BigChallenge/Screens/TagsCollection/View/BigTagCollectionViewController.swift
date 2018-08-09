@@ -33,6 +33,7 @@ class BigTagCollectionViewController: TagCollectionViewController {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         viewModel.filtering = true
         viewModel.tagsObservable.onNext(viewModel.tags) //TODO: if updated selected tags, reload tableView
+        viewModel.presentingActionSheet = false
         dismiss(animated: true)
     }
 }
