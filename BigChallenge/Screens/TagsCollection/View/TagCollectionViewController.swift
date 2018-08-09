@@ -23,7 +23,6 @@ class TagCollectionViewController: UIViewController {
     @IBOutlet weak var tagsCollectionView: UICollectionView!
     
     var viewModel: TagCollectionViewModel!
-    fileprivate var presentingActionSheet: Bool = false
     
     var clickedTagEvent: BehaviorSubject<Tag>?
     private(set) var addTagEvent: PublishSubject<Bool>?
@@ -85,21 +84,21 @@ class TagCollectionViewController: UIViewController {
     }
     
     func presentActionSheet(for tag: Tag) {
-        guard !presentingActionSheet else { return }
+        guard !viewModel.presentingActionSheet else { return }
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-        presentingActionSheet = true
+        viewModel.presentingActionSheet = true
         let actionsheet = UIAlertController(title: viewModel.alertControllerTitle,
                                             message: viewModel.alertControllerMessage,
                                             preferredStyle: .actionSheet)
         
         let deleteAction = UIAlertAction(title: viewModel.deleteActionTitle, style: .destructive) { _ in
             self.viewModel.delete(tag: tag)
-            self.presentingActionSheet = false
+            self.viewModel.presentingActionSheet = false
         }
         
         let cancelAction = UIAlertAction(title: viewModel.cancelActionTitle, style: .cancel) { _ in
             print("Cancelled")
-            self.presentingActionSheet = false
+            self.viewModel.presentingActionSheet = false
         }
         
         actionsheet.addAction(deleteAction)
