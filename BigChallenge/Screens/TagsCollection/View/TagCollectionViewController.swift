@@ -82,7 +82,7 @@ class TagCollectionViewController: UIViewController {
         }.disposed(by: disposeBag)
     }
     
-    func handleLongPressIn(tag: Tag) {
+    func presentActionSheet(for tag: Tag) {
         guard !presentingActionSheet else { return }
         presentingActionSheet = true
         let actionsheet = UIAlertController(title: viewModel.alertControllerTitle,
@@ -136,8 +136,8 @@ class TagCollectionViewController: UIViewController {
         }
         
         cell.longPressedTag.subscribe {
-            self.handleLongPressIn(tag: $0.element!)
-            }.disposed(by: self.disposeBag)
+            self.presentActionSheet(for: $0.element!)
+        }.disposed(by: self.disposeBag)
         
         let tagViewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
         let indexPath = IndexPath(row: row, section: 0)
