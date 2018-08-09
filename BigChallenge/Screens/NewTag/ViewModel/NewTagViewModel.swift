@@ -16,12 +16,17 @@ protocol NewTagViewModelDelegate: class {
     
 }
 
-class NewTagViewModel: NewTagViewModelProtocol {
+class NewTagViewModel {
     
     private let model: TagModel
     private var isEditing: Bool
     private var tag: Tag?
-    var tagTitleTextField: String?
+    
+    var tagTitle: String? {
+        didSet {
+            
+        }
+    }
     
     weak var delegate: NewTagViewModelDelegate?
     
@@ -67,16 +72,12 @@ class NewTagViewModel: NewTagViewModelProtocol {
     }
     
     private func createTag() {
-        guard let tagTitle = tagTitleTextField else { return }
+        guard let tagTitle = tagTitle else { return }
         let attributes: [TagModel.Attributes : Any] =
             [.title : tagTitle as Any]
         let tag = model.createTag(with: attributes)
         self.tag = tag
         model.save(tag)
-    }
-    
-    func tagTitle() -> String? {
-        return tag?.title
     }
     
     // MARK: - Strings

@@ -186,10 +186,10 @@ extension CreationFrameViewController: TaskFrameDelegate {
 
 extension CreationFrameViewController: StoryboardInstantiable {
     static var storyboardIdentifier: String {
-        return "TaskFrame"
+        return "CreationFrame"
     }
     
     static var viewControllerID: String {
-        return "TaskFrameViewController"
+        return "CreationFrameViewController"
     }
 }
