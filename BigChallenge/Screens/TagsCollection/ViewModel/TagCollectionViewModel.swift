@@ -49,13 +49,6 @@ class TagCollectionViewModel {
         return TagCollectionViewCellViewModel(with: tag)
     }
     
-    func unSelectBigTitle() {
-        if let tag = selectedTags.first {
-            UISelectionFeedbackGenerator().selectionChanged()
-            selectedTagEvent.onNext(tag)
-        }
-    }
-    
     func delete(tag: Tag) {
         model.delete(object: tag)
     }
