@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,30 +24,26 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a7b-g8-XXm">
-                                <rect key="frame" x="166" y="60" width="42" height="20.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="geK-Td-d2V">
-                                <rect key="frame" x="59" y="151" width="257" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="geK-Td-d2V">
+                                <rect key="frame" x="5" y="151" width="365" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KDU-qd-iY5">
                                         <rect key="frame" x="0.0" y="0.0" width="69" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="Tomorrow"/>
                                         <connections>
                                             <action selector="touchUpInsideTomorrowShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="ToY-T4-0OM"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VST-pw-ufN">
-                                        <rect key="frame" x="87" y="0.0" width="72" height="30"/>
+                                        <rect key="frame" x="141" y="0.0" width="72" height="30"/>
                                         <state key="normal" title="Next week"/>
                                         <connections>
                                             <action selector="touchUpInsideNextWeekShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="Lvj-3N-Ht1"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Deg-a9-9om">
-                                        <rect key="frame" x="177" y="0.0" width="80" height="30"/>
+                                        <rect key="frame" x="285" y="0.0" width="80" height="30"/>
                                         <state key="normal" title="Next month"/>
                                         <connections>
                                             <action selector="touchUpInsideNextMonthShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="dbz-T2-L2H"/>
@@ -54,8 +51,22 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yOd-A2-VUk">
+                                <rect key="frame" x="16" y="45" width="343" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="WGF-XW-mth"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="yOd-A2-VUk" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" constant="16" id="IcB-I6-Vlr"/>
+                            <constraint firstItem="geK-Td-d2V" firstAttribute="top" secondItem="Thx-CC-uDZ" secondAttribute="top" constant="151" id="J3e-UU-XB6"/>
+                            <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="yOd-A2-VUk" secondAttribute="trailing" constant="16" id="Nh1-qE-rMs"/>
+                            <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="geK-Td-d2V" secondAttribute="trailing" constant="5" id="b4N-Vx-QbM"/>
+                            <constraint firstItem="yOd-A2-VUk" firstAttribute="top" secondItem="Thx-CC-uDZ" secondAttribute="top" constant="45" id="f1A-js-70Y"/>
+                            <constraint firstItem="geK-Td-d2V" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" constant="5" id="mpo-zH-qEj"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Thx-CC-uDZ"/>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
@@ -63,6 +74,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="400"/>
                     <connections>
+                        <outlet property="dateInputStatusStackView" destination="yOd-A2-VUk" id="LQE-vs-mSE"/>
                         <outlet property="dateShortcutsStackView" destination="geK-Td-d2V" id="F9d-xD-CtE"/>
                         <outlet property="nextMonthShortcutButton" destination="Deg-a9-9om" id="gtK-dp-T55"/>
                         <outlet property="nextWeekShortcutButton" destination="VST-pw-ufN" id="f0r-cQ-PXd"/>

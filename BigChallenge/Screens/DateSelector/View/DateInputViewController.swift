@@ -16,7 +16,8 @@ class DateInputViewController: UIViewController {
     var viewModel: DateInputViewModelProtocol?
     var dateSelectorViewModel: DateInputViewModelProtocol?
     private let disposeBag = DisposeBag()
-
+    
+    @IBOutlet weak var dateInputStatusStackView: UIStackView!
     private(set) var selectedDateLabel: UILabel!
     private(set) var selectedTimeOfDayLabel: UILabel!
     
@@ -29,6 +30,7 @@ class DateInputViewController: UIViewController {
         super.viewDidLoad()
         loadSelectedDateLabel()
         loadSelectedTimeOfDayLabel()
+        loadDateInputStatusStackView()
         loadShortcutButtons()
     }
     
@@ -36,49 +38,90 @@ class DateInputViewController: UIViewController {
         selectedDateLabel = UILabel()
         selectedDateLabel.layer.masksToBounds = true
         selectedDateLabel.layer.cornerRadius = 4.3
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "E dd MMM"
+        
         viewModel?.date.asObservable().subscribe(onNext: { [weak self] in
-            guard let dateComponents = $0 else {
-                self?.selectedDateLabel.text = "???"
-                
-                return
-            }
             
-            let date = Calendar.current.date(from: dateComponents)!
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "E dd MMM"
-            self?.selectedDateLabel.text = dateFormatter.string(from: date)
+            if let dateComponents = $0,
+                let date = Calendar.current.date(from: dateComponents) {
+                
+                self?.selectedDateLabel.text = dateFormatter.string(from: date)
+                
+            } else {
+                self?.selectedDateLabel.text = "???"
+            }
+        
         }).disposed(by: disposeBag)
     }
     
     private func loadSelectedTimeOfDayLabel() {
         selectedTimeOfDayLabel = UILabel()
-        selectedTimeOfDayLabel.textColor = .green
+        selectedTimeOfDayLabel.font = UIFont.font(sized: 19.77, weight: .semibold, with: .body)
+        selectedTimeOfDayLabel.textColor = UIColor.DateInput.defaultColor
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm" //TODO Localize time of day format
+        
         viewModel?.timeOfDay.asObservable().subscribe(onNext: { [weak self] in
-            guard let dateComponents = $0 else {
-                self?.selectedTimeOfDayLabel.text = "???"
+            
+            if let dateComponents = $0,
+               let date = Calendar.current.date(from: dateComponents) {
                 
-                return
+                self?.selectedTimeOfDayLabel.text = dateFormatter.string(from: date)
+                
+            } else {
+                self?.selectedTimeOfDayLabel.text = "???"
             }
             
-            let date = Calendar.current.date(from: dateComponents)!
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "HH:mm"
-            self?.selectedTimeOfDayLabel.text = dateFormatter.string(from: date)
         }).disposed(by: disposeBag)
     }
     
+    private func loadDateInputStatusStackView() {
+        let dateInputStatusFormat = Strings.DateInputView.dateInputStatus
+        
+        let dateInputStackDescriptors = dateInputStatusFormat.components(separatedBy: "@").filter { !$0.isEmpty }
+        
+        for dateInputStackDescriptor in dateInputStackDescriptors {
+            
+            switch dateInputStackDescriptor {
+            case "date":
+                dateInputStatusStackView.addArrangedSubview(selectedDateLabel)
+                
+            case "timeofday":
+                dateInputStatusStackView.addArrangedSubview(selectedTimeOfDayLabel)
+                
+            default:
+                let label = UILabel()
+                label.text = dateInputStackDescriptor
+                dateInputStatusStackView.addArrangedSubview(label)
+            }
+        }
+    }
+    
     private func loadShortcutButtons() {
+        configure(tomorrowShortcutButton)
+        configure(nextWeekShortcutButton)
+        configure(nextMonthShortcutButton)
+        
         viewModel?.tomorrowShortcutText.asObservable().subscribe(onNext: { [weak self] in
-            self?.tomorrowShortcutButton.titleLabel?.text = $0
+            self?.tomorrowShortcutButton.setTitle($0, for: .normal)
         }).disposed(by: disposeBag)
         
         viewModel?.nextWeekShortcutText.asObservable().subscribe(onNext: { [weak self] in
-            self?.nextWeekShortcutButton.titleLabel?.text = $0
+            self?.nextWeekShortcutButton.setTitle($0, for: .normal)
         }).disposed(by: disposeBag)
         
         viewModel?.nextMonthShortcutText.asObservable().subscribe(onNext: { [weak self] in
-            self?.nextMonthShortcutButton.titleLabel?.text = $0
+            self?.nextMonthShortcutButton.setTitle($0, for: .normal)
         }).disposed(by: disposeBag)
+    }
+    
+    private func configure(_ shortcutButton: UIButton) {
+        let shortcutButtonFont = UIFont.font(sized: 19.77, weight: .semibold, with: .body)
+        shortcutButton.titleLabel?.font = shortcutButtonFont
+        shortcutButton.tintColor = UIColor.DateInput.shortcutButtonsColor
     }
     
     @IBAction func touchUpInsideTomorrowShortcutButton(_ sender: UIButton) {

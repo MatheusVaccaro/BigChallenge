@@ -64,3 +64,17 @@
 
 /* placeholder title for notification */
 "notificationTitle" = "Your task waits";
+
+    /* MARK: Date Input */
+
+/* text for tomorrow shortcut button */
+"tomorrowShortcutDateInput" = "Tomorrow";
+
+/* text for next week shortcut button */
+"nextWeekShortcutDateInput" = "Next week";
+
+/* text for next month shortcut button */
+"nextMonthShortcutDateInput" = "Next month";
+
+/* text displaying the current selected date and time of day */
+"dateInputStatusDateInput" = "Remember me @date@ at @timeofday@";
