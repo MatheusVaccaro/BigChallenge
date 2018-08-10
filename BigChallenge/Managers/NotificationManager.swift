@@ -42,7 +42,7 @@ open class NotificationManager {
     }
     
     /** Add date and location notification for all tasks of a tag */
-    open class func addTagNotifications(tag: Tag, repeats: Bool = false, arriving: Bool = false) {
+    open class func addAllTagNotifications(from tag: Tag, repeats: Bool = false, arriving: Bool = false) {
         guard let tasks = tag.tasks else { return }
         if let date = tag.dueDate {
             for case let task as Task in tasks {
@@ -52,6 +52,43 @@ open class NotificationManager {
             }
         }
         //TODO: Location
+    }
+    
+    /** remove all date notifications from all associated tasks of a tag,
+    does not remove tasks own notifications */
+    open class func removeAllDateNotifications(from tag: Tag) {
+        guard let tasks = tag.tasks else { return }
+        guard tag.dueDate != nil else { return }
+        
+        var identifiersArray: [String] = []
+        
+        for case let task as Task in tasks {
+            let identifier = "\(task.title!)-\(tag.title!)-date"
+            identifiersArray.append(identifier)
+        }
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiersArray)
+    }
+    
+    /** remove all location notifications from all associated tasks of a tag,
+    does not remove tasks own notifications */
+    open class func removeAllLocationNotifications(from tag: Tag) {
+        guard let tasks = tag.tasks else { return }
+//        guard tag.location != nil else { return }
+        
+        var identifiersArray: [String] = []
+        
+        for case let task as Task in tasks {
+            let identifier = "\(task.title!)-\(tag.title!)-location"
+            identifiersArray.append(identifier)
+        }
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiersArray)
+    }
+    
+    /** remove all notifications from all associated tasks of a tag,
+    does not remove tasks own notifications */
+    open class func removeAllNotifications(from tag: Tag) {
+        removeAllDateNotifications(from: tag)
+        removeAllLocationNotifications(from: tag)
     }
     
     fileprivate class func addLocationNotification(_ identifier: String,
