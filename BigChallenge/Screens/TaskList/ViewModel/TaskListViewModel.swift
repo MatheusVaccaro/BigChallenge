@@ -66,12 +66,14 @@ public class TaskListViewModel {
             appendTask(task)
         }
         
-        guard !tags.isEmpty
+        guard !tags.isEmpty // if there are no selected tags, show recommended tasks
             else { tasksObservable.onNext((mainTasks, tasksToShow)); return }
         
-        // filter tasks that dont containt any of the tags selected
+        // filter tasks that dont contain any of the tags selected
         secondaryTasks =
             secondaryTasks.filter {
+                if model.recommendedTasks.contains($0) { return false }
+                if $0.tags!.allObjects.isEmpty { return true }
                 for tag in tags where !$0.tags!.contains(tag) { return false }
                 return true
         }
@@ -98,16 +100,19 @@ public class TaskListViewModel {
      verifies that task contains only one tag, which is the current selected tag
      */
     fileprivate func isMainTask(_ task: Task) -> Bool {
-        let tags = (task.tags?.allObjects as! [Tag])
+        if model.recommendedTasks.contains(task) { return true }
         
-        return tags.count == selectedTags.count &&
-            tags.map { $0.title! }.sorted() == selectedTags.map { $0.title! }.sorted()
+        let taskTags = (task.tags?.allObjects as! [Tag])
+        
+        return !selectedTags.isEmpty &&
+            taskTags.count == selectedTags.count &&
+            taskTags.map { $0.title! }.sorted() == selectedTags.map { $0.title! }.sorted() //TODO: improve this
     }
     
     /** appends a centain task to the appropriate array inside taskListViewModel */
     fileprivate func appendTask(_ task: Task) {
         if !task.isCompleted {
-            if isMainTask(task) { // this whould be better as a one-line if ;-;
+            if isMainTask(task) {
                 mainTasks.append(task)
             } else {
                 secondaryTasks.append(task)
@@ -130,4 +135,9 @@ public class TaskListViewModel {
             self.model.save(task) // model updated handles changing the arrays
         }.disposed(by: disposeBag)
     }
+    
+    // MARK: Strings
+    let recommendedHeaderTitle = Strings.Task.ListScreen.recommendedHeaderTitle
+    let section2HeaderTitle = Strings.Task.ListScreen.section2HeaderTitle
+    
 }
