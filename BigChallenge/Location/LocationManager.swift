@@ -13,6 +13,10 @@ class LocationManager: NSObject {
     
     let manager: CLLocationManager
     
+    var currentLocation: CLLocationCoordinate2D? {
+        return manager.location?.coordinate
+    }
+    
     override init() {
         manager = CLLocationManager()
         super.init()
