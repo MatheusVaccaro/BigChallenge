@@ -47,6 +47,17 @@ struct Strings {
         }
     }
     
+    struct DateInputView {
+        static let tomorrowShortcut = NSLocalizedString("tomorrowShortcutDateInput",
+                                                        comment: "text for tomorrow shortcut button")
+        
+        static let nextWeekShortcut = NSLocalizedString("nextWeekShortcutDateInput",
+                                                        comment: "text for next week shortcut button")
+        
+        static let nextMonthShortcut = NSLocalizedString("nextMonthShortcutDateInput",
+                                                        comment: "text for next month shortcut button")
+    }
+    
     struct LocationInputView {
         static let arrivingString = NSLocalizedString("arrivingLocationInputView",
                                                       comment: "string for selecting arriving location")

@@ -16,13 +16,14 @@ protocol DateInputViewModelProtocol {
     var timeOfDay: Variable<DateComponents?> { get }
     var frequency: Variable<NotificationOptions.Frequency?> { get }
     
-    var dateObservable: Observable<DateComponents?> { get }
-    var timeOfDayObservable: Observable<DateComponents?> { get }
-    var frequencyObservable: Observable<NotificationOptions.Frequency?> { get }
-    
     func selectDate(_ date: DateComponents)
     func selectTimeOfDay(_ timeOfDay: DateComponents)
     func select(frequency: NotificationOptions.Frequency)
+    
+    // MARK: - Date shortcuts
+    var tomorrowShortcutText: Variable<String> { get }
+    var nextWeekShortcutText: Variable<String> { get }
+    var nextMonthShortcutText: Variable<String> { get }
     
     func selectTomorrow()
     func selectNextWeek()

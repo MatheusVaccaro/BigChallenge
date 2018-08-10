@@ -10,22 +10,16 @@ import UIKit
 import RxSwift
 
 class DateInputViewModel: DateInputViewModelProtocol {
-    
+
     weak var delegate: DateSelectorViewModelDelegate?
     
     private(set) var date: Variable<DateComponents?>
     private(set) var timeOfDay: Variable<DateComponents?>
     private(set) var frequency: Variable<NotificationOptions.Frequency?>
     
-    var dateObservable: Observable<DateComponents?> {
-        return date.asObservable()
-    }
-    var timeOfDayObservable: Observable<DateComponents?> {
-        return timeOfDay.asObservable()
-    }
-    var frequencyObservable: Observable<NotificationOptions.Frequency?> {
-        return frequency.asObservable()
-    }
+    private(set) var tomorrowShortcutText: Variable<String>
+    private(set) var nextWeekShortcutText: Variable<String>
+    private(set) var nextMonthShortcutText: Variable<String>
     
     init(delegate: DateSelectorViewModelDelegate? = nil) {
         self.delegate = delegate
@@ -33,6 +27,10 @@ class DateInputViewModel: DateInputViewModelProtocol {
         self.date = Variable(nil)
         self.timeOfDay = Variable(nil)
         self.frequency = Variable(nil)
+        
+        self.tomorrowShortcutText = Variable<String>(Strings.DateInputView.tomorrowShortcut)
+        self.nextWeekShortcutText = Variable<String>(Strings.DateInputView.nextWeekShortcut)
+        self.nextMonthShortcutText = Variable<String>(Strings.DateInputView.nextMonthShortcut)
     }
     
     func selectDate(_ date: DateComponents) {
