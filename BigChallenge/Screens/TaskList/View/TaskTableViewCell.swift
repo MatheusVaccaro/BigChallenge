@@ -87,6 +87,7 @@ class TaskTableViewCell: UITableViewCell {
     
     @IBAction func didPressCheckButton(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
+        UISelectionFeedbackGenerator().selectionChanged()
         viewModel?.changedCheckButton(to: checkButton.isSelected)
     }
     
