@@ -33,6 +33,11 @@ class NewTagCoordinator: Coordinator {
     
     func start() {
         let tagCreationFrameViewController = CreationFrameViewController.instantiate()
+        let tagCreationFrameViewModel = TagCreationFrameViewModel(tagModel: model)
+        tagCreationFrameViewModel.delegate = self
+        tagCreationFrameViewController.viewModel = tagCreationFrameViewModel
+        
+        
         self.tagCreationFrameViewController = tagCreationFrameViewController
         
         let modalPresenter = UINavigationController(rootViewController: tagCreationFrameViewController)
@@ -55,17 +60,13 @@ class NewTagCoordinator: Coordinator {
     
 }
 
-extension NewTagCoordinator: NewTagViewModelDelegate {
+extension NewTagCoordinator: CreationFrameViewModelDelegate {
     
     func didTapCancelButton() {
         dismissViewController()
     }
     
-    func didTapDoneButton() {
-        dismissViewController()
-    }
-    
-    func didTapDeleteTagButton() {
+    func didTapSaveButton() {
         dismissViewController()
     }
     

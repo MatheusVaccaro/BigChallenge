@@ -52,7 +52,7 @@
 		226B311D211C954200881E34 /* CreateTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B311C211C954200881E34 /* CreateTagViewController.swift */; };
 		226CEA0520E17E87008CEB97 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226CEA0420E17E87008CEB97 /* Strings.swift */; };
 		2286A71620E3DF2100BE92AA /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2286A71420E3DF2100BE92AA /* Model.xcdatamodeld */; };
-		228946352113999A009D05CB /* CreationFrameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228946342113999A009D05CB /* CreationFrameViewModel.swift */; };
+		228946352113999A009D05CB /* TaskCreationFrameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228946342113999A009D05CB /* TaskCreationFrameViewModel.swift */; };
 		228946392113F1A4009D05CB /* InvertedCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228946382113F1A4009D05CB /* InvertedCircle.swift */; };
 		228BAD442108C22400E74AA9 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BAD432108C22400E74AA9 /* Fonts.swift */; };
 		2299F07920F628A70074A834 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299F07820F628A70074A834 /* LocationManager.swift */; };
@@ -94,6 +94,7 @@
 		C28DC92120B61CB9007F881A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C28DC92020B61CB9007F881A /* Assets.xcassets */; };
 		C28DC92420B61CB9007F881A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C28DC92220B61CB9007F881A /* LaunchScreen.storyboard */; };
 		C2901055211E097E008F2807 /* CreationFrameViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2901054211E097E008F2807 /* CreationFrameViewModelProtocol.swift */; };
+		C2901057211E0FB6008F2807 /* TagCreationFrameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2901056211E0FB6008F2807 /* TagCreationFrameViewModel.swift */; };
 		C29742C521123D3400A1D213 /* CreationFrame.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C29742C421123D3400A1D213 /* CreationFrame.storyboard */; };
 		C29742CA21123E2D00A1D213 /* MoreOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C29742C921123E2D00A1D213 /* MoreOptions.storyboard */; };
 		C29742CC211244F800A1D213 /* MoreOptionsViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29742CB211244F800A1D213 /* MoreOptionsViewModelProtocol.swift */; };
@@ -194,7 +195,7 @@
 		226B311C211C954200881E34 /* CreateTagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTagViewController.swift; sourceTree = "<group>"; };
 		226CEA0420E17E87008CEB97 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		2286A71520E3DF2100BE92AA /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		228946342113999A009D05CB /* CreationFrameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationFrameViewModel.swift; sourceTree = "<group>"; };
+		228946342113999A009D05CB /* TaskCreationFrameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreationFrameViewModel.swift; sourceTree = "<group>"; };
 		228946382113F1A4009D05CB /* InvertedCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertedCircle.swift; sourceTree = "<group>"; };
 		228BAD432108C22400E74AA9 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		2299F07820F628A70074A834 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -247,6 +248,7 @@
 		C28DC92320B61CB9007F881A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C28DC92520B61CB9007F881A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C2901054211E097E008F2807 /* CreationFrameViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationFrameViewModelProtocol.swift; sourceTree = "<group>"; };
+		C2901056211E0FB6008F2807 /* TagCreationFrameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCreationFrameViewModel.swift; sourceTree = "<group>"; };
 		C29742C421123D3400A1D213 /* CreationFrame.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreationFrame.storyboard; sourceTree = "<group>"; };
 		C29742C921123E2D00A1D213 /* MoreOptions.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MoreOptions.storyboard; sourceTree = "<group>"; };
 		C29742CB211244F800A1D213 /* MoreOptionsViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -441,8 +443,9 @@
 		228946322113996B009D05CB /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				228946342113999A009D05CB /* CreationFrameViewModel.swift */,
+				228946342113999A009D05CB /* TaskCreationFrameViewModel.swift */,
 				C2901054211E097E008F2807 /* CreationFrameViewModelProtocol.swift */,
+				C2901056211E0FB6008F2807 /* TagCreationFrameViewModel.swift */,
 			);
 			name = ViewModel;
 			path = View/ViewModel;
@@ -1147,6 +1150,7 @@
 			files = (
 				C2C231C520FD41AE002A2371 /* NewTagCoordinator.swift in Sources */,
 				22CC1865210511CC00486B27 /* Colors.swift in Sources */,
+				C2901057211E0FB6008F2807 /* TagCreationFrameViewModel.swift in Sources */,
 				222BFF9420ED92C7001B6BBF /* RemindersCommunicator.swift in Sources */,
 				C2A1114220B8AED400ABB161 /* TaskTableViewCell.swift in Sources */,
 				2255B3AE2113209800F2F37C /* LocationInputViewModel.swift in Sources */,
@@ -1161,7 +1165,7 @@
 				2255B3AC211295DD00F2F37C /* radiusMapView.swift in Sources */,
 				C2A1115320BA036800ABB161 /* NewTaskCoordinator.swift in Sources */,
 				22205ADD20FF7ADF007689D7 /* BigTagCollectionViewController.swift in Sources */,
-				228946352113999A009D05CB /* CreationFrameViewModel.swift in Sources */,
+				228946352113999A009D05CB /* TaskCreationFrameViewModel.swift in Sources */,
 				C23753AE20B6461E00C1CE15 /* Coordinator.swift in Sources */,
 				22ED5955211A7C21008EAD7D /* MKRadiusCircleRenderer.swift in Sources */,
 				2286A71620E3DF2100BE92AA /* Model.xcdatamodeld in Sources */,
