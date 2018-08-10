@@ -132,7 +132,7 @@ public class TaskModel {
         var localTasks: [Task] = []; let localTasksLimit = 2
         var nextTasks: [Task] = []; let nextTasksLimit = 3
         
-        let toDo = tasks
+        var toDo = tasks
             .filter { !$0.isCompleted }
         
         if let location = LocationManager().currentLocation {
@@ -142,17 +142,20 @@ public class TaskModel {
                 .prefix(localTasksLimit)
             )
         }
+        
+        toDo = toDo
+            .filter { !localTasks.contains($0) }
 
         nextTasks = Array(
             toDo
-            .filter { $0.dueDate != nil && !localTasks.contains($0) }
+            .filter { $0.dueDate != nil }
             .sorted { $0.dueDate! < $1.dueDate! }
             .prefix(nextTasksLimit)
         )
         
         latestTasks = Array(
             toDo
-            .filter { !nextTasks.contains($0) && !localTasks.contains($0) }
+            .filter { !nextTasks.contains($0) }
             .sorted { $0.creationDate! > $1.creationDate! }
             .prefix(latestTasksLimit)
         )
