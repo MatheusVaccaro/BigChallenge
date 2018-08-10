@@ -10,12 +10,7 @@ import Foundation
 import CoreLocation
 import RxSwift
 
-protocol CreationFrameViewModelDelegate: class {
-    func didTapCancelButton()
-    func didTapSaveButton()
-}
-
-class CreationFrameViewModel: CreationFrameViewModelProtocol {
+class TaskCreationFrameViewModel: CreationFrameViewModelProtocol {
     
     fileprivate var taskModel: TaskModel
     fileprivate var taskTitle: String? {
@@ -89,7 +84,7 @@ class CreationFrameViewModel: CreationFrameViewModelProtocol {
    
 }
 
-extension CreationFrameViewModel: NewTaskViewModelOutputDelegate {
+extension TaskCreationFrameViewModel: NewTaskViewModelOutputDelegate {
     func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateTitle title: String?) {
         taskTitle = title
     }
@@ -107,7 +102,7 @@ extension CreationFrameViewModel: NewTaskViewModelOutputDelegate {
     }
 }
 
-extension CreationFrameViewModel: MoreOptionsViewModelDelegate {
+extension TaskCreationFrameViewModel: MoreOptionsViewModelDelegate {
     func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool) {
         taskRegion = location
         taskArriving = arriving

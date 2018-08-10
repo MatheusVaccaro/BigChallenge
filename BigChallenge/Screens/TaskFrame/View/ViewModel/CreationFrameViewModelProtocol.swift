@@ -13,4 +13,10 @@ protocol CreationFrameViewModelProtocol {
     func didTapCancelButton()
     func didTapSaveButton()
     var doneButtonObservable: BehaviorSubject<Bool> { get }
+    var delegate: CreationFrameViewModelDelegate? { get set }
+}
+
+protocol CreationFrameViewModelDelegate: class {
+    func didTapCancelButton()
+    func didTapSaveButton()
 }
