@@ -10,33 +10,40 @@ import Foundation
 import CoreLocation
 
 protocol NewTagViewModelDelegate: class {
-    
     func didTapCancelButton()
     func didTapDoneButton()
     func didTapDeleteTagButton()
-    
+}
+
+protocol NewTagViewModelOutputDelegate: class {
+    func newTagViewModel(_ newTagViewModel: NewTagViewModel, didUpdateTitle title: String?)
+    func newTagViewModel(_ newTagViewModel: NewTagViewModel, didUpdateColorIndex colorIndex: Int64?)
+    func newTagViewModel(_ newTagViewModel: NewTagViewModel, didUpdateLocation location: CLLocation?)
 }
 
 class NewTagViewModel: NewTagViewModelProtocol {
-    var colorIndex: Int64?
-    
-    var location: CLLocation?
-    
-    var placeholder: String {
-        return titleTextFieldPlaceholder()
-    }
-    
     
     private let model: TagModel
     private var isEditing: Bool
     private var tag: Tag?
     
+    var colorIndex: Int64? {
+        didSet {
+            outputDelegate?.newTagViewModel(self, didUpdateColorIndex: colorIndex)
+        }
+    }
+    var location: CLLocation? {
+        didSet {
+            outputDelegate?.newTagViewModel(self, didUpdateLocation: location)
+        }
+    }
     var tagTitle: String? {
         didSet {
-            
+            outputDelegate?.newTagViewModel(self, didUpdateTitle: tagTitle)
         }
     }
     
+    weak var outputDelegate: NewTagViewModelOutputDelegate?
     weak var delegate: NewTagViewModelDelegate?
     
     init(tag: Tag?, isEditing: Bool, model: TagModel) {
@@ -57,19 +64,6 @@ class NewTagViewModel: NewTagViewModelProtocol {
         return 1
     }
     
-    func didTapCancelButton() {
-        delegate?.didTapCancelButton()
-    }
-    
-    func didTapDoneButton() {
-        delegate?.didTapDoneButton()
-        if isEditing {
-            // TODO
-        } else {
-            createTag()
-        }
-    }
-    
     func didTapDeleteTagButton() {
         delegate?.didTapDeleteTagButton()
         deleteTag()
@@ -80,17 +74,12 @@ class NewTagViewModel: NewTagViewModelProtocol {
         model.delete(object: tag)
     }
     
-    private func createTag() {
-        guard let tagTitle = tagTitle else { return }
-        let attributes: [TagModel.Attributes : Any] =
-            [.title : tagTitle as Any]
-        let tag = model.createTag(with: attributes)
-        self.tag = tag
-        model.save(tag)
-    }
-    
     // MARK: - Strings
     func titleTextFieldPlaceholder() -> String {
         return Strings.Task.CreationScreen.taskTitlePlaceholder
+    }
+    
+    var placeholder: String {
+        return titleTextFieldPlaceholder()
     }
 }

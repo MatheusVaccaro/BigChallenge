@@ -71,10 +71,6 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
         deleteTask()
     }
     
-    func didTapMoreOptionsButton() {
-        delegate?.didTapMoreOptionsButton()
-    }
-    
     private func deleteTask() {
         guard let task = task else { return }
         taskModel.delete(task)

@@ -32,8 +32,18 @@ class NewTagCoordinator: Coordinator {
     }
     
     func start() {
+        // New Tag
+//        let newTagViewController = NewTagViewController.instantiate()
+//        self.newTagViewController = newTagViewController
+        
+        let newTagViewModel = NewTagViewModel(tag: tag,
+                                              isEditing: isEditing,
+                                              model: model)
+//        newTagViewController.viewModel = newTagViewModel
+        
+        
         let tagCreationFrameViewController = CreationFrameViewController.instantiate()
-        let tagCreationFrameViewModel = TagCreationFrameViewModel(tagModel: model)
+        let tagCreationFrameViewModel = TagCreationFrameViewModel(mainInfoViewModel: newTagViewModel, tagModel: model)
         tagCreationFrameViewModel.delegate = self
         tagCreationFrameViewController.viewModel = tagCreationFrameViewModel
         
@@ -43,21 +53,7 @@ class NewTagCoordinator: Coordinator {
         let modalPresenter = UINavigationController(rootViewController: tagCreationFrameViewController)
         self.modalPresenter = modalPresenter
         presenter.present(modalPresenter, animated: true, completion: nil)
-        
-        
-//        let newTagTableViewController = NewTagTableViewController.instantiate()
-//        self.newTagTableViewController = newTagTableViewController
-//        
-//        let newTagViewModel = NewTagViewModel(tag: tag, isEditing: isEditing, model: model)
-//        newTagViewModel.delegate = self
-//        newTagTableViewController.viewModel = newTagViewModel
-//        
-//        let modalPresenter = UINavigationController(rootViewController: newTagTableViewController)
-//        self.modalPresenter = modalPresenter
-//        
-//        presenter.present(modalPresenter, animated: true, completion: nil)
     }
-    
 }
 
 extension NewTagCoordinator: CreationFrameViewModelDelegate {
