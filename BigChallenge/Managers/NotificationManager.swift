@@ -91,6 +91,22 @@ open class NotificationManager {
         removeAllLocationNotifications(from: tag)
     }
     
+    /** remove date notification from a specific task of a tag,
+     does not remove task own notification */
+    open class func removeSpecificDateNotification(from tag: Tag, task: Task) {
+        guard tag.dueDate != nil else { return }
+        let identifier = "\(task.title!)-\(tag.title!)-date"
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
+    }
+    
+    /** remove location notification from a specific task of a tag,
+     does not remove task own notification */
+    open class func removeSpecificLocationNotification(from tag: Tag, task: Task) {
+//        guard tag.region != nil else { return }
+        let identifier = "\(task.title!)-\(tag.title!)-location"
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
+    }
+    
     fileprivate class func addLocationNotification(_ identifier: String,
                                                    _ title: String,
                                                    _ arriving: Bool,
@@ -108,14 +124,7 @@ open class NotificationManager {
         
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: { _ in
-            UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
-                for request in requests {
-                    print(request.identifier)
-                    print(request.trigger!)
-                }
-            }
-        })
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
     
     fileprivate class func addDateNotification(_ identifier: String,
