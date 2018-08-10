@@ -72,7 +72,7 @@ public class TaskListViewController: UIViewController {
     }
     
     fileprivate func layout(cell: TaskTableViewCell, with indexPath: IndexPath) {
-        if indexPath.section == 0, tableView.numberOfSections != 1 {
+        if indexPath.section == 0, !viewModel.mainTasks.isEmpty {
             cell.layout(with: .main)
         } else {
             cell.layout(with: .none)
@@ -212,12 +212,12 @@ public class TaskListViewController: UIViewController {
 
 extension TaskListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard !(tableView.numberOfSections == 1) else { return 0 }
+        guard !(viewModel.mainTasks.isEmpty) else { return 0 }
         return 10.5 + heightOfHeaderTag
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return tableView.numberOfSections == 1 ? 0 : 46
+        return viewModel.mainTasks.isEmpty ? 0 : 46
     }
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -248,7 +248,7 @@ extension TaskListViewController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard tableView.numberOfSections > 1 && section == 0 else { return nil }
+        guard viewModel.mainTasks.isEmpty && section == 0 else { return nil }
         
         let footerView = UIView(frame: view.frame)
         

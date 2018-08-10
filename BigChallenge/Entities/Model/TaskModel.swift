@@ -141,10 +141,9 @@ public class TaskModel {
                 .filter { isLocation(location, in: $0) }
                 .prefix(localTasksLimit)
             )
+            toDo = toDo
+                .filter { !localTasks.contains($0) }
         }
-        
-        toDo = toDo
-            .filter { !localTasks.contains($0) }
 
         nextTasks = Array(
             toDo
