@@ -15,7 +15,7 @@ protocol CreationFrameViewModelDelegate: class {
     func didTapSaveButton()
 }
 
-class CreationFrameViewModel {
+class CreationFrameViewModel: CreationFrameViewModelProtocol {
     
     fileprivate var taskModel: TaskModel
     fileprivate var taskTitle: String? {
@@ -42,6 +42,15 @@ class CreationFrameViewModel {
         doneButtonObservable = BehaviorSubject<Bool>(value: false)
         mainInfoViewModel.outputDelegate = self
         detailViewModel.delegate = self
+    }
+    
+    func didTapCancelButton() {
+        delegate?.didTapCancelButton()
+    }
+    
+    func didTapSaveButton() {
+        createTaskIfPossible()
+        delegate?.didTapSaveButton()
     }
     
     var canCreateTask: Bool {
@@ -72,6 +81,12 @@ class CreationFrameViewModel {
         taskModel.save(task)
         NotificationManager.addLocationNotification(for: task)
     }
+    
+    private var shouldEnableDoneButton: Bool {
+        guard let taskTitle = taskTitle else { return false }
+        return !taskTitle.isEmpty
+    }
+   
 }
 
 extension CreationFrameViewModel: NewTaskViewModelOutputDelegate {
@@ -109,22 +124,4 @@ extension CreationFrameViewModel: MoreOptionsViewModelDelegate {
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectFrequency frequency: NotificationOptions.Frequency) {
         taskFrequency = frequency
     }
-}
-
-extension CreationFrameViewModel: CreationFrameViewModelProtocol {
-    
-    fileprivate var shouldEnableDoneButton: Bool {
-        guard let taskTitle = taskTitle else { return false }
-        return !taskTitle.isEmpty
-    }
-
-    func didTapCancelButton() {
-        delegate?.didTapCancelButton()
-    }
-    
-    func didTapSaveButton() {
-        createTaskIfPossible()
-        delegate?.didTapSaveButton()
-    }
-    
 }

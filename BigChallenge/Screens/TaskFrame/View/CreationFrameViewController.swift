@@ -13,12 +13,6 @@ protocol CreationFramePresentable {
     func didTapMoreOptionsButton(_ sender: UIButton)
 }
 
-protocol CreationFrameViewModelProtocol {
-    func didTapCancelButton()
-    func didTapSaveButton()
-    var doneButtonObservable: BehaviorSubject<Bool> { get }
-}
-
 class CreationFrameViewController: UIViewController {
 
     typealias FrameContent = CreationFramePresentable & UIViewController

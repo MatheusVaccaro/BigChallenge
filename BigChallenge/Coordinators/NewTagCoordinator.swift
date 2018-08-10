@@ -15,6 +15,7 @@ class NewTagCoordinator: Coordinator {
     var childrenCoordinators: [Coordinator]
     
 //    fileprivate var newTagTableViewController: NewTagTableViewController?
+    fileprivate var tagCreationFrameViewController: CreationFrameViewController?
     fileprivate let model: TagModel
     fileprivate var tag: Tag?
     fileprivate let isEditing: Bool
@@ -31,6 +32,14 @@ class NewTagCoordinator: Coordinator {
     }
     
     func start() {
+        let tagCreationFrameViewController = CreationFrameViewController.instantiate()
+        self.tagCreationFrameViewController = tagCreationFrameViewController
+        
+        let modalPresenter = UINavigationController(rootViewController: tagCreationFrameViewController)
+        self.modalPresenter = modalPresenter
+        presenter.present(modalPresenter, animated: true, completion: nil)
+        
+        
 //        let newTagTableViewController = NewTagTableViewController.instantiate()
 //        self.newTagTableViewController = newTagTableViewController
 //        
