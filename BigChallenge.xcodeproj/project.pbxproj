@@ -62,8 +62,8 @@
 		25A3EF9F7B0FADAB1A8E19B8 /* Pods_BigChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18C9FEFF01841372B83A1C4 /* Pods_BigChallengeUITests.framework */; };
 		2934BCCA21003E0700B6A05A /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2934BCC921003E0700B6A05A /* TaskTests.swift */; };
 		294490EE20FD297200333F11 /* TaskViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294490ED20FD297200333F11 /* TaskViewModelTests.swift */; };
-		2972201F211CCD8F00CF80CE /* DateInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2972201E211CCD8F00CF80CE /* DateInputView.swift */; };
-		29722022211CD1AE00CF80CE /* DateInputView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29722021211CD1AE00CF80CE /* DateInputView.storyboard */; };
+		2972201F211CCD8F00CF80CE /* DateInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2972201E211CCD8F00CF80CE /* DateInputViewController.swift */; };
+		29722022211CD1AE00CF80CE /* DateInput.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29722021211CD1AE00CF80CE /* DateInput.storyboard */; };
 		29A4F8832110EFD500AE4FA1 /* DateInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8822110EFD500AE4FA1 /* DateInputTests.swift */; };
 		29A4F8852110F04600AE4FA1 /* DateInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8842110F04600AE4FA1 /* DateInputViewModel.swift */; };
 		29A4F8892111061A00AE4FA1 /* Task+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8882111061A00AE4FA1 /* Task+Extension.swift */; };
@@ -195,8 +195,8 @@
 		2766B305F29EF8BE8DDEADCA /* Pods-BigChallengeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigChallengeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigChallengeUITests/Pods-BigChallengeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2934BCC921003E0700B6A05A /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		294490ED20FD297200333F11 /* TaskViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModelTests.swift; sourceTree = "<group>"; };
-		2972201E211CCD8F00CF80CE /* DateInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputView.swift; sourceTree = "<group>"; };
-		29722021211CD1AE00CF80CE /* DateInputView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DateInputView.storyboard; sourceTree = "<group>"; };
+		2972201E211CCD8F00CF80CE /* DateInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputViewController.swift; sourceTree = "<group>"; };
+		29722021211CD1AE00CF80CE /* DateInput.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DateInput.storyboard; sourceTree = "<group>"; };
 		29A4F8822110EFD500AE4FA1 /* DateInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputTests.swift; sourceTree = "<group>"; };
 		29A4F8842110F04600AE4FA1 /* DateInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputViewModel.swift; sourceTree = "<group>"; };
 		29A4F8882111061A00AE4FA1 /* Task+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Extension.swift"; sourceTree = "<group>"; };
@@ -480,8 +480,8 @@
 		29722020211CCDA000CF80CE /* View */ = {
 			isa = PBXGroup;
 			children = (
-				29722021211CD1AE00CF80CE /* DateInputView.storyboard */,
-				2972201E211CCD8F00CF80CE /* DateInputView.swift */,
+				29722021211CD1AE00CF80CE /* DateInput.storyboard */,
+				2972201E211CCD8F00CF80CE /* DateInputViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -912,7 +912,7 @@
 				221BA8B620F6A18500BE2AC1 /* TagCollection.storyboard in Resources */,
 				C29742C521123D3400A1D213 /* TaskFrame.storyboard in Resources */,
 				2253179A20D147AD0065C9F9 /* Localizable.strings in Resources */,
-				29722022211CD1AE00CF80CE /* DateInputView.storyboard in Resources */,
+				29722022211CD1AE00CF80CE /* DateInput.storyboard in Resources */,
 				C2A1114720B9F6EF00ABB161 /* NewTask.storyboard in Resources */,
 				C28DC92420B61CB9007F881A /* LaunchScreen.storyboard in Resources */,
 				16E8DDCE211205E8004F66D6 /* Barlow-ExtraBoldItalic.ttf in Resources */,
@@ -1142,7 +1142,7 @@
 				222888DC211873DD0093EEF7 /* LocationTableViewCell.swift in Sources */,
 				29A4F8852110F04600AE4FA1 /* DateInputViewModel.swift in Sources */,
 				2299F07920F628A70074A834 /* LocationManager.swift in Sources */,
-				2972201F211CCD8F00CF80CE /* DateInputView.swift in Sources */,
+				2972201F211CCD8F00CF80CE /* DateInputViewController.swift in Sources */,
 				2241F36920ED08340069EFE9 /* TagModel.swift in Sources */,
 				C2A1113B20B8791E00ABB161 /* MockPersistence.swift in Sources */,
 				C21EAD0020B741BC005F0F85 /* HomeScreenCoordinator.swift in Sources */,

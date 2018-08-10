@@ -10,20 +10,68 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Date Input View-->
+        <!--Date Input View Controller-->
         <scene sceneID="lu7-cs-EQv">
             <objects>
-                <viewController id="oKG-w4-TWy" customClass="DateInputView" customModule="BigChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DateInputViewController" id="oKG-w4-TWy" customClass="DateInputViewController" customModule="BigChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mM1-iF-aiS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="guG-ou-Y1h">
+                                <rect key="frame" x="67" y="218" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a7b-g8-XXm">
+                                <rect key="frame" x="166" y="60" width="42" height="20.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="geK-Td-d2V">
+                                <rect key="frame" x="59" y="151" width="257" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KDU-qd-iY5">
+                                        <rect key="frame" x="0.0" y="0.0" width="69" height="30"/>
+                                        <state key="normal" title="Tomorrow"/>
+                                        <connections>
+                                            <action selector="touchUpInsideTomorrowShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="ToY-T4-0OM"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VST-pw-ufN">
+                                        <rect key="frame" x="87" y="0.0" width="72" height="30"/>
+                                        <state key="normal" title="Next week"/>
+                                        <connections>
+                                            <action selector="touchUpInsideNextWeekShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="Lvj-3N-Ht1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Deg-a9-9om">
+                                        <rect key="frame" x="177" y="0.0" width="80" height="30"/>
+                                        <state key="normal" title="Next month"/>
+                                        <connections>
+                                            <action selector="touchUpInsideNextMonthShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="dbz-T2-L2H"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Thx-CC-uDZ"/>
                     </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="400"/>
+                    <connections>
+                        <outlet property="dateShortcutsStackView" destination="geK-Td-d2V" id="F9d-xD-CtE"/>
+                        <outlet property="nextMonthShortcutButton" destination="Deg-a9-9om" id="gtK-dp-T55"/>
+                        <outlet property="nextWeekShortcutButton" destination="VST-pw-ufN" id="f0r-cQ-PXd"/>
+                        <outlet property="tomorrowShortcutButton" destination="KDU-qd-iY5" id="bYU-BW-m1Y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Zr-Nm-Ffb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="241" y="50"/>
+            <point key="canvasLocation" x="240.80000000000001" y="49.475262368815599"/>
         </scene>
     </scenes>
 </document>
