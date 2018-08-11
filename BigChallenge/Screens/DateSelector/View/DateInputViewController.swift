@@ -18,8 +18,10 @@ class DateInputViewController: UIViewController {
     private let disposeBag = DisposeBag()
     
     @IBOutlet weak var dateInputStatusStackView: UIStackView!
-    private(set) var selectedDateLabel: UILabel!
-    private(set) var selectedTimeOfDayLabel: UILabel!
+    private(set) var selectedDateButton: DateStatusButton!
+    private(set) var selectedTimeOfDayButton: DateStatusButton!
+    
+    private(set) var currentSelector: BehaviorSubject<DateSelector>!
     
     @IBOutlet weak var dateShortcutsStackView: UIStackView!
     @IBOutlet weak var tomorrowShortcutButton: UIButton!
@@ -28,38 +30,68 @@ class DateInputViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        currentSelector = BehaviorSubject<DateSelector>(value: .date)
+        
         loadSelectedDateLabel()
         loadSelectedTimeOfDayLabel()
         loadDateInputStatusStackView()
         loadShortcutButtons()
+        
+        currentSelector.subscribe(onNext: { [weak self] in
+            self?.displaySelector(ofType: $0)
+        }).disposed(by: disposeBag)
+    }
+    
+    private func displaySelector(ofType selector: DateSelector) {
+        switch selector {
+        case .date:
+
+            break
+            
+        case .timeOfDay:
+
+            break
+        }
     }
     
     private func loadSelectedDateLabel() {
-        selectedDateLabel = UILabel()
-        selectedDateLabel.layer.masksToBounds = true
-        selectedDateLabel.layer.cornerRadius = 4.3
+        selectedDateButton = DateStatusButton()
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self,
+                                                   action: #selector(touchUpInsideSelectedDateButton))
+        selectedDateButton.addGestureRecognizer(tapRecognizer)
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "E dd MMM"
+        dateFormatter.dateFormat = "E dd MMM" // TODO Localize date format
         
         viewModel?.date.asObservable().subscribe(onNext: { [weak self] in
             
             if let dateComponents = $0,
                 let date = Calendar.current.date(from: dateComponents) {
                 
-                self?.selectedDateLabel.text = dateFormatter.string(from: date)
+                self?.selectedDateButton.text = dateFormatter.string(from: date)
                 
             } else {
-                self?.selectedDateLabel.text = "???"
+                self?.selectedDateButton.text = "???"
             }
         
         }).disposed(by: disposeBag)
+        
+        currentSelector.subscribe(onNext: { [weak self] in
+            self?.selectedDateButton.isToggled = ($0 == .date)
+        }).disposed(by: disposeBag)
+    }
+    
+    @objc func touchUpInsideSelectedDateButton() {
+        currentSelector.onNext(.date)
     }
     
     private func loadSelectedTimeOfDayLabel() {
-        selectedTimeOfDayLabel = UILabel()
-        selectedTimeOfDayLabel.font = UIFont.font(sized: 19.77, weight: .semibold, with: .body)
-        selectedTimeOfDayLabel.textColor = UIColor.DateInput.defaultColor
+        selectedTimeOfDayButton = DateStatusButton()
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self,
+                                                   action: #selector(touchUpInsideSelectedTimeOfDayButton))
+        selectedTimeOfDayButton.addGestureRecognizer(tapRecognizer)
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm" //TODO Localize time of day format
@@ -69,15 +101,23 @@ class DateInputViewController: UIViewController {
             if let dateComponents = $0,
                let date = Calendar.current.date(from: dateComponents) {
                 
-                self?.selectedTimeOfDayLabel.text = dateFormatter.string(from: date)
+                self?.selectedTimeOfDayButton.text = dateFormatter.string(from: date)
                 
             } else {
-                self?.selectedTimeOfDayLabel.text = "???"
+                self?.selectedTimeOfDayButton.text = "???"
             }
             
         }).disposed(by: disposeBag)
+        
+        currentSelector.subscribe(onNext: { [weak self] in
+            self?.selectedTimeOfDayButton.isToggled = ($0 == .timeOfDay)
+        }).disposed(by: disposeBag)
     }
     
+    @objc func touchUpInsideSelectedTimeOfDayButton() {
+        currentSelector.onNext(.timeOfDay)
+    }
+
     private func loadDateInputStatusStackView() {
         let dateInputStatusFormat = Strings.DateInputView.dateInputStatus
         
@@ -87,10 +127,10 @@ class DateInputViewController: UIViewController {
             
             switch dateInputStackDescriptor {
             case "date":
-                dateInputStatusStackView.addArrangedSubview(selectedDateLabel)
+                dateInputStatusStackView.addArrangedSubview(selectedDateButton)
                 
             case "timeofday":
-                dateInputStatusStackView.addArrangedSubview(selectedTimeOfDayLabel)
+                dateInputStatusStackView.addArrangedSubview(selectedTimeOfDayButton)
                 
             default:
                 let label = UILabel()
@@ -98,6 +138,7 @@ class DateInputViewController: UIViewController {
                 dateInputStatusStackView.addArrangedSubview(label)
             }
         }
+        
     }
     
     private func loadShortcutButtons() {
@@ -134,6 +175,11 @@ class DateInputViewController: UIViewController {
     
     @IBAction func touchUpInsideNextMonthShortcutButton(_ sender: UIButton) {
         viewModel?.selectNextMonth()
+    }
+    
+    enum DateSelector {
+    	case date
+        case timeOfDay
     }
 }
 
