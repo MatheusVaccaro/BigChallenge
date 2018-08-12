@@ -213,11 +213,15 @@ public class TaskListViewController: UIViewController {
 extension TaskListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         guard !(viewModel.mainTasks.isEmpty) else { return 0 }
-        return 10.5 + heightOfHeaderTag
+        let additionalHeight = (section == 0 && !viewModel.selectedTags.isEmpty)
+            ? 0
+            : heightOfHeaderTag!
+        
+        return 10.5 + additionalHeight
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return viewModel.mainTasks.isEmpty ? 0 : 46
+        return viewModel.mainTasks.isEmpty && viewModel.selectedTags.isEmpty ? 0 : 46
     }
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -225,22 +229,28 @@ extension TaskListViewController: UITableViewDelegate {
 
         if section == 0 {
             let cardView = UIView(frame: headerView.bounds)
+            var textHeader = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
             
-            cardView.frame.size.height = 8
-            cardView.frame.origin.y = tableView.delegate!.tableView!(tableView, heightForHeaderInSection: section) - 8
+            if viewModel.selectedTags.isEmpty {
+                textHeader = textHeaderView(with: viewModel.recommendedHeaderTitle,
+                                            colored: UIColor.darkGray)
+            }
+            
+            let headerHeight =
+                tableView.delegate!.tableView!(tableView, heightForHeaderInSection: section)
+            
+            cardView.frame.size.height = headerHeight - (textHeader.bounds.height*0.5)
+            cardView.frame.origin.y = headerHeight - cardView.frame.size.height
             cardView.layer.cornerRadius = 6.3
             cardView.backgroundColor = UIColor.white
             cardView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-            
             headerView.addSubview(cardView)
             
-            if viewModel.selectedTags.isEmpty {
-                headerView.addSubview(textHeaderView(with: viewModel.recommendedHeaderTitle,
-                                                     colored: UIColor.darkGray))
-            }
+            textHeader.frame.origin.y = cardView.frame.origin.y - (textHeader.bounds.height*0.5)
+            headerView.addSubview(textHeader)
             
             return headerView
-        } else { // section 1
+        } else { // also tagged section
             guard !viewModel.secondaryTasks.isEmpty else { return nil }
             headerView.addSubview(alsoTaggedHeader)
             return headerView
@@ -248,7 +258,7 @@ extension TaskListViewController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard viewModel.mainTasks.isEmpty && section == 0 else { return nil }
+        guard !viewModel.mainTasks.isEmpty && section == 0 else { return nil }
         
         let footerView = UIView(frame: view.frame)
         

@@ -69,11 +69,15 @@ public class TaskListViewModel {
         guard !tags.isEmpty // if there are no selected tags, show recommended tasks
             else { tasksObservable.onNext((mainTasks, tasksToShow)); return }
         
+        print(mainTasks.map {$0.title!})
+        print(secondaryTasks.map {$0.title!})
+        
         // filter tasks that dont contain any of the tags selected
         secondaryTasks =
             secondaryTasks.filter {
-                if model.recommendedTasks.contains($0) { return false }
-                if $0.tags!.allObjects.isEmpty { return true }
+                // on main screen and task is recommended
+                if selectedTags.isEmpty && model.recommendedTasks.contains($0) { return false }
+                else if $0.tags!.allObjects.isEmpty { return true }
                 for tag in tags where !$0.tags!.contains(tag) { return false }
                 return true
         }
@@ -100,7 +104,7 @@ public class TaskListViewModel {
      verifies that task contains only one tag, which is the current selected tag
      */
     fileprivate func isMainTask(_ task: Task) -> Bool {
-        if model.recommendedTasks.contains(task) { return true }
+        if model.recommendedTasks.contains(task) && selectedTags.isEmpty { return true }
         
         let taskTags = (task.tags?.allObjects as! [Tag])
         
