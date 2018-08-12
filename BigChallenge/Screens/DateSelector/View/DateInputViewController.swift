@@ -108,20 +108,17 @@ class DateInputViewController: UIViewController {
                                                    action: #selector(touchUpInsideSelectedDateButton))
         selectedDateLabel.addGestureRecognizer(tapRecognizer)
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "E dd MMM" // TODO Localize date format
-        
         viewModel?.date.asObservable().subscribe(onNext: { [weak self] in
             
             if let dateComponents = $0,
                let date = Calendar.current.date(from: dateComponents) {
                 
-                // TODO Come up with a more elegant solution for spacing the label
-                let selectedDateText = dateFormatter.string(from: date)
+                let selectedDateText = DateFormatter.localizedString(from: date,
+                                                                     dateStyle: .medium, timeStyle: .none)
                 self?.selectedDateLabel.text = " \(selectedDateText) "
                 
             } else {
-                self?.selectedDateLabel.text = "???"
+                self?.selectedDateLabel.text = " ??? "
             }
         
         }).disposed(by: disposeBag)
@@ -142,20 +139,17 @@ class DateInputViewController: UIViewController {
                                                    action: #selector(touchUpInsideSelectedTimeOfDayButton))
         selectedTimeOfDayLabel.addGestureRecognizer(tapRecognizer)
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm" //TODO Localize time of day format
-        
         viewModel?.timeOfDay.asObservable().subscribe(onNext: { [weak self] in
             
             if let dateComponents = $0,
                let date = Calendar.current.date(from: dateComponents) {
                 
-                // TODO Come up with a more elegant solution for spacing the label
-                let selectedTimeOfDayText = dateFormatter.string(from: date)
+                let selectedTimeOfDayText = DateFormatter.localizedString(from: date,
+                                                                          dateStyle: .none, timeStyle: .short)
                 self?.selectedTimeOfDayLabel.text = " \(selectedTimeOfDayText) "
                 
             } else {
-                self?.selectedTimeOfDayLabel.text = "???"
+                self?.selectedTimeOfDayLabel.text = " ??? "
             }
             
         }).disposed(by: disposeBag)
