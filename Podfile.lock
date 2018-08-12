@@ -1,5 +1,6 @@
 PODS:
   - Differentiator (3.0.2)
+  - JTAppleCalendar (7.1.5)
   - Nimble (7.1.3)
   - Quick (1.3.1)
   - RxCocoa (4.2.0):
@@ -13,6 +14,7 @@ PODS:
   - "UITextView+Placeholder (1.2.1)"
 
 DEPENDENCIES:
+  - JTAppleCalendar (~> 7.0)
   - Nimble
   - Quick
   - RxCocoa (~> 4.0)
@@ -24,6 +26,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Differentiator
+    - JTAppleCalendar
     - Nimble
     - Quick
     - RxCocoa
@@ -34,6 +37,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
+  JTAppleCalendar: 2d4f974f9f3c8b4964d51ca1f6e004883c031fbe
   Nimble: 2839b01d1b31f6a6a7777a221f0d91cf52e8e27b
   Quick: d17304d58d0d169dd0bd1c6e5c28e3318de32a1a
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
@@ -42,6 +46,6 @@ SPEC CHECKSUMS:
   SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
   "UITextView+Placeholder": 0c3efd97f37ea64bde7f34cc6e90fe02e87b3909
 
-PODFILE CHECKSUM: 3b428e26ba27719fb9686ec46b80422d7e33836f
+PODFILE CHECKSUM: 006427b5bdf52d9ebedd877bee91464ed8643737
 
 COCOAPODS: 1.5.3

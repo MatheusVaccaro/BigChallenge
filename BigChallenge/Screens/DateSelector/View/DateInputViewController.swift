@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JTAppleCalendar
 import RxSwift
 
 class DateInputViewController: UIViewController {
@@ -23,7 +24,11 @@ class DateInputViewController: UIViewController {
     
     private(set) var currentSelector: BehaviorSubject<DateSelector>!
     @IBOutlet weak var selectorView: UIView!
-    private var dateSelectorView: UIView!
+    
+    @IBOutlet weak var calendarContainerView: UIView!
+    private var calendarViewController: CalendarViewController!
+    private var calendar: JTAppleCalendarView { return calendarViewController.calendar }
+    
     @IBOutlet weak var timeOfDaySelector: UIDatePicker!
     
     @IBOutlet weak var dateShortcutsStackView: UIStackView!
@@ -39,6 +44,7 @@ class DateInputViewController: UIViewController {
         loadSelectedTimeOfDayLabel()
         loadDateInputStatusStackView()
         
+        loadDateSelectorView()
         loadTimeOfDaySelectorView()
         
         loadShortcutButtons()
@@ -51,11 +57,37 @@ class DateInputViewController: UIViewController {
     private func displaySelector(ofType selector: DateSelector) {
         switch selector {
         case .date:
+            calendarContainerView.isHidden = false
             timeOfDaySelector.isHidden = true
             
         case .timeOfDay:
+            calendarContainerView.isHidden = true
 			timeOfDaySelector.isHidden = false
         }
+    }
+    
+    private func loadDateSelectorView() {
+        calendarViewController = CalendarViewController.instantiate()
+        addChildViewController(calendarViewController)
+        calendarContainerView.addSubview(calendarViewController.view)
+        
+        calendarViewController.calendar.calendarDelegate = self
+        calendarViewController.calendar.isRangeSelectionUsed = false
+        
+        viewModel?.date.asObservable()
+            .map { dateComponent in
+            	Calendar.current.date(from: dateComponent)
+        	}
+            .subscribe(onNext: { [weak self] in
+                if let date = $0 {
+                    self?.calendar.scrollToDate(date, animateScroll: true) {
+                        self?.calendar.selectDates([date], triggerSelectionDelegate: false)
+                    }
+                } else {
+                    self?.calendar.selectDates([], triggerSelectionDelegate: true)
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     private func loadTimeOfDaySelectorView() {
@@ -203,6 +235,18 @@ class DateInputViewController: UIViewController {
     enum DateSelector {
     	case date
         case timeOfDay
+    }
+}
+
+extension DateInputViewController: JTAppleCalendarViewDelegate {
+    
+    func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+        guard let calendarCell = cell as? CalendarCell else { return }
+        
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
+        viewModel?.selectDate(dateComponents)
+        
+        calendarCell.select()
     }
 }
 

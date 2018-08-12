@@ -70,6 +70,10 @@
 		29A4F8892111061A00AE4FA1 /* Task+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8882111061A00AE4FA1 /* Task+Extension.swift */; };
 		29A4F88B21125C1C00AE4FA1 /* DateInputViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F88A21125C1C00AE4FA1 /* DateInputViewModelProtocol.swift */; };
 		29B6302821102B6A006D7A8A /* RemindersImporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6302721102B6A006D7A8A /* RemindersImporterTests.swift */; };
+		29BA689D2120C345009B4AB9 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29BA689C2120C345009B4AB9 /* Calendar.storyboard */; };
+		29BA68A02120C37D009B4AB9 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BA689F2120C37D009B4AB9 /* CalendarViewController.swift */; };
+		29BA68A42120CC2F009B4AB9 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BA68A32120CC2F009B4AB9 /* CalendarCell.swift */; };
+		29BA68A62120E147009B4AB9 /* Calendar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BA68A52120E147009B4AB9 /* Calendar+Extension.swift */; };
 		29BEED5F2107E946008E2202 /* ImportDataPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BEED5E2107E946008E2202 /* ImportDataPacket.swift */; };
 		C21EAD0020B741BC005F0F85 /* HomeScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EACFF20B741BC005F0F85 /* HomeScreenCoordinator.swift */; };
 		C21EAD0720B74757005F0F85 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD0620B74757005F0F85 /* TaskListViewController.swift */; };
@@ -204,6 +208,10 @@
 		29A4F8882111061A00AE4FA1 /* Task+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Extension.swift"; sourceTree = "<group>"; };
 		29A4F88A21125C1C00AE4FA1 /* DateInputViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputViewModelProtocol.swift; sourceTree = "<group>"; };
 		29B6302721102B6A006D7A8A /* RemindersImporterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersImporterTests.swift; sourceTree = "<group>"; };
+		29BA689C2120C345009B4AB9 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
+		29BA689F2120C37D009B4AB9 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		29BA68A32120CC2F009B4AB9 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
+		29BA68A52120E147009B4AB9 /* Calendar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar+Extension.swift"; sourceTree = "<group>"; };
 		29BEED5E2107E946008E2202 /* ImportDataPacket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportDataPacket.swift; sourceTree = "<group>"; };
 		2D020A78B9BEB6EB771DFE12 /* Pods-BigChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigChallenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigChallenge/Pods-BigChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		3B2823E64B1FC7A4411311AA /* Pods-BigChallengeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigChallengeUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BigChallengeUITests/Pods-BigChallengeUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -485,6 +493,7 @@
 				29722021211CD1AE00CF80CE /* DateInput.storyboard */,
 				2972201E211CCD8F00CF80CE /* DateInputViewController.swift */,
 				29722023211E36CF00CF80CE /* DateStatusLabel.swift */,
+				29BA689E2120C369009B4AB9 /* Calendar */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -505,6 +514,16 @@
 				29A4F88A21125C1C00AE4FA1 /* DateInputViewModelProtocol.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		29BA689E2120C369009B4AB9 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				29BA689C2120C345009B4AB9 /* Calendar.storyboard */,
+				29BA68A32120CC2F009B4AB9 /* CalendarCell.swift */,
+				29BA689F2120C37D009B4AB9 /* CalendarViewController.swift */,
+			);
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 		45EE167F10EAE72CE5635B25 /* Frameworks */ = {
@@ -596,6 +615,7 @@
 				C21EAD0A20B74F01005F0F85 /* StoryboardInstantiable.swift */,
 				2253179C20D147AD0065C9F9 /* Localizable.strings */,
 				22456D2820DC3BB000168894 /* dateExtension.swift */,
+				29BA68A52120E147009B4AB9 /* Calendar+Extension.swift */,
 				226CEA0420E17E87008CEB97 /* Strings.swift */,
 				22CC1864210511CC00486B27 /* Colors.swift */,
 				228BAD432108C22400E74AA9 /* Fonts.swift */,
@@ -922,6 +942,7 @@
 				221BA8AF20F6991200BE2AC1 /* HomeScreen.storyboard in Resources */,
 				16E8DDD4211205E8004F66D6 /* Barlow-Medium.ttf in Resources */,
 				16E8DDCB211205E8004F66D6 /* Barlow-Bold.ttf in Resources */,
+				29BA689D2120C345009B4AB9 /* Calendar.storyboard in Resources */,
 				C28DC92120B61CB9007F881A /* Assets.xcassets in Resources */,
 				16E8DDD8211205E8004F66D6 /* Barlow-SemiBoldItalic.ttf in Resources */,
 				C231118E20FFC75200BCB000 /* NewTag.storyboard in Resources */,
@@ -955,6 +976,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-BigChallenge/Pods-BigChallenge-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
+				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -963,6 +985,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
@@ -1144,6 +1167,7 @@
 				221BA8BA20F6A26100BE2AC1 /* TagCollectionViewModel.swift in Sources */,
 				222888DC211873DD0093EEF7 /* LocationTableViewCell.swift in Sources */,
 				29A4F8852110F04600AE4FA1 /* DateInputViewModel.swift in Sources */,
+				29BA68A42120CC2F009B4AB9 /* CalendarCell.swift in Sources */,
 				2299F07920F628A70074A834 /* LocationManager.swift in Sources */,
 				2972201F211CCD8F00CF80CE /* DateInputViewController.swift in Sources */,
 				2241F36920ED08340069EFE9 /* TagModel.swift in Sources */,
@@ -1154,6 +1178,7 @@
 				C29742CE211249B000A1D213 /* MoreOptionsViewModel.swift in Sources */,
 				C2DD9A28210D262D00E9B89B /* CreationFrameViewController.swift in Sources */,
 				22325A7420FB8E0500E5F8C6 /* HomeScreenViewModel.swift in Sources */,
+				29BA68A62120E147009B4AB9 /* Calendar+Extension.swift in Sources */,
 				C29742D4211257B600A1D213 /* LocationTableViewCellViewModel.swift in Sources */,
 				1676FC9020D99580003E2D79 /* TaskModel.swift in Sources */,
 				C2A1113D20B88A2F00ABB161 /* Storable.swift in Sources */,
@@ -1163,6 +1188,7 @@
 				C25F5AA92108FEB3001E1561 /* NewTaskViewController.swift in Sources */,
 				C231119320FFC95300BCB000 /* NewTagViewModelProtocol.swift in Sources */,
 				C29742D021124F1600A1D213 /* MoreOptionsTableViewCellViewModel.swift in Sources */,
+				29BA68A02120C37D009B4AB9 /* CalendarViewController.swift in Sources */,
 				C2A1114020B8A70A00ABB161 /* TaskCellViewModel.swift in Sources */,
 				C2A1115120B9FCDB00ABB161 /* NewTaskViewModel.swift in Sources */,
 				22456D2920DC3BB000168894 /* dateExtension.swift in Sources */,

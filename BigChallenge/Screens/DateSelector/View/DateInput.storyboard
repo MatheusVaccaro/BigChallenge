@@ -16,28 +16,34 @@
             <objects>
                 <viewController storyboardIdentifier="DateInputViewController" id="oKG-w4-TWy" customClass="DateInputViewController" customModule="BigChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mM1-iF-aiS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="guG-ou-Y1h">
-                                <rect key="frame" x="0.0" y="218" width="375" height="128"/>
+                                <rect key="frame" x="0.0" y="238" width="375" height="308"/>
                                 <subviews>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="YgX-4j-r0O">
-                                        <rect key="frame" x="8" y="0.0" width="375" height="162"/>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qv3-lM-uBA">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="308"/>
+                                    </containerView>
+                                    <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="YgX-4j-r0O">
+                                        <rect key="frame" x="8" y="0.0" width="375" height="216"/>
                                         <date key="date" timeIntervalSinceReferenceDate="555793516.040452">
                                             <!--2018-08-12 19:05:16 +0000-->
                                         </date>
                                     </datePicker>
                                 </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="qv3-lM-uBA" secondAttribute="bottom" id="48Y-K8-a3Q"/>
+                                    <constraint firstItem="qv3-lM-uBA" firstAttribute="top" secondItem="guG-ou-Y1h" secondAttribute="top" id="GMY-fh-dpe"/>
+                                    <constraint firstAttribute="trailing" secondItem="qv3-lM-uBA" secondAttribute="trailing" id="Xgg-8G-LfZ"/>
                                     <constraint firstAttribute="trailing" secondItem="YgX-4j-r0O" secondAttribute="trailing" constant="-8" id="Zg3-Ea-zjY"/>
                                     <constraint firstItem="YgX-4j-r0O" firstAttribute="leading" secondItem="guG-ou-Y1h" secondAttribute="leading" constant="8" id="Zot-na-FtT"/>
                                     <constraint firstItem="YgX-4j-r0O" firstAttribute="top" secondItem="guG-ou-Y1h" secondAttribute="top" id="jbv-6V-8bh"/>
+                                    <constraint firstItem="qv3-lM-uBA" firstAttribute="leading" secondItem="guG-ou-Y1h" secondAttribute="leading" id="wwx-r9-qjl"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="geK-Td-d2V">
-                                <rect key="frame" x="5" y="151" width="365" height="30"/>
+                                <rect key="frame" x="5" y="171" width="365" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KDU-qd-iY5">
                                         <rect key="frame" x="0.0" y="0.0" width="69" height="30"/>
@@ -64,7 +70,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yOd-A2-VUk">
-                                <rect key="frame" x="16" y="45" width="343" height="54"/>
+                                <rect key="frame" x="16" y="65" width="343" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="WGF-XW-mth"/>
                                 </constraints>
@@ -88,8 +94,9 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="400"/>
+                    <size key="freeformSize" width="375" height="600"/>
                     <connections>
+                        <outlet property="calendarContainerView" destination="qv3-lM-uBA" id="4vH-bI-Pks"/>
                         <outlet property="dateInputStatusStackView" destination="yOd-A2-VUk" id="LQE-vs-mSE"/>
                         <outlet property="dateShortcutsStackView" destination="geK-Td-d2V" id="F9d-xD-CtE"/>
                         <outlet property="nextMonthShortcutButton" destination="Deg-a9-9om" id="gtK-dp-T55"/>
