@@ -64,7 +64,7 @@
 		294490EE20FD297200333F11 /* TaskViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294490ED20FD297200333F11 /* TaskViewModelTests.swift */; };
 		2972201F211CCD8F00CF80CE /* DateInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2972201E211CCD8F00CF80CE /* DateInputViewController.swift */; };
 		29722022211CD1AE00CF80CE /* DateInput.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29722021211CD1AE00CF80CE /* DateInput.storyboard */; };
-		29722024211E36CF00CF80CE /* DateStatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29722023211E36CF00CF80CE /* DateStatusButton.swift */; };
+		29722024211E36CF00CF80CE /* DateStatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29722023211E36CF00CF80CE /* DateStatusLabel.swift */; };
 		29A4F8832110EFD500AE4FA1 /* DateInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8822110EFD500AE4FA1 /* DateInputTests.swift */; };
 		29A4F8852110F04600AE4FA1 /* DateInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8842110F04600AE4FA1 /* DateInputViewModel.swift */; };
 		29A4F8892111061A00AE4FA1 /* Task+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8882111061A00AE4FA1 /* Task+Extension.swift */; };
@@ -198,7 +198,7 @@
 		294490ED20FD297200333F11 /* TaskViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModelTests.swift; sourceTree = "<group>"; };
 		2972201E211CCD8F00CF80CE /* DateInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputViewController.swift; sourceTree = "<group>"; };
 		29722021211CD1AE00CF80CE /* DateInput.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DateInput.storyboard; sourceTree = "<group>"; };
-		29722023211E36CF00CF80CE /* DateStatusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateStatusButton.swift; sourceTree = "<group>"; };
+		29722023211E36CF00CF80CE /* DateStatusLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateStatusLabel.swift; sourceTree = "<group>"; };
 		29A4F8822110EFD500AE4FA1 /* DateInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputTests.swift; sourceTree = "<group>"; };
 		29A4F8842110F04600AE4FA1 /* DateInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputViewModel.swift; sourceTree = "<group>"; };
 		29A4F8882111061A00AE4FA1 /* Task+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Extension.swift"; sourceTree = "<group>"; };
@@ -484,7 +484,7 @@
 			children = (
 				29722021211CD1AE00CF80CE /* DateInput.storyboard */,
 				2972201E211CCD8F00CF80CE /* DateInputViewController.swift */,
-				29722023211E36CF00CF80CE /* DateStatusButton.swift */,
+				29722023211E36CF00CF80CE /* DateStatusLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1174,7 +1174,7 @@
 				C29742D2211257A600A1D213 /* TimeTableViewCellViewModel.swift in Sources */,
 				221BA8B820F6A1DF00BE2AC1 /* TagCollectionViewController.swift in Sources */,
 				C29742D62112CBFF00A1D213 /* HeaderViewController.swift in Sources */,
-				29722024211E36CF00CF80CE /* DateStatusButton.swift in Sources */,
+				29722024211E36CF00CF80CE /* DateStatusLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

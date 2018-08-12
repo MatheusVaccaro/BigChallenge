@@ -19,10 +19,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="guG-ou-Y1h">
-                                <rect key="frame" x="67" y="218" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="guG-ou-Y1h">
+                                <rect key="frame" x="0.0" y="218" width="375" height="128"/>
+                                <subviews>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="YgX-4j-r0O">
+                                        <rect key="frame" x="8" y="0.0" width="375" height="162"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="555793516.040452">
+                                            <!--2018-08-12 19:05:16 +0000-->
+                                        </date>
+                                    </datePicker>
+                                </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="YgX-4j-r0O" secondAttribute="trailing" constant="-8" id="Zg3-Ea-zjY"/>
+                                    <constraint firstItem="YgX-4j-r0O" firstAttribute="leading" secondItem="guG-ou-Y1h" secondAttribute="leading" constant="8" id="Zot-na-FtT"/>
+                                    <constraint firstItem="YgX-4j-r0O" firstAttribute="top" secondItem="guG-ou-Y1h" secondAttribute="top" id="jbv-6V-8bh"/>
+                                </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="geK-Td-d2V">
                                 <rect key="frame" x="5" y="151" width="365" height="30"/>
@@ -51,7 +63,7 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="yOd-A2-VUk">
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yOd-A2-VUk">
                                 <rect key="frame" x="16" y="45" width="343" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="WGF-XW-mth"/>
@@ -60,9 +72,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="guG-ou-Y1h" secondAttribute="trailing" id="Eed-T0-Ln3"/>
+                            <constraint firstItem="guG-ou-Y1h" firstAttribute="top" secondItem="geK-Td-d2V" secondAttribute="bottom" constant="37" id="I5P-eL-JLs"/>
                             <constraint firstItem="yOd-A2-VUk" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" constant="16" id="IcB-I6-Vlr"/>
                             <constraint firstItem="geK-Td-d2V" firstAttribute="top" secondItem="Thx-CC-uDZ" secondAttribute="top" constant="151" id="J3e-UU-XB6"/>
+                            <constraint firstItem="guG-ou-Y1h" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" id="LCW-En-KV4"/>
                             <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="yOd-A2-VUk" secondAttribute="trailing" constant="16" id="Nh1-qE-rMs"/>
+                            <constraint firstItem="Thx-CC-uDZ" firstAttribute="bottom" secondItem="guG-ou-Y1h" secondAttribute="bottom" constant="54" id="XPk-Vk-X8G"/>
                             <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="geK-Td-d2V" secondAttribute="trailing" constant="5" id="b4N-Vx-QbM"/>
                             <constraint firstItem="yOd-A2-VUk" firstAttribute="top" secondItem="Thx-CC-uDZ" secondAttribute="top" constant="45" id="f1A-js-70Y"/>
                             <constraint firstItem="geK-Td-d2V" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" constant="5" id="mpo-zH-qEj"/>
@@ -78,6 +94,8 @@
                         <outlet property="dateShortcutsStackView" destination="geK-Td-d2V" id="F9d-xD-CtE"/>
                         <outlet property="nextMonthShortcutButton" destination="Deg-a9-9om" id="gtK-dp-T55"/>
                         <outlet property="nextWeekShortcutButton" destination="VST-pw-ufN" id="f0r-cQ-PXd"/>
+                        <outlet property="selectorView" destination="guG-ou-Y1h" id="AQU-Uk-OtA"/>
+                        <outlet property="timeOfDaySelector" destination="YgX-4j-r0O" id="gzN-GG-RpH"/>
                         <outlet property="tomorrowShortcutButton" destination="KDU-qd-iY5" id="bYU-BW-m1Y"/>
                     </connections>
                 </viewController>

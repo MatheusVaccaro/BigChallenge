@@ -18,10 +18,13 @@ class DateInputViewController: UIViewController {
     private let disposeBag = DisposeBag()
     
     @IBOutlet weak var dateInputStatusStackView: UIStackView!
-    private(set) var selectedDateButton: DateStatusButton!
-    private(set) var selectedTimeOfDayButton: DateStatusButton!
+    private(set) var selectedDateLabel: DateStatusLabel!
+    private(set) var selectedTimeOfDayLabel: DateStatusLabel!
     
     private(set) var currentSelector: BehaviorSubject<DateSelector>!
+    @IBOutlet weak var selectorView: UIView!
+    private var dateSelectorView: UIView!
+    @IBOutlet weak var timeOfDaySelector: UIDatePicker!
     
     @IBOutlet weak var dateShortcutsStackView: UIStackView!
     @IBOutlet weak var tomorrowShortcutButton: UIButton!
@@ -35,6 +38,9 @@ class DateInputViewController: UIViewController {
         loadSelectedDateLabel()
         loadSelectedTimeOfDayLabel()
         loadDateInputStatusStackView()
+        
+        loadTimeOfDaySelectorView()
+        
         loadShortcutButtons()
         
         currentSelector.subscribe(onNext: { [weak self] in
@@ -45,21 +51,30 @@ class DateInputViewController: UIViewController {
     private func displaySelector(ofType selector: DateSelector) {
         switch selector {
         case .date:
-
-            break
+            timeOfDaySelector.isHidden = true
             
         case .timeOfDay:
-
-            break
+			timeOfDaySelector.isHidden = false
         }
     }
     
+    private func loadTimeOfDaySelectorView() {
+        timeOfDaySelector.addTarget(self, action: #selector(handleTimeOfDaySelectorChange(_:)), for: .valueChanged)
+    }
+    
+    @objc func handleTimeOfDaySelectorChange(_ datePicker: UIDatePicker) {
+        let pickedDate = datePicker.date
+        let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: pickedDate)
+        
+        viewModel?.selectTimeOfDay(dateComponents)
+    }
+    
     private func loadSelectedDateLabel() {
-        selectedDateButton = DateStatusButton()
+        selectedDateLabel = DateStatusLabel()
         
         let tapRecognizer = UITapGestureRecognizer(target: self,
                                                    action: #selector(touchUpInsideSelectedDateButton))
-        selectedDateButton.addGestureRecognizer(tapRecognizer)
+        selectedDateLabel.addGestureRecognizer(tapRecognizer)
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "E dd MMM" // TODO Localize date format
@@ -67,18 +82,20 @@ class DateInputViewController: UIViewController {
         viewModel?.date.asObservable().subscribe(onNext: { [weak self] in
             
             if let dateComponents = $0,
-                let date = Calendar.current.date(from: dateComponents) {
+               let date = Calendar.current.date(from: dateComponents) {
                 
-                self?.selectedDateButton.text = dateFormatter.string(from: date)
+                // TODO Come up with a more elegant solution for spacing the label
+                let selectedDateText = dateFormatter.string(from: date)
+                self?.selectedDateLabel.text = " \(selectedDateText) "
                 
             } else {
-                self?.selectedDateButton.text = "???"
+                self?.selectedDateLabel.text = "???"
             }
         
         }).disposed(by: disposeBag)
         
         currentSelector.subscribe(onNext: { [weak self] in
-            self?.selectedDateButton.isToggled = ($0 == .date)
+            self?.selectedDateLabel.isToggled = ($0 == .date)
         }).disposed(by: disposeBag)
     }
     
@@ -87,11 +104,11 @@ class DateInputViewController: UIViewController {
     }
     
     private func loadSelectedTimeOfDayLabel() {
-        selectedTimeOfDayButton = DateStatusButton()
+        selectedTimeOfDayLabel = DateStatusLabel()
         
         let tapRecognizer = UITapGestureRecognizer(target: self,
                                                    action: #selector(touchUpInsideSelectedTimeOfDayButton))
-        selectedTimeOfDayButton.addGestureRecognizer(tapRecognizer)
+        selectedTimeOfDayLabel.addGestureRecognizer(tapRecognizer)
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm" //TODO Localize time of day format
@@ -101,16 +118,18 @@ class DateInputViewController: UIViewController {
             if let dateComponents = $0,
                let date = Calendar.current.date(from: dateComponents) {
                 
-                self?.selectedTimeOfDayButton.text = dateFormatter.string(from: date)
+                // TODO Come up with a more elegant solution for spacing the label
+                let selectedTimeOfDayText = dateFormatter.string(from: date)
+                self?.selectedTimeOfDayLabel.text = " \(selectedTimeOfDayText) "
                 
             } else {
-                self?.selectedTimeOfDayButton.text = "???"
+                self?.selectedTimeOfDayLabel.text = "???"
             }
             
         }).disposed(by: disposeBag)
         
         currentSelector.subscribe(onNext: { [weak self] in
-            self?.selectedTimeOfDayButton.isToggled = ($0 == .timeOfDay)
+            self?.selectedTimeOfDayLabel.isToggled = ($0 == .timeOfDay)
         }).disposed(by: disposeBag)
     }
     
@@ -127,10 +146,10 @@ class DateInputViewController: UIViewController {
             
             switch dateInputStackDescriptor {
             case "date":
-                dateInputStatusStackView.addArrangedSubview(selectedDateButton)
+                dateInputStatusStackView.addArrangedSubview(selectedDateLabel)
                 
             case "timeofday":
-                dateInputStatusStackView.addArrangedSubview(selectedTimeOfDayButton)
+                dateInputStatusStackView.addArrangedSubview(selectedTimeOfDayLabel)
                 
             default:
                 let label = UILabel()
@@ -139,6 +158,10 @@ class DateInputViewController: UIViewController {
             }
         }
         
+        let spacerView = UIView()
+        spacerView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        spacerView.backgroundColor = .clear
+        dateInputStatusStackView.addArrangedSubview(spacerView)
     }
     
     private func loadShortcutButtons() {

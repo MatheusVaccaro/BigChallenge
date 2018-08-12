@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DateStatusButton: UILabel {
+class DateStatusLabel: UILabel {
     
     var colorLayer: CAShapeLayer?
     var shadowLayer: CAShapeLayer?
