@@ -30,7 +30,7 @@ class LocationInputViewModel {
     func accessibilityValue(for radius: Int) -> String {
         let localizedString = Strings.LocationInputView.accessibilityValueMap
         return String.localizedStringWithFormat(localizedString,
-                                         radius,
+                                         radius.description,
                                          placeName)
     }
     
