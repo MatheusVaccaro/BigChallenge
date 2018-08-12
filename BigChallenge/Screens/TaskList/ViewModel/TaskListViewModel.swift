@@ -37,6 +37,7 @@ public class TaskListViewModel {
     private(set) var completedTasks: [Task]
     private(set) var selectedTags: [Tag]
 
+    private var recommender: Recommender
     private let model: TaskModel
     private var disposeBag = DisposeBag()
     
@@ -50,6 +51,7 @@ public class TaskListViewModel {
         self.taskCompleted = PublishSubject<Task>()
         self.shouldAddTask = BehaviorSubject<Bool>(value: false)
         self.tasksObservable = BehaviorSubject<([Task], [Task])>(value: (mainTasks, secondaryTasks))
+        self.recommender = Recommender(model: model)
         
         subscribeToCompletedTask()
         subscribeToModelUpdate()
@@ -76,7 +78,8 @@ public class TaskListViewModel {
         secondaryTasks =
             secondaryTasks.filter {
                 // on main screen and task is recommended
-                if selectedTags.isEmpty && model.recommendedTasks.contains($0) { return false }
+                if selectedTags.isEmpty &&
+                    recommender.recommendedTasks.contains($0) { return false }
                 else if $0.tags!.allObjects.isEmpty { return true }
                 for tag in tags where !$0.tags!.contains(tag) { return false }
                 return true
@@ -104,13 +107,14 @@ public class TaskListViewModel {
      verifies that task contains only one tag, which is the current selected tag
      */
     fileprivate func isMainTask(_ task: Task) -> Bool {
-        if model.recommendedTasks.contains(task) && selectedTags.isEmpty { return true }
+        if recommender.recommendedTasks.contains(task) && selectedTags.isEmpty { return true }
         
         let taskTags = (task.tags?.allObjects as! [Tag])
         
         return !selectedTags.isEmpty &&
             taskTags.count == selectedTags.count &&
-            taskTags.map { $0.title! }.sorted() == selectedTags.map { $0.title! }.sorted() //TODO: improve this
+            taskTags.map { $0.title! }.sorted() == selectedTags.map { $0.title! }.sorted()
+        //TODO: improve this
     }
     
     /** appends a centain task to the appropriate array inside taskListViewModel */

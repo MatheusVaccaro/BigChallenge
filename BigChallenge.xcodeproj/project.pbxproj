@@ -26,6 +26,7 @@
 		221BA8B820F6A1DF00BE2AC1 /* TagCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BA8B720F6A1DF00BE2AC1 /* TagCollectionViewController.swift */; };
 		221BA8BA20F6A26100BE2AC1 /* TagCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BA8B920F6A26100BE2AC1 /* TagCollectionViewModel.swift */; };
 		22205ADD20FF7ADF007689D7 /* BigTagCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22205ADC20FF7ADF007689D7 /* BigTagCollectionViewController.swift */; };
+		22270EFA2120C07000695223 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22270EF92120C07000695223 /* Recommender.swift */; };
 		222888D82117E5D90093EEF7 /* RadiusMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222888D72117E5D90093EEF7 /* RadiusMapViewModel.swift */; };
 		222888DC211873DD0093EEF7 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222888DB211873DD0093EEF7 /* LocationTableViewCell.swift */; };
 		222BFF9420ED92C7001B6BBF /* RemindersCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222BFF9320ED92C7001B6BBF /* RemindersCommunicator.swift */; };
@@ -168,6 +169,7 @@
 		221BA8B920F6A26100BE2AC1 /* TagCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewModel.swift; sourceTree = "<group>"; };
 		221BA8BD20F6B0EF00BE2AC1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TaskList.strings; sourceTree = "<group>"; };
 		22205ADC20FF7ADF007689D7 /* BigTagCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigTagCollectionViewController.swift; sourceTree = "<group>"; };
+		22270EF92120C07000695223 /* Recommender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommender.swift; sourceTree = "<group>"; };
 		222888D72117E5D90093EEF7 /* RadiusMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusMapViewModel.swift; sourceTree = "<group>"; };
 		222888DB211873DD0093EEF7 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		222BFF9320ED92C7001B6BBF /* RemindersCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersCommunicator.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				1676FC8F20D99580003E2D79 /* TaskModel.swift */,
 				29A4F8882111061A00AE4FA1 /* Task+Extension.swift */,
 				2241F36820ED08340069EFE9 /* TagModel.swift */,
+				22270EF92120C07000695223 /* Recommender.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1146,6 +1149,7 @@
 				C231118F20FFC75200BCB000 /* NewTagTableViewController.swift in Sources */,
 				228946392113F1A4009D05CB /* InvertedCircle.swift in Sources */,
 				221BA8B320F69E5C00BE2AC1 /* HomeScreenViewController.swift in Sources */,
+				22270EFA2120C07000695223 /* Recommender.swift in Sources */,
 				223C0C3E20E568DE00CF39ED /* Enums.swift in Sources */,
 				2255B3AC211295DD00F2F37C /* radiusMapView.swift in Sources */,
 				C2A1115320BA036800ABB161 /* NewTaskCoordinator.swift in Sources */,
