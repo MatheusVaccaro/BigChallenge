@@ -57,6 +57,7 @@ public class TagModel {
     
     public func delete(object: Tag) {
         guard tags.contains(object) else { print("could not delete \(object) "); return }
+        NotificationManager.removeAllNotifications(from: object)
         persistance.delete(object) // delegate manages the array
     }
     
