@@ -91,6 +91,12 @@ class TagCollectionViewController: UIViewController {
         let actionsheet = UIAlertController(title: tag.title!,
                                             message: nil,
                                             preferredStyle: .actionSheet)
+        
+        let updateAction = UIAlertAction(title: viewModel.updateActionTitle, style: .default) { _ in
+            self.viewModel.update(tag: tag)
+            self.viewModel.presentingActionSheet = false
+        }
+        
         let deleteAction = UIAlertAction(title: viewModel.deleteActionTitle, style: .destructive) { _ in
             self.viewModel.delete(tag: tag)
             self.viewModel.presentingActionSheet = false
@@ -101,6 +107,7 @@ class TagCollectionViewController: UIViewController {
             self.viewModel.presentingActionSheet = false
         }
         
+        actionsheet.addAction(updateAction)
         actionsheet.addAction(deleteAction)
         actionsheet.addAction(cancelAction)
         
