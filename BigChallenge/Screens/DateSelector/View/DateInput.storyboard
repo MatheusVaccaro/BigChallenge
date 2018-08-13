@@ -48,7 +48,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="geK-Td-d2V">
-                                <rect key="frame" x="5" y="171" width="365" height="30"/>
+                                <rect key="frame" x="16" y="171" width="343" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KDU-qd-iY5">
                                         <rect key="frame" x="0.0" y="0.0" width="69" height="30"/>
@@ -59,14 +59,14 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VST-pw-ufN">
-                                        <rect key="frame" x="141" y="0.0" width="72" height="30"/>
+                                        <rect key="frame" x="130" y="0.0" width="72" height="30"/>
                                         <state key="normal" title="Next week"/>
                                         <connections>
                                             <action selector="touchUpInsideNextWeekShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="Lvj-3N-Ht1"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Deg-a9-9om">
-                                        <rect key="frame" x="285" y="0.0" width="80" height="30"/>
+                                        <rect key="frame" x="263" y="0.0" width="80" height="30"/>
                                         <state key="normal" title="Next month"/>
                                         <connections>
                                             <action selector="touchUpInsideNextMonthShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="dbz-T2-L2H"/>
@@ -89,9 +89,9 @@
                             <constraint firstItem="geK-Td-d2V" firstAttribute="top" secondItem="Thx-CC-uDZ" secondAttribute="top" constant="151" id="J3e-UU-XB6"/>
                             <constraint firstItem="guG-ou-Y1h" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" id="LCW-En-KV4"/>
                             <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="yOd-A2-VUk" secondAttribute="trailing" constant="16" id="Nh1-qE-rMs"/>
-                            <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="geK-Td-d2V" secondAttribute="trailing" constant="5" id="b4N-Vx-QbM"/>
+                            <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="geK-Td-d2V" secondAttribute="trailing" constant="16" id="b4N-Vx-QbM"/>
                             <constraint firstItem="yOd-A2-VUk" firstAttribute="top" secondItem="Thx-CC-uDZ" secondAttribute="top" constant="45" id="f1A-js-70Y"/>
-                            <constraint firstItem="geK-Td-d2V" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" constant="5" id="mpo-zH-qEj"/>
+                            <constraint firstItem="geK-Td-d2V" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" constant="16" id="mpo-zH-qEj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Thx-CC-uDZ"/>
                     </view>

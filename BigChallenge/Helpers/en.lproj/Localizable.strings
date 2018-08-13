@@ -77,4 +77,4 @@
 "nextMonthShortcutDateInput" = "Next month";
 
 /* text displaying the current selected date and time of day */
-"dateInputStatusDateInput" = "Remember me @date@ at @timeofday@";
+"dateInputStatusDateInput" = "Remember me on @date@ at @timeofday@";
