@@ -67,6 +67,7 @@ class CreationFrameViewModel {
         
         let task = taskModel.createTask(with: attributes)
         taskModel.save(task)
+        NotificationManager.addLocationNotification(for: task)
     }
 }
 
