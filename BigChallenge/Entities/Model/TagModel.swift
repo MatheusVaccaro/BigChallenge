@@ -57,6 +57,7 @@ public class TagModel {
     
     public func delete(object: Tag) {
         guard tags.contains(object) else { print("could not delete \(object) "); return }
+        NotificationManager.removeAllNotifications(from: object)
         persistance.delete(object) // delegate manages the array
     }
     
@@ -90,6 +91,7 @@ public class TagModel {
         }
         if let dates = attributes[.dates] as? [Date] {
             tag.dates = dates
+            NotificationManager.updateTagNotifications(for: tag)
         }
         if let dueDate = attributes[.dueDate] as? Date {
             tag.dueDate = dueDate
