@@ -24,6 +24,7 @@ class DateInputTests: QuickSpec {
                 dateSelectorViewModel = DateInputViewModel()
                 mockDateSelectorDelegate = DateSelectorMockDelegate()
                 dateSelectorViewModel.delegate = mockDateSelectorDelegate
+                DateGenerator.shared = DateGenerator(currentDate: Date())
             }
             
             context("when selecting a date") {
@@ -139,7 +140,7 @@ class DateInputTests: QuickSpec {
                     guard let internalDate = dateSelectorViewModel.date.value,
                           let selectedDate = Calendar.current.date(from: internalDate) else { fail("DateSelectorViewModel internal date data after selecting next month was nil."); return }
                     
-                    guard let sameWeekdayOfTodayInNextWeek = Calendar.current.date(byAdding: DateComponents(day: 7), to: Date()) else { fail("Error when creating a date 7 days from now."); return }
+                    guard let sameWeekdayOfTodayInNextWeek = Calendar.current.date(byAdding: DateComponents(day: 7), to: Date.now()) else { fail("Error when creating a date 7 days from now."); return }
                     
                     let isSelectedDateTheSameWeekdayOfTodayButInNextWeek = Calendar.current.isDate(selectedDate, inSameDayAs: sameWeekdayOfTodayInNextWeek)
                     
@@ -157,11 +158,138 @@ class DateInputTests: QuickSpec {
                     guard let internalDate = dateSelectorViewModel.date.value,
                           let selectedDate = Calendar.current.date(from: internalDate) else { fail("DateSelectorViewModel internal date data after selecting next month was nil."); return }
                     
-                    guard let thirtyDaysAfterToday = Calendar.current.date(byAdding: DateComponents(day: 30), to: Date()) else { fail("Error when creating a date thirty days from now."); return }
+                    guard let thirtyDaysAfterToday = Calendar.current.date(byAdding: DateComponents(day: 30), to: Date.now()) else { fail("Error when creating a date thirty days from now."); return }
                     
                     let isSelectedDateEqualToThirtyDaysAfterToday = Calendar.current.isDate(selectedDate, equalTo: thirtyDaysAfterToday, toGranularity: Calendar.Component.day)
                     
                     expect(isSelectedDateEqualToThirtyDaysAfterToday).to(beTrue())
+                }
+            }
+            
+            context("when selecting two hours from now") {
+                
+                beforeEach {
+                    dateSelectorViewModel.selectTwoHoursFromNow()
+                }
+                
+                it("should select the date equal to two hour from now") {
+                    guard let internalDate = dateSelectorViewModel.date.value,
+                        let internalTime = dateSelectorViewModel.timeOfDay.value,
+                        let selectedDate = Calendar.current.combine(date: internalDate, andTimeOfDay: internalTime) else {
+                            fail("DateSelectorViewModel internal date data after selecting two hours from now was nil.")
+                            return
+                    }
+                    
+                    guard let twoHoursFromNow = Calendar.current.date(byAdding: DateComponents(hour: 2), to: Date.now()) else { fail("Error when creating a date two hours from now."); return }
+                    
+                    let isSelectedDateEqualToTwoHoursFromNow = Calendar.current.isDate(selectedDate, equalTo: twoHoursFromNow, toGranularity: Calendar.Component.hour)
+                    
+                    expect(isSelectedDateEqualToTwoHoursFromNow).to(beTrue())
+                }
+            }
+            
+            context("when selecting this evening") {
+                
+                context("and it's earlier than 8 PM") {
+                    
+                    beforeEach {
+                        let earlierThan8PM = Calendar.current.date(bySettingHour: 19, minute: 0, second: 0, of: Date())!
+                        DateGenerator.shared = DateGenerator(currentDate: earlierThan8PM)
+                        
+                        dateSelectorViewModel.selectThisEvening()
+                    }
+                    
+                    it("should select today at 8 PM") {
+                        guard let internalDate = dateSelectorViewModel.date.value,
+                            let internalTime = dateSelectorViewModel.timeOfDay.value,
+                            let selectedDate = Calendar.current.combine(date: internalDate, andTimeOfDay: internalTime) else {
+                                fail("DateInputViewModel internal date data after selecting this evening was nil.")
+                                return
+                        }
+                        
+                        guard let thisEvening = Calendar.current.date(bySettingHour: 20, minute: 0, second: 0, of: Date.now()) else { fail("Error when creating a date for this evening."); return }
+                        
+                        expect(selectedDate).to(equal(thisEvening))
+                    }
+                }
+                
+                context("and it's after 8 PM") {
+                    
+                    beforeEach {
+                        let after8PM = Calendar.current.date(bySettingHour: 21, minute: 0, second: 0, of: Date())!
+                        DateGenerator.shared = DateGenerator(currentDate: after8PM)
+                        
+                        dateSelectorViewModel.selectThisEvening()
+                    }
+                    
+                    it("should select 1 hour from now") {
+                        guard let internalDate = dateSelectorViewModel.date.value,
+                            let internalTime = dateSelectorViewModel.timeOfDay.value,
+                            let selectedDate = Calendar.current.combine(date: internalDate, andTimeOfDay: internalTime) else {
+                                fail("DateInputViewModel internal date data after selecting this evening was nil.")
+                                return
+                        }
+                        
+                        guard let oneHourFromNow = Calendar.current.date(byAdding: .hour, value: 1, to: Date.now()) else { fail("Error when creating a date one hour from now."); return }
+                        
+                        let isSelectedDateEqualToOneHourFromNow = Calendar.current.isDate(selectedDate, equalTo: oneHourFromNow, toGranularity: Calendar.Component.hour)
+                        
+                        expect(isSelectedDateEqualToOneHourFromNow).to(beTrue())
+                    }
+                }
+            }
+            
+            context("when selecting next morning") {
+                
+                context("and it's earlier than 8 AM") {
+                    
+                    beforeEach {
+                        let earlierThan8AM = Calendar.current.date(bySettingHour: 7, minute: 0, second: 0, of: Date())!
+                        DateGenerator.shared = DateGenerator(currentDate: earlierThan8AM)
+                        
+                        dateSelectorViewModel.selectNextMorning()
+                    }
+                    
+                    it("should select today at 8 AM") {
+                        guard let internalDate = dateSelectorViewModel.date.value,
+                            let internalTime = dateSelectorViewModel.timeOfDay.value,
+                            let selectedDate = Calendar.current.combine(date: internalDate, andTimeOfDay: internalTime) else {
+                                fail("DateInputViewModel internal date data after selecting next morning was nil.")
+                                return
+                        }
+
+                        guard let nextMorning = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date.now()) else { fail("Error when creating a date for this evening."); return }
+                        
+                        expect(selectedDate).to(equal(nextMorning))
+                    }
+                }
+                
+                context("and it's after 8 AM") {
+                    
+                    beforeEach {
+                        let after8AM = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: Date())!
+                        DateGenerator.shared = DateGenerator(currentDate: after8AM)
+                        
+                        dateSelectorViewModel.selectNextMorning()
+                    }
+                    
+                    it("should select tomorrow at 8 AM") {
+                        guard let internalDate = dateSelectorViewModel.date.value,
+                            let internalTime = dateSelectorViewModel.timeOfDay.value,
+                            let selectedDate = Calendar.current.combine(date: internalDate, andTimeOfDay: internalTime) else {
+                                fail("DateInputViewModel internal date data after selecting this morning was nil.")
+                                return
+                        }
+                        
+                        
+                        guard let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date.now()),
+                            let tomorrowMorning = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: tomorrow) else {
+                                fail("Error when creating the date of tomorrow morning.")
+                                return
+                        }
+                        
+                        expect(selectedDate).to(equal(tomorrowMorning))
+                    }
                 }
             }
         }
@@ -179,15 +307,15 @@ class DateSelectorMockDelegate: DateInputViewModelDelegate {
         providedNotificationOptions = notificationOptions
     }
     
-    func dateSelectorViewModel(_ dateSelectorViewModel: DateInputViewModelProtocol, didSelectDate date: DateComponents) {
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: DateComponents) {
         providedDate = date
     }
     
-    func dateSelectorViewModel(_ dateSelectorViewModel: DateInputViewModelProtocol, didSelectTimeOfDay timeOfDay: DateComponents) {
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectTimeOfDay timeOfDay: DateComponents) {
         providedTimeOfDay = timeOfDay
     }
     
-    func dateSelectorViewModel(_ dateSelectorViewModel: DateInputViewModelProtocol, didSelect frequency: NotificationOptions.Frequency) {
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectFrequency frequency: NotificationOptions.Frequency) {
         providedFrequency = frequency
     }
 }
