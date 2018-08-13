@@ -20,7 +20,7 @@
     /* MARK: Tag */
 
 /* screen title when on \"all tags\" screen */
-"CollectionScreenTitle" = "Tags";
+"collectionScreenTitle" = "Tags";
 
 /* placeholder title for a new tag */
 "newTagTitlePlaceHolder" = "New Tag";
@@ -55,7 +55,10 @@
 "mapViewAccessibilityValueEmpty" = "Location";
 
 /* accessibility hint on searchBar for voiceOver users */
-"SearchBarHint" = "tap to search location";
+"searchBarHint" = "tap to search location";
+
+/* placeholder for empty state location search bar */
+"searchBarPlaceholder" = "Search"
 
     /* MARK: Notification */
 

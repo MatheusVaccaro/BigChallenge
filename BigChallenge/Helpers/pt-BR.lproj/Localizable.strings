@@ -37,7 +37,6 @@
 /* text for tag cancel in action sheet */
 "cancelActionTitle" = "Cancelar";
 
-
     /* MARK: Location */
 
 /* accessibility value on map for voiceOver users */
@@ -56,7 +55,10 @@
 "mapViewAccessibilityValueEmpty" = "Lugar";
 
 /* accessibility hint on searchBar for voiceOver users */
-"SearchBarHint" = "toque para buscar lugares";
+"searchBarHint" = "toque para buscar lugares";
+
+/* placeholder for empty state location search bar */
+"searchBarPlaceholder" = "Pesquisar"
 
     /* MARK: Notification */
 

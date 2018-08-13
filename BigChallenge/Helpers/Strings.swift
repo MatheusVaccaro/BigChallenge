@@ -67,7 +67,7 @@ struct Strings {
         static let accessibilityValueMap = NSLocalizedString("%d meters from %s",
                                                              comment: "accessibility value on map for voiceOver users")
         
-        static let accessibilityHintSearchBar = NSLocalizedString("SearchBarHint",
+        static let accessibilityHintSearchBar = NSLocalizedString("searchBarHint",
                                                                   comment: "accessibility hint on searchBar for voiceOver users")
     }
     
