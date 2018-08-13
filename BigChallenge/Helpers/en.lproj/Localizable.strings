@@ -32,10 +32,10 @@
 "updateActionTitle" = "Edit";
 
 /* text for tag delete in action sheet */
-"deleteActionTitle" = "Deletar Tag";
+"deleteActionTitle" = "Delete";
 
 /* text for tag cancel in action sheet */
-"cancelActionTitle" = "Cancelar";
+"cancelActionTitle" = "Cancel";
 
     /* MARK: Location */
 
