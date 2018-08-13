@@ -90,7 +90,7 @@ struct Strings {
         static let accessibilityValueEmptyMap = NSLocalizedString("mapViewAccessibilityValueEmpty",
                                                                   comment: "description of empty value of map for voiceOver users")
         
-        static let accessibilityValueMap = NSLocalizedString("%d meters from %s",
+        static let accessibilityValueMap = NSLocalizedString("%@ meters from %@",
                                                              comment: "accessibility value on map for voiceOver users")
         
         static let accessibilityHintSearchBar = NSLocalizedString("searchBarHint",

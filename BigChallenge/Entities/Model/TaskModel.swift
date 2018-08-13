@@ -75,7 +75,6 @@ public class TaskModel {
                 NSKeyedArchiver.archivedData(withRootObject: region)
             task.regionData = regionData
             task.arriving = arriving
-//            let region = NSKeyedUnarchiver.unarchiveObject(with: regionData!) as! CLCircularRegion
         }
         
         delegate?.taskModel(self, didCreate: task)

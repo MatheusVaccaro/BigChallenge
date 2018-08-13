@@ -36,12 +36,50 @@ class HomeScreenViewController: UIViewController {
         return layer
     }()
     
+    lazy var titleGradient: CAGradientLayer = {
+        let layer = CAGradientLayer()
+        
+        layer.startPoint = CGPoint(x: 0, y: 1)
+        layer.endPoint = CGPoint(x: 1, y: 0)
+        
+        return layer
+    }()
+    
+    lazy var maskLabel: UILabel = {
+        let ans = UILabel()
+        
+        ans.textAlignment = bigTitle.textAlignment
+        ans.font = bigTitle.font
+        
+        return ans
+    }()
+    
+    lazy var gradientView: UIView = {
+        let gradientView = UIView(frame: view.bounds)
+        
+        gradientView.isUserInteractionEnabled = false
+        gradientView.layer.addSublayer(titleGradient)
+        gradientView.addSubview(maskLabel)
+        gradientView.mask = maskLabel
+        
+        return gradientView
+    }()
+    
+    override func viewDidLayoutSubviews() {
+        gradientView.frame = bigTitle.frame
+        titleGradient.frame = gradientView.bounds
+        maskLabel.frame = gradientView.bounds
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.layer.addSublayer(gradientLayer) // background gradient layer
+//        bigTitle.textColor = UIColor.clear
         bigTitle.font = UIFont.font(sized: 41, weight: .medium, with: .largeTitle)
         bigTitle.adjustsFontForContentSizeCategory = true
+        
+        view.layer.addSublayer(gradientLayer) // background gradient layer
+        view.addSubview(gradientView)
         
         observeSelectedTags()
         observeClickedAddTag()
@@ -61,7 +99,7 @@ class HomeScreenViewController: UIViewController {
                     if let shouldAddTask = event.element {
                         if shouldAddTask {
                             self.delegate?
-                                .willAddTask(selectedTags: self.tagCollectionViewController.viewModel.selectedTags )
+                                .willAddTask(selectedTags: self.tagCollectionViewController.viewModel.selectedTags)
                         }
                     }
                 }.disposed(by: disposeBag)
@@ -88,10 +126,23 @@ class HomeScreenViewController: UIViewController {
         tagCollectionViewController.viewModel.selectedTagsObservable
             .subscribe { event in
                 self.viewModel.updateSelectedTagsIfNeeded(event.element)
-                self.bigTitle.text = self.viewModel.bigTitleText
+                self.configureBigTitle()
                 if let activity = self.userActivity { self.updateUserActivityState(activity) }
                 self.taskListViewController.viewModel.filterTasks(with: event.element!)
             }.disposed(by: disposeBag)
+    }
+    
+    func configureBigTitle() {
+        bigTitle.text = viewModel.bigTitleText
+        maskLabel.text = viewModel.bigTitleText
+        
+        titleGradient.colors = bigTitleColors
+    }
+    
+    var bigTitleColors: [CGColor] {
+        return viewModel.selectedTags.isEmpty
+            ? [UIColor.black.cgColor, UIColor.black.cgColor]
+            : TagModel.tagColors[ Int(viewModel.selectedTags.first!.color) ]
     }
     
     @IBAction func didTapBigTitle(_ sender: Any) {

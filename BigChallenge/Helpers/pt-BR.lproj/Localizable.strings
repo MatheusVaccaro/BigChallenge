@@ -40,7 +40,7 @@
     /* MARK: Location */
 
 /* accessibility value on map for voiceOver users */
-"%d meters from %s" = "%d metros de %s";
+"%@ meters from %@" = "%@ metros de %@";
 
 /* string for selecting arriving location */
 "arrivingLocationInputView" = "Ao chegar";
