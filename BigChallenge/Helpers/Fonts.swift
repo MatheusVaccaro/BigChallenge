@@ -10,7 +10,10 @@ import Foundation
 import UIKit
 
 extension UIFont {
-    static func font(sized size: CGFloat, weight: UIFont.Weight, with style: UIFontTextStyle, fontName: FontName = .system) -> UIFont {
+    static func font(sized size: CGFloat,
+                     weight: UIFont.Weight,
+                     with style: UIFontTextStyle,
+                     fontName: FontName = .system) -> UIFont {
         let font = fontNamed(name: fontName, weight: weight, size: size)
         
         let fontMetrics = UIFontMetrics(forTextStyle: style)

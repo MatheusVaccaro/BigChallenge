@@ -22,7 +22,11 @@ class HomeScreenCoordinator: Coordinator {
     fileprivate var tagModel: TagModel
     fileprivate var selectedTags: [Tag]
     
-    init(presenter: UINavigationController, taskModel: TaskModel, tagModel: TagModel, persistence: Persistence, selectedTags: [Tag]) {
+    init(presenter: UINavigationController,
+         taskModel: TaskModel,
+         tagModel: TagModel,
+         persistence: Persistence,
+         selectedTags: [Tag]) {
         
         self.presenter = presenter
         self.taskModel = taskModel
