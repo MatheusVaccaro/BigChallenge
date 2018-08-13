@@ -17,7 +17,7 @@ protocol NewTagViewModelDelegate: class {
 
 protocol NewTagViewModelOutputDelegate: class {
     func newTagViewModel(_ newTagViewModel: NewTagViewModel, didUpdateTitle title: String?)
-    func newTagViewModel(_ newTagViewModel: NewTagViewModel, didUpdateColorIndex colorIndex: Int64?)
+    func newTagViewModel(_ newTagViewModel: NewTagViewModel, didUpdateColorIndex colorIndex: Int?)
     func newTagViewModel(_ newTagViewModel: NewTagViewModel, didUpdateLocation location: CLLocation?)
 }
 
@@ -27,7 +27,7 @@ class NewTagViewModel: NewTagViewModelProtocol {
     private var isEditing: Bool
     private var tag: Tag?
     
-    var colorIndex: Int64? {
+    var colorIndex: Int? {
         didSet {
             outputDelegate?.newTagViewModel(self, didUpdateColorIndex: colorIndex)
         }
@@ -72,6 +72,10 @@ class NewTagViewModel: NewTagViewModelProtocol {
     private func deleteTag() {
         guard let tag = tag else { return }
         model.delete(object: tag)
+    }
+    
+    func numberOfColors() -> Int {
+        return TagModel.tagColors.count
     }
     
     // MARK: - Strings

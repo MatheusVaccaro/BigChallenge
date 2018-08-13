@@ -12,7 +12,7 @@ import CoreLocation
 protocol NewTagViewModelProtocol {
     
     var tagTitle: String? { get set }
-    var colorIndex: Int64? { get set }
+    var colorIndex: Int? { get set }
     var location: CLLocation? { get set }
     var placeholder: String { get }
 

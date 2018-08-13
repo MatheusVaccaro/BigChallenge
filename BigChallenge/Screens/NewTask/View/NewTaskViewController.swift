@@ -103,7 +103,7 @@ class NewTaskViewController: UIViewController, CreationFramePresentable {
         taskNotesTextView.font = UIFont.font(sized: 14, weight: .regular, with: .body)
         taskNotesTextView.textContainer.lineBreakMode = .byTruncatingTail
         taskNotesTextView.placeholderColor = UIColor.lightGray.withAlphaComponent(0.5)
-        taskNotesTextView.placeholder = Strings.Tag.CreationScreen.tagDescriptionPlaceholder
+        taskNotesTextView.placeholder = Strings.Task.CreationScreen.taskDescriptionPlaceholder
     }
 }
 

@@ -14,7 +14,7 @@ class NewTagCoordinator: Coordinator {
     fileprivate let presenter: UINavigationController
     var childrenCoordinators: [Coordinator]
     
-//    fileprivate var newTagTableViewController: NewTagTableViewController?
+    fileprivate var createTagViewController: CreateTagViewController?
     fileprivate var tagCreationFrameViewController: CreationFrameViewController?
     fileprivate let model: TagModel
     fileprivate var tag: Tag?
@@ -33,25 +33,28 @@ class NewTagCoordinator: Coordinator {
     
     func start() {
         // New Tag
-//        let newTagViewController = NewTagViewController.instantiate()
-//        self.newTagViewController = newTagViewController
+        let createTagViewController = CreateTagViewController.instantiate()
+        self.createTagViewController = createTagViewController
         
         let newTagViewModel = NewTagViewModel(tag: tag,
                                               isEditing: isEditing,
                                               model: model)
-//        newTagViewController.viewModel = newTagViewModel
+        createTagViewController.viewModel = newTagViewModel
         
-        
+        // Tag Frame
         let tagCreationFrameViewController = CreationFrameViewController.instantiate()
         let tagCreationFrameViewModel = TagCreationFrameViewModel(mainInfoViewModel: newTagViewModel, tagModel: model)
         tagCreationFrameViewModel.delegate = self
         tagCreationFrameViewController.viewModel = tagCreationFrameViewModel
-        
-        
         self.tagCreationFrameViewController = tagCreationFrameViewController
+
+        tagCreationFrameViewController.configurePageViewController(with: [createTagViewController])
         
+        // Modal Presenter
         let modalPresenter = UINavigationController(rootViewController: tagCreationFrameViewController)
+        modalPresenter.isNavigationBarHidden = true
         self.modalPresenter = modalPresenter
+        
         presenter.present(modalPresenter, animated: true, completion: nil)
     }
 }

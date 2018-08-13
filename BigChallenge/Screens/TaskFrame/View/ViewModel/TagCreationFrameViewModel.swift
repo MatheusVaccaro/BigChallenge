@@ -18,7 +18,7 @@ class TagCreationFrameViewModel: CreationFrameViewModelProtocol {
             doneButtonObservable.onNext(shouldEnableDoneButton)
         }
     }
-    fileprivate var tagColorIndex: Int64?
+    fileprivate var tagColorIndex: Int?
     fileprivate var tagLocation: CLLocation?
     
     let doneButtonObservable: BehaviorSubject<Bool>
@@ -37,7 +37,24 @@ class TagCreationFrameViewModel: CreationFrameViewModelProtocol {
     }
     
     func didTapSaveButton() {
+        createTagIfPossible()
         delegate?.didTapSaveButton()
+    }
+    
+    private func createTagIfPossible() {
+        guard let tagTitle = tagTitle else { return }
+    
+        var attributes: [TagModel.Attributes : Any] = [
+            .title : tagTitle as Any,
+        ]
+        
+        if let colorIndex = tagColorIndex {
+            let int64ColorIndex = Int64(colorIndex)
+            attributes[.colorIndex] = int64ColorIndex
+        }
+        
+        let tag = tagModel.createTag(with: attributes)
+        tagModel.save(tag)
     }
     
     private var shouldEnableDoneButton: Bool {
@@ -51,13 +68,11 @@ extension TagCreationFrameViewModel: NewTagViewModelOutputDelegate {
         tagTitle = title
     }
     
-    func newTagViewModel(_ newTagViewModel: NewTagViewModel, didUpdateColorIndex colorIndex: Int64?) {
+    func newTagViewModel(_ newTagViewModel: NewTagViewModel, didUpdateColorIndex colorIndex: Int?) {
         tagColorIndex = colorIndex
     }
     
     func newTagViewModel(_ newTagViewModel: NewTagViewModel, didUpdateLocation location: CLLocation?) {
         tagLocation = location
     }
-    
-    
 }
