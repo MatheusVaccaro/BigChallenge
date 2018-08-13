@@ -28,7 +28,13 @@
 /* placeholder title for a new tag description */
 "newTagDescriptionPlaceholder" = "Adicione uma nota";
 
-    // MARK: Location
+/* text for tag delete in action sheet */
+"deleteActionTitle" = "Deletar Tag";
+
+/* text for tag cancel in action sheet */
+"cancelActionTitle" = "Cancelar";
+
+    /* MARK: Location */
 
 /* accessibility value on map for voiceOver users */
 "%d meters from %s" = "%d metros de %s";
