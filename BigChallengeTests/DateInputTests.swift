@@ -168,7 +168,7 @@ class DateInputTests: QuickSpec {
     }
 }
 
-class DateSelectorMockDelegate: DateSelectorViewModelDelegate {
+class DateSelectorMockDelegate: DateInputViewModelDelegate {
 
     var providedNotificationOptions: NotificationOptions?
     var providedDate: DateComponents?

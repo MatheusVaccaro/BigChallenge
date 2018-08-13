@@ -60,7 +60,6 @@ class MoreOptionsViewController: UIViewController, CreationFramePresentable {
         } else {
             viewModel.showTimeCell()
             tableView.insertRows(at: [IndexPath(row: 0, section: 1)], with: .automatic)
-            
         }
     }
     

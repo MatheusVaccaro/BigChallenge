@@ -14,4 +14,19 @@ extension Calendar {
         
         return date(from: dateComponents)
     }
+    
+    func combine(date dateComponents: DateComponents? = DateComponents(),
+                 andTimeOfDay timeOfDay: DateComponents? = DateComponents()) -> Date? {
+        
+        var mergedDateComponents = DateComponents()
+        mergedDateComponents.year = dateComponents!.year
+        mergedDateComponents.month = dateComponents!.month
+        mergedDateComponents.day = dateComponents!.day
+        
+        mergedDateComponents.hour = timeOfDay!.hour
+        mergedDateComponents.minute = timeOfDay!.minute
+        mergedDateComponents.second = timeOfDay!.second
+        
+        return date(from: mergedDateComponents)
+    }
 }

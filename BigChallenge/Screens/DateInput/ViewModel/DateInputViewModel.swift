@@ -11,7 +11,7 @@ import RxSwift
 
 class DateInputViewModel: DateInputViewModelProtocol {
 
-    weak var delegate: DateSelectorViewModelDelegate?
+    weak var delegate: DateInputViewModelDelegate?
     
     private(set) var date: Variable<DateComponents?>
     private(set) var timeOfDay: Variable<DateComponents?>
@@ -21,7 +21,7 @@ class DateInputViewModel: DateInputViewModelProtocol {
     private(set) var nextWeekShortcutText: Variable<String>
     private(set) var nextMonthShortcutText: Variable<String>
     
-    init(delegate: DateSelectorViewModelDelegate? = nil) {
+    init(delegate: DateInputViewModelDelegate? = nil) {
         self.delegate = delegate
         
         self.date = Variable(nil)
@@ -39,7 +39,7 @@ class DateInputViewModel: DateInputViewModelProtocol {
         let dateComponents = DateComponents(year: year, month: month, day: day)
         
         self.date.value = dateComponents
-        delegate?.dateSelectorViewModel(self, didSelectDate: dateComponents)
+        delegate?.dateInputViewModel(self, didSelectDate: dateComponents)
     }
     
     func selectTimeOfDay(_ timeOfDay: DateComponents) {
@@ -48,12 +48,12 @@ class DateInputViewModel: DateInputViewModelProtocol {
         let dateComponents = DateComponents(hour: hour, minute: minute)
         
         self.timeOfDay.value = dateComponents
-        delegate?.dateSelectorViewModel(self, didSelectTimeOfDay: dateComponents)
+        delegate?.dateInputViewModel(self, didSelectTimeOfDay: dateComponents)
     }
     
     func select(frequency: NotificationOptions.Frequency) {
     	self.frequency.value = frequency
-        delegate?.dateSelectorViewModel(self, didSelect: frequency)
+        delegate?.dateInputViewModel(self, didSelectFrequency: frequency)
     }
     
     func selectTomorrow() {
@@ -85,10 +85,9 @@ class DateInputViewModel: DateInputViewModelProtocol {
     }
 }
 
-protocol DateSelectorViewModelDelegate: class {
+protocol DateInputViewModelDelegate: class {
     //swiftlint:disable next line_length
-    func dateSelectorViewModel(_ dateSelectorViewModel: DateInputViewModelProtocol, didFinishSelecting notificationOptions: NotificationOptions)
-    func dateSelectorViewModel(_ dateSelectorViewModel: DateInputViewModelProtocol, didSelectDate date: DateComponents)
-    func dateSelectorViewModel(_ dateSelectorViewModel: DateInputViewModelProtocol, didSelectTimeOfDay timeOfDay: DateComponents)
-    func dateSelectorViewModel(_ dateSelectorViewModel: DateInputViewModelProtocol, didSelect frequency: NotificationOptions.Frequency)
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: DateComponents)
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectTimeOfDay timeOfDay: DateComponents)
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectFrequency frequency: NotificationOptions.Frequency)
 }

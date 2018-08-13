@@ -11,24 +11,33 @@ import CoreLocation
 
 protocol MoreOptionsViewModelDelegate: class {
     func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool)
+    
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: DateComponents)
+    
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,  didSelectTimeOfDay timeOfDay: DateComponents)
+    
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectFrequency frequency: NotificationOptions.Frequency)
 }
 
 class MoreOptionsViewModel: MoreOptionsViewModelProtocol {
     
     weak var delegate: MoreOptionsViewModelDelegate?
     let locationInputViewModel: LocationInputViewModel
+    private(set) var dateInputViewModel: DateInputViewModelProtocol
     private var numberOfRowsInSection0: Int
     private var numberOfRowsInSection1: Int
     private(set) var isShowingLocationCell: Bool
     private(set) var isShowingTimeCell: Bool
     
-    init(_ locationInputViewModel: LocationInputViewModel) {
+    init(locationInputViewModel: LocationInputViewModel, dateInputViewModel: DateInputViewModelProtocol) {
         self.numberOfRowsInSection0 = 0
         self.numberOfRowsInSection1 = 0
         self.isShowingLocationCell = false
         self.isShowingTimeCell = false
         self.locationInputViewModel = locationInputViewModel
-        locationInputViewModel.delegate = self
+        self.dateInputViewModel = dateInputViewModel
+        self.locationInputViewModel.delegate = self
+        self.dateInputViewModel.delegate = self
     }
     
     func numberOfRows(in section: Int) -> Int {
@@ -82,8 +91,27 @@ class MoreOptionsViewModel: MoreOptionsViewModelProtocol {
     }
 }
 
+// TODO Propagate view model changes with RX
 extension MoreOptionsViewModel: LocationInputDelegate {
     func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool) {
         delegate?.locationInput(locationInputView, didFind: location, arriving: arriving)
+    }
+}
+
+extension MoreOptionsViewModel: DateInputViewModelDelegate {
+
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
+                               didSelectDate date: DateComponents) {
+        
+    }
+    
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
+                               didSelectTimeOfDay timeOfDay: DateComponents) {
+        
+    }
+    
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
+                               didSelectFrequency frequency: NotificationOptions.Frequency) {
+        // TODO Implement NotificationOptions handling
     }
 }
