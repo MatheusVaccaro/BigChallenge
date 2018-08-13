@@ -41,6 +41,7 @@ struct Strings {
         
         struct CollectionScreen {
             static let title = NSLocalizedString("collectionScreenTitle", comment: "screen title when on \"all tags\" screen")
+            static let updateActionTitle = NSLocalizedString("updateActionTitle", comment: "update button title on edit action sheet")
             static let deleteActionTitle = NSLocalizedString("deleteActionTitle", comment: "delete button title on edit action sheet")
             static let cancelActionTitle = NSLocalizedString("cancelActionTitle", comment: "cancel button title on edit action sheet")
         }

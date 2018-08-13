@@ -28,6 +28,9 @@
 /* placeholder title for a new tag description */
 "newTagDescriptionPlaceholder" = "Add a note";
 
+/* text for tag update in action sheet */
+"updateActionTitle" = "Edit";
+
 /* text for tag delete in action sheet */
 "deleteActionTitle" = "Deletar Tag";
 
