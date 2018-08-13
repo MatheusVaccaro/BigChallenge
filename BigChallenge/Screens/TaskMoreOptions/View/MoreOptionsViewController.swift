@@ -39,6 +39,7 @@ class MoreOptionsViewController: UIViewController, CreationFramePresentable {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.bounces = false
+        tableView.allowsSelection = false
     }
     
     @objc fileprivate func toggleLocationCell() {
