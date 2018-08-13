@@ -15,17 +15,18 @@ extension Calendar {
         return date(from: dateComponents)
     }
     
-    func combine(date dateComponents: DateComponents? = DateComponents(),
-                 andTimeOfDay timeOfDay: DateComponents? = DateComponents()) -> Date? {
+    func combine(date dateComponents: DateComponents?, andTimeOfDay timeOfDayComponents: DateComponents?) -> Date? {
+        let dateComponents = dateComponents ?? DateComponents()
+        let timeOfDayComponents = timeOfDayComponents ?? DateComponents()
         
         var mergedDateComponents = DateComponents()
-        mergedDateComponents.year = dateComponents!.year
-        mergedDateComponents.month = dateComponents!.month
-        mergedDateComponents.day = dateComponents!.day
+        mergedDateComponents.year = dateComponents.year
+        mergedDateComponents.month = dateComponents.month
+        mergedDateComponents.day = dateComponents.day
         
-        mergedDateComponents.hour = timeOfDay!.hour
-        mergedDateComponents.minute = timeOfDay!.minute
-        mergedDateComponents.second = timeOfDay!.second
+        mergedDateComponents.hour = timeOfDayComponents.hour
+        mergedDateComponents.minute = timeOfDayComponents.minute
+        mergedDateComponents.second = timeOfDayComponents.second
         
         return date(from: mergedDateComponents)
     }

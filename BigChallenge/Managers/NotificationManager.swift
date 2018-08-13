@@ -22,7 +22,9 @@ open class NotificationManager {
     
     /** Add a geofenced notification from a task */
     open class func addLocationNotification(for task: Task, repeats: Bool = false) {
-        if let region = NSKeyedUnarchiver.unarchiveObject(with: task.regionData!) as? CLCircularRegion {
+        guard let regionData = task.regionData else { return }
+        
+        if let region = NSKeyedUnarchiver.unarchiveObject(with: regionData) as? CLCircularRegion {
             let identifier = "\(task.title!)-location"
             let title = task.title ?? Strings.Notification.placeholderTitle
             addLocationNotification(identifier, title, task.arriving, region)
