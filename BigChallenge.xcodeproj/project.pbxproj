@@ -43,7 +43,7 @@
 		223C0C4020E5697700CF39ED /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD1020B754AE005F0F85 /* Enums.swift */; };
 		223C0C4120E5697800CF39ED /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD1020B754AE005F0F85 /* Enums.swift */; };
 		2241F36920ED08340069EFE9 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2241F36820ED08340069EFE9 /* TagModel.swift */; };
-		22456D2920DC3BB000168894 /* dateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22456D2820DC3BB000168894 /* dateExtension.swift */; };
+		22456D2920DC3BB000168894 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22456D2820DC3BB000168894 /* Date+Extension.swift */; };
 		2253179A20D147AD0065C9F9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2253179C20D147AD0065C9F9 /* Localizable.strings */; };
 		2255B3AC211295DD00F2F37C /* radiusMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2255B3AB211295DD00F2F37C /* radiusMapView.swift */; };
 		2255B3AE2113209800F2F37C /* LocationInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2255B3AD2113209800F2F37C /* LocationInputViewModel.swift */; };
@@ -179,7 +179,7 @@
 		223C0C0520E5293500CF39ED /* PersistenceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceProtocol.swift; sourceTree = "<group>"; };
 		223C0C0720E529D600CF39ED /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		2241F36820ED08340069EFE9 /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
-		22456D2820DC3BB000168894 /* dateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateExtension.swift; sourceTree = "<group>"; };
+		22456D2820DC3BB000168894 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		2253179820D145AD0065C9F9 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/TaskList.strings"; sourceTree = "<group>"; };
 		2253179920D145AE0065C9F9 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		2253179B20D147AD0065C9F9 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -617,7 +617,7 @@
 				222BFF9520EDB83B001B6BBF /* Importers */,
 				C21EAD0A20B74F01005F0F85 /* StoryboardInstantiable.swift */,
 				2253179C20D147AD0065C9F9 /* Localizable.strings */,
-				22456D2820DC3BB000168894 /* dateExtension.swift */,
+				22456D2820DC3BB000168894 /* Date+Extension.swift */,
 				29BA68A52120E147009B4AB9 /* Calendar+Extension.swift */,
 				226CEA0420E17E87008CEB97 /* Strings.swift */,
 				22CC1864210511CC00486B27 /* Colors.swift */,
@@ -1195,7 +1195,7 @@
 				29BA68A02120C37D009B4AB9 /* CalendarViewController.swift in Sources */,
 				C2A1114020B8A70A00ABB161 /* TaskCellViewModel.swift in Sources */,
 				C2A1115120B9FCDB00ABB161 /* NewTaskViewModel.swift in Sources */,
-				22456D2920DC3BB000168894 /* dateExtension.swift in Sources */,
+				22456D2920DC3BB000168894 /* Date+Extension.swift in Sources */,
 				C21EAD0B20B74F01005F0F85 /* StoryboardInstantiable.swift in Sources */,
 				222888D82117E5D90093EEF7 /* RadiusMapViewModel.swift in Sources */,
 				C2C231C120FD1AB2002A2371 /* NewTagViewModel.swift in Sources */,
