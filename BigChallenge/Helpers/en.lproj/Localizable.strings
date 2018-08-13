@@ -7,9 +7,9 @@
   Copyright © 2018 Matheus Vaccaro. All rights reserved.
 */
 
-    //MARK: Task
+    /* MARK: Task */
 
-"newTaskTitle" = "New Task";
+"newTaskTitlePlaceholder" = "New Task";
 
 /* header title for 'recommended' section  */
 "recommendedHeaderTitle" = "Recommended:";
@@ -17,7 +17,7 @@
 /* header title for 'also tagged:' section  */
 "section2HeaderTitle" = "Also tagged:";
 
-    // MARK: Tag
+    /* MARK: Tag */
 
 /* screen title when on \"all tags\" screen */
 "CollectionScreenTitle" = "Tags";
@@ -54,7 +54,7 @@
 /* accessibility hint on searchBar for voiceOver users */
 "SearchBarHint" = "tap to search location";
 
-    // MARK: Notification
+    /* MARK: Notification */
 
 /* placeholder title for notification */
 "notificationTitle" = "Your task waits";

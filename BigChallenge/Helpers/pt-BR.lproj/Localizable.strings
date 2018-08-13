@@ -7,17 +7,17 @@
   Copyright © 2018 Matheus Vaccaro. All rights reserved.
 */
 
-    // MARK: Task
+    /* MARK: Task */
 
-"newTaskTitle" = "Nova Tarefa";
+"newTaskTitlePlaceholder" = "Nova Tarefa";
 
-/* header title for 'recommended' section  */
+/* header title for 'recommended' section */
 "recommendedHeaderTitle" = "Recomendado:";
 
-/* header title for 'also tagged:' section  */
+/* header title for 'also tagged:' section */
 "section2HeaderTitle" = "Também marcado com:";
 
-    // MARK: Tag
+    /* MARK: Tag */
 
 /* screen title when on \"all tags\" screen */
 "collectionScreenTitle" = "Tags";
@@ -54,7 +54,7 @@
 /* accessibility hint on searchBar for voiceOver users */
 "SearchBarHint" = "toque para buscar lugares";
 
-    // MARK: Notification
+    /* MARK: Notification */
 
 /* placeholder title for notification */
 "notificationTitle" = "Sua task está esperando";

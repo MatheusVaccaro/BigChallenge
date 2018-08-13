@@ -81,6 +81,6 @@ class NewTagViewModel: NewTagViewModelProtocol {
     
     // MARK: - Strings
     func titleTextFieldPlaceholder() -> String {
-        return Strings.Tag.CreationScreen.tagTitlePlaceholder
+        return Strings.Task.CreationScreen.taskTitlePlaceholder
     }
 }
