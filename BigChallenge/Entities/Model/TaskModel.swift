@@ -43,6 +43,8 @@ public class TaskModel {
     
     public func delete(_ task: Task) {
         guard tasks.contains(task) else { print("could not delete \(task) "); return }
+        NotificationManager.removeLocationNotification(for: task)
+        NotificationManager.removeDateNotification(for: task)
         persistance.delete(task) // delegate manages the array
     }
     
@@ -97,6 +99,13 @@ public class TaskModel {
         }
         if let isCompleted = attributes[.isCompleted] as? Bool {
             task.isCompleted = isCompleted
+            if isCompleted {
+                NotificationManager.removeLocationNotification(for: task)
+                NotificationManager.removeDateNotification(for: task)
+            } else {
+                NotificationManager.addLocationNotification(for: task)
+                NotificationManager.addDateNotification(for: task)
+            }
         }
         if let notes = attributes[.notes] as? String {
             task.notes = notes
