@@ -58,7 +58,7 @@
 "searchBarHint" = "tap to search location";
 
 /* placeholder for empty state location search bar */
-"searchBarPlaceholder" = "Search"
+"searchBarPlaceholder" = "Search";
 
     /* MARK: Notification */
 

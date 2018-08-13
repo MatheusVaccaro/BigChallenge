@@ -58,7 +58,7 @@
 "searchBarHint" = "toque para buscar lugares";
 
 /* placeholder for empty state location search bar */
-"searchBarPlaceholder" = "Pesquisar"
+"searchBarPlaceholder" = "Pesquisar";
 
     /* MARK: Notification */
 
