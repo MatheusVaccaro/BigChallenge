@@ -25,6 +25,7 @@ class CreateTagViewController: UIViewController, CreationFramePresentable {
         super.viewDidLoad()
         configureTagTitleTextView()
         configureColorsCollectionView()
+        configureWithViewModel()
     }
     
     // MARK: - IBAction
@@ -48,6 +49,17 @@ class CreateTagViewController: UIViewController, CreationFramePresentable {
         colorsCollectionView.delegate = self
     }
 
+    private func configureWithViewModel() {
+        if let title = viewModel.tagTitle {
+            tagTitleTextView.text = title
+        }
+        
+        if let colorIndex = viewModel.colorIndex {
+            let indexPath = IndexPath(row: colorIndex, section: 0)
+            colorsCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .left)
+        }
+    }
+    
 }
 
 // MARK: - UITextViewDelegate

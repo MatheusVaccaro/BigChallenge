@@ -25,7 +25,14 @@ class NewTagViewModel: NewTagViewModelProtocol {
     
     private let model: TagModel
     private var isEditing: Bool
-    private var tag: Tag?
+    private var tag: Tag? {
+        didSet {
+            if let colorIndex64 = tag?.colorIndex {
+                colorIndex = Int(colorIndex64)
+            }
+            tagTitle = tag?.title
+        }
+    }
     
     var colorIndex: Int? {
         didSet {
