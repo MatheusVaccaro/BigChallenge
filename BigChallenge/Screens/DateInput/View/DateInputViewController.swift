@@ -81,7 +81,6 @@ class DateInputViewController: UIViewController {
                                     multiplier: 1, constant: 0)
         NSLayoutConstraint.activate([widthConstraint, heightConstraint])
         
-        
         viewModel?.date.asObservable()
             .map { dateComponent in
             	Calendar.current.date(from: dateComponent)
@@ -91,8 +90,7 @@ class DateInputViewController: UIViewController {
                     self?.calendar.scrollToHeaderForDate(date, withAnimation: true) {
                         self?.calendar.selectDates([date], triggerSelectionDelegate: false)
                     }
-//                    self?.calendar.scrollToDate(date, animateScroll: true) {
-//                    }
+                    
                 } else {
                     self?.calendar.selectDates([], triggerSelectionDelegate: true)
                 }
@@ -118,24 +116,28 @@ class DateInputViewController: UIViewController {
                                                    action: #selector(touchUpInsideSelectedDateButton))
         selectedDateLabel.addGestureRecognizer(tapRecognizer)
         
-        viewModel?.date.asObservable().subscribe(onNext: { [weak self] in
-            
-            if let dateComponents = $0,
-               let date = Calendar.current.date(from: dateComponents) {
-                
-                let selectedDateText = DateFormatter.localizedString(from: date,
-                                                                     dateStyle: .medium, timeStyle: .none)
-                self?.selectedDateLabel.text = " \(selectedDateText) "
-                
-            } else {
-                self?.selectedDateLabel.text = " ??? "
-            }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = Strings.DateInputView.selectedDateFormat
         
-        }).disposed(by: disposeBag)
+        viewModel?.date.asObservable()
+            .subscribe(onNext: { [weak self] in
+                if let dateComponents = $0,
+                   let date = Calendar.current.date(from: dateComponents) {
+                    
+                    let selectedDateText = dateFormatter.string(from: date)
+                    self?.selectedDateLabel.text = " \(selectedDateText) "
+                    
+                } else {
+                    self?.selectedDateLabel.text = " ??? "
+                }
+            })
+            .disposed(by: disposeBag)
         
-        currentSelector.subscribe(onNext: { [weak self] in
-            self?.selectedDateLabel.isToggled = ($0 == .date)
-        }).disposed(by: disposeBag)
+        currentSelector
+            .subscribe(onNext: { [weak self] in
+            	self?.selectedDateLabel.isToggled = ($0 == .date)
+        	})
+            .disposed(by: disposeBag)
     }
     
     @objc func touchUpInsideSelectedDateButton() {
@@ -149,24 +151,26 @@ class DateInputViewController: UIViewController {
                                                    action: #selector(touchUpInsideSelectedTimeOfDayButton))
         selectedTimeOfDayLabel.addGestureRecognizer(tapRecognizer)
         
-        viewModel?.timeOfDay.asObservable().subscribe(onNext: { [weak self] in
-            
-            if let dateComponents = $0,
-               let date = Calendar.current.date(from: dateComponents) {
-                
-                let selectedTimeOfDayText = DateFormatter.localizedString(from: date,
-                                                                          dateStyle: .none, timeStyle: .short)
-                self?.selectedTimeOfDayLabel.text = " \(selectedTimeOfDayText) "
-                
-            } else {
-                self?.selectedTimeOfDayLabel.text = " ??? "
-            }
-            
-        }).disposed(by: disposeBag)
+        viewModel?.timeOfDay.asObservable()
+            .subscribe(onNext: { [weak self] in
+                if let dateComponents = $0,
+                   let date = Calendar.current.date(from: dateComponents) {
+                    
+                    let selectedTimeOfDayText = DateFormatter.localizedString(from: date,
+                                                                              dateStyle: .none, timeStyle: .short)
+                    self?.selectedTimeOfDayLabel.text = " \(selectedTimeOfDayText) "
+                    
+                } else {
+                    self?.selectedTimeOfDayLabel.text = " ??? "
+                }
+        	})
+            .disposed(by: disposeBag)
         
-        currentSelector.subscribe(onNext: { [weak self] in
-            self?.selectedTimeOfDayLabel.isToggled = ($0 == .timeOfDay)
-        }).disposed(by: disposeBag)
+        currentSelector
+            .subscribe(onNext: { [weak self] in
+            	self?.selectedTimeOfDayLabel.isToggled = ($0 == .timeOfDay)
+        	})
+            .disposed(by: disposeBag)
     }
     
     @objc func touchUpInsideSelectedTimeOfDayButton() {

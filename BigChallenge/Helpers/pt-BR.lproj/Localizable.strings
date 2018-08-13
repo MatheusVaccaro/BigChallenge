@@ -79,3 +79,5 @@
 /* text displaying the current selected date and time of day */
 "dateInputStatusDateInput" = "Lembre-me @date@ às @timeofday@";
 
+/* format for displaying the currently selected date */
+"selectedDateFormatStatusDateInput" = "E dd MMM";

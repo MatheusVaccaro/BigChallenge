@@ -51,6 +51,9 @@ struct Strings {
         static let dateInputStatus = NSLocalizedString("dateInputStatusDateInput",
                                                        comment: "text displaying the current selected date and time of day")
         
+        static let selectedDateFormat = NSLocalizedString("selectedDateFormatStatusDateInput",
+                                                          comment: "format for displaying the currently selected date")
+        
         static let tomorrowShortcut = NSLocalizedString("tomorrowShortcutDateInput",
                                                         comment: "text for tomorrow shortcut button")
         
