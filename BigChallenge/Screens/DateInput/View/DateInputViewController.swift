@@ -9,6 +9,7 @@
 import UIKit
 import JTAppleCalendar
 import RxSwift
+import RxCocoa
 
 class DateInputViewController: UIViewController {
     
@@ -36,6 +37,11 @@ class DateInputViewController: UIViewController {
     @IBOutlet weak var nextWeekShortcutButton: UIButton!
     @IBOutlet weak var nextMonthShortcutButton: UIButton!
     
+    @IBOutlet weak var timeOfDayShortcutsStackView: UIStackView!
+    @IBOutlet weak var twoHoursFromNowButton: UIButton!
+    @IBOutlet weak var thisEveningButton: UIButton!
+    @IBOutlet weak var nextMorningButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         currentSelector = BehaviorSubject<DateSelector>(value: .date)
@@ -58,11 +64,15 @@ class DateInputViewController: UIViewController {
         switch selector {
         case .date:
             calendarContainerView.isHidden = false
+            dateShortcutsStackView.isHidden = false
             timeOfDaySelector.isHidden = true
+            timeOfDayShortcutsStackView.isHidden = true
             
         case .timeOfDay:
             calendarContainerView.isHidden = true
+            dateShortcutsStackView.isHidden = true
 			timeOfDaySelector.isHidden = false
+            timeOfDayShortcutsStackView.isHidden = false
         }
     }
     
@@ -92,7 +102,7 @@ class DateInputViewController: UIViewController {
                     }
                     
                 } else {
-                    self?.calendar.selectDates([], triggerSelectionDelegate: true)
+                    self?.calendar.selectDates([], triggerSelectionDelegate: false)
                 }
             })
             .disposed(by: disposeBag)
@@ -100,6 +110,17 @@ class DateInputViewController: UIViewController {
     
     private func loadTimeOfDaySelectorView() {
         timeOfDaySelector.addTarget(self, action: #selector(handleTimeOfDaySelectorChange(_:)), for: .valueChanged)
+        
+        viewModel?.timeOfDay.asObservable()
+            .map { dateComponent in
+            	Calendar.current.date(from: dateComponent)
+        	}
+            .subscribe(onNext: { [weak self] in
+                if let date = $0 {
+                    self?.timeOfDaySelector.setDate(date, animated: true)
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     @objc func handleTimeOfDaySelectorChange(_ datePicker: UIDatePicker) {
@@ -113,7 +134,7 @@ class DateInputViewController: UIViewController {
         selectedDateLabel = ToggleableLabel()
         
         let tapRecognizer = UITapGestureRecognizer(target: self,
-                                                   action: #selector(touchUpInsideSelectedDateButton))
+                                                   action: #selector(touchUpInsideSelectedDateLabel))
         selectedDateLabel.addGestureRecognizer(tapRecognizer)
         
         let dateFormatter = DateFormatter()
@@ -140,7 +161,7 @@ class DateInputViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    @objc func touchUpInsideSelectedDateButton() {
+    @objc func touchUpInsideSelectedDateLabel() {
         currentSelector.onNext(.date)
     }
     
@@ -205,10 +226,8 @@ class DateInputViewController: UIViewController {
     }
     
     private func loadShortcutButtons() {
-        configure(tomorrowShortcutButton)
-        configure(nextWeekShortcutButton)
-        configure(nextMonthShortcutButton)
-        
+        configure([tomorrowShortcutButton, nextWeekShortcutButton, nextMonthShortcutButton])
+        // RXSwift binding
         viewModel?.tomorrowShortcutText.asObservable().subscribe(onNext: { [weak self] in
             self?.tomorrowShortcutButton.setTitle($0, for: .normal)
         }).disposed(by: disposeBag)
@@ -220,8 +239,25 @@ class DateInputViewController: UIViewController {
         viewModel?.nextMonthShortcutText.asObservable().subscribe(onNext: { [weak self] in
             self?.nextMonthShortcutButton.setTitle($0, for: .normal)
         }).disposed(by: disposeBag)
+        
+        configure([twoHoursFromNowButton, thisEveningButton, nextMorningButton])
+        // RXCocoa binding - looks way cleaner!
+        viewModel?.twoHoursFromNowShortcutText.asObserver()
+            .bind(to: twoHoursFromNowButton.rx.title(for: .normal))
+            .disposed(by: disposeBag)
+        
+        viewModel?.thisEveningShortcutText.asObserver()
+        	.bind(to: thisEveningButton.rx.title(for: .normal))
+            .disposed(by: disposeBag)
+        
+        viewModel?.nextMorningShortcutText.asObserver()
+        	.bind(to: nextMorningButton.rx.title(for: .normal))
+        	.disposed(by: disposeBag)
     }
     
+    private func configure(_ shortcutButtons: [UIButton]) {
+        shortcutButtons.forEach { self.configure($0) }
+    }
     private func configure(_ shortcutButton: UIButton) {
         let shortcutButtonFont = UIFont.font(sized: 19.77, weight: .semibold, with: .body)
         shortcutButton.titleLabel?.font = shortcutButtonFont
@@ -238,6 +274,18 @@ class DateInputViewController: UIViewController {
     
     @IBAction func touchUpInsideNextMonthShortcutButton(_ sender: UIButton) {
         viewModel?.selectNextMonth()
+    }
+    
+    @IBAction func touchUpInsideTwoHoursFromNowShortcutButton(_ sender: UIButton) {
+        viewModel?.selectTwoHoursFromNow()
+    }
+    
+    @IBAction func touchUpInsideThisEveningShortcutButton(_ sender: UIButton) {
+        viewModel?.selectThisEvening()
+    }
+    
+    @IBAction func touchUpInsideNextMorningShortcutButton(_ sender: UIButton) {
+        viewModel?.selectNextMorning()
     }
     
     enum DateSelector {

@@ -9,6 +9,13 @@
 import UIKit
 import JTAppleCalendar
 
+protocol CalendarDelegate: class {
+    func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date,
+                  cell: JTAppleCell?, cellState: CellState)
+    func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date,
+                  cell: JTAppleCell?, cellState: CellState)
+}
+
 class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource {
     
     weak var delegate: CalendarDelegate?
@@ -22,7 +29,8 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource {
         calendar.allowsDateCellStretching = false
         calendar.minimumInteritemSpacing = 5
         calendar.minimumLineSpacing = 5
-        calendar.cellSize = (calendar.frame.width - ( 5 * 5 ))/7
+        // TODO Figure out how to calculate the optimal value for cellSize and make it accessibility-friendly
+        calendar.cellSize = (calendar.frame.width - 3 * calendar.minimumLineSpacing)/7
     }
     
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
@@ -56,18 +64,6 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         calendarCell.configure(with: cellState)
     }
     
-    func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
-//        if let tuple = visibleDates.monthDates.first {
-//
-//            let date = tuple.date
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "MMM"
-//            let monthText = dateFormatter.string(from: date)
-//
-//            monthLabel.text = monthText
-//        }
-    }
-    
     func calendarSizeForMonths(_ calendar: JTAppleCalendarView?) -> MonthSize? {
         // TODO Make this accessibility-friendly
         return MonthSize(defaultSize: 25)
@@ -98,13 +94,6 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         calendarCell.deselect(basedOn: cellState)
         delegate?.calendar(calendar, didDeselectDate: date, cell: cell, cellState: cellState)
     }
-}
-
-protocol CalendarDelegate: class {
-    func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date,
-                  cell: JTAppleCell?, cellState: CellState)
-    func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date,
-                  cell: JTAppleCell?, cellState: CellState)
 }
 
 extension CalendarDelegate {

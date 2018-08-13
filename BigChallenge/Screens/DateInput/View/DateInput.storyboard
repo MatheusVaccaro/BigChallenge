@@ -19,8 +19,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yOd-A2-VUk">
+                                <rect key="frame" x="16" y="20" width="343" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="WGF-XW-mth"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="geK-Td-d2V">
+                                <rect key="frame" x="16" y="111" width="343" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KDU-qd-iY5">
+                                        <rect key="frame" x="0.0" y="0.0" width="69" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <state key="normal" title="Tomorrow"/>
+                                        <connections>
+                                            <action selector="touchUpInsideTomorrowShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="ToY-T4-0OM"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VST-pw-ufN">
+                                        <rect key="frame" x="130" y="0.0" width="72" height="30"/>
+                                        <state key="normal" title="Next week"/>
+                                        <connections>
+                                            <action selector="touchUpInsideNextWeekShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="Lvj-3N-Ht1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Deg-a9-9om">
+                                        <rect key="frame" x="263" y="0.0" width="80" height="30"/>
+                                        <state key="normal" title="Next month"/>
+                                        <connections>
+                                            <action selector="touchUpInsideNextMonthShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="dbz-T2-L2H"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="sTT-eL-sOK">
+                                <rect key="frame" x="16" y="111" width="343" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gcr-gD-PS7">
+                                        <rect key="frame" x="0.0" y="0.0" width="69" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <state key="normal" title="Tomorrow"/>
+                                        <connections>
+                                            <action selector="touchUpInsideTwoHoursFromNowShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="8v3-qf-aJf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2vY-aL-0Gt">
+                                        <rect key="frame" x="130" y="0.0" width="72" height="30"/>
+                                        <state key="normal" title="Next week"/>
+                                        <connections>
+                                            <action selector="touchUpInsideThisEveningShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="ZsB-St-4B7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iwe-Xe-8xq">
+                                        <rect key="frame" x="263" y="0.0" width="80" height="30"/>
+                                        <state key="normal" title="Next month"/>
+                                        <connections>
+                                            <action selector="touchUpInsideNextMorningShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="BPc-dr-UnB"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="guG-ou-Y1h">
-                                <rect key="frame" x="0.0" y="238" width="375" height="308"/>
+                                <rect key="frame" x="0.0" y="183" width="375" height="308"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qv3-lM-uBA">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="308"/>
@@ -47,50 +107,20 @@
                                     <constraint firstItem="qv3-lM-uBA" firstAttribute="leading" secondItem="guG-ou-Y1h" secondAttribute="leading" id="wwx-r9-qjl"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="geK-Td-d2V">
-                                <rect key="frame" x="16" y="171" width="343" height="30"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KDU-qd-iY5">
-                                        <rect key="frame" x="0.0" y="0.0" width="69" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="Tomorrow"/>
-                                        <connections>
-                                            <action selector="touchUpInsideTomorrowShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="ToY-T4-0OM"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VST-pw-ufN">
-                                        <rect key="frame" x="130" y="0.0" width="72" height="30"/>
-                                        <state key="normal" title="Next week"/>
-                                        <connections>
-                                            <action selector="touchUpInsideNextWeekShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="Lvj-3N-Ht1"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Deg-a9-9om">
-                                        <rect key="frame" x="263" y="0.0" width="80" height="30"/>
-                                        <state key="normal" title="Next month"/>
-                                        <connections>
-                                            <action selector="touchUpInsideNextMonthShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="dbz-T2-L2H"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yOd-A2-VUk">
-                                <rect key="frame" x="16" y="65" width="343" height="54"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="WGF-XW-mth"/>
-                                </constraints>
-                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="geK-Td-d2V" firstAttribute="top" secondItem="yOd-A2-VUk" secondAttribute="bottom" constant="37" id="6cU-hj-Uw4"/>
                             <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="guG-ou-Y1h" secondAttribute="trailing" id="Eed-T0-Ln3"/>
-                            <constraint firstItem="guG-ou-Y1h" firstAttribute="top" secondItem="geK-Td-d2V" secondAttribute="bottom" constant="37" id="I5P-eL-JLs"/>
+                            <constraint firstItem="guG-ou-Y1h" firstAttribute="top" secondItem="geK-Td-d2V" secondAttribute="bottom" constant="42" id="I5P-eL-JLs"/>
                             <constraint firstItem="yOd-A2-VUk" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" constant="16" id="IcB-I6-Vlr"/>
-                            <constraint firstItem="geK-Td-d2V" firstAttribute="top" secondItem="Thx-CC-uDZ" secondAttribute="top" constant="151" id="J3e-UU-XB6"/>
+                            <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="sTT-eL-sOK" secondAttribute="trailing" constant="16" id="Kax-ti-rQ3"/>
                             <constraint firstItem="guG-ou-Y1h" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" id="LCW-En-KV4"/>
+                            <constraint firstItem="sTT-eL-sOK" firstAttribute="top" secondItem="yOd-A2-VUk" secondAttribute="bottom" constant="37" id="NXf-cS-eGS"/>
                             <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="yOd-A2-VUk" secondAttribute="trailing" constant="16" id="Nh1-qE-rMs"/>
+                            <constraint firstItem="sTT-eL-sOK" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" constant="16" id="PQH-7R-oIA"/>
                             <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="geK-Td-d2V" secondAttribute="trailing" constant="16" id="b4N-Vx-QbM"/>
-                            <constraint firstItem="yOd-A2-VUk" firstAttribute="top" secondItem="Thx-CC-uDZ" secondAttribute="top" constant="45" id="f1A-js-70Y"/>
+                            <constraint firstItem="yOd-A2-VUk" firstAttribute="top" secondItem="Thx-CC-uDZ" secondAttribute="top" id="f1A-js-70Y"/>
                             <constraint firstItem="geK-Td-d2V" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" constant="16" id="mpo-zH-qEj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Thx-CC-uDZ"/>
@@ -104,10 +134,14 @@
                         <outlet property="dateInputStatusStackView" destination="yOd-A2-VUk" id="LQE-vs-mSE"/>
                         <outlet property="dateShortcutsStackView" destination="geK-Td-d2V" id="F9d-xD-CtE"/>
                         <outlet property="nextMonthShortcutButton" destination="Deg-a9-9om" id="gtK-dp-T55"/>
+                        <outlet property="nextMorningButton" destination="Iwe-Xe-8xq" id="dXN-sy-LWB"/>
                         <outlet property="nextWeekShortcutButton" destination="VST-pw-ufN" id="f0r-cQ-PXd"/>
                         <outlet property="selectorView" destination="guG-ou-Y1h" id="AQU-Uk-OtA"/>
+                        <outlet property="thisEveningButton" destination="2vY-aL-0Gt" id="e4I-CE-yYe"/>
                         <outlet property="timeOfDaySelector" destination="YgX-4j-r0O" id="gzN-GG-RpH"/>
+                        <outlet property="timeOfDayShortcutsStackView" destination="sTT-eL-sOK" id="WKN-YY-hbS"/>
                         <outlet property="tomorrowShortcutButton" destination="KDU-qd-iY5" id="bYU-BW-m1Y"/>
+                        <outlet property="twoHoursFromNowButton" destination="gcr-gD-PS7" id="EZN-tu-r8X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Zr-Nm-Ffb" userLabel="First Responder" sceneMemberID="firstResponder"/>

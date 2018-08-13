@@ -62,6 +62,15 @@ struct Strings {
         
         static let nextMonthShortcut = NSLocalizedString("nextMonthShortcutDateInput",
                                                         comment: "text for next month shortcut button")
+        
+        static let twoHoursFromNowShortcut = NSLocalizedString("twoHoursFromNowShortcutDateInput",
+                                                         comment: "text for two hours for now shortcut button")
+        
+        static let thisEveningShortcut = NSLocalizedString("thisEveningShortcutDateInput",
+                                                         comment: "text for this evening shortcut button")
+        
+        static let nextMorningShortcut = NSLocalizedString("nextMorningShortcutDateInput",
+                                                         comment: "text for next morning shortcut button")
     }
     
     struct LocationInputView {

@@ -81,3 +81,12 @@
 
 /* format for displaying the currently selected date */
 "selectedDateFormatStatusDateInput" = "E dd MMM";
+
+/* text for two hours for now shortcut button */
+"twoHoursFromNowShortcutDateInput" = "Daqui 2h";
+
+/* text for this evening shortcut button */
+"thisEveningShortcutDateInput" = "Esta noite";
+
+/* text for next morning shortcut button */
+"nextMorningShortcutDateInput" = "Amanhã de manhã";
