@@ -7,13 +7,10 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol CreationFramePresentable {
     func didTapMoreOptionsButton(_ sender: UIButton)
-}
-
-protocol TaskFrameDelegate: class {
-    func shouldEnableDoneButton(_ bool: Bool)
 }
 
 class CreationFrameViewController: UIViewController {
@@ -21,11 +18,13 @@ class CreationFrameViewController: UIViewController {
     typealias FrameContent = CreationFramePresentable & UIViewController
     
     // MARK: - Properties
-    var viewModel: CreationFrameViewModel!
+    
+    var viewModel: CreationFrameViewModelProtocol!
     private var pageViewController: UIPageViewController?
     private var pages: [UIViewController] = []
     private var currentPageIndex: Int?
     private var pendingPageIndex: Int?
+    private let disposeBag = DisposeBag()
     
     // MARK: - IBOutlets
     
@@ -38,7 +37,7 @@ class CreationFrameViewController: UIViewController {
         super.viewDidLoad()
         setupPageViewController()
         disablePageViewControllerBounce()
-        doneButton.isEnabled = false
+        subscribeToEnableDoneButton()
     }
     
     // MARK: - IBActions
@@ -99,6 +98,12 @@ class CreationFrameViewController: UIViewController {
                 break
             }
         }
+    }
+    
+    private func subscribeToEnableDoneButton() {
+        viewModel.doneButtonObservable.subscribe {
+            self.doneButton.isEnabled = $0.element!
+            }.disposed(by: disposeBag)
     }
     
     func configurePageViewController(with pages: [FrameContent]) {
@@ -174,22 +179,14 @@ extension CreationFrameViewController: UIScrollViewDelegate {
     }
 }
 
-// MARK: - TaskFrameDelegate
-
-extension CreationFrameViewController: TaskFrameDelegate {
-    func shouldEnableDoneButton(_ bool: Bool) {
-        doneButton.isEnabled = bool
-    }
-}
-
 // MARK: - StoryboardInstantiable
 
 extension CreationFrameViewController: StoryboardInstantiable {
     static var storyboardIdentifier: String {
-        return "TaskFrame"
+        return "CreationFrame"
     }
     
     static var viewControllerID: String {
-        return "TaskFrameViewController"
+        return "CreationFrameViewController"
     }
 }

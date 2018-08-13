@@ -16,7 +16,7 @@
         <relationship name="importData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ImportData" inverseName="remindersImportData" inverseEntity="ImportData" syncable="YES"/>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
-        <attribute name="color" optional="YES" attributeType="Integer 64" minValueString="0" maxValueString="4" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="colorIndex" optional="YES" attributeType="Integer 64" minValueString="0" maxValueString="4" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="dates" optional="YES" attributeType="Transformable" customClassName="[Date]" syncable="YES"/>
         <attribute name="dueDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>

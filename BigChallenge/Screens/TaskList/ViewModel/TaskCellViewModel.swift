@@ -45,7 +45,7 @@ class TaskCellViewModel {
     }()
     
     var checkButtonGradient: [CGColor] {
-        let index = (task.tags?.allObjects.first as? Tag)?.color ?? 0
+        let index = (task.tags?.allObjects.first as? Tag)?.colorIndex ?? 0
         return TagModel.tagColors[Int(index)]
     }
     

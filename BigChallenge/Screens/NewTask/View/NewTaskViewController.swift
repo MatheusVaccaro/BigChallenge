@@ -19,8 +19,7 @@ class NewTaskViewController: UIViewController, CreationFramePresentable {
     var tagCollectionViewModel: TagCollectionViewModel?
     fileprivate var tagCollectionViewController: TagCollectionViewController!
     private let disposeBag = DisposeBag()
-    
-    weak var delegate: TaskFrameDelegate?
+
     // MARK: - IBOutlets
     
     @IBOutlet weak var taskTitleTextView: UITextView!
@@ -104,7 +103,7 @@ class NewTaskViewController: UIViewController, CreationFramePresentable {
         taskNotesTextView.font = UIFont.font(sized: 14, weight: .regular, with: .body)
         taskNotesTextView.textContainer.lineBreakMode = .byTruncatingTail
         taskNotesTextView.placeholderColor = UIColor.lightGray.withAlphaComponent(0.5)
-        taskNotesTextView.placeholder = Strings.Tag.CreationScreen.tagDescriptionPlaceholder
+        taskNotesTextView.placeholder = Strings.Task.CreationScreen.taskDescriptionPlaceholder
     }
 }
 
@@ -122,9 +121,6 @@ extension NewTaskViewController: StoryboardInstantiable {
 }
 
 extension NewTaskViewController: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        delegate?.shouldEnableDoneButton(!textView.text.isEmpty)
-    }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
