@@ -64,7 +64,7 @@
 		294490EE20FD297200333F11 /* TaskViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294490ED20FD297200333F11 /* TaskViewModelTests.swift */; };
 		2972201F211CCD8F00CF80CE /* DateInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2972201E211CCD8F00CF80CE /* DateInputViewController.swift */; };
 		29722022211CD1AE00CF80CE /* DateInput.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29722021211CD1AE00CF80CE /* DateInput.storyboard */; };
-		29722024211E36CF00CF80CE /* DateStatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29722023211E36CF00CF80CE /* DateStatusLabel.swift */; };
+		29722024211E36CF00CF80CE /* ToggleableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29722023211E36CF00CF80CE /* ToggleableLabel.swift */; };
 		29A4F8832110EFD500AE4FA1 /* DateInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8822110EFD500AE4FA1 /* DateInputTests.swift */; };
 		29A4F8852110F04600AE4FA1 /* DateInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8842110F04600AE4FA1 /* DateInputViewModel.swift */; };
 		29A4F8892111061A00AE4FA1 /* Task+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8882111061A00AE4FA1 /* Task+Extension.swift */; };
@@ -203,7 +203,7 @@
 		294490ED20FD297200333F11 /* TaskViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModelTests.swift; sourceTree = "<group>"; };
 		2972201E211CCD8F00CF80CE /* DateInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputViewController.swift; sourceTree = "<group>"; };
 		29722021211CD1AE00CF80CE /* DateInput.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DateInput.storyboard; sourceTree = "<group>"; };
-		29722023211E36CF00CF80CE /* DateStatusLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateStatusLabel.swift; sourceTree = "<group>"; };
+		29722023211E36CF00CF80CE /* ToggleableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleableLabel.swift; sourceTree = "<group>"; };
 		29A4F8822110EFD500AE4FA1 /* DateInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputTests.swift; sourceTree = "<group>"; };
 		29A4F8842110F04600AE4FA1 /* DateInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputViewModel.swift; sourceTree = "<group>"; };
 		29A4F8882111061A00AE4FA1 /* Task+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Extension.swift"; sourceTree = "<group>"; };
@@ -494,19 +494,19 @@
 			children = (
 				29722021211CD1AE00CF80CE /* DateInput.storyboard */,
 				2972201E211CCD8F00CF80CE /* DateInputViewController.swift */,
-				29722023211E36CF00CF80CE /* DateStatusLabel.swift */,
+				29722023211E36CF00CF80CE /* ToggleableLabel.swift */,
 				29BA689E2120C369009B4AB9 /* Calendar */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		29A4F8862110F05200AE4FA1 /* DateSelector */ = {
+		29A4F8862110F05200AE4FA1 /* DateInput */ = {
 			isa = PBXGroup;
 			children = (
 				29722020211CCDA000CF80CE /* View */,
 				29A4F8872110F05D00AE4FA1 /* ViewModel */,
 			);
-			path = DateSelector;
+			path = DateInput;
 			sourceTree = "<group>";
 		};
 		29A4F8872110F05D00AE4FA1 /* ViewModel */ = {
@@ -585,7 +585,7 @@
 				C29742C121123CE300A1D213 /* TaskFrame */,
 				C2A1114320B9F65200ABB161 /* NewTask */,
 				C29742C621123DCD00A1D213 /* TaskMoreOptions */,
-				29A4F8862110F05200AE4FA1 /* DateSelector */,
+				29A4F8862110F05200AE4FA1 /* DateInput */,
 				22D84C5E210BEFE4004B8969 /* LocationInput */,
 				C21EAD0420B74710005F0F85 /* TaskList */,
 			);
@@ -1204,7 +1204,7 @@
 				C29742D2211257A600A1D213 /* TimeTableViewCellViewModel.swift in Sources */,
 				221BA8B820F6A1DF00BE2AC1 /* TagCollectionViewController.swift in Sources */,
 				C29742D62112CBFF00A1D213 /* HeaderViewController.swift in Sources */,
-				29722024211E36CF00CF80CE /* DateStatusLabel.swift in Sources */,
+				29722024211E36CF00CF80CE /* ToggleableLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

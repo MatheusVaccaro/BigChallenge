@@ -19,8 +19,8 @@ class DateInputViewController: UIViewController {
     private let disposeBag = DisposeBag()
     
     @IBOutlet weak var dateInputStatusStackView: UIStackView!
-    private(set) var selectedDateLabel: DateStatusLabel!
-    private(set) var selectedTimeOfDayLabel: DateStatusLabel!
+    private(set) var selectedDateLabel: ToggleableLabel!
+    private(set) var selectedTimeOfDayLabel: ToggleableLabel!
     
     private(set) var currentSelector: BehaviorSubject<DateSelector>!
     @IBOutlet weak var selectorView: UIView!
@@ -112,7 +112,7 @@ class DateInputViewController: UIViewController {
     }
     
     private func loadSelectedDateLabel() {
-        selectedDateLabel = DateStatusLabel()
+        selectedDateLabel = ToggleableLabel()
         
         let tapRecognizer = UITapGestureRecognizer(target: self,
                                                    action: #selector(touchUpInsideSelectedDateButton))
@@ -143,7 +143,7 @@ class DateInputViewController: UIViewController {
     }
     
     private func loadSelectedTimeOfDayLabel() {
-        selectedTimeOfDayLabel = DateStatusLabel()
+        selectedTimeOfDayLabel = ToggleableLabel()
         
         let tapRecognizer = UITapGestureRecognizer(target: self,
                                                    action: #selector(touchUpInsideSelectedTimeOfDayButton))
