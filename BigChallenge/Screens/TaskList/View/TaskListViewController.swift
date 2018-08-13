@@ -260,11 +260,11 @@ extension TaskListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         guard !viewModel.mainTasks.isEmpty && section == 0 else { return nil }
         
-        let footerView = UIView(frame: view.frame)
-        
+        let footerView = UIView(frame: view.bounds)
         let cardView = UIView(frame: footerView.bounds)
         
-        cardView.frame.size.height = 8
+        cardView.frame.origin.y -= 1
+        cardView.frame.size.height = 14
         cardView.layer.cornerRadius = 6.3
         cardView.backgroundColor = UIColor.white
         cardView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
