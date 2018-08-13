@@ -60,7 +60,9 @@ class CreationFrameViewModel {
             .arriving : taskArriving
         ]
         
-        if let date = Calendar.current.combine(date: taskDueDate, andTimeOfDay: taskDueTimeOfDay) {
+        if let taskDueDate = self.taskDueDate,
+           let taskDueTimeOfDay = self.taskDueTimeOfDay,
+           let date = Calendar.current.combine(date: taskDueDate, andTimeOfDay: taskDueTimeOfDay) {
             attributes[.dueDate] = date
         }
         if let region = taskRegion {
