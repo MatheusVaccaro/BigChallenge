@@ -24,6 +24,10 @@
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qv3-lM-uBA">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="308"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="375" id="ejs-dg-3RA"/>
+                                            <constraint firstAttribute="height" constant="308" id="rBd-vH-428"/>
+                                        </constraints>
                                     </containerView>
                                     <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="YgX-4j-r0O">
                                         <rect key="frame" x="8" y="0.0" width="375" height="216"/>
@@ -39,6 +43,7 @@
                                     <constraint firstAttribute="trailing" secondItem="YgX-4j-r0O" secondAttribute="trailing" constant="-8" id="Zg3-Ea-zjY"/>
                                     <constraint firstItem="YgX-4j-r0O" firstAttribute="leading" secondItem="guG-ou-Y1h" secondAttribute="leading" constant="8" id="Zot-na-FtT"/>
                                     <constraint firstItem="YgX-4j-r0O" firstAttribute="top" secondItem="guG-ou-Y1h" secondAttribute="top" id="jbv-6V-8bh"/>
+                                    <constraint firstAttribute="height" constant="308" id="jez-wj-WUq"/>
                                     <constraint firstItem="qv3-lM-uBA" firstAttribute="leading" secondItem="guG-ou-Y1h" secondAttribute="leading" id="wwx-r9-qjl"/>
                                 </constraints>
                             </view>
@@ -84,7 +89,6 @@
                             <constraint firstItem="geK-Td-d2V" firstAttribute="top" secondItem="Thx-CC-uDZ" secondAttribute="top" constant="151" id="J3e-UU-XB6"/>
                             <constraint firstItem="guG-ou-Y1h" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" id="LCW-En-KV4"/>
                             <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="yOd-A2-VUk" secondAttribute="trailing" constant="16" id="Nh1-qE-rMs"/>
-                            <constraint firstItem="Thx-CC-uDZ" firstAttribute="bottom" secondItem="guG-ou-Y1h" secondAttribute="bottom" constant="54" id="XPk-Vk-X8G"/>
                             <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="geK-Td-d2V" secondAttribute="trailing" constant="5" id="b4N-Vx-QbM"/>
                             <constraint firstItem="yOd-A2-VUk" firstAttribute="top" secondItem="Thx-CC-uDZ" secondAttribute="top" constant="45" id="f1A-js-70Y"/>
                             <constraint firstItem="geK-Td-d2V" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" constant="5" id="mpo-zH-qEj"/>

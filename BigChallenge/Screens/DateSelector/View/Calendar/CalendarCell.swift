@@ -18,17 +18,21 @@ class CalendarCell: JTAppleCell {
         dayLabel.text = "\(day)"
         
         if isSelected {
-            select()
+            select(basedOn: cellState)
         } else {
-            deselect()
+        	deselect(basedOn: cellState)
         }
     }
     
-    func select() {
-        dayLabel.textColor = UIColor.DateInput.defaultColor
+    func select(basedOn cellState: CellState? = nil) {
+        dayLabel.textColor = UIColor.DateInput.Calendar.selectedDate
     }
     
-    func deselect() {
-        dayLabel.textColor = .black
+    func deselect(basedOn cellState: CellState? = nil) {
+        if let cellState = cellState, cellState.dateBelongsTo != .thisMonth {
+            dayLabel.textColor = UIColor.DateInput.Calendar.dateOffCurrentMonth
+        } else {
+            dayLabel.textColor = UIColor.DateInput.Calendar.deselectedDate
+        }
     }
 }

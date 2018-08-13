@@ -68,11 +68,19 @@ class DateInputViewController: UIViewController {
     
     private func loadDateSelectorView() {
         calendarViewController = CalendarViewController.instantiate()
+        calendarViewController.delegate = self
         addChildViewController(calendarViewController)
-        calendarContainerView.addSubview(calendarViewController.view)
         
-        calendarViewController.calendar.calendarDelegate = self
-        calendarViewController.calendar.isRangeSelectionUsed = false
+        calendarContainerView.addSubview(calendarViewController.view)
+        let calendarView = calendarViewController.view!
+        let widthConstraint = NSLayoutConstraint(item: calendarView, attribute: .width, relatedBy: .equal,
+                                    toItem: selectorView, attribute: .width,
+                                    multiplier: 1, constant: 0)
+        let heightConstraint = NSLayoutConstraint(item: calendarView, attribute: .height, relatedBy: .equal,
+                                    toItem: selectorView, attribute: .height,
+                                    multiplier: 1, constant: 0)
+        NSLayoutConstraint.activate([widthConstraint, heightConstraint])
+        
         
         viewModel?.date.asObservable()
             .map { dateComponent in
@@ -80,9 +88,11 @@ class DateInputViewController: UIViewController {
         	}
             .subscribe(onNext: { [weak self] in
                 if let date = $0 {
-                    self?.calendar.scrollToDate(date, animateScroll: true) {
+                    self?.calendar.scrollToHeaderForDate(date, withAnimation: true) {
                         self?.calendar.selectDates([date], triggerSelectionDelegate: false)
                     }
+//                    self?.calendar.scrollToDate(date, animateScroll: true) {
+//                    }
                 } else {
                     self?.calendar.selectDates([], triggerSelectionDelegate: true)
                 }
@@ -232,7 +242,7 @@ class DateInputViewController: UIViewController {
     }
 }
 
-extension DateInputViewController: JTAppleCalendarViewDelegate {
+extension DateInputViewController: CalendarDelegate {
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         guard let calendarCell = cell as? CalendarCell else { return }

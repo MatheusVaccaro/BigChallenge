@@ -47,5 +47,11 @@ extension UIColor {
         static var shortcutButtonsColor: UIColor {
             return UIColor.DateInput.defaultColor
         }
+        
+        struct Calendar {
+            static let dateOffCurrentMonth = UIColor(red: 0, green: 0, blue: 0, alpha: 0.05)
+            static let deselectedDate = UIColor.black
+            static let selectedDate = UIColor.DateInput.defaultColor
+        }
     }
 }
