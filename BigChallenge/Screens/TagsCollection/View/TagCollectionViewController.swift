@@ -87,10 +87,9 @@ class TagCollectionViewController: UIViewController {
         guard !viewModel.presentingActionSheet else { return }
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         viewModel.presentingActionSheet = true
-        let actionsheet = UIAlertController(title: viewModel.alertControllerTitle,
-                                            message: viewModel.alertControllerMessage,
+        let actionsheet = UIAlertController(title: tag.title!,
+                                            message: nil,
                                             preferredStyle: .actionSheet)
-        
         let deleteAction = UIAlertAction(title: viewModel.deleteActionTitle, style: .destructive) { _ in
             self.viewModel.delete(tag: tag)
             self.viewModel.presentingActionSheet = false

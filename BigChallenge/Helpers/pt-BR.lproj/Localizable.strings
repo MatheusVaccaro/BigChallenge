@@ -6,16 +6,38 @@
   Created by Bruno Fulber Wide on 12/06/18.
   Copyright © 2018 Matheus Vaccaro. All rights reserved.
 */
-"newTaskTitle" = "Título";
 
-/* screen title when on \"all tags\" screen */
-"CollectionScreenTitle" = "Tags";
+    /* MARK: Task */
 
-/* header title for 'recommended' section  */
+"newTaskTitlePlaceholder" = "Nova Tarefa";
+
+/* header title for 'recommended' section */
 "recommendedHeaderTitle" = "Recomendado:";
 
-/* header title for 'also tagged:' section  */
+/* header title for 'also tagged:' section */
 "section2HeaderTitle" = "Também marcado com:";
+
+    /* MARK: Tag */
+
+/* screen title when on \"all tags\" screen */
+"collectionScreenTitle" = "Tags";
+
+/* placeholder title for a new tag */
+"newTagTitlePlaceHolder" = "Nova Etiqueta";
+
+/* placeholder title for a new tag description */
+"newTagDescriptionPlaceholder" = "Adicione uma nota";
+
+/* text for tag update in action sheet */
+"updateActionTitle" = "Editar";
+
+/* text for tag delete in action sheet */
+"deleteActionTitle" = "Deletar";
+
+/* text for tag cancel in action sheet */
+"cancelActionTitle" = "Cancelar";
+
+    /* MARK: Location */
 
 /* accessibility value on map for voiceOver users */
 "%d meters from %s" = "%d metros de %s";
@@ -33,13 +55,12 @@
 "mapViewAccessibilityValueEmpty" = "Lugar";
 
 /* accessibility hint on searchBar for voiceOver users */
-"SearchBarHint" = "toque para buscar lugares";
+"searchBarHint" = "toque para buscar lugares";
+
+/* placeholder for empty state location search bar */
+"searchBarPlaceholder" = "Pesquisar"
+
+    /* MARK: Notification */
 
 /* placeholder title for notification */
 "notificationTitle" = "Sua task está esperando";
-
-/* placeholder title for a new tag description */
-"newTagDescriptionPlaceholder" = "Adicione uma nota";
-
-/* placeholder title for a new tag */
-"newTagTitlePlaceHolder" = "Titulo";

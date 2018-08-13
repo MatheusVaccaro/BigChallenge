@@ -6,16 +6,38 @@
   Created by Bruno Fulber Wide on 12/06/18.
   Copyright © 2018 Matheus Vaccaro. All rights reserved.
 */
-"newTaskTitle" = "New Task";
 
-/* screen title when on \"all tags\" screen */
-"CollectionScreenTitle" = "Tags";
+    /* MARK: Task */
+
+"newTaskTitlePlaceholder" = "New Task";
 
 /* header title for 'recommended' section  */
 "recommendedHeaderTitle" = "Recommended:";
 
 /* header title for 'also tagged:' section  */
 "section2HeaderTitle" = "Also tagged:";
+
+    /* MARK: Tag */
+
+/* screen title when on \"all tags\" screen */
+"collectionScreenTitle" = "Tags";
+
+/* placeholder title for a new tag */
+"newTagTitlePlaceHolder" = "New Tag";
+
+/* placeholder title for a new tag description */
+"newTagDescriptionPlaceholder" = "Add a note";
+
+/* text for tag update in action sheet */
+"updateActionTitle" = "Edit";
+
+/* text for tag delete in action sheet */
+"deleteActionTitle" = "Delete";
+
+/* text for tag cancel in action sheet */
+"cancelActionTitle" = "Cancel";
+
+    /* MARK: Location */
 
 /* accessibility value on map for voiceOver users */
 "%d meters from %s" = "%d meters from %s";
@@ -33,13 +55,12 @@
 "mapViewAccessibilityValueEmpty" = "Location";
 
 /* accessibility hint on searchBar for voiceOver users */
-"SearchBarHint" = "tap to search location";
+"searchBarHint" = "tap to search location";
+
+/* placeholder for empty state location search bar */
+"searchBarPlaceholder" = "Search"
+
+    /* MARK: Notification */
 
 /* placeholder title for notification */
 "notificationTitle" = "Your task waits";
-
-/* placeholder title for a new tag description */
-"newTagDescriptionPlaceholder" = "Add a note";
-
-/* placeholder title for a new tag */
-"newTagTitlePlaceHolder" = "New Task";

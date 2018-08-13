@@ -32,8 +32,6 @@ class MKRadiusCircleRenderer: MKOverlayRenderer {
         context.addPath(circlePath.cgPath)
         context.setFillColor(fillColor.cgColor)
         context.fillPath()
-
-        
         context.setLineWidth(lineWidth/zoomScale)
         context.setStrokeColor(strokeColor.cgColor)
         context.addPath(circlePath.cgPath)
@@ -65,4 +63,3 @@ class MKRadiusCircleRenderer: MKOverlayRenderer {
         context.fillPath()
     }
 }
-

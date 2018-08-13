@@ -26,8 +26,6 @@ class TagCollectionViewModel {
     private let disposeBag = DisposeBag()
     private var model: TagModel
     
-    let alertControllerTitle = Strings.Tag.CollectionScreen.alertControllerTitle
-    let alertControllerMessage = Strings.Tag.CollectionScreen.alertControllerMessage
     let deleteActionTitle = Strings.Tag.CollectionScreen.deleteActionTitle
     let cancelActionTitle = Strings.Tag.CollectionScreen.cancelActionTitle
     

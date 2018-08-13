@@ -18,7 +18,7 @@ struct Strings {
         
         struct CreationScreen {
             static let taskTitlePlaceholder =
-                NSLocalizedString("newTaskTitle", comment: "placeholder title for a new task")
+                NSLocalizedString("newTaskTitlePlaceholder", comment: "placeholder title for a new task")
         }
         
         struct ListScreen {
@@ -40,9 +40,8 @@ struct Strings {
         }
         
         struct CollectionScreen {
-            static let title = NSLocalizedString("CollectionScreenTitle", comment: "screen title when on \"all tags\" screen")
-            static let alertControllerTitle = NSLocalizedString("alertControllerTitle", comment: "title for alert sheet used to edit tag")
-            static let alertControllerMessage = NSLocalizedString("alertControllerMessage", comment: "message of alert sheet used to edit tag")
+            static let title = NSLocalizedString("collectionScreenTitle", comment: "screen title when on \"all tags\" screen")
+            static let updateActionTitle = NSLocalizedString("updateActionTitle", comment: "update button title on edit action sheet")
             static let deleteActionTitle = NSLocalizedString("deleteActionTitle", comment: "delete button title on edit action sheet")
             static let cancelActionTitle = NSLocalizedString("cancelActionTitle", comment: "cancel button title on edit action sheet")
         }
@@ -68,7 +67,7 @@ struct Strings {
         static let accessibilityValueMap = NSLocalizedString("%d meters from %s",
                                                              comment: "accessibility value on map for voiceOver users")
         
-        static let accessibilityHintSearchBar = NSLocalizedString("SearchBarHint",
+        static let accessibilityHintSearchBar = NSLocalizedString("searchBarHint",
                                                                   comment: "accessibility hint on searchBar for voiceOver users")
     }
     
