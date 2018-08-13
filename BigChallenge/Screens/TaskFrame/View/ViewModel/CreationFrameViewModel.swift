@@ -23,7 +23,9 @@ class CreationFrameViewModel {
     fileprivate var taskNotes: String = ""
     fileprivate var taskRegion: CLCircularRegion?
     fileprivate var taskArriving: Bool = false
-    fileprivate var taskDueDate: Date?
+    fileprivate var taskDueTimeOfDay: DateComponents?
+    fileprivate var taskDueDate: DateComponents?
+    fileprivate var taskFrequency: NotificationOptions.Frequency?
     
     weak var delegate: CreationFrameViewModelDelegate?
     
@@ -58,7 +60,7 @@ class CreationFrameViewModel {
             .arriving : taskArriving
         ]
         
-        if let date = taskDueDate {
+        if let date = Calendar.current.combine(date: taskDueDate, andTimeOfDay: taskDueTimeOfDay) {
             attributes[.dueDate] = date
         }
         if let region = taskRegion {
@@ -81,7 +83,7 @@ extension CreationFrameViewModel: NewTaskViewModelOutputDelegate {
     }
     
     func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateDueDate dueDate: Date?) {
-        taskDueDate = dueDate
+//        taskDueDate = dueDate
     }
     
     func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateNotes notes: String?) {
@@ -93,5 +95,17 @@ extension CreationFrameViewModel: MoreOptionsViewModelDelegate {
     func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool) {
         taskRegion = location
         taskArriving = arriving
+    }
+    
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: DateComponents) {
+        taskDueDate = date
+    }
+    
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectTimeOfDay timeOfDay: DateComponents) {
+        taskDueTimeOfDay = timeOfDay
+    }
+    
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectFrequency frequency: NotificationOptions.Frequency) {
+        taskFrequency = frequency
     }
 }

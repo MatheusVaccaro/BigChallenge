@@ -47,6 +47,32 @@ struct Strings {
         }
     }
     
+    struct DateInputView {
+        static let dateInputStatus = NSLocalizedString("dateInputStatusDateInput",
+                                                       comment: "text displaying the current selected date and time of day")
+        
+        static let selectedDateFormat = NSLocalizedString("selectedDateFormatStatusDateInput",
+                                                          comment: "format for displaying the currently selected date")
+        
+        static let tomorrowShortcut = NSLocalizedString("tomorrowShortcutDateInput",
+                                                        comment: "text for tomorrow shortcut button")
+        
+        static let nextWeekShortcut = NSLocalizedString("nextWeekShortcutDateInput",
+                                                        comment: "text for next week shortcut button")
+        
+        static let nextMonthShortcut = NSLocalizedString("nextMonthShortcutDateInput",
+                                                        comment: "text for next month shortcut button")
+        
+        static let twoHoursFromNowShortcut = NSLocalizedString("twoHoursFromNowShortcutDateInput",
+                                                         comment: "text for two hours for now shortcut button")
+        
+        static let thisEveningShortcut = NSLocalizedString("thisEveningShortcutDateInput",
+                                                         comment: "text for this evening shortcut button")
+        
+        static let nextMorningShortcut = NSLocalizedString("nextMorningShortcutDateInput",
+                                                         comment: "text for next morning shortcut button")
+    }
+    
     struct LocationInputView {
         static let arrivingString = NSLocalizedString("arrivingLocationInputView",
                                                       comment: "string for selecting arriving location")

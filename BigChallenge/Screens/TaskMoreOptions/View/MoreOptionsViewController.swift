@@ -39,6 +39,7 @@ class MoreOptionsViewController: UIViewController, CreationFramePresentable {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.bounces = false
+        tableView.allowsSelection = false
     }
     
     @objc fileprivate func toggleLocationCell() {
@@ -60,7 +61,6 @@ class MoreOptionsViewController: UIViewController, CreationFramePresentable {
         } else {
             viewModel.showTimeCell()
             tableView.insertRows(at: [IndexPath(row: 0, section: 1)], with: .automatic)
-            
         }
     }
     

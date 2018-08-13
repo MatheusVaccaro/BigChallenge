@@ -16,7 +16,6 @@ protocol NewTaskViewModelDelegate: class {
 protocol NewTaskViewModelOutputDelegate: class {
     func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateTitle title: String?)
     func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateTags tags: [Tag]?)
-    func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateDueDate dueDate: Date?)
     func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateNotes notes: String?)
 }
 
@@ -38,12 +37,6 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
     var taskNotesText: String? {
         didSet {
             outputDelegate?.newTask(self, didUpdateNotes: taskNotesText)
-        }
-    }
-    
-    var dueDate: Date? {
-        didSet {
-            outputDelegate?.newTask(self, didUpdateDueDate: dueDate)
         }
     }
     

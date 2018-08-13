@@ -8,6 +8,7 @@ target 'BigChallenge' do
     pod 'SwiftLint', '~> 0.25.0'
     pod 'RxDataSources', '~> 3.0'
     pod 'UITextView+Placeholder', '~> 1.2'
+    pod 'JTAppleCalendar', '~> 7.0'
 end
 
 # RxTest and RxBlocking make the most sense in the context of unit/integration tests

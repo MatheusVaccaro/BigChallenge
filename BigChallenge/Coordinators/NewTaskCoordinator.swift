@@ -61,11 +61,19 @@ class NewTaskCoordinator: Coordinator {
         let moreOptionsViewController = MoreOptionsViewController.instantiate()
         
         let locationInputViewController = LocationInputView.instantiate()
-
-        let moreOptionsViewModel = MoreOptionsViewModel(locationInputViewController.viewModel)
+        let locationInputViewModel = locationInputViewController.viewModel
+		
+        let dateInputViewModel = DateInputViewModel()
+        let dateInputViewController = DateInputViewController.instantiate()
+        dateInputViewController.viewModel = dateInputViewModel
+        
+        let moreOptionsViewModel = MoreOptionsViewModel(locationInputViewModel: locationInputViewModel,
+                                                        dateInputViewModel: dateInputViewModel)
+        
         moreOptionsViewController.viewModel = moreOptionsViewModel
         self.moreOptionsViewController = moreOptionsViewController
         moreOptionsViewController.locationCellContent = locationInputViewController
+        moreOptionsViewController.timeCellContent = dateInputViewController
     
         // Task Frame
         let creationFrameViewController = CreationFrameViewController.instantiate()

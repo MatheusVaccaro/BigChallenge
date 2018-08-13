@@ -58,9 +58,35 @@
 "searchBarHint" = "tap to search location";
 
 /* placeholder for empty state location search bar */
-"searchBarPlaceholder" = "Search"
+"searchBarPlaceholder" = "Search";
 
     /* MARK: Notification */
 
 /* placeholder title for notification */
 "notificationTitle" = "Your task waits";
+
+    /* MARK: Date Input */
+
+/* text for tomorrow shortcut button */
+"tomorrowShortcutDateInput" = "Tomorrow";
+
+/* text for next week shortcut button */
+"nextWeekShortcutDateInput" = "Next week";
+
+/* text for next month shortcut button */
+"nextMonthShortcutDateInput" = "Next month";
+
+/* text displaying the current selected date and time of day */
+"dateInputStatusDateInput" = "Remind me on @date@ at @timeofday@";
+
+/* format for displaying the currently selected date */
+"selectedDateFormatStatusDateInput" = "E dd MMM";
+
+/* text for two hours for now shortcut button */
+"twoHoursFromNowShortcutDateInput" = "2h from now";
+
+/* text for this evening shortcut button */
+"thisEveningShortcutDateInput" = "This evening";
+
+/* text for next morning shortcut button */
+"nextMorningShortcutDateInput" = "Next morning";
