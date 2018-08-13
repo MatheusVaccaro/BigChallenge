@@ -10,6 +10,10 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+protocol TagCollectionViewModelDelegate: class {
+    func willUpdate(tag: Tag)
+}
+
 class TagCollectionViewModel {
     
     var tagsObservable: BehaviorSubject<[Tag]>
@@ -26,8 +30,11 @@ class TagCollectionViewModel {
     private let disposeBag = DisposeBag()
     private var model: TagModel
     
+    let updateActionTitle = Strings.Tag.CollectionScreen.updateActionTitle
     let deleteActionTitle = Strings.Tag.CollectionScreen.deleteActionTitle
     let cancelActionTitle = Strings.Tag.CollectionScreen.cancelActionTitle
+    
+    weak var delegate: TagCollectionViewModelDelegate?
     
     init(model: TagModel, filtering: Bool, selectedTags: [Tag]) {
         self.model = model
@@ -51,6 +58,10 @@ class TagCollectionViewModel {
     
     func delete(tag: Tag) {
         model.delete(object: tag)
+    }
+    
+    func update(tag: Tag) {
+        delegate?.willUpdate(tag: tag)
     }
     
     func sortMostTasksIn(_ tags: [Tag]) -> [Tag] {
