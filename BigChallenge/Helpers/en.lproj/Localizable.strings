@@ -6,16 +6,29 @@
   Created by Bruno Fulber Wide on 12/06/18.
   Copyright © 2018 Matheus Vaccaro. All rights reserved.
 */
-"newTaskTitle" = "New Task";
 
-/* screen title when on \"all tags\" screen */
-"CollectionScreenTitle" = "Tags";
+    //MARK: Task
+
+"newTaskTitle" = "New Task";
 
 /* header title for 'recommended' section  */
 "recommendedHeaderTitle" = "Recommended:";
 
 /* header title for 'also tagged:' section  */
 "section2HeaderTitle" = "Also tagged:";
+
+    // MARK: Tag
+
+/* screen title when on \"all tags\" screen */
+"CollectionScreenTitle" = "Tags";
+
+/* placeholder title for a new tag */
+"newTagTitlePlaceHolder" = "New Tag";
+
+/* placeholder title for a new tag description */
+"newTagDescriptionPlaceholder" = "Add a note";
+
+    // MARK: Location
 
 /* accessibility value on map for voiceOver users */
 "%d meters from %s" = "%d meters from %s";
@@ -35,11 +48,7 @@
 /* accessibility hint on searchBar for voiceOver users */
 "SearchBarHint" = "tap to search location";
 
+    // MARK: Notification
+
 /* placeholder title for notification */
 "notificationTitle" = "Your task waits";
-
-/* placeholder title for a new tag description */
-"newTagDescriptionPlaceholder" = "Add a note";
-
-/* placeholder title for a new tag */
-"newTagTitlePlaceHolder" = "New Task";
