@@ -25,7 +25,15 @@ protocol DateInputViewModelProtocol {
     var nextWeekShortcutText: Variable<String> { get }
     var nextMonthShortcutText: Variable<String> { get }
     
+    var twoHoursFromNowShortcutText: BehaviorSubject<String> { get }
+    var thisEveningShortcutText: BehaviorSubject<String> { get }
+    var nextMorningShortcutText: BehaviorSubject<String> { get }
+    
     func selectTomorrow()
     func selectNextWeek()
     func selectNextMonth()
+    
+    func selectTwoHoursFromNow()
+    func selectThisEvening()
+    func selectNextMorning()
 }
