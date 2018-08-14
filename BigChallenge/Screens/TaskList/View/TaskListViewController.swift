@@ -108,23 +108,20 @@ public class TaskListViewController: UIViewController {
         }.disposed(by: disposeBag)
         
         tableView.rx.didScroll.subscribe { _ in
-            if !self.lightImpactOcurred, self.tableView.contentOffset.y < -50.0 {
-                self.triggerImpact(.light)
-            } else if !self.mediumImpactOcurred, self.tableView.contentOffset.y < -110.0 {
+            if self.shouldTriggerMediumImpact(self.tableView) {
                 self.triggerImpact(.medium)
-            } else if !self.lightImpactOcurred, self.shouldTriggerMediumImpact(self.tableView) {
-                self.triggerImpact(.light)
-            } else if !self.mediumImpactOcurred, self.shouldShowCompletedTasks(self.tableView) {
+            } else if !self.heavyImpactOcurred, self.shouldAddNewTask(self.tableView) {
+                self.triggerImpact(.heavy)
+            } else if self.shouldTriggerMediumImpact(self.tableView) {
                 self.triggerImpact(.medium)
-            }
-        }.disposed(by: disposeBag)
-
-        tableView.rx.didEndDragging.subscribe { _ in
-            if self.mediumImpactOcurred {
+            } else if !self.heavyImpactOcurred, self.shouldShowCompletedTasks(self.tableView) {
                 self.triggerImpact(.heavy)
             }
             
-            if self.tableView.contentOffset.y < -110.0 {
+        }.disposed(by: disposeBag)
+
+        tableView.rx.didEndDragging.subscribe { _ in
+            if self.shouldAddNewTask(self.tableView) {
                 self.viewModel.shouldGoToAddTask()
              } else if self.shouldShowCompletedTasks(self.tableView) {
                 self.viewModel.showsCompletedTasks = !self.viewModel.showsCompletedTasks
@@ -169,7 +166,7 @@ public class TaskListViewController: UIViewController {
     
     fileprivate func prepareFeedback() {
         print("preparing feedback")
-        feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+        feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
         feedbackGenerator?.prepare()
     }
     
@@ -192,21 +189,30 @@ public class TaskListViewController: UIViewController {
     
     fileprivate func resetFeedback() {
         feedbackGenerator = nil
+        lightImpactOcurred = false
         mediumImpactOcurred = false
         heavyImpactOcurred = false
-        lightImpactOcurred = false
+    }
+    
+    fileprivate func shouldAddNewTask(_ tableView: UITableView) -> Bool {
+        return self.tableView.contentOffset.y < -80.0
     }
     
     fileprivate func shouldShowCompletedTasks(_ tableView: UITableView) -> Bool {
         return tableView.contentSize.height < tableView.bounds.height
-            ? tableView.contentOffset.y > 110
-            : tableView.contentOffset.y + tableView.bounds.height + 110 > tableView.contentSize.height
+            ? tableView.contentOffset.y > 80
+            : tableView.contentOffset.y + tableView.bounds.height + 80 > tableView.contentSize.height
     }
     
     fileprivate func shouldTriggerMediumImpact(_ tableView: UITableView) -> Bool {
-        return tableView.contentSize.height < tableView.bounds.height
-            ? tableView.contentOffset.y > 60
-            : tableView.contentOffset.y + tableView.bounds.height + 60 > tableView.contentSize.height
+        guard !mediumImpactOcurred else { return false }
+        if self.tableView.contentOffset.y < -50.0 {
+            return true
+        } else {
+            return tableView.contentSize.height < tableView.bounds.height
+                ? tableView.contentOffset.y > 50
+                : tableView.contentOffset.y + tableView.bounds.height + 50 > tableView.contentSize.height
+        }
     }
 }
 
