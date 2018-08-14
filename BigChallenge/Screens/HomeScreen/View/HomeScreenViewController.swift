@@ -74,7 +74,7 @@ class HomeScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        bigTitle.textColor = UIColor.clear
+        bigTitle.textColor = UIColor.clear
         bigTitle.font = UIFont.font(sized: 41, weight: .medium, with: .largeTitle)
         bigTitle.adjustsFontForContentSizeCategory = true
         
