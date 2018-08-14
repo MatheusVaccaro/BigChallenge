@@ -153,7 +153,7 @@ class HomeScreenViewController: UIViewController {
     var bigTitleColors: [CGColor] {
         return viewModel.selectedTags.isEmpty
             ? [UIColor.black.cgColor, UIColor.black.cgColor]
-            : TagModel.tagColors[ Int(viewModel.selectedTags.first!.color) ]
+            : TagModel.tagColors[ Int(viewModel.selectedTags.first!.colorIndex) ]
     }
     
     @IBAction func didTapBigTitle(_ sender: Any) {
