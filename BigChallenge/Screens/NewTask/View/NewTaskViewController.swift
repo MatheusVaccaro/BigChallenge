@@ -30,10 +30,14 @@ class NewTaskViewController: UIViewController, CreationFramePresentable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureWithViewModel()
         configureTagCollectionViewController()
         configureTaskTitleTextView()
         configureTaskNotesTextView()
+        userActivity = viewModel!.userActivity
+        userActivity?.becomeCurrent()
+        
         taskTitleTextView.delegate = self
     }
     

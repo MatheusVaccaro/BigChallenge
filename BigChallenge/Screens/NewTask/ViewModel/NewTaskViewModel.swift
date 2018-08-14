@@ -88,4 +88,32 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
     func titleTextFieldPlaceholder() -> String {
         return Strings.Task.CreationScreen.taskTitlePlaceholder
     }
+    
+    // MARK: - NSUserActivity
+    fileprivate var selectedTagIDs: [String] {
+        return selectedTags.map { $0.id!.description }
+    }
+    
+    fileprivate var userInfoEntries: [String : Any] {
+        return [
+            "taskTitle" : taskTitleText ?? "",
+            "taskNotes" : taskNotesText ?? "",
+            "selectedTags" : selectedTagIDs
+        ] //location / date ??????????
+    }
+    
+    lazy var userActivity: NSUserActivity = {
+        let activity = NSUserActivity(activityType: "com.bigBeanie.finalChallenge.createTask")
+        
+        activity.userInfo = userInfoEntries
+        
+        activity.isEligibleForHandoff = true
+        
+        return activity
+    }()
+    
+    func update(_ userActivity: NSUserActivity) {
+        userActivity.addUserInfoEntries(from: userInfoEntries)
+        userActivity.becomeCurrent()
+    }
 }

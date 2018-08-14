@@ -13,6 +13,7 @@ protocol NewTaskViewModelProtocol {
     var taskTitleText: String? { get set }
     var selectedTags: [Tag] { get set }
     var taskNotesText: String? { get set }
+    var userActivity: NSUserActivity { get }
     
     func numberOfSections() -> Int
     func numberOfRows(in section: Int) -> Int
