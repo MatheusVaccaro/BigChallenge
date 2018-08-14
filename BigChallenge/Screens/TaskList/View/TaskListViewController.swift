@@ -259,7 +259,7 @@ extension TaskListViewController: UITableViewDelegate {
             
             return headerView
         } else { // also tagged section
-            guard !viewModel.secondaryTasks.isEmpty else { return nil }
+            guard !viewModel.secondaryTasks.isEmpty && viewModel.selectedTags.isEmpty else { return nil }
             headerView.addSubview(alsoTaggedHeader)
             return headerView
         }
