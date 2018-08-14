@@ -61,7 +61,7 @@ class HomeScreenViewModel {
         return ans
     }
     
-    var userActivity: NSUserActivity {
+    lazy var userActivity: NSUserActivity = {
         let activity = NSUserActivity(activityType: "com.bigBeanie.finalChallenge.selectedTags")
         
         activity.userInfo =
@@ -72,14 +72,13 @@ class HomeScreenViewModel {
         
         activity.isEligibleForSearch = true
         activity.isEligibleForHandoff = true
-        activity.isEligibleForPublicIndexing = true
         //TODO: uncomment when available
         //        if #available(iOS 12.0, *) {
         //            activity.isEligibleForPrediction = true
         //        }
         
         return activity
-    }
+    }()
     
     func updateSelectedTagsIfNeeded(_ tags: [Tag]?) {
         selectedTags = tags ?? []
@@ -87,6 +86,7 @@ class HomeScreenViewModel {
     }
     
     func updateUserActivity(_ activity: NSUserActivity) {
+        guard !selectedTags.isEmpty else { return }
         activity.addUserInfoEntries(from: ["selectedTagIDs" : selectedTags.map { $0.id!.description }])
         
         activity.keywords =

@@ -199,7 +199,7 @@ public class TaskListViewController: UIViewController {
     }
     
     fileprivate func shouldShowCompletedTasks(_ tableView: UITableView) -> Bool {
-        return tableView.contentSize.height < tableView.bounds.height
+        return tableView.contentSize.height < tableView.bounds.height + 80
             ? tableView.contentOffset.y > 80
             : tableView.contentOffset.y + tableView.bounds.height + 80 > tableView.contentSize.height
     }
@@ -209,7 +209,7 @@ public class TaskListViewController: UIViewController {
         if self.tableView.contentOffset.y < -50.0 {
             return true
         } else {
-            return tableView.contentSize.height < tableView.bounds.height
+            return tableView.contentSize.height < tableView.bounds.height + 50
                 ? tableView.contentOffset.y > 50
                 : tableView.contentOffset.y + tableView.bounds.height + 50 > tableView.contentSize.height
         }

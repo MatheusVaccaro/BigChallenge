@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 class NewTaskCoordinator: Coordinator {
     
@@ -24,6 +25,9 @@ class NewTaskCoordinator: Coordinator {
     fileprivate let isEditing: Bool
     fileprivate var modalPresenter: UINavigationController?
     
+    fileprivate var location: CLCircularRegion?
+    fileprivate var date: Date?
+    
     weak var delegate: CoordinatorDelegate?
     
     init(task: Task? = nil,
@@ -38,6 +42,7 @@ class NewTaskCoordinator: Coordinator {
         self.childrenCoordinators = []
         self.isEditing = task != nil
         self.task = task
+        
         self.selectedTags = isEditing
             ? task!.tags!.allObjects as! [Tag]
             : selectedTags
@@ -49,8 +54,8 @@ class NewTaskCoordinator: Coordinator {
         self.newTaskViewController = newTaskViewController
 
         let newTaskViewModel = NewTaskViewModel(task: task,
-                                                isEditing: isEditing,
                                                 taskModel: taskModel)
+        
         newTaskViewController.viewModel = newTaskViewModel
 
         let tagCollectionViewModel = TagCollectionViewModel(model: tagModel,
@@ -63,6 +68,11 @@ class NewTaskCoordinator: Coordinator {
         
         let locationInputViewController = LocationInputView.instantiate()
         let locationInputViewModel = locationInputViewController.viewModel
+        // edit task
+        if let task = self.task, let location = TaskModel.region(of: task) {
+            locationInputViewController.outputlocation = location
+            locationInputViewController.arriving = task.arriving
+        }
 		
         let dateInputViewModel = DateInputViewModel(with: task)
         let dateInputViewController = DateInputViewController.instantiate()
@@ -82,8 +92,14 @@ class NewTaskCoordinator: Coordinator {
                                                                 detailViewModel: moreOptionsViewModel,
                                                                 taskModel: taskModel)
         creationFrameViewModel.delegate = self
+        creationFrameViewModel.task = task
         creationFrameViewController.viewModel = creationFrameViewModel
         self.taskFrameViewController = creationFrameViewController
+        
+        //edit
+        if let task = task {
+            creationFrameViewModel.doneButtonObservable.onNext(true)
+        }
         
         creationFrameViewController
             .configurePageViewController(with: [newTaskViewController, moreOptionsViewController])

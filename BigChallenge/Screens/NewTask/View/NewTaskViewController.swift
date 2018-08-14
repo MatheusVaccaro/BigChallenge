@@ -30,10 +30,14 @@ class NewTaskViewController: UIViewController, CreationFramePresentable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureWithViewModel()
         configureTagCollectionViewController()
         configureTaskTitleTextView()
         configureTaskNotesTextView()
+        userActivity = viewModel!.userActivity
+        userActivity?.becomeCurrent()
+        
         taskTitleTextView.delegate = self
     }
     
@@ -56,8 +60,10 @@ class NewTaskViewController: UIViewController, CreationFramePresentable {
     
     private func configureWithViewModel() {
         guard let viewModel = viewModel else { return }
-        if let taskTitle = viewModel.taskTitle() {
+        if let taskTitle = viewModel.taskTitle(),
+            let taskNotes = viewModel.taskNotesText {
             taskTitleTextView.text = taskTitle
+            taskNotesTextView.text = taskNotes
         }
     }
     

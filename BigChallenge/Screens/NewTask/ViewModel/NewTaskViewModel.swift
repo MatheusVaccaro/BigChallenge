@@ -22,7 +22,6 @@ protocol NewTaskViewModelOutputDelegate: class {
 class NewTaskViewModel: NewTaskViewModelProtocol {
     
     private let taskModel: TaskModel
-    private var isEditing: Bool
     private var task: Task?
     var taskTitleText: String? {
         didSet {
@@ -43,27 +42,12 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
     weak var outputDelegate: NewTaskViewModelOutputDelegate?
     weak var delegate: NewTaskViewModelDelegate?
     
-    init(task: Task?, isEditing: Bool, taskModel: TaskModel) {
-        self.isEditing = isEditing
+    init(task: Task?, taskModel: TaskModel) {
         self.taskModel = taskModel
         self.task = task
-        self.selectedTags = []
-    }
-    
-    func numberOfSections() -> Int {
-        if isEditing {
-            return 2
-        } else {
-            return 1
-        }
-    }
-    
-    func numberOfRows(in section: Int) -> Int {
-        if section == 0 {
-            return 2
-        } else {
-            return 1
-        }
+        
+        self.selectedTags = task == nil ? [] : task!.tags!.allObjects as! [Tag]
+        self.taskNotesText = task?.notes ?? ""
     }
     
     func didTapDeleteTaskButton() {
@@ -87,5 +71,33 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
     // MARK: - Strings
     func titleTextFieldPlaceholder() -> String {
         return Strings.Task.CreationScreen.taskTitlePlaceholder
+    }
+    
+    // MARK: - NSUserActivity
+    fileprivate var selectedTagIDs: [String] {
+        return selectedTags.map { $0.id!.description }
+    }
+    
+    fileprivate var userInfoEntries: [String : Any] {
+        return [
+            "taskTitle" : taskTitleText ?? "",
+            "taskNotes" : taskNotesText ?? "",
+            "selectedTags" : selectedTagIDs
+        ] //location / date ??????????
+    }
+    
+    lazy var userActivity: NSUserActivity = {
+        let activity = NSUserActivity(activityType: "com.bigBeanie.finalChallenge.createTask")
+        
+        activity.userInfo = userInfoEntries
+        
+        activity.isEligibleForHandoff = true
+        
+        return activity
+    }()
+    
+    func update(_ userActivity: NSUserActivity) {
+        userActivity.addUserInfoEntries(from: userInfoEntries)
+        userActivity.becomeCurrent()
     }
 }

@@ -56,7 +56,6 @@ class ApplicationCoordinator: Coordinator {
 }
 
 extension ApplicationCoordinator: TaskModelDelegate {
-    
     func taskModel(_ taskModel: TaskModel, didSave task: Task) {
         remindersImporter.exportTaskToReminders(task)
     }
