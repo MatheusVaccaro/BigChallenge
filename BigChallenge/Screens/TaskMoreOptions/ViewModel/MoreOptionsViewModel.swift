@@ -14,9 +14,11 @@ protocol MoreOptionsViewModelDelegate: class {
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: DateComponents)
     
-    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,  didSelectTimeOfDay timeOfDay: DateComponents)
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
+                            didSelectTimeOfDay timeOfDay: DateComponents)
     
-    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectFrequency frequency: NotificationOptions.Frequency)
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
+                            didSelectFrequency frequency: NotificationOptions.Frequency)
 }
 
 class MoreOptionsViewModel: MoreOptionsViewModelProtocol {
@@ -91,7 +93,6 @@ class MoreOptionsViewModel: MoreOptionsViewModelProtocol {
     }
 }
 
-// TODO Propagate view model changes with RX
 extension MoreOptionsViewModel: LocationInputDelegate {
     func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool) {
         delegate?.locationInput(locationInputView, didFind: location, arriving: arriving)
@@ -101,17 +102,17 @@ extension MoreOptionsViewModel: LocationInputDelegate {
 extension MoreOptionsViewModel: DateInputViewModelDelegate {
 
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
-                               didSelectDate date: DateComponents) {
-        
+                            didSelectDate date: DateComponents) {
+        delegate?.dateInputViewModel(dateInputViewModel, didSelectDate: date)
     }
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
-                               didSelectTimeOfDay timeOfDay: DateComponents) {
-        
+                            didSelectTimeOfDay timeOfDay: DateComponents) {
+        delegate?.dateInputViewModel(dateInputViewModel, didSelectTimeOfDay: timeOfDay)
     }
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
-                               didSelectFrequency frequency: NotificationOptions.Frequency) {
-        // TODO Implement NotificationOptions handling
+                            didSelectFrequency frequency: NotificationOptions.Frequency) {
+        delegate?.dateInputViewModel(dateInputViewModel, didSelectFrequency: frequency)
     }
 }
