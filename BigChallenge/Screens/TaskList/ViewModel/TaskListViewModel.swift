@@ -15,7 +15,8 @@ public class TaskListViewModel {
     
     var tasksObservable: BehaviorSubject<([Task], [Task])>
     var taskCompleted: PublishSubject<Task>
-    var shouldAddTask: BehaviorSubject<Bool>
+    var shouldAddTask: PublishSubject<Bool>
+    var shouldEditTask: PublishSubject<Task>
     
     var showsCompletedTasks: Bool = false {
         didSet {
@@ -49,7 +50,9 @@ public class TaskListViewModel {
         self.selectedTags = []
         
         self.taskCompleted = PublishSubject<Task>()
-        self.shouldAddTask = BehaviorSubject<Bool>(value: false)
+        self.shouldAddTask = PublishSubject<Bool>()
+        self.shouldEditTask = PublishSubject<Task>()
+        
         self.tasksObservable = BehaviorSubject<([Task], [Task])>(value: (mainTasks, secondaryTasks))
         self.recommender = Recommender(model: model)
         
@@ -100,6 +103,10 @@ public class TaskListViewModel {
 
     func shouldGoToAddTask() {
         self.shouldAddTask.onNext(true)
+    }
+    
+    func shouldGoToEdit(_ task: Task) {
+        self.shouldEditTask.onNext(task)
     }
     
     // MARK: Helpers

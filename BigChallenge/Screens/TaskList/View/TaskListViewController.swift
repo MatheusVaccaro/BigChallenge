@@ -211,6 +211,14 @@ public class TaskListViewController: UIViewController {
 }
 
 extension TaskListViewController: UITableViewDelegate {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let task =
+            indexPath.section == 0
+                ? viewModel.mainTasks[indexPath.row]
+                : viewModel.tasksToShow[indexPath.row]
+        viewModel.shouldEditTask.onNext(task)
+    }
+    
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         guard !(viewModel.mainTasks.isEmpty) else { return 0 }
         let additionalHeight = (section == 0 && !viewModel.selectedTags.isEmpty)
