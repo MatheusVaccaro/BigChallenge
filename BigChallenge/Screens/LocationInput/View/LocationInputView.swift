@@ -21,14 +21,18 @@ class LocationInputView: UIViewController {
     
     var outputlocation: CLCircularRegion? {
         didSet {
-            accessibilityMapView.accessibilityValue = viewModel.accessibilityValue(for: Int(outputlocation!.radius))
+            if isViewLoaded {
+                accessibilityMapView.accessibilityValue = viewModel.accessibilityValue(for: Int(outputlocation!.radius))
+            }
             viewModel.delegate?.locationInput(self, didFind: outputlocation!, arriving: arriving)
         }
     }
     
     var arriving: Bool = true {
         didSet {
-            mapView.arriving = arriving
+            if isViewLoaded {
+                mapView.arriving = arriving
+            }
             guard let location = outputlocation else { return }
             viewModel.delegate?.locationInput(self, didFind: location, arriving: arriving)
         }
@@ -41,15 +45,17 @@ class LocationInputView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let location = outputlocation {
-            addCircle(on: location)
-        }
-        
         setupSegmentedControl()
         setupLocationManager()
         setupSearchBar()
         setupMapView()
         setupTableView()
+        
+        if let location = outputlocation {
+            addCircle(on: location)
+            mapView.arriving = arriving
+            segmentedControl.selectedSegmentIndex = arriving ? 0 : 1
+        }
     }
     
     @IBAction func segmentedControlSelected(_ sender: Any) {
@@ -190,6 +196,8 @@ extension LocationInputView: CLLocationManagerDelegate {
             
             let span = MKCoordinateSpanMake(0.05, 0.05)
             let region = MKCoordinateRegion(center: location.coordinate, span: span)
+            
+            accessibilityMapView.accessibilityValue = viewModel.accessibilityValue(for: Int(outputlocation!.radius))
             
             mapView.setRegion(region, animated: true)
         }

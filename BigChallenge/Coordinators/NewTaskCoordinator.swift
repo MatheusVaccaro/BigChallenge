@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 class NewTaskCoordinator: Coordinator {
     
@@ -24,6 +25,9 @@ class NewTaskCoordinator: Coordinator {
     fileprivate let isEditing: Bool
     fileprivate var modalPresenter: UINavigationController?
     
+    fileprivate var location: CLCircularRegion?
+    fileprivate var date: Date?
+    
     weak var delegate: CoordinatorDelegate?
     
     init(task: Task? = nil,
@@ -38,9 +42,11 @@ class NewTaskCoordinator: Coordinator {
         self.childrenCoordinators = []
         self.isEditing = task != nil
         self.task = task
+        
         self.selectedTags = isEditing
             ? task!.tags!.allObjects as! [Tag]
             : selectedTags
+        
     }
     
     func start() {
@@ -51,6 +57,7 @@ class NewTaskCoordinator: Coordinator {
         let newTaskViewModel = NewTaskViewModel(task: task,
                                                 isEditing: isEditing,
                                                 taskModel: taskModel)
+        
         newTaskViewController.viewModel = newTaskViewModel
 
         let tagCollectionViewModel = TagCollectionViewModel(model: tagModel,
@@ -63,6 +70,10 @@ class NewTaskCoordinator: Coordinator {
         
         let locationInputViewController = LocationInputView.instantiate()
         let locationInputViewModel = locationInputViewController.viewModel
+        if let task = self.task, let location = TaskModel.region(of: task) {
+            locationInputViewController.outputlocation = location
+            locationInputViewController.arriving = task.arriving
+        }
 		
         let dateInputViewModel = DateInputViewModel(with: task)
         let dateInputViewController = DateInputViewController.instantiate()
