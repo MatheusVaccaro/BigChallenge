@@ -83,7 +83,7 @@ public class TaskModel {
             task.regionData = regionData
             task.arriving = arriving
         }
-        
+        updateNotifications(for: task)
         delegate?.taskModel(self, didCreate: task)
         
         return task
@@ -104,13 +104,7 @@ public class TaskModel {
         }
         if let isCompleted = attributes[.isCompleted] as? Bool {
             task.isCompleted = isCompleted
-            if isCompleted {
-                NotificationManager.removeLocationNotification(for: task)
-                NotificationManager.removeDateNotification(for: task)
-            } else {
-                NotificationManager.addLocationNotification(for: task)
-                NotificationManager.addDateNotification(for: task)
-            }
+            updateNotifications(for: task)
         }
         if let notes = attributes[.notes] as? String {
             task.notes = notes
@@ -118,8 +112,22 @@ public class TaskModel {
         if let title = attributes[.title] as? String {
             task.title = title
         }
+        if let tags = attributes[.tags] as? [Tag] {
+            task.tags = NSSet(array: tags)
+        }
         
+        persistance.save()
         delegate?.taskModel(self, didUpdate: task, with: attributes)
+    }
+    
+    fileprivate func updateNotifications(for task: Task) {
+        if task.isCompleted {
+            NotificationManager.removeLocationNotification(for: task)
+            NotificationManager.removeDateNotification(for: task)
+        } else {
+            NotificationManager.addLocationNotification(for: task)
+            NotificationManager.addDateNotification(for: task)
+        }
     }
     
     // The attributes of the Task class, mapped according to CoreData
