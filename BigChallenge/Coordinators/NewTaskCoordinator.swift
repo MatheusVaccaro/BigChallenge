@@ -46,7 +46,6 @@ class NewTaskCoordinator: Coordinator {
         self.selectedTags = isEditing
             ? task!.tags!.allObjects as! [Tag]
             : selectedTags
-        
     }
     
     func start() {
@@ -55,7 +54,6 @@ class NewTaskCoordinator: Coordinator {
         self.newTaskViewController = newTaskViewController
 
         let newTaskViewModel = NewTaskViewModel(task: task,
-                                                isEditing: isEditing,
                                                 taskModel: taskModel)
         
         newTaskViewController.viewModel = newTaskViewModel
@@ -70,6 +68,7 @@ class NewTaskCoordinator: Coordinator {
         
         let locationInputViewController = LocationInputView.instantiate()
         let locationInputViewModel = locationInputViewController.viewModel
+        // edit task
         if let task = self.task, let location = TaskModel.region(of: task) {
             locationInputViewController.outputlocation = location
             locationInputViewController.arriving = task.arriving
@@ -93,8 +92,14 @@ class NewTaskCoordinator: Coordinator {
                                                                 detailViewModel: moreOptionsViewModel,
                                                                 taskModel: taskModel)
         creationFrameViewModel.delegate = self
+        creationFrameViewModel.task = task
         creationFrameViewController.viewModel = creationFrameViewModel
         self.taskFrameViewController = creationFrameViewController
+        
+        //edit
+        if let task = task {
+            creationFrameViewModel.doneButtonObservable.onNext(true)
+        }
         
         creationFrameViewController
             .configurePageViewController(with: [newTaskViewController, moreOptionsViewController])

@@ -97,7 +97,6 @@ extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
     }
     
     func will(edit task: Task) {
-//        print("editing \(task.title)")
         showEditTask(task)
     }
 }

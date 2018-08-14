@@ -22,7 +22,6 @@ protocol NewTaskViewModelOutputDelegate: class {
 class NewTaskViewModel: NewTaskViewModelProtocol {
     
     private let taskModel: TaskModel
-    private var isEditing: Bool
     private var task: Task?
     var taskTitleText: String? {
         didSet {
@@ -43,27 +42,12 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
     weak var outputDelegate: NewTaskViewModelOutputDelegate?
     weak var delegate: NewTaskViewModelDelegate?
     
-    init(task: Task?, isEditing: Bool, taskModel: TaskModel) {
-        self.isEditing = isEditing
+    init(task: Task?, taskModel: TaskModel) {
         self.taskModel = taskModel
         self.task = task
-        self.selectedTags = []
-    }
-    
-    func numberOfSections() -> Int {
-        if isEditing {
-            return 2
-        } else {
-            return 1
-        }
-    }
-    
-    func numberOfRows(in section: Int) -> Int {
-        if section == 0 {
-            return 2
-        } else {
-            return 1
-        }
+        
+        self.selectedTags = task == nil ? [] : task!.tags!.allObjects as! [Tag]
+        self.taskNotesText = task?.notes ?? ""
     }
     
     func didTapDeleteTaskButton() {
