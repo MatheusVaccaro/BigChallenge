@@ -153,7 +153,7 @@ class TagCollectionViewController: UIViewController {
                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 mediumImpactOcurred = true
                 return true
-            } else if !heavyImpactOcurred, force >= 0.7 {
+            } else if !heavyImpactOcurred, force >= 0.6 {
                 UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                 heavyImpactOcurred = true
                 return true

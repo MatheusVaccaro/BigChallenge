@@ -50,7 +50,6 @@ class HomeScreenCoordinator: Coordinator {
 
     fileprivate func showNewTask(selectedTags: [Tag]) {
         let newTaskCoordinator = NewTaskCoordinator(task: nil,
-                                                    isEditing: false,
                                                     presenter: presenter,
                                                     taskModel: taskModel,
                                                     tagModel: tagModel,
@@ -60,15 +59,15 @@ class HomeScreenCoordinator: Coordinator {
         newTaskCoordinator.start()
     }
     
-//    fileprivate func showEditTask(_ task: Task) {
-//        let newTaskCoordinator = NewTaskCoordinator(task: task,
-//                                                    isEditing: true,
-//                                                    presenter: presenter,
-//                                                    model: taskModel)
-//        newTaskCoordinator.delegate = self
-//        addChild(coordinator: newTaskCoordinator)
-//        newTaskCoordinator.start()
-//    }
+    fileprivate func showEditTask(_ task: Task) {
+        let newTaskCoordinator = NewTaskCoordinator(task: task,
+                                                    presenter: presenter,
+                                                    taskModel: taskModel,
+                                                    tagModel: tagModel)
+        newTaskCoordinator.delegate = self
+        addChild(coordinator: newTaskCoordinator)
+        newTaskCoordinator.start()
+    }
     
     fileprivate func showNewTag() {
         let newTagCoordinator = NewTagCoordinator(tag: nil,
@@ -88,6 +87,7 @@ extension HomeScreenCoordinator: CoordinatorDelegate {
 }
 
 extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
+    
     func willAddTask(selectedTags: [Tag]) {
         showNewTask(selectedTags: selectedTags)
     }
@@ -96,7 +96,8 @@ extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
         showNewTag()
     }
     
-    func wilEditTask() {
-        print("will edit task")
+    func will(edit task: Task) {
+//        print("editing \(task.title)")
+        showEditTask(task)
     }
 }

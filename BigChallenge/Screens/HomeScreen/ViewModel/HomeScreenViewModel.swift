@@ -10,7 +10,7 @@ import Foundation
 
 protocol HomeScreenViewModelDelegate: class {
     func willAddTask(selectedTags: [Tag])
-    func wilEditTask()
+    func will(edit task: Task)
     func willAddTag()
 }
 

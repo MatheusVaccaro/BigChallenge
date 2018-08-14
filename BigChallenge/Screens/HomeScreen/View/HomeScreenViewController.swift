@@ -74,7 +74,7 @@ class HomeScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        bigTitle.textColor = UIColor.clear
+        bigTitle.textColor = UIColor.clear
         bigTitle.font = UIFont.font(sized: 41, weight: .medium, with: .largeTitle)
         bigTitle.adjustsFontForContentSizeCategory = true
         
@@ -95,14 +95,9 @@ class HomeScreenViewController: UIViewController {
         if segue.identifier == "taskListSegue" {
             if let taskListViewController = segue.destination as? TaskListViewController {
                 let taskListViewModel = viewModel.taskListViewModel
-                taskListViewModel.shouldAddTask.subscribe { event in
-                    if let shouldAddTask = event.element {
-                        if shouldAddTask {
-                            self.delegate?
-                                .willAddTask(selectedTags: self.tagCollectionViewController.viewModel.selectedTags)
-                        }
-                    }
-                }.disposed(by: disposeBag)
+                
+                self.subscribe(to: taskListViewModel)
+                
                 taskListViewController.viewModel = taskListViewModel
                 self.taskListViewController = taskListViewController
             }
@@ -114,6 +109,22 @@ class HomeScreenViewController: UIViewController {
                 self.tagCollectionViewController = tagCollectionViewController
             }
         }
+    }
+    
+    fileprivate func subscribe(to taskListViewModel: TaskListViewModel) {
+        taskListViewModel.shouldAddTask.subscribe { event in
+            if let shouldAddTask = event.element, shouldAddTask {
+                self.delegate?
+                    .willAddTask(selectedTags: self.tagCollectionViewController.viewModel.selectedTags)
+                }
+        }.disposed(by: disposeBag)
+        
+        taskListViewModel.shouldEditTask.subscribe() { task in
+            if let task = task.element {
+                self.delegate?
+                    .will(edit: task)
+            }
+        }.disposed(by: disposeBag)
     }
     
     fileprivate func observeClickedAddTag() {
@@ -142,7 +153,7 @@ class HomeScreenViewController: UIViewController {
     var bigTitleColors: [CGColor] {
         return viewModel.selectedTags.isEmpty
             ? [UIColor.black.cgColor, UIColor.black.cgColor]
-            : TagModel.tagColors[ Int(viewModel.selectedTags.first!.color) ]
+            : TagModel.tagColors[ Int(viewModel.selectedTags.first!.colorIndex) ]
     }
     
     @IBAction func didTapBigTitle(_ sender: Any) {

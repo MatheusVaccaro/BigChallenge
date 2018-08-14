@@ -27,7 +27,6 @@ class NewTaskCoordinator: Coordinator {
     weak var delegate: CoordinatorDelegate?
     
     init(task: Task? = nil,
-         isEditing: Bool,
          presenter: UINavigationController,
          taskModel: TaskModel,
          tagModel: TagModel,
@@ -37,9 +36,11 @@ class NewTaskCoordinator: Coordinator {
         self.tagModel = tagModel
         self.presenter = presenter
         self.childrenCoordinators = []
-        self.isEditing = isEditing
+        self.isEditing = task != nil
         self.task = task
-        self.selectedTags = selectedTags
+        self.selectedTags = isEditing
+            ? task!.tags!.allObjects as! [Tag]
+            : selectedTags
     }
     
     func start() {
