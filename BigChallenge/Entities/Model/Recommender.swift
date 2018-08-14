@@ -63,13 +63,8 @@ class Recommender {
     }
     
     fileprivate func isLocation(_ location: CLLocationCoordinate2D, in task: Task) -> Bool {
-        if let region = region(of: task) {
+        if let region = TaskModel.region(of: task) {
             return region.contains( location )
         } else { return false }
-    }
-    
-    fileprivate func region(of task: Task) -> CLCircularRegion? {
-        guard let data = task.regionData else { return nil }
-        return NSKeyedUnarchiver.unarchiveObject(with: data) as? CLCircularRegion
     }
 }

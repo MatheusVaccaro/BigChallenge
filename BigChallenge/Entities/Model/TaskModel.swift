@@ -13,6 +13,11 @@ import RxSwift
 
 public class TaskModel {
     
+    static func region(of task: Task) -> CLCircularRegion? {
+        guard let data = task.regionData else { return nil }
+        return NSKeyedUnarchiver.unarchiveObject(with: data) as? CLCircularRegion
+    }
+    
     // MARK: - Properties
     
     weak var delegate: TaskModelDelegate?
