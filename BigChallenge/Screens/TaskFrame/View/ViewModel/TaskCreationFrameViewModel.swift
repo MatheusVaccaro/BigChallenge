@@ -11,20 +11,25 @@ import CoreLocation
 import RxSwift
 
 class TaskCreationFrameViewModel: CreationFrameViewModelProtocol {
-    
     fileprivate var taskModel: TaskModel
     fileprivate var taskTitle: String? {
         didSet {
             doneButtonObservable.onNext(shouldEnableDoneButton)
         }
     }
-    fileprivate var taskTags: [Tag] = []
-    fileprivate var taskNotes: String = ""
+    fileprivate var taskTags: [Tag]?
+    fileprivate var taskNotes: String?
     fileprivate var taskRegion: CLCircularRegion?
-    fileprivate var taskArriving: Bool = false
+    fileprivate var taskArriving: Bool?
     fileprivate var taskDueTimeOfDay: DateComponents?
     fileprivate var taskDueDate: DateComponents?
     fileprivate var taskFrequency: NotificationOptions.Frequency?
+    
+    var task: Task? {
+        didSet {
+            taskTitle = task!.title
+        }
+    }
     
     let doneButtonObservable: BehaviorSubject<Bool>
     
@@ -44,7 +49,11 @@ class TaskCreationFrameViewModel: CreationFrameViewModelProtocol {
     }
     
     func didTapSaveButton() {
-        createTaskIfPossible()
+        if let task = task {
+            updateTask()
+        } else {
+            createTaskIfPossible()
+        }
         delegate?.didTapSaveButton()
     }
     
@@ -53,28 +62,34 @@ class TaskCreationFrameViewModel: CreationFrameViewModelProtocol {
         return true
     }
     
-    private func createTaskIfPossible() {
-        guard let taskTitle = taskTitle else { return }
-        
-        var attributes: [TaskModel.Attributes : Any] = [
-            .title : taskTitle,
-            .tags : taskTags,
-            .notes : taskNotes,
-            .arriving : taskArriving
-        ]
+    private var taskAttributes: [TaskModel.Attributes : Any] {
+        var attributes: [TaskModel.Attributes : Any] = [:]
+            
+        if let taskTitle = taskTitle { attributes[.title] = taskTitle }
+        if let taskTags = taskTags { attributes[.tags] = taskTags }
+        if let taskNotes = taskNotes { attributes[.notes] = taskNotes }
+        if let taskArriving = taskArriving { attributes[.arriving] = taskArriving }
+        if let region = taskRegion { attributes[.region] = region }
         
         if let taskDueDate = self.taskDueDate,
-           let taskDueTimeOfDay = self.taskDueTimeOfDay,
-           let date = Calendar.current.combine(date: taskDueDate, andTimeOfDay: taskDueTimeOfDay) {
+            let taskDueTimeOfDay = self.taskDueTimeOfDay,
+            let date = Calendar.current.combine(date: taskDueDate, andTimeOfDay: taskDueTimeOfDay) {
             attributes[.dueDate] = date
         }
-        if let region = taskRegion {
-            attributes[.region] = region
-        }
         
-        let task = taskModel.createTask(with: attributes)
+        return attributes
+    }
+    
+    private func updateTask() {
+        print(taskAttributes.keys)
+        guard canCreateTask else { return }
+        taskModel.update(task!, with: taskAttributes)
+    }
+    
+    private func createTaskIfPossible() {
+        guard canCreateTask else { return }
+        let task = taskModel.createTask(with: taskAttributes)
         taskModel.save(task)
-        NotificationManager.addLocationNotification(for: task)
     }
     
     private var shouldEnableDoneButton: Bool {

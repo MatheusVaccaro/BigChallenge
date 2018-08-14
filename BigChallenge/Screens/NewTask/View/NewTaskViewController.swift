@@ -60,8 +60,10 @@ class NewTaskViewController: UIViewController, CreationFramePresentable {
     
     private func configureWithViewModel() {
         guard let viewModel = viewModel else { return }
-        if let taskTitle = viewModel.taskTitle() {
+        if let taskTitle = viewModel.taskTitle(),
+            let taskNotes = viewModel.taskNotesText {
             taskTitleTextView.text = taskTitle
+            taskNotesTextView.text = taskNotes
         }
     }
     
