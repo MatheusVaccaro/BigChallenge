@@ -25,12 +25,12 @@ class DateInputViewModel: DateInputViewModelProtocol {
     private(set) var thisEveningShortcutText: BehaviorSubject<String>
     private(set) var nextMorningShortcutText: BehaviorSubject<String>
     
-    init(delegate: DateInputViewModelDelegate? = nil) {
+    init(date: DateComponents? = nil, timeOfDay: DateComponents? = nil, frequency: NotificationOptions.Frequency? = nil, delegate: DateInputViewModelDelegate? = nil) {
         self.delegate = delegate
         
-        self.date = Variable(nil)
-        self.timeOfDay = Variable(nil)
-        self.frequency = Variable(nil)
+        self.date = Variable(date)
+        self.timeOfDay = Variable(timeOfDay)
+        self.frequency = Variable(frequency)
         
         self.tomorrowShortcutText = Variable<String>(Strings.DateInputView.tomorrowShortcut)
         self.nextWeekShortcutText = Variable<String>(Strings.DateInputView.nextWeekShortcut)

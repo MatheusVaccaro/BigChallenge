@@ -64,7 +64,7 @@ class NewTaskCoordinator: Coordinator {
         let locationInputViewController = LocationInputView.instantiate()
         let locationInputViewModel = locationInputViewController.viewModel
 		
-        let dateInputViewModel = DateInputViewModel()
+        let dateInputViewModel = DateInputViewModel(with: task)
         let dateInputViewController = DateInputViewController.instantiate()
         dateInputViewController.viewModel = dateInputViewModel
         
@@ -125,4 +125,23 @@ extension NewTaskCoordinator: CreationFrameViewModelDelegate {
         delegate?.shouldDeinitCoordinator(self)
     }
     
+}
+
+extension DateInputViewModel {
+    convenience init(with task: Task?) {
+        guard let task = task else {
+            self.init()
+            return
+        }
+        
+        if let triggerDate = task.notificationOptions.triggerDate {
+            let date = Calendar.current.dateComponents([.year, .month, .day], from: triggerDate)
+            let timeOfDay = Calendar.current.dateComponents([.hour, .minute, .second], from: triggerDate)
+            let frequency = task.notificationOptions.frequency
+            self.init(date: date, timeOfDay: timeOfDay, frequency: frequency)
+            
+        } else {
+            self.init()
+        }
+    }
 }
