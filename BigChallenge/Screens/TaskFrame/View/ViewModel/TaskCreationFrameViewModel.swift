@@ -71,9 +71,18 @@ class TaskCreationFrameViewModel: CreationFrameViewModelProtocol {
         if let taskArriving = taskArriving { attributes[.arriving] = taskArriving }
         if let region = taskRegion { attributes[.region] = region }
         
-        if let taskDueDate = self.taskDueDate,
-            let taskDueTimeOfDay = self.taskDueTimeOfDay,
-            let date = Calendar.current.combine(date: taskDueDate, andTimeOfDay: taskDueTimeOfDay) {
+        if let taskDueDate = self.taskDueDate {
+            
+            var taskDueTimeOfDay = self.taskDueTimeOfDay
+            
+            if taskDueDate == nil {
+                taskDueTimeOfDay = DateComponents()
+                taskDueTimeOfDay!.setValue(0, for: .hour)
+                taskDueTimeOfDay!.setValue(0, for: .minute)
+                taskDueTimeOfDay!.setValue(0, for: .second)
+            }
+            
+            let date = Calendar.current.combine(date: taskDueDate, andTimeOfDay: taskDueTimeOfDay)!
             attributes[.dueDate] = date
         }
         
@@ -106,10 +115,6 @@ extension TaskCreationFrameViewModel: NewTaskViewModelOutputDelegate {
     
     func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateTags tags: [Tag]?) {
         taskTags = tags ?? []
-    }
-    
-    func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateDueDate dueDate: Date?) {
-//        taskDueDate = dueDate
     }
     
     func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateNotes notes: String?) {
