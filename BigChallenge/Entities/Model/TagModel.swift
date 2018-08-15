@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 import RxCocoa
 import RxSwift
 import Crashlytics
@@ -78,6 +79,7 @@ public class TagModel {
             let dueDate = attributes[.dueDate] as? Date ?? Date()
             let id = attributes[.id] as? UUID ?? UUID()
             let tasks = attributes[.tasks] as? [Task] ?? []
+            let arriving = attributes[.arriving] as? Bool ?? false
             
             tag.colorIndex = colorIndex
             tag.dates = dates
@@ -85,6 +87,16 @@ public class TagModel {
             tag.id = id
             tag.title = title
             tag.tasks = NSSet(array: tasks)
+            
+            if let dueDate = attributes[.dueDate] as? Date {
+                tag.dueDate = dueDate
+            }
+            if let region = attributes[.region] as? CLCircularRegion {
+                let regionData =
+                    NSKeyedArchiver.archivedData(withRootObject: region)
+                tag.regionData = regionData
+                tag.arriving = arriving
+            }
             
             return tag
         }
@@ -120,6 +132,8 @@ public class TagModel {
         case id
         case title
         case tasks
+        case region
+        case arriving
     }
 }
 
