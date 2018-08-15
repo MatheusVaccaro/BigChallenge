@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 import RxCocoa
 import RxSwift
 
@@ -138,6 +139,7 @@ class TagCollectionViewController: UIViewController {
         
         cell.longPressedTag.subscribe {
             self.presentActionSheet(for: $0.element!)
+            Answers.logCustomEvent(withName: "longpressed tag")
         }.disposed(by: self.disposeBag)
         
         let tagViewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
