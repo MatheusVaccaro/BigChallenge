@@ -25,14 +25,7 @@ class NewTagViewModel: NewTagViewModelProtocol {
     
     private let model: TagModel
     private var isEditing: Bool
-    private var tag: Tag? {
-        didSet {
-            if let colorIndex64 = tag?.colorIndex {
-                colorIndex = Int(colorIndex64)
-            }
-            tagTitle = tag?.title
-        }
-    }
+    private var tag: Tag?
     
     var colorIndex: Int? {
         didSet {
@@ -57,6 +50,10 @@ class NewTagViewModel: NewTagViewModelProtocol {
         self.isEditing = isEditing
         self.model = model
         self.tag = tag
+        
+        if let tag = tag {
+            configureAttributes(from: tag)
+        }
     }
     
     func numberOfSections() -> Int {
@@ -83,6 +80,11 @@ class NewTagViewModel: NewTagViewModelProtocol {
     
     func numberOfColors() -> Int {
         return TagModel.tagColors.count
+    }
+    
+    private func configureAttributes(from tag: Tag) {
+        colorIndex = Int(tag.colorIndex)
+        tagTitle = tag.title
     }
     
     // MARK: - Strings

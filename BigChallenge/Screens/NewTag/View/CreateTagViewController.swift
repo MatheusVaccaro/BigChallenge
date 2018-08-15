@@ -13,6 +13,7 @@ class CreateTagViewController: UIViewController, CreationFramePresentable {
     // MARK: - Properties
     
     var viewModel: NewTagViewModel!
+    private var isConfigured: Bool = false
     
     // MARK: - IBOutlets
     
@@ -58,6 +59,8 @@ class CreateTagViewController: UIViewController, CreationFramePresentable {
             let indexPath = IndexPath(row: colorIndex, section: 0)
             colorsCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .left)
         }
+        
+        isConfigured = true
     }
     
 }
@@ -75,6 +78,7 @@ extension CreateTagViewController: UITextViewDelegate {
     }
     
     func textViewDidChangeSelection(_ textView: UITextView) {
+        guard isConfigured else { return }
         if textView === tagTitleTextView {
             viewModel?.tagTitle = textView.text
         }
@@ -114,20 +118,5 @@ extension CreateTagViewController: UICollectionViewDataSource {
 }
 
 extension CreateTagViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("selected item at \(indexPath)")
-        guard let selectedCell = collectionView.cellForItem(at: indexPath) as? ColorCollectionViewCell else { return }
-        let row = indexPath.row
-        viewModel.colorIndex = row
-        selectedCell.select()
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        print("desected item at \(indexPath)")
-        guard let selectedCell = collectionView.cellForItem(at: indexPath) as? ColorCollectionViewCell else { return }
-        viewModel.colorIndex = nil
-        selectedCell.deselect()
-    }
     
 }

@@ -30,8 +30,12 @@ class HomeScreenViewModel {
         return TaskListViewModel(model: taskModel)
     }()
     
+    // TODO: Remove this. Used as a workaround while the homescreen is not refactored according to the architecture
+    var tagCollectionViewModelDelegate: TagCollectionViewModelDelegate?
     lazy var tagCollectionViewModel: TagCollectionViewModel = {
-        return TagCollectionViewModel(model: tagModel, filtering: true, selectedTags: selectedTags)
+        let tagCollectionViewModel = TagCollectionViewModel(model: tagModel, filtering: true, selectedTags: selectedTags)
+        tagCollectionViewModel.delegate = tagCollectionViewModelDelegate
+        return tagCollectionViewModel
     }()
     
     var bigTitleText: String {

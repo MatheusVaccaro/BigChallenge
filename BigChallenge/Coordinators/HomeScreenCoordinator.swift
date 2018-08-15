@@ -14,6 +14,7 @@ class HomeScreenCoordinator: Coordinator {
     var childrenCoordinators: [Coordinator]
     fileprivate let presenter: UINavigationController
     
+    fileprivate var homeScreenViewController: HomeScreenViewController?
     fileprivate var taskListViewController: TaskListViewController?
     fileprivate var tagCollectionViewController: TagCollectionViewController?
     
@@ -39,10 +40,14 @@ class HomeScreenCoordinator: Coordinator {
 
     func start() {
         let homeScreenViewController = HomeScreenViewController.instantiate()
-        homeScreenViewController.viewModel =
-            HomeScreenViewModel(taskModel: taskModel, tagModel: tagModel, selectedTags: selectedTags)
+        let homeScreenViewModel = HomeScreenViewModel(taskModel: taskModel, tagModel: tagModel, selectedTags: selectedTags)
+        homeScreenViewController.viewModel = homeScreenViewModel
 
         homeScreenViewController.delegate = self
+        self.homeScreenViewController = homeScreenViewController
+        
+        // TODO: Reestructure HomeScreen according to the architecture
+        homeScreenViewModel.tagCollectionViewModelDelegate = self
         
         presenter.isNavigationBarHidden = true
         presenter.pushViewController(homeScreenViewController, animated: false)
@@ -78,6 +83,16 @@ class HomeScreenCoordinator: Coordinator {
         addChild(coordinator: newTagCoordinator)
         newTagCoordinator.start()
     }
+    
+    fileprivate func showEditTag(_ tag: Tag) {
+        let editTagCoordinator = NewTagCoordinator(tag: tag,
+                                                  isEditing: true,
+                                                  presenter: presenter,
+                                                  model: tagModel)
+        editTagCoordinator.delegate = self
+        addChild(coordinator: editTagCoordinator)
+        editTagCoordinator.start()
+    }
 }
 
 extension HomeScreenCoordinator: CoordinatorDelegate {
@@ -99,4 +114,12 @@ extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
     func will(edit task: Task) {
         showEditTask(task)
     }
+}
+
+extension HomeScreenCoordinator: TagCollectionViewModelDelegate {
+    
+    func willUpdate(tag: Tag) {
+        showEditTag(tag)
+    }
+
 }

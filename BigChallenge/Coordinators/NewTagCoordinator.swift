@@ -34,12 +34,11 @@ class NewTagCoordinator: Coordinator {
     func start() {
         // New Tag
         let createTagViewController = CreateTagViewController.instantiate()
-        self.createTagViewController = createTagViewController
-        
         let newTagViewModel = NewTagViewModel(tag: tag,
                                               isEditing: isEditing,
                                               model: model)
         createTagViewController.viewModel = newTagViewModel
+        self.createTagViewController = createTagViewController
         
         // Tag Frame
         let tagCreationFrameViewController = CreationFrameViewController.instantiate()

@@ -45,7 +45,7 @@ class TagCreationFrameViewModel: CreationFrameViewModelProtocol {
         guard let tagTitle = tagTitle else { return }
     
         var attributes: [TagModel.Attributes : Any] = [
-            .title : tagTitle as Any,
+            .title : tagTitle as Any
         ]
         
         if let colorIndex = tagColorIndex {
