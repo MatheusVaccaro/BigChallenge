@@ -93,14 +93,12 @@ public class TagModel {
             
             let colorIndex = attributes[.colorIndex] as? Int64 ?? nextColor
             let dates = attributes[.dates] as? [Date] ?? []
-            let dueDate = attributes[.dueDate] as? Date ?? Date()
             let id = attributes[.id] as? UUID ?? UUID()
             let tasks = attributes[.tasks] as? [Task] ?? []
             let arriving = attributes[.arriving] as? Bool ?? false
             
             tag.colorIndex = colorIndex
             tag.dates = dates
-            tag.dueDate = dueDate
             tag.id = id
             tag.title = title
             tag.tasks = NSSet(array: tasks)
