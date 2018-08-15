@@ -18,7 +18,6 @@ protocol NewTagViewModelDelegate: class {
 protocol NewTagViewModelOutputDelegate: class {
     func newTagViewModel(_ newTagViewModel: NewTagViewModel, didUpdateTitle title: String?)
     func newTagViewModel(_ newTagViewModel: NewTagViewModel, didUpdateColorIndex colorIndex: Int?)
-    func newTagViewModel(_ newTagViewModel: NewTagViewModel, didUpdateLocation location: CLLocation?)
 }
 
 class NewTagViewModel: NewTagViewModelProtocol {
@@ -29,11 +28,6 @@ class NewTagViewModel: NewTagViewModelProtocol {
     var colorIndex: Int? {
         didSet {
             outputDelegate?.newTagViewModel(self, didUpdateColorIndex: colorIndex)
-        }
-    }
-    var location: CLLocation? {
-        didSet {
-            outputDelegate?.newTagViewModel(self, didUpdateLocation: location)
         }
     }
     var tagTitle: String? {

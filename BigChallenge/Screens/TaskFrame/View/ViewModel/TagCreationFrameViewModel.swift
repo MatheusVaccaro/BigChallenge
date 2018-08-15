@@ -19,19 +19,47 @@ class TagCreationFrameViewModel: CreationFrameViewModelProtocol {
         }
     }
     fileprivate var tagColorIndex: Int?
-    fileprivate var tagLocation: CLLocation?
+    fileprivate var tagRegion: CLCircularRegion?
+    fileprivate var tagArriving: Bool?
+    fileprivate var tagDueTimeOfDay: DateComponents?
+    fileprivate var tagDueDate: DateComponents?
+    fileprivate var tagFrequency: NotificationOptions.Frequency?
     
     var tag: Tag?
+    
+    private var tagAttributes: [TagModel.Attributes : Any] {
+        var attributes: [TagModel.Attributes : Any] = [:]
+        
+        if let tagTitle = tagTitle { attributes[.title] = tagTitle }
+        if let colorIndex = tagColorIndex { attributes[.colorIndex] = Int64(colorIndex) }
+        if let tagArriving = tagArriving { attributes[.arriving] = tagArriving }
+        if let tagRegion = tagRegion { attributes[.region] = tagRegion }
+        
+        if let tagDueDate = tagDueDate,
+            let tagDueTimeOfDay = tagDueTimeOfDay,
+            let date = Calendar.current.combine(date: tagDueDate, andTimeOfDay: tagDueTimeOfDay) {
+            attributes[.dueDate] = date
+        }
+        
+        return attributes
+    }
+    
+    var canCreateTag: Bool {
+        guard tagTitle != nil else { return false }
+        return true
+    }
     
     let doneButtonObservable: BehaviorSubject<Bool>
     
     weak var delegate: CreationFrameViewModelDelegate?
 
     init(mainInfoViewModel: NewTagViewModel,
+         detailViewModel: MoreOptionsViewModel,
          tagModel: TagModel) {
         self.tagModel = tagModel
         doneButtonObservable = BehaviorSubject<Bool>(value: false)
         mainInfoViewModel.outputDelegate = self
+        detailViewModel.delegate = self
     }
     
     func didTapCancelButton() {
@@ -39,7 +67,7 @@ class TagCreationFrameViewModel: CreationFrameViewModelProtocol {
     }
     
     func didTapSaveButton() {
-        if let tag = tag {
+        if tag != nil {
             updateTag()
         } else {
             createTagIfPossible()
@@ -48,35 +76,15 @@ class TagCreationFrameViewModel: CreationFrameViewModelProtocol {
     }
     
     private func createTagIfPossible() {
-        guard let tagTitle = tagTitle else { return }
-    
-        var attributes: [TagModel.Attributes : Any] = [
-            .title : tagTitle as Any
-        ]
-        
-        if let colorIndex = tagColorIndex {
-            let int64ColorIndex = Int64(colorIndex)
-            attributes[.colorIndex] = int64ColorIndex
-        }
-        
-        let tag = tagModel.createTag(with: attributes)
+        guard canCreateTag else { return }
+        let tag = tagModel.createTag(with: tagAttributes)
         tagModel.save(tag)
     }
     
     private func updateTag() {
+        guard canCreateTag else { return }
         guard let tag = tag else { return }
-        guard let tagTitle = tagTitle else { return }
-        
-        var attributes: [TagModel.Attributes : Any] = [
-            .title : tagTitle as Any
-        ]
-        
-        if let colorIndex = tagColorIndex {
-            let int64ColorIndex = Int64(colorIndex)
-            attributes[.colorIndex] = int64ColorIndex
-        }
-        
-        tagModel.update(tag, with: attributes)
+        tagModel.update(tag, with: tagAttributes)
     }
     
     private var shouldEnableDoneButton: Bool {
@@ -93,8 +101,25 @@ extension TagCreationFrameViewModel: NewTagViewModelOutputDelegate {
     func newTagViewModel(_ newTagViewModel: NewTagViewModel, didUpdateColorIndex colorIndex: Int?) {
         tagColorIndex = colorIndex
     }
+}
+
+extension TagCreationFrameViewModel: MoreOptionsViewModelDelegate {
+    func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool) {
+        tagRegion = location
+        tagArriving = arriving
+    }
     
-    func newTagViewModel(_ newTagViewModel: NewTagViewModel, didUpdateLocation location: CLLocation?) {
-        tagLocation = location
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: DateComponents) {
+        tagDueDate = date
+    }
+    
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
+                            didSelectTimeOfDay timeOfDay: DateComponents) {
+        tagDueTimeOfDay = timeOfDay
+    }
+    
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
+                            didSelectFrequency frequency: NotificationOptions.Frequency) {
+        tagFrequency = frequency
     }
 }

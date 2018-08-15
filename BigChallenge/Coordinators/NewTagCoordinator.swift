@@ -15,6 +15,7 @@ class NewTagCoordinator: Coordinator {
     var childrenCoordinators: [Coordinator]
     
     fileprivate var createTagViewController: CreateTagViewController?
+    fileprivate var moreOptionsViewController: MoreOptionsViewController?
     fileprivate var tagCreationFrameViewController: CreationFrameViewController?
     fileprivate let model: TagModel
     fileprivate var tag: Tag?
@@ -37,14 +38,39 @@ class NewTagCoordinator: Coordinator {
         createTagViewController.viewModel = newTagViewModel
         self.createTagViewController = createTagViewController
         
+        // More Options
+        let moreOptionsViewController = MoreOptionsViewController.instantiate()
+        
+        let locationInputViewController = LocationInputView.instantiate()
+        let locationInputViewModel = locationInputViewController.viewModel
+        // edit tag
+        if let tag = self.tag, let location = TagModel.region(of: tag) {
+            locationInputViewController.outputlocation = location
+            locationInputViewController.arriving = tag.arriving
+        }
+        
+        let dateInputViewModel = DateInputViewModel(with: tag)
+        let dateInputViewController = DateInputViewController.instantiate()
+        dateInputViewController.viewModel = dateInputViewModel
+        
+        let moreOptionsViewModel = MoreOptionsViewModel(locationInputViewModel: locationInputViewModel,
+                                                        dateInputViewModel: dateInputViewModel)
+        
+        moreOptionsViewController.viewModel = moreOptionsViewModel
+        self.moreOptionsViewController = moreOptionsViewController
+        moreOptionsViewController.locationCellContent = locationInputViewController
+        moreOptionsViewController.timeCellContent = dateInputViewController
+        
         // Tag Frame
         let tagCreationFrameViewController = CreationFrameViewController.instantiate()
-        let tagCreationFrameViewModel = TagCreationFrameViewModel(mainInfoViewModel: newTagViewModel, tagModel: model)
+        let tagCreationFrameViewModel = TagCreationFrameViewModel(mainInfoViewModel: newTagViewModel,
+                                                                  detailViewModel: moreOptionsViewModel,
+                                                                  tagModel: model)
         tagCreationFrameViewModel.delegate = self
         tagCreationFrameViewController.viewModel = tagCreationFrameViewModel
         self.tagCreationFrameViewController = tagCreationFrameViewController
 
-        tagCreationFrameViewController.configurePageViewController(with: [createTagViewController])
+        tagCreationFrameViewController.configurePageViewController(with: [createTagViewController, moreOptionsViewController])
         
         // Edit Mode
         if let tag = tag {
