@@ -68,11 +68,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="qLG-Z8-bgi" secondAttribute="trailing" constant="8" id="797-GV-JgE"/>
                             <constraint firstItem="hi9-8n-jJk" firstAttribute="top" secondItem="qLG-Z8-bgi" secondAttribute="bottom" constant="5" id="7iD-TA-CcH"/>
-                            <constraint firstItem="PrB-8h-Asu" firstAttribute="top" secondItem="QKa-yH-x6F" secondAttribute="top" constant="17" id="BAW-7M-1CL"/>
+                            <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PrB-8h-Asu" secondAttribute="trailing" constant="8" id="AWC-11-Z5J"/>
+                            <constraint firstItem="PrB-8h-Asu" firstAttribute="top" secondItem="QKa-yH-x6F" secondAttribute="top" priority="250" constant="17" id="BAW-7M-1CL"/>
                             <constraint firstItem="cie-Gz-Vzx" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="8" id="BXC-pC-xol"/>
                             <constraint firstItem="qLG-Z8-bgi" firstAttribute="top" secondItem="Qdj-bK-Hkb" secondAttribute="bottom" constant="12" id="Fuh-wr-9H2"/>
                             <constraint firstItem="cie-Gz-Vzx" firstAttribute="bottom" secondItem="QKa-yH-x6F" secondAttribute="bottom" id="Mlh-Oq-gNo"/>

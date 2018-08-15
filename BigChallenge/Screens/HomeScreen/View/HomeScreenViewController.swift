@@ -163,7 +163,6 @@ class HomeScreenViewController: UIViewController {
     fileprivate func showEmptyState(_ bool: Bool) {
         [emptyStateSubtitleLabel, emptyStateTitleLabel, emptyStateImage]
             .forEach { $0!.isHidden = !bool }
-//        taskListContainerView.isHidden = bool
     }
     
     fileprivate func configureEmptyState() {

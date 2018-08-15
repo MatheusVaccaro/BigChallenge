@@ -45,7 +45,7 @@ class HomeScreenViewModel {
         if let tag = selectedTags.first {
             return tag.title!
         } else {
-            return "Hello"
+            return Strings.HomeScreen.title
         }
     }
     
