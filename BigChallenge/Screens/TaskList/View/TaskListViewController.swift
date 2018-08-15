@@ -31,6 +31,8 @@ public class TaskListViewController: UIViewController {
     private let disposeBag = DisposeBag()
     fileprivate var heightOfHeaderTag: CGFloat!
     private var alsoTaggedHeader: UIView!
+    private var newTaskTriggerThreshold: CGFloat!
+    private var showCompletedTasksTriggerThreshold: CGFloat!
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -123,7 +125,7 @@ public class TaskListViewController: UIViewController {
         tableView.rx.didEndDragging.subscribe { _ in
             if self.shouldAddNewTask(self.tableView) {
                 self.viewModel.shouldGoToAddTask()
-             } else if self.shouldShowCompletedTasks(self.tableView) {
+            } else if self.shouldShowCompletedTasks(self.tableView) {
                 self.viewModel.showsCompletedTasks = !self.viewModel.showsCompletedTasks
             }
         }.disposed(by: disposeBag)
@@ -156,6 +158,11 @@ public class TaskListViewController: UIViewController {
                            colored: UIColor.purple)
         
         heightOfHeaderTag = alsoTaggedHeader.bounds.size.height
+        
+        hapticFeedbackTriggerThreshold = tableView.bounds.height / 9.42
+        
+        newTaskTriggerThreshold = -hapticFeedbackTriggerThreshold * 1.6
+        showCompletedTasksTriggerThreshold = hapticFeedbackTriggerThreshold * 1.6
     }
     
     // MARK: - Haptics
@@ -163,16 +170,16 @@ public class TaskListViewController: UIViewController {
     fileprivate var lightImpactOcurred: Bool = false
     fileprivate var heavyImpactOcurred: Bool = false
     fileprivate var mediumImpactOcurred: Bool = false
+    private var hapticFeedbackTriggerThreshold: CGFloat!
     
     fileprivate func prepareFeedback() {
-        print("preparing feedback")
         feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
         feedbackGenerator?.prepare()
     }
     
     fileprivate func triggerImpact(_ style: UIImpactFeedbackStyle) {
-        print("triggered \(style.rawValue) impact")
-        self.feedbackGenerator?.impactOccurred()
+        feedbackGenerator?.impactOccurred()
+        
         switch style {
         case .light:
             lightImpactOcurred = true
@@ -195,24 +202,26 @@ public class TaskListViewController: UIViewController {
     }
     
     fileprivate func shouldAddNewTask(_ tableView: UITableView) -> Bool {
-        return self.tableView.contentOffset.y < -80.0
+        return tableView.contentOffset.y < newTaskTriggerThreshold
     }
     
     fileprivate func shouldShowCompletedTasks(_ tableView: UITableView) -> Bool {
-        return tableView.contentSize.height < tableView.bounds.height + 80
-            ? tableView.contentOffset.y > 80
-            : tableView.contentOffset.y + tableView.bounds.height + 80 > tableView.contentSize.height
+        return tableView.contentSize.height < tableView.bounds.height
+            ? tableView.contentOffset.y > showCompletedTasksTriggerThreshold
+            : tableView.contentOffset.y + tableView.bounds.height + showCompletedTasksTriggerThreshold
+            > tableView.contentSize.height
     }
     
     fileprivate func shouldTriggerMediumImpact(_ tableView: UITableView) -> Bool {
         guard !mediumImpactOcurred else { return false }
-        if self.tableView.contentOffset.y < -50.0 {
-            return true
-        } else {
-            return tableView.contentSize.height < tableView.bounds.height + 50
-                ? tableView.contentOffset.y > 50
-                : tableView.contentOffset.y + tableView.bounds.height + 50 > tableView.contentSize.height
-        }
+        
+        let scrollPosition = tableView.contentOffset.y
+        let currentSpacing = scrollPosition < 0 ? scrollPosition
+            : max(scrollPosition + min(tableView.bounds.height - tableView.contentSize.height, 0), 0)
+        
+        let shouldTriggerMediumImpact = abs(currentSpacing) > hapticFeedbackTriggerThreshold
+        
+        return shouldTriggerMediumImpact
     }
 }
 
