@@ -18,16 +18,14 @@ class NewTagCoordinator: Coordinator {
     fileprivate var tagCreationFrameViewController: CreationFrameViewController?
     fileprivate let model: TagModel
     fileprivate var tag: Tag?
-    fileprivate let isEditing: Bool
     fileprivate var modalPresenter: UINavigationController?
     
     weak var delegate: CoordinatorDelegate?
     
-    init(tag: Tag? = nil, isEditing: Bool, presenter: UINavigationController, model: TagModel) {
+    init(tag: Tag? = nil, presenter: UINavigationController, model: TagModel) {
         self.model = model
         self.presenter = presenter
         self.childrenCoordinators = []
-        self.isEditing = isEditing
         self.tag = tag
     }
     
@@ -35,7 +33,6 @@ class NewTagCoordinator: Coordinator {
         // New Tag
         let createTagViewController = CreateTagViewController.instantiate()
         let newTagViewModel = NewTagViewModel(tag: tag,
-                                              isEditing: isEditing,
                                               model: model)
         createTagViewController.viewModel = newTagViewModel
         self.createTagViewController = createTagViewController

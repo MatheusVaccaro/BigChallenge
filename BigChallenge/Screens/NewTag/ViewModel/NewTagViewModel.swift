@@ -24,7 +24,6 @@ protocol NewTagViewModelOutputDelegate: class {
 class NewTagViewModel: NewTagViewModelProtocol {
     
     private let model: TagModel
-    private var isEditing: Bool
     private var tag: Tag?
     
     var colorIndex: Int? {
@@ -46,26 +45,13 @@ class NewTagViewModel: NewTagViewModelProtocol {
     weak var outputDelegate: NewTagViewModelOutputDelegate?
     weak var delegate: NewTagViewModelDelegate?
     
-    init(tag: Tag?, isEditing: Bool, model: TagModel) {
-        self.isEditing = isEditing
+    init(tag: Tag?, model: TagModel) {
         self.model = model
         self.tag = tag
         
         if let tag = tag {
             configureAttributes(from: tag)
         }
-    }
-    
-    func numberOfSections() -> Int {
-        if isEditing {
-            return 2
-        } else {
-            return 1
-        }
-    }
-    
-    func numberOfRowsInSection() -> Int {
-        return 1
     }
     
     func didTapDeleteTagButton() {

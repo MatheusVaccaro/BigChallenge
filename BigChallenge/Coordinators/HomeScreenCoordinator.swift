@@ -76,7 +76,6 @@ class HomeScreenCoordinator: Coordinator {
     
     fileprivate func showNewTag() {
         let newTagCoordinator = NewTagCoordinator(tag: nil,
-                                                  isEditing: false,
                                                   presenter: presenter,
                                                   model: tagModel)
         newTagCoordinator.delegate = self
@@ -86,7 +85,6 @@ class HomeScreenCoordinator: Coordinator {
     
     fileprivate func showEditTag(_ tag: Tag) {
         let editTagCoordinator = NewTagCoordinator(tag: tag,
-                                                  isEditing: true,
                                                   presenter: presenter,
                                                   model: tagModel)
         editTagCoordinator.delegate = self
