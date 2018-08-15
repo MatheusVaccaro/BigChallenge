@@ -14,6 +14,11 @@ import Crashlytics
 
 public class TagModel {
     
+    static func region(of tag: Tag) -> CLCircularRegion? {
+        guard let data = tag.regionData else { return nil }
+        return NSKeyedUnarchiver.unarchiveObject(with: data) as? CLCircularRegion
+    }
+    
     // MARK: - Properties
     
     static let tagColors = [ UIColor.Tags.purpleGradient,

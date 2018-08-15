@@ -112,6 +112,8 @@
 		C2A1115320BA036800ABB161 /* NewTaskCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1115220BA036800ABB161 /* NewTaskCoordinator.swift */; };
 		C2C231C120FD1AB2002A2371 /* NewTagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C231C020FD1AB2002A2371 /* NewTagViewModel.swift */; };
 		C2C231C520FD41AE002A2371 /* NewTagCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C231C420FD41AE002A2371 /* NewTagCoordinator.swift */; };
+		C2C79D2D2123E7D70058F228 /* DateInputViewModel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C79D2C2123E7D70058F228 /* DateInputViewModel+Extension.swift */; };
+		C2C79D2F2123E89A0058F228 /* Tag+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C79D2E2123E89A0058F228 /* Tag+Extension.swift */; };
 		C2DD9A28210D262D00E9B89B /* CreationFrameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DD9A27210D262D00E9B89B /* CreationFrameViewController.swift */; };
 		C2DD9A3321114ADD00E9B89B /* MoreOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DD9A3221114ADD00E9B89B /* MoreOptionsViewController.swift */; };
 		C2DD9A3521114FBC00E9B89B /* MoreOptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DD9A3421114FBC00E9B89B /* MoreOptionsTableViewCell.swift */; };
@@ -266,6 +268,8 @@
 		C2A1115220BA036800ABB161 /* NewTaskCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskCoordinator.swift; sourceTree = "<group>"; };
 		C2C231C020FD1AB2002A2371 /* NewTagViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTagViewModel.swift; sourceTree = "<group>"; };
 		C2C231C420FD41AE002A2371 /* NewTagCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTagCoordinator.swift; sourceTree = "<group>"; };
+		C2C79D2C2123E7D70058F228 /* DateInputViewModel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateInputViewModel+Extension.swift"; sourceTree = "<group>"; };
+		C2C79D2E2123E89A0058F228 /* Tag+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+Extension.swift"; sourceTree = "<group>"; };
 		C2DD9A27210D262D00E9B89B /* CreationFrameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationFrameViewController.swift; sourceTree = "<group>"; };
 		C2DD9A3221114ADD00E9B89B /* MoreOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsViewController.swift; sourceTree = "<group>"; };
 		C2DD9A3421114FBC00E9B89B /* MoreOptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsTableViewCell.swift; sourceTree = "<group>"; };
@@ -329,6 +333,7 @@
 				1676FC8F20D99580003E2D79 /* TaskModel.swift */,
 				29A4F8882111061A00AE4FA1 /* Task+Extension.swift */,
 				2241F36820ED08340069EFE9 /* TagModel.swift */,
+				C2C79D2E2123E89A0058F228 /* Tag+Extension.swift */,
 				22270EF92120C07000695223 /* Recommender.swift */,
 			);
 			path = Model;
@@ -525,6 +530,7 @@
 			children = (
 				29A4F8842110F04600AE4FA1 /* DateInputViewModel.swift */,
 				29A4F88A21125C1C00AE4FA1 /* DateInputViewModelProtocol.swift */,
+				C2C79D2C2123E7D70058F228 /* DateInputViewModel+Extension.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1169,6 +1175,7 @@
 			files = (
 				C2C231C520FD41AE002A2371 /* NewTagCoordinator.swift in Sources */,
 				22CC1865210511CC00486B27 /* Colors.swift in Sources */,
+				C2C79D2D2123E7D70058F228 /* DateInputViewModel+Extension.swift in Sources */,
 				C2901057211E0FB6008F2807 /* TagCreationFrameViewModel.swift in Sources */,
 				222BFF9420ED92C7001B6BBF /* RemindersCommunicator.swift in Sources */,
 				C2A1114220B8AED400ABB161 /* TaskTableViewCell.swift in Sources */,
@@ -1200,6 +1207,7 @@
 				16FDC13C210F809A008FA931 /* NotificationManager.swift in Sources */,
 				C2DD9A3321114ADD00E9B89B /* MoreOptionsViewController.swift in Sources */,
 				228BAD442108C22400E74AA9 /* Fonts.swift in Sources */,
+				C2C79D2F2123E89A0058F228 /* Tag+Extension.swift in Sources */,
 				22325A7920FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift in Sources */,
 				225852822100C5BE0011F4B0 /* TagsCollectionView.swift in Sources */,
 				221BA8BA20F6A26100BE2AC1 /* TagCollectionViewModel.swift in Sources */,
