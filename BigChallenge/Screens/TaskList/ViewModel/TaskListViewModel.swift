@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Crashlytics
 import UIKit
 import RxCocoa
 import RxSwift
@@ -21,6 +22,7 @@ public class TaskListViewModel {
     var showsCompletedTasks: Bool = false {
         didSet {
             print((showsCompletedTasks ? "showing" : "not showing") + " completed tasks")
+            if showsCompletedTasks { Answers.logCustomEvent(withName: "showed completed tasks") }
             tasksObservable.onNext((mainTasks, tasksToShow))
         }
     }
