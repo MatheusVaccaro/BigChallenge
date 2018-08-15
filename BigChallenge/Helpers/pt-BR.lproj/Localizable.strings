@@ -1,23 +1,9 @@
 
-/* 
-  Localizable.strings
-  BigChallenge
-
-  Created by Bruno Fulber Wide on 12/06/18.
-  Copyright © 2018 Matheus Vaccaro. All rights reserved.
-*/
-
-    /* MARK: Task */
-
-"newTaskTitlePlaceholder" = "Nova Tarefa";
-
 /* header title for 'recommended' section */
 "recommendedHeaderTitle" = "Recomendado:";
 
 /* header title for 'also tagged:' section */
 "section2HeaderTitle" = "Também marcado com:";
-
-    /* MARK: Tag */
 
 /* screen title when on \"all tags\" screen */
 "collectionScreenTitle" = "Tags";
@@ -36,8 +22,6 @@
 
 /* text for tag cancel in action sheet */
 "cancelActionTitle" = "Cancelar";
-
-    /* MARK: Location */
 
 /* accessibility value on map for voiceOver users */
 "%@ meters from %@" = "%@ metros de %@";
@@ -60,12 +44,8 @@
 /* placeholder for empty state location search bar */
 "searchBarPlaceholder" = "Pesquisar";
 
-    /* MARK: Notification */
-
 /* placeholder title for notification */
 "notificationTitle" = "Sua task está esperando";
-
-    /* MARK: Date Input */
 
 /* text for tomorrow shortcut button */
 "tomorrowShortcutDateInput" = "Amanhã";
@@ -90,3 +70,12 @@
 
 /* text for next morning shortcut button */
 "nextMorningShortcutDateInput" = "Amanhã de manhã";
+
+/* default place when reading location name in voiceOver */
+"defaultPlaceName" = "Sua licalização";
+
+/* placeholder title for a new task description */
+"newTaskDescriptionPlaceholder" = "Notas";
+
+/* placeholder title for a new task */
+"newTaskTitle" = "Sua tarefa";
