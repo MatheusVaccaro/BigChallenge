@@ -21,6 +21,8 @@ class TagCreationFrameViewModel: CreationFrameViewModelProtocol {
     fileprivate var tagColorIndex: Int?
     fileprivate var tagLocation: CLLocation?
     
+    var tag: Tag?
+    
     let doneButtonObservable: BehaviorSubject<Bool>
     
     weak var delegate: CreationFrameViewModelDelegate?
@@ -37,7 +39,11 @@ class TagCreationFrameViewModel: CreationFrameViewModelProtocol {
     }
     
     func didTapSaveButton() {
-        createTagIfPossible()
+        if let tag = tag {
+            updateTag()
+        } else {
+            createTagIfPossible()
+        }
         delegate?.didTapSaveButton()
     }
     
@@ -55,6 +61,22 @@ class TagCreationFrameViewModel: CreationFrameViewModelProtocol {
         
         let tag = tagModel.createTag(with: attributes)
         tagModel.save(tag)
+    }
+    
+    private func updateTag() {
+        guard let tag = tag else { return }
+        guard let tagTitle = tagTitle else { return }
+        
+        var attributes: [TagModel.Attributes : Any] = [
+            .title : tagTitle as Any
+        ]
+        
+        if let colorIndex = tagColorIndex {
+            let int64ColorIndex = Int64(colorIndex)
+            attributes[.colorIndex] = int64ColorIndex
+        }
+        
+        tagModel.update(tag, with: attributes)
     }
     
     private var shouldEnableDoneButton: Bool {

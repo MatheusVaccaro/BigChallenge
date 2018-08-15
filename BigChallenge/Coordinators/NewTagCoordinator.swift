@@ -46,6 +46,12 @@ class NewTagCoordinator: Coordinator {
 
         tagCreationFrameViewController.configurePageViewController(with: [createTagViewController])
         
+        // Edit Mode
+        if let tag = tag {
+            tagCreationFrameViewModel.tag = tag
+            tagCreationFrameViewModel.doneButtonObservable.onNext(true)
+        }
+        
         // Modal Presenter
         let modalPresenter = UINavigationController(rootViewController: tagCreationFrameViewController)
         modalPresenter.isNavigationBarHidden = true
