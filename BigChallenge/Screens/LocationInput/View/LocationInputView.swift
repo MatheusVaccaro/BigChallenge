@@ -187,6 +187,7 @@ extension LocationInputView: UITableViewDelegate {
 extension LocationInputView: RadiusMapViewDelegate {
     func radiusMapView(_ radiusMapView: RadiusMapView, didFind region: CLCircularRegion) {
         outputlocation = region
+        accessibilityMapView.accessibilityValue = viewModel.accessibilityValue(for: Int(outputlocation!.radius))
     }
 }
 
@@ -196,8 +197,6 @@ extension LocationInputView: CLLocationManagerDelegate {
             
             let span = MKCoordinateSpanMake(0.05, 0.05)
             let region = MKCoordinateRegion(center: location.coordinate, span: span)
-            
-            accessibilityMapView.accessibilityValue = viewModel.accessibilityValue(for: Int(outputlocation!.radius))
             
             mapView.setRegion(region, animated: true)
         }

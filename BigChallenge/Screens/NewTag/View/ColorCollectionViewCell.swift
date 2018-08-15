@@ -14,6 +14,12 @@ class ColorCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "colorCell"
     
+    override var isSelected: Bool {
+        didSet {
+            isSelected ? select() : deselect()
+        }
+    }
+    
     lazy var gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
         

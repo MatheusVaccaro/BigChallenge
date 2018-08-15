@@ -13,6 +13,7 @@ class CreateTagViewController: UIViewController, CreationFramePresentable {
     // MARK: - Properties
     
     var viewModel: NewTagViewModel!
+    private var isConfigured: Bool = false
     
     // MARK: - IBOutlets
     
@@ -25,6 +26,7 @@ class CreateTagViewController: UIViewController, CreationFramePresentable {
         super.viewDidLoad()
         configureTagTitleTextView()
         configureColorsCollectionView()
+        configureWithViewModel()
     }
     
     // MARK: - IBAction
@@ -48,6 +50,19 @@ class CreateTagViewController: UIViewController, CreationFramePresentable {
         colorsCollectionView.delegate = self
     }
 
+    private func configureWithViewModel() {
+        if let title = viewModel.tagTitle {
+            tagTitleTextView.text = title
+        }
+        
+        if let colorIndex = viewModel.colorIndex {
+            let indexPath = IndexPath(row: colorIndex, section: 0)
+            colorsCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .left)
+        }
+        
+        isConfigured = true
+    }
+    
 }
 
 // MARK: - UITextViewDelegate
@@ -63,6 +78,7 @@ extension CreateTagViewController: UITextViewDelegate {
     }
     
     func textViewDidChangeSelection(_ textView: UITextView) {
+        guard isConfigured else { return }
         if textView === tagTitleTextView {
             viewModel?.tagTitle = textView.text
         }
@@ -102,20 +118,5 @@ extension CreateTagViewController: UICollectionViewDataSource {
 }
 
 extension CreateTagViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("selected item at \(indexPath)")
-        guard let selectedCell = collectionView.cellForItem(at: indexPath) as? ColorCollectionViewCell else { return }
-        let row = indexPath.row
-        viewModel.colorIndex = row
-        selectedCell.select()
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        print("desected item at \(indexPath)")
-        guard let selectedCell = collectionView.cellForItem(at: indexPath) as? ColorCollectionViewCell else { return }
-        viewModel.colorIndex = nil
-        selectedCell.deselect()
-    }
     
 }

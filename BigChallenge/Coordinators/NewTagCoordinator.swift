@@ -15,40 +15,68 @@ class NewTagCoordinator: Coordinator {
     var childrenCoordinators: [Coordinator]
     
     fileprivate var createTagViewController: CreateTagViewController?
+    fileprivate var moreOptionsViewController: MoreOptionsViewController?
     fileprivate var tagCreationFrameViewController: CreationFrameViewController?
     fileprivate let model: TagModel
     fileprivate var tag: Tag?
-    fileprivate let isEditing: Bool
     fileprivate var modalPresenter: UINavigationController?
     
     weak var delegate: CoordinatorDelegate?
     
-    init(tag: Tag? = nil, isEditing: Bool, presenter: UINavigationController, model: TagModel) {
+    init(tag: Tag? = nil, presenter: UINavigationController, model: TagModel) {
         self.model = model
         self.presenter = presenter
         self.childrenCoordinators = []
-        self.isEditing = isEditing
         self.tag = tag
     }
     
     func start() {
         // New Tag
         let createTagViewController = CreateTagViewController.instantiate()
-        self.createTagViewController = createTagViewController
-        
         let newTagViewModel = NewTagViewModel(tag: tag,
-                                              isEditing: isEditing,
                                               model: model)
         createTagViewController.viewModel = newTagViewModel
+        self.createTagViewController = createTagViewController
+        
+        // More Options
+        let moreOptionsViewController = MoreOptionsViewController.instantiate()
+        
+        let locationInputViewController = LocationInputView.instantiate()
+        let locationInputViewModel = locationInputViewController.viewModel
+        // edit tag
+        if let tag = self.tag, let location = TagModel.region(of: tag) {
+            locationInputViewController.outputlocation = location
+            locationInputViewController.arriving = tag.arriving
+        }
+        
+        let dateInputViewModel = DateInputViewModel(with: tag)
+        let dateInputViewController = DateInputViewController.instantiate()
+        dateInputViewController.viewModel = dateInputViewModel
+        
+        let moreOptionsViewModel = MoreOptionsViewModel(locationInputViewModel: locationInputViewModel,
+                                                        dateInputViewModel: dateInputViewModel)
+        
+        moreOptionsViewController.viewModel = moreOptionsViewModel
+        self.moreOptionsViewController = moreOptionsViewController
+        moreOptionsViewController.locationCellContent = locationInputViewController
+        moreOptionsViewController.timeCellContent = dateInputViewController
         
         // Tag Frame
         let tagCreationFrameViewController = CreationFrameViewController.instantiate()
-        let tagCreationFrameViewModel = TagCreationFrameViewModel(mainInfoViewModel: newTagViewModel, tagModel: model)
+        let tagCreationFrameViewModel = TagCreationFrameViewModel(mainInfoViewModel: newTagViewModel,
+                                                                  detailViewModel: moreOptionsViewModel,
+                                                                  tagModel: model)
         tagCreationFrameViewModel.delegate = self
         tagCreationFrameViewController.viewModel = tagCreationFrameViewModel
         self.tagCreationFrameViewController = tagCreationFrameViewController
 
-        tagCreationFrameViewController.configurePageViewController(with: [createTagViewController])
+        tagCreationFrameViewController.configurePageViewController(with: [createTagViewController, moreOptionsViewController])
+        
+        // Edit Mode
+        if let tag = tag {
+            tagCreationFrameViewModel.tag = tag
+            tagCreationFrameViewModel.doneButtonObservable.onNext(true)
+        }
         
         // Modal Presenter
         let modalPresenter = UINavigationController(rootViewController: tagCreationFrameViewController)

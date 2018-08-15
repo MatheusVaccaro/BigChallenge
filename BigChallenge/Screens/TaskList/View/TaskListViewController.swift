@@ -219,7 +219,7 @@ public class TaskListViewController: UIViewController {
 extension TaskListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let task =
-            indexPath.section == 0
+            indexPath.section == 0 && tableView.numberOfSections == 2
                 ? viewModel.mainTasks[indexPath.row]
                 : viewModel.tasksToShow[indexPath.row]
         viewModel.shouldEditTask.onNext(task)
