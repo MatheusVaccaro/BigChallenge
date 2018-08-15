@@ -199,9 +199,9 @@ public class TaskListViewController: UIViewController {
     }
     
     fileprivate func shouldShowCompletedTasks(_ tableView: UITableView) -> Bool {
-        return tableView.contentSize.height < tableView.bounds.height + 80
+        return tableView.contentSize.height < tableView.bounds.height
             ? tableView.contentOffset.y > 80
-            : tableView.contentOffset.y + tableView.bounds.height + 80 > tableView.contentSize.height
+            : tableView.contentOffset.y + tableView.bounds.height > tableView.contentSize.height + 80
     }
     
     fileprivate func shouldTriggerMediumImpact(_ tableView: UITableView) -> Bool {
@@ -211,7 +211,7 @@ public class TaskListViewController: UIViewController {
         } else {
             return tableView.contentSize.height < tableView.bounds.height + 50
                 ? tableView.contentOffset.y > 50
-                : tableView.contentOffset.y + tableView.bounds.height + 50 > tableView.contentSize.height
+                : tableView.contentOffset.y + tableView.bounds.height > tableView.contentSize.height + 50
         }
     }
 }
