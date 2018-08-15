@@ -143,7 +143,9 @@ class HomeScreenViewController: UIViewController {
                 if let activity = self.userActivity { self.updateUserActivityState(activity) }
                 self.taskListViewController.viewModel.filterTasks(with: selectedTags)
                 
-                Answers.logCustomEvent(withName: "filtered with tag", customAttributes: ["numberOfFilteredTags" : selectedTags.count])
+                if !selectedTags.isEmpty {                
+                    Answers.logCustomEvent(withName: "filtered with tag", customAttributes: ["numberOfFilteredTags" : selectedTags.count])
+                }
                 
             }.disposed(by: disposeBag)
     }

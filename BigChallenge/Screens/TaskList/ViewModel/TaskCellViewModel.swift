@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Crashlytics
 import RxCocoa
 import RxSwift
 
@@ -60,5 +61,8 @@ class TaskCellViewModel {
                                                         .completionDate: Date()]
         taskModel.update(task, with: attributes)
         taskModel.save(task)
+        let metricAttributes =
+            ["time to complete" : task.creationDate!.timeIntervalSinceNow]
+        if bool { Answers.logCustomEvent(withName: "completed task", customAttributes: metricAttributes) }
     }
 }
