@@ -25,7 +25,11 @@ class DateInputViewModel: DateInputViewModelProtocol {
     private(set) var thisEveningShortcutText: BehaviorSubject<String>
     private(set) var nextMorningShortcutText: BehaviorSubject<String>
     
-    init(date: DateComponents? = nil, timeOfDay: DateComponents? = nil, frequency: NotificationOptions.Frequency? = nil, delegate: DateInputViewModelDelegate? = nil) {
+    init(date: DateComponents? = nil,
+         timeOfDay: DateComponents? = nil,
+         frequency: NotificationOptions.Frequency? = nil,
+         delegate: DateInputViewModelDelegate? = nil) {
+        
         self.delegate = delegate
         
         self.date = Variable(date)
