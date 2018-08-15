@@ -14,6 +14,13 @@ import Foundation
 
 struct Strings {
     
+    struct HomeScreen {
+        static let emptyStateTitle =
+            NSLocalizedString("emptyStateTitle", comment: "title of empty state on taskList")
+        static let emptyStateSubtitle =
+            NSLocalizedString("emptyStateSubtitle", comment: "subtitle of empty state on taskList")
+    }
+    
     struct Task {
         
         struct CreationScreen {

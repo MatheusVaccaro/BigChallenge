@@ -136,14 +136,12 @@ extension MoreOptionsViewController: UITableViewDataSource {
         if section == 0 {
             let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggleLocationCell))
             headerViewController.view.addGestureRecognizer(gestureRecognizer)
-//            headerViewController.viewModel = viewModel.locationViewModel()
             headerViewController.configure(with: viewModel.locationViewModel())
             return headerViewController.view
         }
         if section == 1 {
             let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggleTimeCell))
             headerViewController.view.addGestureRecognizer(gestureRecognizer)
-//            headerViewController.viewModel = viewModel.timeViewModel()
             headerViewController.configure(with: viewModel.timeViewModel())
             return headerViewController.view
         }

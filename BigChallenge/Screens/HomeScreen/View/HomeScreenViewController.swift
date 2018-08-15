@@ -19,7 +19,10 @@ class HomeScreenViewController: UIViewController {
     @IBOutlet weak var tagContainerView: UIView!
     @IBOutlet weak var taskListContainerView: UIView!
     @IBOutlet weak var bigTitle: UILabel!
-
+    @IBOutlet weak var emptyStateImage: UIImageView!
+    @IBOutlet weak var emptyStateTitleLabel: UILabel!
+    @IBOutlet weak var emptyStateSubtitleLabel: UILabel!
+    
     fileprivate var taskListViewController: TaskListViewController!
     fileprivate var tagCollectionViewController: TagCollectionViewController!
 
@@ -79,9 +82,10 @@ class HomeScreenViewController: UIViewController {
         bigTitle.font = UIFont.font(sized: 41, weight: .medium, with: .largeTitle)
         bigTitle.adjustsFontForContentSizeCategory = true
         
-        view.layer.addSublayer(gradientLayer) // background gradient layer
+        view.layer.addSublayer(gradientLayer)
         view.addSubview(gradientView)
         
+        configureEmptyState()
         observeSelectedTags()
         observeClickedAddTag()
         userActivity = viewModel.userActivity
@@ -126,6 +130,11 @@ class HomeScreenViewController: UIViewController {
                     .will(edit: task)
             }
         }.disposed(by: disposeBag)
+        
+        taskListViewModel.tasksObservable.subscribe { event in
+            guard let tasks = event.element else { return }
+            self.showEmptyState(tasks.0.isEmpty && tasks.1.isEmpty)
+        }.disposed(by: disposeBag)
     }
     
     fileprivate func observeClickedAddTag() {
@@ -144,15 +153,33 @@ class HomeScreenViewController: UIViewController {
                 self.taskListViewController.viewModel.filterTasks(with: selectedTags)
                 
                 if !selectedTags.isEmpty {                
-                    Answers.logCustomEvent(withName: "filtered with tag", customAttributes: ["numberOfFilteredTags" : selectedTags.count])
+                    Answers.logCustomEvent(withName: "filtered with tag",
+                                           customAttributes: ["numberOfFilteredTags" : selectedTags.count])
                 }
                 
             }.disposed(by: disposeBag)
     }
     
-    func configureBigTitle() {
+    fileprivate func showEmptyState(_ bool: Bool) {
+        [emptyStateSubtitleLabel, emptyStateTitleLabel, emptyStateImage]
+            .forEach { $0!.isHidden = !bool }
+//        taskListContainerView.isHidden = bool
+    }
+    
+    fileprivate func configureEmptyState() {
+        emptyStateTitleLabel.font = UIFont.font(sized: 18, weight: .bold, with: .title2)
+        emptyStateSubtitleLabel.font = UIFont.font(sized: 14, weight: .light, with: .title3)
+        
+        emptyStateTitleLabel.text = viewModel.emptyStateTitleText
+        emptyStateSubtitleLabel.text = viewModel.emptyStateSubtitleText
+    }
+    
+    fileprivate func configureBigTitle() {
         bigTitle.text = viewModel.bigTitleText
         maskLabel.text = viewModel.bigTitleText
+        
+        bigTitle.font = UIFont.font(sized: 41, weight: .bold, with: .title1, fontName: .barlow)
+        maskLabel.font = UIFont.font(sized: 41, weight: .bold, with: .title1, fontName: .barlow)
         
         titleGradient.colors = bigTitleColors
     }
