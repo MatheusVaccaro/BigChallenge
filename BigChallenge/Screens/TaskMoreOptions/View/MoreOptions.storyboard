@@ -60,11 +60,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRs-wY-utf">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRs-wY-utf">
                                 <rect key="frame" x="16" y="0.0" width="68" height="68"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="68" id="aaY-Hu-MQu"/>
-                                    <constraint firstAttribute="width" constant="68" id="vPu-VK-2Uf"/>
+                                    <constraint firstAttribute="width" secondItem="eRs-wY-utf" secondAttribute="height" multiplier="1:1" id="cqA-zM-gIA"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="90" id="vPu-VK-2Uf"/>
                                 </constraints>
                                 <state key="normal" image="locationButton"/>
                                 <state key="selected" title="Y"/>
@@ -82,12 +82,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="8D6-W8-RlL" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qER-89-Rdn" secondAttribute="trailing" constant="10" id="AGO-gr-JLv"/>
                             <constraint firstItem="30e-PN-y7P" firstAttribute="top" secondItem="qER-89-Rdn" secondAttribute="bottom" id="RSf-dO-SOD"/>
                             <constraint firstItem="qER-89-Rdn" firstAttribute="leading" secondItem="eRs-wY-utf" secondAttribute="trailing" constant="8" id="Waq-vZ-6TR"/>
                             <constraint firstItem="eRs-wY-utf" firstAttribute="leading" secondItem="8D6-W8-RlL" secondAttribute="leading" constant="16" id="YZa-TQ-f1W"/>
                             <constraint firstItem="qER-89-Rdn" firstAttribute="top" secondItem="8D6-W8-RlL" secondAttribute="top" constant="6" id="cBD-Y4-052"/>
+                            <constraint firstItem="8D6-W8-RlL" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="30e-PN-y7P" secondAttribute="trailing" constant="230" id="dep-6n-Pj7"/>
+                            <constraint firstItem="8D6-W8-RlL" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="qER-89-Rdn" secondAttribute="trailing" constant="235" id="hH3-V1-a0Q"/>
+                            <constraint firstItem="8D6-W8-RlL" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="30e-PN-y7P" secondAttribute="trailing" constant="10" id="tHV-fE-RQ7"/>
                             <constraint firstItem="30e-PN-y7P" firstAttribute="leading" secondItem="eRs-wY-utf" secondAttribute="trailing" constant="8" id="unu-yr-3vO"/>
                             <constraint firstItem="eRs-wY-utf" firstAttribute="top" secondItem="8D6-W8-RlL" secondAttribute="top" id="zVT-Lf-tod"/>
                         </constraints>

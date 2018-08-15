@@ -20,7 +20,10 @@ class HeaderViewController: UIViewController {
     
     func configure(with viewModel: MoreOptionsTableViewCellViewModelProtocol) {
         taskTitle.text = viewModel.title()
+        taskTitle.font = UIFont.font(sized: 25, weight: .medium, with: .title1)
+        
         subtitle.text = viewModel.subtitle()
+        subtitle.font = UIFont.font(sized: 14, weight: .regular, with: .title3)
         let image = UIImage(named: viewModel.imageName())
         button.setImage(image, for: .normal)
     }

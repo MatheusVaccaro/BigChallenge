@@ -72,10 +72,22 @@
 "nextMorningShortcutDateInput" = "Amanhã de manhã";
 
 /* default place when reading location name in voiceOver */
-"defaultPlaceName" = "Sua licalização";
+"defaultPlaceName" = "Sua localização";
 
 /* placeholder title for a new task description */
 "newTaskDescriptionPlaceholder" = "Notas";
 
 /* placeholder title for a new task */
 "newTaskTitle" = "Sua tarefa";
+
+/* title for location header */
+"locationHeaderTitle" = "Localização";
+
+/* subtitle for location header */
+"locationHeaderSubtitle" = "Lembre-se em um lugar específico";
+
+/* title for time header */
+"timeHeaderTitle" = "Data";
+
+/* subtitle for time header */
+"timeHeaderSubtitle" = "Selecione uma data para sua task";

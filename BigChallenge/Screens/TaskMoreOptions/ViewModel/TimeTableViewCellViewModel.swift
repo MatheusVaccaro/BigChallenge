@@ -11,11 +11,11 @@ import Foundation
 class TimeTableViewCellViewModel: MoreOptionsTableViewCellViewModelProtocol {
     
     func title() -> String {
-        return "Time"
+        return Strings.MoreOptionsScreen.TimeCell.title
     }
     
     func subtitle() -> String {
-        return "Set a date for your task"
+        return Strings.MoreOptionsScreen.TimeCell.subtitle
     }
     
     func imageName() -> String {

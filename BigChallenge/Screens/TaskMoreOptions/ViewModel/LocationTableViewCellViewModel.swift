@@ -11,11 +11,11 @@ import Foundation
 class LocationTableViewCellViewModel: MoreOptionsTableViewCellViewModelProtocol {
     
     func title() -> String {
-        return "Location"
+        return Strings.MoreOptionsScreen.LocationCell.title
     }
     
     func subtitle() -> String {
-        return "Remember at a specific location"
+        return Strings.MoreOptionsScreen.LocationCell.subtitle
     }
     
     func imageName() -> String {

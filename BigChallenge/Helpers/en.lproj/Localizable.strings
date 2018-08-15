@@ -79,3 +79,15 @@
 
 /* placeholder title for a new task */
 "newTaskTitle" = "Your Task";
+
+/* title for location header */
+"locationHeaderTitle" = "Location";
+
+/* subtitle for location header */
+"locationHeaderSubtitle" = "Remember at a specific location";
+
+/* title for time header */
+"timeHeaderTitle" = "Time";
+
+/* subtitle for time header */
+"timeHeaderSubtitle" = "Set a date for your task";
