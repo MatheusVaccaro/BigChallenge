@@ -82,14 +82,14 @@ class DateInputViewController: UIViewController {
         addChildViewController(calendarViewController)
         
         calendarContainerView.addSubview(calendarViewController.view)
+        
         let calendarView = calendarViewController.view!
-        let widthConstraint = NSLayoutConstraint(item: calendarView, attribute: .width, relatedBy: .equal,
-                                    toItem: selectorView, attribute: .width,
-                                    multiplier: 1, constant: 0)
-        let heightConstraint = NSLayoutConstraint(item: calendarView, attribute: .height, relatedBy: .equal,
-                                    toItem: selectorView, attribute: .height,
-                                    multiplier: 1, constant: 0)
-        NSLayoutConstraint.activate([widthConstraint, heightConstraint])
+		let constraints = [
+            calendarView.rightAnchor.constraint(equalTo: calendarContainerView.rightAnchor),
+        	calendarView.topAnchor.constraint(equalTo: calendarContainerView.topAnchor),
+        	calendarView.leftAnchor.constraint(equalTo: calendarContainerView.leftAnchor),
+        	calendarView.bottomAnchor.constraint(equalTo: calendarContainerView.bottomAnchor)]
+        NSLayoutConstraint.activate(constraints)
         
         viewModel?.date.asObservable()
             .map { dateComponent in
