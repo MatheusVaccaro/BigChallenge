@@ -92,12 +92,12 @@ class NewTaskCoordinator: Coordinator {
                                                                 detailViewModel: moreOptionsViewModel,
                                                                 taskModel: taskModel)
         creationFrameViewModel.delegate = self
-        creationFrameViewModel.task = task
         creationFrameViewController.viewModel = creationFrameViewModel
         self.taskFrameViewController = creationFrameViewController
         
         //edit
         if let task = task {
+            creationFrameViewModel.task = task
             creationFrameViewModel.doneButtonObservable.onNext(true)
         }
         
