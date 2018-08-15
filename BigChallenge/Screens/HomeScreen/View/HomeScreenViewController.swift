@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 import RxCocoa
 import RxSwift
 
@@ -136,10 +137,16 @@ class HomeScreenViewController: UIViewController {
     fileprivate func observeSelectedTags() {
         tagCollectionViewController.viewModel.selectedTagsObservable
             .subscribe { event in
-                self.viewModel.updateSelectedTagsIfNeeded(event.element)
+                guard let selectedTags = event.element else { return }
+                self.viewModel.updateSelectedTagsIfNeeded(selectedTags)
                 self.configureBigTitle()
                 if let activity = self.userActivity { self.updateUserActivityState(activity) }
-                self.taskListViewController.viewModel.filterTasks(with: event.element!)
+                self.taskListViewController.viewModel.filterTasks(with: selectedTags)
+                
+                if !selectedTags.isEmpty {                
+                    Answers.logCustomEvent(withName: "filtered with tag", customAttributes: ["numberOfFilteredTags" : selectedTags.count])
+                }
+                
             }.disposed(by: disposeBag)
     }
     
@@ -160,12 +167,15 @@ class HomeScreenViewController: UIViewController {
         if let tag = viewModel.selectedTags.first {
             UISelectionFeedbackGenerator().selectionChanged()
             viewModel.unSelectBigTitle(tag: tag)
+            
+            Answers.logCustomEvent(withName: "unselected tag on screen title")
         }
     }
     
     @IBAction func didLongpressBigTitle(_ sender: Any) {
         if let tag = viewModel.selectedTags.first {
             tagCollectionViewController.presentActionSheet(for: tag)
+            Answers.logCustomEvent(withName: "longpressed tag")
         }
     }
     

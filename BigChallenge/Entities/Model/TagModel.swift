@@ -9,6 +9,7 @@
 import Foundation
 import RxCocoa
 import RxSwift
+import Crashlytics
 
 public class TagModel {
     
@@ -40,6 +41,10 @@ public class TagModel {
         persistance.tagsDelegate = self
         persistence.fetch(Tag.self) {
             tags = $0
+            Answers.logCustomEvent(withName: "fetched tags", customAttributes: [
+                "numberOfTags" : tags.count,
+                "numberOfTasksPerTag" : tags.map { (($0.tasks!.allObjects as! [Task]).filter { !$0.isCompleted }).count }
+                ])
         }
         didUpdateTags.onNext(tags)
     }

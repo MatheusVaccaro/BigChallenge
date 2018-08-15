@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import Fabric
+import Crashlytics
 
 class ApplicationCoordinator: Coordinator {
     
@@ -42,6 +44,11 @@ class ApplicationCoordinator: Coordinator {
         showTaskList()
         remindersImporter.attemptToImport()
         UITextField.appearance().keyboardAppearance = .light
+        startFabric()
+    }
+    
+    private func startFabric() {
+        Fabric.with([Crashlytics.self])
     }
     
     private func showTaskList() {

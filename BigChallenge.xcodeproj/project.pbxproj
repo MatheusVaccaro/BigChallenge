@@ -873,6 +873,7 @@
 				C28DC91420B61CB6007F881A /* Resources */,
 				7B8A3E05277891C7E4FEF6D7 /* [CP] Embed Pods Frameworks */,
 				1628B48820C88A9E0038D65E /* Swift Lint Pod */,
+				226C31B62123BAC100BC5898 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -983,6 +984,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		226C31B62123BAC100BC5898 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 9d0ff1cd027783f4796366946fbc8b3ba7e8d98f f8a001a87ba3f3df88b1c5e0bf98c12873e37cd4eeda5744b8d47dd7bbc4f3dd\n";
 		};
 		7B8A3E05277891C7E4FEF6D7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

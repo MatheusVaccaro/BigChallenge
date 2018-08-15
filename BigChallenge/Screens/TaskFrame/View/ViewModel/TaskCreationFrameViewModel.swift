@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Crashlytics
 import CoreLocation
 import RxSwift
 
@@ -66,10 +67,20 @@ class TaskCreationFrameViewModel: CreationFrameViewModelProtocol {
         var attributes: [TaskModel.Attributes : Any] = [:]
             
         if let taskTitle = taskTitle { attributes[.title] = taskTitle }
-        if let taskTags = taskTags { attributes[.tags] = taskTags }
-        if let taskNotes = taskNotes { attributes[.notes] = taskNotes }
+        if let taskTags = taskTags {
+            attributes[.tags] = taskTags
+            taskAnswersAttributes["tags"] = taskTags.count
+        }
+        if let taskNotes = taskNotes {
+            attributes[.notes] = taskNotes
+            taskAnswersAttributes["notes"] = true
+        }
         if let taskArriving = taskArriving { attributes[.arriving] = taskArriving }
-        if let region = taskRegion { attributes[.region] = region }
+        if let region = taskRegion {
+            attributes[.region] = region
+            Answers.logCustomEvent(withName: "added region on task")
+            taskAnswersAttributes["region"] = true
+        }
         
         if let taskDueDate = self.taskDueDate {
             
@@ -84,21 +95,32 @@ class TaskCreationFrameViewModel: CreationFrameViewModelProtocol {
             
             let date = Calendar.current.combine(date: taskDueDate, andTimeOfDay: taskDueTimeOfDay)!
             attributes[.dueDate] = date
+            
+            taskAnswersAttributes["date"] = true
+            taskAnswersAttributes["dateDistanceFromNow"] = date.timeIntervalSinceNow
         }
         
         return attributes
     }
     
+    var taskAnswersAttributes: [String : Any] = [
+        "date" : false,
+        "region" : false,
+        "notes" : false,
+        "tags" : false
+    ]
+    
     private func updateTask() {
-        print(taskAttributes.keys)
         guard canCreateTask else { return }
         taskModel.update(task!, with: taskAttributes)
+        Answers.logCustomEvent(withName: "updated task", customAttributes: taskAnswersAttributes)
     }
     
     private func createTaskIfPossible() {
         guard canCreateTask else { return }
         let task = taskModel.createTask(with: taskAttributes)
         taskModel.save(task)
+        Answers.logCustomEvent(withName: "created task", customAttributes: taskAnswersAttributes)
     }
     
     private var shouldEnableDoneButton: Bool {
