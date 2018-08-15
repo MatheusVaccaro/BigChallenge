@@ -12,6 +12,16 @@ import RxCocoa
 import RxSwift
 import Crashlytics
 
+protocol TagModelDelegate: class {
+    func tagModel(_ tagModel: TagModel, didCreate tag: Tag)
+    func tagModel(_ tagModel: TagModel, didUpdate tag: Tag, with attributes: [TagModel.Attributes: Any])
+}
+
+extension TagModelDelegate {
+    func tagModel(_ tagModel: TagModel, didCreate tag: Tag) { }
+    func tagModel(_ tagModel: TagModel, didUpdate tag: Tag, with attributes: [TagModel.Attributes: Any]) { }
+}
+
 public class TagModel {
     
     static func region(of tag: Tag) -> CLCircularRegion? {
@@ -20,6 +30,8 @@ public class TagModel {
     }
     
     // MARK: - Properties
+    
+    weak var delegate: TagModelDelegate?
     
     static let tagColors = [ UIColor.Tags.purpleGradient,
                              UIColor.Tags.redGradient,
@@ -127,6 +139,19 @@ public class TagModel {
         if let tasks = attributes[.tasks] as? [Task] {
             tag.tasks = NSSet(array: tasks)
         }
+        if let colorIndex = attributes[.colorIndex] as? Int64 {
+            tag.colorIndex = colorIndex
+        }
+        if let arriving = attributes[.arriving] as? Bool {
+            tag.arriving = arriving
+        }
+        if let region = attributes[.region] as? CLCircularRegion {
+            let regionData = NSKeyedArchiver.archivedData(withRootObject: region)
+            tag.regionData = regionData
+        }
+        
+        persistance.save()
+        delegate?.tagModel(self, didUpdate: tag, with: attributes)
     }
     
     // The attributes of the Tag class, mapped according to CoreData
