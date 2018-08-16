@@ -11,6 +11,7 @@ import Foundation
 protocol NewTaskViewModelDelegate: class {
     func didTapDeleteTaskButton()
     func didTapMoreOptionsButton()
+    func willAddTag()
 }
 
 protocol NewTaskViewModelOutputDelegate: class {
@@ -84,6 +85,10 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
             "taskNotes" : taskNotesText ?? "",
             "selectedTags" : selectedTagIDs
         ] //location / date ??????????
+    }
+    
+    func willAddTag() {
+        delegate?.willAddTag()
     }
     
     lazy var userActivity: NSUserActivity = {

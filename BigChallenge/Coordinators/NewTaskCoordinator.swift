@@ -112,6 +112,16 @@ class NewTaskCoordinator: Coordinator {
         presenter.present(modalPresenter, animated: true, completion: nil)
     }
     
+    fileprivate func showNewTag() {
+        guard let modalPresenter = modalPresenter else { return }
+        let newTagCoordinator = NewTagCoordinator(tag: nil,
+                                                  presenter: modalPresenter,
+                                                  model: tagModel)
+        newTagCoordinator.delegate = self
+        addChild(coordinator: newTagCoordinator)
+        newTagCoordinator.start()
+    }
+    
     fileprivate func showMoreOptions() {
         // init moreOptions coordinator
         // moreOptionsCoordinator presenter SHOULD be modalPresenter in this case
@@ -128,6 +138,10 @@ class NewTaskCoordinator: Coordinator {
 
 extension NewTaskCoordinator: CreationFrameViewModelDelegate {
     
+    func willAddTag() {
+        showNewTag()
+    }
+    
     func didTapCancelButton() {
         dismissViewController()
     }
@@ -140,5 +154,12 @@ extension NewTaskCoordinator: CreationFrameViewModelDelegate {
         presenter.dismiss(animated: true, completion: nil)
         delegate?.shouldDeinitCoordinator(self)
     }
-    
 }
+
+extension NewTaskCoordinator: CoordinatorDelegate {
+    func shouldDeinitCoordinator(_ coordinator: Coordinator) {
+        releaseChild(coordinator: coordinator)
+    }
+}
+
+

@@ -91,7 +91,11 @@ class NewTaskViewController: UIViewController, CreationFramePresentable {
         tagCollectionViewController.viewModel.selectedTagsObservable.subscribe { event in
             self.viewModel?.selectedTags = event.element!
             print("selected tags are: \(event.element!.map {$0.title})")
-            }.disposed(by: disposeBag)
+        }.disposed(by: disposeBag)
+        
+        tagCollectionViewController.addTagEvent?.subscribe { _ in
+            self.viewModel?.willAddTag()
+        }.disposed(by: disposeBag)
     }
     
     private func configureTaskTitleTextView() {

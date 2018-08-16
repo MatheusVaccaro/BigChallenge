@@ -16,6 +16,7 @@ protocol NewTaskViewModelProtocol {
     var userActivity: NSUserActivity { get }
     
     func didTapDeleteTaskButton()
+    func willAddTag()
     
     func taskTitle() -> String?
     func titleTextFieldPlaceholder() -> String

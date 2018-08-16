@@ -19,4 +19,9 @@ protocol CreationFrameViewModelProtocol {
 protocol CreationFrameViewModelDelegate: class {
     func didTapCancelButton()
     func didTapSaveButton()
+    func willAddTag()
+}
+
+extension CreationFrameViewModelDelegate {
+    func willAddTag() { }
 }
