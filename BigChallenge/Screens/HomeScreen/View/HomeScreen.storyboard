@@ -67,15 +67,34 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fea-br-2cN">
+                                <rect key="frame" x="8" y="566" width="359" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxw-1p-TGH">
+                                <rect key="frame" x="164.66666666666666" y="607" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="didClickImportFromRemindersButton:" destination="hA5-o5-LMg" eventType="touchUpInside" id="7rb-Ir-ZCN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Fea-br-2cN" firstAttribute="centerX" secondItem="C6D-bh-Zj8" secondAttribute="centerX" id="3NN-37-izL"/>
+                            <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vxw-1p-TGH" secondAttribute="trailing" constant="8" id="4il-lb-PHm"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="qLG-Z8-bgi" secondAttribute="trailing" constant="8" id="797-GV-JgE"/>
                             <constraint firstItem="hi9-8n-jJk" firstAttribute="top" secondItem="qLG-Z8-bgi" secondAttribute="bottom" constant="5" id="7iD-TA-CcH"/>
+                            <constraint firstItem="vxw-1p-TGH" firstAttribute="top" secondItem="Fea-br-2cN" secondAttribute="bottom" constant="20" id="8xb-IZ-PNv"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PrB-8h-Asu" secondAttribute="trailing" constant="8" id="AWC-11-Z5J"/>
                             <constraint firstItem="PrB-8h-Asu" firstAttribute="top" secondItem="QKa-yH-x6F" secondAttribute="top" priority="250" constant="17" id="BAW-7M-1CL"/>
                             <constraint firstItem="cie-Gz-Vzx" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="8" id="BXC-pC-xol"/>
+                            <constraint firstItem="Fea-br-2cN" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="8" id="D66-7M-aEc"/>
                             <constraint firstItem="qLG-Z8-bgi" firstAttribute="top" secondItem="Qdj-bK-Hkb" secondAttribute="bottom" constant="12" id="Fuh-wr-9H2"/>
+                            <constraint firstItem="Fea-br-2cN" firstAttribute="top" secondItem="hi9-8n-jJk" secondAttribute="bottom" constant="20" id="IP6-aA-8Pq"/>
+                            <constraint firstItem="vxw-1p-TGH" firstAttribute="centerX" secondItem="C6D-bh-Zj8" secondAttribute="centerX" id="ItX-iu-81n"/>
                             <constraint firstItem="cie-Gz-Vzx" firstAttribute="bottom" secondItem="QKa-yH-x6F" secondAttribute="bottom" id="Mlh-Oq-gNo"/>
                             <constraint firstItem="qLG-Z8-bgi" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="8" id="Pzm-ub-o7b"/>
                             <constraint firstItem="cie-Gz-Vzx" firstAttribute="top" secondItem="fUe-Ak-aYb" secondAttribute="bottom" constant="30" id="Qao-O4-dlm"/>
@@ -85,7 +104,9 @@
                             <constraint firstItem="fUe-Ak-aYb" firstAttribute="top" secondItem="PrB-8h-Asu" secondAttribute="bottom" constant="17" id="ct2-OT-yVw"/>
                             <constraint firstItem="Qdj-bK-Hkb" firstAttribute="centerX" secondItem="C6D-bh-Zj8" secondAttribute="centerX" id="jix-3k-g9R"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="fUe-Ak-aYb" secondAttribute="trailing" id="l9d-qe-b2V"/>
+                            <constraint firstItem="vxw-1p-TGH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="8" id="mAO-h2-klz"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="hi9-8n-jJk" secondAttribute="trailing" constant="8" id="o3p-t5-cbB"/>
+                            <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="Fea-br-2cN" secondAttribute="trailing" constant="8" id="sWv-bs-slk"/>
                             <constraint firstItem="Qdj-bK-Hkb" firstAttribute="centerY" secondItem="cie-Gz-Vzx" secondAttribute="centerY" multiplier="0.8" id="wP2-1Q-T4J"/>
                             <constraint firstItem="qLG-Z8-bgi" firstAttribute="centerX" secondItem="C6D-bh-Zj8" secondAttribute="centerX" id="yRu-Zp-dyC"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="cie-Gz-Vzx" secondAttribute="trailing" constant="8" id="yev-Sb-Zry"/>
@@ -96,8 +117,10 @@
                     <connections>
                         <outlet property="bigTitle" destination="PrB-8h-Asu" id="5tW-9y-1bj"/>
                         <outlet property="emptyStateImage" destination="Qdj-bK-Hkb" id="Lx1-rQ-beF"/>
+                        <outlet property="emptyStateOrLabel" destination="Fea-br-2cN" id="fgG-Tc-tuU"/>
                         <outlet property="emptyStateSubtitleLabel" destination="hi9-8n-jJk" id="C4P-wJ-g8q"/>
                         <outlet property="emptyStateTitleLabel" destination="qLG-Z8-bgi" id="jzK-Sb-ooc"/>
+                        <outlet property="importFromRemindersButton" destination="vxw-1p-TGH" id="0fE-Yn-UcO"/>
                         <outlet property="tagContainerView" destination="fUe-Ak-aYb" id="qwP-ET-avs"/>
                         <outlet property="taskListContainerView" destination="cie-Gz-Vzx" id="ktk-MH-6by"/>
                     </connections>

@@ -19,8 +19,14 @@ struct Strings {
             NSLocalizedString("emptyStateTitle", comment: "title of empty state on taskList")
         static let emptyStateSubtitle =
             NSLocalizedString("emptyStateSubtitle", comment: "subtitle of empty state on taskList")
+        static let emptyStateOr =
+            NSLocalizedString("emptyStateOr", comment: "'or'")
+        static let importFromReminders =
+            NSLocalizedString("importFromReminders", comment: "button that imports tasks from reminders")
         static let title =
             NSLocalizedString("title", comment: "title of homeScreen with no tag selected")
+        
+        
     }
     
     struct Task {
