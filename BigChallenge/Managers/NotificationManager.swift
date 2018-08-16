@@ -52,16 +52,32 @@ open class NotificationManager {
     }
     
     /** Add date and location notification for all tasks of a tag */
-    open class func addAllTagNotifications(from tag: Tag, repeats: Bool = false, arriving: Bool = false) {
+    open class func addAllTagNotifications(from tag: Tag, repeats: Bool = false) {
         guard let tasks = tag.tasks else { return }
         if let date = tag.dueDate {
-            for case let task as Task in tasks {
+            for case let task as Task in tasks where !task.isCompleted {
                 let identifier = "\(task.title!)-\(tag.title!)-date"
                 let title = task.title!
                 addDateNotification(identifier, title, repeats, date)
             }
         }
-        //TODO: Location
+        if let regionData = tag.regionData {
+            if let region = NSKeyedUnarchiver.unarchiveObject(with: regionData) as? CLCircularRegion {
+                for case let task as Task in tasks where !task.isCompleted {
+                    let identifier = "\(task.title!)-\(tag.title!)-date"
+                    let title = task.title!
+                    let arriving = tag.arriving
+                    addLocationNotification(identifier, title, arriving, region)
+                }
+            }
+        }
+    }
+    
+    /** Add date and location notification for all tasks of a tag */
+    open class func addAllTagsNotifications(from tags: [Tag], repeats: Bool = false) {
+        for tag in tags {
+            addAllTagNotifications(from: tag)
+        }
     }
     
     /** remove all date notifications from all associated tasks of a tag,
