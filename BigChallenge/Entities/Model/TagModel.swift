@@ -8,6 +8,8 @@
 
 import Foundation
 import CoreLocation
+import CoreSpotlight
+import MobileCoreServices
 import RxCocoa
 import RxSwift
 import Crashlytics
@@ -82,6 +84,7 @@ public class TagModel {
         guard tags.contains(object) else { print("could not delete \(object) "); return }
         NotificationManager.removeAllNotifications(from: object)
         persistance.delete(object) // delegate manages the array
+        deindex(tag: object)
     }
     
     public func createTag(with attributes: [Attributes : Any]) -> Tag {
@@ -113,6 +116,7 @@ public class TagModel {
                 tag.arriving = arriving
             }
             
+            index(tag: tag)
             return tag
         }
     }
@@ -150,6 +154,31 @@ public class TagModel {
         
         persistance.save()
         delegate?.tagModel(self, didUpdate: tag, with: attributes)
+    }
+    
+    private func index(tag: Tag) {
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
+        
+        attributeSet.title = tag.title!
+        
+        let item = CSSearchableItem(uniqueIdentifier: "tag-\(tag.id!)", domainIdentifier: "com.beanie", attributeSet: attributeSet)
+        CSSearchableIndex.default().indexSearchableItems([item]) { error in
+            if let error = error {
+                print("Indexing error: \(error.localizedDescription)")
+            } else {
+                print("Search item successfully indexed!")
+            }
+        }
+    }
+    
+    func deindex(tag: Tag) {
+        CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: ["\(tag.id!)"]) { error in
+            if let error = error {
+                print("Deindexing error: \(error.localizedDescription)")
+            } else {
+                print("Search item successfully removed!")
+            }
+        }
     }
     
     // The attributes of the Tag class, mapped according to CoreData

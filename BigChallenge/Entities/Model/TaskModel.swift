@@ -8,6 +8,8 @@
 
 import Foundation
 import CoreLocation
+import CoreSpotlight
+import MobileCoreServices
 import RxCocoa
 import RxSwift
 
@@ -48,6 +50,7 @@ public class TaskModel {
     
     public func delete(_ task: Task) {
         guard tasks.contains(task) else { print("could not delete \(task) "); return }
+        deindex(task: task)
         NotificationManager.removeLocationNotification(for: task)
         NotificationManager.removeDateNotification(for: task)
         persistance.delete(task) // delegate manages the array
@@ -88,6 +91,8 @@ public class TaskModel {
         if let tags = task.tags?.allObjects as? [Tag] {
             NotificationManager.addAllTagsNotifications(from: tags)
         }
+        
+        if !isCompleted { index(task: task) }
         return task
     }
     
@@ -120,6 +125,32 @@ public class TaskModel {
         
         persistance.save()
         delegate?.taskModel(self, didUpdate: task, with: attributes)
+    }
+    
+    private func index(task: Task) {
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
+        
+        attributeSet.title = task.title!
+        attributeSet.contentDescription = task.notes
+        
+        let item = CSSearchableItem(uniqueIdentifier: "task-\(task.id!)", domainIdentifier: "com.beanie", attributeSet: attributeSet)
+        CSSearchableIndex.default().indexSearchableItems([item]) { error in
+            if let error = error {
+                print("Indexing error: \(error.localizedDescription)")
+            } else {
+                print("Search item successfully indexed!")
+            }
+        }
+    }
+    
+    func deindex(task: Task) {
+        CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: ["\(task.id!)"]) { error in
+            if let error = error {
+                print("Deindexing error: \(error.localizedDescription)")
+            } else {
+                print("Search item successfully removed!")
+            }
+        }
     }
     
     fileprivate func updateNotifications(for task: Task) {
