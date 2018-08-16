@@ -80,10 +80,6 @@ class HomeScreenViewModel {
         activity.userInfo =
             ["selectedTagIDs": selectedTags.map { $0.id!.description }]
         
-        activity.keywords =
-            Set<String>(selectedTags.map { $0.title! })
-        
-        activity.isEligibleForSearch = true
         activity.isEligibleForHandoff = true
         //TODO: uncomment when available
         //        if #available(iOS 12.0, *) {
@@ -101,9 +97,6 @@ class HomeScreenViewModel {
     func updateUserActivity(_ activity: NSUserActivity) {
         guard !selectedTags.isEmpty else { return }
         activity.addUserInfoEntries(from: ["selectedTagIDs" : selectedTags.map { $0.id!.description }])
-        
-        activity.keywords =
-            Set<String>(selectedTags.map { $0.title! })
         
         activity.title = userActivityTitle
         

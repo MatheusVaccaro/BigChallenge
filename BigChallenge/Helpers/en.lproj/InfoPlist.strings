@@ -10,8 +10,6 @@
 
 "NSContactsUsageDescription" = "";
 
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Reef needs to use your current location to create geofenced tasks if you don't want to forget to buy cereal again when you're at the market.";
-
-"NSLocationWhenInUseUsageDescription" = "Reef needs to use your current location to create geofenced tasks if you don't want to forget to buy cereal again when you're at the market.";
+"NSLocationWhenInUseUsageDescription" = "Reef needs to use your current location to remind of your nearby tasks. So you won't forget to buy cereal the next time you're at the market.";
 
 "NSRemindersUsageDescription" = "Looking pretty empty over here, huh? We can import reminders you already have to get you started, just say the word!";

@@ -8,6 +8,8 @@
 
 import Foundation
 import CoreLocation
+import CoreSpotlight
+import MobileCoreServices
 import RxCocoa
 import RxSwift
 
@@ -48,6 +50,7 @@ public class TaskModel {
     
     public func delete(_ task: Task) {
         guard tasks.contains(task) else { print("could not delete \(task) "); return }
+        deindex(task: task)
         NotificationManager.removeLocationNotification(for: task)
         NotificationManager.removeDateNotification(for: task)
         persistance.delete(task) // delegate manages the array
@@ -62,7 +65,7 @@ public class TaskModel {
         let creationDate = attributes[.creationDate] as? Date ?? Date()
         let isCompleted = attributes[.isCompleted] as? Bool ?? false
         let tags = attributes[.tags] as? [Tag] ?? []
-        let arriving = attributes[.arriving] as? Bool ?? false
+        let arriving = attributes[.arriving] as? Bool ?? true
         
         task.id = id
         task.title = title
@@ -88,6 +91,8 @@ public class TaskModel {
         if let tags = task.tags?.allObjects as? [Tag] {
             NotificationManager.addAllTagsNotifications(from: tags)
         }
+        
+        if !isCompleted { index(task: task) }
         return task
     }
     
@@ -118,8 +123,52 @@ public class TaskModel {
             task.tags = NSSet(array: tags)
         }
         
+        if let region = attributes[.region] as? CLCircularRegion {
+            let regionData =
+                NSKeyedArchiver.archivedData(withRootObject: region)
+            task.regionData = regionData
+            task.arriving = attributes[.arriving] as? Bool ?? true
+        }
+        
+        updateInSpotlight(task: task)
         persistance.save()
         delegate?.taskModel(self, didUpdate: task, with: attributes)
+    }
+    
+    func taskWith(id: UUID) -> Task? {
+        return tasks.first { $0.id! == id }
+    }
+    
+    private func index(task: Task) {
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
+        
+        attributeSet.title = task.title!
+        attributeSet.contentDescription = task.notes
+        
+        attributeSet.contentCreationDate = task.creationDate
+        
+        let item = CSSearchableItem(uniqueIdentifier: "task-\(task.id!)",
+            domainIdentifier: "com.beanie",
+            attributeSet: attributeSet)
+        
+        CSSearchableIndex.default().indexSearchableItems([item]) { error in
+            if let error = error {
+                print("Indexing error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    private func updateInSpotlight(task: Task) {
+        deindex(task: task)
+        index(task: task)
+    }
+    
+    func deindex(task: Task) {
+        CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: ["\(task.id!)"]) { error in
+            if let error = error {
+                print("Deindexing error: \(error.localizedDescription)")
+            }
+        }
     }
     
     fileprivate func updateNotifications(for task: Task) {

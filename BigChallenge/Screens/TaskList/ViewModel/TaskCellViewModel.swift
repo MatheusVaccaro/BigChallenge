@@ -63,6 +63,9 @@ class TaskCellViewModel {
         taskModel.save(task)
         let metricAttributes =
             ["time to complete" : task.creationDate!.timeIntervalSinceNow]
-        if bool { Answers.logCustomEvent(withName: "completed task", customAttributes: metricAttributes) }
+        if bool {
+            Answers.logCustomEvent(withName: "completed task", customAttributes: metricAttributes)
+            taskModel.deindex(task: task)
+        }
     }
 }

@@ -191,7 +191,8 @@ class HomeScreenViewController: UIViewController {
         emptyStateTitleLabel.text = viewModel.emptyStateTitleText
         emptyStateSubtitleLabel.text = viewModel.emptyStateSubtitleText
         emptyStateOrLabel.text = viewModel.emptyStateOrText
-        importFromRemindersButton.titleLabel?.text = viewModel.importFromRemindersText
+        importFromRemindersButton.setTitle(viewModel.importFromRemindersText,
+                                           for: .normal)
     }
     
     fileprivate func configureBigTitle() {

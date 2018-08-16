@@ -20,10 +20,11 @@ class LocationManager: NSObject {
     override init() {
         manager = CLLocationManager()
         super.init()
-        
-        manager.requestWhenInUseAuthorization()
-        
         manager.delegate = self
+    }
+    
+    func requestWhenInUseAuthorization() {
+        manager.requestWhenInUseAuthorization()
     }
     
     func startMonitoring(region: CLCircularRegion) {

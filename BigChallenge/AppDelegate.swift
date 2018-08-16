@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreSpotlight
 import UserNotifications
 
 @UIApplicationMain
@@ -34,17 +35,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-        let tagIDs = userActivity.userInfo!["selectedTagIDs"] as? [String]
-        startApplicationCoordinator(with: window!, selectedTagIDs: tagIDs ?? [])
+        
+        if userActivity.activityType == CSSearchableItemActionType {
+            if let uniqueIdentifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
+                if uniqueIdentifier.starts(with: "task-") { //task
+                    let taskID = String( uniqueIdentifier.dropFirst(5) )
+                    startApplicationCoordinator(with: window!, selectedTask: taskID)
+                    //start app with task
+                } else if uniqueIdentifier.starts(with: "tag-") { // tag
+                    let tagID = String( uniqueIdentifier.dropFirst(4) )
+                    startApplicationCoordinator(with: window!, selectedTagIDs: [tagID])
+                }
+            }
+        }
+        
         return true
     }
     
     // MARK: - Helper Methods
-    func startApplicationCoordinator(with window: UIWindow, selectedTagIDs: [String]) {
+    func startApplicationCoordinator(with window: UIWindow, selectedTagIDs: [String]? = nil, selectedTask: String? = nil) {
         requestAuthorizationForNotifications()
-        let applicationCoordinator = ApplicationCoordinator(window: window, selectedTagIDs: selectedTagIDs)
+        let applicationCoordinator = ApplicationCoordinator(window: window)
         self.applicationCoordinator = applicationCoordinator
-        applicationCoordinator.start()
+        applicationCoordinator.start(selectedTagIDs: selectedTagIDs, taskID: selectedTask)
     }
     
     func requestAuthorizationForNotifications() {

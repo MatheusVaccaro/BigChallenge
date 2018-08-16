@@ -34,14 +34,18 @@ class Recommender {
         var toDo = tasks
             .filter { !$0.isCompleted }
         
-        if let location = LocationManager().currentLocation {
-            localTasks = Array(
-                tasks
-                    .filter { isLocation(location, in: $0) }
-                    .prefix(localTasksLimit)
-            )
-            toDo = toDo
-                .filter { !localTasks.contains($0) }
+        if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        } else {
+            if let location = locationManager.currentLocation {
+                localTasks = Array(
+                    tasks
+                        .filter { isLocation(location, in: $0) }
+                        .prefix(localTasksLimit)
+                )
+                toDo = toDo
+                    .filter { !localTasks.contains($0) }
+            }
         }
         
         nextTasks = Array(

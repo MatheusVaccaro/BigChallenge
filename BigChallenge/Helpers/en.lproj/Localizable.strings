@@ -101,4 +101,8 @@
 /* subtitle for time header */
 "timeHeaderSubtitle" = "Set a date for your task";
 
-"RemindersPermission" = "we can import all your reminders to this app";
+/* 'or' */
+"emptyStateOr" = "Or";
+
+/* button that imports tasks from reminders */
+"importFromReminders" = "Import existing reminders";
