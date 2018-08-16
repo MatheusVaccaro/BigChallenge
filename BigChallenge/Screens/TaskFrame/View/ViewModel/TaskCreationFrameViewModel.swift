@@ -41,6 +41,7 @@ class TaskCreationFrameViewModel: CreationFrameViewModelProtocol {
          taskModel: TaskModel) {
         self.taskModel = taskModel
         doneButtonObservable = BehaviorSubject<Bool>(value: false)
+        mainInfoViewModel.delegate = self
         mainInfoViewModel.outputDelegate = self
         detailViewModel.delegate = self
     }
@@ -120,6 +121,22 @@ class TaskCreationFrameViewModel: CreationFrameViewModelProtocol {
         return !taskTitle.isEmpty
     }
    
+}
+
+extension TaskCreationFrameViewModel: NewTaskViewModelDelegate {
+    func didTapDeleteTaskButton() {
+        print("did tap delete task button")
+    }
+    
+    func didTapMoreOptionsButton() {
+        print("did tap more options button")
+    }
+    
+    func willAddTag() {
+        delegate?.willAddTag()
+    }
+    
+    
 }
 
 extension TaskCreationFrameViewModel: NewTaskViewModelOutputDelegate {

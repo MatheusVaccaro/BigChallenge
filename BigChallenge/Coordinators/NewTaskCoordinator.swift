@@ -113,8 +113,9 @@ class NewTaskCoordinator: Coordinator {
     }
     
     fileprivate func showNewTag() {
+        guard let modalPresenter = modalPresenter else { return }
         let newTagCoordinator = NewTagCoordinator(tag: nil,
-                                                  presenter: presenter,
+                                                  presenter: modalPresenter,
                                                   model: tagModel)
         newTagCoordinator.delegate = self
         addChild(coordinator: newTagCoordinator)
@@ -136,6 +137,10 @@ class NewTaskCoordinator: Coordinator {
 }
 
 extension NewTaskCoordinator: CreationFrameViewModelDelegate {
+    
+    func willAddTag() {
+        showNewTag()
+    }
     
     func didTapCancelButton() {
         dismissViewController()
