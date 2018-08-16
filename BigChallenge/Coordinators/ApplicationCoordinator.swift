@@ -12,16 +12,15 @@ import Fabric
 import Crashlytics
 
 class ApplicationCoordinator: Coordinator {
-    
     public var childrenCoordinators: [Coordinator]
     private let window: UIWindow
     private let rootViewController: UINavigationController
     private let persistence: Persistence
     private let taskModel: TaskModel
     private let tagModel: TagModel
-    private let selectedTags: [Tag]
+    private var selectedTags: [Tag]
     
-    init(window: UIWindow, selectedTagIDs: [String]) {
+    init(window: UIWindow) {
         self.window = window
         self.rootViewController = UINavigationController()
         self.rootViewController.isNavigationBarHidden = true
@@ -29,17 +28,27 @@ class ApplicationCoordinator: Coordinator {
         self.persistence = Persistence(configuration: .inDevice)
         self.tagModel = TagModel(persistence: persistence)
         self.taskModel = TaskModel(persistence: persistence)
-        self.selectedTags =
-            tagModel.tags.filter { selectedTagIDs.contains($0.id!.description) }
+        self.selectedTags = []
         print(selectedTags.map { $0.title! })
     }
     
     func start() {
+        self.start(selectedTagIDs: nil, taskID: nil)
+    }
+    
+    func start(selectedTagIDs: [String]? = nil, taskID: String? = nil) {
+        if let selectedTagIDs = selectedTagIDs {
+            selectedTags =
+                tagModel.tags.filter { selectedTagIDs.contains($0.id!.description) }
+        } else if let taskID = taskID {
+            selectedTags =
+                taskModel.taskWith(id: UUID(uuidString: taskID)!)!.tags!.allObjects as! [Tag]
+        }
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         showTaskList()
-        UITextField.appearance().keyboardAppearance = .light
         startFabric()
+        UITextField.appearance().keyboardAppearance = .light
     }
     
     private func startFabric() {

@@ -123,8 +123,13 @@ public class TaskModel {
             task.tags = NSSet(array: tags)
         }
         
+        updateInSpotlight(task: task)
         persistance.save()
         delegate?.taskModel(self, didUpdate: task, with: attributes)
+    }
+    
+    func taskWith(id: UUID) -> Task? {
+        return tasks.first { $0.id! == id }
     }
     
     private func index(task: Task) {
@@ -132,23 +137,28 @@ public class TaskModel {
         
         attributeSet.title = task.title!
         attributeSet.contentDescription = task.notes
+        attributeSet.contentCreationDate = task.creationDate
         
-        let item = CSSearchableItem(uniqueIdentifier: "task-\(task.id!)", domainIdentifier: "com.beanie", attributeSet: attributeSet)
+        let item = CSSearchableItem(uniqueIdentifier: "task-\(task.id!)",
+            domainIdentifier: "com.beanie",
+            attributeSet: attributeSet)
+        
         CSSearchableIndex.default().indexSearchableItems([item]) { error in
             if let error = error {
                 print("Indexing error: \(error.localizedDescription)")
-            } else {
-                print("Search item successfully indexed!")
             }
         }
+    }
+    
+    private func updateInSpotlight(task: Task) {
+        deindex(task: task)
+        index(task: task)
     }
     
     func deindex(task: Task) {
         CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: ["\(task.id!)"]) { error in
             if let error = error {
                 print("Deindexing error: \(error.localizedDescription)")
-            } else {
-                print("Search item successfully removed!")
             }
         }
     }

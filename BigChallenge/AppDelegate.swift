@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let uniqueIdentifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
                 if uniqueIdentifier.starts(with: "task-") { //task
                     let taskID = String( uniqueIdentifier.dropFirst(5) )
+                    startApplicationCoordinator(with: window!, selectedTask: taskID)
                     //start app with task
                 } else if uniqueIdentifier.starts(with: "tag-") { // tag
                     let tagID = String( uniqueIdentifier.dropFirst(4) )
@@ -52,11 +53,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // MARK: - Helper Methods
-    func startApplicationCoordinator(with window: UIWindow, selectedTagIDs: [String]) {
+    func startApplicationCoordinator(with window: UIWindow, selectedTagIDs: [String]? = nil, selectedTask: String? = nil) {
         requestAuthorizationForNotifications()
-        let applicationCoordinator = ApplicationCoordinator(window: window, selectedTagIDs: selectedTagIDs)
+        let applicationCoordinator = ApplicationCoordinator(window: window)
         self.applicationCoordinator = applicationCoordinator
-        applicationCoordinator.start()
+        applicationCoordinator.start(selectedTagIDs: selectedTagIDs, taskID: selectedTask)
     }
     
     func requestAuthorizationForNotifications() {
