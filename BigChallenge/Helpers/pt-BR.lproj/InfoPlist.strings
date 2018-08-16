@@ -1,0 +1,17 @@
+/* 
+  InfoPlist.strings
+  BigChallenge
+
+  Created by Gabriel Paul on 16/08/18.
+  Copyright © 2018 Matheus Vaccaro. All rights reserved.
+*/
+
+"NSCalendarsUsageDescription" = "";
+
+"NSContactsUsageDescription" = "";
+
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Reef precisa usar sua localização para criar tarefas baseadas em gelocalização se você não quer esquecer de comprar aquele cereal de novo na próxima vez que estiver no supermercado.";
+
+"NSLocationWhenInUseUsageDescription" = "Reef precisa usar sua localização para criar tarefas baseadas em gelocalização se você não quer esquecer de comprar aquele cereal de novo na próxima vez que estiver no supermercado.";
+
+"NSRemindersUsageDescription" = "Meio vazio por aqui, não acha? Nós podemos começar importando os seus lembretes já salvos para você ter por onde começar. É só chamar!";
