@@ -133,6 +133,7 @@ extension NewTaskCoordinator: CreationFrameViewModelDelegate {
     }
     
     func didTapSaveButton() {
+        newTaskViewController?.viewModel?.prepareUserActivityForSearch()
         dismissViewController()
     }
     

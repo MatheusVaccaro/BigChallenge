@@ -86,6 +86,14 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
         ] //location / date ??????????
     }
     
+    func prepareUserActivityForSearch() {
+        if let title = taskTitleText {
+//            userActivity.isEligibleForSearch = true @tets
+            userActivity.title = title
+            userActivity.keywords = Set([title]) //TODO add this on taskModel???????
+        }
+    }
+    
     lazy var userActivity: NSUserActivity = {
         let activity = NSUserActivity(activityType: "com.bigBeanie.finalChallenge.createTask")
         
@@ -97,7 +105,8 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
     }()
     
     func update(_ userActivity: NSUserActivity) {
-        userActivity.addUserInfoEntries(from: userInfoEntries)
+        userActivity.addUserInfoEntries(from: userInfoEntries)        
+        
         userActivity.becomeCurrent()
     }
 }
