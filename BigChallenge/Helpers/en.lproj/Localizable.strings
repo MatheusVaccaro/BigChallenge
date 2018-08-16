@@ -80,6 +80,15 @@
 /* placeholder title for a new task */
 "newTaskTitle" = "Your Task";
 
+/* subtitle of empty state on taskList */
+"emptyStateSubtitle" = "Swipe down to add your first task";
+
+/* title of empty state on taskList */
+"emptyStateTitle" = "Let’s get something DONE!";
+
+/* title of homeScreen with no tag selected */
+"title" = "Hello";
+
 /* title for location header */
 "locationHeaderTitle" = "Location";
 

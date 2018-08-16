@@ -20,6 +20,9 @@ class HomeScreenViewModel {
     private(set) var taskModel: TaskModel
     private(set) var tagModel: TagModel
     
+    let emptyStateTitleText = Strings.HomeScreen.emptyStateTitle
+    let emptyStateSubtitleText = Strings.HomeScreen.emptyStateSubtitle
+    
     init(taskModel: TaskModel, tagModel: TagModel, selectedTags: [Tag]) {
         self.taskModel = taskModel
         self.tagModel = tagModel
@@ -42,7 +45,7 @@ class HomeScreenViewModel {
         if let tag = selectedTags.first {
             return tag.title!
         } else {
-            return "Hello"
+            return Strings.HomeScreen.title
         }
     }
     

@@ -85,14 +85,6 @@ class TaskCreationFrameViewModel: CreationFrameViewModelProtocol {
         if let taskDueDate = self.taskDueDate {
             
             var taskDueTimeOfDay = self.taskDueTimeOfDay
-            
-            if taskDueDate == nil {
-                taskDueTimeOfDay = DateComponents()
-                taskDueTimeOfDay!.setValue(0, for: .hour)
-                taskDueTimeOfDay!.setValue(0, for: .minute)
-                taskDueTimeOfDay!.setValue(0, for: .second)
-            }
-            
             let date = Calendar.current.combine(date: taskDueDate, andTimeOfDay: taskDueTimeOfDay)!
             attributes[.dueDate] = date
             

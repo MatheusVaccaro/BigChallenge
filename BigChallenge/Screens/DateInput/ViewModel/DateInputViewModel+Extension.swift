@@ -9,9 +9,11 @@
 import Foundation
 
 extension DateInputViewModel {
+    //TODO default day when date is removable
     convenience init(with task: Task?) {
+        let timeOfDay = Calendar.current.dateComponents([.hour, .minute, .second], from: Date())
         guard let task = task else {
-            self.init()
+            self.init(timeOfDay: timeOfDay)
             return
         }
         
@@ -22,13 +24,14 @@ extension DateInputViewModel {
             self.init(date: date, timeOfDay: timeOfDay, frequency: frequency)
             
         } else {
-            self.init()
+            self.init(timeOfDay: timeOfDay)
         }
     }
     
     convenience init(with tag: Tag?) {
+        let timeOfDay = Calendar.current.dateComponents([.hour, .minute, .second], from: Date())
         guard let tag = tag else {
-            self.init()
+            self.init(timeOfDay: timeOfDay)
             return
         }
         
@@ -39,7 +42,7 @@ extension DateInputViewModel {
             self.init(date: date, timeOfDay: timeOfDay, frequency: frequency)
             
         } else {
-            self.init()
+            self.init(timeOfDay: timeOfDay)
         }
     }
 }

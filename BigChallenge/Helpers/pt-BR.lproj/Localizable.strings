@@ -72,13 +72,22 @@
 "nextMorningShortcutDateInput" = "Amanhã de manhã";
 
 /* default place when reading location name in voiceOver */
-"defaultPlaceName" = "Sua localização";
+"defaultPlaceName" = "Sua licalização";
 
 /* placeholder title for a new task description */
 "newTaskDescriptionPlaceholder" = "Notas";
 
 /* placeholder title for a new task */
 "newTaskTitle" = "Sua tarefa";
+
+/* subtitle of empty state on taskList */
+"emptyStateSubtitle" = "";
+
+/* title of empty state on taskList */
+"emptyStateTitle" = "";
+
+/* title of homeScreen with no tag selected */
+"title" = "Olá";
 
 /* title for location header */
 "locationHeaderTitle" = "Localização";
@@ -91,3 +100,4 @@
 
 /* subtitle for time header */
 "timeHeaderSubtitle" = "Selecione uma data para sua task";
+
