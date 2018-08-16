@@ -17,6 +17,7 @@
 		16E8DDD4211205E8004F66D6 /* Barlow-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDBA211205C3004F66D6 /* Barlow-Medium.ttf */; };
 		16E8DDD5211205E8004F66D6 /* Barlow-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDBF211205C4004F66D6 /* Barlow-MediumItalic.ttf */; };
 		16E8DDD8211205E8004F66D6 /* Barlow-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC5211205C5004F66D6 /* Barlow-SemiBoldItalic.ttf */; };
+		16EC4CCB2125207600B8256D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 16EC4CCD2125207600B8256D /* InfoPlist.strings */; };
 		16EC6CEA21065B2500797D9C /* TagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EC6CE921065B2500797D9C /* TagTests.swift */; };
 		16FDC139210BB237008FA931 /* NotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FDC138210BB237008FA931 /* NotificationTests.swift */; };
 		16FDC13C210F809A008FA931 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FDC13B210F809A008FA931 /* NotificationManager.swift */; };
@@ -162,6 +163,8 @@
 		16E8DDC5211205C5004F66D6 /* Barlow-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Barlow-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		16E8DDC6211205C6004F66D6 /* Barlow-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Barlow-Black.ttf"; sourceTree = "<group>"; };
 		16E8DDC7211205C6004F66D6 /* Barlow-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Barlow-Italic.ttf"; sourceTree = "<group>"; };
+		16EC4CCC2125207600B8256D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		16EC4CCE2125207900B8256D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		16EC6CE921065B2500797D9C /* TagTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTests.swift; sourceTree = "<group>"; };
 		16FDC138210BB237008FA931 /* NotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTests.swift; sourceTree = "<group>"; };
 		16FDC13B210F809A008FA931 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -632,6 +635,7 @@
 				222BFF9520EDB83B001B6BBF /* Importers */,
 				C21EAD0A20B74F01005F0F85 /* StoryboardInstantiable.swift */,
 				2253179C20D147AD0065C9F9 /* Localizable.strings */,
+				16EC4CCD2125207600B8256D /* InfoPlist.strings */,
 				22456D2820DC3BB000168894 /* Date+Extension.swift */,
 				29BA68A52120E147009B4AB9 /* Calendar+Extension.swift */,
 				226CEA0420E17E87008CEB97 /* Strings.swift */,
@@ -917,6 +921,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = C28DC90D20B61CB6007F881A;
 			productRefGroup = C28DC91720B61CB6007F881A /* Products */;
@@ -958,6 +963,7 @@
 				29722022211CD1AE00CF80CE /* DateInput.storyboard in Resources */,
 				C2A1114720B9F6EF00ABB161 /* NewTask.storyboard in Resources */,
 				C28DC92420B61CB9007F881A /* LaunchScreen.storyboard in Resources */,
+				16EC4CCB2125207600B8256D /* InfoPlist.strings in Resources */,
 				16E8DDCE211205E8004F66D6 /* Barlow-ExtraBoldItalic.ttf in Resources */,
 				221BA8AF20F6991200BE2AC1 /* HomeScreen.storyboard in Resources */,
 				16E8DDD4211205E8004F66D6 /* Barlow-Medium.ttf in Resources */,
@@ -993,12 +999,8 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
-			);
-			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
@@ -1264,6 +1266,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		16EC4CCD2125207600B8256D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				16EC4CCC2125207600B8256D /* en */,
+				16EC4CCE2125207900B8256D /* pt-BR */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		2253179C20D147AD0065C9F9 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

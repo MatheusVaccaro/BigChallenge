@@ -1,0 +1,17 @@
+/* 
+  InfoPlist.strings
+  BigChallenge
+
+  Created by Gabriel Paul on 16/08/18.
+  Copyright © 2018 Matheus Vaccaro. All rights reserved.
+*/
+
+"NSCalendarsUsageDescription" = "";
+
+"NSContactsUsageDescription" = "";
+
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Reef needs to use your current location to create geofenced tasks if you don't want to forget to buy cereal again when you're at the market.";
+
+"NSLocationWhenInUseUsageDescription" = "Reef needs to use your current location to create geofenced tasks if you don't want to forget to buy cereal again when you're at the market.";
+
+"NSRemindersUsageDescription" = "Looking pretty empty over here, huh? We can import reminders you already have to get you started, just say the word!";
