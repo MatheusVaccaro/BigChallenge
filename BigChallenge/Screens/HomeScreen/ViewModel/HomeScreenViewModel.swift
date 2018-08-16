@@ -12,6 +12,8 @@ protocol HomeScreenViewModelDelegate: class {
     func willAddTask(selectedTags: [Tag])
     func will(edit task: Task)
     func willAddTag()
+    func importFromReminders()
+    func shouldShowImportFromRemindersOption() -> Bool
 }
 
 class HomeScreenViewModel {
@@ -22,6 +24,10 @@ class HomeScreenViewModel {
     
     let emptyStateTitleText = Strings.HomeScreen.emptyStateTitle
     let emptyStateSubtitleText = Strings.HomeScreen.emptyStateSubtitle
+    let emptyStateOrText = Strings.HomeScreen.emptyStateOr
+    let importFromRemindersText = Strings.HomeScreen.importFromReminders
+    
+    weak var delegate: HomeScreenViewModelDelegate?
     
     init(taskModel: TaskModel, tagModel: TagModel, selectedTags: [Tag]) {
         self.taskModel = taskModel
