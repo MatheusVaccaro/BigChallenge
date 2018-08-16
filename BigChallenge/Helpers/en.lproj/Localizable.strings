@@ -100,3 +100,5 @@
 
 /* subtitle for time header */
 "timeHeaderSubtitle" = "Set a date for your task";
+
+"RemindersPermission" = "we can import all your reminders to this app";

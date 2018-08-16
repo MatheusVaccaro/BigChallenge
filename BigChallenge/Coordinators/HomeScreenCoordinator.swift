@@ -17,7 +17,7 @@ class HomeScreenCoordinator: Coordinator {
     fileprivate var homeScreenViewController: HomeScreenViewController?
     fileprivate var taskListViewController: TaskListViewController?
     fileprivate var tagCollectionViewController: TagCollectionViewController?
-    
+    fileprivate let remindersImporter: RemindersImporter
     fileprivate let persistence: Persistence
     fileprivate var taskModel: TaskModel
     fileprivate var tagModel: TagModel
@@ -36,6 +36,11 @@ class HomeScreenCoordinator: Coordinator {
         
         self.childrenCoordinators = []
         self.persistence = persistence
+        
+        self.remindersImporter =
+            RemindersImporter(taskModel: taskModel, tagModel: tagModel)
+        
+        self.taskModel.delegate = self
     }
 
     func start() {
@@ -43,7 +48,7 @@ class HomeScreenCoordinator: Coordinator {
         let homeScreenViewModel = HomeScreenViewModel(taskModel: taskModel, tagModel: tagModel, selectedTags: selectedTags)
         homeScreenViewController.viewModel = homeScreenViewModel
 
-        homeScreenViewController.delegate = self
+        homeScreenViewModel.delegate = self
         self.homeScreenViewController = homeScreenViewController
         
         // TODO: Reestructure HomeScreen according to the architecture
@@ -100,6 +105,13 @@ extension HomeScreenCoordinator: CoordinatorDelegate {
 }
 
 extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
+    func shouldShowImportFromRemindersOption() -> Bool {
+        return true // TODO @MAX
+    }
+    
+    func importFromReminders() {
+        remindersImporter.attemptToImport()
+    }
     
     func willAddTask(selectedTags: [Tag]) {
         showNewTask(selectedTags: selectedTags)
@@ -115,9 +127,13 @@ extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
 }
 
 extension HomeScreenCoordinator: TagCollectionViewModelDelegate {
-    
     func willUpdate(tag: Tag) {
         showEditTag(tag)
     }
+}
 
+extension HomeScreenCoordinator: TaskModelDelegate {
+    func taskModel(_ taskModel: TaskModel, didSave task: Task) {
+        remindersImporter.exportTaskToReminders(task)
+    }
 }

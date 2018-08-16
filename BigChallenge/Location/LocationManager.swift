@@ -21,7 +21,7 @@ class LocationManager: NSObject {
         manager = CLLocationManager()
         super.init()
         
-        manager.requestAlwaysAuthorization()
+        manager.requestWhenInUseAuthorization()
         
         manager.delegate = self
     }

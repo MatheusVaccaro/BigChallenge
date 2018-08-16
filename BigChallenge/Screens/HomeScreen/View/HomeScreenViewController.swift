@@ -13,15 +13,11 @@ import RxSwift
 
 class HomeScreenViewController: UIViewController {
     
-    weak var delegate: HomeScreenViewModelDelegate?
     var viewModel: HomeScreenViewModel!
     
     @IBOutlet weak var tagContainerView: UIView!
     @IBOutlet weak var taskListContainerView: UIView!
     @IBOutlet weak var bigTitle: UILabel!
-    @IBOutlet weak var emptyStateImage: UIImageView!
-    @IBOutlet weak var emptyStateTitleLabel: UILabel!
-    @IBOutlet weak var emptyStateSubtitleLabel: UILabel!
     
     fileprivate var taskListViewController: TaskListViewController!
     fileprivate var tagCollectionViewController: TagCollectionViewController!
@@ -119,14 +115,14 @@ class HomeScreenViewController: UIViewController {
     fileprivate func subscribe(to taskListViewModel: TaskListViewModel) {
         taskListViewModel.shouldAddTask.subscribe { event in
             if let shouldAddTask = event.element, shouldAddTask {
-                self.delegate?
+                self.viewModel.delegate?
                     .willAddTask(selectedTags: self.tagCollectionViewController.viewModel.selectedTags)
                 }
         }.disposed(by: disposeBag)
         
         taskListViewModel.shouldEditTask.subscribe() { task in
             if let task = task.element {
-                self.delegate?
+                self.viewModel.delegate?
                     .will(edit: task)
             }
         }.disposed(by: disposeBag)
@@ -141,7 +137,7 @@ class HomeScreenViewController: UIViewController {
     
     fileprivate func observeClickedAddTag() {
         tagCollectionViewController.addTagEvent?.subscribe { _ in
-            self.delegate?.willAddTag()
+            self.viewModel.delegate?.willAddTag()
         }.disposed(by: disposeBag)
     }
     
@@ -162,10 +158,30 @@ class HomeScreenViewController: UIViewController {
             }.disposed(by: disposeBag)
     }
     
+    //MARK: - Empty State
+    
+    @IBOutlet weak var emptyStateImage: UIImageView!
+    @IBOutlet weak var emptyStateTitleLabel: UILabel!
+    @IBOutlet weak var emptyStateSubtitleLabel: UILabel!
+    @IBOutlet weak var emptyStateOrLabel: UILabel!
+    @IBOutlet weak var importFromRemindersButton: UIButton!
+    
     fileprivate func showEmptyState(_ bool: Bool) {
         emptyStateSubtitleLabel.isHidden = !bool
         emptyStateTitleLabel.isHidden = !bool
         emptyStateImage.isHidden = !bool
+        
+        if bool, viewModel.delegate!.shouldShowImportFromRemindersOption() {
+            emptyStateOrLabel.isHidden = false
+            importFromRemindersButton.isHidden = false
+        } else {
+            emptyStateOrLabel.isHidden = true
+            importFromRemindersButton.isHidden = true
+        }
+    }
+    
+    @IBAction func didClickImportFromRemindersButton(_ sender: Any) {
+        viewModel.delegate?.importFromReminders()
     }
     
     fileprivate func configureEmptyState() {
@@ -174,6 +190,8 @@ class HomeScreenViewController: UIViewController {
         
         emptyStateTitleLabel.text = viewModel.emptyStateTitleText
         emptyStateSubtitleLabel.text = viewModel.emptyStateSubtitleText
+        emptyStateOrLabel.text = viewModel.emptyStateOrText
+        importFromRemindersButton.titleLabel?.text = viewModel.importFromRemindersText
     }
     
     fileprivate func configureBigTitle() {

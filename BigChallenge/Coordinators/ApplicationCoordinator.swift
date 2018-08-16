@@ -19,7 +19,6 @@ class ApplicationCoordinator: Coordinator {
     private let persistence: Persistence
     private let taskModel: TaskModel
     private let tagModel: TagModel
-    private let remindersImporter: RemindersImporter
     private let selectedTags: [Tag]
     
     init(window: UIWindow, selectedTagIDs: [String]) {
@@ -33,16 +32,12 @@ class ApplicationCoordinator: Coordinator {
         self.selectedTags =
             tagModel.tags.filter { selectedTagIDs.contains($0.id!.description) }
         print(selectedTags.map { $0.title! })
-        self.remindersImporter =
-            RemindersImporter(taskModel: taskModel, tagModel: tagModel)
-        self.taskModel.delegate = self
     }
     
     func start() {
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         showTaskList()
-        remindersImporter.attemptToImport()
         UITextField.appearance().keyboardAppearance = .light
         startFabric()
     }
@@ -59,11 +54,5 @@ class ApplicationCoordinator: Coordinator {
                                                         selectedTags: selectedTags)
         addChild(coordinator: homeScreenCoordinator)
         homeScreenCoordinator.start()
-    }
-}
-
-extension ApplicationCoordinator: TaskModelDelegate {
-    func taskModel(_ taskModel: TaskModel, didSave task: Task) {
-        remindersImporter.exportTaskToReminders(task)
     }
 }
