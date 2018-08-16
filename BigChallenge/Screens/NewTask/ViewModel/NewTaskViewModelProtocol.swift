@@ -15,7 +15,6 @@ protocol NewTaskViewModelProtocol {
     var taskNotesText: String? { get set }
     var userActivity: NSUserActivity { get }
     
-    func prepareUserActivityForSearch()
     func didTapDeleteTaskButton()
     
     func taskTitle() -> String?
