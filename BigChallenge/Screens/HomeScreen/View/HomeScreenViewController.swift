@@ -92,8 +92,8 @@ class HomeScreenViewController: UIViewController {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        bigTitle.font =
-            UIFont.font(sized: 41, weight: .medium, with: .largeTitle)
+        bigTitle.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
+        maskLabel.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -133,7 +133,9 @@ class HomeScreenViewController: UIViewController {
         
         taskListViewModel.tasksObservable.subscribe { event in
             guard let tasks = event.element else { return }
-            self.showEmptyState(tasks.0.isEmpty && tasks.1.isEmpty)
+            DispatchQueue.main.async {
+                self.showEmptyState(tasks.0.isEmpty && tasks.1.isEmpty)
+            }
         }.disposed(by: disposeBag)
     }
     
@@ -161,8 +163,9 @@ class HomeScreenViewController: UIViewController {
     }
     
     fileprivate func showEmptyState(_ bool: Bool) {
-        [emptyStateSubtitleLabel, emptyStateTitleLabel, emptyStateImage]
-            .forEach { $0!.isHidden = !bool }
+        emptyStateSubtitleLabel.isHidden = !bool
+        emptyStateTitleLabel.isHidden = !bool
+        emptyStateImage.isHidden = !bool
     }
     
     fileprivate func configureEmptyState() {
@@ -177,8 +180,8 @@ class HomeScreenViewController: UIViewController {
         bigTitle.text = viewModel.bigTitleText
         maskLabel.text = viewModel.bigTitleText
         
-        bigTitle.font = UIFont.font(sized: 41, weight: .bold, with: .title1, fontName: .barlow)
-        maskLabel.font = UIFont.font(sized: 41, weight: .bold, with: .title1, fontName: .barlow)
+        bigTitle.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
+        maskLabel.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
         
         titleGradient.colors = bigTitleColors
     }
