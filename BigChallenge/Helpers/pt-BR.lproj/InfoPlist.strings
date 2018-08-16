@@ -10,8 +10,6 @@
 
 "NSContactsUsageDescription" = "";
 
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Reef precisa usar sua localização para criar tarefas baseadas em gelocalização se você não quer esquecer de comprar aquele cereal de novo na próxima vez que estiver no supermercado.";
+"NSLocationWhenInUseUsageDescription" = "Reef precisa usar sua localização para lembrar das tarefas proximas a você. Caso não queira esquecer de comprar aquele cereal na próxima vez que estiver no supermercado.";
 
-"NSLocationWhenInUseUsageDescription" = "Reef precisa usar sua localização para criar tarefas baseadas em gelocalização se você não quer esquecer de comprar aquele cereal de novo na próxima vez que estiver no supermercado.";
-
-"NSRemindersUsageDescription" = "Meio vazio por aqui, não acha? Nós podemos começar importando os seus lembretes já salvos para você ter por onde começar. É só chamar!";
+"NSRemindersUsageDescription" = "Meio vazio por aqui, não acha? Nós podemos começar importando seus lembretes já salvos para você ter por onde começar. É só chamar!";

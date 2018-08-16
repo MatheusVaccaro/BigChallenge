@@ -81,10 +81,10 @@
 "newTaskTitle" = "Sua tarefa";
 
 /* subtitle of empty state on taskList */
-"emptyStateSubtitle" = "";
+"emptyStateSubtitle" = "Deslize para baixo para adicionar sua primeira tarefa";
 
 /* title of empty state on taskList */
-"emptyStateTitle" = "";
+"emptyStateTitle" = "Parece vazio por aqui!";
 
 /* title of homeScreen with no tag selected */
 "title" = "Olá";
@@ -101,3 +101,8 @@
 /* subtitle for time header */
 "timeHeaderSubtitle" = "Selecione uma data para sua task";
 
+/* 'or' */
+"emptyStateOr" = "Ou";
+
+/* button that imports tasks from reminders */
+"importFromReminders" = "Importe seus lembretes";
