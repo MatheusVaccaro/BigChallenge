@@ -35,15 +35,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCalendarsUsageDescription</key>
-	<string>dasd</string>
+	<string>TODO</string>
 	<key>NSContactsUsageDescription</key>
-	<string>adsda</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>TODO</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>TODO</string>
 	<key>NSRemindersUsageDescription</key>
-	<string>we can import all your reminders to this app</string>
+	<string>RemindersPermission</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Barlow-ExtraLight.ttf</string>
@@ -76,13 +74,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
 </plist>

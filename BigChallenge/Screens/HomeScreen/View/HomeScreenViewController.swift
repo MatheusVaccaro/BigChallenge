@@ -170,9 +170,13 @@ class HomeScreenViewController: UIViewController {
         emptyStateSubtitleLabel.isHidden = !bool
         emptyStateTitleLabel.isHidden = !bool
         emptyStateImage.isHidden = !bool
-        if viewModel.delegate!.shouldShowImportFromRemindersOption() {
+        
+        if bool, viewModel.delegate!.shouldShowImportFromRemindersOption() {
             emptyStateOrLabel.isHidden = false
             importFromRemindersButton.isHidden = false
+        } else {
+            emptyStateOrLabel.isHidden = true
+            importFromRemindersButton.isHidden = true
         }
     }
     
