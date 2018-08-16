@@ -65,7 +65,7 @@ public class TaskModel {
         let creationDate = attributes[.creationDate] as? Date ?? Date()
         let isCompleted = attributes[.isCompleted] as? Bool ?? false
         let tags = attributes[.tags] as? [Tag] ?? []
-        let arriving = attributes[.arriving] as? Bool ?? false
+        let arriving = attributes[.arriving] as? Bool ?? true
         
         task.id = id
         task.title = title
@@ -123,6 +123,13 @@ public class TaskModel {
             task.tags = NSSet(array: tags)
         }
         
+        if let region = attributes[.region] as? CLCircularRegion {
+            let regionData =
+                NSKeyedArchiver.archivedData(withRootObject: region)
+            task.regionData = regionData
+            task.arriving = attributes[.arriving] as? Bool ?? true
+        }
+        
         updateInSpotlight(task: task)
         persistance.save()
         delegate?.taskModel(self, didUpdate: task, with: attributes)
@@ -137,6 +144,7 @@ public class TaskModel {
         
         attributeSet.title = task.title!
         attributeSet.contentDescription = task.notes
+        
         attributeSet.contentCreationDate = task.creationDate
         
         let item = CSSearchableItem(uniqueIdentifier: "task-\(task.id!)",

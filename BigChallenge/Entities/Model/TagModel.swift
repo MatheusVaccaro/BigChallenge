@@ -152,6 +152,7 @@ public class TagModel {
             tag.regionData = regionData
         }
         
+        updateInSpotlight(tag: tag)
         persistance.save()
         delegate?.tagModel(self, didUpdate: tag, with: attributes)
     }
@@ -161,12 +162,13 @@ public class TagModel {
         
         attributeSet.title = tag.title!
         
-        let item = CSSearchableItem(uniqueIdentifier: "tag-\(tag.id!)", domainIdentifier: "com.beanie", attributeSet: attributeSet)
+        let item = CSSearchableItem(uniqueIdentifier: "tag-\(tag.id!)",
+            domainIdentifier: "com.beanie",
+            attributeSet: attributeSet)
+        
         CSSearchableIndex.default().indexSearchableItems([item]) { error in
             if let error = error {
                 print("Indexing error: \(error.localizedDescription)")
-            } else {
-                print("Search item successfully indexed!")
             }
         }
     }
@@ -175,10 +177,13 @@ public class TagModel {
         CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: ["\(tag.id!)"]) { error in
             if let error = error {
                 print("Deindexing error: \(error.localizedDescription)")
-            } else {
-                print("Search item successfully removed!")
             }
         }
+    }
+    
+    private func updateInSpotlight(tag: Tag) {
+        deindex(tag: tag)
+        index(tag: tag)
     }
     
     // The attributes of the Tag class, mapped according to CoreData
