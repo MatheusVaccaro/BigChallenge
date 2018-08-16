@@ -88,3 +88,16 @@
 
 /* title of homeScreen with no tag selected */
 "title" = "Olá";
+
+/* title for location header */
+"locationHeaderTitle" = "Localização";
+
+/* subtitle for location header */
+"locationHeaderSubtitle" = "Lembre-se em um lugar específico";
+
+/* title for time header */
+"timeHeaderTitle" = "Data";
+
+/* subtitle for time header */
+"timeHeaderSubtitle" = "Selecione uma data para sua task";
+
