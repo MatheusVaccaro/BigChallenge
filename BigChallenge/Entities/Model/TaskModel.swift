@@ -85,7 +85,9 @@ public class TaskModel {
         }
         updateNotifications(for: task)
         delegate?.taskModel(self, didCreate: task)
-        
+        if let tags = task.tags?.allObjects as? [Tag] {
+            NotificationManager.addAllTagsNotifications(from: tags)
+        }
         return task
     }
     
