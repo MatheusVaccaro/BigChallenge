@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -77,6 +77,11 @@
                             <constraint firstItem="Vqf-9Q-5TW" firstAttribute="top" secondItem="nP4-Nl-e1W" secondAttribute="bottom" constant="-49" id="oyN-ti-vQn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="l3r-Z7-lkW"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="YpV-Ep-zcu"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="containerView" destination="8ih-d8-tH9" id="o7d-bG-ifq"/>

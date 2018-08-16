@@ -116,7 +116,6 @@
 		C2C79D2F2123E89A0058F228 /* Tag+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C79D2E2123E89A0058F228 /* Tag+Extension.swift */; };
 		C2DD9A28210D262D00E9B89B /* CreationFrameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DD9A27210D262D00E9B89B /* CreationFrameViewController.swift */; };
 		C2DD9A3321114ADD00E9B89B /* MoreOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DD9A3221114ADD00E9B89B /* MoreOptionsViewController.swift */; };
-		C2DD9A3521114FBC00E9B89B /* MoreOptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DD9A3421114FBC00E9B89B /* MoreOptionsTableViewCell.swift */; };
 		EE3649E90DE055B9D5168F01 /* Pods_BigChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8708FC5A67C933F755CB93 /* Pods_BigChallenge.framework */; };
 /* End PBXBuildFile section */
 
@@ -272,7 +271,6 @@
 		C2C79D2E2123E89A0058F228 /* Tag+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+Extension.swift"; sourceTree = "<group>"; };
 		C2DD9A27210D262D00E9B89B /* CreationFrameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationFrameViewController.swift; sourceTree = "<group>"; };
 		C2DD9A3221114ADD00E9B89B /* MoreOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsViewController.swift; sourceTree = "<group>"; };
-		C2DD9A3421114FBC00E9B89B /* MoreOptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -745,7 +743,6 @@
 			children = (
 				C29742C921123E2D00A1D213 /* MoreOptions.storyboard */,
 				C2DD9A3221114ADD00E9B89B /* MoreOptionsViewController.swift */,
-				C2DD9A3421114FBC00E9B89B /* MoreOptionsTableViewCell.swift */,
 				C29742D52112CBFF00A1D213 /* HeaderViewController.swift */,
 			);
 			path = View;
@@ -1222,7 +1219,6 @@
 				C21EAD0020B741BC005F0F85 /* HomeScreenCoordinator.swift in Sources */,
 				C2901059211E4492008F2807 /* ColorCollectionViewCell.swift in Sources */,
 				C23753B020B6463700C1CE15 /* ApplicationCoordinator.swift in Sources */,
-				C2DD9A3521114FBC00E9B89B /* MoreOptionsTableViewCell.swift in Sources */,
 				C29742CE211249B000A1D213 /* MoreOptionsViewModel.swift in Sources */,
 				C2DD9A28210D262D00E9B89B /* CreationFrameViewController.swift in Sources */,
 				22325A7420FB8E0500E5F8C6 /* HomeScreenViewModel.swift in Sources */,

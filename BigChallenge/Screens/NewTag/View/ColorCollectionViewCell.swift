@@ -42,7 +42,7 @@ class ColorCollectionViewCell: UICollectionViewCell {
     }
     
     func select() {
-        imageView.image = UIImage(named: "teteuzika")
+        imageView.image = UIImage(named: "checkButton")
     }
     
     func deselect() {

@@ -103,4 +103,20 @@ struct Strings {
         static let placeholderTitle =
             NSLocalizedString("notificationTitle", comment: "placeholder for notification title")
     }
+    
+    struct MoreOptionsScreen {
+        
+        struct LocationCell {
+            static let title = NSLocalizedString("locationHeaderTitle", comment: "title for location header")
+            
+            static let subtitle = NSLocalizedString("locationHeaderSubtitle", comment: "subtitle for location header")
+        }
+        
+        struct TimeCell {
+            static let title = NSLocalizedString("timeHeaderTitle", comment: "title for time header")
+            
+            static let subtitle = NSLocalizedString("timeHeaderSubtitle", comment: "subtitle for time header")
+        }
+        
+    }
 }
