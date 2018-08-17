@@ -138,10 +138,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1627170D20C8793900AA0024 /* BigChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1627170D20C8793900AA0024 /* ReefTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReefTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1627170F20C8793900AA0024 /* BigChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigChallengeTests.swift; sourceTree = "<group>"; };
 		1627171120C8793900AA0024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1627171B20C879AD00AA0024 /* BigChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1627171B20C879AD00AA0024 /* ReefUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReefUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1627171D20C879AD00AA0024 /* BigChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigChallengeUITests.swift; sourceTree = "<group>"; };
 		1627171F20C879AD00AA0024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1676FC8F20D99580003E2D79 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
@@ -244,7 +244,7 @@
 		C23753AD20B6461E00C1CE15 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		C23753AF20B6463700C1CE15 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
 		C25F5AA82108FEB3001E1561 /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
-		C28DC91620B61CB6007F881A /* BigChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C28DC91620B61CB6007F881A /* BigChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = BigChallenge.app; path = Reef.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C28DC91920B61CB6007F881A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C28DC91E20B61CB6007F881A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TaskList.storyboard; sourceTree = "<group>"; };
 		C28DC92020B61CB9007F881A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -680,8 +680,8 @@
 			isa = PBXGroup;
 			children = (
 				C28DC91620B61CB6007F881A /* BigChallenge.app */,
-				1627170D20C8793900AA0024 /* BigChallengeTests.xctest */,
-				1627171B20C879AD00AA0024 /* BigChallengeUITests.xctest */,
+				1627170D20C8793900AA0024 /* ReefTests.xctest */,
+				1627171B20C879AD00AA0024 /* ReefUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -830,9 +830,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1627170C20C8793900AA0024 /* BigChallengeTests */ = {
+		1627170C20C8793900AA0024 /* ReefTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1627171420C8793900AA0024 /* Build configuration list for PBXNativeTarget "BigChallengeTests" */;
+			buildConfigurationList = 1627171420C8793900AA0024 /* Build configuration list for PBXNativeTarget "ReefTests" */;
 			buildPhases = (
 				C6D80CDCAD21C4B14BECB9C6 /* [CP] Check Pods Manifest.lock */,
 				1627170920C8793900AA0024 /* Sources */,
@@ -845,14 +845,14 @@
 			dependencies = (
 				1627171320C8793900AA0024 /* PBXTargetDependency */,
 			);
-			name = BigChallengeTests;
+			name = ReefTests;
 			productName = BigChallengeTests;
-			productReference = 1627170D20C8793900AA0024 /* BigChallengeTests.xctest */;
+			productReference = 1627170D20C8793900AA0024 /* ReefTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		1627171A20C879AD00AA0024 /* BigChallengeUITests */ = {
+		1627171A20C879AD00AA0024 /* ReefUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1627172220C879AD00AA0024 /* Build configuration list for PBXNativeTarget "BigChallengeUITests" */;
+			buildConfigurationList = 1627172220C879AD00AA0024 /* Build configuration list for PBXNativeTarget "ReefUITests" */;
 			buildPhases = (
 				9BB5C177AEAF8FEBDD7DC279 /* [CP] Check Pods Manifest.lock */,
 				1627171720C879AD00AA0024 /* Sources */,
@@ -865,9 +865,9 @@
 			dependencies = (
 				1627172120C879AD00AA0024 /* PBXTargetDependency */,
 			);
-			name = BigChallengeUITests;
+			name = ReefUITests;
 			productName = BigChallengeUITests;
-			productReference = 1627171B20C879AD00AA0024 /* BigChallengeUITests.xctest */;
+			productReference = 1627171B20C879AD00AA0024 /* ReefUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		C28DC91520B61CB6007F881A /* Reef */ = {
@@ -914,7 +914,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C28DC91120B61CB6007F881A /* Build configuration list for PBXProject "BigChallenge" */;
+			buildConfigurationList = C28DC91120B61CB6007F881A /* Build configuration list for PBXProject "Reef" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -929,8 +929,8 @@
 			projectRoot = "";
 			targets = (
 				C28DC91520B61CB6007F881A /* Reef */,
-				1627170C20C8793900AA0024 /* BigChallengeTests */,
-				1627171A20C879AD00AA0024 /* BigChallengeUITests */,
+				1627170C20C8793900AA0024 /* ReefTests */,
+				1627171A20C879AD00AA0024 /* ReefUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1326,7 +1326,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BigChallenge.app/BigChallenge";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Reef.app/Reef";
 			};
 			name = Debug;
 		};
@@ -1349,7 +1349,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BigChallenge.app/BigChallenge";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Reef.app/Reef";
 			};
 			name = Release;
 		};
@@ -1561,7 +1561,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1627171420C8793900AA0024 /* Build configuration list for PBXNativeTarget "BigChallengeTests" */ = {
+		1627171420C8793900AA0024 /* Build configuration list for PBXNativeTarget "ReefTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1627171520C8793900AA0024 /* Debug */,
@@ -1570,7 +1570,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		1627172220C879AD00AA0024 /* Build configuration list for PBXNativeTarget "BigChallengeUITests" */ = {
+		1627172220C879AD00AA0024 /* Build configuration list for PBXNativeTarget "ReefUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1627172320C879AD00AA0024 /* Debug */,
@@ -1579,7 +1579,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		C28DC91120B61CB6007F881A /* Build configuration list for PBXProject "BigChallenge" */ = {
+		C28DC91120B61CB6007F881A /* Build configuration list for PBXProject "Reef" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C28DC92620B61CB9007F881A /* Debug */,

@@ -17,7 +17,7 @@
                BlueprintIdentifier = "C28DC91520B61CB6007F881A"
                BuildableName = "Reef.app"
                BlueprintName = "Reef"
-               ReferencedContainer = "container:BigChallenge.xcodeproj">
+               ReferencedContainer = "container:Reef.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
             BlueprintIdentifier = "C28DC91520B61CB6007F881A"
             BuildableName = "Reef.app"
             BlueprintName = "Reef"
-            ReferencedContainer = "container:BigChallenge.xcodeproj">
+            ReferencedContainer = "container:Reef.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -60,7 +60,7 @@
             BlueprintIdentifier = "C28DC91520B61CB6007F881A"
             BuildableName = "Reef.app"
             BlueprintName = "Reef"
-            ReferencedContainer = "container:BigChallenge.xcodeproj">
+            ReferencedContainer = "container:Reef.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -79,7 +79,7 @@
             BlueprintIdentifier = "C28DC91520B61CB6007F881A"
             BuildableName = "Reef.app"
             BlueprintName = "Reef"
-            ReferencedContainer = "container:BigChallenge.xcodeproj">
+            ReferencedContainer = "container:Reef.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
