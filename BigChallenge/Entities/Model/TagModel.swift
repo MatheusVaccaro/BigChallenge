@@ -82,9 +82,9 @@ public class TagModel {
     
     public func delete(object: Tag) {
         guard tags.contains(object) else { print("could not delete \(object) "); return }
+        deindex(tag: object)
         NotificationManager.removeAllNotifications(from: object)
         persistance.delete(object) // delegate manages the array
-        deindex(tag: object)
     }
     
     public func createTag(with attributes: [Attributes : Any]) -> Tag {
