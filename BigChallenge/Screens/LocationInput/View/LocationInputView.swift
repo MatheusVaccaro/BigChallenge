@@ -73,7 +73,7 @@ class LocationInputView: UIViewController {
     fileprivate func setupLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
     }
     

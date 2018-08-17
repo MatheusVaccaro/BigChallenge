@@ -34,9 +34,7 @@ class Recommender {
         var toDo = tasks
             .filter { !$0.isCompleted }
         
-        if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.notDetermined {
-            locationManager.requestWhenInUseAuthorization()
-        } else {
+        if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse {
             if let location = locationManager.currentLocation {
                 localTasks = Array(
                     tasks
