@@ -49,7 +49,7 @@ class HomeScreenViewModel {
     
     var bigTitleText: String {
         if let tag = selectedTags.first {
-            return tag.title!
+            return Strings.HomeScreen.title//tag.title!
         } else {
             return Strings.HomeScreen.title
         }

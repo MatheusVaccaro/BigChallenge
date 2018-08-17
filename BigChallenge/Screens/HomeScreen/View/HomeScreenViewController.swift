@@ -202,7 +202,7 @@ class HomeScreenViewController: UIViewController {
         bigTitle.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
         maskLabel.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
         
-        titleGradient.colors = bigTitleColors
+        titleGradient.colors = [UIColor.black.cgColor, UIColor.black.cgColor] //bigTitleColors
     }
     
     var bigTitleColors: [CGColor] {

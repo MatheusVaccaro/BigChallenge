@@ -80,7 +80,7 @@ public class TaskListViewModel {
             secondaryTasks.filter {
                 if selectedTags.isEmpty, // on main screen and task is recommended
                     recommender.recommendedTasks.contains($0) { return false }
-                else if $0.tags!.allObjects.isEmpty { return true }
+                else if $0.tags!.allObjects.isEmpty && selectedTags.isEmpty { return true }
                 for tag in tags where !$0.tags!.contains(tag) { return false }
                 return true
         }
