@@ -870,9 +870,9 @@
 			productReference = 1627171B20C879AD00AA0024 /* BigChallengeUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		C28DC91520B61CB6007F881A /* BigChallenge */ = {
+		C28DC91520B61CB6007F881A /* Reef */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C28DC92820B61CB9007F881A /* Build configuration list for PBXNativeTarget "BigChallenge" */;
+			buildConfigurationList = C28DC92820B61CB9007F881A /* Build configuration list for PBXNativeTarget "Reef" */;
 			buildPhases = (
 				B82CD480A753E33953458C3C /* [CP] Check Pods Manifest.lock */,
 				C28DC91220B61CB6007F881A /* Sources */,
@@ -886,7 +886,7 @@
 			);
 			dependencies = (
 			);
-			name = BigChallenge;
+			name = Reef;
 			productName = BigChallenge;
 			productReference = C28DC91620B61CB6007F881A /* BigChallenge.app */;
 			productType = "com.apple.product-type.application";
@@ -928,7 +928,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C28DC91520B61CB6007F881A /* BigChallenge */,
+				C28DC91520B61CB6007F881A /* Reef */,
 				1627170C20C8793900AA0024 /* BigChallengeTests */,
 				1627171A20C879AD00AA0024 /* BigChallengeUITests */,
 			);
@@ -1255,12 +1255,12 @@
 /* Begin PBXTargetDependency section */
 		1627171320C8793900AA0024 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C28DC91520B61CB6007F881A /* BigChallenge */;
+			target = C28DC91520B61CB6007F881A /* Reef */;
 			targetProxy = 1627171220C8793900AA0024 /* PBXContainerItemProxy */;
 		};
 		1627172120C879AD00AA0024 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C28DC91520B61CB6007F881A /* BigChallenge */;
+			target = C28DC91520B61CB6007F881A /* Reef */;
 			targetProxy = 1627172020C879AD00AA0024 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1588,7 +1588,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		C28DC92820B61CB9007F881A /* Build configuration list for PBXNativeTarget "BigChallenge" */ = {
+		C28DC92820B61CB9007F881A /* Build configuration list for PBXNativeTarget "Reef" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C28DC92920B61CB9007F881A /* Debug */,
