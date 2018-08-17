@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import NotificationCenter
 
 protocol CreationFramePresentable {
     func didTapMoreOptionsButton(_ sender: UIButton)
@@ -25,19 +26,32 @@ class CreationFrameViewController: UIViewController {
     private var currentPageIndex: Int?
     private var pendingPageIndex: Int?
     private let disposeBag = DisposeBag()
+    private var isShowingKeyboard = false
     
     // MARK: - IBOutlets
     
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var containerView: UIView!
     
+    // MARK: - Constraints
+    
+    @IBOutlet weak var buttonsBookshelfTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var doneButtonBottomConstraint: NSLayoutConstraint!
+    
     // MARK: - TaskFrameViewController Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         setupPageViewController()
         disablePageViewControllerBounce()
         subscribeToEnableDoneButton()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(CreationFrameViewController.keyboardWillShow),
+                                               name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(CreationFrameViewController.keyboardWillHide),
+                                               name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     // MARK: - IBActions
@@ -110,6 +124,31 @@ class CreationFrameViewController: UIViewController {
         self.pages = pages
     }
     
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if !isShowingKeyboard {
+            if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                isShowingKeyboard = true
+                UIView.animate(withDuration: 1) {
+                    self.buttonsBookshelfTopConstraint.constant -= keyboardSize.height
+                    self.doneButtonBottomConstraint.constant += keyboardSize.height
+                    self.view.layoutIfNeeded()
+                }
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if isShowingKeyboard {
+            isShowingKeyboard = false
+            if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                UIView.animate(withDuration: 1) {
+                    self.buttonsBookshelfTopConstraint.constant += keyboardSize.height
+                    self.doneButtonBottomConstraint.constant -= keyboardSize.height
+                    self.view.layoutIfNeeded()
+                }
+            }
+        }
+    }
 }
 
 // MARK: - UIPageViewControllerDelegate
