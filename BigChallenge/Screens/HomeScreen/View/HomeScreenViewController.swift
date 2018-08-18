@@ -90,6 +90,7 @@ class HomeScreenViewController: UIViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         bigTitle.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
         maskLabel.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
+        configureEmptyState()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -187,6 +188,9 @@ class HomeScreenViewController: UIViewController {
     fileprivate func configureEmptyState() {
         emptyStateTitleLabel.font = UIFont.font(sized: 18, weight: .bold, with: .title2)
         emptyStateSubtitleLabel.font = UIFont.font(sized: 14, weight: .light, with: .title3)
+        emptyStateOrLabel.font = UIFont.font(sized: 14, weight: .light, with: .caption2)
+        importFromRemindersButton.titleLabel?.font = UIFont.font(sized: 14, weight: .light, with: .caption2)
+        importFromRemindersButton.titleLabel?.numberOfLines = 1
         
         emptyStateTitleLabel.text = viewModel.emptyStateTitleText
         emptyStateSubtitleLabel.text = viewModel.emptyStateSubtitleText
