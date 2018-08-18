@@ -65,8 +65,8 @@ class Recommender {
     }
     
     fileprivate func isLocation(_ location: CLLocationCoordinate2D, in task: Task) -> Bool {
-        if let region = TaskModel.region(of: task) {
-            return region.contains( location )
-        } else { return false }
+        let regions = TaskModel.regions(of: task)
+        for region in regions where region.contains( location ) { return true }
+        return false
     }
 }
