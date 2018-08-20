@@ -14,27 +14,6 @@ import RxCocoa
 import RxSwift
 
 public class TaskModel {
-    
-    static func regions(of task: Task) -> [CLCircularRegion] {
-        var ans: [CLCircularRegion] = []
-        
-        //data is stored in task
-        if let data =
-            task.regionData { ans.append(NSKeyedUnarchiver.unarchiveObject(with: data) as! CLCircularRegion) }
-        
-        // OR
-        //data is stored in one of its tags
-        
-        let tagsData = task.allTags
-            .map { $0.regionData }
-        
-        for data in tagsData where data != nil {
-            ans.append(NSKeyedUnarchiver.unarchiveObject(with: data!) as! CLCircularRegion)
-        }
-        
-        return ans
-    }
-    
     // MARK: - Properties
     
     weak var delegate: TaskModelDelegate?

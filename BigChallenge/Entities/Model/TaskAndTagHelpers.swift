@@ -23,12 +23,8 @@ extension Task {
     var regions: [CLCircularRegion] {
         var ans: [CLCircularRegion] = []
         
-        //data is stored in task
         if let data =
             self.regionData { ans.append(NSKeyedUnarchiver.unarchiveObject(with: data) as! CLCircularRegion) }
-        
-        // OR
-        //data is stored in one of its tags
         
         let tagsData = self
             .allTags
@@ -50,5 +46,15 @@ extension Task {
             .filter { $0 != nil } as! [Date]) //swiftlint:disable:this force_cast
         
         return dates
+    }
+    
+    func isInside(_ location: CLLocationCoordinate2D) -> Bool {
+        for region in regions where region.contains( location ) { return true }
+        return false
+    }
+    
+    func isBefore(_ task: Task) -> Bool {
+        guard !dates.isEmpty, !task.dates.isEmpty else { return false }
+        return dates.min()! < task.dates.min()!
     }
 }

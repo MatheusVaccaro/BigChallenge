@@ -8,11 +8,7 @@
 
 import Foundation
 
-extension Tag {
-    var allTasks: [Task] {
-        return tasks!.allObjects as! [Task] //swiftlint:disable:this force_cast
-    }
-    
+extension Tag {    
     var notificationOptions: NotificationOptions {
         get {
             let frequency = NotificationOptions.Frequency(rawValue: self.frequency) ?? .none

@@ -8,22 +8,7 @@
 
 import Foundation
 
-extension Task {
-    var allTags: [Tag] {
-        return tags!.allObjects as! [Tag] //swiftlint:disable:this force_cast
-    }
-    
-    var minDate: Date {
-        var dates: [Date] = []
-        
-        if let dueDate = dueDate { dates.append(dueDate) }
-        dates.append(contentsOf: allTags
-            .map { $0.dueDate }
-            .filter { $0 != nil } as! [Date]) //swiftlint:disable:this force_cast
-        
-        return dates.min()!
-    }
-    
+extension Task {    
     var notificationOptions: NotificationOptions {
         get {
             let frequency = NotificationOptions.Frequency(rawValue: self.frequency) ?? .none

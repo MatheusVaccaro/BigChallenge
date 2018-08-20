@@ -38,7 +38,7 @@ class Recommender {
             if let location = locationManager.currentLocation {
                 localTasks = Array(
                     tasks
-                        .filter { isLocation(location, in: $0) }
+                        .filter { $0.isInside(location) }
                         .prefix(localTasksLimit)
                 )
                 toDo = toDo
@@ -49,7 +49,7 @@ class Recommender {
         nextTasks = Array(
             toDo
                 .filter { $0.dueDate != nil }
-                .sorted { $0.isNextTo($1) }
+                .sorted { $0.isBefore($1) }
                 .prefix(nextTasksLimit)
         )
         
@@ -62,17 +62,5 @@ class Recommender {
         
         _recommendedTasks = latestTasks + nextTasks + localTasks
         return _recommendedTasks!
-    }
-    
-    fileprivate func isLocation(_ location: CLLocationCoordinate2D, in task: Task) -> Bool {
-        let regions = TaskModel.regions(of: task)
-        for region in regions where region.contains( location ) { return true }
-        return false
-    }
-}
-
-fileprivate extension Task {    
-    func isNextTo(_ task: Task) -> Bool {
-        return minDate < task.minDate
     }
 }

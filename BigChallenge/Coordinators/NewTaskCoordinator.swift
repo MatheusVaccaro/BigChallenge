@@ -70,7 +70,6 @@ class NewTaskCoordinator: Coordinator {
         let locationInputViewModel = locationInputViewController.viewModel
         // edit task
         if let task = self.task {
-            let locations = TaskModel.regions(of: task)
             locationInputViewController.outputlocation = location
             locationInputViewController.arriving = task.arriving
         }
