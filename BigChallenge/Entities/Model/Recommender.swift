@@ -49,7 +49,7 @@ class Recommender {
         nextTasks = Array(
             toDo
                 .filter { $0.dueDate != nil }
-                .sorted { $0.dueDate! < $1.dueDate! }
+                .sorted { $0.isNextTo($1) }
                 .prefix(nextTasksLimit)
         )
         
@@ -68,5 +68,11 @@ class Recommender {
         let regions = TaskModel.regions(of: task)
         for region in regions where region.contains( location ) { return true }
         return false
+    }
+}
+
+fileprivate extension Task {
+    func isNextTo(_ task: Task) -> Bool {
+        return self.dueDate! < task.dueDate!
     }
 }
