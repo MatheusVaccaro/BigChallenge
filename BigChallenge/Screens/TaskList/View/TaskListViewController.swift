@@ -154,6 +154,7 @@ public class TaskListViewController: UIViewController {
             }.disposed(by: disposeBag)
         
         tableView.rx.didEndDragging.subscribe { _ in
+            self.feedbackGenerator = nil
             if tableView.shouldAddNewTask {
                 self.viewModel.shouldGoToAddTask()
             } else if tableView.shouldShowCompletedTasks {
@@ -169,7 +170,6 @@ public class TaskListViewController: UIViewController {
     }
     
     fileprivate func resetFeedback() {
-        feedbackGenerator = nil
         lightImpactOcurred = true
         mediumImpactOcurred = false
         heavyImpactOcurred = false
