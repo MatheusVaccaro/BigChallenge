@@ -63,7 +63,7 @@ public class TagModel {
             tags = $0
             Answers.logCustomEvent(withName: "fetched tags", customAttributes: [
                 "numberOfTags" : tags.count,
-                "numberOfTasksPerTag" : tags.map { (($0.tasks!.allObjects as! [Task]).filter { !$0.isCompleted }).count }
+                "numberOfTasksPerTag" : tags.map { ($0.allTasks.filter { !$0.isCompleted }).count }
                 ])
         }
         didUpdateTags.onNext(tags)

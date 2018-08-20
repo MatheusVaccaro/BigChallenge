@@ -66,10 +66,9 @@ class TagCollectionViewModel {
     
     func sortMostTasksIn(_ tags: [Tag]) -> [Tag] {
         return tags.sorted {
-            //swiftlint:disable force_cast
-            let completedTasks1 = ($0.tasks!.allObjects as! [Task]).filter { !$0.isCompleted }
-            let completedTasks2 = ($1.tasks!.allObjects as! [Task]).filter { !$0.isCompleted }
-            //swiftlint:enable force_cast
+            let completedTasks1 = $0.allTasks.filter { !$0.isCompleted }
+            let completedTasks2 = $1.allTasks.filter { !$0.isCompleted }
+            
             return completedTasks1.count > completedTasks2.count
         }
     }
@@ -117,8 +116,9 @@ class TagCollectionViewModel {
         filteredTags = model.tags.filter {
             return (selectedTags.isEmpty ||                          //no tag is selected, or
                 selectedTags.contains($0) ||                        //tag is selected, or
-                !(($0.tasks!.allObjects as! [Task])                 //tag has uncompleted tasks in common
-                    .filter { !$0.isCompleted && $0.tags!.contains(tag) }).isEmpty)
+                !($0.allTasks                 //tag has uncompleted tasks in common
+                    .filter { !$0.isCompleted && $0.tags!.contains(tag) })
+                    .isEmpty)
         }
         tagsObservable.onNext(filteredTags)
     }

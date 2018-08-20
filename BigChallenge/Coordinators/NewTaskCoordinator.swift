@@ -44,7 +44,7 @@ class NewTaskCoordinator: Coordinator {
         self.task = task
         
         self.selectedTags = isEditing
-            ? task!.tags!.allObjects as! [Tag]
+            ? task!.allTags
             : selectedTags
     }
     

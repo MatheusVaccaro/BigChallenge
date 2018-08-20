@@ -42,7 +42,7 @@ class ApplicationCoordinator: Coordinator {
                 tagModel.tags.filter { selectedTagIDs.contains($0.id!.description) }
         } else if let taskID = taskID {
             selectedTags =
-                taskModel.taskWith(id: UUID(uuidString: taskID)!)!.tags!.allObjects as! [Tag]
+                taskModel.taskWith(id: UUID(uuidString: taskID)!)!.allTags
         }
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()

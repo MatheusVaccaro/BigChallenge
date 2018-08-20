@@ -25,8 +25,7 @@ public class TaskModel {
         // OR
         //data is stored in one of its tags
         
-        let tagsData =
-            (task.tags!.allObjects as! [Tag])
+        let tagsData = task.allTags
             .map { $0.regionData }
         
         for data in tagsData where data != nil {

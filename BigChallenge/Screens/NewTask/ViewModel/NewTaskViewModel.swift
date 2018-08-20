@@ -47,7 +47,7 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
         self.taskModel = taskModel
         self.task = task
         
-        self.selectedTags = task == nil ? [] : task!.tags!.allObjects as! [Tag]
+        self.selectedTags = task == nil ? [] : task!.allTags
         self.taskNotesText = task?.notes ?? ""
     }
     

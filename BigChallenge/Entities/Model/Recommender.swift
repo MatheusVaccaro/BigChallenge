@@ -71,8 +71,8 @@ class Recommender {
     }
 }
 
-fileprivate extension Task {
+fileprivate extension Task {    
     func isNextTo(_ task: Task) -> Bool {
-        return self.dueDate! < task.dueDate!
+        return minDate < task.minDate
     }
 }
