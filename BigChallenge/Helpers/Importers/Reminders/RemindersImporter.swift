@@ -32,8 +32,15 @@ public class RemindersImporter {
      Attempts to start the import procedure.
      If sucessful, will import all reminders that have not been imported yet.
  	*/
-    func attemptToImport() {
+    func requestAndImport() {
         remindersDB.requestAccess()
+    }
+    
+    /// import from remidners only if permission is already granted
+    func importIfGranted() {
+        if EKEventStore.authorizationStatus(for: .reminder) == .authorized {
+            requestAndImport()
+        }
     }
 
     /**
