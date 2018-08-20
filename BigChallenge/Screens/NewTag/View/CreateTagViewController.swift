@@ -64,16 +64,7 @@ class CreateTagViewController: UIViewController, CreationFramePresentable {
 
 // MARK: - UITextViewDelegate
 
-extension CreateTagViewController: UITextViewDelegate {
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n" {
-            textView.resignFirstResponder()
-            return false
-        }
-        return true
-    }
-    
+extension CreateTagViewController: UITextViewDelegate {    
     func textViewDidChangeSelection(_ textView: UITextView) {
         if textView === tagTitleTextView {
             viewModel?.tagTitle = textView.text

@@ -130,16 +130,7 @@ extension NewTaskViewController: StoryboardInstantiable {
     }
 }
 
-extension NewTaskViewController: UITextViewDelegate {
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n" {
-            textView.resignFirstResponder()
-            return false
-        }
-        return true
-    }
-    
+extension NewTaskViewController: UITextViewDelegate {    
     func textViewDidChangeSelection(_ textView: UITextView) {
         if textView === taskTitleTextView {
             viewModel?.taskTitleText = textView.text
