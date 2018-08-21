@@ -102,12 +102,12 @@ class TagCollectionViewModel {
                 for tag in self.selectedTags where !self.tags.contains(tag) {
                     let index = self.selectedTags.index(of: tag)!
                     self.selectedTags.remove(at: index)
-                    self.selectedTagsObservable.onNext(self.selectedTags)
                 }
                 
                 print("updated tags: \(self.tags.map {$0.title!})")
                 
                 if self.filtering { self.filterTags(with: self.selectedTags) }
+                self.selectedTagsObservable.onNext(self.selectedTags)
                 self.tagsObservable.onNext(self.filteredTags)
             }.disposed(by: disposeBag)
     }
