@@ -1,7 +1,7 @@
 # Podfile
 use_frameworks!
 
-target 'BigChallenge' do
+target 'Reef' do
 	platform :ios, '11.0'
 
     pod 'RxSwift',    '~> 4.0'
@@ -28,10 +28,10 @@ def testing_pods
     pod 'RxSwift', '~> 4.0'
 end
 
-target 'BigChallengeTests' do
+target 'ReefTests' do
     testing_pods
 end
 
-target 'BigChallengeUITests' do
+target 'ReefUITests' do
     testing_pods
 end
