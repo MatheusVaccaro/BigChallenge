@@ -13,7 +13,7 @@ protocol TaskCellDelegate: class {
 }
 
 enum CellType {
-    case main
+    case card
     case none
 }
 
@@ -74,7 +74,7 @@ class TaskTableViewCell: UITableViewCell {
     
     func layout(with position: CellType) {
         switch position {
-        case .main:
+        case .card:
             layer.shadowColor = UIColor.black.cgColor
             backgroundColor = UIColor.white
         case .none:

@@ -63,17 +63,22 @@ public class TaskListViewController: UIViewController {
             .rx.setDelegate(self)
             .disposed(by: disposeBag)
         
+        
+        // divide tasks in main and secondary sections
+        // filter empty sections
         viewModel.tasksObservable
             .map {
-                return [SectionedTaskModel(items: $0.0), // divide tasks in main and secondary sections
-                        SectionedTaskModel(items: $0.1)].filter { !$0.items.isEmpty } // filter empty sections
-            }.bind(to: tableView.rx.items(dataSource: dataSource))
+                return $0
+                    .map { SectionedTaskModel(items: $0) }
+                    .filter { !$0.items.isEmpty }
+            }
+            .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }
     
     fileprivate func layout(cell: TaskTableViewCell, with indexPath: IndexPath) {
-        if indexPath.section == 0, !viewModel.mainTasks.isEmpty {
-            cell.layout(with: .main)
+        if indexPath.section == 0, !viewModel.tasks.first!.isEmpty {
+            cell.layout(with: .card)
         } else {
             cell.layout(with: .none)
         }
@@ -157,8 +162,6 @@ public class TaskListViewController: UIViewController {
             self.feedbackGenerator = nil
             if tableView.shouldAddNewTask {
                 self.viewModel.shouldGoToAddTask()
-            } else if tableView.shouldShowCompletedTasks {
-                self.viewModel.showsCompletedTasks = !self.viewModel.showsCompletedTasks
             }
             }.disposed(by: disposeBag)
     }
@@ -225,25 +228,17 @@ fileprivate extension UITableView {
     var shouldAddNewTask: Bool {
         return contentOffset.y < -80.0
     }
-    
-    var shouldShowCompletedTasks: Bool {
-        return contentSize.height < bounds.height
-            ? contentOffset.y > 80
-            : contentOffset.y + bounds.height > contentSize.height + 80
-    }
 }
 
 extension TaskListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let task =
-            indexPath.section == 0 && !viewModel.mainTasks.isEmpty
-                ? viewModel.mainTasks[indexPath.row]
-                : viewModel.tasksToShow[indexPath.row]
+        let task = viewModel.tasks[indexPath.section][indexPath.row]
         viewModel.shouldEditTask.onNext(task)
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard !(viewModel.mainTasks.isEmpty) else { return 0 }
+        guard !viewModel.tasks[section].isEmpty else { return 0 }
+        
         let additionalHeight = (section == 0 && !viewModel.selectedTags.isEmpty)
             ? 0
             : heightOfHeaderTag!
@@ -252,7 +247,7 @@ extension TaskListViewController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return viewModel.mainTasks.isEmpty && viewModel.selectedTags.isEmpty ? 0 : 46
+        return !viewModel.isCardAppearing && viewModel.selectedTags.isEmpty ? 0 : 46
     }
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -282,14 +277,14 @@ extension TaskListViewController: UITableViewDelegate {
             
             return headerView
         } else { // also tagged section
-            guard !viewModel.secondaryTasks.isEmpty, !viewModel.selectedTags.isEmpty else { return headerView }
-            headerView.addSubview(alsoTaggedHeader)
+            guard !viewModel.tasks[section].isEmpty, !viewModel.selectedTags.isEmpty else { return headerView }
+            headerView.addSubview( textHeaderView(with: viewModel.name(for: section) , colored: UIColor.black) )
             return headerView
         }
     }
     
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard !viewModel.mainTasks.isEmpty && section == 0 else { return nil }
+        guard viewModel.isCardAppearing && section == 0 else { return nil }
         
         let footerView = UIView(frame: view.bounds)
         let cardView = UIView(frame: footerView.bounds)

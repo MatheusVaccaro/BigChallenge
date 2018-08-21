@@ -14,31 +14,21 @@ import RxSwift
 
 public class TaskListViewModel {
     
-    var tasksObservable: BehaviorSubject<([Task], [Task])>
+    var tasksObservable: BehaviorSubject<[[Task]]>
     var taskCompleted: PublishSubject<Task>
     var shouldAddTask: PublishSubject<Bool>
     var shouldEditTask: PublishSubject<Task>
     
-    var showsCompletedTasks: Bool = false {
-        didSet {
-            print((showsCompletedTasks ? "showing" : "not showing") + " completed tasks")
-            if showsCompletedTasks { Answers.logCustomEvent(withName: "showed completed tasks") }
-            tasksObservable.onNext((mainTasks, tasksToShow))
-        }
-    }
-    
-    var tasksToShow: [Task] {
-        if showsCompletedTasks {
-            return secondaryTasks + completedTasks
-        } else { return secondaryTasks }
-    }
-    
     //    here i declare multiple arrays for completed and uncomplete tasks
     //    so that you dont need to filer the array everytime you complete a task
-    private(set) var mainTasks: [Task]
-    private(set) var secondaryTasks: [Task]
-    private(set) var completedTasks: [Task]
+    private(set) var sections: [[Tag]]
+    private(set) var tasks: [[Task]]
     private(set) var selectedTags: [Tag]
+    private(set) var relatedTags: [Tag]
+    
+    var isCardAppearing: Bool {
+        return !tasks.first!.isEmpty
+    }
 
     private var recommender: Recommender
     private let model: TaskModel
@@ -46,58 +36,58 @@ public class TaskListViewModel {
     
     public init(model: TaskModel) {
         self.model = model
-        self.mainTasks = []
-        self.secondaryTasks = []
-        self.completedTasks = []
+        self.tasks = []
         self.selectedTags = []
+        self.relatedTags = []
+        self.sections = []
         
         self.taskCompleted = PublishSubject<Task>()
         self.shouldAddTask = PublishSubject<Bool>()
         self.shouldEditTask = PublishSubject<Task>()
         
-        self.tasksObservable = BehaviorSubject<([Task], [Task])>(value: (mainTasks, secondaryTasks))
+        self.tasksObservable = BehaviorSubject<[[Task]]>(value: tasks)
         self.recommender = Recommender(model: model)
         
         subscribeToCompletedTask()
         subscribeToModelUpdate()
     }
     
+    func name(for section: Int) -> String {
+        var ans = ""
+        
+        ans += sections[section].map { $0.title! }.description
+        
+        return ans
+    }
+    
+    
     /** filters the taskList with selected tags */
-    func filterTasks(with tags: [Tag]) {
-        self.selectedTags = tags
-        mainTasks = []
-        secondaryTasks = []
-        completedTasks = []
+    func filterTasks(with selectedTags: [Tag], relatedTags: [Tag]) {
+        //swiftlint:disable statement_postition
+        self.selectedTags = selectedTags
+        self.relatedTags = relatedTags
+        self.tasks = []
         
-        for task in model.tasks {
-            appendTask(task)
+        if selectedTags.isEmpty { tasks.append(recommender.recommendedTasks) }
+        
+        var flatTasks = model.tasks // remove unrelated tasks
+            .filter { !$0.isCompleted }
+            .filter { for tag in selectedTags where !$0.tags!.contains(tag) { return false }; return true }
+        
+        sections = relatedTags.powerSet.map { selectedTags + $0 }
+        
+        for tags in sections {
+            let tasksInSection = flatTasks
+                .filter { $0.allTags.count == tags.count &&
+                          $0.tags! == NSSet(array: tags) }
+            
+            flatTasks = flatTasks.filter { !tasksInSection.contains($0) } // ??????????
+            
+            tasks.append(tasksInSection)
         }
         
-        print(mainTasks.map {$0.title!})
-        print(secondaryTasks.map {$0.title!})
-        
-        secondaryTasks =
-            secondaryTasks.filter {
-                if selectedTags.isEmpty, // on main screen and task is recommended
-                    recommender.recommendedTasks.contains($0) { return false }
-                else if $0.tags!.allObjects.isEmpty && selectedTags.isEmpty { return true }
-                for tag in tags where !$0.tags!.contains(tag) { return false }
-                return true
-        }
-        
-        completedTasks =
-            completedTasks
-                .filter {
-                    for tag in tags where !$0.tags!.contains(tag) { return false }
-                    return true
-        }
-        
-        completedTasks = Array(
-            completedTasks
-                .sorted { $0.completionDate! > $1.completionDate! }
-                .prefix(10) )
-        
-        tasksObservable.onNext((mainTasks, tasksToShow))
+        tasksObservable.onNext(tasks)
+        //swiftlint:enable statement_postition
     }
     
     func taskCellViewModel(for task: Task) -> TaskCellViewModel {
@@ -125,23 +115,10 @@ public class TaskListViewModel {
         //TODO: improve this
     }
     
-    /** appends a centain task to the appropriate array inside taskListViewModel */
-    fileprivate func appendTask(_ task: Task) {
-        if !task.isCompleted {
-            if isMainTask(task) {
-                mainTasks.append(task)
-            } else {
-                secondaryTasks.append(task)
-            }
-        } else {
-            completedTasks.append(task)
-        }
-    }
-    
     fileprivate func subscribeToModelUpdate() {
         model.didUpdateTasks.subscribe {
             guard $0.element != nil else { return }
-            self.filterTasks(with: self.selectedTags)
+            self.filterTasks(with: self.selectedTags, relatedTags: self.relatedTags)
             }.disposed(by: disposeBag)
     }
     

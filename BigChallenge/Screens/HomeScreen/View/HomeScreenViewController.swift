@@ -134,7 +134,7 @@ class HomeScreenViewController: UIViewController {
         taskListViewModel.tasksObservable.subscribe { event in
             guard let tasks = event.element else { return }
             DispatchQueue.main.async {
-                self.showEmptyState(tasks.0.isEmpty && tasks.1.isEmpty)
+                self.showEmptyState( tasks.flatMap { $0 }.isEmpty )
             }
         }.disposed(by: disposeBag)
     }
@@ -151,7 +151,12 @@ class HomeScreenViewController: UIViewController {
                 guard let selectedTags = event.element else { return }
                 self.viewModel.updateSelectedTagsIfNeeded(selectedTags)
                 self.configureBigTitle()
-                self.taskListViewController.viewModel.filterTasks(with: selectedTags)
+                let relatedTags = self.tagCollectionViewController.viewModel
+                    .filteredTags.filter { !selectedTags.contains($0) }
+                self.taskListViewController.viewModel
+                    .filterTasks(with: selectedTags,
+                                 relatedTags: relatedTags)
+                
                 if let activity = self.userActivity { self.updateUserActivityState(activity) }
                 if !selectedTags.isEmpty {
                     Answers.logCustomEvent(withName: "filtered with tag",
