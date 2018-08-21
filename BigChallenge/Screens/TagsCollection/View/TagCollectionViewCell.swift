@@ -134,6 +134,8 @@ class TagCollectionViewCell: UICollectionViewCell {
     }
     
     override func layoutSubviews() {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
         super.layoutSubviews()
         
         maskLabel.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -142,5 +144,49 @@ class TagCollectionViewCell: UICollectionViewCell {
         frame.size.width = tagUILabel.frame.size.width + 8*3
         gradientLayer.frame = bounds
         maskLabel.frame = bounds
+        CATransaction.commit()
+    }
+    
+    // MARK: - Force touch
+    var forceTouched: PublishSubject<UITouch> = PublishSubject()
+    var impactGenerator: UIImpactFeedbackGenerator?
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        impactGenerator = UIImpactFeedbackGenerator(style: .medium)
+        impactGenerator?.prepare()
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        guard let touch = touches.first else { return }
+        if shouldTriggerForceTouch(on: touch) {
+            forceTouched.onNext(touch)
+            resetImpactFeedback()
+        }
+    }
+    
+    fileprivate func shouldTriggerForceTouch(on touch: UITouch) -> Bool {
+        if self.traitCollection.forceTouchCapability == .available {
+            let force = touch.force/touch.maximumPossibleForce
+            if !mediumImpactOcurred, force >= 0.5 {
+                impactGenerator?.impactOccurred()
+                mediumImpactOcurred = true
+                return true
+            } else if !heavyImpactOcurred, force >= 0.6 {
+                UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+                heavyImpactOcurred = true
+                return true
+            }
+        }
+        return false
+    }
+    
+    fileprivate var mediumImpactOcurred: Bool = false
+    fileprivate var heavyImpactOcurred: Bool = false
+    
+    fileprivate func resetImpactFeedback() {
+        mediumImpactOcurred = false
+        heavyImpactOcurred = false
     }
 }
