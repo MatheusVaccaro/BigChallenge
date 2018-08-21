@@ -151,9 +151,9 @@ class HomeScreenViewController: UIViewController {
                 guard let selectedTags = event.element else { return }
                 self.viewModel.updateSelectedTagsIfNeeded(selectedTags)
                 self.configureBigTitle()
-                if let activity = self.userActivity { self.updateUserActivityState(activity) }
                 self.taskListViewController.viewModel.filterTasks(with: selectedTags)
-                if !selectedTags.isEmpty {                
+                if let activity = self.userActivity { self.updateUserActivityState(activity) }
+                if !selectedTags.isEmpty {
                     Answers.logCustomEvent(withName: "filtered with tag",
                                            customAttributes: ["numberOfFilteredTags" : selectedTags.count])
                 }

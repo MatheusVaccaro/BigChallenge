@@ -134,10 +134,6 @@ class TagCollectionViewController: UIViewController {
             return
         }
         
-        cell.forceTouched.subscribe { event in
-            self.presentBigCollection()
-        }.disposed(by: disposeBag)
-        
         cell.longPressedTag.subscribe { event in
             self.presentActionSheet(for: event.element!)
             Answers.logCustomEvent(withName: "longpressed tag")
