@@ -80,7 +80,7 @@ public class TaskListViewModel {
             secondaryTasks.filter {
                 if selectedTags.isEmpty, // on main screen and task is recommended
                     recommender.recommendedTasks.contains($0) { return false }
-                else if $0.tags!.allObjects.isEmpty { return true }
+                else if $0.tags!.allObjects.isEmpty && selectedTags.isEmpty { return true }
                 for tag in tags where !$0.tags!.contains(tag) { return false }
                 return true
         }
@@ -119,11 +119,9 @@ public class TaskListViewModel {
     fileprivate func isMainTask(_ task: Task) -> Bool {
         if recommender.recommendedTasks.contains(task) && selectedTags.isEmpty { return true }
         
-        let taskTags = (task.tags?.allObjects as! [Tag])
-        
         return !selectedTags.isEmpty &&
-            taskTags.count == selectedTags.count &&
-            taskTags.map { $0.title! }.sorted() == selectedTags.map { $0.title! }.sorted()
+            task.allTags.count == selectedTags.count &&
+            task.allTags.map { $0.title! }.sorted() == selectedTags.map { $0.title! }.sorted()
         //TODO: improve this
     }
     

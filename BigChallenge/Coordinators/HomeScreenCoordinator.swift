@@ -39,13 +39,15 @@ class HomeScreenCoordinator: Coordinator {
         
         self.remindersImporter =
             RemindersImporter(taskModel: taskModel, tagModel: tagModel)
-        
+        remindersImporter.importIfGranted()
         self.taskModel.delegate = self
     }
 
     func start() {
         let homeScreenViewController = HomeScreenViewController.instantiate()
-        let homeScreenViewModel = HomeScreenViewModel(taskModel: taskModel, tagModel: tagModel, selectedTags: selectedTags)
+        let homeScreenViewModel = HomeScreenViewModel(taskModel: taskModel,
+                                                      tagModel: tagModel,
+                                                      selectedTags: selectedTags)
         homeScreenViewController.viewModel = homeScreenViewModel
 
         homeScreenViewModel.delegate = self
@@ -110,7 +112,7 @@ extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
     }
     
     func importFromReminders() {
-        remindersImporter.attemptToImport()
+        remindersImporter.requestAndImport()
     }
     
     func willAddTask(selectedTags: [Tag]) {

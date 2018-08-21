@@ -44,7 +44,7 @@ class NewTaskCoordinator: Coordinator {
         self.task = task
         
         self.selectedTags = isEditing
-            ? task!.tags!.allObjects as! [Tag]
+            ? task!.allTags
             : selectedTags
     }
     
@@ -69,7 +69,7 @@ class NewTaskCoordinator: Coordinator {
         let locationInputViewController = LocationInputView.instantiate()
         let locationInputViewModel = locationInputViewController.viewModel
         // edit task
-        if let task = self.task, let location = TaskModel.region(of: task) {
+        if let task = self.task {
             locationInputViewController.outputlocation = location
             locationInputViewController.arriving = task.arriving
         }

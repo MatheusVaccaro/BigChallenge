@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Tag {
+extension Tag {    
     var notificationOptions: NotificationOptions {
         get {
             let frequency = NotificationOptions.Frequency(rawValue: self.frequency) ?? .none

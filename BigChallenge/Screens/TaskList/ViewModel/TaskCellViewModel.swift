@@ -34,7 +34,8 @@ class TaskCellViewModel {
         guard !task.tags!.allObjects.isEmpty else { return "" }
         var ans = ""
         
-        let tagArray = (task.tags?.allObjects as! [Tag]).map { $0.title ?? "nil" }
+        let tagArray = task.allTags
+            .map { $0.title! }
         
         for index in 0..<tagArray.count-1 {
             ans += tagArray[index] + ", "

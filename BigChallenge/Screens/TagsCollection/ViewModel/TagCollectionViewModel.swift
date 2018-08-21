@@ -66,10 +66,9 @@ class TagCollectionViewModel {
     
     func sortMostTasksIn(_ tags: [Tag]) -> [Tag] {
         return tags.sorted {
-            //swiftlint:disable force_cast
-            let completedTasks1 = ($0.tasks!.allObjects as! [Task]).filter { !$0.isCompleted }
-            let completedTasks2 = ($1.tasks!.allObjects as! [Task]).filter { !$0.isCompleted }
-            //swiftlint:enable force_cast
+            let completedTasks1 = $0.allTasks.filter { !$0.isCompleted }
+            let completedTasks2 = $1.allTasks.filter { !$0.isCompleted }
+            
             return completedTasks1.count > completedTasks2.count
         }
     }
@@ -88,9 +87,9 @@ class TagCollectionViewModel {
                 } else { self.selectedTags.append(tag) }
 
                 self.selectedTagsObservable.onNext(self.selectedTags)
-                print(self.filtering)
+                
                 if self.filtering {
-                    self.filterTags(with: tag)
+                    self.filterTags(with: self.selectedTags)
                 }
             }.disposed(by: disposeBag)
     }
@@ -113,13 +112,28 @@ class TagCollectionViewModel {
             }.disposed(by: disposeBag)
     }
 
-    fileprivate func filterTags(with tag: Tag) {
-        filteredTags = model.tags.filter {
-            return (selectedTags.isEmpty ||                          //no tag is selected, or
-                selectedTags.contains($0) ||                        //tag is selected, or
-                !(($0.tasks!.allObjects as! [Task])                 //tag has uncompleted tasks in common
-                    .filter { !$0.isCompleted && $0.tags!.contains(tag) }).isEmpty)
+    fileprivate func filterTags(with tags: [Tag]) {
+        //no tag is selected, or
+        //tag is selected, or
+        //tag has uncompleted tasks in common
+        
+        if tags.isEmpty {
+            filteredTags = self.tags
+        } else {
+            filteredTags =
+                model.tags
+                    .filter { tags.contains($0) || $0.hasTagsInCommonWith(tags) }
         }
+        
         tagsObservable.onNext(filteredTags)
+    }
+}
+
+fileprivate extension Tag {
+    func hasTagsInCommonWith(_ tags: [Tag]) -> Bool {
+        return !(allTasks
+            .filter { !$0.isCompleted }
+            .filter { Set<Tag>(tags).isSubset(of: $0.allTags) }
+            .isEmpty)
     }
 }

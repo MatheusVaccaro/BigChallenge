@@ -34,13 +34,11 @@ class Recommender {
         var toDo = tasks
             .filter { !$0.isCompleted }
         
-        if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.notDetermined {
-            locationManager.requestWhenInUseAuthorization()
-        } else {
+        if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse {
             if let location = locationManager.currentLocation {
                 localTasks = Array(
                     tasks
-                        .filter { isLocation(location, in: $0) }
+                        .filter { $0.isInside(location) }
                         .prefix(localTasksLimit)
                 )
                 toDo = toDo
@@ -51,7 +49,7 @@ class Recommender {
         nextTasks = Array(
             toDo
                 .filter { $0.dueDate != nil }
-                .sorted { $0.dueDate! < $1.dueDate! }
+                .sorted { $0.isBefore($1) }
                 .prefix(nextTasksLimit)
         )
         
@@ -64,11 +62,5 @@ class Recommender {
         
         _recommendedTasks = latestTasks + nextTasks + localTasks
         return _recommendedTasks!
-    }
-    
-    fileprivate func isLocation(_ location: CLLocationCoordinate2D, in task: Task) -> Bool {
-        if let region = TaskModel.region(of: task) {
-            return region.contains( location )
-        } else { return false }
     }
 }
