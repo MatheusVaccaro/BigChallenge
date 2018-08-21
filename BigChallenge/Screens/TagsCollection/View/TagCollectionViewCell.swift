@@ -14,7 +14,6 @@ class TagCollectionViewCell: UICollectionViewCell {
 
     static let identifier = "tagCollectionCell"
     
-    private(set) var clickedAddTag: PublishSubject<Bool> = PublishSubject()
     private(set) var longPressedTag: PublishSubject<Tag> = PublishSubject()
     
     enum Kind {
@@ -48,17 +47,13 @@ class TagCollectionViewCell: UICollectionViewCell {
         return ans
     }()
     
-    private var isPresenting: Bool = false
-    
     override var isSelected: Bool {
         didSet {
             contentView.mask = isSelected ? nil : maskLabel
             tagUILabel.isHidden = !isSelected
-            if kind == .add, isSelected, !isPresenting {
-                isPresenting = true
-                clickedAddTag.onNext(true)
+            
+            if kind == .add, isSelected { // add tag is never selected
                 isSelected = false
-                isPresenting = false
             }
         }
     }
@@ -88,11 +83,10 @@ class TagCollectionViewCell: UICollectionViewCell {
         kind = .tag
         
         longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
-        contentView.addGestureRecognizer(longPressRecognizer!)
     }
     
     deinit {
-        contentView.removeGestureRecognizer(longPressRecognizer)
+        removeGestureRecognizer(longPressRecognizer)
     }
     
     @objc private func handleLongPress() {
@@ -107,6 +101,7 @@ class TagCollectionViewCell: UICollectionViewCell {
             return
         }
         
+        addGestureRecognizer(longPressRecognizer)
         self.viewModel = viewModel
         tagUILabel.text = viewModel.tagTitle
         maskLabel.text = viewModel.tagTitle
@@ -116,9 +111,10 @@ class TagCollectionViewCell: UICollectionViewCell {
     }
     
     func configureDefault() {
-        contentView.removeGestureRecognizer(longPressRecognizer)
+        removeGestureRecognizer(longPressRecognizer)
         tagUILabel.text = "+"
         maskLabel.text = "+"
+        
         layer.shadowColor = UIColor.black.cgColor
         gradientLayer.colors = UIColor.Tags.redGradient
         contentView.mask = maskLabel
@@ -138,6 +134,8 @@ class TagCollectionViewCell: UICollectionViewCell {
     }
     
     override func layoutSubviews() {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
         super.layoutSubviews()
         
         maskLabel.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -146,5 +144,6 @@ class TagCollectionViewCell: UICollectionViewCell {
         frame.size.width = tagUILabel.frame.size.width + 8*3
         gradientLayer.frame = bounds
         maskLabel.frame = bounds
+        CATransaction.commit()
     }
 }

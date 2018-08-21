@@ -61,18 +61,11 @@ class TagCollectionViewController: UIViewController {
                 
         }.disposed(by: disposeBag)
         
-        if let tagsCollection = tagsCollectionView as? TagCollectionView {
-            tagsCollection.touchedEvent.subscribe { event in
-                guard let touch = event.element else { return }
-                if self.shouldPresentBigCollection(on: touch) {
-                    self.presentBigCollection()
-                }
-                self.resetImpactFeedback()
-            }.disposed(by: disposeBag)
-        }
-        
         tagsCollectionView.rx.modelSelected(Item.self).subscribe { event in
-            guard let tag = event.element?.tag else { return }
+            guard let tag = event.element?.tag else {
+                self.addTagEvent?.onNext(true)
+                return
+            }
             UISelectionFeedbackGenerator().selectionChanged()
             self.viewModel.selectedTagEvent.onNext(tag)
         }.disposed(by: disposeBag)
@@ -138,14 +131,11 @@ class TagCollectionViewController: UIViewController {
     fileprivate func configureCell(row: Int, item: Item, cell: TagCollectionViewCell) {
         guard let tag = item.tag else {
             cell.configure()
-            cell.clickedAddTag.subscribe { _ in
-                self.addTagEvent?.onNext(true)
-                }.disposed(by: self.disposeBag)
             return
         }
         
-        cell.longPressedTag.subscribe {
-            self.presentActionSheet(for: $0.element!)
+        cell.longPressedTag.subscribe { event in
+            self.presentActionSheet(for: event.element!)
             Answers.logCustomEvent(withName: "longpressed tag")
         }.disposed(by: self.disposeBag)
         
@@ -153,30 +143,6 @@ class TagCollectionViewController: UIViewController {
         let indexPath = IndexPath(row: row, section: 0)
         cell.configure(with: tagViewModel)
         self.loadSelection(for: cell, tag: tag, at: indexPath)
-    }
-    
-    fileprivate func shouldPresentBigCollection(on touch: UITouch) -> Bool {
-        if self.traitCollection.forceTouchCapability == .available {
-            let force = touch.force/touch.maximumPossibleForce
-            if !mediumImpactOcurred, force >= 0.5 {
-                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                mediumImpactOcurred = true
-                return true
-            } else if !heavyImpactOcurred, force >= 0.6 {
-                UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
-                heavyImpactOcurred = true
-                return true
-            }
-        }
-        return false
-    }
-    
-    fileprivate var mediumImpactOcurred: Bool = false
-    fileprivate var heavyImpactOcurred: Bool = false
-    
-    fileprivate func resetImpactFeedback() {
-        mediumImpactOcurred = false
-        heavyImpactOcurred = false
     }
     
     fileprivate func presentBigCollection() {

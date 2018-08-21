@@ -66,9 +66,12 @@ class HomeScreenViewController: UIViewController {
     }()
     
     override func viewDidLayoutSubviews() {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
         gradientView.frame = bigTitle.frame
         titleGradient.frame = gradientView.bounds
         maskLabel.frame = gradientView.bounds
+        CATransaction.commit()
     }
     
     override func viewDidLoad() {
@@ -148,10 +151,9 @@ class HomeScreenViewController: UIViewController {
                 guard let selectedTags = event.element else { return }
                 self.viewModel.updateSelectedTagsIfNeeded(selectedTags)
                 self.configureBigTitle()
-                if let activity = self.userActivity { self.updateUserActivityState(activity) }
                 self.taskListViewController.viewModel.filterTasks(with: selectedTags)
-                
-                if !selectedTags.isEmpty {                
+                if let activity = self.userActivity { self.updateUserActivityState(activity) }
+                if !selectedTags.isEmpty {
                     Answers.logCustomEvent(withName: "filtered with tag",
                                            customAttributes: ["numberOfFilteredTags" : selectedTags.count])
                 }
@@ -200,6 +202,8 @@ class HomeScreenViewController: UIViewController {
     }
     
     fileprivate func configureBigTitle() {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
         bigTitle.text = viewModel.bigTitleText
         maskLabel.text = viewModel.bigTitleText
         
@@ -207,6 +211,7 @@ class HomeScreenViewController: UIViewController {
         maskLabel.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
         
         titleGradient.colors = bigTitleColors
+        CATransaction.commit()
     }
     
     var bigTitleColors: [CGColor] {
