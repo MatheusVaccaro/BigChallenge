@@ -61,12 +61,6 @@ class TagCollectionViewController: UIViewController {
                 
         }.disposed(by: disposeBag)
         
-        if let tagsCollection = tagsCollectionView as? TagCollectionView {
-            tagsCollection.forceTouched.subscribe { event in
-                self.presentBigCollection()
-            }.disposed(by: disposeBag)
-        }
-        
         tagsCollectionView.rx.modelSelected(Item.self).subscribe { event in
             guard let tag = event.element?.tag else {
                 self.addTagEvent?.onNext(true)
@@ -137,11 +131,12 @@ class TagCollectionViewController: UIViewController {
     fileprivate func configureCell(row: Int, item: Item, cell: TagCollectionViewCell) {
         guard let tag = item.tag else {
             cell.configure()
-//            cell.clickedAddTag.subscribe { _ in
-//                self.addTagEvent?.onNext(true)
-//            }.disposed(by: self.disposeBag)
             return
         }
+        
+        cell.forceTouched.subscribe { event in
+            self.presentBigCollection()
+        }.disposed(by: disposeBag)
         
         cell.longPressedTag.subscribe { event in
             self.presentActionSheet(for: event.element!)
