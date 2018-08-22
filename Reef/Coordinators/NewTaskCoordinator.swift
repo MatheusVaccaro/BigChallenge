@@ -59,7 +59,7 @@ class NewTaskCoordinator: Coordinator {
         
         newTaskViewController.viewModel = newTaskViewModel
 
-        let tagCollectionViewModel = TagCollectionViewModel(model: tagModel,
+        let tagCollectionViewModel = TagCollectionViewModelImpl(model: tagModel,
                                                             filtering: false,
                                                             selectedTags: selectedTags)
         newTaskViewController.tagCollectionViewModel = tagCollectionViewModel

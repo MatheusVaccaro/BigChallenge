@@ -25,7 +25,7 @@
 		221BA8B320F69E5C00BE2AC1 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BA8B220F69E5C00BE2AC1 /* HomeScreenViewController.swift */; };
 		221BA8B620F6A18500BE2AC1 /* TagCollection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221BA8B520F6A18500BE2AC1 /* TagCollection.storyboard */; };
 		221BA8B820F6A1DF00BE2AC1 /* TagCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BA8B720F6A1DF00BE2AC1 /* TagCollectionViewController.swift */; };
-		221BA8BA20F6A26100BE2AC1 /* TagCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BA8B920F6A26100BE2AC1 /* TagCollectionViewModel.swift */; };
+		221BA8BA20F6A26100BE2AC1 /* TagCollectionViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BA8B920F6A26100BE2AC1 /* TagCollectionViewModelImpl.swift */; };
 		22205ADD20FF7ADF007689D7 /* BigTagCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22205ADC20FF7ADF007689D7 /* BigTagCollectionViewController.swift */; };
 		222888D82117E5D90093EEF7 /* RadiusMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222888D72117E5D90093EEF7 /* RadiusMapViewModel.swift */; };
 		222888DC211873DD0093EEF7 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222888DB211873DD0093EEF7 /* LocationTableViewCell.swift */; };
@@ -98,6 +98,7 @@
 		29A4F88B21125C1C00AE4FA1 /* DateInputViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F88A21125C1C00AE4FA1 /* DateInputViewModelProtocol.swift */; };
 		29B6302821102B6A006D7A8A /* RemindersImporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6302721102B6A006D7A8A /* RemindersImporterTests.swift */; };
 		29B93B6E212DFF360057A771 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B93B6D212DFF360057A771 /* TaskListViewModel.swift */; };
+		29B93B70212E07C00057A771 /* TagCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B93B6F212E07C00057A771 /* TagCollectionViewModel.swift */; };
 		29BA689D2120C345009B4AB9 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29BA689C2120C345009B4AB9 /* Calendar.storyboard */; };
 		29BA68A02120C37D009B4AB9 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BA689F2120C37D009B4AB9 /* CalendarViewController.swift */; };
 		29BA68A42120CC2F009B4AB9 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BA68A32120CC2F009B4AB9 /* CalendarCell.swift */; };
@@ -250,7 +251,7 @@
 		221BA8B220F69E5C00BE2AC1 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		221BA8B520F6A18500BE2AC1 /* TagCollection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TagCollection.storyboard; sourceTree = "<group>"; };
 		221BA8B720F6A1DF00BE2AC1 /* TagCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewController.swift; sourceTree = "<group>"; };
-		221BA8B920F6A26100BE2AC1 /* TagCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewModel.swift; sourceTree = "<group>"; };
+		221BA8B920F6A26100BE2AC1 /* TagCollectionViewModelImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewModelImpl.swift; sourceTree = "<group>"; };
 		221BA8BD20F6B0EF00BE2AC1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TaskList.strings; sourceTree = "<group>"; };
 		22205ADC20FF7ADF007689D7 /* BigTagCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigTagCollectionViewController.swift; sourceTree = "<group>"; };
 		22270EF92120C07000695223 /* Recommender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommender.swift; sourceTree = "<group>"; };
@@ -324,6 +325,7 @@
 		29A4F88A21125C1C00AE4FA1 /* DateInputViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputViewModelProtocol.swift; sourceTree = "<group>"; };
 		29B6302721102B6A006D7A8A /* RemindersImporterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersImporterTests.swift; sourceTree = "<group>"; };
 		29B93B6D212DFF360057A771 /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
+		29B93B6F212E07C00057A771 /* TagCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewModel.swift; sourceTree = "<group>"; };
 		29BA689C2120C345009B4AB9 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		29BA689F2120C37D009B4AB9 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		29BA68A32120CC2F009B4AB9 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
@@ -559,7 +561,8 @@
 		221BA8BB20F6A2B500BE2AC1 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				221BA8B920F6A26100BE2AC1 /* TagCollectionViewModel.swift */,
+				29B93B6F212E07C00057A771 /* TagCollectionViewModel.swift */,
+				221BA8B920F6A26100BE2AC1 /* TagCollectionViewModelImpl.swift */,
 				22325A7820FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift */,
 			);
 			path = ViewModel;
@@ -1599,6 +1602,7 @@
 			files = (
 				C2C231C520FD41AE002A2371 /* NewTagCoordinator.swift in Sources */,
 				C2C79D2D2123E7D70058F228 /* DateInputViewModel+Extension.swift in Sources */,
+				29B93B70212E07C00057A771 /* TagCollectionViewModel.swift in Sources */,
 				C2901057211E0FB6008F2807 /* TagCreationFrameViewModel.swift in Sources */,
 				222BFF9420ED92C7001B6BBF /* RemindersCommunicator.swift in Sources */,
 				2255B3AE2113209800F2F37C /* LocationInputViewModel.swift in Sources */,
@@ -1630,7 +1634,7 @@
 				22F23E9D212E43B30064EE05 /* Tag+Extension.swift in Sources */,
 				22325A7920FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift in Sources */,
 				225852822100C5BE0011F4B0 /* TagsCollectionView.swift in Sources */,
-				221BA8BA20F6A26100BE2AC1 /* TagCollectionViewModel.swift in Sources */,
+				221BA8BA20F6A26100BE2AC1 /* TagCollectionViewModelImpl.swift in Sources */,
 				222888DC211873DD0093EEF7 /* LocationTableViewCell.swift in Sources */,
 				29A4F8852110F04600AE4FA1 /* DateInputViewModel.swift in Sources */,
 				29BA68A42120CC2F009B4AB9 /* CalendarCell.swift in Sources */,

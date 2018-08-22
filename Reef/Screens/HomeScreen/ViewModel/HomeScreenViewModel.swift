@@ -40,11 +40,13 @@ class HomeScreenViewModel {
     weak var delegate: HomeScreenViewModelDelegate?
     
     init(taskModel: TaskModel, tagModel: TagModel, selectedTags: [Tag],
-         taskListViewModelType: TaskListViewModel.Type) {
+         taskListViewModelType: TaskListViewModel.Type,
+         tagCollectionViewModelType: TagCollectionViewModel.Type) {
         self.taskModel = taskModel
         self.tagModel = tagModel
         self.selectedTags = selectedTags
         self.taskListViewModelType = taskListViewModelType
+        self.tagCollectionViewModelType = tagCollectionViewModelType
     }
     
     private let taskListViewModelType: TaskListViewModel.Type
@@ -55,10 +57,13 @@ class HomeScreenViewModel {
         return taskListViewModel
     }()
     
+    private let tagCollectionViewModelType: TagCollectionViewModel.Type
     lazy var tagCollectionViewModel: TagCollectionViewModel = {
-        let tagCollectionViewModel = TagCollectionViewModel(model: tagModel,
-                                                            filtering: true,
-                                                            selectedTags: selectedTags)
+        let tagCollectionViewModel = tagCollectionViewModelType.init(model: tagModel,
+                                                                     filtering: true,
+                                                                     selectedTags: selectedTags)
+        delegate?.homeScreenViewModel(self, didInstantiate: tagCollectionViewModel)
+        
         return tagCollectionViewModel
     }()
     

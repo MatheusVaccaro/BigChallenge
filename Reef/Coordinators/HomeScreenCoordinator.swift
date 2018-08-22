@@ -13,15 +13,19 @@ import ReefKit
 class HomeScreenCoordinator: Coordinator {
     
     var childrenCoordinators: [Coordinator]
-    fileprivate let presenter: UINavigationController
+    private let presenter: UINavigationController
     
-    fileprivate var homeScreenViewController: HomeScreenViewController?
-    fileprivate var taskListViewController: TaskListViewController?
-    fileprivate var tagCollectionViewController: TagCollectionViewController?
-    fileprivate let remindersImporter: RemindersImporter
-    fileprivate var taskModel: TaskModel
-    fileprivate var tagModel: TagModel
-    fileprivate var selectedTags: [Tag]
+    private var homeScreenViewController: HomeScreenViewController?
+    private let remindersImporter: RemindersImporter
+    private var taskModel: TaskModel
+    private var tagModel: TagModel
+    private var selectedTags: [Tag]
+    
+    private let taskListViewModelType: TaskListViewModel.Type
+    private var taskListViewController: TaskListViewController?
+    
+    private let tagCollectionViewModelType: TagCollectionViewModel.Type
+    private var tagCollectionViewController: TagCollectionViewController?
     
     init(presenter: UINavigationController,
          taskModel: TaskModel,
@@ -33,11 +37,14 @@ class HomeScreenCoordinator: Coordinator {
         self.tagModel = tagModel
         self.selectedTags = selectedTags
         
+        self.tagCollectionViewModelType = TagCollectionViewModelImpl.self
+        self.taskListViewModelType = TaskListViewModelImpl.self
+        
         self.childrenCoordinators = []
         
-        self.remindersImporter =
-            RemindersImporter(taskModel: taskModel, tagModel: tagModel)
-        remindersImporter.importIfGranted()
+        self.remindersImporter = RemindersImporter(taskModel: taskModel, tagModel: tagModel)
+        self.remindersImporter.importIfGranted()
+        
         self.taskModel.delegate = self
     }
 
@@ -46,7 +53,8 @@ class HomeScreenCoordinator: Coordinator {
         let homeScreenViewModel = HomeScreenViewModel(taskModel: taskModel,
                                                       tagModel: tagModel,
                                                       selectedTags: selectedTags,
-                                                      taskListViewModelType: TaskListViewModelImpl.self)
+                                                      taskListViewModelType: taskListViewModelType,
+                                                      tagCollectionViewModelType: tagCollectionViewModelType)
         homeScreenViewController.viewModel = homeScreenViewModel
 
         homeScreenViewModel.delegate = self
