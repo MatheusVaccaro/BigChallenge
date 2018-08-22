@@ -8,10 +8,19 @@
 
 import Foundation
 import CoreLocation
+import UIKit
 
 extension Tag {
     var allTasks: [Task] {
         return tasks!.allObjects as! [Task] //swiftlint:disable:this force_cast
+    }
+    
+    var color: UIColor {
+        return UIColor(cgColor: TagModel.tagColors[Int(colorIndex)].first!)
+    }
+    
+    var colors: [CGColor] {
+        return TagModel.tagColors[Int(colorIndex)]
     }
 }
 
