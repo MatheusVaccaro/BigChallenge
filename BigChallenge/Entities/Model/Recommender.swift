@@ -27,6 +27,10 @@ class Recommender {
     fileprivate let locationManager: LocationManager
     fileprivate let disposeBag = DisposeBag()
     
+    func reset() {
+        _recommendedTasks = nil
+    }
+    
     var recommendedTasks: [Task] {
         guard _recommendedTasks == nil else { return _recommendedTasks! }
         
@@ -75,8 +79,8 @@ class Recommender {
     
     fileprivate func subscribeToModel() {
         model.didUpdateTasks.subscribe {
-            for tag in $0.element! {
-                if let tasks = self._recommendedTasks, let index = tasks.index(of: tag) {
+            for task in $0.element! {
+                if let tasks = self._recommendedTasks, task.isCompleted, let index = tasks.index(of: task) {
                     self._recommendedTasks?.remove(at: index)
                 }
             }
