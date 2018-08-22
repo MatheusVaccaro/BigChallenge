@@ -77,7 +77,7 @@ public class TaskListViewController: UIViewController {
     }
     
     fileprivate func layout(cell: TaskTableViewCell, with indexPath: IndexPath) {
-        if indexPath.section == 0, !viewModel.tasks.first!.isEmpty {
+        if viewModel.isCard(indexPath.section) {
             cell.layout(with: .card)
         } else {
             cell.layout(with: .none)
@@ -237,23 +237,17 @@ extension TaskListViewController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard !viewModel.tasks[section].isEmpty else { return 0 }
-        
-        let additionalHeight = (section == 0 && !viewModel.selectedTags.isEmpty)
-            ? 0
-            : heightOfHeaderTag!
-        
-        return 10.5 + additionalHeight
+        return 10.5 + ( viewModel.hasHeaderIn(section) ? heightOfHeaderTag! : 0 )
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return !viewModel.isCardAppearing && viewModel.selectedTags.isEmpty ? 0 : 46
+        return viewModel.isCard(section) ? 46 : 23
     }
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: view.frame)
 
-        if section == 0 {
+        if viewModel.isCard(section) {
             let cardView = UIView(frame: headerView.bounds)
             var textHeader = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
             
@@ -276,15 +270,14 @@ extension TaskListViewController: UITableViewDelegate {
             headerView.addSubview(textHeader)
             
             return headerView
-        } else { // also tagged section
-            guard !viewModel.tasks[section].isEmpty, !viewModel.selectedTags.isEmpty else { return headerView }
+        } else {
             headerView.addSubview( textHeaderView(with: viewModel.name(for: section) , colored: UIColor.black) )
             return headerView
         }
     }
     
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard viewModel.isCardAppearing && section == 0 else { return nil }
+        guard viewModel.isCard(section) else { return nil }
         
         let footerView = UIView(frame: view.bounds)
         let cardView = UIView(frame: footerView.bounds)

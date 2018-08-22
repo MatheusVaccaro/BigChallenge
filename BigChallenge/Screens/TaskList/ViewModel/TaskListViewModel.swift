@@ -25,10 +25,6 @@ public class TaskListViewModel {
     private(set) var tasks: [[Task]]
     private(set) var selectedTags: [Tag]
     private(set) var relatedTags: [Tag]
-    
-    var isCardAppearing: Bool {
-        return !tasks.first!.isEmpty
-    }
 
     private var recommender: Recommender
     private let model: TaskModel
@@ -52,14 +48,27 @@ public class TaskListViewModel {
         subscribeToModelUpdate()
     }
     
+    var isShowingCard: Bool {
+        return sections.first == selectedTags ||
+            (selectedTags.isEmpty && !recommender.recommendedTasks.isEmpty)
+    }
+    
     func name(for section: Int) -> String {
         var ans = ""
+        let index = isShowingCard && selectedTags.isEmpty ? section-1 : section // diff recommended section
         
-        ans += sections[section].map { $0.title! }.description
+        ans += sections[index].map { $0.title! }.description
         
         return ans
     }
     
+    func hasHeaderIn(_ section: Int) -> Bool {
+        return !(section == 0 && !selectedTags.isEmpty && isCard(section))
+    }
+    
+    func isCard(_ section: Int) -> Bool {
+        return section == 0 && isShowingCard
+    }
     
     /** filters the taskList with selected tags */
     func filterTasks(with selectedTags: [Tag], relatedTags: [Tag]) {
@@ -68,13 +77,18 @@ public class TaskListViewModel {
         self.relatedTags = relatedTags
         self.tasks = []
         
-        if selectedTags.isEmpty { tasks.append(recommender.recommendedTasks) }
+        if selectedTags.isEmpty {
+            tasks.append(recommender.recommendedTasks)
+        }
         
-        var flatTasks = model.tasks // remove unrelated tasks
-            .filter { !$0.isCompleted }
+        // remove completed and recommended (if on main screen)
+        // remove tasks with none of the tags to filter by
+        var flatTasks = model.tasks
+            .filter { !$0.isCompleted && (selectedTags.isEmpty ? !recommender.recommendedTasks.contains($0) : true) }
             .filter { for tag in selectedTags where !$0.tags!.contains(tag) { return false }; return true }
         
-        sections = relatedTags.powerSet.map { selectedTags + $0 }
+        sections = relatedTags.powerSet
+            .map { selectedTags + $0 }
         
         for tags in sections {
             let tasksInSection = flatTasks
@@ -83,8 +97,12 @@ public class TaskListViewModel {
             
             flatTasks = flatTasks.filter { !tasksInSection.contains($0) } // ??????????
             
+            if tasksInSection.isEmpty { sections.remove(at: sections.index(of: tags)! ) }
             tasks.append(tasksInSection)
         }
+        
+        tasks = tasks
+            .filter { !$0.isEmpty }
         
         tasksObservable.onNext(tasks)
         //swiftlint:enable statement_postition
