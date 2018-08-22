@@ -8,12 +8,14 @@
 
 import Foundation
 import CoreLocation
+import RxSwift
 
 class Recommender {
     
     init(model: TaskModel) {
         self.model = model
         self.locationManager = LocationManager()
+        subscribeToModel()
     }
     
     // MARK: - Recommendation
@@ -23,16 +25,27 @@ class Recommender {
         return model.tasks
     }
     fileprivate let locationManager: LocationManager
+    fileprivate let disposeBag = DisposeBag()
+    
+    func reset() {
+        _recommendedTasks = nil
+    }
     
     var recommendedTasks: [Task] {
         guard _recommendedTasks == nil else { return _recommendedTasks! }
         
+        var pinnedTasks: [Task] = []
+        var localTasks: [Task] = []; let localTasksLimit = 3
+        var nextTasks: [Task] = []; let nextTasksLimit = 2
         var latestTasks: [Task] = []; let latestTasksLimit = 1
-        var localTasks: [Task] = []; let localTasksLimit = 2
-        var nextTasks: [Task] = []; let nextTasksLimit = 3
         
         var toDo = tasks
             .filter { !$0.isCompleted }
+        
+        toDo = toDo.filter {
+            if $0.isPinned { pinnedTasks.append($0); return false }
+            return true
+        }
         
         if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse {
             if let location = locationManager.currentLocation {
@@ -62,5 +75,15 @@ class Recommender {
         
         _recommendedTasks = latestTasks + nextTasks + localTasks
         return _recommendedTasks!
+    }
+    
+    fileprivate func subscribeToModel() {
+        model.didUpdateTasks.subscribe {
+            for task in $0.element! {
+                if let tasks = self._recommendedTasks, task.isCompleted, let index = tasks.index(of: task) {
+                    self._recommendedTasks?.remove(at: index)
+                }
+            }
+            }.disposed(by: disposeBag)
     }
 }

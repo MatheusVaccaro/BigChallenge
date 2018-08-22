@@ -59,7 +59,8 @@ public class TaskModel {
         let creationDate = attributes[.creationDate] as? Date ?? Date()
         let isCompleted = attributes[.isCompleted] as? Bool ?? false
         let tags = attributes[.tags] as? [Tag] ?? []
-        let arriving = attributes[.arriving] as? Bool ?? true
+        let isArriving = attributes[.isArriving] as? Bool ?? true
+        let isPinned = attributes[.isPinned] as? Bool ?? false
         
         task.id = id
         task.title = title
@@ -67,6 +68,7 @@ public class TaskModel {
         task.creationDate = creationDate
         task.isCompleted = isCompleted
         task.tags = NSSet(array: tags)
+        task.isPinned = isPinned
         
         if let completionDate = attributes[.completionDate] as? Date {
             task.completionDate = completionDate
@@ -78,7 +80,7 @@ public class TaskModel {
             let regionData =
                 NSKeyedArchiver.archivedData(withRootObject: region)
             task.regionData = regionData
-            task.arriving = arriving
+            task.isArriving = isArriving
         }
         updateNotifications(for: task)
         delegate?.taskModel(self, didCreate: task)
@@ -121,7 +123,11 @@ public class TaskModel {
             let regionData =
                 NSKeyedArchiver.archivedData(withRootObject: region)
             task.regionData = regionData
-            task.arriving = attributes[.arriving] as? Bool ?? true
+            task.isArriving = attributes[.isArriving] as? Bool ?? true
+        }
+        
+        if let isPinned = attributes[.isPinned] as? Bool {
+            task.isPinned = isPinned
         }
         
         updateInSpotlight(task: task)
@@ -186,7 +192,8 @@ public class TaskModel {
         case title
         case tags
         case region
-        case arriving
+        case isArriving
+        case isPinned
     }
 }
 

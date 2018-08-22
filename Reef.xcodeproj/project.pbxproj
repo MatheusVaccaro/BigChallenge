@@ -59,6 +59,7 @@
 		228BAD442108C22400E74AA9 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BAD432108C22400E74AA9 /* Fonts.swift */; };
 		2299F07920F628A70074A834 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299F07820F628A70074A834 /* LocationManager.swift */; };
 		22CC1865210511CC00486B27 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CC1864210511CC00486B27 /* Colors.swift */; };
+		22D14A1E212CBBF500B15B98 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D14A1D212CBBF500B15B98 /* ArrayExtension.swift */; };
 		22D84C63210BF1E3004B8969 /* LocationInputView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22D84C62210BF1E3004B8969 /* LocationInputView.storyboard */; };
 		22D84C65210BF4D1004B8969 /* LocationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D84C64210BF4D1004B8969 /* LocationInputView.swift */; };
 		22ED5955211A7C21008EAD7D /* MKRadiusCircleRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ED5954211A7C21008EAD7D /* MKRadiusCircleRenderer.swift */; };
@@ -209,6 +210,7 @@
 		228BAD432108C22400E74AA9 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		2299F07820F628A70074A834 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		22CC1864210511CC00486B27 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		22D14A1D212CBBF500B15B98 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		22D84C62210BF1E3004B8969 /* LocationInputView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationInputView.storyboard; sourceTree = "<group>"; };
 		22D84C64210BF4D1004B8969 /* LocationInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputView.swift; sourceTree = "<group>"; };
 		22ED5954211A7C21008EAD7D /* MKRadiusCircleRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKRadiusCircleRenderer.swift; sourceTree = "<group>"; };
@@ -651,6 +653,7 @@
 				16EC4CCD2125207600B8256D /* InfoPlist.strings */,
 				22456D2820DC3BB000168894 /* Date+Extension.swift */,
 				29BA68A52120E147009B4AB9 /* Calendar+Extension.swift */,
+				22D14A1D212CBBF500B15B98 /* ArrayExtension.swift */,
 				226CEA0420E17E87008CEB97 /* Strings.swift */,
 				22CC1864210511CC00486B27 /* Colors.swift */,
 				228BAD432108C22400E74AA9 /* Fonts.swift */,
@@ -1217,6 +1220,7 @@
 				223C0C0620E5293500CF39ED /* PersistenceProtocol.swift in Sources */,
 				C29742CC211244F800A1D213 /* MoreOptionsViewModelProtocol.swift in Sources */,
 				C231119120FFC92800BCB000 /* NewTaskViewModelProtocol.swift in Sources */,
+				22D14A1E212CBBF500B15B98 /* ArrayExtension.swift in Sources */,
 				16FDC13C210F809A008FA931 /* NotificationManager.swift in Sources */,
 				C2DD9A3321114ADD00E9B89B /* MoreOptionsViewController.swift in Sources */,
 				228BAD442108C22400E74AA9 /* Fonts.swift in Sources */,

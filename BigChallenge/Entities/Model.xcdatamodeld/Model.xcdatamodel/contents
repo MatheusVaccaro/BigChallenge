@@ -26,13 +26,14 @@
         <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="tags" inverseEntity="Task" syncable="YES"/>
     </entity>
     <entity name="Task" representedClassName="Task" syncable="YES" codeGenerationType="class">
-        <attribute name="arriving" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="completionDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="dueDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="frequency" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="isArriving" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="isCompleted" attributeType="Boolean" minValueString="0" maxValueString="1" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isPinned" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="regionData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" minValueString="0" syncable="YES"/>
@@ -45,6 +46,6 @@
         <element name="ImportData" positionX="-225" positionY="-351" width="128" height="90"/>
         <element name="RemindersImportData" positionX="-234" positionY="-360" width="128" height="90"/>
         <element name="Tag" positionX="-436.5546875" positionY="-377.390625" width="128" height="165"/>
-        <element name="Task" positionX="-81.23828125" positionY="-452.66796875" width="128" height="240"/>
+        <element name="Task" positionX="-81.23828125" positionY="-452.66796875" width="128" height="255"/>
     </elements>
 </model>

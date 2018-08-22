@@ -86,9 +86,8 @@ class TagCollectionViewModel {
                     self.selectedTags.remove(at: index)
                 } else { self.selectedTags.append(tag) }
 
-                self.selectedTagsObservable.onNext(self.selectedTags)
-                
                 if self.filtering { self.filterTags(with: self.selectedTags) }
+                self.selectedTagsObservable.onNext(self.selectedTags)
             }.disposed(by: disposeBag)
     }
     
