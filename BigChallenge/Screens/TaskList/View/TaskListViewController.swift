@@ -232,7 +232,7 @@ fileprivate extension UITableView {
 
 extension TaskListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let task = viewModel.tasks[indexPath.section][indexPath.row]
+        let task = viewModel.task(for: indexPath)
         viewModel.shouldEditTask.onNext(task)
     }
     
@@ -271,7 +271,8 @@ extension TaskListViewController: UITableViewDelegate {
             
             return headerView
         } else {
-            headerView.addSubview( textHeaderView(with: viewModel.name(forHeaderIn: section) , colored: UIColor.black) )
+            headerView.addSubview( textHeaderView(with: viewModel.name(forHeaderIn: section) ,
+                                                  colored: viewModel.color(forHeaderIn: section)))
             return headerView
         }
     }

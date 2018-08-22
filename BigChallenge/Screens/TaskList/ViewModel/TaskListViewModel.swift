@@ -48,16 +48,26 @@ public class TaskListViewModel {
         subscribeToModelUpdate()
     }
     
+    func task(for indexPath: IndexPath) -> Task {
+        return tasks[indexPath.section][indexPath.row]
+    }
+    
+    var isShowingRecommendedSection: Bool {
+        return selectedTags.isEmpty && !recommender.recommendedTasks.isEmpty
+    }
+    
     var isShowingCard: Bool {
-        return sections.first == selectedTags ||
-            (selectedTags.isEmpty && !recommender.recommendedTasks.isEmpty)
+        return sections.first == selectedTags || isShowingRecommendedSection
     }
     
     func name(forHeaderIn section: Int) -> String {
         var ans = ""
-        let index = isShowingCard && selectedTags.isEmpty ? section-1 : section // diff recommended section
         
-        var tags = sections[index]
+        let index = isShowingRecommendedSection
+            ? section-1
+            : section
+        
+        var tags = sections[index].filter { !selectedTags.contains($0) }
         
         while tags.count > 1 {
             ans += "\(tags.removeFirst().title!) + "
@@ -66,6 +76,16 @@ public class TaskListViewModel {
         ans += tags.removeFirst().title!
         
         return ans
+    }
+    
+    func color(forHeaderIn section: Int) -> UIColor {
+        let index = isShowingRecommendedSection
+            ? section-1
+            : section
+        
+        let colorIndex = Int(sections[index].first!.colorIndex)
+        
+        return UIColor(cgColor: TagModel.tagColors[colorIndex].first!)
     }
     
     func hasHeaderIn(_ section: Int) -> Bool {
