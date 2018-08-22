@@ -245,7 +245,7 @@ class HomeScreenViewController: UIViewController {
     @IBAction func didTapBigTitle(_ sender: Any) {
         if let tag = viewModel.selectedTags.first {
             UISelectionFeedbackGenerator().selectionChanged()
-            viewModel.unSelectBigTitle(tag: tag)
+            viewModel.deselectBigTitle(tag: tag)
             
             Answers.logCustomEvent(withName: "unselected tag on screen title")
         }

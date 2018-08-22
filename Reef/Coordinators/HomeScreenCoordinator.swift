@@ -50,7 +50,7 @@ class HomeScreenCoordinator: Coordinator {
 
     func start() {
         let homeScreenViewController = HomeScreenViewController.instantiate()
-        let homeScreenViewModel = HomeScreenViewModel(taskModel: taskModel,
+        let homeScreenViewModel = HomeScreenViewModelImpl(taskModel: taskModel,
                                                       tagModel: tagModel,
                                                       selectedTags: selectedTags,
                                                       taskListViewModelType: taskListViewModelType,
