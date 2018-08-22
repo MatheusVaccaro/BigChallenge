@@ -57,7 +57,13 @@ public class TaskListViewModel {
         var ans = ""
         let index = isShowingCard && selectedTags.isEmpty ? section-1 : section // diff recommended section
         
-        ans += sections[index].map { $0.title! }.description
+        var tags = sections[index]
+        
+        while tags.count > 1 {
+            ans += "\(tags.removeFirst().title!) + "
+        }
+        
+        ans += tags.removeFirst().title!
         
         return ans
     }
