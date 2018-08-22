@@ -91,7 +91,6 @@ class HomeScreenViewController: UIViewController {
         observeSelectedTags()
         observeClickedAddTag()
         userActivity = viewModel.userActivity
-        
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -138,15 +137,15 @@ class HomeScreenViewController: UIViewController {
     fileprivate func subscribe(to taskListViewModel: TaskListViewModel) {
         taskListViewModel.shouldAddTask.subscribe { event in
             if let shouldAddTask = event.element, shouldAddTask {
-                self.viewModel.delegate?
-                    .willAddTask(selectedTags: self.tagCollectionViewController.viewModel.selectedTags)
+                let selectedTags = self.tagCollectionViewController.viewModel.selectedTags
+                self.viewModel.delegate?.homeScreenViewModel(self.viewModel,
+                                                             willAddTaskWithSelectedTags: selectedTags)
                 }
         }.disposed(by: disposeBag)
         
         taskListViewModel.shouldEditTask.subscribe { task in
             if let task = task.element {
-                self.viewModel.delegate?
-                    .will(edit: task)
+                self.viewModel.delegate?.homeScreenViewModel(self.viewModel, willEdit: task)
             }
         }.disposed(by: disposeBag)
         
@@ -160,7 +159,7 @@ class HomeScreenViewController: UIViewController {
     
     fileprivate func observeClickedAddTag() {
         tagCollectionViewController.addTagEvent?.subscribe { _ in
-            self.viewModel.delegate?.willAddTag()
+            self.viewModel.delegate?.homeScreenViewModelWillAddTag(self.viewModel)
         }.disposed(by: disposeBag)
     }
     
@@ -197,7 +196,7 @@ class HomeScreenViewController: UIViewController {
         emptyStateTitleLabel.isHidden = !bool
         emptyStateImage.isHidden = !bool
         
-        if bool && viewModel.delegate!.shouldShowImportFromRemindersOption() {
+        if bool, viewModel.delegate?.homeScreenViewModelShouldShowImportFromRemindersOption(viewModel) ?? false {
             emptyStateOrLabel.isHidden = false
             importFromRemindersButton.isHidden = false
         } else {
@@ -207,7 +206,7 @@ class HomeScreenViewController: UIViewController {
     }
     
     @IBAction func didClickImportFromRemindersButton(_ sender: Any) {
-        viewModel.delegate?.importFromReminders()
+        viewModel.delegate?.homeScreenViewModelWillImportFromReminders(viewModel)
     }
     
     fileprivate func configureEmptyState() {

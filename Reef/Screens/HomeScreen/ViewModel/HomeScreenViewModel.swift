@@ -10,11 +10,15 @@ import Foundation
 import ReefKit
 
 protocol HomeScreenViewModelDelegate: class {
-    func willAddTask(selectedTags: [Tag])
-    func will(edit task: Task)
-    func willAddTag()
-    func importFromReminders()
-    func shouldShowImportFromRemindersOption() -> Bool
+    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
+                             willAddTaskWithSelectedTags selectedTags: [Tag])
+    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel, willEdit task: Task)
+    
+    func homeScreenViewModelWillImportFromReminders(_ homeScreenViewModel: HomeScreenViewModel)
+    
+    func homeScreenViewModelShouldShowImportFromRemindersOption(_ homeScreenViewModel: HomeScreenViewModel) -> Bool
+    
+    func homeScreenViewModelWillAddTag(_ homeScreenViewModel: HomeScreenViewModel)
 }
 
 class HomeScreenViewModel {
@@ -41,9 +45,11 @@ class HomeScreenViewModel {
     }()
     
     // TODO: Remove this. Used as a workaround while the homescreen is not refactored according to the architecture
-    var tagCollectionViewModelDelegate: TagCollectionViewModelDelegate?
+    weak var tagCollectionViewModelDelegate: TagCollectionViewModelDelegate?
     lazy var tagCollectionViewModel: TagCollectionViewModel = {
-        let tagCollectionViewModel = TagCollectionViewModel(model: tagModel, filtering: true, selectedTags: selectedTags)
+        let tagCollectionViewModel = TagCollectionViewModel(model: tagModel,
+                                                            filtering: true,
+                                                            selectedTags: selectedTags)
         tagCollectionViewModel.delegate = tagCollectionViewModelDelegate
         return tagCollectionViewModel
     }()

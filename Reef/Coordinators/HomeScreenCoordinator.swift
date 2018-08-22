@@ -105,24 +105,25 @@ extension HomeScreenCoordinator: CoordinatorDelegate {
 }
 
 extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
-    func shouldShowImportFromRemindersOption() -> Bool {
-        return !RemindersImporter.isImportingDefined
-    }
-    
-    func importFromReminders() {
-        remindersImporter.requestAndImport()
-    }
-    
-    func willAddTask(selectedTags: [Tag]) {
+    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
+                             willAddTaskWithSelectedTags selectedTags: [Tag]) {
         showNewTask(selectedTags: selectedTags)
     }
     
-    func willAddTag() {
+    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel, willEdit task: Task) {
+        showEditTask(task)
+    }
+    
+    func homeScreenViewModelWillAddTag(_ homeScreenViewModel: HomeScreenViewModel) {
         showNewTag()
     }
     
-    func will(edit task: Task) {
-        showEditTask(task)
+    func homeScreenViewModelWillImportFromReminders(_ homeScreenViewModel: HomeScreenViewModel) {
+        remindersImporter.requestAndImport()
+    }
+    
+    func homeScreenViewModelShouldShowImportFromRemindersOption(_ homeScreenViewModel: HomeScreenViewModel) -> Bool {
+        return !RemindersImporter.isImportingDefined
     }
 }
 
