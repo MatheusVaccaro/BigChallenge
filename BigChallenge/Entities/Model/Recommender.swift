@@ -8,12 +8,14 @@
 
 import Foundation
 import CoreLocation
+import RxSwift
 
 class Recommender {
     
     init(model: TaskModel) {
         self.model = model
         self.locationManager = LocationManager()
+        subscribeToModel()
     }
     
     // MARK: - Recommendation
@@ -23,6 +25,7 @@ class Recommender {
         return model.tasks
     }
     fileprivate let locationManager: LocationManager
+    fileprivate let disposeBag = DisposeBag()
     
     var recommendedTasks: [Task] {
         guard _recommendedTasks == nil else { return _recommendedTasks! }
@@ -68,5 +71,15 @@ class Recommender {
         
         _recommendedTasks = latestTasks + nextTasks + localTasks
         return _recommendedTasks!
+    }
+    
+    fileprivate func subscribeToModel() {
+        model.didUpdateTasks.subscribe {
+            for tag in $0.element! {
+                if let tasks = self._recommendedTasks, let index = tasks.index(of: tag) {
+                    self._recommendedTasks?.remove(at: index)
+                }
+            }
+            }.disposed(by: disposeBag)
     }
 }
