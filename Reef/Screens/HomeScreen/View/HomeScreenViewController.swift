@@ -84,10 +84,14 @@ class HomeScreenViewController: UIViewController {
         view.layer.addSublayer(gradientLayer)
         view.addSubview(gradientView)
         
+        setupTagCollection()
+        setupTaskList()
+        
         configureEmptyState()
         observeSelectedTags()
         observeClickedAddTag()
         userActivity = viewModel.userActivity
+        
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -96,24 +100,39 @@ class HomeScreenViewController: UIViewController {
         configureEmptyState()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "taskListSegue" {
-            if let taskListViewController = segue.destination as? TaskListViewController {
-                let taskListViewModel = viewModel.taskListViewModel
-                
-                self.subscribe(to: taskListViewModel)
-                
-                taskListViewController.viewModel = taskListViewModel
-                self.taskListViewController = taskListViewController
-            }
-        } else if segue.identifier == "tagCollectionSegue" {
-            if let tagCollectionViewController = segue.destination as? TagCollectionViewController {
-                let tagCollectionViewModel =
-                    viewModel.tagCollectionViewModel
-                tagCollectionViewController.viewModel = tagCollectionViewModel
-                self.tagCollectionViewController = tagCollectionViewController
-            }
-        }
+    private func setupTaskList() {
+        let taskListViewModel = viewModel.taskListViewModel
+        subscribe(to: taskListViewModel)
+        
+        taskListViewController = TaskListViewController.instantiate()
+        taskListViewController.viewModel = taskListViewModel
+        
+        addChildViewController(taskListViewController)
+		taskListContainerView.addSubview(taskListViewController.view)
+        
+        NSLayoutConstraint.activate([
+            taskListViewController.view.rightAnchor.constraint(equalTo: taskListContainerView.rightAnchor),
+            taskListViewController.view.topAnchor.constraint(equalTo: taskListContainerView.topAnchor),
+            taskListViewController.view.leftAnchor.constraint(equalTo: taskListContainerView.leftAnchor),
+            taskListViewController.view.bottomAnchor.constraint(equalTo: taskListContainerView.bottomAnchor)
+        ])
+    }
+    
+    private func setupTagCollection() {
+        let tagCollectionViewModel = viewModel.tagCollectionViewModel
+        
+        tagCollectionViewController = TagCollectionViewController.instantiate()
+        tagCollectionViewController.viewModel = tagCollectionViewModel
+        
+        addChildViewController(tagCollectionViewController)
+        tagContainerView.addSubview(tagCollectionViewController.view)
+        
+        NSLayoutConstraint.activate([
+            tagCollectionViewController.view.rightAnchor.constraint(equalTo: tagContainerView.rightAnchor),
+            tagCollectionViewController.view.topAnchor.constraint(equalTo: tagContainerView.topAnchor),
+            tagCollectionViewController.view.leftAnchor.constraint(equalTo: tagContainerView.leftAnchor),
+            tagCollectionViewController.view.bottomAnchor.constraint(equalTo: tagContainerView.bottomAnchor)
+        ])
     }
     
     fileprivate func subscribe(to taskListViewModel: TaskListViewModel) {
@@ -124,7 +143,7 @@ class HomeScreenViewController: UIViewController {
                 }
         }.disposed(by: disposeBag)
         
-        taskListViewModel.shouldEditTask.subscribe() { task in
+        taskListViewModel.shouldEditTask.subscribe { task in
             if let task = task.element {
                 self.viewModel.delegate?
                     .will(edit: task)

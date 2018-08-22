@@ -32,8 +32,10 @@ class TagCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
         addTagEvent = PublishSubject<Bool>()
-        // Do any additional setup after loading the view.
         bindCollectionView()
         tagsCollectionView.allowsMultipleSelection = true
         if let layout = tagsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {

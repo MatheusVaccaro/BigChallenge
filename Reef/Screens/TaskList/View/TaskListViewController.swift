@@ -40,6 +40,8 @@ public class TaskListViewController: UIViewController {
     // MARK: - ViewController Lifecycle
     override public func viewDidLoad() {
         super.viewDidLoad()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
         tableView.backgroundColor = UIColor.clear
         
         // config tableView to autolayout constraints to resize the tableCells height
