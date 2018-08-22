@@ -76,7 +76,7 @@ class TaskCreationFrameViewModel: CreationFrameViewModelProtocol {
             attributes[.notes] = taskNotes
             taskAnswersAttributes["notes"] = true
         }
-        if let taskArriving = taskArriving { attributes[.arriving] = taskArriving }
+        if let taskArriving = taskArriving { attributes[.isArriving] = taskArriving }
         if let region = taskRegion {
             attributes[.region] = region
             Answers.logCustomEvent(withName: "added region on task")

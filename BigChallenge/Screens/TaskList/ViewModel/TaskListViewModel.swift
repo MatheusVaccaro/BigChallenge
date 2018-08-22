@@ -53,7 +53,7 @@ public class TaskListViewModel {
             (selectedTags.isEmpty && !recommender.recommendedTasks.isEmpty)
     }
     
-    func name(for section: Int) -> String {
+    func name(forHeaderIn section: Int) -> String {
         var ans = ""
         let index = isShowingCard && selectedTags.isEmpty ? section-1 : section // diff recommended section
         

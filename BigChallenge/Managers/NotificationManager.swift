@@ -27,7 +27,7 @@ open class NotificationManager {
         if let region = NSKeyedUnarchiver.unarchiveObject(with: regionData) as? CLCircularRegion {
             let identifier = "\(task.title!)-location"
             let title = task.title ?? Strings.Notification.placeholderTitle
-            addLocationNotification(identifier, title, task.arriving, region)
+            addLocationNotification(identifier, title, task.isArriving, region)
         }
     }
     

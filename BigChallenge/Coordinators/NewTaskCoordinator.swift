@@ -71,7 +71,7 @@ class NewTaskCoordinator: Coordinator {
         // edit task
         if let task = self.task {
             locationInputViewController.outputlocation = location
-            locationInputViewController.arriving = task.arriving
+            locationInputViewController.arriving = task.isArriving
         }
 		
         let dateInputViewModel = DateInputViewModel(with: task)

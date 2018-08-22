@@ -27,12 +27,18 @@ class Recommender {
     var recommendedTasks: [Task] {
         guard _recommendedTasks == nil else { return _recommendedTasks! }
         
+        var pinnedTasks: [Task] = []
+        var localTasks: [Task] = []; let localTasksLimit = 3
+        var nextTasks: [Task] = []; let nextTasksLimit = 2
         var latestTasks: [Task] = []; let latestTasksLimit = 1
-        var localTasks: [Task] = []; let localTasksLimit = 2
-        var nextTasks: [Task] = []; let nextTasksLimit = 3
         
         var toDo = tasks
             .filter { !$0.isCompleted }
+        
+        toDo = toDo.filter {
+            if $0.isPinned { pinnedTasks.append($0); return false }
+            return true
+        }
         
         if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse {
             if let location = locationManager.currentLocation {

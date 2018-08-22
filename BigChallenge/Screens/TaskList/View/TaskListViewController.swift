@@ -271,7 +271,7 @@ extension TaskListViewController: UITableViewDelegate {
             
             return headerView
         } else {
-            headerView.addSubview( textHeaderView(with: viewModel.name(for: section) , colored: UIColor.black) )
+            headerView.addSubview( textHeaderView(with: viewModel.name(forHeaderIn: section) , colored: UIColor.black) )
             return headerView
         }
     }
