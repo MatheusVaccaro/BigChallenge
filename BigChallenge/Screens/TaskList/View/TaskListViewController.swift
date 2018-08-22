@@ -271,8 +271,14 @@ extension TaskListViewController: UITableViewDelegate {
             
             return headerView
         } else {
-            headerView.addSubview( textHeaderView(with: viewModel.name(forHeaderIn: section) ,
-                                                  colored: viewModel.color(forHeaderIn: section)))
+            var xPosition: CGFloat = 0
+            for tag in viewModel.tags(forHeadersIn: section) {
+                let header = textHeaderView(with: tag.title!, colored: tag.color)
+                header.frame.origin.x += xPosition
+                headerView.addSubview(header)
+                xPosition += header.frame.width + 5
+                
+            }
             return headerView
         }
     }

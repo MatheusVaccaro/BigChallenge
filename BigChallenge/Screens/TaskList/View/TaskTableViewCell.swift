@@ -43,7 +43,6 @@ class TaskTableViewCell: UITableViewCell {
     @IBOutlet weak var tagsLabel: UILabel!
     
     // MARK: - TableViewCell Lifecycle
-
     override func awakeFromNib() {
         super.awakeFromNib()
         taskTitleTextView.delegate = self

@@ -60,32 +60,13 @@ public class TaskListViewModel {
         return sections.first == selectedTags || isShowingRecommendedSection
     }
     
-    func name(forHeaderIn section: Int) -> String {
-        var ans = ""
-        
+    func tags(forHeadersIn section: Int) -> [Tag] {
         let index = isShowingRecommendedSection
             ? section-1
             : section
         
-        var tags = sections[index].filter { !selectedTags.contains($0) }
-        
-        while tags.count > 1 {
-            ans += "\(tags.removeFirst().title!) + "
-        }
-        
-        ans += tags.removeFirst().title!
-        
-        return ans
-    }
-    
-    func color(forHeaderIn section: Int) -> UIColor {
-        let index = isShowingRecommendedSection
-            ? section-1
-            : section
-        
-        let colorIndex = Int(sections[index].first!.colorIndex)
-        
-        return UIColor(cgColor: TagModel.tagColors[colorIndex].first!)
+        return sections[index]
+            .filter { !selectedTags.contains($0) }
     }
     
     func hasHeaderIn(_ section: Int) -> Bool {
