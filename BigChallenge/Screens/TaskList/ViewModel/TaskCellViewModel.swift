@@ -61,7 +61,6 @@ class TaskCellViewModel {
         let attributes: [TaskModel.Attributes : Any] = [.isCompleted: bool,
                                                         .completionDate: Date()]
         taskModel.update(task, with: attributes)
-        taskModel.save(task)
         let metricAttributes =
             ["time to complete" : task.creationDate!.timeIntervalSinceNow]
         if bool {
