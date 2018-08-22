@@ -45,14 +45,12 @@ class HomeScreenCoordinator: Coordinator {
         let homeScreenViewController = HomeScreenViewController.instantiate()
         let homeScreenViewModel = HomeScreenViewModel(taskModel: taskModel,
                                                       tagModel: tagModel,
-                                                      selectedTags: selectedTags)
+                                                      selectedTags: selectedTags,
+                                                      taskListViewModelType: TaskListViewModelImpl.self)
         homeScreenViewController.viewModel = homeScreenViewModel
 
         homeScreenViewModel.delegate = self
         self.homeScreenViewController = homeScreenViewController
-        
-        // TODO: Reestructure HomeScreen according to the architecture
-        homeScreenViewModel.tagCollectionViewModelDelegate = self
         
         presenter.isNavigationBarHidden = true
         presenter.pushViewController(homeScreenViewController, animated: false)
@@ -124,6 +122,14 @@ extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
     
     func homeScreenViewModelShouldShowImportFromRemindersOption(_ homeScreenViewModel: HomeScreenViewModel) -> Bool {
         return !RemindersImporter.isImportingDefined
+    }
+    
+    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
+                             didInstantiate taskListViewModel: TaskListViewModel) { }
+    
+    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
+                             didInstantiate tagCollectionViewModel: TagCollectionViewModel) {
+        tagCollectionViewModel.delegate = self
     }
 }
 

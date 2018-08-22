@@ -19,6 +19,11 @@ protocol HomeScreenViewModelDelegate: class {
     func homeScreenViewModelShouldShowImportFromRemindersOption(_ homeScreenViewModel: HomeScreenViewModel) -> Bool
     
     func homeScreenViewModelWillAddTag(_ homeScreenViewModel: HomeScreenViewModel)
+    
+    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
+                             didInstantiate taskListViewModel: TaskListViewModel)
+    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
+                             didInstantiate tagCollectionViewModel: TagCollectionViewModel)
 }
 
 class HomeScreenViewModel {
@@ -34,23 +39,26 @@ class HomeScreenViewModel {
     
     weak var delegate: HomeScreenViewModelDelegate?
     
-    init(taskModel: TaskModel, tagModel: TagModel, selectedTags: [Tag]) {
+    init(taskModel: TaskModel, tagModel: TagModel, selectedTags: [Tag],
+         taskListViewModelType: TaskListViewModel.Type) {
         self.taskModel = taskModel
         self.tagModel = tagModel
         self.selectedTags = selectedTags
+        self.taskListViewModelType = taskListViewModelType
     }
     
+    private let taskListViewModelType: TaskListViewModel.Type
     lazy var taskListViewModel: TaskListViewModel = {
-        return TaskListViewModel(model: taskModel)
+        let taskListViewModel = taskListViewModelType.init(model: taskModel)
+        delegate?.homeScreenViewModel(self, didInstantiate: taskListViewModel)
+        
+        return taskListViewModel
     }()
     
-    // TODO: Remove this. Used as a workaround while the homescreen is not refactored according to the architecture
-    weak var tagCollectionViewModelDelegate: TagCollectionViewModelDelegate?
     lazy var tagCollectionViewModel: TagCollectionViewModel = {
         let tagCollectionViewModel = TagCollectionViewModel(model: tagModel,
                                                             filtering: true,
                                                             selectedTags: selectedTags)
-        tagCollectionViewModel.delegate = tagCollectionViewModelDelegate
         return tagCollectionViewModel
     }()
     
