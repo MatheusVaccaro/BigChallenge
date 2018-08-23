@@ -8,11 +8,8 @@
 
 import Foundation
 import CoreLocation
-import CoreSpotlight
-import MobileCoreServices
-import RxCocoa
 import RxSwift
-import Crashlytics
+import ReefKit
 
 protocol TagModelDelegate: class {
     func tagModel(_ tagModel: TagModel, didCreate tag: Tag)
@@ -26,6 +23,8 @@ extension TagModelDelegate {
 
 public class TagModel {
     
+    static let tagColors = UIColor.tagColors
+    
     static func region(of tag: Tag) -> CLCircularRegion? {
         guard let data = tag.regionData else { return nil }
         return NSKeyedUnarchiver.unarchiveObject(with: data) as? CLCircularRegion
@@ -35,11 +34,6 @@ public class TagModel {
     
     weak var delegate: TagModelDelegate?
     
-    static let tagColors = [ UIColor.Tags.purpleGradient,
-                             UIColor.Tags.redGradient,
-                             UIColor.Tags.peachGradient,
-                             UIColor.Tags.greenGradient ]
-    
     private(set) var didUpdateTags: BehaviorSubject<[Tag]>
     private(set) public var tags: [Tag]
     
@@ -47,7 +41,7 @@ public class TagModel {
     private var _nextColor: Int //TODO: save to user defaults
     private var nextColor: Int64 {
         _nextColor += 1
-        return Int64( _nextColor % TagModel.tagColors.count )
+        return Int64( _nextColor % UIColor.tagColors.count )
     }
     
     // MARK: - TagModel Lifecyce
@@ -61,10 +55,6 @@ public class TagModel {
         persistance.tagsDelegate = self
         persistence.fetch(Tag.self) {
             tags = $0
-            Answers.logCustomEvent(withName: "fetched tags", customAttributes: [
-                "numberOfTags" : tags.count,
-                "numberOfTasksPerTag" : tags.map { ($0.allTasks.filter { !$0.isCompleted }).count }
-                ])
         }
         didUpdateTags.onNext(tags)
     }
@@ -82,7 +72,7 @@ public class TagModel {
     
     public func delete(object: Tag) {
         guard tags.contains(object) else { print("could not delete \(object) "); return }
-        deindex(tag: object)
+        ReefSpotlight.deindex(tag: object)
         NotificationManager.removeAllNotifications(from: object)
         persistance.delete(object) // delegate manages the array
     }
@@ -114,7 +104,7 @@ public class TagModel {
                 tag.arriving = arriving
             }
             
-            index(tag: tag)
+            ReefSpotlight.index(tag: tag)
             return tag
         }
     }
@@ -146,38 +136,9 @@ public class TagModel {
             tag.regionData = regionData
         }
         
-        updateInSpotlight(tag: tag)
+        ReefSpotlight.updateInSpotlight(tag: tag)
         persistance.save()
         delegate?.tagModel(self, didUpdate: tag, with: attributes)
-    }
-    
-    private func index(tag: Tag) {
-        let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
-        
-        attributeSet.title = tag.title!
-        
-        let item = CSSearchableItem(uniqueIdentifier: "tag-\(tag.id!)",
-            domainIdentifier: "com.beanie",
-            attributeSet: attributeSet)
-        
-        CSSearchableIndex.default().indexSearchableItems([item]) { error in
-            if let error = error {
-                print("Indexing error: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func deindex(tag: Tag) {
-        CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: ["\(tag.id!)"]) { error in
-            if let error = error {
-                print("Deindexing error: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    private func updateInSpotlight(tag: Tag) {
-        deindex(tag: tag)
-        index(tag: tag)
     }
     
     // The attributes of the Tag class, mapped according to CoreData
@@ -196,7 +157,7 @@ public class TagModel {
 
 extension TagModel: TagsPersistenceDelegate {
     
-    func persistence(_ persistence: Persistence, didInsertTags tags: [Tag]) {
+    public func persistence(_ persistence: Persistence, didInsertTags tags: [Tag]) {
         for tag in tags {
             guard !self.tags.contains(tag) else { continue }
             self.tags.append(tag)
@@ -204,7 +165,7 @@ extension TagModel: TagsPersistenceDelegate {
         self.didUpdateTags.onNext(self.tags)
     }
     
-    func persistence(_ persistence: Persistence, didUpdateTags tags: [Tag]) {
+    public func persistence(_ persistence: Persistence, didUpdateTags tags: [Tag]) {
         for tag in tags {
             guard let index = self.tags.index(of: tag) else { continue }
             self.tags[index] = tag
@@ -212,7 +173,7 @@ extension TagModel: TagsPersistenceDelegate {
         self.didUpdateTags.onNext(self.tags)
     }
     
-    func persistence(_ persistence: Persistence, didDeleteTags tags: [Tag]) {
+    public func persistence(_ persistence: Persistence, didDeleteTags tags: [Tag]) {
         for tag in tags {
             guard let index = self.tags.index(of: tag) else { continue }
             self.tags.remove(at: index)

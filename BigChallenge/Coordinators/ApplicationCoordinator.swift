@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Fabric
 import Crashlytics
+import ReefKit
 
 class ApplicationCoordinator: Coordinator {
     public var childrenCoordinators: [Coordinator]
@@ -63,7 +64,6 @@ class ApplicationCoordinator: Coordinator {
         let homeScreenCoordinator = HomeScreenCoordinator(presenter: rootViewController,
                                                         taskModel: taskModel,
                                                         tagModel: tagModel,
-                                                        persistence: persistence,
                                                         selectedTags: selectedTags)
         addChild(coordinator: homeScreenCoordinator)
         homeScreenCoordinator.start()

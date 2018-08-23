@@ -8,10 +8,8 @@
 
 import Foundation
 import CoreLocation
-import CoreSpotlight
-import MobileCoreServices
-import RxCocoa
 import RxSwift
+import ReefKit
 
 public class TaskModel {
     // MARK: - Properties
@@ -44,7 +42,7 @@ public class TaskModel {
     
     public func delete(_ task: Task) {
         guard tasks.contains(task) else { print("could not delete \(task) "); return }
-        deindex(task: task)
+        ReefSpotlight.deindex(task: task)
         NotificationManager.removeLocationNotification(for: task)
         NotificationManager.removeDateNotification(for: task)
         persistance.delete(task) // delegate manages the array
@@ -88,7 +86,7 @@ public class TaskModel {
             NotificationManager.addAllTagsNotifications(from: tags)
         }
         
-        if !isCompleted { index(task: task) }
+        if !isCompleted { ReefSpotlight.index(task: task) }
         return task
     }
     
@@ -130,45 +128,13 @@ public class TaskModel {
             task.isPinned = isPinned
         }
         
-        updateInSpotlight(task: task)
+        ReefSpotlight.updateInSpotlight(task: task)
         persistance.save()
         delegate?.taskModel(self, didUpdate: task, with: attributes)
     }
     
     func taskWith(id: UUID) -> Task? {
         return tasks.first { $0.id! == id }
-    }
-    
-    private func index(task: Task) {
-        let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
-        
-        attributeSet.title = task.title!
-        attributeSet.contentDescription = task.notes
-        
-        attributeSet.contentCreationDate = task.creationDate
-        
-        let item = CSSearchableItem(uniqueIdentifier: "task-\(task.id!)",
-            domainIdentifier: "com.beanie",
-            attributeSet: attributeSet)
-        
-        CSSearchableIndex.default().indexSearchableItems([item]) { error in
-            if let error = error {
-                print("Indexing error: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    private func updateInSpotlight(task: Task) {
-        deindex(task: task)
-        index(task: task)
-    }
-    
-    func deindex(task: Task) {
-        CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: ["\(task.id!)"]) { error in
-            if let error = error {
-                print("Deindexing error: \(error.localizedDescription)")
-            }
-        }
     }
     
     fileprivate func updateNotifications(for task: Task) {
@@ -215,7 +181,7 @@ extension TaskModelDelegate {
 
 extension TaskModel: TasksPersistenceDelegate {
     
-    func persistence(_ persistence: Persistence, didInsertTasks tasks: [Task]) {
+    public func persistence(_ persistence: Persistence, didInsertTasks tasks: [Task]) {
         for task in tasks {
             guard !self.tasks.contains(task) else { continue }
             self.tasks.append(task)
@@ -223,7 +189,7 @@ extension TaskModel: TasksPersistenceDelegate {
         self.didUpdateTasks.onNext(self.tasks)
     }
     
-    func persistence(_ persistence: Persistence, didUpdateTasks tasks: [Task]) {
+    public func persistence(_ persistence: Persistence, didUpdateTasks tasks: [Task]) {
         for task in tasks {
             guard let index = self.tasks.index(of: task) else { continue }
             self.tasks[index] = task
@@ -231,7 +197,7 @@ extension TaskModel: TasksPersistenceDelegate {
         self.didUpdateTasks.onNext(self.tasks)
     }
     
-    func persistence(_ persistence: Persistence, didDeleteTasks tasks: [Task]) {
+    public func persistence(_ persistence: Persistence, didDeleteTasks tasks: [Task]) {
         for task in tasks {
             guard let index = self.tasks.index(of: task) else { continue }
             self.tasks.remove(at: index)

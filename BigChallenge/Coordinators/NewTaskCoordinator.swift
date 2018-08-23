@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreLocation
 
+
 class NewTaskCoordinator: Coordinator {
     
     fileprivate let presenter: UINavigationController

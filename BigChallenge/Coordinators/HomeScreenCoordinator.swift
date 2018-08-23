@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+
 class HomeScreenCoordinator: Coordinator {
     
     var childrenCoordinators: [Coordinator]
@@ -18,7 +19,6 @@ class HomeScreenCoordinator: Coordinator {
     fileprivate var taskListViewController: TaskListViewController?
     fileprivate var tagCollectionViewController: TagCollectionViewController?
     fileprivate let remindersImporter: RemindersImporter
-    fileprivate let persistence: Persistence
     fileprivate var taskModel: TaskModel
     fileprivate var tagModel: TagModel
     fileprivate var selectedTags: [Tag]
@@ -26,7 +26,6 @@ class HomeScreenCoordinator: Coordinator {
     init(presenter: UINavigationController,
          taskModel: TaskModel,
          tagModel: TagModel,
-         persistence: Persistence,
          selectedTags: [Tag]) {
         
         self.presenter = presenter
@@ -35,7 +34,6 @@ class HomeScreenCoordinator: Coordinator {
         self.selectedTags = selectedTags
         
         self.childrenCoordinators = []
-        self.persistence = persistence
         
         self.remindersImporter =
             RemindersImporter(taskModel: taskModel, tagModel: tagModel)

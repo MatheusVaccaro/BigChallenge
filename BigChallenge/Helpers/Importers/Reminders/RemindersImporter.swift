@@ -8,6 +8,7 @@
 
 import Foundation
 import EventKit
+import ReefKit
 
 public class RemindersImporter {
     

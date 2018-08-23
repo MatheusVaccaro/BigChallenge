@@ -10,26 +10,26 @@ import Foundation
 import CoreLocation
 import UIKit
 
-extension Tag {
-    var allTasks: [Task] {
+public extension Tag {
+    public var allTasks: [Task] {
         return tasks!.allObjects as! [Task] //swiftlint:disable:this force_cast
     }
     
-    var color: UIColor {
-        return UIColor(cgColor: TagModel.tagColors[Int(colorIndex)].first!)
+    public var color: UIColor {
+        return UIColor(cgColor: UIColor.tagColors[Int(colorIndex)].first!)
     }
     
-    var colors: [CGColor] {
-        return TagModel.tagColors[Int(colorIndex)]
+    public var colors: [CGColor] {
+        return UIColor.tagColors[Int(colorIndex)]
     }
 }
 
-extension Task {
-    var allTags: [Tag] {
+public extension Task {
+    public var allTags: [Tag] {
         return tags!.allObjects as! [Tag] //swiftlint:disable:this force_cast
     }
     
-    var regions: [CLCircularRegion] {
+    public var regions: [CLCircularRegion] {
         var ans: [CLCircularRegion] = []
         
         if let data =
@@ -46,7 +46,7 @@ extension Task {
         return ans
     }
     
-    var dates: [Date] {
+    public var dates: [Date] {
         var dates: [Date] = []
         
         if let dueDate = dueDate { dates.append(dueDate) }
@@ -57,12 +57,12 @@ extension Task {
         return dates
     }
     
-    func isInside(_ location: CLLocationCoordinate2D) -> Bool {
+    public func isInside(_ location: CLLocationCoordinate2D) -> Bool {
         for region in regions where region.contains( location ) { return true }
         return false
     }
     
-    func isBefore(_ task: Task) -> Bool {
+    public func isBefore(_ task: Task) -> Bool {
         guard !dates.isEmpty, !task.dates.isEmpty else { return false }
         return dates.min()! < task.dates.min()!
     }

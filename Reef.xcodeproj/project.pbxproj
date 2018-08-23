@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09FB5E14F92E45162642AB92 /* Pods_ReefKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E3B37A82203D5E380D0390 /* Pods_ReefKit.framework */; };
 		1627171020C8793900AA0024 /* BigChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1627170F20C8793900AA0024 /* BigChallengeTests.swift */; };
 		1627171E20C879AD00AA0024 /* BigChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1627171D20C879AD00AA0024 /* BigChallengeUITests.swift */; };
 		1627EBEDDA20D9C1EB6BC691 /* Pods_ReefTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 558C6AF329AB768E11815BB8 /* Pods_ReefTests.framework */; };
-		1676FC9020D99580003E2D79 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1676FC8F20D99580003E2D79 /* TaskModel.swift */; };
 		16E8DDC9211205E8004F66D6 /* Barlow-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC6211205C6004F66D6 /* Barlow-Black.ttf */; };
 		16E8DDCB211205E8004F66D6 /* Barlow-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDB8211205C2004F66D6 /* Barlow-Bold.ttf */; };
 		16E8DDCE211205E8004F66D6 /* Barlow-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDBD211205C4004F66D6 /* Barlow-ExtraBoldItalic.ttf */; };
@@ -21,14 +21,12 @@
 		16EC6CEA21065B2500797D9C /* TagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EC6CE921065B2500797D9C /* TagTests.swift */; };
 		16FDC139210BB237008FA931 /* NotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FDC138210BB237008FA931 /* NotificationTests.swift */; };
 		16FDC13C210F809A008FA931 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FDC13B210F809A008FA931 /* NotificationManager.swift */; };
-		2207B3F3212ADB1800F26C55 /* TaskAndTagHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2207B3F2212ADB1800F26C55 /* TaskAndTagHelpers.swift */; };
 		221BA8AF20F6991200BE2AC1 /* HomeScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221BA8AE20F6991200BE2AC1 /* HomeScreen.storyboard */; };
 		221BA8B320F69E5C00BE2AC1 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BA8B220F69E5C00BE2AC1 /* HomeScreenViewController.swift */; };
 		221BA8B620F6A18500BE2AC1 /* TagCollection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221BA8B520F6A18500BE2AC1 /* TagCollection.storyboard */; };
 		221BA8B820F6A1DF00BE2AC1 /* TagCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BA8B720F6A1DF00BE2AC1 /* TagCollectionViewController.swift */; };
 		221BA8BA20F6A26100BE2AC1 /* TagCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BA8B920F6A26100BE2AC1 /* TagCollectionViewModel.swift */; };
 		22205ADD20FF7ADF007689D7 /* BigTagCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22205ADC20FF7ADF007689D7 /* BigTagCollectionViewController.swift */; };
-		22270EFA2120C07000695223 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22270EF92120C07000695223 /* Recommender.swift */; };
 		222888D82117E5D90093EEF7 /* RadiusMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222888D72117E5D90093EEF7 /* RadiusMapViewModel.swift */; };
 		222888DC211873DD0093EEF7 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222888DB211873DD0093EEF7 /* LocationTableViewCell.swift */; };
 		222BFF9420ED92C7001B6BBF /* RemindersCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222BFF9320ED92C7001B6BBF /* RemindersCommunicator.swift */; };
@@ -36,16 +34,6 @@
 		22325A7420FB8E0500E5F8C6 /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22325A7320FB8E0500E5F8C6 /* HomeScreenViewModel.swift */; };
 		22325A7720FBC3F100E5F8C6 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22325A7620FBC3F100E5F8C6 /* TagCollectionViewCell.swift */; };
 		22325A7920FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22325A7820FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift */; };
-		223C0BE120E4449C00CF39ED /* LocalPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0BE020E4449C00CF39ED /* LocalPersistence.swift */; };
-		223C0C0620E5293500CF39ED /* PersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0520E5293500CF39ED /* PersistenceProtocol.swift */; };
-		223C0C0820E529D600CF39ED /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0720E529D600CF39ED /* Persistence.swift */; };
-		223C0C3920E5678100CF39ED /* LocalPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0BE020E4449C00CF39ED /* LocalPersistence.swift */; };
-		223C0C3C20E5681200CF39ED /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113C20B88A2F00ABB161 /* Storable.swift */; };
-		223C0C3D20E5681500CF39ED /* PersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0520E5293500CF39ED /* PersistenceProtocol.swift */; };
-		223C0C3E20E568DE00CF39ED /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD1020B754AE005F0F85 /* Enums.swift */; };
-		223C0C4020E5697700CF39ED /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD1020B754AE005F0F85 /* Enums.swift */; };
-		223C0C4120E5697800CF39ED /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD1020B754AE005F0F85 /* Enums.swift */; };
-		2241F36920ED08340069EFE9 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2241F36820ED08340069EFE9 /* TagModel.swift */; };
 		22456D2920DC3BB000168894 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22456D2820DC3BB000168894 /* Date+Extension.swift */; };
 		2253179A20D147AD0065C9F9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2253179C20D147AD0065C9F9 /* Localizable.strings */; };
 		2255B3AC211295DD00F2F37C /* radiusMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2255B3AB211295DD00F2F37C /* radiusMapView.swift */; };
@@ -53,17 +41,35 @@
 		225852822100C5BE0011F4B0 /* TagsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225852812100C5BE0011F4B0 /* TagsCollectionView.swift */; };
 		226B311D211C954200881E34 /* CreateTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B311C211C954200881E34 /* CreateTagViewController.swift */; };
 		226CEA0520E17E87008CEB97 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226CEA0420E17E87008CEB97 /* Strings.swift */; };
-		2286A71620E3DF2100BE92AA /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2286A71420E3DF2100BE92AA /* Model.xcdatamodeld */; };
 		228946352113999A009D05CB /* TaskCreationFrameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228946342113999A009D05CB /* TaskCreationFrameViewModel.swift */; };
 		228946392113F1A4009D05CB /* InvertedCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228946382113F1A4009D05CB /* InvertedCircle.swift */; };
 		228BAD442108C22400E74AA9 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BAD432108C22400E74AA9 /* Fonts.swift */; };
 		2299F07920F628A70074A834 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299F07820F628A70074A834 /* LocationManager.swift */; };
-		22CC1865210511CC00486B27 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CC1864210511CC00486B27 /* Colors.swift */; };
 		22D14A1E212CBBF500B15B98 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D14A1D212CBBF500B15B98 /* ArrayExtension.swift */; };
 		22D84C63210BF1E3004B8969 /* LocationInputView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22D84C62210BF1E3004B8969 /* LocationInputView.storyboard */; };
 		22D84C65210BF4D1004B8969 /* LocationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D84C64210BF4D1004B8969 /* LocationInputView.swift */; };
 		22ED5955211A7C21008EAD7D /* MKRadiusCircleRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ED5954211A7C21008EAD7D /* MKRadiusCircleRenderer.swift */; };
 		22ED5957211B346F008EAD7D /* MKPlaceMarkExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ED5956211B346F008EAD7D /* MKPlaceMarkExtension.swift */; };
+		22F23E75212E3E800064EE05 /* ReefKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F23E6C212E3E7F0064EE05 /* ReefKit.framework */; };
+		22F23E7C212E3E800064EE05 /* ReefKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F23E7B212E3E800064EE05 /* ReefKitTests.swift */; };
+		22F23E7E212E3E800064EE05 /* ReefKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 22F23E6E212E3E7F0064EE05 /* ReefKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22F23E81212E3E800064EE05 /* ReefKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F23E6C212E3E7F0064EE05 /* ReefKit.framework */; };
+		22F23E82212E3E800064EE05 /* ReefKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22F23E6C212E3E7F0064EE05 /* ReefKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22F23E8A212E3E990064EE05 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0720E529D600CF39ED /* Persistence.swift */; };
+		22F23E8B212E3E9D0064EE05 /* MockPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113A20B8791E00ABB161 /* MockPersistence.swift */; };
+		22F23E8C212E3EA10064EE05 /* LocalPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0BE020E4449C00CF39ED /* LocalPersistence.swift */; };
+		22F23E8D212E3EA70064EE05 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2286A71420E3DF2100BE92AA /* Model.xcdatamodeld */; };
+		22F23E93212E3EC30064EE05 /* TaskAndTagHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2207B3F2212ADB1800F26C55 /* TaskAndTagHelpers.swift */; };
+		22F23E94212E3EC80064EE05 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113C20B88A2F00ABB161 /* Storable.swift */; };
+		22F23E95212E3ECC0064EE05 /* PersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0520E5293500CF39ED /* PersistenceProtocol.swift */; };
+		22F23E98212E40640064EE05 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CC1864210511CC00486B27 /* Colors.swift */; };
+		22F23E99212E40AD0064EE05 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22270EF92120C07000695223 /* Recommender.swift */; };
+		22F23E9B212E416C0064EE05 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1676FC8F20D99580003E2D79 /* TaskModel.swift */; };
+		22F23E9C212E41700064EE05 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2241F36820ED08340069EFE9 /* TagModel.swift */; };
+		22F23E9D212E43B30064EE05 /* Tag+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C79D2E2123E89A0058F228 /* Tag+Extension.swift */; };
+		22F23E9E212E43B30064EE05 /* Task+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8882111061A00AE4FA1 /* Task+Extension.swift */; };
+		22F23EA0212E452E0064EE05 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F23E9F212E452E0064EE05 /* Colors.swift */; };
+		22F23EA2212E46060064EE05 /* ReefSpotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F23EA1212E46060064EE05 /* ReefSpotlight.swift */; };
 		25A3EF9F7B0FADAB1A8E19B8 /* Pods_ReefUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18C9FEFF01841372B83A1C4 /* Pods_ReefUITests.framework */; };
 		2934BCCA21003E0700B6A05A /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2934BCC921003E0700B6A05A /* TaskTests.swift */; };
 		294490EE20FD297200333F11 /* TaskViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294490ED20FD297200333F11 /* TaskViewModelTests.swift */; };
@@ -72,7 +78,6 @@
 		29722024211E36CF00CF80CE /* ToggleableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29722023211E36CF00CF80CE /* ToggleableLabel.swift */; };
 		29A4F8832110EFD500AE4FA1 /* DateInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8822110EFD500AE4FA1 /* DateInputTests.swift */; };
 		29A4F8852110F04600AE4FA1 /* DateInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8842110F04600AE4FA1 /* DateInputViewModel.swift */; };
-		29A4F8892111061A00AE4FA1 /* Task+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8882111061A00AE4FA1 /* Task+Extension.swift */; };
 		29A4F88B21125C1C00AE4FA1 /* DateInputViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F88A21125C1C00AE4FA1 /* DateInputViewModelProtocol.swift */; };
 		29B6302821102B6A006D7A8A /* RemindersImporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6302721102B6A006D7A8A /* RemindersImporterTests.swift */; };
 		29BA689D2120C345009B4AB9 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29BA689C2120C345009B4AB9 /* Calendar.storyboard */; };
@@ -108,8 +113,6 @@
 		C29742D2211257A600A1D213 /* TimeTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29742D1211257A600A1D213 /* TimeTableViewCellViewModel.swift */; };
 		C29742D4211257B600A1D213 /* LocationTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29742D3211257B600A1D213 /* LocationTableViewCellViewModel.swift */; };
 		C29742D62112CBFF00A1D213 /* HeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29742D52112CBFF00A1D213 /* HeaderViewController.swift */; };
-		C2A1113B20B8791E00ABB161 /* MockPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113A20B8791E00ABB161 /* MockPersistence.swift */; };
-		C2A1113D20B88A2F00ABB161 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113C20B88A2F00ABB161 /* Storable.swift */; };
 		C2A1114020B8A70A00ABB161 /* TaskCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113F20B8A70A00ABB161 /* TaskCellViewModel.swift */; };
 		C2A1114220B8AED400ABB161 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1114120B8AED400ABB161 /* TaskTableViewCell.swift */; };
 		C2A1114720B9F6EF00ABB161 /* NewTask.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2A1114620B9F6EF00ABB161 /* NewTask.storyboard */; };
@@ -118,7 +121,6 @@
 		C2C231C120FD1AB2002A2371 /* NewTagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C231C020FD1AB2002A2371 /* NewTagViewModel.swift */; };
 		C2C231C520FD41AE002A2371 /* NewTagCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C231C420FD41AE002A2371 /* NewTagCoordinator.swift */; };
 		C2C79D2D2123E7D70058F228 /* DateInputViewModel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C79D2C2123E7D70058F228 /* DateInputViewModel+Extension.swift */; };
-		C2C79D2F2123E89A0058F228 /* Tag+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C79D2E2123E89A0058F228 /* Tag+Extension.swift */; };
 		C2DD9A28210D262D00E9B89B /* CreationFrameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DD9A27210D262D00E9B89B /* CreationFrameViewController.swift */; };
 		C2DD9A3321114ADD00E9B89B /* MoreOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DD9A3221114ADD00E9B89B /* MoreOptionsViewController.swift */; };
 		EE3649E90DE055B9D5168F01 /* Pods_Reef.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8708FC5A67C933F755CB93 /* Pods_Reef.framework */; };
@@ -139,7 +141,42 @@
 			remoteGlobalIDString = C28DC91520B61CB6007F881A;
 			remoteInfo = BigChallenge;
 		};
+		22F23E76212E3E800064EE05 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C28DC90E20B61CB6007F881A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22F23E6B212E3E7F0064EE05;
+			remoteInfo = ReefKit;
+		};
+		22F23E78212E3E800064EE05 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C28DC90E20B61CB6007F881A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C28DC91520B61CB6007F881A;
+			remoteInfo = Reef;
+		};
+		22F23E7F212E3E800064EE05 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C28DC90E20B61CB6007F881A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22F23E6B212E3E7F0064EE05;
+			remoteInfo = ReefKit;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		22F23E86212E3E800064EE05 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				22F23E82212E3E800064EE05 /* ReefKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1627170D20C8793900AA0024 /* ReefTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReefTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -215,6 +252,15 @@
 		22D84C64210BF4D1004B8969 /* LocationInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputView.swift; sourceTree = "<group>"; };
 		22ED5954211A7C21008EAD7D /* MKRadiusCircleRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKRadiusCircleRenderer.swift; sourceTree = "<group>"; };
 		22ED5956211B346F008EAD7D /* MKPlaceMarkExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKPlaceMarkExtension.swift; sourceTree = "<group>"; };
+		22F23E6C212E3E7F0064EE05 /* ReefKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReefKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22F23E6E212E3E7F0064EE05 /* ReefKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReefKit.h; sourceTree = "<group>"; };
+		22F23E6F212E3E7F0064EE05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22F23E74212E3E7F0064EE05 /* ReefKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReefKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22F23E7B212E3E800064EE05 /* ReefKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReefKitTests.swift; sourceTree = "<group>"; };
+		22F23E7D212E3E800064EE05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22F23E96212E3F1B0064EE05 /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22F23E9F212E452E0064EE05 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		22F23EA1212E46060064EE05 /* ReefSpotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReefSpotlight.swift; sourceTree = "<group>"; };
 		2766B305F29EF8BE8DDEADCA /* Pods-ReefUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReefUITests/Pods-ReefUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2934BCC921003E0700B6A05A /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		294490ED20FD297200333F11 /* TaskViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModelTests.swift; sourceTree = "<group>"; };
@@ -236,6 +282,8 @@
 		32F8AC4AA847D00A2CB492DF /* Pods_ReefTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReefTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B2823E64B1FC7A4411311AA /* Pods-ReefUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReefUITests/Pods-ReefUITests.release.xcconfig"; sourceTree = "<group>"; };
 		558C6AF329AB768E11815BB8 /* Pods_ReefTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReefTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		65E3B37A82203D5E380D0390 /* Pods_ReefKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReefKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		714B43063E29B780DB147628 /* Pods-ReefKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReefKit/Pods-ReefKit.debug.xcconfig"; sourceTree = "<group>"; };
 		717F662667FED0B8BDFBAA0B /* Pods-ReefTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReefTests/Pods-ReefTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7184CCF59380519A67144175 /* Pods_Reef.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reef.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E8708FC5A67C933F755CB93 /* Pods_Reef.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reef.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -246,14 +294,13 @@
 		C21EAD0620B74757005F0F85 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		C21EAD0A20B74F01005F0F85 /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
 		C21EAD0E20B75211005F0F85 /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
-		C21EAD1020B754AE005F0F85 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		C231118C20FFC75200BCB000 /* NewTag.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewTag.storyboard; sourceTree = "<group>"; };
 		C231119020FFC92800BCB000 /* NewTaskViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewModelProtocol.swift; sourceTree = "<group>"; };
 		C231119220FFC95300BCB000 /* NewTagViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTagViewModelProtocol.swift; sourceTree = "<group>"; };
 		C23753AD20B6461E00C1CE15 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		C23753AF20B6463700C1CE15 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
 		C25F5AA82108FEB3001E1561 /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
-		C28DC91620B61CB6007F881A /* BigChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = BigChallenge.app; path = Reef.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C28DC91620B61CB6007F881A /* Reef.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reef.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C28DC91920B61CB6007F881A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C28DC91E20B61CB6007F881A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TaskList.storyboard; sourceTree = "<group>"; };
 		C28DC92020B61CB9007F881A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -283,6 +330,7 @@
 		C2C79D2E2123E89A0058F228 /* Tag+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+Extension.swift"; sourceTree = "<group>"; };
 		C2DD9A27210D262D00E9B89B /* CreationFrameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationFrameViewController.swift; sourceTree = "<group>"; };
 		C2DD9A3221114ADD00E9B89B /* MoreOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsViewController.swift; sourceTree = "<group>"; };
+		CBEDB2B28E4B9B9C40FB7E0A /* Pods-ReefKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReefKit/Pods-ReefKit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,11 +352,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		22F23E69212E3E7F0064EE05 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09FB5E14F92E45162642AB92 /* Pods_ReefKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22F23E71212E3E7F0064EE05 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22F23E75212E3E800064EE05 /* ReefKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C28DC91320B61CB6007F881A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				EE3649E90DE055B9D5168F01 /* Pods_Reef.framework in Frameworks */,
+				22F23E81212E3E800064EE05 /* ReefKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,11 +407,6 @@
 		1676FC8E20D9946E003E2D79 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1676FC8F20D99580003E2D79 /* TaskModel.swift */,
-				29A4F8882111061A00AE4FA1 /* Task+Extension.swift */,
-				2241F36820ED08340069EFE9 /* TagModel.swift */,
-				C2C79D2E2123E89A0058F228 /* Tag+Extension.swift */,
-				22270EF92120C07000695223 /* Recommender.swift */,
 				2207B3F2212ADB1800F26C55 /* TaskAndTagHelpers.swift */,
 			);
 			path = Model;
@@ -509,6 +569,38 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		22F23E6D212E3E7F0064EE05 /* ReefKit */ = {
+			isa = PBXGroup;
+			children = (
+				C2A1113720B878CC00ABB161 /* Persistence */,
+				22F23E6E212E3E7F0064EE05 /* ReefKit.h */,
+				22F23E6F212E3E7F0064EE05 /* Info.plist */,
+			);
+			path = ReefKit;
+			sourceTree = "<group>";
+		};
+		22F23E7A212E3E800064EE05 /* ReefKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				22F23E7B212E3E800064EE05 /* ReefKitTests.swift */,
+				22F23E7D212E3E800064EE05 /* Info.plist */,
+			);
+			path = ReefKitTests;
+			sourceTree = "<group>";
+		};
+		22F23E9A212E41550064EE05 /* PersistenceManager */ = {
+			isa = PBXGroup;
+			children = (
+				22270EF92120C07000695223 /* Recommender.swift */,
+				1676FC8F20D99580003E2D79 /* TaskModel.swift */,
+				2241F36820ED08340069EFE9 /* TagModel.swift */,
+				29A4F8882111061A00AE4FA1 /* Task+Extension.swift */,
+				C2C79D2E2123E89A0058F228 /* Tag+Extension.swift */,
+				22F23EA1212E46060064EE05 /* ReefSpotlight.swift */,
+			);
+			path = PersistenceManager;
+			sourceTree = "<group>";
+		};
 		2965C40F20F6A81D001C988E /* Reminders */ = {
 			isa = PBXGroup;
 			children = (
@@ -562,6 +654,7 @@
 		45EE167F10EAE72CE5635B25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				22F23E96212E3F1B0064EE05 /* RxSwift.framework */,
 				220D7C1C20D02E5E007EC0DD /* RxSwift.framework */,
 				7E8708FC5A67C933F755CB93 /* Pods_Reef.framework */,
 				558C6AF329AB768E11815BB8 /* Pods_ReefTests.framework */,
@@ -569,6 +662,7 @@
 				7184CCF59380519A67144175 /* Pods_Reef.framework */,
 				32F8AC4AA847D00A2CB492DF /* Pods_ReefTests.framework */,
 				1E128F2E25BA570ED73A4795 /* Pods_ReefUITests.framework */,
+				65E3B37A82203D5E380D0390 /* Pods_ReefKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -582,6 +676,8 @@
 				9F87A6CB4388F73CB0FDA3A1 /* Pods-ReefTests.release.xcconfig */,
 				2766B305F29EF8BE8DDEADCA /* Pods-ReefUITests.debug.xcconfig */,
 				3B2823E64B1FC7A4411311AA /* Pods-ReefUITests.release.xcconfig */,
+				714B43063E29B780DB147628 /* Pods-ReefKit.debug.xcconfig */,
+				CBEDB2B28E4B9B9C40FB7E0A /* Pods-ReefKit.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -653,9 +749,9 @@
 				16EC4CCD2125207600B8256D /* InfoPlist.strings */,
 				22456D2820DC3BB000168894 /* Date+Extension.swift */,
 				29BA68A52120E147009B4AB9 /* Calendar+Extension.swift */,
+				22F23E9F212E452E0064EE05 /* Colors.swift */,
 				22D14A1D212CBBF500B15B98 /* ArrayExtension.swift */,
 				226CEA0420E17E87008CEB97 /* Strings.swift */,
-				22CC1864210511CC00486B27 /* Colors.swift */,
 				228BAD432108C22400E74AA9 /* Fonts.swift */,
 			);
 			path = Helpers;
@@ -673,8 +769,8 @@
 		C21EAD0D20B751E8005F0F85 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				C21EAD1020B754AE005F0F85 /* Enums.swift */,
 				2286A71420E3DF2100BE92AA /* Model.xcdatamodeld */,
+				22CC1864210511CC00486B27 /* Colors.swift */,
 				1676FC8E20D9946E003E2D79 /* Model */,
 			);
 			path = Entities;
@@ -686,6 +782,8 @@
 				C28DC91820B61CB6007F881A /* BigChallenge */,
 				1627170E20C8793900AA0024 /* BigChallengeTests */,
 				1627171C20C879AD00AA0024 /* BigChallengeUITests */,
+				22F23E6D212E3E7F0064EE05 /* ReefKit */,
+				22F23E7A212E3E800064EE05 /* ReefKitTests */,
 				C28DC91720B61CB6007F881A /* Products */,
 				6BF08872F858F444FF435658 /* Pods */,
 				45EE167F10EAE72CE5635B25 /* Frameworks */,
@@ -695,9 +793,11 @@
 		C28DC91720B61CB6007F881A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C28DC91620B61CB6007F881A /* BigChallenge.app */,
+				C28DC91620B61CB6007F881A /* Reef.app */,
 				1627170D20C8793900AA0024 /* ReefTests.xctest */,
 				1627171B20C879AD00AA0024 /* ReefUITests.xctest */,
+				22F23E6C212E3E7F0064EE05 /* ReefKit.framework */,
+				22F23E74212E3E7F0064EE05 /* ReefKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -705,13 +805,12 @@
 		C28DC91820B61CB6007F881A /* BigChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				22F23E9A212E41550064EE05 /* PersistenceManager */,
 				C28DC91920B61CB6007F881A /* AppDelegate.swift */,
 				C21EAD0220B745E3005F0F85 /* Coordinators */,
-				C21EAD0D20B751E8005F0F85 /* Entities */,
 				C21EAD0320B745FE005F0F85 /* Screens */,
 				C21EAD0920B74EE6005F0F85 /* Helpers */,
 				C21EAD0120B745B6005F0F85 /* Resources */,
-				C2A1113720B878CC00ABB161 /* Persistence */,
 				2299F07720F6287F0074A834 /* Location */,
 				16FDC13A210F8080008FA931 /* Managers */,
 			);
@@ -771,6 +870,7 @@
 		C2A1113720B878CC00ABB161 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				C21EAD0D20B751E8005F0F85 /* Entities */,
 				C2A1113E20B88A4900ABB161 /* Protocols */,
 				223C0C0720E529D600CF39ED /* Persistence.swift */,
 				C2A1113A20B8791E00ABB161 /* MockPersistence.swift */,
@@ -845,6 +945,17 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		22F23E67212E3E7F0064EE05 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22F23E7E212E3E800064EE05 /* ReefKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		1627170C20C8793900AA0024 /* ReefTests */ = {
 			isa = PBXNativeTarget;
@@ -886,6 +997,44 @@
 			productReference = 1627171B20C879AD00AA0024 /* ReefUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		22F23E6B212E3E7F0064EE05 /* ReefKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22F23E83212E3E800064EE05 /* Build configuration list for PBXNativeTarget "ReefKit" */;
+			buildPhases = (
+				20B050C4605934FC9E215BFA /* [CP] Check Pods Manifest.lock */,
+				22F23E67212E3E7F0064EE05 /* Headers */,
+				22F23E68212E3E7F0064EE05 /* Sources */,
+				22F23E69212E3E7F0064EE05 /* Frameworks */,
+				22F23E6A212E3E7F0064EE05 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReefKit;
+			productName = ReefKit;
+			productReference = 22F23E6C212E3E7F0064EE05 /* ReefKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		22F23E73212E3E7F0064EE05 /* ReefKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22F23E87212E3E800064EE05 /* Build configuration list for PBXNativeTarget "ReefKitTests" */;
+			buildPhases = (
+				22F23E70212E3E7F0064EE05 /* Sources */,
+				22F23E71212E3E7F0064EE05 /* Frameworks */,
+				22F23E72212E3E7F0064EE05 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22F23E77212E3E800064EE05 /* PBXTargetDependency */,
+				22F23E79212E3E800064EE05 /* PBXTargetDependency */,
+			);
+			name = ReefKitTests;
+			productName = ReefKitTests;
+			productReference = 22F23E74212E3E7F0064EE05 /* ReefKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		C28DC91520B61CB6007F881A /* Reef */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C28DC92820B61CB9007F881A /* Build configuration list for PBXNativeTarget "Reef" */;
@@ -897,14 +1046,16 @@
 				7B8A3E05277891C7E4FEF6D7 /* [CP] Embed Pods Frameworks */,
 				1628B48820C88A9E0038D65E /* Swift Lint Pod */,
 				226C31B62123BAC100BC5898 /* ShellScript */,
+				22F23E86212E3E800064EE05 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				22F23E80212E3E800064EE05 /* PBXTargetDependency */,
 			);
 			name = Reef;
 			productName = BigChallenge;
-			productReference = C28DC91620B61CB6007F881A /* BigChallenge.app */;
+			productReference = C28DC91620B61CB6007F881A /* Reef.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -913,7 +1064,7 @@
 		C28DC90E20B61CB6007F881A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0940;
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Matheus Vaccaro";
 				TargetAttributes = {
@@ -923,6 +1074,13 @@
 					};
 					1627171A20C879AD00AA0024 = {
 						CreatedOnToolsVersion = 9.4;
+						TestTargetID = C28DC91520B61CB6007F881A;
+					};
+					22F23E6B212E3E7F0064EE05 = {
+						CreatedOnToolsVersion = 10.0;
+					};
+					22F23E73212E3E7F0064EE05 = {
+						CreatedOnToolsVersion = 10.0;
 						TestTargetID = C28DC91520B61CB6007F881A;
 					};
 					C28DC91520B61CB6007F881A = {
@@ -947,6 +1105,8 @@
 				C28DC91520B61CB6007F881A /* Reef */,
 				1627170C20C8793900AA0024 /* ReefTests */,
 				1627171A20C879AD00AA0024 /* ReefUITests */,
+				22F23E6B212E3E7F0064EE05 /* ReefKit */,
+				22F23E73212E3E7F0064EE05 /* ReefKitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -960,6 +1120,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1627171920C879AD00AA0024 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22F23E6A212E3E7F0064EE05 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22F23E72212E3E7F0064EE05 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1010,6 +1184,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
+		20B050C4605934FC9E215BFA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ReefKit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		226C31B62123BAC100BC5898 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1035,8 +1227,9 @@
 				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift-iOS11.0/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/UITextView+Placeholder/UITextView_Placeholder.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift-iOS11.4/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1114,7 +1307,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ReefUITests/Pods-ReefUITests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift-iOS11.0/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 			);
@@ -1138,7 +1331,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ReefTests/Pods-ReefTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift-iOS11.0/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 			);
@@ -1164,10 +1357,6 @@
 				16EC6CEA21065B2500797D9C /* TagTests.swift in Sources */,
 				29B6302821102B6A006D7A8A /* RemindersImporterTests.swift in Sources */,
 				1627171020C8793900AA0024 /* BigChallengeTests.swift in Sources */,
-				223C0C3C20E5681200CF39ED /* Storable.swift in Sources */,
-				223C0C3D20E5681500CF39ED /* PersistenceProtocol.swift in Sources */,
-				223C0C4020E5697700CF39ED /* Enums.swift in Sources */,
-				223C0C3920E5678100CF39ED /* LocalPersistence.swift in Sources */,
 				29A4F8832110EFD500AE4FA1 /* DateInputTests.swift in Sources */,
 				2934BCCA21003E0700B6A05A /* TaskTests.swift in Sources */,
 				16FDC139210BB237008FA931 /* NotificationTests.swift in Sources */,
@@ -1179,8 +1368,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				223C0C4120E5697800CF39ED /* Enums.swift in Sources */,
 				1627171E20C879AD00AA0024 /* BigChallengeUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22F23E68212E3E7F0064EE05 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22F23E8C212E3EA10064EE05 /* LocalPersistence.swift in Sources */,
+				22F23E8A212E3E990064EE05 /* Persistence.swift in Sources */,
+				22F23E94212E3EC80064EE05 /* Storable.swift in Sources */,
+				22F23E8B212E3E9D0064EE05 /* MockPersistence.swift in Sources */,
+				22F23E8D212E3EA70064EE05 /* Model.xcdatamodeld in Sources */,
+				22F23E98212E40640064EE05 /* Colors.swift in Sources */,
+				22F23E93212E3EC30064EE05 /* TaskAndTagHelpers.swift in Sources */,
+				22F23E95212E3ECC0064EE05 /* PersistenceProtocol.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22F23E70212E3E7F0064EE05 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22F23E7C212E3E800064EE05 /* ReefKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1189,43 +1400,39 @@
 			buildActionMask = 2147483647;
 			files = (
 				C2C231C520FD41AE002A2371 /* NewTagCoordinator.swift in Sources */,
-				22CC1865210511CC00486B27 /* Colors.swift in Sources */,
 				C2C79D2D2123E7D70058F228 /* DateInputViewModel+Extension.swift in Sources */,
 				C2901057211E0FB6008F2807 /* TagCreationFrameViewModel.swift in Sources */,
 				222BFF9420ED92C7001B6BBF /* RemindersCommunicator.swift in Sources */,
 				C2A1114220B8AED400ABB161 /* TaskTableViewCell.swift in Sources */,
 				2255B3AE2113209800F2F37C /* LocationInputViewModel.swift in Sources */,
 				C21EAD0F20B75211005F0F85 /* TaskListViewModel.swift in Sources */,
-				2207B3F3212ADB1800F26C55 /* TaskAndTagHelpers.swift in Sources */,
 				22ED5957211B346F008EAD7D /* MKPlaceMarkExtension.swift in Sources */,
 				C28DC91A20B61CB6007F881A /* AppDelegate.swift in Sources */,
 				228946392113F1A4009D05CB /* InvertedCircle.swift in Sources */,
+				22F23E9E212E43B30064EE05 /* Task+Extension.swift in Sources */,
 				221BA8B320F69E5C00BE2AC1 /* HomeScreenViewController.swift in Sources */,
-				22270EFA2120C07000695223 /* Recommender.swift in Sources */,
-				223C0C3E20E568DE00CF39ED /* Enums.swift in Sources */,
 				2255B3AC211295DD00F2F37C /* radiusMapView.swift in Sources */,
+				22F23EA0212E452E0064EE05 /* Colors.swift in Sources */,
+				22F23E9C212E41700064EE05 /* TagModel.swift in Sources */,
 				C2A1115320BA036800ABB161 /* NewTaskCoordinator.swift in Sources */,
 				22205ADD20FF7ADF007689D7 /* BigTagCollectionViewController.swift in Sources */,
 				228946352113999A009D05CB /* TaskCreationFrameViewModel.swift in Sources */,
 				C23753AE20B6461E00C1CE15 /* Coordinator.swift in Sources */,
 				22ED5955211A7C21008EAD7D /* MKRadiusCircleRenderer.swift in Sources */,
-				2286A71620E3DF2100BE92AA /* Model.xcdatamodeld in Sources */,
 				22325A7720FBC3F100E5F8C6 /* TagCollectionViewCell.swift in Sources */,
-				29A4F8892111061A00AE4FA1 /* Task+Extension.swift in Sources */,
 				C2901055211E097E008F2807 /* CreationFrameViewModelProtocol.swift in Sources */,
-				223C0C0820E529D600CF39ED /* Persistence.swift in Sources */,
 				226CEA0520E17E87008CEB97 /* Strings.swift in Sources */,
 				29BA68A821211754009B4AB9 /* CalendarHeaderView.swift in Sources */,
 				29BEED5F2107E946008E2202 /* ImportDataPacket.swift in Sources */,
-				223C0C0620E5293500CF39ED /* PersistenceProtocol.swift in Sources */,
 				C29742CC211244F800A1D213 /* MoreOptionsViewModelProtocol.swift in Sources */,
 				C231119120FFC92800BCB000 /* NewTaskViewModelProtocol.swift in Sources */,
 				22D14A1E212CBBF500B15B98 /* ArrayExtension.swift in Sources */,
 				16FDC13C210F809A008FA931 /* NotificationManager.swift in Sources */,
 				C2DD9A3321114ADD00E9B89B /* MoreOptionsViewController.swift in Sources */,
 				228BAD442108C22400E74AA9 /* Fonts.swift in Sources */,
-				C2C79D2F2123E89A0058F228 /* Tag+Extension.swift in Sources */,
+				22F23E9D212E43B30064EE05 /* Tag+Extension.swift in Sources */,
 				22325A7920FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift in Sources */,
+				22F23E99212E40AD0064EE05 /* Recommender.swift in Sources */,
 				225852822100C5BE0011F4B0 /* TagsCollectionView.swift in Sources */,
 				221BA8BA20F6A26100BE2AC1 /* TagCollectionViewModel.swift in Sources */,
 				222888DC211873DD0093EEF7 /* LocationTableViewCell.swift in Sources */,
@@ -1233,9 +1440,8 @@
 				29BA68A42120CC2F009B4AB9 /* CalendarCell.swift in Sources */,
 				2299F07920F628A70074A834 /* LocationManager.swift in Sources */,
 				2972201F211CCD8F00CF80CE /* DateInputViewController.swift in Sources */,
-				2241F36920ED08340069EFE9 /* TagModel.swift in Sources */,
 				226B311D211C954200881E34 /* CreateTagViewController.swift in Sources */,
-				C2A1113B20B8791E00ABB161 /* MockPersistence.swift in Sources */,
+				22F23EA2212E46060064EE05 /* ReefSpotlight.swift in Sources */,
 				C21EAD0020B741BC005F0F85 /* HomeScreenCoordinator.swift in Sources */,
 				C2901059211E4492008F2807 /* ColorCollectionViewCell.swift in Sources */,
 				C23753B020B6463700C1CE15 /* ApplicationCoordinator.swift in Sources */,
@@ -1244,8 +1450,6 @@
 				22325A7420FB8E0500E5F8C6 /* HomeScreenViewModel.swift in Sources */,
 				29BA68A62120E147009B4AB9 /* Calendar+Extension.swift in Sources */,
 				C29742D4211257B600A1D213 /* LocationTableViewCellViewModel.swift in Sources */,
-				1676FC9020D99580003E2D79 /* TaskModel.swift in Sources */,
-				C2A1113D20B88A2F00ABB161 /* Storable.swift in Sources */,
 				22D84C65210BF4D1004B8969 /* LocationInputView.swift in Sources */,
 				222BFF9720EDB854001B6BBF /* RemindersImporter.swift in Sources */,
 				29A4F88B21125C1C00AE4FA1 /* DateInputViewModelProtocol.swift in Sources */,
@@ -1259,10 +1463,10 @@
 				C21EAD0B20B74F01005F0F85 /* StoryboardInstantiable.swift in Sources */,
 				222888D82117E5D90093EEF7 /* RadiusMapViewModel.swift in Sources */,
 				C2C231C120FD1AB2002A2371 /* NewTagViewModel.swift in Sources */,
-				223C0BE120E4449C00CF39ED /* LocalPersistence.swift in Sources */,
 				C21EAD0720B74757005F0F85 /* TaskListViewController.swift in Sources */,
 				C29742D2211257A600A1D213 /* TimeTableViewCellViewModel.swift in Sources */,
 				221BA8B820F6A1DF00BE2AC1 /* TagCollectionViewController.swift in Sources */,
+				22F23E9B212E416C0064EE05 /* TaskModel.swift in Sources */,
 				C29742D62112CBFF00A1D213 /* HeaderViewController.swift in Sources */,
 				29722024211E36CF00CF80CE /* ToggleableLabel.swift in Sources */,
 			);
@@ -1280,6 +1484,21 @@
 			isa = PBXTargetDependency;
 			target = C28DC91520B61CB6007F881A /* Reef */;
 			targetProxy = 1627172020C879AD00AA0024 /* PBXContainerItemProxy */;
+		};
+		22F23E77212E3E800064EE05 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22F23E6B212E3E7F0064EE05 /* ReefKit */;
+			targetProxy = 22F23E76212E3E800064EE05 /* PBXContainerItemProxy */;
+		};
+		22F23E79212E3E800064EE05 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C28DC91520B61CB6007F881A /* Reef */;
+			targetProxy = 22F23E78212E3E800064EE05 /* PBXContainerItemProxy */;
+		};
+		22F23E80212E3E800064EE05 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22F23E6B212E3E7F0064EE05 /* ReefKit */;
+			targetProxy = 22F23E7F212E3E800064EE05 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1413,6 +1632,114 @@
 			};
 			name = Release;
 		};
+		22F23E84212E3E800064EE05 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 714B43063E29B780DB147628 /* Pods-ReefKit.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = D9KU92KK65;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ReefKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Wide.ReefKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		22F23E85212E3E800064EE05 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CBEDB2B28E4B9B9C40FB7E0A /* Pods-ReefKit.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = D9KU92KK65;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ReefKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Wide.ReefKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		22F23E88212E3E800064EE05 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D9KU92KK65;
+				INFOPLIST_FILE = ReefKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Wide.ReefKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Reef.app/Reef";
+			};
+			name = Debug;
+		};
+		22F23E89212E3E800064EE05 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D9KU92KK65;
+				INFOPLIST_FILE = ReefKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Wide.ReefKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Reef.app/Reef";
+			};
+			name = Release;
+		};
 		C28DC92620B61CB9007F881A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1533,6 +1860,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2D020A78B9BEB6EB771DFE12 /* Pods-Reef.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = D9KU92KK65;
@@ -1556,6 +1884,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AB08D99D8EA8EBF32B46628D /* Pods-Reef.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -1593,6 +1922,24 @@
 			buildConfigurations = (
 				1627172320C879AD00AA0024 /* Debug */,
 				1627172420C879AD00AA0024 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		22F23E83212E3E800064EE05 /* Build configuration list for PBXNativeTarget "ReefKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22F23E84212E3E800064EE05 /* Debug */,
+				22F23E85212E3E800064EE05 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		22F23E87212E3E800064EE05 /* Build configuration list for PBXNativeTarget "ReefKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22F23E88212E3E800064EE05 /* Debug */,
+				22F23E89212E3E800064EE05 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

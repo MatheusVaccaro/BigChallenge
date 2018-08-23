@@ -12,22 +12,21 @@ public class Persistence: PersistenceProtocol {
     
     // MARK: - Initialization Configuration Enum
     
-    enum Configuration {
+    public enum Configuration {
         case inMemory
         case inDevice
     }
 
     // MARK: - Properties
+    public weak var tasksDelegate: TasksPersistenceDelegate?
+    public weak var tagsDelegate: TagsPersistenceDelegate?
     
     private let localPersistence: LocalPersistence
     private let remotePersistence: PersistenceProtocol?
     
-    weak var tasksDelegate: TasksPersistenceDelegate?
-    weak var tagsDelegate: TagsPersistenceDelegate?
-    
     // MARK: - Persistence Lifecycle
     
-    init(configuration: Configuration = .inDevice) {
+    public init(configuration: Configuration = .inDevice) {
         switch configuration {
         case .inDevice:
             localPersistence = LocalPersistence()
@@ -85,14 +84,14 @@ public class Persistence: PersistenceProtocol {
 // MARK: - Persistence Delegate
 
 // MARK: Tasks
-protocol TasksPersistenceDelegate: class {
+public protocol TasksPersistenceDelegate: class {
     func persistence(_ persistence: Persistence, didInsertTasks tasks: [Task])
     func persistence(_ persistence: Persistence, didUpdateTasks tasks: [Task])
     func persistence(_ persistence: Persistence, didDeleteTasks tasks: [Task])
 }
 
 // MARK: Tags
-protocol TagsPersistenceDelegate: class {
+public protocol TagsPersistenceDelegate: class {
     func persistence(_ persistence: Persistence, didInsertTags tags: [Tag])
     func persistence(_ persistence: Persistence, didUpdateTags tags: [Tag])
     func persistence(_ persistence: Persistence, didDeleteTags tags: [Tag])
