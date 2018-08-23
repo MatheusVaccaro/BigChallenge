@@ -13,17 +13,15 @@ import ReefKit
 
 protocol TagModelDelegate: class {
     func tagModel(_ tagModel: TagModel, didCreate tag: Tag)
-    func tagModel(_ tagModel: TagModel, didUpdate tag: Tag, with attributes: [TagModel.Attributes: Any])
+    func tagModel(_ tagModel: TagModel, didUpdate tag: Tag, with attributes: [TagAttributes: Any])
 }
 
 extension TagModelDelegate {
     func tagModel(_ tagModel: TagModel, didCreate tag: Tag) { }
-    func tagModel(_ tagModel: TagModel, didUpdate tag: Tag, with attributes: [TagModel.Attributes: Any]) { }
+    func tagModel(_ tagModel: TagModel, didUpdate tag: Tag, with attributes: [TagAttributes: Any]) { }
 }
 
 public class TagModel {
-    
-    static let tagColors = UIColor.tagColors
     
     static func region(of tag: Tag) -> CLCircularRegion? {
         guard let data = tag.regionData else { return nil }
@@ -36,120 +34,54 @@ public class TagModel {
     
     private(set) var didUpdateTags: BehaviorSubject<[Tag]>
     private(set) public var tags: [Tag]
-    
-    private let persistance: Persistence
-    private var _nextColor: Int //TODO: save to user defaults
-    private var nextColor: Int64 {
-        _nextColor += 1
-        return Int64( _nextColor % UIColor.tagColors.count )
-    }
-    
+//    private let persistance: Persistence
+    private let reefKit: ReefKit
     // MARK: - TagModel Lifecyce
     
-    init(persistence: Persistence) {
-        self.persistance = persistence
+    init(reefKit: ReefKit) {
+        self.reefKit = reefKit
+//        self.persistance = reefKit.persistence
         self.tags = []
         self.didUpdateTags = BehaviorSubject<[Tag]>(value: tags)
-        self._nextColor = 0
         
-        persistance.tagsDelegate = self
-        persistence.fetch(Tag.self) {
-            tags = $0
-        }
+        reefKit.persistence.tagsDelegate = self
+        reefKit.persistence.fetch(Tag.self) { self.tags = $0 }
         didUpdateTags.onNext(tags)
     }
     
     // MARK: - CRUD Methods
     
     public func saveContext() {
-        persistance.save()
+        reefKit.persistence.save()
     }
     
     public func save(_ tag: Tag) {
         if !tags.contains(tag) { tags.append(tag) }
-        persistance.save() // delegate manages the array
+        reefKit.persistence.save() // delegate manages the array
     }
     
     public func delete(object: Tag) {
         guard tags.contains(object) else { print("could not delete \(object) "); return }
         ReefSpotlight.deindex(tag: object)
         NotificationManager.removeAllNotifications(from: object)
-        persistance.delete(object) // delegate manages the array
+        reefKit.persistence.delete(object) // delegate manages the array
     }
     
-    public func createTag(with attributes: [Attributes : Any]) -> Tag {
+    public func createTag(with attributes: [TagAttributes : Any]) -> Tag {
         let title = attributes[.title] as? String ?? ""
         if let tag = (tags.first { $0.title == title }) {
             return tag
         } else {
-            let tag = persistance.create(Tag.self)
-            
-            let colorIndex = attributes[.colorIndex] as? Int64 ?? nextColor
-            let id = attributes[.id] as? UUID ?? UUID()
-            let tasks = attributes[.tasks] as? [Task] ?? []
-            let arriving = attributes[.arriving] as? Bool ?? false
-            
-            tag.colorIndex = colorIndex
-            tag.id = id
-            tag.title = title
-            tag.tasks = NSSet(array: tasks)
-            
-            if let dueDate = attributes[.dueDate] as? Date {
-                tag.dueDate = dueDate
-            }
-            if let region = attributes[.region] as? CLCircularRegion {
-                let regionData =
-                    NSKeyedArchiver.archivedData(withRootObject: region)
-                tag.regionData = regionData
-                tag.arriving = arriving
-            }
-            
+            let tag = reefKit.createTag(with: attributes)! // TODO:
             ReefSpotlight.index(tag: tag)
             return tag
         }
     }
     
-    public func update(_ tag: Tag, with attributes: [Attributes : Any]) {
-        if let color = attributes[.colorIndex] as? Int64 {
-            tag.colorIndex = color
-        }
-        if let dueDate = attributes[.dueDate] as? Date {
-            tag.dueDate = dueDate
-        }
-        if let id = attributes[.id] as? UUID {
-            tag.id = id
-        }
-        if let title = attributes[.title] as? String {
-            tag.title = title
-        }
-        if let tasks = attributes[.tasks] as? [Task] {
-            tag.tasks = NSSet(array: tasks)
-        }
-        if let colorIndex = attributes[.colorIndex] as? Int64 {
-            tag.colorIndex = colorIndex
-        }
-        if let arriving = attributes[.arriving] as? Bool {
-            tag.arriving = arriving
-        }
-        if let region = attributes[.region] as? CLCircularRegion {
-            let regionData = NSKeyedArchiver.archivedData(withRootObject: region)
-            tag.regionData = regionData
-        }
-        
+    public func update(_ tag: Tag, with attributes: [TagAttributes : Any]) {
+        reefKit.update(tag, with: attributes)
         ReefSpotlight.updateInSpotlight(tag: tag)
-        persistance.save()
         delegate?.tagModel(self, didUpdate: tag, with: attributes)
-    }
-    
-    // The attributes of the Tag class, mapped according to CoreData
-    public enum Attributes {
-        case colorIndex
-        case dueDate
-        case id
-        case title
-        case tasks
-        case region
-        case arriving
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ReefKit
 
 extension Tag {    
     var notificationOptions: NotificationOptions {

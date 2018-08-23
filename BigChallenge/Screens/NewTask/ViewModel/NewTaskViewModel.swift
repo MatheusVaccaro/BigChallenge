@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ReefKit
 
 protocol NewTaskViewModelDelegate: class {
     func didTapDeleteTaskButton()

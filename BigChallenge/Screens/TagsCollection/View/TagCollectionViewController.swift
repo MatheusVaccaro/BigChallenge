@@ -10,6 +10,7 @@ import UIKit
 import Crashlytics
 import RxCocoa
 import RxSwift
+import ReefKit //TODO: remove
 
 class TagCollectionViewController: UIViewController {
     
@@ -134,12 +135,13 @@ class TagCollectionViewController: UIViewController {
             return
         }
         
-        cell.longPressedTag.subscribe { event in
+        let tagViewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
+        
+        tagViewModel.longPressedTag.subscribe { event in
             self.presentActionSheet(for: event.element!)
             Answers.logCustomEvent(withName: "longpressed tag")
         }.disposed(by: self.disposeBag)
         
-        let tagViewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
         let indexPath = IndexPath(row: row, section: 0)
         cell.configure(with: tagViewModel)
         self.loadSelection(for: cell, tag: tag, at: indexPath)

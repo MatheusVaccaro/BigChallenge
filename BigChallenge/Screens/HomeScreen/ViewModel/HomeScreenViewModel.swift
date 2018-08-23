@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ReefKit
 
 protocol HomeScreenViewModelDelegate: class {
     func willAddTask(selectedTags: [Tag])

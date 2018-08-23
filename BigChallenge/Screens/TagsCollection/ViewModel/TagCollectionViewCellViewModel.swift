@@ -9,10 +9,12 @@
 import Foundation
 import RxCocoa
 import RxSwift
+import ReefKit
 
 class TagCollectionViewCellViewModel {
     
     private(set) var tag: Tag
+    private(set) var longPressedTag: PublishSubject<Tag> = PublishSubject()
     
     private let disposeBag = DisposeBag()
     
@@ -24,7 +26,7 @@ class TagCollectionViewCellViewModel {
        return tag.title!
     }()
     
-    lazy var color: [CGColor] = {
-        return TagModel.tagColors[ Int(tag.colorIndex) ]
+    lazy var colors: [CGColor] = {
+        return tag.colors
     }()
 }

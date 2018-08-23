@@ -17,6 +17,7 @@ class ApplicationCoordinator: Coordinator {
     private let window: UIWindow
     private let rootViewController: UINavigationController
     private let persistence: Persistence
+    private let reefKit: ReefKit
     private let taskModel: TaskModel
     private let tagModel: TagModel
     private var selectedTags: [Tag]
@@ -26,9 +27,10 @@ class ApplicationCoordinator: Coordinator {
         self.rootViewController = UINavigationController()
         self.rootViewController.isNavigationBarHidden = true
         self.childrenCoordinators = []
-        self.persistence = Persistence(configuration: .inDevice)
-        self.tagModel = TagModel(persistence: persistence)
-        self.taskModel = TaskModel(persistence: persistence)
+        self.reefKit = ReefKit()
+        self.persistence = reefKit.persistence
+        self.tagModel = TagModel(reefKit: reefKit)
+        self.taskModel = TaskModel(reefKit: reefKit)
         self.selectedTags = []
         print(selectedTags.map { $0.title! })
     }

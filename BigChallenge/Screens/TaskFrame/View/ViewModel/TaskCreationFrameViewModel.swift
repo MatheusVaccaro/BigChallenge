@@ -10,6 +10,7 @@ import Foundation
 import Crashlytics
 import CoreLocation
 import RxSwift
+import ReefKit
 
 class TaskCreationFrameViewModel: CreationFrameViewModelProtocol {
     fileprivate var taskModel: TaskModel
@@ -51,7 +52,7 @@ class TaskCreationFrameViewModel: CreationFrameViewModelProtocol {
     }
     
     func didTapSaveButton() {
-        if let task = task {
+        if task != nil {
             updateTask()
         } else {
             createTaskIfPossible()
@@ -64,8 +65,8 @@ class TaskCreationFrameViewModel: CreationFrameViewModelProtocol {
         return true
     }
     
-    private var taskAttributes: [TaskModel.Attributes : Any] {
-        var attributes: [TaskModel.Attributes : Any] = [:]
+    private var taskAttributes: [TaskAttributes : Any] {
+        var attributes: [TaskAttributes : Any] = [:]
             
         if let taskTitle = taskTitle { attributes[.title] = taskTitle }
         if let taskTags = taskTags {
@@ -85,7 +86,7 @@ class TaskCreationFrameViewModel: CreationFrameViewModelProtocol {
         
         if let taskDueDate = self.taskDueDate {
             
-            var taskDueTimeOfDay = self.taskDueTimeOfDay
+            let taskDueTimeOfDay = self.taskDueTimeOfDay
             let date = Calendar.current.combine(date: taskDueDate, andTimeOfDay: taskDueTimeOfDay)!
             attributes[.dueDate] = date
             

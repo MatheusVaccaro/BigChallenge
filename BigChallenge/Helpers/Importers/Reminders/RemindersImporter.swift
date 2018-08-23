@@ -116,11 +116,11 @@ public class RemindersImporter {
     
     // Convert a reminder to a Task and a Tag
     private func convertTaskAndTag(from reminder: Reminder) -> (task: Task, tag: Tag) {
-        let tagAttributes: [TagModel.Attributes : Any] =
+        let tagAttributes: [TagAttributes : Any] =
             [.title : reminder.calendar.title as Any]
         let tag = tagModel.createTag(with: tagAttributes)
         
-        let taskAttributes: [TaskModel.Attributes : Any] =
+        let taskAttributes: [TaskAttributes : Any] =
             [.title : reminder.title as Any,
              .isCompleted : reminder.isCompleted as Any,
              .completionDate : reminder.completionDate as Any,

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import ReefKit
 
 protocol NewTagViewModelDelegate: class {
     func didTapCancelButton()
@@ -59,7 +60,7 @@ class NewTagViewModel: NewTagViewModelProtocol {
     }
     
     func numberOfColors() -> Int {
-        return TagModel.tagColors.count
+        return UIColor.tagColors.count
     }
     
     private func configureAttributes(from tag: Tag) {

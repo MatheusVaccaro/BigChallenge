@@ -14,8 +14,6 @@ class TagCollectionViewCell: UICollectionViewCell {
 
     static let identifier = "tagCollectionCell"
     
-    private(set) var longPressedTag: PublishSubject<Tag> = PublishSubject()
-    
     enum Kind {
         case tag
         case add
@@ -91,7 +89,7 @@ class TagCollectionViewCell: UICollectionViewCell {
     
     @objc private func handleLongPress() {
         guard let viewModel = viewModel else { return }
-        longPressedTag.onNext(viewModel.tag)
+        viewModel.longPressedTag.onNext(viewModel.tag)
     }
     
     func configure(with viewModel: TagCollectionViewCellViewModel? = nil) {
@@ -105,8 +103,8 @@ class TagCollectionViewCell: UICollectionViewCell {
         self.viewModel = viewModel
         tagUILabel.text = viewModel.tagTitle
         maskLabel.text = viewModel.tagTitle
-        layer.shadowColor = viewModel.color.first!
-        gradientLayer.colors = viewModel.color
+        layer.shadowColor = viewModel.colors.first
+        gradientLayer.colors = viewModel.colors
         kind = .tag
     }
     

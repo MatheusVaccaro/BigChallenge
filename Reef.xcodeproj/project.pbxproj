@@ -50,8 +50,6 @@
 		22D84C65210BF4D1004B8969 /* LocationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D84C64210BF4D1004B8969 /* LocationInputView.swift */; };
 		22ED5955211A7C21008EAD7D /* MKRadiusCircleRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ED5954211A7C21008EAD7D /* MKRadiusCircleRenderer.swift */; };
 		22ED5957211B346F008EAD7D /* MKPlaceMarkExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ED5956211B346F008EAD7D /* MKPlaceMarkExtension.swift */; };
-		22F23E75212E3E800064EE05 /* ReefKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F23E6C212E3E7F0064EE05 /* ReefKit.framework */; };
-		22F23E7C212E3E800064EE05 /* ReefKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F23E7B212E3E800064EE05 /* ReefKitTests.swift */; };
 		22F23E7E212E3E800064EE05 /* ReefKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 22F23E6E212E3E7F0064EE05 /* ReefKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22F23E81212E3E800064EE05 /* ReefKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F23E6C212E3E7F0064EE05 /* ReefKit.framework */; };
 		22F23E82212E3E800064EE05 /* ReefKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22F23E6C212E3E7F0064EE05 /* ReefKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -70,6 +68,8 @@
 		22F23E9E212E43B30064EE05 /* Task+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8882111061A00AE4FA1 /* Task+Extension.swift */; };
 		22F23EA0212E452E0064EE05 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F23E9F212E452E0064EE05 /* Colors.swift */; };
 		22F23EA2212E46060064EE05 /* ReefSpotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F23EA1212E46060064EE05 /* ReefSpotlight.swift */; };
+		22F78C1D212F31390036A4EB /* TaskCRUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F78C1C212F31390036A4EB /* TaskCRUD.swift */; };
+		22F78C1F212F365F0036A4EB /* ReefKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F78C1E212F365F0036A4EB /* ReefKit.swift */; };
 		25A3EF9F7B0FADAB1A8E19B8 /* Pods_ReefUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18C9FEFF01841372B83A1C4 /* Pods_ReefUITests.framework */; };
 		2934BCCA21003E0700B6A05A /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2934BCC921003E0700B6A05A /* TaskTests.swift */; };
 		294490EE20FD297200333F11 /* TaskViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294490ED20FD297200333F11 /* TaskViewModelTests.swift */; };
@@ -140,20 +140,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = C28DC91520B61CB6007F881A;
 			remoteInfo = BigChallenge;
-		};
-		22F23E76212E3E800064EE05 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C28DC90E20B61CB6007F881A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22F23E6B212E3E7F0064EE05;
-			remoteInfo = ReefKit;
-		};
-		22F23E78212E3E800064EE05 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C28DC90E20B61CB6007F881A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C28DC91520B61CB6007F881A;
-			remoteInfo = Reef;
 		};
 		22F23E7F212E3E800064EE05 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -255,12 +241,11 @@
 		22F23E6C212E3E7F0064EE05 /* ReefKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReefKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F23E6E212E3E7F0064EE05 /* ReefKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReefKit.h; sourceTree = "<group>"; };
 		22F23E6F212E3E7F0064EE05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22F23E74212E3E7F0064EE05 /* ReefKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReefKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		22F23E7B212E3E800064EE05 /* ReefKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReefKitTests.swift; sourceTree = "<group>"; };
-		22F23E7D212E3E800064EE05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22F23E96212E3F1B0064EE05 /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F23E9F212E452E0064EE05 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		22F23EA1212E46060064EE05 /* ReefSpotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReefSpotlight.swift; sourceTree = "<group>"; };
+		22F78C1C212F31390036A4EB /* TaskCRUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCRUD.swift; sourceTree = "<group>"; };
+		22F78C1E212F365F0036A4EB /* ReefKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReefKit.swift; sourceTree = "<group>"; };
 		2766B305F29EF8BE8DDEADCA /* Pods-ReefUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReefUITests/Pods-ReefUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2934BCC921003E0700B6A05A /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		294490ED20FD297200333F11 /* TaskViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModelTests.swift; sourceTree = "<group>"; };
@@ -360,14 +345,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		22F23E71212E3E7F0064EE05 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22F23E75212E3E800064EE05 /* ReefKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C28DC91320B61CB6007F881A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -407,7 +384,10 @@
 		1676FC8E20D9946E003E2D79 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2286A71420E3DF2100BE92AA /* Model.xcdatamodeld */,
+				22CC1864210511CC00486B27 /* Colors.swift */,
 				2207B3F2212ADB1800F26C55 /* TaskAndTagHelpers.swift */,
+				22F78C1C212F31390036A4EB /* TaskCRUD.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -456,8 +436,8 @@
 		221BA8AA20F698D000BE2AC1 /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
-				221BA8AD20F698F100BE2AC1 /* ViewModel */,
 				221BA8AB20F698DC00BE2AC1 /* View */,
+				221BA8AD20F698F100BE2AC1 /* ViewModel */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -572,20 +552,13 @@
 		22F23E6D212E3E7F0064EE05 /* ReefKit */ = {
 			isa = PBXGroup;
 			children = (
+				22F78C1E212F365F0036A4EB /* ReefKit.swift */,
+				1676FC8E20D9946E003E2D79 /* Model */,
 				C2A1113720B878CC00ABB161 /* Persistence */,
 				22F23E6E212E3E7F0064EE05 /* ReefKit.h */,
 				22F23E6F212E3E7F0064EE05 /* Info.plist */,
 			);
 			path = ReefKit;
-			sourceTree = "<group>";
-		};
-		22F23E7A212E3E800064EE05 /* ReefKitTests */ = {
-			isa = PBXGroup;
-			children = (
-				22F23E7B212E3E800064EE05 /* ReefKitTests.swift */,
-				22F23E7D212E3E800064EE05 /* Info.plist */,
-			);
-			path = ReefKitTests;
 			sourceTree = "<group>";
 		};
 		22F23E9A212E41550064EE05 /* PersistenceManager */ = {
@@ -766,16 +739,6 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		C21EAD0D20B751E8005F0F85 /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-				2286A71420E3DF2100BE92AA /* Model.xcdatamodeld */,
-				22CC1864210511CC00486B27 /* Colors.swift */,
-				1676FC8E20D9946E003E2D79 /* Model */,
-			);
-			path = Entities;
-			sourceTree = "<group>";
-		};
 		C28DC90D20B61CB6007F881A = {
 			isa = PBXGroup;
 			children = (
@@ -783,7 +746,6 @@
 				1627170E20C8793900AA0024 /* BigChallengeTests */,
 				1627171C20C879AD00AA0024 /* BigChallengeUITests */,
 				22F23E6D212E3E7F0064EE05 /* ReefKit */,
-				22F23E7A212E3E800064EE05 /* ReefKitTests */,
 				C28DC91720B61CB6007F881A /* Products */,
 				6BF08872F858F444FF435658 /* Pods */,
 				45EE167F10EAE72CE5635B25 /* Frameworks */,
@@ -797,7 +759,6 @@
 				1627170D20C8793900AA0024 /* ReefTests.xctest */,
 				1627171B20C879AD00AA0024 /* ReefUITests.xctest */,
 				22F23E6C212E3E7F0064EE05 /* ReefKit.framework */,
-				22F23E74212E3E7F0064EE05 /* ReefKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -870,7 +831,6 @@
 		C2A1113720B878CC00ABB161 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				C21EAD0D20B751E8005F0F85 /* Entities */,
 				C2A1113E20B88A4900ABB161 /* Protocols */,
 				223C0C0720E529D600CF39ED /* Persistence.swift */,
 				C2A1113A20B8791E00ABB161 /* MockPersistence.swift */,
@@ -1016,25 +976,6 @@
 			productReference = 22F23E6C212E3E7F0064EE05 /* ReefKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		22F23E73212E3E7F0064EE05 /* ReefKitTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 22F23E87212E3E800064EE05 /* Build configuration list for PBXNativeTarget "ReefKitTests" */;
-			buildPhases = (
-				22F23E70212E3E7F0064EE05 /* Sources */,
-				22F23E71212E3E7F0064EE05 /* Frameworks */,
-				22F23E72212E3E7F0064EE05 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				22F23E77212E3E800064EE05 /* PBXTargetDependency */,
-				22F23E79212E3E800064EE05 /* PBXTargetDependency */,
-			);
-			name = ReefKitTests;
-			productName = ReefKitTests;
-			productReference = 22F23E74212E3E7F0064EE05 /* ReefKitTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		C28DC91520B61CB6007F881A /* Reef */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C28DC92820B61CB9007F881A /* Build configuration list for PBXNativeTarget "Reef" */;
@@ -1079,10 +1020,6 @@
 					22F23E6B212E3E7F0064EE05 = {
 						CreatedOnToolsVersion = 10.0;
 					};
-					22F23E73212E3E7F0064EE05 = {
-						CreatedOnToolsVersion = 10.0;
-						TestTargetID = C28DC91520B61CB6007F881A;
-					};
 					C28DC91520B61CB6007F881A = {
 						CreatedOnToolsVersion = 9.3;
 					};
@@ -1106,7 +1043,6 @@
 				1627170C20C8793900AA0024 /* ReefTests */,
 				1627171A20C879AD00AA0024 /* ReefUITests */,
 				22F23E6B212E3E7F0064EE05 /* ReefKit */,
-				22F23E73212E3E7F0064EE05 /* ReefKitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1127,13 +1063,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		22F23E6A212E3E7F0064EE05 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		22F23E72212E3E7F0064EE05 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1376,22 +1305,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22F78C1F212F365F0036A4EB /* ReefKit.swift in Sources */,
 				22F23E8C212E3EA10064EE05 /* LocalPersistence.swift in Sources */,
 				22F23E8A212E3E990064EE05 /* Persistence.swift in Sources */,
+				22F78C1D212F31390036A4EB /* TaskCRUD.swift in Sources */,
 				22F23E94212E3EC80064EE05 /* Storable.swift in Sources */,
 				22F23E8B212E3E9D0064EE05 /* MockPersistence.swift in Sources */,
 				22F23E8D212E3EA70064EE05 /* Model.xcdatamodeld in Sources */,
 				22F23E98212E40640064EE05 /* Colors.swift in Sources */,
 				22F23E93212E3EC30064EE05 /* TaskAndTagHelpers.swift in Sources */,
 				22F23E95212E3ECC0064EE05 /* PersistenceProtocol.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		22F23E70212E3E7F0064EE05 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22F23E7C212E3E800064EE05 /* ReefKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1484,16 +1407,6 @@
 			isa = PBXTargetDependency;
 			target = C28DC91520B61CB6007F881A /* Reef */;
 			targetProxy = 1627172020C879AD00AA0024 /* PBXContainerItemProxy */;
-		};
-		22F23E77212E3E800064EE05 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22F23E6B212E3E7F0064EE05 /* ReefKit */;
-			targetProxy = 22F23E76212E3E800064EE05 /* PBXContainerItemProxy */;
-		};
-		22F23E79212E3E800064EE05 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C28DC91520B61CB6007F881A /* Reef */;
-			targetProxy = 22F23E78212E3E800064EE05 /* PBXContainerItemProxy */;
 		};
 		22F23E80212E3E800064EE05 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1695,51 +1608,6 @@
 			};
 			name = Release;
 		};
-		22F23E88212E3E800064EE05 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D9KU92KK65;
-				INFOPLIST_FILE = ReefKitTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Wide.ReefKitTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Reef.app/Reef";
-			};
-			name = Debug;
-		};
-		22F23E89212E3E800064EE05 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D9KU92KK65;
-				INFOPLIST_FILE = ReefKitTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Wide.ReefKitTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Reef.app/Reef";
-			};
-			name = Release;
-		};
 		C28DC92620B61CB9007F881A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1931,15 +1799,6 @@
 			buildConfigurations = (
 				22F23E84212E3E800064EE05 /* Debug */,
 				22F23E85212E3E800064EE05 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		22F23E87212E3E800064EE05 /* Build configuration list for PBXNativeTarget "ReefKitTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				22F23E88212E3E800064EE05 /* Debug */,
-				22F23E89212E3E800064EE05 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

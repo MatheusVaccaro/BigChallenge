@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol PersistenceProtocol {
+protocol PersistenceProtocol {
     func create<T: Storable>(_ model: T.Type) throws -> T
     func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate?, completion: (([T]) -> Void)) throws
     func save() throws

@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import ReefKit
 
 class NewTagCoordinator: Coordinator {
     

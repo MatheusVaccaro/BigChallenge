@@ -18,6 +18,7 @@ public class Persistence: PersistenceProtocol {
     }
 
     // MARK: - Properties
+    
     public weak var tasksDelegate: TasksPersistenceDelegate?
     public weak var tagsDelegate: TagsPersistenceDelegate?
     
@@ -82,7 +83,6 @@ public class Persistence: PersistenceProtocol {
 }
 
 // MARK: - Persistence Delegate
-
 // MARK: Tasks
 public protocol TasksPersistenceDelegate: class {
     func persistence(_ persistence: Persistence, didInsertTasks tasks: [Task])
@@ -100,7 +100,7 @@ public protocol TagsPersistenceDelegate: class {
 // MARK: - LocalPersistenceDelegate Extension
 
 extension Persistence: LocalPersistenceDelegate {
-    
+
     func localPersistence(_ localPersistence: LocalPersistence, didInsertObjects objects: [Storable]) {
         // filter is needed because if a Task and a Tag were to be updated at the same time, the cast would fail
         if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {

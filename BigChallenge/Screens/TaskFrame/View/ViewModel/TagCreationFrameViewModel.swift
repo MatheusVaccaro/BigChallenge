@@ -9,6 +9,7 @@
 import Foundation
 import CoreLocation
 import RxSwift
+import ReefKit
 
 class TagCreationFrameViewModel: CreationFrameViewModelProtocol {
     
@@ -27,8 +28,8 @@ class TagCreationFrameViewModel: CreationFrameViewModelProtocol {
     
     var tag: Tag?
     
-    private var tagAttributes: [TagModel.Attributes : Any] {
-        var attributes: [TagModel.Attributes : Any] = [:]
+    private var tagAttributes: [TagAttributes : Any] {
+        var attributes: [TagAttributes : Any] = [:]
         
         if let tagTitle = tagTitle { attributes[.title] = tagTitle }
         if let colorIndex = tagColorIndex { attributes[.colorIndex] = Int64(colorIndex) }
@@ -77,8 +78,7 @@ class TagCreationFrameViewModel: CreationFrameViewModelProtocol {
     
     private func createTagIfPossible() {
         guard canCreateTag else { return }
-        let tag = tagModel.createTag(with: tagAttributes)
-        tagModel.save(tag)
+        let _ = tagModel.createTag(with: tagAttributes)
     }
     
     private func updateTag() {

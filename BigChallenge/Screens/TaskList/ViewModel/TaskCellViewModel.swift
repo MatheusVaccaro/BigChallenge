@@ -10,6 +10,7 @@ import Foundation
 import Crashlytics
 import RxCocoa
 import RxSwift
+import ReefKit
 
 class TaskCellViewModel {
     
@@ -47,18 +48,17 @@ class TaskCellViewModel {
     }()
     
     var checkButtonGradient: [CGColor] {
-        let index = (task.tags?.allObjects.first as? Tag)?.colorIndex ?? 0
-        return TagModel.tagColors[Int(index)]
+        return task.allTags.first!.colors
     }
     
     func changeTextTitle(to title: String) {
-        let attributes: [TaskModel.Attributes : Any] = [.title: title]
+        let attributes: [TaskAttributes : Any] = [.title: title]
         taskModel.update(task, with: attributes)
         taskModel.save(task)
     }
     
     func changedCheckButton(to bool: Bool) {
-        let attributes: [TaskModel.Attributes : Any] = [.isCompleted: bool,
+        let attributes: [TaskAttributes : Any] = [.isCompleted: bool,
                                                         .completionDate: Date()]
         taskModel.update(task, with: attributes)
         let metricAttributes =

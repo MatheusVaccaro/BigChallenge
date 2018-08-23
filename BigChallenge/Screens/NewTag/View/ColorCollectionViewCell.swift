@@ -36,8 +36,7 @@ class ColorCollectionViewCell: UICollectionViewCell {
         imageView.layer.zPosition = 1
         imageView.layer.cornerRadius = imageView.layer.frame.height / 2
         imageView.layer.masksToBounds = true
-        let cgColors = TagModel.tagColors[ Int(colorIndex) ]
-        gradientLayer.colors = cgColors
+        gradientLayer.colors = UIColor.tagColors[colorIndex]
         contentView.layer.addSublayer(gradientLayer)
     }
     

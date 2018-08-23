@@ -17,18 +17,18 @@ public class TaskModel {
     weak var delegate: TaskModelDelegate?
     private(set) var didUpdateTasks: BehaviorSubject<[Task]>
     private(set) public var tasks: [Task]
-    private let persistance: Persistence
+    private let reefKit: ReefKit
 
     // MARK: - TaskModel Lifecycle
     
-    init(persistence: Persistence, delegate: TaskModelDelegate? = nil) {
-        self.persistance = persistence
+    init(reefKit: ReefKit, delegate: TaskModelDelegate? = nil) {
+        self.reefKit = reefKit
         self.delegate = delegate
         self.tasks = []
         self.didUpdateTasks = BehaviorSubject<[Task]>(value: tasks)
+        reefKit.persistence.tasksDelegate = self
         
-        persistance.tasksDelegate = self
-        persistence.fetch(Task.self) {
+        reefKit.persistence.fetch(Task.self) {
             tasks = $0
         }
         didUpdateTasks.onNext(tasks)
@@ -37,100 +37,32 @@ public class TaskModel {
     // MARK: - CRUD Methods
     public func save(_ task: Task) {
         if !tasks.contains(task) { tasks.append(task) }
-        persistance.save() // delegate manages the array
+        reefKit.persistence.save()
     }
     
     public func delete(_ task: Task) {
         guard tasks.contains(task) else { print("could not delete \(task) "); return }
-        ReefSpotlight.deindex(task: task)
-        NotificationManager.removeLocationNotification(for: task)
+        ReefSpotlight.deindex(task: task) // TODO: move to reefSpotlghtKit
+        NotificationManager.removeLocationNotification(for: task) // TODO: move to notificationKit
         NotificationManager.removeDateNotification(for: task)
-        persistance.delete(task) // delegate manages the array
+        reefKit.persistence.delete(task)
     }
     
-    public func createTask(with attributes: [Attributes : Any]) -> Task {
-        let task: Task = persistance.create(Task.self)
-        
-        let id = attributes[.id] as? UUID ?? UUID()
-        let title = attributes[.title] as? String ?? ""
-        let notes = attributes[.notes] as? String ?? ""
-        let creationDate = attributes[.creationDate] as? Date ?? Date()
-        let isCompleted = attributes[.isCompleted] as? Bool ?? false
-        let tags = attributes[.tags] as? [Tag] ?? []
-        let isArriving = attributes[.isArriving] as? Bool ?? true
-        let isPinned = attributes[.isPinned] as? Bool ?? false
-        
-        task.id = id
-        task.title = title
-        task.notes = notes
-        task.creationDate = creationDate
-        task.isCompleted = isCompleted
-        task.tags = NSSet(array: tags)
-        task.isPinned = isPinned
-        
-        if let completionDate = attributes[.completionDate] as? Date {
-            task.completionDate = completionDate
-        }
-        if let dueDate = attributes[.dueDate] as? Date {
-            task.dueDate = dueDate
-        }
-        if let region = attributes[.region] as? CLCircularRegion {
-            let regionData =
-                NSKeyedArchiver.archivedData(withRootObject: region)
-            task.regionData = regionData
-            task.isArriving = isArriving
-        }
+    public func createTask(with attributes: [TaskAttributes : Any]) -> Task {
+        let task = reefKit.createTask(with: attributes)! //TODO: remove force cast
         updateNotifications(for: task)
         delegate?.taskModel(self, didCreate: task)
+        if !task.isCompleted { ReefSpotlight.index(task: task) }
         if let tags = task.tags?.allObjects as? [Tag] {
             NotificationManager.addAllTagsNotifications(from: tags)
         }
-        
-        if !isCompleted { ReefSpotlight.index(task: task) }
         return task
     }
     
-    public func update(_ task: Task, with attributes: [Attributes : Any]) {
-        if let completionDate = attributes[.completionDate] as? Date {
-            task.completionDate = completionDate
-        }
-        if let creationDate = attributes[.creationDate] as? Date {
-            task.creationDate = creationDate
-        }
-        if let dueDate = attributes[.dueDate] as? Date {
-            task.dueDate = dueDate
-        }
-        if let id = attributes[.id] as? UUID {
-            task.id = id
-        }
-        if let isCompleted = attributes[.isCompleted] as? Bool {
-            task.isCompleted = isCompleted
-            updateNotifications(for: task)
-        }
-        if let notes = attributes[.notes] as? String {
-            task.notes = notes
-        }
-        if let title = attributes[.title] as? String {
-            task.title = title
-        }
-        if let tags = attributes[.tags] as? [Tag] {
-            task.tags = NSSet(array: tags)
-        }
-        
-        if let region = attributes[.region] as? CLCircularRegion {
-            let regionData =
-                NSKeyedArchiver.archivedData(withRootObject: region)
-            task.regionData = regionData
-            task.isArriving = attributes[.isArriving] as? Bool ?? true
-        }
-        
-        if let isPinned = attributes[.isPinned] as? Bool {
-            task.isPinned = isPinned
-        }
-        
+    public func update(_ task: Task, with attributes: [TaskAttributes : Any]) {
+        reefKit.update(task, with: attributes)
+        updateNotifications(for: task)
         ReefSpotlight.updateInSpotlight(task: task)
-        persistance.save()
-        delegate?.taskModel(self, didUpdate: task, with: attributes)
     }
     
     func taskWith(id: UUID) -> Task? {
@@ -146,35 +78,18 @@ public class TaskModel {
             NotificationManager.addDateNotification(for: task)
         }
     }
-    
-    // The attributes of the Task class, mapped according to CoreData
-    public enum Attributes {
-        case completionDate
-        case creationDate
-        case dueDate
-        case id
-        case isCompleted
-        case notes
-        case title
-        case tags
-        case region
-        case isArriving
-        case isPinned
-    }
 }
 
 protocol TaskModelDelegate: class {
     func taskModel(_ taskModel: TaskModel, didSave task: Task)
     func taskModel(_ taskModel: TaskModel, didDelete task: Task)
     func taskModel(_ taskModel: TaskModel, didCreate task: Task)
-    func taskModel(_ taskModel: TaskModel, didUpdate task: Task, with attributes: [TaskModel.Attributes: Any])
 }
 
 extension TaskModelDelegate {
     func taskModel(_ taskModel: TaskModel, didSave task: Task) { }
     func taskModel(_ taskModel: TaskModel, didDelete task: Task) { }
     func taskModel(_ taskModel: TaskModel, didCreate task: Task) { }
-    func taskModel(_ taskModel: TaskModel, didUpdate task: Task, with attributes: [TaskModel.Attributes: Any]) { }
 }
 
 // MARK: - TaskPersistenceDelegate Extension
