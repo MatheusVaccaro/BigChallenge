@@ -46,9 +46,9 @@ class TaskCRUD {
         }
     }
     
-    func createTask(with attributes: [TaskAttributes : Any]) -> Task? {
-        guard let title = attributes[.title] as? String, !title.isEmpty else { return nil }
+    func createTask(with attributes: [TaskAttributes : Any]) -> Task {
         
+        let title = attributes[.title] as? String ?? ""
         let task: Task = persistence.create(Task.self)
         let id = attributes[.id] as? UUID ?? UUID()
         let notes = attributes[.notes] as? String ?? ""
@@ -119,10 +119,9 @@ class TaskCRUD {
         if let isPinned = attributes[.isPinned] as? Bool {
             task.isPinned = isPinned
         }
-        save(task)
     }
     
-    private func save(_ task: Task) {
+    func save(_ task: Task) {
         persistence.save()
     }
     
@@ -151,9 +150,9 @@ public class TagCRUD {
         }
     }
     
-    func createTag(with attributes: [TagAttributes : Any]) -> Tag? {
-        guard let title = attributes[.title] as? String, !title.isEmpty else { return nil }
+    func createTag(with attributes: [TagAttributes : Any]) -> Tag {
         
+        let title = attributes[.title] as? String
         let tag = persistence.create(Tag.self)
         let colorIndex = attributes[.colorIndex] as? Int64 ?? nextColor()
         let id = attributes[.id] as? UUID ?? UUID()
@@ -175,7 +174,6 @@ public class TagCRUD {
             tag.arriving = arriving
         }
         
-        save(tag)
         return tag
     }
     
@@ -205,15 +203,13 @@ public class TagCRUD {
             let regionData = NSKeyedArchiver.archivedData(withRootObject: region)
             tag.regionData = regionData
         }
-        
-        save(tag)
     }
     
     func delete(_ tag: Tag) {
         persistence.delete(tag)
     }
     
-    private func save(_ tag: Tag) {
+    func save(_ tag: Tag) {
         //TODO: do more stuff
         persistence.save()
     }

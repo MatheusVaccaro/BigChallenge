@@ -44,27 +44,21 @@ public class TagModel {
         self.tags = []
         self.didUpdateTags = BehaviorSubject<[Tag]>(value: tags)
         
-        reefKit.persistence.tagsDelegate = self
-        reefKit.persistence.fetch(Tag.self) { self.tags = $0 }
+        reefKit.tagsDelegate = self
+        reefKit.fetchTags { self.tags = $0 }
         didUpdateTags.onNext(tags)
     }
     
     // MARK: - CRUD Methods
-    
-    public func saveContext() {
-        reefKit.persistence.save()
-    }
-    
     public func save(_ tag: Tag) {
         if !tags.contains(tag) { tags.append(tag) }
-        reefKit.persistence.save() // delegate manages the array
+        reefKit.save(tag) // delegate manages the array
     }
     
     public func delete(object: Tag) {
         guard tags.contains(object) else { print("could not delete \(object) "); return }
-        ReefSpotlight.deindex(tag: object)
         NotificationManager.removeAllNotifications(from: object)
-        reefKit.persistence.delete(object) // delegate manages the array
+        reefKit.delete(object) // delegate manages the array
     }
     
     public func createTag(with attributes: [TagAttributes : Any]) -> Tag {
@@ -73,23 +67,20 @@ public class TagModel {
             return tag
         } else {
             let tag = reefKit.createTag(with: attributes)! // TODO:
-            ReefSpotlight.index(tag: tag)
             return tag
         }
     }
     
     public func update(_ tag: Tag, with attributes: [TagAttributes : Any]) {
         reefKit.update(tag, with: attributes)
-        ReefSpotlight.updateInSpotlight(tag: tag)
         delegate?.tagModel(self, didUpdate: tag, with: attributes)
     }
 }
 
 // MARK: - TagPersistenceDelegate Extension
 
-extension TagModel: TagsPersistenceDelegate {
-    
-    public func persistence(_ persistence: Persistence, didInsertTags tags: [Tag]) {
+extension TagModel: ReefTagDelegate {
+    public func reef(_ reefKit: ReefKit, didInsertTags tags: [Tag]) {
         for tag in tags {
             guard !self.tags.contains(tag) else { continue }
             self.tags.append(tag)
@@ -97,7 +88,7 @@ extension TagModel: TagsPersistenceDelegate {
         self.didUpdateTags.onNext(self.tags)
     }
     
-    public func persistence(_ persistence: Persistence, didUpdateTags tags: [Tag]) {
+    public func reef(_ reefKit: ReefKit, didUpdateTags tags: [Tag]) {
         for tag in tags {
             guard let index = self.tags.index(of: tag) else { continue }
             self.tags[index] = tag
@@ -105,7 +96,7 @@ extension TagModel: TagsPersistenceDelegate {
         self.didUpdateTags.onNext(self.tags)
     }
     
-    public func persistence(_ persistence: Persistence, didDeleteTags tags: [Tag]) {
+    public func reef(_ reefKit: ReefKit, didDeleteTags tags: [Tag]) {
         for tag in tags {
             guard let index = self.tags.index(of: tag) else { continue }
             self.tags.remove(at: index)

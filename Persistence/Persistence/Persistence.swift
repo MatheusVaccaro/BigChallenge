@@ -131,5 +131,4 @@ extension Persistence: LocalPersistenceDelegate {
             tagsDelegate?.persistence(self, didDeleteTags: tags)
         }
     }
-
 }

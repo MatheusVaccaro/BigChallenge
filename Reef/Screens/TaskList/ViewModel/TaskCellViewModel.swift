@@ -65,7 +65,6 @@ class TaskCellViewModel {
             ["time to complete" : task.creationDate!.timeIntervalSinceNow]
         if bool {
             Answers.logCustomEvent(withName: "completed task", customAttributes: metricAttributes)
-            ReefSpotlight.deindex(task: task)
         }
     }
 }

@@ -26,33 +26,29 @@ public class TaskModel {
         self.delegate = delegate
         self.tasks = []
         self.didUpdateTasks = BehaviorSubject<[Task]>(value: tasks)
-        reefKit.persistence.tasksDelegate = self
+        reefKit.tasksDelegate = self
         
-        reefKit.persistence.fetch(Task.self) {
-            tasks = $0
-        }
+        reefKit.fetchTasks { self.tasks = $0 }
         didUpdateTasks.onNext(tasks)
     }
     
     // MARK: - CRUD Methods
     public func save(_ task: Task) {
         if !tasks.contains(task) { tasks.append(task) }
-        reefKit.persistence.save()
+        reefKit.save(task)
     }
     
     public func delete(_ task: Task) {
         guard tasks.contains(task) else { print("could not delete \(task) "); return }
-        ReefSpotlight.deindex(task: task) // TODO: move to reefSpotlghtKit
         NotificationManager.removeLocationNotification(for: task) // TODO: move to notificationKit
         NotificationManager.removeDateNotification(for: task)
-        reefKit.persistence.delete(task)
+        reefKit.delete(task)
     }
     
     public func createTask(with attributes: [TaskAttributes : Any]) -> Task {
-        let task = reefKit.createTask(with: attributes)! //TODO: remove force cast
+        let task = reefKit.createTask(with: attributes)
         updateNotifications(for: task)
         delegate?.taskModel(self, didCreate: task)
-        if !task.isCompleted { ReefSpotlight.index(task: task) }
         if let tags = task.tags?.allObjects as? [Tag] {
             NotificationManager.addAllTagsNotifications(from: tags)
         }
@@ -62,7 +58,6 @@ public class TaskModel {
     public func update(_ task: Task, with attributes: [TaskAttributes : Any]) {
         reefKit.update(task, with: attributes)
         updateNotifications(for: task)
-        ReefSpotlight.updateInSpotlight(task: task)
     }
     
     func taskWith(id: UUID) -> Task? {
@@ -94,9 +89,8 @@ extension TaskModelDelegate {
 
 // MARK: - TaskPersistenceDelegate Extension
 
-extension TaskModel: TasksPersistenceDelegate {
-    
-    public func persistence(_ persistence: Persistence, didInsertTasks tasks: [Task]) {
+extension TaskModel: ReefTaskDelegate {
+    public func reef(_ reefKit: ReefKit, didInsertTasks tasks: [Task]) {
         for task in tasks {
             guard !self.tasks.contains(task) else { continue }
             self.tasks.append(task)
@@ -104,7 +98,7 @@ extension TaskModel: TasksPersistenceDelegate {
         self.didUpdateTasks.onNext(self.tasks)
     }
     
-    public func persistence(_ persistence: Persistence, didUpdateTasks tasks: [Task]) {
+    public func reef(_ reefKit: ReefKit, didUpdateTasks tasks: [Task]) {
         for task in tasks {
             guard let index = self.tasks.index(of: task) else { continue }
             self.tasks[index] = task
@@ -112,7 +106,7 @@ extension TaskModel: TasksPersistenceDelegate {
         self.didUpdateTasks.onNext(self.tasks)
     }
     
-    public func persistence(_ persistence: Persistence, didDeleteTasks tasks: [Task]) {
+    public func reef(_ reefKit: ReefKit, didDeleteTasks tasks: [Task]) {
         for task in tasks {
             guard let index = self.tasks.index(of: task) else { continue }
             self.tasks.remove(at: index)

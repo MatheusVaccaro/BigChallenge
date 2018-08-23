@@ -11,7 +11,7 @@ import CoreSpotlight
 import MobileCoreServices
 import ReefKit
 
-class ReefSpotlight {
+class ReefSpotlight: NSObject {
     static func index(task: Task) {
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
         
