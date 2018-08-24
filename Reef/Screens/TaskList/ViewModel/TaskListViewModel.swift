@@ -93,15 +93,15 @@ public class TaskListViewModel {
             .filter { !$0.isCompleted && (selectedTags.isEmpty ? !model.recommended.contains($0) : true) }
             .filter { for tag in selectedTags where !$0.tags!.contains(tag) { return false }; return true }
         
-        sections = relatedTags.powerSet
+        sections = relatedTags
+            .powerSet
             .map { selectedTags + $0 }
         
         for tags in sections {
             let tasksInSection = flatTasks
-                .filter { $0.allTags.count == tags.count &&
-                          $0.tags! == NSSet(array: tags) }
+                .filter { $0.allTags.count == tags.count && Set<Tag>($0.allTags) == Set<Tag>(tags) }
             
-            flatTasks = flatTasks.filter { !tasksInSection.contains($0) } // ??????????
+            flatTasks = flatTasks.filter { !tasksInSection.contains($0) } //remove from flattask to improve performance?
             
             if tasksInSection.isEmpty { sections.remove(at: sections.index(of: tags)! ) }
             tasks.append(tasksInSection)
@@ -135,7 +135,7 @@ public class TaskListViewModel {
         
         return !selectedTags.isEmpty &&
             task.allTags.count == selectedTags.count &&
-            task.allTags.sorted() == selectedTags.sorted()
+            Set<Tag>(task.allTags) == Set<Tag>(selectedTags)
     }
     
     fileprivate func subscribeToModelUpdate() {

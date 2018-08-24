@@ -17,7 +17,11 @@ public class ReefSpotlight: NSObject {
         attributeSet.title = task.title!
         attributeSet.contentDescription = task.notes
         
-        attributeSet.contentCreationDate = task.creationDate
+        attributeSet.userOwned = 1
+        
+        attributeSet.dueDate = task.dates.min()
+        //TODO add location
+//        attributeSet.contentCreationDate = task.creationDate
         
         let item = CSSearchableItem(uniqueIdentifier: "task-\(task.id!)",
             domainIdentifier: "com.beanie",
@@ -47,7 +51,6 @@ public class ReefSpotlight: NSObject {
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
         
         attributeSet.title = tag.title!
-        attributeSet.contentDescription = "tag" //TODO: localize
         
         let item = CSSearchableItem(uniqueIdentifier: "tag-\(tag.id!)",
             domainIdentifier: "com.beanie",
