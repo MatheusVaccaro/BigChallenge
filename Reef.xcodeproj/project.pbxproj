@@ -46,7 +46,6 @@
 		228946352113999A009D05CB /* TaskCreationFrameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228946342113999A009D05CB /* TaskCreationFrameViewModel.swift */; };
 		228946392113F1A4009D05CB /* InvertedCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228946382113F1A4009D05CB /* InvertedCircle.swift */; };
 		228BAD442108C22400E74AA9 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BAD432108C22400E74AA9 /* Fonts.swift */; };
-		2299F07920F628A70074A834 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299F07820F628A70074A834 /* LocationManager.swift */; };
 		22D14A1E212CBBF500B15B98 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D14A1D212CBBF500B15B98 /* ArrayExtension.swift */; };
 		22D84C63210BF1E3004B8969 /* LocationInputView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22D84C62210BF1E3004B8969 /* LocationInputView.storyboard */; };
 		22D84C65210BF4D1004B8969 /* LocationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D84C64210BF4D1004B8969 /* LocationInputView.swift */; };
@@ -63,7 +62,6 @@
 		22F23E94212E3EC80064EE05 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113C20B88A2F00ABB161 /* Storable.swift */; };
 		22F23E95212E3ECC0064EE05 /* PersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0520E5293500CF39ED /* PersistenceProtocol.swift */; };
 		22F23E98212E40640064EE05 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CC1864210511CC00486B27 /* Colors.swift */; };
-		22F23E99212E40AD0064EE05 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22270EF92120C07000695223 /* Recommender.swift */; };
 		22F23E9B212E416C0064EE05 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1676FC8F20D99580003E2D79 /* TaskModel.swift */; };
 		22F23E9C212E41700064EE05 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2241F36820ED08340069EFE9 /* TagModel.swift */; };
 		22F23E9D212E43B30064EE05 /* Tag+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C79D2E2123E89A0058F228 /* Tag+Extension.swift */; };
@@ -79,6 +77,8 @@
 		22FA286921303A5B00FC74D3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22FA286721303A5B00FC74D3 /* MainInterface.storyboard */; };
 		22FA286D21303A5B00FC74D3 /* ReefQuickLook.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 22FA286121303A5B00FC74D3 /* ReefQuickLook.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22FA2871213040FC00FC74D3 /* ReefKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F23E6C212E3E7F0064EE05 /* ReefKit.framework */; };
+		22FA2872213048AF00FC74D3 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299F07820F628A70074A834 /* LocationManager.swift */; };
+		22FA2873213048B200FC74D3 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22270EF92120C07000695223 /* Recommender.swift */; };
 		2934BCCA21003E0700B6A05A /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2934BCC921003E0700B6A05A /* TaskTests.swift */; };
 		294490EE20FD297200333F11 /* TaskViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294490ED20FD297200333F11 /* TaskViewModelTests.swift */; };
 		2972201F211CCD8F00CF80CE /* DateInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2972201E211CCD8F00CF80CE /* DateInputViewController.swift */; };
@@ -570,7 +570,6 @@
 		2299F07720F6287F0074A834 /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				2299F07820F628A70074A834 /* LocationManager.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -612,6 +611,8 @@
 			children = (
 				22F78C1E212F365F0036A4EB /* ReefKit.swift */,
 				22F23EA1212E46060064EE05 /* ReefSpotlight.swift */,
+				22270EF92120C07000695223 /* Recommender.swift */,
+				2299F07820F628A70074A834 /* LocationManager.swift */,
 				1676FC8E20D9946E003E2D79 /* Model */,
 				22F23E6E212E3E7F0064EE05 /* ReefKit.h */,
 				22F23E6F212E3E7F0064EE05 /* Info.plist */,
@@ -622,7 +623,6 @@
 		22F23E9A212E41550064EE05 /* PersistenceManager */ = {
 			isa = PBXGroup;
 			children = (
-				22270EF92120C07000695223 /* Recommender.swift */,
 				1676FC8F20D99580003E2D79 /* TaskModel.swift */,
 				2241F36820ED08340069EFE9 /* TagModel.swift */,
 				29A4F8882111061A00AE4FA1 /* Task+Extension.swift */,
@@ -1409,6 +1409,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22FA2873213048B200FC74D3 /* Recommender.swift in Sources */,
 				22F78C1F212F365F0036A4EB /* ReefKit.swift in Sources */,
 				22FA285B212F7EA200FC74D3 /* ReefSpotlight.swift in Sources */,
 				22F23E8C212E3EA10064EE05 /* LocalPersistence.swift in Sources */,
@@ -1417,6 +1418,7 @@
 				22F23E94212E3EC80064EE05 /* Storable.swift in Sources */,
 				22F23E8B212E3E9D0064EE05 /* MockPersistence.swift in Sources */,
 				22F23E8D212E3EA70064EE05 /* Model.xcdatamodeld in Sources */,
+				22FA2872213048AF00FC74D3 /* LocationManager.swift in Sources */,
 				22F23E98212E40640064EE05 /* Colors.swift in Sources */,
 				22F23E93212E3EC30064EE05 /* TaskAndTagHelpers.swift in Sources */,
 				22F23E95212E3ECC0064EE05 /* PersistenceProtocol.swift in Sources */,
@@ -1476,13 +1478,11 @@
 				228BAD442108C22400E74AA9 /* Fonts.swift in Sources */,
 				22F23E9D212E43B30064EE05 /* Tag+Extension.swift in Sources */,
 				22325A7920FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift in Sources */,
-				22F23E99212E40AD0064EE05 /* Recommender.swift in Sources */,
 				225852822100C5BE0011F4B0 /* TagsCollectionView.swift in Sources */,
 				221BA8BA20F6A26100BE2AC1 /* TagCollectionViewModel.swift in Sources */,
 				222888DC211873DD0093EEF7 /* LocationTableViewCell.swift in Sources */,
 				29A4F8852110F04600AE4FA1 /* DateInputViewModel.swift in Sources */,
 				29BA68A42120CC2F009B4AB9 /* CalendarCell.swift in Sources */,
-				2299F07920F628A70074A834 /* LocationManager.swift in Sources */,
 				2972201F211CCD8F00CF80CE /* DateInputViewController.swift in Sources */,
 				226B311D211C954200881E34 /* CreateTagViewController.swift in Sources */,
 				C21EAD0020B741BC005F0F85 /* HomeScreenCoordinator.swift in Sources */,

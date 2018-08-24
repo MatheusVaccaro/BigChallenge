@@ -17,6 +17,7 @@ public class TaskModel {
     weak var delegate: TaskModelDelegate?
     private(set) var didUpdateTasks: BehaviorSubject<[Task]>
     private(set) public var tasks: [Task]
+    private(set) public var recommended: [Task]
     private let reefKit: ReefKit
 
     // MARK: - TaskModel Lifecycle
@@ -25,10 +26,14 @@ public class TaskModel {
         self.reefKit = reefKit
         self.delegate = delegate
         self.tasks = []
+        self.recommended = []
         self.didUpdateTasks = BehaviorSubject<[Task]>(value: tasks)
         reefKit.tasksDelegate = self
         
-        reefKit.fetchTasks { self.tasks = $0 }
+        reefKit.fetchTasks {
+            self.tasks = $0
+            self.recommended = ReefKit.recommendedTasks(from: $0)
+        }
         didUpdateTasks.onNext(tasks)
     }
     
@@ -100,18 +105,21 @@ extension TaskModel: ReefTaskDelegate {
     
     public func reef(_ reefKit: ReefKit, didUpdateTasks tasks: [Task]) {
         for task in tasks {
-            guard let index = self.tasks.index(of: task) else { continue }
-            self.tasks[index] = task
+            if let index = tasks.index(of: task) { self.tasks[index] = task }
+            if let index = recommended.index(of: task) {
+                if task.isCompleted { recommended.remove(at: index); continue }
+                recommended[index] = task
+            }
         }
         self.didUpdateTasks.onNext(self.tasks)
     }
     
     public func reef(_ reefKit: ReefKit, didDeleteTasks tasks: [Task]) {
         for task in tasks {
-            guard let index = self.tasks.index(of: task) else { continue }
-            self.tasks.remove(at: index)
+            if let index = tasks.index(of: task) { self.tasks.remove(at: index) }
+            if let index = recommended.index(of: task) { recommended.remove(at: index) }
         }
-        self.didUpdateTasks.onNext(self.tasks)
+        didUpdateTasks.onNext(tasks)
     }
 }
 

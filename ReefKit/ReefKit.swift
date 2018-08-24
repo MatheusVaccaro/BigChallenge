@@ -25,6 +25,10 @@ public class ReefKit {
         persistence.tagsDelegate = self
     }
     
+    public static func recommendedTasks(from tasks: [Task]) -> [Task] {
+        return Recommender.recommended(from: tasks)
+    }
+    
     public func fetchTasks(completionHandler: @escaping (([Task]) -> ())) {
         taskCRUD.fetchTasks { completionHandler($0) }
     }

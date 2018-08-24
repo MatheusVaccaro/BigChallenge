@@ -27,7 +27,6 @@ public class TaskListViewModel {
     private(set) var selectedTags: [Tag]
     private(set) var relatedTags: [Tag]
 
-    private var recommender: Recommender
     private let model: TaskModel
     private var disposeBag = DisposeBag()
     
@@ -43,7 +42,6 @@ public class TaskListViewModel {
         self.shouldEditTask = PublishSubject<Task>()
         
         self.tasksObservable = BehaviorSubject<[[Task]]>(value: tasks)
-        self.recommender = Recommender(model: model)
         
         subscribeToCompletedTask()
         subscribeToModelUpdate()
@@ -54,7 +52,7 @@ public class TaskListViewModel {
     }
     
     var isShowingRecommendedSection: Bool {
-        return selectedTags.isEmpty && !recommender.recommendedTasks.isEmpty
+        return selectedTags.isEmpty && !model.recommended.isEmpty
     }
     
     var isShowingCard: Bool {
@@ -86,13 +84,13 @@ public class TaskListViewModel {
         self.tasks = []
         
         if selectedTags.isEmpty {
-            tasks.append(recommender.recommendedTasks)
+            tasks.append(model.recommended)
         }
         
         // remove completed and recommended (if on main screen)
         // remove tasks with none of the tags to filter by
         var flatTasks = model.tasks
-            .filter { !$0.isCompleted && (selectedTags.isEmpty ? !recommender.recommendedTasks.contains($0) : true) }
+            .filter { !$0.isCompleted && (selectedTags.isEmpty ? !model.recommended.contains($0) : true) }
             .filter { for tag in selectedTags where !$0.tags!.contains(tag) { return false }; return true }
         
         sections = relatedTags.powerSet
@@ -133,17 +131,15 @@ public class TaskListViewModel {
      verifies that task contains only one tag, which is the current selected tag
      */
     fileprivate func isMainTask(_ task: Task) -> Bool {
-        if recommender.recommendedTasks.contains(task) && selectedTags.isEmpty { return true }
+        if model.recommended.contains(task) && selectedTags.isEmpty { return true }
         
         return !selectedTags.isEmpty &&
             task.allTags.count == selectedTags.count &&
-            task.allTags.map { $0.title! }.sorted() == selectedTags.map { $0.title! }.sorted()
-        //TODO: improve this
+            task.allTags.sorted() == selectedTags.sorted()
     }
     
     fileprivate func subscribeToModelUpdate() {
-        model.didUpdateTasks.subscribe {
-            guard $0.element != nil else { return }
+        model.didUpdateTasks.subscribe { _ in
             self.filterTasks(with: self.selectedTags, relatedTags: self.relatedTags)
             }.disposed(by: disposeBag)
     }

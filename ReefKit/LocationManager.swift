@@ -9,7 +9,7 @@
 import Foundation
 import CoreLocation
 
-class LocationManager: NSObject {
+class LocationManager {
     
     let manager: CLLocationManager
     
@@ -17,10 +17,8 @@ class LocationManager: NSObject {
         return manager.location?.coordinate
     }
     
-    override init() {
+    init() {
         manager = CLLocationManager()
-        super.init()
-        manager.delegate = self
     }
     
     func requestWhenInUseAuthorization() {
@@ -46,23 +44,5 @@ class LocationManager: NSObject {
             manager.stopMonitoring(for: circularRegion)
         }
     }
-    
-}
 
-extension LocationManager: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            // notify entered region
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            // notify exit region
-        }
-    }
 }

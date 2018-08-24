@@ -9,36 +9,20 @@
 import Foundation
 import CoreLocation
 import RxSwift
-import ReefKit
 
-class Recommender {
-    
-    init(model: TaskModel) {
-        self.model = model
-        self.locationManager = LocationManager()
-        subscribeToModel()
-    }
-    
+public class Recommender {
     // MARK: - Recommendation
-    fileprivate var model: TaskModel
-    fileprivate var _recommendedTasks: [Task]?
-    fileprivate var tasks: [Task] {
-        return model.tasks
-    }
-    fileprivate let locationManager: LocationManager
-    fileprivate let disposeBag = DisposeBag()
+    fileprivate static var _recommendedTasks: [Task]?
     
-    func reset() {
-        _recommendedTasks = nil
-    }
     
-    var recommendedTasks: [Task] {
+    public static func recommended(from tasks: [Task]) -> [Task] {
         guard _recommendedTasks == nil else { return _recommendedTasks! }
         
         var pinnedTasks: [Task] = []
         var localTasks: [Task] = []; let localTasksLimit = 3
         var nextTasks: [Task] = []; let nextTasksLimit = 2
         var latestTasks: [Task] = []; let latestTasksLimit = 1
+        let locationManager = LocationManager()
         
         var toDo = tasks
             .filter { !$0.isCompleted }
@@ -51,7 +35,7 @@ class Recommender {
         if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse {
             if let location = locationManager.currentLocation {
                 localTasks = Array(
-                    tasks
+                    toDo
                         .filter { $0.isInside(location) }
                         .prefix(localTasksLimit)
                 )
@@ -62,6 +46,7 @@ class Recommender {
         
         nextTasks = Array(
             toDo
+                .filter { !$0.dates.isEmpty }
                 .sorted { $0.isBefore($1) }
                 .prefix(nextTasksLimit)
         )
@@ -77,13 +62,5 @@ class Recommender {
         return _recommendedTasks!
     }
     
-    fileprivate func subscribeToModel() {
-        model.didUpdateTasks.subscribe {
-            for task in $0.element! {
-                if let tasks = self._recommendedTasks, task.isCompleted, let index = tasks.index(of: task) {
-                    self._recommendedTasks?.remove(at: index)
-                }
-            }
-            }.disposed(by: disposeBag)
-    }
+    public static func reset() { _recommendedTasks = nil }
 }

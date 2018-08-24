@@ -24,6 +24,12 @@ public extension Tag {
     }
 }
 
+extension Tag: Comparable {
+    public static func < (lhs: Tag, rhs: Tag) -> Bool {
+        return lhs.title! < rhs.title!
+    }
+}
+
 public extension Task {
     public var allTags: [Tag] {
         return tags!.allObjects as! [Tag] //swiftlint:disable:this force_cast
