@@ -66,7 +66,7 @@ public class TagModel {
         if let tag = (tags.first { $0.title == title }) {
             return tag
         } else {
-            let tag = reefKit.createTag(with: attributes)! // TODO:
+            let tag = reefKit.createTag(with: attributes) // TODO:
             return tag
         }
     }
