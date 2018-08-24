@@ -62,7 +62,6 @@ class Recommender {
         
         nextTasks = Array(
             toDo
-                .filter { $0.dueDate != nil }
                 .sorted { $0.isBefore($1) }
                 .prefix(nextTasksLimit)
         )

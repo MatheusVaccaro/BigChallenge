@@ -9,7 +9,6 @@
 import Foundation
 import CoreSpotlight
 import MobileCoreServices
-import ReefKit
 
 class ReefSpotlight: NSObject {
     static func index(task: Task) {
