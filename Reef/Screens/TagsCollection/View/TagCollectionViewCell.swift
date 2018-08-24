@@ -71,9 +71,10 @@ class TagCollectionViewCell: UICollectionViewCell {
         layer.masksToBounds = true
         
         layer.shadowRadius = 6.3
-        layer.shadowOpacity = 0.2
-        layer.shadowOffset = CGSize(width: 0, height: 4)
+        layer.shadowOffset = CGSize(width: 0, height: 20)
         layer.masksToBounds = false
+        layer.shadowColor = CGColor.shadowColor
+        layer.shadowOpacity = 0.2
         
         tagUILabel.textColor = UIColor.white
         
@@ -103,7 +104,6 @@ class TagCollectionViewCell: UICollectionViewCell {
         self.viewModel = viewModel
         tagUILabel.text = viewModel.tagTitle
         maskLabel.text = viewModel.tagTitle
-        layer.shadowColor = viewModel.colors.first
         gradientLayer.colors = viewModel.colors
         kind = .tag
     }
@@ -113,7 +113,6 @@ class TagCollectionViewCell: UICollectionViewCell {
         tagUILabel.text = "+"
         maskLabel.text = "+"
         
-        layer.shadowColor = UIColor.black.cgColor
         gradientLayer.colors = UIColor.Tags.redGradient
         contentView.mask = maskLabel
         tagUILabel.isHidden = true
