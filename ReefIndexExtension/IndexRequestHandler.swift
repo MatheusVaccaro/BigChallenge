@@ -10,12 +10,19 @@ import CoreSpotlight
 import ReefKit
 
 //TODO
-class IndexRequestHandler: CSIndexExtensionRequestHandler { //TODO
+class IndexRequestHandler: CSIndexExtensionRequestHandler {
 
     override func searchableIndex(_ searchableIndex: CSSearchableIndex, reindexAllSearchableItemsWithAcknowledgementHandler acknowledgementHandler: @escaping () -> Void) {
         // Reindex all data with the provided index
+        let group = DispatchGroup()
         
-        acknowledgementHandler()
+        ReefKit().fetchTasks {
+            for task in $0 { ReefSpotlight.index(task: task) }
+        }
+        
+        group.notify(queue: .global(qos: .utility)) {
+            acknowledgementHandler()
+        }
     }
     
     override func searchableIndex(_ searchableIndex: CSSearchableIndex, reindexSearchableItemsWithIdentifiers identifiers: [String], acknowledgementHandler: @escaping () -> Void) {
@@ -27,13 +34,6 @@ class IndexRequestHandler: CSIndexExtensionRequestHandler { //TODO
     override func data(for searchableIndex: CSSearchableIndex, itemIdentifier: String, typeIdentifier: String) throws -> Data {
         // Replace with Data representation of requested type from item identifier
         
-        return Data()
+        return Data() //TODO: add data when ipad app is available
     }
-    
-    override func fileURL(for searchableIndex: CSSearchableIndex, itemIdentifier: String, typeIdentifier: String, inPlace: Bool) throws -> URL {
-        // Replace with to return file url based on requested type from item identifier
-        
-        return URL(string:"file://")!
-    }
-    
 }

@@ -10,8 +10,8 @@ import Foundation
 import CoreSpotlight
 import MobileCoreServices
 
-class ReefSpotlight: NSObject {
-    static func index(task: Task) {
+public class ReefSpotlight: NSObject {
+    public static func index(task: Task) {
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
         
         attributeSet.title = task.title!
@@ -30,12 +30,12 @@ class ReefSpotlight: NSObject {
         }
     }
     
-    static func updateInSpotlight(task: Task) {
+    public static func updateInSpotlight(task: Task) {
         ReefSpotlight.deindex(task: task)
         ReefSpotlight.index(task: task)
     }
     
-    static func deindex(task: Task) {
+    public static func deindex(task: Task) {
         CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: ["\(task.id!)"]) { error in
             if let error = error {
                 print("Deindexing error: \(error.localizedDescription)")
@@ -43,10 +43,11 @@ class ReefSpotlight: NSObject {
         }
     }
     
-    static func index(tag: Tag) {
+    public static func index(tag: Tag) {
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
         
         attributeSet.title = tag.title!
+        attributeSet.contentDescription = "tag" //TODO: localize
         
         let item = CSSearchableItem(uniqueIdentifier: "tag-\(tag.id!)",
             domainIdentifier: "com.beanie",
@@ -59,7 +60,7 @@ class ReefSpotlight: NSObject {
         }
     }
     
-    static func deindex(tag: Tag) {
+    public static func deindex(tag: Tag) {
         CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: ["\(tag.id!)"]) { error in
             if let error = error {
                 print("Deindexing error: \(error.localizedDescription)")
@@ -67,7 +68,7 @@ class ReefSpotlight: NSObject {
         }
     }
     
-    static func updateInSpotlight(tag: Tag) {
+    public static func updateInSpotlight(tag: Tag) {
         ReefSpotlight.deindex(tag: tag)
         ReefSpotlight.index(tag: tag)
     }
