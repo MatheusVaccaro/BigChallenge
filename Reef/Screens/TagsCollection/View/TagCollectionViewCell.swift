@@ -1,0 +1,146 @@
+//
+//  TagCollectionViewCell.swift
+//  BigChallenge
+//
+//  Created by Bruno Fulber Wide on 15/07/18.
+//  Copyright © 2018 Matheus Vaccaro. All rights reserved.
+//
+
+import UIKit
+import RxCocoa
+import RxSwift
+
+class TagCollectionViewCell: UICollectionViewCell {
+
+    static let identifier = "tagCollectionCell"
+    
+    enum Kind {
+        case tag
+        case add
+    }
+    
+    var kind: Kind = .tag
+    
+    lazy var gradientLayer: CAGradientLayer = {
+        let layer = CAGradientLayer()
+        
+        layer.startPoint = CGPoint(x: 0, y: 1)
+        layer.endPoint = CGPoint(x: 1, y: 0)
+        layer.cornerRadius = 6.3
+        layer.zPosition = -1
+        
+        contentView.layer.addSublayer(layer)
+        return layer
+    }()
+    
+    @IBOutlet weak var tagUILabel: UILabel!
+    
+    lazy var maskLabel: UILabel = {
+        let ans = UILabel()
+        
+        ans.textColor = UIColor.white
+        ans.textAlignment = tagUILabel.textAlignment
+        ans.font = tagUILabel.font
+        
+        return ans
+    }()
+    
+    override var isSelected: Bool {
+        didSet {
+            contentView.mask = isSelected ? nil : maskLabel
+            tagUILabel.isHidden = !isSelected
+            
+            if kind == .add, isSelected { // add tag is never selected
+                isSelected = false
+            }
+        }
+    }
+    
+    private(set) var viewModel: TagCollectionViewCellViewModel?
+    
+    private var longPressRecognizer: UILongPressGestureRecognizer!
+    
+    override func awakeFromNib() {
+        tagUILabel.font = UIFont.font(sized: 19, weight: .medium, with: .title3)
+        
+        layer.backgroundColor = UIColor.white.cgColor
+        layer.borderColor = UIColor.clear.cgColor
+        
+        layer.cornerRadius = 6.3
+        layer.borderWidth = 1.0
+        layer.masksToBounds = true
+        
+        layer.shadowRadius = 6.3
+        layer.shadowOffset = CGSize(width: 0, height: 20)
+        layer.masksToBounds = false
+        layer.shadowColor = CGColor.shadowColor
+        layer.shadowOpacity = 0.2
+        
+        tagUILabel.textColor = UIColor.white
+        
+        contentView.addSubview(maskLabel)
+        kind = .tag
+        
+        longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+    }
+    
+    deinit {
+        removeGestureRecognizer(longPressRecognizer)
+    }
+    
+    @objc private func handleLongPress() {
+        guard let viewModel = viewModel else { return }
+        viewModel.longPressedTag.onNext(viewModel.tag)
+    }
+    
+    func configure(with viewModel: TagCollectionViewCellViewModel? = nil) {
+        
+        guard let viewModel = viewModel else {
+            configureDefault()
+            return
+        }
+        
+        addGestureRecognizer(longPressRecognizer)
+        self.viewModel = viewModel
+        tagUILabel.text = viewModel.tagTitle
+        maskLabel.text = viewModel.tagTitle
+        gradientLayer.colors = viewModel.colors
+        kind = .tag
+    }
+    
+    func configureDefault() {
+        removeGestureRecognizer(longPressRecognizer)
+        tagUILabel.text = "+"
+        maskLabel.text = "+"
+        
+        gradientLayer.colors = UIColor.Tags.redGradient
+        contentView.mask = maskLabel
+        tagUILabel.isHidden = true
+        kind = .add
+    }
+    
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) ->
+        UICollectionViewLayoutAttributes {
+        setNeedsLayout()
+        layoutIfNeeded()
+        var newFrame = layoutAttributes.frame
+        newFrame.size.width = tagUILabel.frame.size.width + 8*3
+        layoutAttributes.frame = newFrame
+        
+        return layoutAttributes
+    }
+    
+    override func layoutSubviews() {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        super.layoutSubviews()
+        
+        maskLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        tagUILabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        frame.size.width = tagUILabel.frame.size.width + 8*3
+        gradientLayer.frame = bounds
+        maskLabel.frame = bounds
+        CATransaction.commit()
+    }
+}
