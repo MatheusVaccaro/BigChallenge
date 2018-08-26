@@ -14,29 +14,43 @@ class IndexRequestHandler: CSIndexExtensionRequestHandler {
 
     override func searchableIndex(_ searchableIndex: CSSearchableIndex, reindexAllSearchableItemsWithAcknowledgementHandler acknowledgementHandler: @escaping () -> Void) {
         // Reindex all data with the provided index
-        let group = DispatchGroup()
+        DispatchQueue.global(qos: .background).sync {
+            let reef = ReefKit()
+            
+            reef.fetchTasks { for task in $0 { ReefSpotlight.index(task: task) } }
+            reef.fetchTags { for tag in $0 { ReefSpotlight.index(tag: tag) } }
         
-        let reef = ReefKit()
-        
-        reef.fetchTasks { for task in $0 { ReefSpotlight.index(task: task) } }
-        reef.fetchTags { for tag in $0 { ReefSpotlight.index(tag: tag) } }
-        
-        group.notify(queue: .global(qos: .utility)) {
             acknowledgementHandler()
         }
     }
     
     override func searchableIndex(_ searchableIndex: CSSearchableIndex, reindexSearchableItemsWithIdentifiers identifiers: [String], acknowledgementHandler: @escaping () -> Void) {
         // Reindex any items with the given identifiers and the provided index
-        let group = DispatchGroup()
-        let reef = ReefKit()
+        DispatchQueue.global(qos: .background).sync {
+            let reef = ReefKit()
+            
+            let tagID = "tag-"
+            let taskID = "task-"
+            
+            let tagIDs = identifiers
+                .filter { $0.hasPrefix(tagID) }
+                .map { String( $0.dropFirst(tagID.count)) }
+            
+            let taskIDs = identifiers
+                .filter { $0.hasPrefix(taskID) }
+                .map { String( $0.dropFirst(taskID.count) ) }
+            
+            reef.fetchTasks() {
+                for task in $0 where taskIDs.contains(task.id!.description) {
+                        ReefSpotlight.index(task: task)
+                }
+            }
+            reef.fetchTags {
+                for tag in $0 where tagIDs.contains(tag.id!.description) {
+                    ReefSpotlight.index(tag: tag)
+                }
+            }
         
-        let ids = identifiers.map { String($0.prefix { $0 != "-" }) } //TODO: verify this
-        
-        reef.fetchTasks { for task in $0 where ids.contains(task.id!.description) { ReefSpotlight.index(task: task) } }
-        reef.fetchTags { for tag in $0 where ids.contains(tag.id!.description) { ReefSpotlight.index(tag: tag) } }
-        
-        group.notify(queue: .global(qos: .utility)) {
             acknowledgementHandler()
         }
     }

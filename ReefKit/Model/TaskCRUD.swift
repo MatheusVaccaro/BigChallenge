@@ -40,8 +40,8 @@ class TaskCRUD {
         self.persistence = persistence
     }
     
-    func fetchTasks(completionHandler: @escaping (([Task]) -> ())) {
-        persistence.fetch(Task.self) {
+    func fetchTasks(predicate: NSPredicate?, completionHandler: @escaping (([Task]) -> ())) {
+        persistence.fetch(Task.self, predicate: predicate) {
             completionHandler($0)
         }
     }
@@ -144,8 +144,8 @@ public class TagCRUD {
         self.persistence = persistence
     }
     
-    func fetchTags(completionHandler: @escaping (([Tag]) -> ())) {
-        persistence.fetch(Tag.self) {
+    func fetchTags(predicate: NSPredicate?, completionHandler: @escaping (([Tag]) -> ())) {
+        persistence.fetch(Tag.self, predicate: predicate) {
             completionHandler($0)
         }
     }

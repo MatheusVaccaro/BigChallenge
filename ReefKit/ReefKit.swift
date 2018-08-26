@@ -29,8 +29,8 @@ public class ReefKit {
         return Recommender.recommended(from: tasks)
     }
     
-    public func fetchTasks(completionHandler: @escaping (([Task]) -> ())) {
-        taskCRUD.fetchTasks { completionHandler($0) }
+    public func fetchTasks(predicate: NSPredicate? = nil, completionHandler: @escaping (([Task]) -> ())) {
+        taskCRUD.fetchTasks(predicate: predicate) { completionHandler($0) }
     }
     
     public func createTask(with attributes: [TaskAttributes : Any]) -> Task {
@@ -52,8 +52,8 @@ public class ReefKit {
         taskCRUD.delete(task)
     }
     
-    public func fetchTags(completionHandler: @escaping (([Tag]) -> ())) {
-        tagCRUD.fetchTags { completionHandler($0) }
+    public func fetchTags(predicate: NSPredicate? = nil, completionHandler: @escaping (([Tag]) -> ())) {
+        tagCRUD.fetchTags(predicate: predicate) { completionHandler($0) }
     }
     
     public func createTag(with attributes: [TagAttributes : Any]) -> Tag {
