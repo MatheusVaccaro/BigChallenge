@@ -16,14 +16,10 @@ class LocationInputView: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var mapView: RadiusMapView!
     @IBOutlet weak var searchResultsTableView: UITableView!
-    @IBOutlet weak var accessibilityMapView: UIView!
     let viewModel = LocationInputViewModel()
     
     var outputlocation: CLCircularRegion? {
         didSet {
-            if isViewLoaded {
-                accessibilityMapView.accessibilityValue = viewModel.accessibilityValue(for: Int(outputlocation!.radius))
-            }
             viewModel.delegate?.locationInput(self, didFind: outputlocation!, arriving: arriving)
         }
     }
@@ -96,11 +92,8 @@ class LocationInputView: UIViewController {
     fileprivate func setupMapView() {
         mapView.outputDelegate = self
         mapView.layer.cornerRadius = 6.3
-        mapView.accessibilityElementsHidden = true
-
-        accessibilityMapView.isAccessibilityElement = true
-        accessibilityMapView.accessibilityLabel = viewModel.mapViewAccessibilityLabel
-        accessibilityMapView.accessibilityValue = viewModel.mapViewAccessibilityValueEmpty
+        
+        mapView.accessibilityLabel = viewModel.mapViewAccessibilityLabel
     }
     
     fileprivate func setupTableView() {
@@ -167,7 +160,9 @@ extension LocationInputView: UITableViewDelegate {
         
         let place = tableViewData[indexPath.row]
         guard let location = place.placemark.location else { return }
-        if let name = place.placemark.name { viewModel.placeName = name }
+        if let name = place.placemark.name {
+            mapView.placeName = name
+        }
         
         mapView.removeOverlays(mapView.overlays)
         mapView.removeAnnotations(mapView.annotations)
@@ -187,7 +182,6 @@ extension LocationInputView: UITableViewDelegate {
 extension LocationInputView: RadiusMapViewDelegate {
     func radiusMapView(_ radiusMapView: RadiusMapView, didFind region: CLCircularRegion) {
         outputlocation = region
-        accessibilityMapView.accessibilityValue = viewModel.accessibilityValue(for: Int(outputlocation!.radius))
     }
 }
 
