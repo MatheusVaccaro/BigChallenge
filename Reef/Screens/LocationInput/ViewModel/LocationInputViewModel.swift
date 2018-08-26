@@ -19,19 +19,11 @@ class LocationInputViewModel {
     
     var placeName = Strings.LocationInputView.defaultPlaceName
     let searchBarHint = Strings.LocationInputView.accessibilityHintSearchBar
-    let mapViewAccessibilityLabel =
-        Strings.LocationInputView.accessibilitylabelMap
-    let mapViewAccessibilityValueEmpty =
-        Strings.LocationInputView.accessibilityValueEmptyMap
     let arrivingString = Strings.LocationInputView.arrivingString
     let leavingString = Strings.LocationInputView.leavingString
     let searchBarPlaceholder = Strings.LocationInputView.searchBarPlaceholder
-    
-    func accessibilityValue(for radius: Int) -> String {
-        let localizedString = Strings.LocationInputView.accessibilityValueMap
-        return String.localizedStringWithFormat(localizedString,
-                                         radius.description,
-                                         placeName)
-    }
+
+    let mapViewAccessibilityLabel =
+        Strings.LocationInputView.accessibilitylabelMap
     
 }

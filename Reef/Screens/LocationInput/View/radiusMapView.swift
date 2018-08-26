@@ -32,6 +32,7 @@ class RadiusMapView: MKMapView {
         delegate = self
         isZoomEnabled = false
         isScrollEnabled = false
+        isAccessibilityElement = true
     }
     
     public var arriving: Bool = true {
@@ -79,9 +80,9 @@ class RadiusMapView: MKMapView {
             setRegion(region, animated: true)
             
             if annotations.isEmpty {
-                let point = MKPointAnnotation()
-                point.coordinate = circle.coordinate
-                addAnnotation(point)
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = circle.coordinate
+                addAnnotation(annotation)
             }
         }
         super.add(overlay)
@@ -90,6 +91,7 @@ class RadiusMapView: MKMapView {
     fileprivate func changeCircle(adding radius: Double) {
         guard let circleOverlay = overlays.first as? MKCircle else { return }
         let newRadius = circleOverlay.radius + radius
+        self.radius = newRadius
         
         guard viewModel.shouldReplaceOverlay(with: newRadius) else { return }
         
@@ -101,6 +103,29 @@ class RadiusMapView: MKMapView {
                                                                 radius: newRadius,
                                                                 identifier: String(describing: newOverlay.coordinate)))
         add(newOverlay)
+    }
+    
+    // MARK: - Accessibility
+    var placeName: String? {
+        didSet { _accessibilityValue = nil }
+    }
+    private var radius: Double = 100 {
+        didSet { _accessibilityValue = nil }
+    }
+    
+    private var _accessibilityValue: String?
+    override var accessibilityValue: String? {
+        get {
+            guard _accessibilityValue == nil else { return _accessibilityValue }
+            let localizedString = Strings.LocationInputView.accessibilityValueMap
+            let defaultPlaceName = Strings.LocationInputView.defaultPlaceName
+            
+            _accessibilityValue = String.localizedStringWithFormat(localizedString,
+                                                                   radius.description,
+                                                                   placeName ?? defaultPlaceName)
+            return _accessibilityValue
+        }
+        set { _accessibilityValue = accessibilityValue }
     }
 }
 
