@@ -7,23 +7,19 @@
 //
 
 import Foundation
-import Crashlytics
-import RxCocoa
 import RxSwift
 import ReefKit
 
-class TaskCellViewModel {
+public class TaskCellViewModel {
     
     var taskIsCompleted: Bool { return task.isCompleted }
     
-    var taskObservable: PublishSubject<Task>
+    public var taskObservable: PublishSubject<Task>
     
     private var task: Task
-    private var taskModel: TaskModel
     
-    init(task: Task, taskModel: TaskModel) {
+    public init(task: Task) {
         self.task = task
-        self.taskModel = taskModel
         taskObservable = PublishSubject<Task>()
     }
     
@@ -54,18 +50,16 @@ class TaskCellViewModel {
     
     func changeTextTitle(to title: String) {
         let attributes: [TaskAttributes : Any] = [.title: title]
-        taskModel.update(task, with: attributes)
-        taskModel.save(task)
+//        taskModel.update(task, with: attributes)
+//        taskModel.save(task)
     }
     
     func changedCheckButton(to bool: Bool) {
         let attributes: [TaskAttributes : Any] = [.isCompleted: bool,
                                                         .completionDate: Date()]
-        taskModel.update(task, with: attributes)
-        let metricAttributes =
-            ["time to complete" : task.creationDate!.timeIntervalSinceNow]
-        if bool {
-            Answers.logCustomEvent(withName: "completed task", customAttributes: metricAttributes)
-        }
+        task.isCompleted = true
+        task.completionDate = Date()
+        
+        taskObservable.onNext(task)
     }
 }

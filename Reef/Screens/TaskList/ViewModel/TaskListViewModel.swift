@@ -12,6 +12,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 import ReefKit
+import ReefTableViewCell
 
 public class TaskListViewModel {
     
@@ -115,7 +116,7 @@ public class TaskListViewModel {
     }
     
     func taskCellViewModel(for task: Task) -> TaskCellViewModel {
-        return TaskCellViewModel(task: task, taskModel: model)
+        return TaskCellViewModel(task: task)
     }
 
     func shouldGoToAddTask() {

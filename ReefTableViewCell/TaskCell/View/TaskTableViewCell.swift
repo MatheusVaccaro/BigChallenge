@@ -8,20 +8,20 @@
 
 import UIKit
 
-protocol TaskCellDelegate: class {
+public protocol TaskCellDelegate: class {
     func shouldUpdateSize(of cell: TaskTableViewCell)
 }
 
-enum CellType {
+public enum CellType {
     case card
     case none
 }
 
-class TaskTableViewCell: UITableViewCell {
+public class TaskTableViewCell: UITableViewCell {
     
     // MARK: - Properties
-    static let identifier = "taskCell"
-    weak var delegate: TaskCellDelegate?
+    public static let identifier = "taskCell"
+    public weak var delegate: TaskCellDelegate?
     
     private var viewModel: TaskCellViewModel?
     private var previousRect = CGRect.zero
@@ -43,7 +43,7 @@ class TaskTableViewCell: UITableViewCell {
     @IBOutlet weak var tagsLabel: UILabel!
     
     // MARK: - TableViewCell Lifecycle
-    override func awakeFromNib() {
+    override public func awakeFromNib() {
         super.awakeFromNib()
         taskTitleTextView.delegate = self
         checkButton.isSelected = false
@@ -56,13 +56,13 @@ class TaskTableViewCell: UITableViewCell {
             UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         taskTitleTextView.textContainer.lineFragmentPadding = 0
         
-        taskTitleTextView.font = UIFont.font(sized: 19, weight: .medium, with: .body)
-        tagsLabel.font = UIFont.font(sized: 14, weight: .regular, with: .footnote)
+//        taskTitleTextView.font = UIFont.font(sized: 19, weight: .medium, with: .body)
+//        tagsLabel.font = UIFont.font(sized: 14, weight: .regular, with: .footnote)
     }
     
     // MARK: - Functions
     
-    func configure(with viewModel: TaskCellViewModel) {
+    public func configure(with viewModel: TaskCellViewModel) {
         self.viewModel = viewModel
         
         gradientLayer.colors = viewModel.checkButtonGradient
@@ -71,7 +71,7 @@ class TaskTableViewCell: UITableViewCell {
         checkButton.isSelected = viewModel.taskIsCompleted
     }
     
-    func layout(with position: CellType) {
+    public func layout(with position: CellType) {
         switch position {
         case .card:
             layer.shadowColor = UIColor.black.cgColor
@@ -90,18 +90,18 @@ class TaskTableViewCell: UITableViewCell {
         viewModel?.changedCheckButton(to: checkButton.isSelected)
     }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         gradientLayer.frame = checkButton.bounds
     }
 }
 
 extension TaskTableViewCell: UITextViewDelegate {
-    func textViewDidEndEditing(_ textView: UITextView) {
+    public func textViewDidEndEditing(_ textView: UITextView) {
         guard let text = textView.text else { return }
         viewModel?.changeTextTitle(to: text)
     }
     
-    func textViewDidChange(_ textView: UITextView) {
+    public func textViewDidChange(_ textView: UITextView) {
         let lastCharPos = textView.endOfDocument
 
         let currentRect = textView.caretRect(for: lastCharPos)

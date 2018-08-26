@@ -18,6 +18,10 @@ target 'ReefKit' do
     pod 'RxSwift',    '~>4.0'
 end
 
+target 'ReefTableViewCell' do
+    pod 'RxSwift', '~>4.0'
+end
+
 # RxTest and RxBlocking make the most sense in the context of unit/integration tests
 # target 'YOUR_TESTING_TARGET' do
 #     pod 'RxBlocking', '~> 4.0'
@@ -33,9 +37,5 @@ def testing_pods
 end
 
 target 'ReefTests' do
-    testing_pods
-end
-
-target 'ReefUITests' do
     testing_pods
 end
