@@ -45,6 +45,8 @@ public class TaskListViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.sectionHeaderHeight = UITableViewAutomaticDimension
         tableView.sectionFooterHeight = UITableViewAutomaticDimension
+        tableView.register(UINib(nibName: "TaskCell", bundle: nil),
+                           forCellReuseIdentifier: TaskTableViewCell.identifier)
         
         tableView.estimatedRowHeight = 60
         tableView.estimatedSectionHeaderHeight = 18.5
@@ -63,7 +65,6 @@ public class TaskListViewController: UIViewController {
         tableView
             .rx.setDelegate(self)
             .disposed(by: disposeBag)
-        
         
         // divide tasks in main and secondary sections
         // filter empty sections
