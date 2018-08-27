@@ -15,7 +15,7 @@ open class NotificationManager {
     /** Add a date notification from a task */
     open class func addDateNotification(for task: Task, repeats: Bool = false) {
         if let date = task.dueDate {
-            let identifier = "\(task.title!)-date"
+            let identifier = "\(task.id!)-date"
             let title = task.title ?? Strings.Notification.placeholderTitle
             addDateNotification(identifier, title, repeats, date)
         }
@@ -26,7 +26,7 @@ open class NotificationManager {
         guard let regionData = task.regionData else { return }
         
         if let region = NSKeyedUnarchiver.unarchiveObject(with: regionData) as? CLCircularRegion {
-            let identifier = "\(task.title!)-location"
+            let identifier = "\(task.id!)-location"
             let title = task.title ?? Strings.Notification.placeholderTitle
             addLocationNotification(identifier, title, task.isArriving, region)
         }
@@ -34,13 +34,13 @@ open class NotificationManager {
     
     /** Remove location notification from a task */
     open class func removeLocationNotification(for task: Task) {
-        let identifier = "\(task.title!)-location"
+        let identifier = "\(task.id!)-location"
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
     }
     
     /** Remove date notification from a task */
     open class func removeDateNotification(for task: Task) {
-        let identifier = "\(task.title!)-date"
+        let identifier = "\(task.id!)-date"
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
     }
     
@@ -57,7 +57,7 @@ open class NotificationManager {
         guard let tasks = tag.tasks else { return }
         if let date = tag.dueDate {
             for case let task as Task in tasks where !task.isCompleted {
-                let identifier = "\(task.title!)-\(tag.title!)-date"
+                let identifier = "\(task.id!)-\(tag.id!)-date"
                 let title = task.title!
                 addDateNotification(identifier, title, repeats, date)
             }
@@ -65,7 +65,7 @@ open class NotificationManager {
         if let regionData = tag.regionData {
             if let region = NSKeyedUnarchiver.unarchiveObject(with: regionData) as? CLCircularRegion {
                 for case let task as Task in tasks where !task.isCompleted {
-                    let identifier = "\(task.title!)-\(tag.title!)-date"
+                    let identifier = "\(task.id!)-\(tag.id!)-date"
                     let title = task.title!
                     let arriving = tag.arriving
                     addLocationNotification(identifier, title, arriving, region)
@@ -85,12 +85,11 @@ open class NotificationManager {
     does not remove tasks own notifications */
     open class func removeAllDateNotifications(from tag: Tag) {
         guard let tasks = tag.tasks else { return }
-        guard tag.dueDate != nil else { return }
         
         var identifiersArray: [String] = []
         
         for case let task as Task in tasks {
-            let identifier = "\(task.title!)-\(tag.title!)-date"
+            let identifier = "\(task.id!)-\(tag.id!)-date"
             identifiersArray.append(identifier)
         }
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiersArray)
@@ -100,12 +99,11 @@ open class NotificationManager {
     does not remove tasks own notifications */
     open class func removeAllLocationNotifications(from tag: Tag) {
         guard let tasks = tag.tasks else { return }
-//        guard tag.location != nil else { return }
         
         var identifiersArray: [String] = []
         
         for case let task as Task in tasks {
-            let identifier = "\(task.title!)-\(tag.title!)-location"
+            let identifier = "\(task.id!)-\(tag.id!)-location"
             identifiersArray.append(identifier)
         }
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiersArray)
@@ -121,16 +119,14 @@ open class NotificationManager {
     /** remove date notification from a specific task of a tag,
      does not remove task own notification */
     open class func removeSpecificDateNotification(from tag: Tag, task: Task) {
-        guard tag.dueDate != nil else { return }
-        let identifier = "\(task.title!)-\(tag.title!)-date"
+        let identifier = "\(task.id!)-\(tag.id!)-date"
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
     }
     
     /** remove location notification from a specific task of a tag,
      does not remove task own notification */
     open class func removeSpecificLocationNotification(from tag: Tag, task: Task) {
-//        guard tag.region != nil else { return }
-        let identifier = "\(task.title!)-\(tag.title!)-location"
+        let identifier = "\(task.id!)-\(tag.id!)-location"
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
     }
     
@@ -144,11 +140,16 @@ open class NotificationManager {
                                                    _ title: String,
                                                    _ arriving: Bool,
                                                    _ region: CLRegion,
-                                                   _ repeats: Bool = false) {
+                                                   _ repeats: Bool = false,
+                                                   _ subtitle: String? = nil) {
         
         let content = UNMutableNotificationContent()
         content.title = title
         content.badge = 1
+        if let subtitle = subtitle {
+            content.subtitle = subtitle
+        }
+        content.categoryIdentifier = "taskNotification"
         
         region.notifyOnEntry = arriving
         region.notifyOnExit = !arriving
@@ -163,11 +164,16 @@ open class NotificationManager {
     fileprivate class func addDateNotification(_ identifier: String,
                                                _ title: String,
                                                _ repeats: Bool,
-                                               _ date: Date) {
+                                               _ date: Date,
+                                               _ subtitle: String? = nil) {
         
         let content = UNMutableNotificationContent()
         content.title = title
         content.badge = 1
+        if let subtitle = subtitle {
+            content.subtitle = subtitle
+        }
+        content.categoryIdentifier = "taskNotification"
         
         let dateComponents = Calendar.current.dateComponents([
             .year,
@@ -176,6 +182,7 @@ open class NotificationManager {
             .hour,
             .minute],
                                                              from: date)
+        
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: repeats)
         
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
