@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // MARK: Application Coordinator
         startApplicationCoordinator(with: window, selectedTagIDs: [])
         
+        setNotificationCategories()
+        
         return true
     }
     
@@ -62,5 +64,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func requestAuthorizationForNotifications() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in })
+    }
+    
+    private func setNotificationCategories() {
+        
+        //TODO: Localizate
+        let completeAction = UNNotificationAction(identifier: "complete", title: "Complete", options: [])
+        let postponeOneHour = UNNotificationAction(identifier: "postponeOneHour", title: "Postpone one hour", options: [])
+        let postponeOneDay = UNNotificationAction(identifier: "postponeOneDay", title: "Postpone one day", options: [])
+        
+        let taskNotification =  UNNotificationCategory(identifier: "taskNotification", actions: [completeAction, postponeOneHour, postponeOneDay], intentIdentifiers: [], options: [])
+        
+        
+        UNUserNotificationCenter.current().setNotificationCategories([taskNotification])
     }
 }
