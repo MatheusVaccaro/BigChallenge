@@ -149,6 +149,7 @@ public class TaskListViewModel {
         taskCompleted.subscribe { event in
             guard let task = event.element else { return }
             self.model.save(task) // model updated handles changing the arrays
+            Answers.logCustomEvent(withName: "completed task")
         }.disposed(by: disposeBag)
     }
     
