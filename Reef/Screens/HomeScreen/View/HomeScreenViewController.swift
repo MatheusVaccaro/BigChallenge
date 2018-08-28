@@ -166,8 +166,7 @@ class HomeScreenViewController: UIViewController {
             }.disposed(by: disposeBag)
     }
     
-    //MARK: - Empty State
-    
+    // MARK: - Empty State
     @IBOutlet weak var emptyStateImage: UIImageView!
     @IBOutlet weak var emptyStateTitleLabel: UILabel!
     @IBOutlet weak var emptyStateSubtitleLabel: UILabel!
@@ -179,7 +178,7 @@ class HomeScreenViewController: UIViewController {
         emptyStateTitleLabel.isHidden = !bool
         emptyStateImage.isHidden = !bool
         
-        if bool, viewModel.delegate!.shouldShowImportFromRemindersOption() {
+        if bool && viewModel.delegate!.shouldShowImportFromRemindersOption() {
             emptyStateOrLabel.isHidden = false
             importFromRemindersButton.isHidden = false
         } else {

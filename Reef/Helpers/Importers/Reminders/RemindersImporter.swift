@@ -19,6 +19,9 @@ public class RemindersImporter {
     private let remindersDB: RemindersCommunicator
     private(set) var isImporting: Bool
     private(set) var isSyncing: Bool
+    static var isImportingDefined: Bool {
+        return EKEventStore.authorizationStatus(for: .reminder) != EKAuthorizationStatus.notDetermined
+    }
 
     init(taskModel: TaskModel, tagModel: TagModel, communicator: RemindersCommunicator = RemindersCommunicator()) {
         self.taskModel = taskModel

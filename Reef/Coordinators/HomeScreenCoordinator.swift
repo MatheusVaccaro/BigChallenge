@@ -106,7 +106,7 @@ extension HomeScreenCoordinator: CoordinatorDelegate {
 
 extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
     func shouldShowImportFromRemindersOption() -> Bool {
-        return true // TODO @MAX
+        return !RemindersImporter.isImportingDefined
     }
     
     func importFromReminders() {
