@@ -10,7 +10,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
-import ReefKit //TODO: remove
+import ReefKit
+import ReefTableViewCell
 
 struct SectionedTaskModel {
     var items: [Task]
@@ -45,6 +46,9 @@ public class TaskListViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.sectionHeaderHeight = UITableViewAutomaticDimension
         tableView.sectionFooterHeight = UITableViewAutomaticDimension
+        tableView.register(UINib(nibName: "TaskCell",
+                                 bundle: Bundle(identifier: "com.Wide.ReefTableViewCell")),
+                           forCellReuseIdentifier: TaskTableViewCell.identifier)
         
         tableView.estimatedRowHeight = 60
         tableView.estimatedSectionHeaderHeight = 18.5
@@ -63,7 +67,6 @@ public class TaskListViewController: UIViewController {
         tableView
             .rx.setDelegate(self)
             .disposed(by: disposeBag)
-        
         
         // divide tasks in main and secondary sections
         // filter empty sections
@@ -96,7 +99,9 @@ public class TaskListViewController: UIViewController {
                 
                 taskCellViewModel.taskObservable.subscribe {
                     if let task = $0.element {
-                        self.viewModel.taskCompleted.onNext(task)
+                        if task.isCompleted {                        
+                            self.viewModel.taskCompleted.onNext(task)
+                        }
                     }
                     }.disposed(by: self.disposeBag)
                 
@@ -303,7 +308,7 @@ extension TaskListViewController: UITableViewDelegate {
 }
 
 extension TaskListViewController: TaskCellDelegate {
-    func shouldUpdateSize(of cell: TaskTableViewCell) {
+    public func shouldUpdateSize(of cell: TaskTableViewCell) {
         UIView.performWithoutAnimation {
             tableView.beginUpdates()
             tableView.endUpdates()

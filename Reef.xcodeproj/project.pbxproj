@@ -20,6 +20,7 @@
 		16EC6CEA21065B2500797D9C /* TagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EC6CE921065B2500797D9C /* TagTests.swift */; };
 		16FDC139210BB237008FA931 /* NotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FDC138210BB237008FA931 /* NotificationTests.swift */; };
 		16FDC13C210F809A008FA931 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FDC13B210F809A008FA931 /* NotificationManager.swift */; };
+		220FE8782134388200127C3E /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BAD432108C22400E74AA9 /* Fonts.swift */; };
 		221BA8AF20F6991200BE2AC1 /* HomeScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221BA8AE20F6991200BE2AC1 /* HomeScreen.storyboard */; };
 		221BA8B320F69E5C00BE2AC1 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BA8B220F69E5C00BE2AC1 /* HomeScreenViewController.swift */; };
 		221BA8B620F6A18500BE2AC1 /* TagCollection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221BA8B520F6A18500BE2AC1 /* TagCollection.storyboard */; };
@@ -45,7 +46,6 @@
 		226CEA0520E17E87008CEB97 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226CEA0420E17E87008CEB97 /* Strings.swift */; };
 		228946352113999A009D05CB /* TaskCreationFrameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228946342113999A009D05CB /* TaskCreationFrameViewModel.swift */; };
 		228946392113F1A4009D05CB /* InvertedCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228946382113F1A4009D05CB /* InvertedCircle.swift */; };
-		228BAD442108C22400E74AA9 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BAD432108C22400E74AA9 /* Fonts.swift */; };
 		22D14A1E212CBBF500B15B98 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D14A1D212CBBF500B15B98 /* ArrayExtension.swift */; };
 		22D84C63210BF1E3004B8969 /* LocationInputView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22D84C62210BF1E3004B8969 /* LocationInputView.storyboard */; };
 		22D84C65210BF4D1004B8969 /* LocationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D84C64210BF4D1004B8969 /* LocationInputView.swift */; };
@@ -75,6 +75,19 @@
 		22FA2871213040FC00FC74D3 /* ReefKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F23E6C212E3E7F0064EE05 /* ReefKit.framework */; };
 		22FA2872213048AF00FC74D3 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299F07820F628A70074A834 /* LocationManager.swift */; };
 		22FA2873213048B200FC74D3 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22270EF92120C07000695223 /* Recommender.swift */; };
+		22FEEA762133419500D8B049 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FEEA752133419500D8B049 /* NotificationCenter.framework */; };
+		22FEEA792133419500D8B049 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FEEA782133419500D8B049 /* TodayViewController.swift */; };
+		22FEEA7C2133419500D8B049 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22FEEA7A2133419500D8B049 /* MainInterface.storyboard */; };
+		22FEEA802133419500D8B049 /* ReefToday.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 22FEEA742133419500D8B049 /* ReefToday.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		22FEEA842133429A00D8B049 /* ReefKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F23E6C212E3E7F0064EE05 /* ReefKit.framework */; };
+		22FEEA8E213344BD00D8B049 /* ReefTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 22FEEA8C213344BD00D8B049 /* ReefTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22FEEA91213344BD00D8B049 /* ReefTableViewCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FEEA8A213344BD00D8B049 /* ReefTableViewCell.framework */; };
+		22FEEA92213344BD00D8B049 /* ReefTableViewCell.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22FEEA8A213344BD00D8B049 /* ReefTableViewCell.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22FEEA96213344D500D8B049 /* TaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22292D88213338110024DA03 /* TaskCell.xib */; };
+		22FEEA97213344DA00D8B049 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1114120B8AED400ABB161 /* TaskTableViewCell.swift */; };
+		22FEEA98213344DE00D8B049 /* TaskCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113F20B8A70A00ABB161 /* TaskCellViewModel.swift */; };
+		22FEEA99213345AD00D8B049 /* ReefKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F23E6C212E3E7F0064EE05 /* ReefKit.framework */; };
+		22FEEA9D21334B6A00D8B049 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22FEEA9C21334B6A00D8B049 /* Media.xcassets */; };
 		2934BCCA21003E0700B6A05A /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2934BCC921003E0700B6A05A /* TaskTests.swift */; };
 		294490EE20FD297200333F11 /* TaskViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294490ED20FD297200333F11 /* TaskViewModelTests.swift */; };
 		2972201F211CCD8F00CF80CE /* DateInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2972201E211CCD8F00CF80CE /* DateInputViewController.swift */; };
@@ -116,8 +129,6 @@
 		C29742D2211257A600A1D213 /* TimeTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29742D1211257A600A1D213 /* TimeTableViewCellViewModel.swift */; };
 		C29742D4211257B600A1D213 /* LocationTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29742D3211257B600A1D213 /* LocationTableViewCellViewModel.swift */; };
 		C29742D62112CBFF00A1D213 /* HeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29742D52112CBFF00A1D213 /* HeaderViewController.swift */; };
-		C2A1114020B8A70A00ABB161 /* TaskCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113F20B8A70A00ABB161 /* TaskCellViewModel.swift */; };
-		C2A1114220B8AED400ABB161 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1114120B8AED400ABB161 /* TaskTableViewCell.swift */; };
 		C2A1114720B9F6EF00ABB161 /* NewTask.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2A1114620B9F6EF00ABB161 /* NewTask.storyboard */; };
 		C2A1115120B9FCDB00ABB161 /* NewTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1115020B9FCDB00ABB161 /* NewTaskViewModel.swift */; };
 		C2A1115320BA036800ABB161 /* NewTaskCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1115220BA036800ABB161 /* NewTaskCoordinator.swift */; };
@@ -126,6 +137,7 @@
 		C2C79D2D2123E7D70058F228 /* DateInputViewModel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C79D2C2123E7D70058F228 /* DateInputViewModel+Extension.swift */; };
 		C2DD9A28210D262D00E9B89B /* CreationFrameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DD9A27210D262D00E9B89B /* CreationFrameViewController.swift */; };
 		C2DD9A3321114ADD00E9B89B /* MoreOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DD9A3221114ADD00E9B89B /* MoreOptionsViewController.swift */; };
+		D407DDD9BE3E0DF75EB26FC1 /* Pods_ReefTableViewCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1BB95B15A7B6F4F726F8BC9 /* Pods_ReefTableViewCell.framework */; };
 		EE3649E90DE055B9D5168F01 /* Pods_Reef.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8708FC5A67C933F755CB93 /* Pods_Reef.framework */; };
 /* End PBXBuildFile section */
 
@@ -158,6 +170,20 @@
 			remoteGlobalIDString = 22FA284F212F7E6D00FC74D3;
 			remoteInfo = IndexExtension;
 		};
+		22FEEA7E2133419500D8B049 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C28DC90E20B61CB6007F881A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22FEEA732133419500D8B049;
+			remoteInfo = ReefToday;
+		};
+		22FEEA8F213344BD00D8B049 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C28DC90E20B61CB6007F881A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22FEEA89213344BD00D8B049;
+			remoteInfo = ReefTableViewCell;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -167,6 +193,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				22FEEA92213344BD00D8B049 /* ReefTableViewCell.framework in Embed Frameworks */,
 				22656932212F718F009714BC /* Persistence.framework in Embed Frameworks */,
 				22F23E82212E3E800064EE05 /* ReefKit.framework in Embed Frameworks */,
 			);
@@ -179,6 +206,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				22FEEA802133419500D8B049 /* ReefToday.appex in Embed App Extensions */,
 				22FA2857212F7E6E00FC74D3 /* ReefIndexExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -227,6 +255,7 @@
 		22270EF92120C07000695223 /* Recommender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommender.swift; sourceTree = "<group>"; };
 		222888D72117E5D90093EEF7 /* RadiusMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusMapViewModel.swift; sourceTree = "<group>"; };
 		222888DB211873DD0093EEF7 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
+		22292D88213338110024DA03 /* TaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskCell.xib; sourceTree = "<group>"; };
 		222BFF9320ED92C7001B6BBF /* RemindersCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersCommunicator.swift; sourceTree = "<group>"; };
 		222BFF9620EDB854001B6BBF /* RemindersImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersImporter.swift; sourceTree = "<group>"; };
 		22325A7320FB8E0500E5F8C6 /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
@@ -272,6 +301,16 @@
 		22FA2852212F7E6E00FC74D3 /* IndexRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexRequestHandler.swift; sourceTree = "<group>"; };
 		22FA2854212F7E6E00FC74D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22FA286221303A5B00FC74D3 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		22FEEA742133419500D8B049 /* ReefToday.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ReefToday.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		22FEEA752133419500D8B049 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		22FEEA782133419500D8B049 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		22FEEA7B2133419500D8B049 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		22FEEA7D2133419500D8B049 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22FEEA8A213344BD00D8B049 /* ReefTableViewCell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReefTableViewCell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22FEEA8C213344BD00D8B049 /* ReefTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReefTableViewCell.h; sourceTree = "<group>"; };
+		22FEEA8D213344BD00D8B049 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22FEEA9A213345BA00D8B049 /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22FEEA9C21334B6A00D8B049 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		2766B305F29EF8BE8DDEADCA /* Pods-ReefUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReefUITests/Pods-ReefUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2934BCC921003E0700B6A05A /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		294490ED20FD297200333F11 /* TaskViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModelTests.swift; sourceTree = "<group>"; };
@@ -290,6 +329,7 @@
 		29BA68A721211754009B4AB9 /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
 		29BEED5E2107E946008E2202 /* ImportDataPacket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportDataPacket.swift; sourceTree = "<group>"; };
 		2D020A78B9BEB6EB771DFE12 /* Pods-Reef.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reef.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Reef/Pods-Reef.debug.xcconfig"; sourceTree = "<group>"; };
+		308B4012DD4C0AC91265A4DF /* Pods-ReefTableViewCell.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefTableViewCell.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReefTableViewCell/Pods-ReefTableViewCell.debug.xcconfig"; sourceTree = "<group>"; };
 		32F8AC4AA847D00A2CB492DF /* Pods_ReefTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReefTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B2823E64B1FC7A4411311AA /* Pods-ReefUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReefUITests/Pods-ReefUITests.release.xcconfig"; sourceTree = "<group>"; };
 		558C6AF329AB768E11815BB8 /* Pods_ReefTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReefTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -298,9 +338,11 @@
 		717F662667FED0B8BDFBAA0B /* Pods-ReefTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReefTests/Pods-ReefTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7184CCF59380519A67144175 /* Pods_Reef.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reef.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E8708FC5A67C933F755CB93 /* Pods_Reef.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reef.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9DB7A8532F97476DD9B7C724 /* Pods-ReefTableViewCell.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefTableViewCell.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReefTableViewCell/Pods-ReefTableViewCell.release.xcconfig"; sourceTree = "<group>"; };
 		9F87A6CB4388F73CB0FDA3A1 /* Pods-ReefTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReefTests/Pods-ReefTests.release.xcconfig"; sourceTree = "<group>"; };
 		A18C9FEFF01841372B83A1C4 /* Pods_ReefUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReefUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB08D99D8EA8EBF32B46628D /* Pods-Reef.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reef.release.xcconfig"; path = "Pods/Target Support Files/Pods-Reef/Pods-Reef.release.xcconfig"; sourceTree = "<group>"; };
+		C1BB95B15A7B6F4F726F8BC9 /* Pods_ReefTableViewCell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReefTableViewCell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C21EACFF20B741BC005F0F85 /* HomeScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenCoordinator.swift; sourceTree = "<group>"; };
 		C21EAD0620B74757005F0F85 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		C21EAD0A20B74F01005F0F85 /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
@@ -377,10 +419,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		22FEEA712133419500D8B049 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22FEEA842133429A00D8B049 /* ReefKit.framework in Frameworks */,
+				22FEEA762133419500D8B049 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22FEEA87213344BD00D8B049 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22FEEA99213345AD00D8B049 /* ReefKit.framework in Frameworks */,
+				D407DDD9BE3E0DF75EB26FC1 /* Pods_ReefTableViewCell.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C28DC91320B61CB6007F881A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22FEEA91213344BD00D8B049 /* ReefTableViewCell.framework in Frameworks */,
 				EE3649E90DE055B9D5168F01 /* Pods_Reef.framework in Frameworks */,
 				22F23E81212E3E800064EE05 /* ReefKit.framework in Frameworks */,
 				22656931212F718F009714BC /* Persistence.framework in Frameworks */,
@@ -501,6 +562,32 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		22292D83213333390024DA03 /* TaskCell */ = {
+			isa = PBXGroup;
+			children = (
+				22292D84213333520024DA03 /* View */,
+				22292D852133335A0024DA03 /* ViewModel */,
+			);
+			path = TaskCell;
+			sourceTree = "<group>";
+		};
+		22292D84213333520024DA03 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				22292D88213338110024DA03 /* TaskCell.xib */,
+				C2A1114120B8AED400ABB161 /* TaskTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		22292D852133335A0024DA03 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C2A1113F20B8A70A00ABB161 /* TaskCellViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		222BFF9520EDB83B001B6BBF /* Importers */ = {
 			isa = PBXGroup;
 			children = (
@@ -585,6 +672,7 @@
 		22F23E6D212E3E7F0064EE05 /* ReefKit */ = {
 			isa = PBXGroup;
 			children = (
+				228BAD432108C22400E74AA9 /* Fonts.swift */,
 				22F78C1E212F365F0036A4EB /* ReefKit.swift */,
 				22F23EA1212E46060064EE05 /* ReefSpotlight.swift */,
 				22270EF92120C07000695223 /* Recommender.swift */,
@@ -614,6 +702,27 @@
 				22FA2854212F7E6E00FC74D3 /* Info.plist */,
 			);
 			path = ReefIndexExtension;
+			sourceTree = "<group>";
+		};
+		22FEEA772133419500D8B049 /* ReefToday */ = {
+			isa = PBXGroup;
+			children = (
+				22FEEA782133419500D8B049 /* TodayViewController.swift */,
+				22FEEA7A2133419500D8B049 /* MainInterface.storyboard */,
+				22FEEA7D2133419500D8B049 /* Info.plist */,
+			);
+			path = ReefToday;
+			sourceTree = "<group>";
+		};
+		22FEEA8B213344BD00D8B049 /* ReefTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				22292D83213333390024DA03 /* TaskCell */,
+				22FEEA8C213344BD00D8B049 /* ReefTableViewCell.h */,
+				22FEEA8D213344BD00D8B049 /* Info.plist */,
+				22FEEA9C21334B6A00D8B049 /* Media.xcassets */,
+			);
+			path = ReefTableViewCell;
 			sourceTree = "<group>";
 		};
 		2965C40F20F6A81D001C988E /* Reminders */ = {
@@ -669,6 +778,7 @@
 		45EE167F10EAE72CE5635B25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				22FEEA9A213345BA00D8B049 /* RxSwift.framework */,
 				22F23E96212E3F1B0064EE05 /* RxSwift.framework */,
 				220D7C1C20D02E5E007EC0DD /* RxSwift.framework */,
 				7E8708FC5A67C933F755CB93 /* Pods_Reef.framework */,
@@ -679,6 +789,8 @@
 				1E128F2E25BA570ED73A4795 /* Pods_ReefUITests.framework */,
 				65E3B37A82203D5E380D0390 /* Pods_ReefKit.framework */,
 				22FA286221303A5B00FC74D3 /* QuickLook.framework */,
+				22FEEA752133419500D8B049 /* NotificationCenter.framework */,
+				C1BB95B15A7B6F4F726F8BC9 /* Pods_ReefTableViewCell.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -694,6 +806,8 @@
 				3B2823E64B1FC7A4411311AA /* Pods-ReefUITests.release.xcconfig */,
 				714B43063E29B780DB147628 /* Pods-ReefKit.debug.xcconfig */,
 				CBEDB2B28E4B9B9C40FB7E0A /* Pods-ReefKit.release.xcconfig */,
+				308B4012DD4C0AC91265A4DF /* Pods-ReefTableViewCell.debug.xcconfig */,
+				9DB7A8532F97476DD9B7C724 /* Pods-ReefTableViewCell.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -751,7 +865,6 @@
 			children = (
 				C28DC91D20B61CB6007F881A /* TaskList.storyboard */,
 				C21EAD0620B74757005F0F85 /* TaskListViewController.swift */,
-				C2A1114120B8AED400ABB161 /* TaskTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -768,7 +881,6 @@
 				22F23E9F212E452E0064EE05 /* Colors.swift */,
 				22D14A1D212CBBF500B15B98 /* ArrayExtension.swift */,
 				226CEA0420E17E87008CEB97 /* Strings.swift */,
-				228BAD432108C22400E74AA9 /* Fonts.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -777,7 +889,6 @@
 			isa = PBXGroup;
 			children = (
 				C21EAD0E20B75211005F0F85 /* TaskListViewModel.swift */,
-				C2A1113F20B8A70A00ABB161 /* TaskCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -790,6 +901,8 @@
 				22F23E6D212E3E7F0064EE05 /* ReefKit */,
 				2265692B212F718F009714BC /* Persistence */,
 				22FA2851212F7E6E00FC74D3 /* ReefIndexExtension */,
+				22FEEA772133419500D8B049 /* ReefToday */,
+				22FEEA8B213344BD00D8B049 /* ReefTableViewCell */,
 				C28DC91720B61CB6007F881A /* Products */,
 				6BF08872F858F444FF435658 /* Pods */,
 				45EE167F10EAE72CE5635B25 /* Frameworks */,
@@ -804,6 +917,8 @@
 				22F23E6C212E3E7F0064EE05 /* ReefKit.framework */,
 				2265692A212F718F009714BC /* Persistence.framework */,
 				22FA2850212F7E6D00FC74D3 /* ReefIndexExtension.appex */,
+				22FEEA742133419500D8B049 /* ReefToday.appex */,
+				22FEEA8A213344BD00D8B049 /* ReefTableViewCell.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -967,6 +1082,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		22FEEA85213344BD00D8B049 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22FEEA8E213344BD00D8B049 /* ReefTableViewCell.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -1044,6 +1167,42 @@
 			productReference = 22FA2850212F7E6D00FC74D3 /* ReefIndexExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		22FEEA732133419500D8B049 /* ReefToday */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22FEEA832133419500D8B049 /* Build configuration list for PBXNativeTarget "ReefToday" */;
+			buildPhases = (
+				22FEEA702133419500D8B049 /* Sources */,
+				22FEEA712133419500D8B049 /* Frameworks */,
+				22FEEA722133419500D8B049 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReefToday;
+			productName = ReefToday;
+			productReference = 22FEEA742133419500D8B049 /* ReefToday.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		22FEEA89213344BD00D8B049 /* ReefTableViewCell */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22FEEA93213344BD00D8B049 /* Build configuration list for PBXNativeTarget "ReefTableViewCell" */;
+			buildPhases = (
+				92EE909DD815B1EEC7D214AD /* [CP] Check Pods Manifest.lock */,
+				22FEEA85213344BD00D8B049 /* Headers */,
+				22FEEA86213344BD00D8B049 /* Sources */,
+				22FEEA87213344BD00D8B049 /* Frameworks */,
+				22FEEA88213344BD00D8B049 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReefTableViewCell;
+			productName = ReefTableViewCell;
+			productReference = 22FEEA8A213344BD00D8B049 /* ReefTableViewCell.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		C28DC91520B61CB6007F881A /* Reef */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C28DC92820B61CB9007F881A /* Build configuration list for PBXNativeTarget "Reef" */;
@@ -1064,6 +1223,8 @@
 				22F23E80212E3E800064EE05 /* PBXTargetDependency */,
 				22656930212F718F009714BC /* PBXTargetDependency */,
 				22FA2856212F7E6E00FC74D3 /* PBXTargetDependency */,
+				22FEEA7F2133419500D8B049 /* PBXTargetDependency */,
+				22FEEA90213344BD00D8B049 /* PBXTargetDependency */,
 			);
 			name = Reef;
 			productName = BigChallenge;
@@ -1093,6 +1254,12 @@
 					22FA284F212F7E6D00FC74D3 = {
 						CreatedOnToolsVersion = 10.0;
 					};
+					22FEEA732133419500D8B049 = {
+						CreatedOnToolsVersion = 10.0;
+					};
+					22FEEA89213344BD00D8B049 = {
+						CreatedOnToolsVersion = 10.0;
+					};
 					C28DC91520B61CB6007F881A = {
 						CreatedOnToolsVersion = 9.3;
 					};
@@ -1117,6 +1284,8 @@
 				22F23E6B212E3E7F0064EE05 /* ReefKit */,
 				22656929212F718F009714BC /* Persistence */,
 				22FA284F212F7E6D00FC74D3 /* ReefIndexExtension */,
+				22FEEA732133419500D8B049 /* ReefToday */,
+				22FEEA89213344BD00D8B049 /* ReefTableViewCell */,
 			);
 		};
 /* End PBXProject section */
@@ -1147,6 +1316,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22FEEA722133419500D8B049 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22FEEA7C2133419500D8B049 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22FEEA88213344BD00D8B049 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22FEEA9D21334B6A00D8B049 /* Media.xcassets in Resources */,
+				22FEEA96213344D500D8B049 /* TaskCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1237,9 +1423,8 @@
 				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift-iOS11.0/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/UITextView+Placeholder/UITextView_Placeholder.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift-iOS11.4/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1253,6 +1438,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Reef/Pods-Reef-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		92EE909DD815B1EEC7D214AD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ReefTableViewCell-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B82CD480A753E33953458C3C /* [CP] Check Pods Manifest.lock */ = {
@@ -1299,7 +1502,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ReefTests/Pods-ReefTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift-iOS11.0/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 			);
@@ -1343,6 +1546,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				220FE8782134388200127C3E /* Fonts.swift in Sources */,
 				22FA2873213048B200FC74D3 /* Recommender.swift in Sources */,
 				22F78C1F212F365F0036A4EB /* ReefKit.swift in Sources */,
 				22FA285B212F7EA200FC74D3 /* ReefSpotlight.swift in Sources */,
@@ -1367,6 +1571,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		22FEEA702133419500D8B049 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22FEEA792133419500D8B049 /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22FEEA86213344BD00D8B049 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22FEEA97213344DA00D8B049 /* TaskTableViewCell.swift in Sources */,
+				22FEEA98213344DE00D8B049 /* TaskCellViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C28DC91220B61CB6007F881A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1375,7 +1596,6 @@
 				C2C79D2D2123E7D70058F228 /* DateInputViewModel+Extension.swift in Sources */,
 				C2901057211E0FB6008F2807 /* TagCreationFrameViewModel.swift in Sources */,
 				222BFF9420ED92C7001B6BBF /* RemindersCommunicator.swift in Sources */,
-				C2A1114220B8AED400ABB161 /* TaskTableViewCell.swift in Sources */,
 				2255B3AE2113209800F2F37C /* LocationInputViewModel.swift in Sources */,
 				C21EAD0F20B75211005F0F85 /* TaskListViewModel.swift in Sources */,
 				22ED5957211B346F008EAD7D /* MKPlaceMarkExtension.swift in Sources */,
@@ -1401,7 +1621,6 @@
 				22D14A1E212CBBF500B15B98 /* ArrayExtension.swift in Sources */,
 				16FDC13C210F809A008FA931 /* NotificationManager.swift in Sources */,
 				C2DD9A3321114ADD00E9B89B /* MoreOptionsViewController.swift in Sources */,
-				228BAD442108C22400E74AA9 /* Fonts.swift in Sources */,
 				22F23E9D212E43B30064EE05 /* Tag+Extension.swift in Sources */,
 				22325A7920FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift in Sources */,
 				225852822100C5BE0011F4B0 /* TagsCollectionView.swift in Sources */,
@@ -1426,7 +1645,6 @@
 				C231119320FFC95300BCB000 /* NewTagViewModelProtocol.swift in Sources */,
 				C29742D021124F1600A1D213 /* MoreOptionsTableViewCellViewModel.swift in Sources */,
 				29BA68A02120C37D009B4AB9 /* CalendarViewController.swift in Sources */,
-				C2A1114020B8A70A00ABB161 /* TaskCellViewModel.swift in Sources */,
 				C2A1115120B9FCDB00ABB161 /* NewTaskViewModel.swift in Sources */,
 				22456D2920DC3BB000168894 /* Date+Extension.swift in Sources */,
 				C21EAD0B20B74F01005F0F85 /* StoryboardInstantiable.swift in Sources */,
@@ -1464,6 +1682,16 @@
 			target = 22FA284F212F7E6D00FC74D3 /* ReefIndexExtension */;
 			targetProxy = 22FA2855212F7E6E00FC74D3 /* PBXContainerItemProxy */;
 		};
+		22FEEA7F2133419500D8B049 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22FEEA732133419500D8B049 /* ReefToday */;
+			targetProxy = 22FEEA7E2133419500D8B049 /* PBXContainerItemProxy */;
+		};
+		22FEEA90213344BD00D8B049 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22FEEA89213344BD00D8B049 /* ReefTableViewCell */;
+			targetProxy = 22FEEA8F213344BD00D8B049 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1483,6 +1711,14 @@
 				2253179D20D147B10065C9F9 /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		22FEEA7A2133419500D8B049 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22FEEA7B2133419500D8B049 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 		C28DC91D20B61CB6007F881A /* TaskList.storyboard */ = {
@@ -1643,7 +1879,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1675,7 +1911,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1728,6 +1964,113 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		22FEEA812133419500D8B049 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D9KU92KK65;
+				INFOPLIST_FILE = ReefToday/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bigBeanie.finalChallenge.ReefToday;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		22FEEA822133419500D8B049 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D9KU92KK65;
+				INFOPLIST_FILE = ReefToday/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bigBeanie.finalChallenge.ReefToday;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		22FEEA94213344BD00D8B049 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 308B4012DD4C0AC91265A4DF /* Pods-ReefTableViewCell.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = D9KU92KK65;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ReefTableViewCell/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Wide.ReefTableViewCell;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		22FEEA95213344BD00D8B049 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9DB7A8532F97476DD9B7C724 /* Pods-ReefTableViewCell.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = D9KU92KK65;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ReefTableViewCell/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Wide.ReefTableViewCell;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -1931,6 +2274,24 @@
 			buildConfigurations = (
 				22FA2859212F7E6E00FC74D3 /* Debug */,
 				22FA285A212F7E6E00FC74D3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		22FEEA832133419500D8B049 /* Build configuration list for PBXNativeTarget "ReefToday" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22FEEA812133419500D8B049 /* Debug */,
+				22FEEA822133419500D8B049 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		22FEEA93213344BD00D8B049 /* Build configuration list for PBXNativeTarget "ReefTableViewCell" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22FEEA94213344BD00D8B049 /* Debug */,
+				22FEEA95213344BD00D8B049 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
