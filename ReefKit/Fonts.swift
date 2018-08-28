@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-extension UIFont {
-    static func font(sized size: CGFloat,
+public extension UIFont {
+    public static func font(sized size: CGFloat,
                      weight: UIFont.Weight,
                      with style: UIFontTextStyle,
                      fontName: FontName = .system) -> UIFont {
@@ -21,13 +21,13 @@ extension UIFont {
         return finalFont
     }
     
-    static func fontNamed(name: FontName, weight: UIFont.Weight, size: CGFloat) -> UIFont {
+    public static func fontNamed(name: FontName, weight: UIFont.Weight, size: CGFloat) -> UIFont {
         guard name != FontName.system else { return UIFont.systemFont(ofSize: size, weight: weight)}
         let weightName = fontWeight(for: weight)
         return UIFont(name: name.rawValue + weightName, size: size)!
     }
     
-    static func fontWeight(for weight: UIFont.Weight) -> String {
+    public static func fontWeight(for weight: UIFont.Weight) -> String {
         switch weight {
         case .thin:
             return FontWeight.thin
@@ -52,13 +52,13 @@ extension UIFont {
     }
 }
 
-enum FontName: String {
-    typealias RawValue = String
+public enum FontName: String {
+    public typealias RawValue = String
     case system
     case barlow = "Barlow"
 }
 
-struct FontWeight {
+public struct FontWeight {
     static let thin = "-Thin"
     static let extraLight = "-ExtraLight"
     static let light = "-Light"
