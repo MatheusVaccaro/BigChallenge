@@ -21,7 +21,6 @@ public class TaskListViewModelImpl: TaskListViewModel {
     
     var showsCompletedTasks: Bool = false {
         didSet {
-            print((showsCompletedTasks ? "showing" : "not showing") + " completed tasks")
             if showsCompletedTasks { Answers.logCustomEvent(withName: "showed completed tasks") }
             tasksObservable.onNext((mainTasks, tasksToShow))
         }
@@ -64,7 +63,7 @@ public class TaskListViewModelImpl: TaskListViewModel {
     
     /** filters the taskList with selected tags */
     func filterTasks(with tags: [Tag]) {
-        self.selectedTags = tags
+        selectedTags = tags
         mainTasks = []
         secondaryTasks = []
         completedTasks = []
@@ -73,16 +72,21 @@ public class TaskListViewModelImpl: TaskListViewModel {
             appendTask(task)
         }
         
-        print(mainTasks.map {$0.title!})
-        print(secondaryTasks.map {$0.title!})
-        
-        secondaryTasks =
-            secondaryTasks.filter {
-                if selectedTags.isEmpty, // on main screen and task is recommended
-                    recommender.recommendedTasks.contains($0) { return false }
-                else if $0.tags!.allObjects.isEmpty && selectedTags.isEmpty { return true }
-                for tag in tags where !$0.tags!.contains(tag) { return false }
+        secondaryTasks = secondaryTasks.filter {
+            
+            // on main screen and task is recommended
+            if selectedTags.isEmpty, recommender.recommendedTasks.contains($0) {
+                return false
+                
+            } else if $0.tags!.allObjects.isEmpty && selectedTags.isEmpty {
                 return true
+            }
+            
+            for tag in tags where !$0.tags!.contains(tag) {
+                return false
+            }
+            
+            return true
         }
         
         completedTasks =
@@ -119,10 +123,10 @@ public class TaskListViewModelImpl: TaskListViewModel {
     fileprivate func isMainTask(_ task: Task) -> Bool {
         if recommender.recommendedTasks.contains(task) && selectedTags.isEmpty { return true }
         
+        // TODO: Improve this @Wide
         return !selectedTags.isEmpty &&
             task.allTags.count == selectedTags.count &&
-            task.allTags.map { $0.title! }.sorted() == selectedTags.map { $0.title! }.sorted()
-        //TODO: improve this
+            task.allTags.map({ $0.title! }).sorted() == selectedTags.map({ $0.title! }).sorted()
     }
     
     /** appends a centain task to the appropriate array inside taskListViewModel */
@@ -139,17 +143,19 @@ public class TaskListViewModelImpl: TaskListViewModel {
     }
     
     fileprivate func subscribeToModelUpdate() {
-        model.didUpdateTasks.subscribe {
-            guard $0.element != nil else { return }
-            self.filterTasks(with: self.selectedTags)
-            }.disposed(by: disposeBag)
+        model.didUpdateTasks
+            .subscribe(onNext: { _ in
+            	self.filterTasks(with: self.selectedTags)
+        	})
+        	.disposed(by: disposeBag)
     }
     
     fileprivate func subscribeToCompletedTask() {
-        taskCompleted.subscribe { event in
-            guard let task = event.element else { return }
-            self.model.save(task) // model updated handles changing the arrays
-        }.disposed(by: disposeBag)
+        taskCompleted
+            .subscribe(onNext: { task in
+            	self.model.save(task) // model updated handles changing the arrays
+        	})
+        	.disposed(by: disposeBag)
     }
     
     // MARK: Strings
