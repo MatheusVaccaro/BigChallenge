@@ -8,7 +8,6 @@
 
 import UserNotifications
 import CoreLocation /* remove this after rebase */
-import ReefKit
 
 open class NotificationManager {
     
