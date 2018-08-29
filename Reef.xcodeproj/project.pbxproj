@@ -43,6 +43,13 @@
 		22656932212F718F009714BC /* Persistence.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2265692A212F718F009714BC /* Persistence.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		226B311D211C954200881E34 /* CreateTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B311C211C954200881E34 /* CreateTagViewController.swift */; };
 		226CEA0520E17E87008CEB97 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226CEA0420E17E87008CEB97 /* Strings.swift */; };
+		228082062136D421003FD3DE /* RemotePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228082052136D421003FD3DE /* RemotePersistence.swift */; };
+		228082072136D472003FD3DE /* PersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0520E5293500CF39ED /* PersistenceProtocol.swift */; };
+		228082082136D476003FD3DE /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113C20B88A2F00ABB161 /* Storable.swift */; };
+		228082092136D482003FD3DE /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0720E529D600CF39ED /* Persistence.swift */; };
+		2280820A2136D486003FD3DE /* MockPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113A20B8791E00ABB161 /* MockPersistence.swift */; };
+		2280820B2136D489003FD3DE /* LocalPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0BE020E4449C00CF39ED /* LocalPersistence.swift */; };
+		2280820C2136D493003FD3DE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2265692D212F718F009714BC /* Info.plist */; };
 		228946352113999A009D05CB /* TaskCreationFrameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228946342113999A009D05CB /* TaskCreationFrameViewModel.swift */; };
 		228946392113F1A4009D05CB /* InvertedCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228946382113F1A4009D05CB /* InvertedCircle.swift */; };
 		22D14A1E212CBBF500B15B98 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D14A1D212CBBF500B15B98 /* ArrayExtension.swift */; };
@@ -53,20 +60,15 @@
 		22F23E7E212E3E800064EE05 /* ReefKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 22F23E6E212E3E7F0064EE05 /* ReefKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22F23E81212E3E800064EE05 /* ReefKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F23E6C212E3E7F0064EE05 /* ReefKit.framework */; };
 		22F23E82212E3E800064EE05 /* ReefKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22F23E6C212E3E7F0064EE05 /* ReefKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		22F23E8A212E3E990064EE05 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0720E529D600CF39ED /* Persistence.swift */; };
-		22F23E8B212E3E9D0064EE05 /* MockPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113A20B8791E00ABB161 /* MockPersistence.swift */; };
-		22F23E8C212E3EA10064EE05 /* LocalPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0BE020E4449C00CF39ED /* LocalPersistence.swift */; };
 		22F23E8D212E3EA70064EE05 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2286A71420E3DF2100BE92AA /* Model.xcdatamodeld */; };
 		22F23E93212E3EC30064EE05 /* TaskAndTagHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2207B3F2212ADB1800F26C55 /* TaskAndTagHelpers.swift */; };
-		22F23E94212E3EC80064EE05 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113C20B88A2F00ABB161 /* Storable.swift */; };
-		22F23E95212E3ECC0064EE05 /* PersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0520E5293500CF39ED /* PersistenceProtocol.swift */; };
 		22F23E98212E40640064EE05 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CC1864210511CC00486B27 /* Colors.swift */; };
 		22F23E9B212E416C0064EE05 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1676FC8F20D99580003E2D79 /* TaskModel.swift */; };
 		22F23E9C212E41700064EE05 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2241F36820ED08340069EFE9 /* TagModel.swift */; };
 		22F23E9D212E43B30064EE05 /* Tag+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C79D2E2123E89A0058F228 /* Tag+Extension.swift */; };
 		22F23E9E212E43B30064EE05 /* Task+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4F8882111061A00AE4FA1 /* Task+Extension.swift */; };
 		22F23EA0212E452E0064EE05 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F23E9F212E452E0064EE05 /* Colors.swift */; };
-		22F78C1D212F31390036A4EB /* TaskCRUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F78C1C212F31390036A4EB /* TaskCRUD.swift */; };
+		22F78C1D212F31390036A4EB /* CRUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F78C1C212F31390036A4EB /* CRUD.swift */; };
 		22F78C1F212F365F0036A4EB /* ReefKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F78C1E212F365F0036A4EB /* ReefKit.swift */; };
 		22FA2853212F7E6E00FC74D3 /* IndexRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FA2852212F7E6E00FC74D3 /* IndexRequestHandler.swift */; };
 		22FA2857212F7E6E00FC74D3 /* ReefIndexExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 22FA2850212F7E6D00FC74D3 /* ReefIndexExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -282,6 +284,7 @@
 		2265692D212F718F009714BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		226B311C211C954200881E34 /* CreateTagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTagViewController.swift; sourceTree = "<group>"; };
 		226CEA0420E17E87008CEB97 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		228082052136D421003FD3DE /* RemotePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotePersistence.swift; sourceTree = "<group>"; };
 		2286A71520E3DF2100BE92AA /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		228946342113999A009D05CB /* TaskCreationFrameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreationFrameViewModel.swift; sourceTree = "<group>"; };
 		228946382113F1A4009D05CB /* InvertedCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertedCircle.swift; sourceTree = "<group>"; };
@@ -299,7 +302,7 @@
 		22F23E96212E3F1B0064EE05 /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F23E9F212E452E0064EE05 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		22F23EA1212E46060064EE05 /* ReefSpotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReefSpotlight.swift; sourceTree = "<group>"; };
-		22F78C1C212F31390036A4EB /* TaskCRUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCRUD.swift; sourceTree = "<group>"; };
+		22F78C1C212F31390036A4EB /* CRUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUD.swift; sourceTree = "<group>"; };
 		22F78C1E212F365F0036A4EB /* ReefKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReefKit.swift; sourceTree = "<group>"; };
 		22FA2850212F7E6D00FC74D3 /* ReefIndexExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ReefIndexExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		22FA2852212F7E6E00FC74D3 /* IndexRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexRequestHandler.swift; sourceTree = "<group>"; };
@@ -482,7 +485,7 @@
 				2286A71420E3DF2100BE92AA /* Model.xcdatamodeld */,
 				22CC1864210511CC00486B27 /* Colors.swift */,
 				2207B3F2212ADB1800F26C55 /* TaskAndTagHelpers.swift */,
-				22F78C1C212F31390036A4EB /* TaskCRUD.swift */,
+				22F78C1C212F31390036A4EB /* CRUD.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1002,6 +1005,7 @@
 				223C0C0720E529D600CF39ED /* Persistence.swift */,
 				C2A1113A20B8791E00ABB161 /* MockPersistence.swift */,
 				223C0BE020E4449C00CF39ED /* LocalPersistence.swift */,
+				228082052136D421003FD3DE /* RemotePersistence.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -1254,6 +1258,7 @@
 					};
 					22656929212F718F009714BC = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 0940;
 					};
 					22F23E6B212E3E7F0064EE05 = {
 						CreatedOnToolsVersion = 10.0;
@@ -1317,6 +1322,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2280820C2136D493003FD3DE /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1554,6 +1560,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2280820A2136D486003FD3DE /* MockPersistence.swift in Sources */,
+				228082082136D476003FD3DE /* Storable.swift in Sources */,
+				228082092136D482003FD3DE /* Persistence.swift in Sources */,
+				2280820B2136D489003FD3DE /* LocalPersistence.swift in Sources */,
+				228082062136D421003FD3DE /* RemotePersistence.swift in Sources */,
+				228082072136D472003FD3DE /* PersistenceProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1565,16 +1577,11 @@
 				22FA2873213048B200FC74D3 /* Recommender.swift in Sources */,
 				22F78C1F212F365F0036A4EB /* ReefKit.swift in Sources */,
 				22FA285B212F7EA200FC74D3 /* ReefSpotlight.swift in Sources */,
-				22F23E8C212E3EA10064EE05 /* LocalPersistence.swift in Sources */,
-				22F23E8A212E3E990064EE05 /* Persistence.swift in Sources */,
-				22F78C1D212F31390036A4EB /* TaskCRUD.swift in Sources */,
-				22F23E94212E3EC80064EE05 /* Storable.swift in Sources */,
-				22F23E8B212E3E9D0064EE05 /* MockPersistence.swift in Sources */,
+				22F78C1D212F31390036A4EB /* CRUD.swift in Sources */,
 				22F23E8D212E3EA70064EE05 /* Model.xcdatamodeld in Sources */,
 				22FA2872213048AF00FC74D3 /* LocationManager.swift in Sources */,
 				22F23E98212E40640064EE05 /* Colors.swift in Sources */,
 				22F23E93212E3EC30064EE05 /* TaskAndTagHelpers.swift in Sources */,
-				22F23E95212E3ECC0064EE05 /* PersistenceProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1811,6 +1818,7 @@
 		22656934212F718F009714BC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1833,6 +1841,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1843,6 +1852,7 @@
 		22656935212F718F009714BC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;

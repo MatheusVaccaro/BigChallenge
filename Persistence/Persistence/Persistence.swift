@@ -19,8 +19,7 @@ public class Persistence: PersistenceProtocol {
 
     // MARK: - Properties
     
-    public weak var tasksDelegate: TasksPersistenceDelegate?
-    public weak var tagsDelegate: TagsPersistenceDelegate?
+    public weak var delegate: PersistenceDelegate?
     
     private let localPersistence: LocalPersistence
     private let remotePersistence: PersistenceProtocol?
@@ -84,17 +83,10 @@ public class Persistence: PersistenceProtocol {
 
 // MARK: - Persistence Delegate
 // MARK: Tasks
-public protocol TasksPersistenceDelegate: class {
-    func persistence(_ persistence: Persistence, didInsertTasks tasks: [Task])
-    func persistence(_ persistence: Persistence, didUpdateTasks tasks: [Task])
-    func persistence(_ persistence: Persistence, didDeleteTasks tasks: [Task])
-}
-
-// MARK: Tags
-public protocol TagsPersistenceDelegate: class {
-    func persistence(_ persistence: Persistence, didInsertTags tags: [Tag])
-    func persistence(_ persistence: Persistence, didUpdateTags tags: [Tag])
-    func persistence(_ persistence: Persistence, didDeleteTags tags: [Tag])
+public protocol PersistenceDelegate: class {
+    func persistence(_ persistence: Persistence, didInsert objects: [Storable])
+    func persistence(_ persistence: Persistence, didUpdate objects: [Storable])
+    func persistence(_ persistence: Persistence, didDelete objects: [Storable])
 }
 
 // MARK: - LocalPersistenceDelegate Extension
@@ -102,33 +94,28 @@ public protocol TagsPersistenceDelegate: class {
 extension Persistence: LocalPersistenceDelegate {
 
     func localPersistence(_ localPersistence: LocalPersistence, didInsertObjects objects: [Storable]) {
-        // filter is needed because if a Task and a Tag were to be updated at the same time, the cast would fail
-        if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {
-            tasksDelegate?.persistence(self, didInsertTasks: tasks)
-        }
-        
-        if let tags = (objects.filter { $0 is Tag }) as? [Tag], !tags.isEmpty {
-            tagsDelegate?.persistence(self, didInsertTags: tags)
-        }
+        delegate?.persistence(self, didInsert: objects)
     }
     
     func localPersistence(_ localPersistence: LocalPersistence, didUpdateObjects objects: [Storable]) {
-        if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {
-            tasksDelegate?.persistence(self, didUpdateTasks: tasks)
-        }
-        
-        if let tags = (objects.filter { $0 is Tag }) as? [Tag], !tags.isEmpty {
-            tagsDelegate?.persistence(self, didUpdateTags: tags)
-        }
+        delegate?.persistence(self, didUpdate: objects)
+//        if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {
+//            tasksDelegate?.persistence(self, didUpdateTasks: tasks)
+//        }
+//
+//        if let tags = (objects.filter { $0 is Tag }) as? [Tag], !tags.isEmpty {
+//            tagsDelegate?.persistence(self, didUpdateTags: tags)
+//        }
     }
     
     func localPersistence(_ localPersistence: LocalPersistence, didDeleteObjects objects: [Storable]) {
-        if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {
-            tasksDelegate?.persistence(self, didDeleteTasks: tasks)
-        }
-        
-        if let tags = (objects.filter { $0 is Tag }) as? [Tag], !tags.isEmpty {
-            tagsDelegate?.persistence(self, didDeleteTags: tags)
-        }
+        delegate?.persistence(self, didDelete: objects)
+//        if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {
+//            tasksDelegate?.persistence(self, didDeleteTasks: tasks)
+//        }
+//
+//        if let tags = (objects.filter { $0 is Tag }) as? [Tag], !tags.isEmpty {
+//            tagsDelegate?.persistence(self, didDeleteTags: tags)
+//        }
     }
 }

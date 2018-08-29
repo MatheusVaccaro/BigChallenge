@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import Persistence
 
 public enum TaskAttributes {
     case completionDate
