@@ -133,11 +133,19 @@ extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
     }
     
     func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
-                             didInstantiate taskListViewModel: TaskListViewModel) { }
+                             didInstantiate taskListViewModel: TaskListViewModel) {
+        let taskListVC = TaskListViewController.instantiate()
+        taskListVC.viewModel = taskListViewModel
+        homeScreenViewController?.setupTaskList(viewModel: taskListViewModel, viewController: taskListVC)
+    }
     
     func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
                              didInstantiate tagCollectionViewModel: TagCollectionViewModel) {
         tagCollectionViewModel.delegate = self
+        
+        let tagCollectionVC = TagCollectionViewController.instantiate()
+        tagCollectionVC.viewModel = tagCollectionViewModel
+		homeScreenViewController?.setupTagCollection(viewModel: tagCollectionViewModel, viewController: tagCollectionVC)
     }
 }
 
