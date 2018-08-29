@@ -19,8 +19,8 @@ class HomeScreenViewController: UIViewController {
     @IBOutlet weak var taskListContainerView: UIView!
     @IBOutlet weak var bigTitle: UILabel!
     
-    fileprivate var taskListViewController: TaskListViewController!
-    fileprivate var tagCollectionViewController: TagCollectionViewController!
+    fileprivate var taskListViewController: TaskListViewController?
+    fileprivate var tagCollectionViewController: TagCollectionViewController?
 
     private let disposeBag = DisposeBag()
     
@@ -96,74 +96,100 @@ class HomeScreenViewController: UIViewController {
         configureEmptyState()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "taskListSegue" {
-            if let taskListViewController = segue.destination as? TaskListViewController {
-                let taskListViewModel = viewModel.taskListViewModel
-                
-                self.subscribe(to: taskListViewModel)
-                
-                taskListViewController.viewModel = taskListViewModel
-                self.taskListViewController = taskListViewController
-            }
-        } else if segue.identifier == "tagCollectionSegue" {
-            if let tagCollectionViewController = segue.destination as? TagCollectionViewController {
-                let tagCollectionViewModel =
-                    viewModel.tagCollectionViewModel
-                tagCollectionViewController.viewModel = tagCollectionViewModel
-                self.tagCollectionViewController = tagCollectionViewController
-            }
-        }
+    func setupTaskList(viewModel: TaskListViewModel,
+                       viewController: TaskListViewController) {
+        
+        guard taskListViewController == nil else { return }
+        taskListViewController = viewController
+        
+        subscribe(to: viewModel)
+        
+        addChildViewController(viewController)
+        taskListContainerView.addSubview(viewController.view)
+        
+        NSLayoutConstraint.activate([
+            viewController.view.rightAnchor.constraint(equalTo: taskListContainerView.rightAnchor),
+            viewController.view.topAnchor.constraint(equalTo: taskListContainerView.topAnchor),
+            viewController.view.leftAnchor.constraint(equalTo: taskListContainerView.leftAnchor),
+            viewController.view.bottomAnchor.constraint(equalTo: taskListContainerView.bottomAnchor)
+        ])
+    }
+    
+    func setupTagCollection(viewModel: TagCollectionViewModel, viewController: TagCollectionViewController) {
+        guard tagCollectionViewController == nil else { return }
+        
+        tagCollectionViewController = viewController
+        
+        addChildViewController(viewController)
+        tagContainerView.addSubview(viewController.view)
+        
+        NSLayoutConstraint.activate([
+            viewController.view.rightAnchor.constraint(equalTo: tagContainerView.rightAnchor),
+            viewController.view.topAnchor.constraint(equalTo: tagContainerView.topAnchor),
+            viewController.view.leftAnchor.constraint(equalTo: tagContainerView.leftAnchor),
+            viewController.view.bottomAnchor.constraint(equalTo: tagContainerView.bottomAnchor)
+        ])
     }
     
     fileprivate func subscribe(to taskListViewModel: TaskListViewModel) {
-        taskListViewModel.shouldAddTask.subscribe { event in
-            if let shouldAddTask = event.element, shouldAddTask {
-                self.viewModel.delegate?
-                    .willAddTask(selectedTags: self.tagCollectionViewController.viewModel.selectedTags)
-                }
-        }.disposed(by: disposeBag)
+        taskListViewModel.shouldAddTask
+            .subscribe(onNext: { shouldAddTask in
+            	if shouldAddTask {
+                	let selectedTags = self.viewModel.tagCollectionViewModel.selectedTags
+                    // TODO: Refactor this to fit into architecture
+                	self.viewModel.delegate?.homeScreenViewModel(self.viewModel,
+                                                             willAddTaskWithSelectedTags: selectedTags)
+            	}
+        	})
+            .disposed(by: disposeBag)
         
-        taskListViewModel.shouldEditTask.subscribe() { task in
-            if let task = task.element {
-                self.viewModel.delegate?
-                    .will(edit: task)
-            }
-        }.disposed(by: disposeBag)
+        taskListViewModel.shouldEditTask
+            .subscribe(onNext: { task in
+                // TODO: Refactor this to fit into architecture
+            	self.viewModel.delegate?.homeScreenViewModel(self.viewModel, willEdit: task)
+        	})
+            .disposed(by: disposeBag)
         
-        taskListViewModel.tasksObservable.subscribe { event in
-            guard let tasks = event.element else { return }
-            DispatchQueue.main.async {
-                self.showEmptyState( tasks.flatMap { $0 }.isEmpty )
-            }
-        }.disposed(by: disposeBag)
+        taskListViewModel.tasksObservable
+            .subscribe(onNext: { tasks in
+            	DispatchQueue.main.async {
+                    self.showEmptyState( tasks.flatMap { $0 }.isEmpty )
+            	}
+        	})
+            .disposed(by: disposeBag)
     }
     
     fileprivate func observeClickedAddTag() {
-        tagCollectionViewController.addTagEvent?.subscribe { _ in
-            self.viewModel.delegate?.willAddTag()
-        }.disposed(by: disposeBag)
+        // TODO Refactor this to fit into the architecture
+        tagCollectionViewController?.addTagEvent?
+            .subscribe { _ in
+            	self.viewModel.delegate?.homeScreenViewModelWillAddTag(self.viewModel)
+        	}
+            .disposed(by: disposeBag)
     }
     
     fileprivate func observeSelectedTags() {
-        tagCollectionViewController.viewModel.selectedTagsObservable
-            .subscribe { event in
-                guard let selectedTags = event.element else { return }
+        viewModel.tagCollectionViewModel.selectedTagsObservable
+            .subscribe(onNext: { selectedTags in
                 self.viewModel.updateSelectedTagsIfNeeded(selectedTags)
                 self.configureBigTitle()
-                let relatedTags = self.tagCollectionViewController.viewModel
-                    .filteredTags.filter { !selectedTags.contains($0) }
-                self.taskListViewController.viewModel
-                    .filterTasks(with: selectedTags,
-                                 relatedTags: relatedTags)
                 
-                if let activity = self.userActivity { self.updateUserActivityState(activity) }
+                let relatedTags = self.viewModel.tagCollectionViewModel.filteredTags.filter {
+                    !selectedTags.contains($0)
+                }
+                
+                self.viewModel.taskListViewModel.filterTasks(with: selectedTags, relatedTags: relatedTags)
+                
+                if let activity = self.userActivity {
+                    self.updateUserActivityState(activity)
+                }
+                
                 if !selectedTags.isEmpty {
                     Answers.logCustomEvent(withName: "filtered with tag",
                                            customAttributes: ["numberOfFilteredTags" : selectedTags.count])
                 }
-                
-            }.disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Empty State
@@ -173,12 +199,14 @@ class HomeScreenViewController: UIViewController {
     @IBOutlet weak var emptyStateOrLabel: UILabel!
     @IBOutlet weak var importFromRemindersButton: UIButton!
     
-    fileprivate func showEmptyState(_ bool: Bool) {
-        emptyStateSubtitleLabel.isHidden = !bool
-        emptyStateTitleLabel.isHidden = !bool
-        emptyStateImage.isHidden = !bool
+    fileprivate func showEmptyState(_ shouldShowEmptyState: Bool) {
+        emptyStateSubtitleLabel.isHidden = !shouldShowEmptyState
+        emptyStateTitleLabel.isHidden = !shouldShowEmptyState
+        emptyStateImage.isHidden = !shouldShowEmptyState
         
-        if bool && viewModel.delegate!.shouldShowImportFromRemindersOption() {
+        // TODO: Refactor this to fit into architecture
+        if shouldShowEmptyState,
+           viewModel.delegate?.homeScreenViewModelShouldShowImportFromRemindersOption(viewModel) ?? false {
             emptyStateOrLabel.isHidden = false
             importFromRemindersButton.isHidden = false
         } else {
@@ -188,7 +216,8 @@ class HomeScreenViewController: UIViewController {
     }
     
     @IBAction func didClickImportFromRemindersButton(_ sender: Any) {
-        viewModel.delegate?.importFromReminders()
+        // TODO: Refactor this to fit into architecture
+        viewModel.delegate?.homeScreenViewModelWillImportFromReminders(viewModel)
     }
     
     fileprivate func configureEmptyState() {
@@ -227,7 +256,7 @@ class HomeScreenViewController: UIViewController {
     @IBAction func didTapBigTitle(_ sender: Any) {
         if let tag = viewModel.selectedTags.first {
             UISelectionFeedbackGenerator().selectionChanged()
-            viewModel.unSelectBigTitle(tag: tag)
+            viewModel.deselectBigTitle(tag: tag)
             
             Answers.logCustomEvent(withName: "unselected tag on screen title")
         }
@@ -235,8 +264,9 @@ class HomeScreenViewController: UIViewController {
     
     @IBAction func didLongpressBigTitle(_ sender: Any) {
         if let tag = viewModel.selectedTags.first {
-            tagCollectionViewController.presentActionSheet(for: tag)
-            Answers.logCustomEvent(withName: "longpressed tag")
+            // TODO Refactor this to fit into architecture
+            tagCollectionViewController?.presentActionSheet(for: tag)
+            Answers.logCustomEvent(withName: "longpressed big title")
         }
     }
     

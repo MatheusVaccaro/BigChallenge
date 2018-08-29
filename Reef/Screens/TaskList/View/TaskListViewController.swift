@@ -40,6 +40,8 @@ public class TaskListViewController: UIViewController {
     // MARK: - ViewController Lifecycle
     override public func viewDidLoad() {
         super.viewDidLoad()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
         tableView.backgroundColor = UIColor.clear
         
         // config tableView to autolayout constraints to resize the tableCells height
@@ -81,7 +83,7 @@ public class TaskListViewController: UIViewController {
     }
     
     fileprivate func layout(cell: TaskTableViewCell, with indexPath: IndexPath) {
-        if viewModel.isCard(indexPath.section) {
+        if viewModel.isCardSection(indexPath.section) {
             cell.layout(with: .card)
         } else {
             cell.layout(with: .none)
@@ -243,17 +245,17 @@ extension TaskListViewController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10.5 + ( viewModel.hasHeaderIn(section) ? heightOfHeaderTag! : 0 )
+        return 10.5 + ( viewModel.hasHeaderInSection(section) ? heightOfHeaderTag! : 0 )
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return viewModel.isCard(section) ? 46 : 23
+        return viewModel.isCardSection(section) ? 46 : 23
     }
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: view.frame)
 
-        if viewModel.isCard(section) {
+        if viewModel.isCardSection(section) {
             let cardView = UIView(frame: headerView.bounds)
             var textHeader = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
             
@@ -278,7 +280,7 @@ extension TaskListViewController: UITableViewDelegate {
             return headerView
         } else {
             var xPosition: CGFloat = 0
-            for tag in viewModel.tags(forHeadersIn: section) {
+            for tag in viewModel.tags(forHeadersInSection: section) {
                 let header = textHeaderView(with: tag.title!, colored: tag.color)
                 header.frame.origin.x += xPosition
                 headerView.addSubview(header)
@@ -290,7 +292,7 @@ extension TaskListViewController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard viewModel.isCard(section) else { return nil }
+        guard viewModel.isCardSection(section) else { return nil }
         
         let footerView = UIView(frame: view.bounds)
         let cardView = UIView(frame: footerView.bounds)

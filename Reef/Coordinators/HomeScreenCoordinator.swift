@@ -13,15 +13,19 @@ import ReefKit
 class HomeScreenCoordinator: Coordinator {
     
     var childrenCoordinators: [Coordinator]
-    fileprivate let presenter: UINavigationController
+    private let presenter: UINavigationController
     
-    fileprivate var homeScreenViewController: HomeScreenViewController?
-    fileprivate var taskListViewController: TaskListViewController?
-    fileprivate var tagCollectionViewController: TagCollectionViewController?
-    fileprivate let remindersImporter: RemindersImporter
-    fileprivate var taskModel: TaskModel
-    fileprivate var tagModel: TagModel
-    fileprivate var selectedTags: [Tag]
+    private var homeScreenViewController: HomeScreenViewController?
+    private let remindersImporter: RemindersImporter
+    private var taskModel: TaskModel
+    private var tagModel: TagModel
+    private var selectedTags: [Tag]
+    
+    private let taskListViewModelType: TaskListViewModel.Type
+    private var taskListViewController: TaskListViewController?
+    
+    private let tagCollectionViewModelType: TagCollectionViewModel.Type
+    private var tagCollectionViewController: TagCollectionViewController?
     
     init(presenter: UINavigationController,
          taskModel: TaskModel,
@@ -33,26 +37,28 @@ class HomeScreenCoordinator: Coordinator {
         self.tagModel = tagModel
         self.selectedTags = selectedTags
         
+        self.tagCollectionViewModelType = TagCollectionViewModelImpl.self
+        self.taskListViewModelType = TaskListViewModelImpl.self
+        
         self.childrenCoordinators = []
         
-        self.remindersImporter =
-            RemindersImporter(taskModel: taskModel, tagModel: tagModel)
-        remindersImporter.importIfGranted()
+        self.remindersImporter = RemindersImporter(taskModel: taskModel, tagModel: tagModel)
+        self.remindersImporter.importIfGranted()
+        
         self.taskModel.delegate = self
     }
 
     func start() {
         let homeScreenViewController = HomeScreenViewController.instantiate()
-        let homeScreenViewModel = HomeScreenViewModel(taskModel: taskModel,
+        let homeScreenViewModel = HomeScreenViewModelImpl(taskModel: taskModel,
                                                       tagModel: tagModel,
-                                                      selectedTags: selectedTags)
+                                                      selectedTags: selectedTags,
+                                                      taskListViewModelType: taskListViewModelType,
+                                                      tagCollectionViewModelType: tagCollectionViewModelType)
         homeScreenViewController.viewModel = homeScreenViewModel
 
         homeScreenViewModel.delegate = self
         self.homeScreenViewController = homeScreenViewController
-        
-        // TODO: Reestructure HomeScreen according to the architecture
-        homeScreenViewModel.tagCollectionViewModelDelegate = self
         
         presenter.isNavigationBarHidden = true
         presenter.pushViewController(homeScreenViewController, animated: false)
@@ -105,24 +111,41 @@ extension HomeScreenCoordinator: CoordinatorDelegate {
 }
 
 extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
-    func shouldShowImportFromRemindersOption() -> Bool {
-        return !RemindersImporter.isImportingDefined
-    }
-    
-    func importFromReminders() {
-        remindersImporter.requestAndImport()
-    }
-    
-    func willAddTask(selectedTags: [Tag]) {
+    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
+                             willAddTaskWithSelectedTags selectedTags: [Tag]) {
         showNewTask(selectedTags: selectedTags)
     }
     
-    func willAddTag() {
+    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel, willEdit task: Task) {
+        showEditTask(task)
+    }
+    
+    func homeScreenViewModelWillAddTag(_ homeScreenViewModel: HomeScreenViewModel) {
         showNewTag()
     }
     
-    func will(edit task: Task) {
-        showEditTask(task)
+    func homeScreenViewModelWillImportFromReminders(_ homeScreenViewModel: HomeScreenViewModel) {
+        remindersImporter.requestAndImport()
+    }
+    
+    func homeScreenViewModelShouldShowImportFromRemindersOption(_ homeScreenViewModel: HomeScreenViewModel) -> Bool {
+        return !RemindersImporter.isImportingDefined
+    }
+    
+    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
+                             didInstantiate taskListViewModel: TaskListViewModel) {
+        let taskListVC = TaskListViewController.instantiate()
+        taskListVC.viewModel = taskListViewModel
+        homeScreenViewController?.setupTaskList(viewModel: taskListViewModel, viewController: taskListVC)
+    }
+    
+    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
+                             didInstantiate tagCollectionViewModel: TagCollectionViewModel) {
+        tagCollectionViewModel.delegate = self
+        
+        let tagCollectionVC = TagCollectionViewController.instantiate()
+        tagCollectionVC.viewModel = tagCollectionViewModel
+		homeScreenViewController?.setupTagCollection(viewModel: tagCollectionViewModel, viewController: tagCollectionVC)
     }
 }
 

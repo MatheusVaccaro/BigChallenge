@@ -7,35 +7,27 @@
 //
 
 import Foundation
-import ReefKit
-import ReefTableViewCell
 import RxSwift
 
 protocol TaskListViewModel {
-
-    var tasksObservable: BehaviorSubject<[[Task]]> { get set }
+    var tasksObservable: BehaviorSubject<([Task], [Task])> { get set }
     var taskCompleted: PublishSubject<Task> { get set }
     var shouldAddTask: PublishSubject<Bool> { get set }
     var shouldEditTask: PublishSubject<Task> { get set }
+    var showsCompletedTasks: Bool { get set }
+    var tasksToShow: [Task] { get }
     
-    var sections: [[Tag]] { get }
-    var tasks: [[Task]] { get }
+    var mainTasks: [Task] { get }
+    var secondaryTasks: [Task] { get }
+    var completedTasks: [Task] { get }
     var selectedTags: [Tag] { get }
-    var relatedTags: [Tag] { get }
-
-    var isShowingRecommendedSection: Bool { get }
-    var isShowingCard: Bool { get }
     
     var recommendedHeaderTitle: String { get }
     var section2HeaderTitle: String { get }
     
     init(model: TaskModel)
     
-    func task(for indexPath: IndexPath) -> Task
-    func tags(forHeadersInSection section: Int) -> [Tag]
-    func hasHeaderInSection(_ section: Int) -> Bool
-    func isCardSection(_ section: Int) -> Bool
-    func filterTasks(with selectedTags: [Tag], relatedTags: [Tag])
+    func filterTasks(with tags: [Tag])
     func taskCellViewModel(for task: Task) -> TaskCellViewModel
     func shouldGoToAddTask()
     func shouldGoToEdit(_ task: Task)

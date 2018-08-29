@@ -22,9 +22,6 @@
                                 <rect key="frame" x="8" y="231" width="359" height="547"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <segue destination="Cdx-VN-yjd" kind="embed" identifier="taskListSegue" id="LiI-kx-V3H"/>
-                                </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUe-Ak-aYb">
                                 <rect key="frame" x="0.0" y="114" width="375" height="87"/>
@@ -33,9 +30,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="87" id="gJB-vw-5rX"/>
                                 </constraints>
-                                <connections>
-                                    <segue destination="fc3-rz-cDg" kind="embed" identifier="tagCollectionSegue" id="h6S-Ve-BxX"/>
-                                </connections>
                             </containerView>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PrB-8h-Asu">
                                 <rect key="frame" x="8" y="61" width="66.666666666666671" height="36"/>
@@ -139,22 +133,6 @@
                 </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-69.599999999999994" y="-428.63568215892059"/>
-        </scene>
-        <!--TagCollection-->
-        <scene sceneID="Ew0-ZG-eSC">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="TagCollection" storyboardName="TagCollection" id="fc3-rz-cDg" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jJ4-bM-swg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="782" y="-473"/>
-        </scene>
-        <!--TaskList-->
-        <scene sceneID="suJ-aB-Okg">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="TaskList" storyboardName="TaskList" id="Cdx-VN-yjd" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4lU-jr-OBY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="756" y="-429"/>
         </scene>
     </scenes>
     <resources>
