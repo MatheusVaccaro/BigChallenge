@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ReefKit
 import RxSwift
 import RxCocoa
 
@@ -77,14 +78,13 @@ class TagCollectionViewModelImpl: TagCollectionViewModel {
         selectedTagEvent
             .subscribe { event in
                 guard let tag = event.element else { return }
-            
+                
                 if let index = self.selectedTags.index(of: tag) {
                     self.selectedTags.remove(at: index)
                 } else { self.selectedTags.append(tag) }
-
-                self.selectedTagsObservable.onNext(self.selectedTags)
                 
                 if self.filtering { self.filterTags(with: self.selectedTags) }
+                self.selectedTagsObservable.onNext(self.selectedTags)
             }.disposed(by: disposeBag)
     }
     
@@ -107,7 +107,7 @@ class TagCollectionViewModelImpl: TagCollectionViewModel {
                 self.tagsObservable.onNext(self.filteredTags)
             }.disposed(by: disposeBag)
     }
-
+    
     fileprivate func filterTags(with tags: [Tag]) {
         //no tag is selected, or
         //tag is selected, or
