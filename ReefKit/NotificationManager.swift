@@ -17,7 +17,7 @@ open class NotificationManager {
             let identifier = "\(task.id!)-date"
             let title = task.title!
             let threadIdentifier = "task"
-            addDateNotification(identifier, title, repeats, date, threadIdentifier)
+            addDateNotification(identifier, title, repeats, date, threadIdentifier, task.uuid)
         }
     }
     
@@ -29,7 +29,7 @@ open class NotificationManager {
             let identifier = "\(task.id!)-location"
             let title = task.title!
             let threadIdentifier = "task"
-            addLocationNotification(identifier, title, task.isArriving, region, threadIdentifier)
+            addLocationNotification(identifier, title, task.isArriving, region, threadIdentifier, task.uuid)
         }
     }
     
@@ -62,7 +62,7 @@ open class NotificationManager {
             for case let task as Task in tasks where !task.isCompleted {
                 let identifier = "\(task.id!)-\(tag.id!)-date"
                 let title = task.title!
-                addDateNotification(identifier, title, repeats, date, threadIdentifier, subtitle)
+                addDateNotification(identifier, title, repeats, date, threadIdentifier, task.uuid, subtitle)
             }
         }
         if let regionData = tag.regionData {
@@ -71,7 +71,7 @@ open class NotificationManager {
                     let identifier = "\(task.id!)-\(tag.id!)-location"
                     let title = task.title!
                     let arriving = tag.arriving
-                    addLocationNotification(identifier, title, arriving, region, threadIdentifier, subtitle)
+                    addLocationNotification(identifier, title, arriving, region, threadIdentifier, task.uuid, subtitle)
                 }
             }
         }
@@ -159,6 +159,7 @@ open class NotificationManager {
                                                    _ arriving: Bool,
                                                    _ region: CLRegion,
                                                    _ threadIdentifier: String,
+                                                   _ taskID: UUID,
                                                    _ subtitle: String? = nil,
                                                    _ repeats: Bool = false) {
         
@@ -168,7 +169,7 @@ open class NotificationManager {
         if let subtitle = subtitle {
             content.subtitle = subtitle
         }
-        content.categoryIdentifier = "taskNotification"
+        content.categoryIdentifier = "TASK_NOTIFICATION"
         content.threadIdentifier = threadIdentifier
         
         region.notifyOnEntry = arriving
@@ -186,6 +187,7 @@ open class NotificationManager {
                                                _ repeats: Bool,
                                                _ date: Date,
                                                _ threadIdentifier: String,
+                                               _ taskID: UUID,
                                                _ subtitle: String? = nil) {
         
         let content = UNMutableNotificationContent()
@@ -194,8 +196,9 @@ open class NotificationManager {
         if let subtitle = subtitle {
             content.subtitle = subtitle
         }
-        content.categoryIdentifier = "taskNotification"
+        content.categoryIdentifier = "TASK_NOTIFICATION"
         content.threadIdentifier = threadIdentifier
+        content.userInfo = ["TASK_ID" : taskID.uuidString]
         
         let dateComponents = Calendar.current.dateComponents([
             .year,
