@@ -44,38 +44,21 @@ public class TaskModel {
     
     public func delete(_ task: Task) {
         guard tasks.contains(task) else { print("could not delete \(task) "); return }
-        NotificationManager.removeLocationNotification(for: task) // TODO: move to notificationKit
-        NotificationManager.removeDateNotification(for: task)
         reefKit.delete(task)
     }
     
     public func createTask(with attributes: [TaskAttributes : Any]) -> Task {
         let task = reefKit.createTask(with: attributes)
-        updateNotifications(for: task)
         delegate?.taskModel(self, didCreate: task)
-        if let tags = task.tags?.allObjects as? [Tag] {
-            NotificationManager.addAllTagsNotifications(from: tags)
-        }
         return task
     }
     
     public func update(_ task: Task, with attributes: [TaskAttributes : Any]) {
         reefKit.update(task, with: attributes)
-        updateNotifications(for: task)
     }
     
     func taskWith(id: UUID) -> Task? {
         return tasks.first { $0.id! == id }
-    }
-    
-    fileprivate func updateNotifications(for task: Task) {
-        if task.isCompleted {
-            NotificationManager.removeLocationNotification(for: task)
-            NotificationManager.removeDateNotification(for: task)
-        } else {
-            NotificationManager.addLocationNotification(for: task)
-            NotificationManager.addDateNotification(for: task)
-        }
     }
 }
 
