@@ -1962,7 +1962,7 @@
 		22FEEA812133419500D8B049 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = D9KU92KK65;
 				INFOPLIST_FILE = ReefToday/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1973,8 +1973,10 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bigBeanie.finalChallenge.ReefToday;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bigBeanie.finalChallenge.ReefWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "df59295b-d3cb-4a7c-b84f-349b2e537d26";
+				PROVISIONING_PROFILE_SPECIFIER = ReefTodayDev;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1985,7 +1987,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = D9KU92KK65;
 				INFOPLIST_FILE = ReefToday/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1995,8 +1997,10 @@
 					"@executable_path/../../Frameworks",
 				);
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bigBeanie.finalChallenge.ReefToday;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bigBeanie.finalChallenge.ReefWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "138a5dd5-c081-4e61-87bb-e1f51949993f";
+				PROVISIONING_PROFILE_SPECIFIER = ReefTodayDist;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
