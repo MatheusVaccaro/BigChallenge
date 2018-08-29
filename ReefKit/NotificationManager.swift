@@ -15,7 +15,7 @@ open class NotificationManager {
     open class func addDateNotification(for task: Task, repeats: Bool = false) {
         if let date = task.dueDate {
             let identifier = "\(task.id!)-date"
-            let title = task.title ?? Strings.Notification.placeholderTitle
+            let title = task.title!
             addDateNotification(identifier, title, repeats, date)
         }
     }
@@ -26,7 +26,7 @@ open class NotificationManager {
         
         if let region = NSKeyedUnarchiver.unarchiveObject(with: regionData) as? CLCircularRegion {
             let identifier = "\(task.id!)-location"
-            let title = task.title ?? Strings.Notification.placeholderTitle
+            let title = task.title!
             addLocationNotification(identifier, title, task.isArriving, region)
         }
     }
@@ -133,6 +133,21 @@ open class NotificationManager {
     open class func updateTagNotifications(for tag: Tag) {
         removeAllNotifications(from: tag)
         addAllTagNotifications(from: tag)
+    }
+    
+    /** Update all notifications from a tag */
+    open class func updateTagsNotifications(for tags: [Tag]) {
+        for tag in tags {
+            updateTagNotifications(for: tag)
+        }
+    }
+    
+    /** Update all notifications from a tag */
+    open class func removeAllTagsNotifications(for task: Task) {
+        for tag in task.allTags {
+            removeSpecificDateNotification(from: tag, task: task)
+            removeSpecificLocationNotification(from: tag, task: task)
+        }
     }
     
     fileprivate class func addLocationNotification(_ identifier: String,
