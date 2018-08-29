@@ -9,23 +9,6 @@
 import Foundation
 import ReefKit
 
-protocol HomeScreenViewModelDelegate: class {
-    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
-                             willAddTaskWithSelectedTags selectedTags: [Tag])
-    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel, willEdit task: Task)
-    
-    func homeScreenViewModelWillImportFromReminders(_ homeScreenViewModel: HomeScreenViewModel)
-    
-    func homeScreenViewModelShouldShowImportFromRemindersOption(_ homeScreenViewModel: HomeScreenViewModel) -> Bool
-    
-    func homeScreenViewModelWillAddTag(_ homeScreenViewModel: HomeScreenViewModel)
-    
-    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
-                             didInstantiate taskListViewModel: TaskListViewModel)
-    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
-                             didInstantiate tagCollectionViewModel: TagCollectionViewModel)
-}
-
 class HomeScreenViewModelImpl: HomeScreenViewModel {
     
     private(set) var selectedTags: [Tag]
