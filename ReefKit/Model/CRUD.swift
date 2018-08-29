@@ -222,6 +222,7 @@ public class TagCRUD {
     }
     
     func delete(_ tag: Tag) {
+        NotificationManager.removeAllNotifications(from: tag)
         persistence.delete(tag)
     }
     
