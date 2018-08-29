@@ -16,7 +16,8 @@ open class NotificationManager {
         if let date = task.dueDate {
             let identifier = "\(task.id!)-date"
             let title = task.title!
-            addDateNotification(identifier, title, repeats, date)
+            let threadIdentifier = "task"
+            addDateNotification(identifier, title, repeats, date, threadIdentifier)
         }
     }
     
@@ -27,7 +28,8 @@ open class NotificationManager {
         if let region = NSKeyedUnarchiver.unarchiveObject(with: regionData) as? CLCircularRegion {
             let identifier = "\(task.id!)-location"
             let title = task.title!
-            addLocationNotification(identifier, title, task.isArriving, region)
+            let threadIdentifier = "task"
+            addLocationNotification(identifier, title, task.isArriving, region, threadIdentifier)
         }
     }
     
@@ -54,27 +56,29 @@ open class NotificationManager {
     /** Add date and location notification for all tasks of a tag */
     open class func addAllTagNotifications(from tag: Tag, repeats: Bool = false) {
         guard let tasks = tag.tasks else { return }
+        let subtitle = tag.title!
+        let threadIdentifier = tag.id!.uuidString
         if let date = tag.dueDate {
             for case let task as Task in tasks where !task.isCompleted {
                 let identifier = "\(task.id!)-\(tag.id!)-date"
                 let title = task.title!
-                addDateNotification(identifier, title, repeats, date)
+                addDateNotification(identifier, title, repeats, date, threadIdentifier, subtitle)
             }
         }
         if let regionData = tag.regionData {
             if let region = NSKeyedUnarchiver.unarchiveObject(with: regionData) as? CLCircularRegion {
                 for case let task as Task in tasks where !task.isCompleted {
-                    let identifier = "\(task.id!)-\(tag.id!)-date"
+                    let identifier = "\(task.id!)-\(tag.id!)-location"
                     let title = task.title!
                     let arriving = tag.arriving
-                    addLocationNotification(identifier, title, arriving, region)
+                    addLocationNotification(identifier, title, arriving, region, threadIdentifier, subtitle)
                 }
             }
         }
     }
     
     /** Add date and location notification for all tasks of a tag */
-    open class func addAllTagsNotifications(from tags: [Tag], repeats: Bool = false) {
+    open class func addAllTagsNotifications(from tags: [Tag]) {
         for tag in tags {
             addAllTagNotifications(from: tag)
         }
@@ -154,8 +158,9 @@ open class NotificationManager {
                                                    _ title: String,
                                                    _ arriving: Bool,
                                                    _ region: CLRegion,
-                                                   _ repeats: Bool = false,
-                                                   _ subtitle: String? = nil) {
+                                                   _ threadIdentifier: String,
+                                                   _ subtitle: String? = nil,
+                                                   _ repeats: Bool = false) {
         
         let content = UNMutableNotificationContent()
         content.title = title
@@ -164,6 +169,7 @@ open class NotificationManager {
             content.subtitle = subtitle
         }
         content.categoryIdentifier = "taskNotification"
+        content.threadIdentifier = threadIdentifier
         
         region.notifyOnEntry = arriving
         region.notifyOnExit = !arriving
@@ -179,6 +185,7 @@ open class NotificationManager {
                                                _ title: String,
                                                _ repeats: Bool,
                                                _ date: Date,
+                                               _ threadIdentifier: String,
                                                _ subtitle: String? = nil) {
         
         let content = UNMutableNotificationContent()
@@ -188,6 +195,7 @@ open class NotificationManager {
             content.subtitle = subtitle
         }
         content.categoryIdentifier = "taskNotification"
+        content.threadIdentifier = threadIdentifier
         
         let dateComponents = Calendar.current.dateComponents([
             .year,
