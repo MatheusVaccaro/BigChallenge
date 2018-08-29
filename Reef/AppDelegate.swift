@@ -73,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let postponeOneHour = UNNotificationAction(identifier: "postponeOneHour", title: "Postpone one hour", options: [])
         let postponeOneDay = UNNotificationAction(identifier: "postponeOneDay", title: "Postpone one day", options: [])
         
-        let taskNotification =  UNNotificationCategory(identifier: "taskNotification", actions: [completeAction, postponeOneHour, postponeOneDay], intentIdentifiers: [], options: [])
+        let taskNotification =  UNNotificationCategory(identifier: "TASK_NOTIFICATION", actions: [completeAction, postponeOneHour, postponeOneDay], intentIdentifiers: [], options: .customDismissAction)
         
         
         UNUserNotificationCenter.current().setNotificationCategories([taskNotification])
