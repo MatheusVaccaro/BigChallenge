@@ -32,6 +32,7 @@
 		222BFF9720EDB854001B6BBF /* RemindersImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222BFF9620EDB854001B6BBF /* RemindersImporter.swift */; };
 		22325A7720FBC3F100E5F8C6 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22325A7620FBC3F100E5F8C6 /* TagCollectionViewCell.swift */; };
 		22325A7920FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22325A7820FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift */; };
+		2241C39B213615AE001AAC28 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2241C39A213615AE001AAC28 /* CloudKit.framework */; };
 		22456D2920DC3BB000168894 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22456D2820DC3BB000168894 /* Date+Extension.swift */; };
 		2253179A20D147AD0065C9F9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2253179C20D147AD0065C9F9 /* Localizable.strings */; };
 		2255B3AC211295DD00F2F37C /* radiusMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2255B3AB211295DD00F2F37C /* radiusMapView.swift */; };
@@ -265,6 +266,8 @@
 		223C0BE020E4449C00CF39ED /* LocalPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPersistence.swift; sourceTree = "<group>"; };
 		223C0C0520E5293500CF39ED /* PersistenceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceProtocol.swift; sourceTree = "<group>"; };
 		223C0C0720E529D600CF39ED /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		2241C3992136157E001AAC28 /* Reef.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Reef.entitlements; sourceTree = "<group>"; };
+		2241C39A213615AE001AAC28 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		2241F36820ED08340069EFE9 /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		22456D2820DC3BB000168894 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		2253179820D145AD0065C9F9 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/TaskList.strings"; sourceTree = "<group>"; };
@@ -447,6 +450,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2241C39B213615AE001AAC28 /* CloudKit.framework in Frameworks */,
 				22FEEA91213344BD00D8B049 /* ReefTableViewCell.framework in Frameworks */,
 				EE3649E90DE055B9D5168F01 /* Pods_Reef.framework in Frameworks */,
 				22F23E81212E3E800064EE05 /* ReefKit.framework in Frameworks */,
@@ -779,6 +783,7 @@
 		45EE167F10EAE72CE5635B25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2241C39A213615AE001AAC28 /* CloudKit.framework */,
 				22FEEA9A213345BA00D8B049 /* RxSwift.framework */,
 				22F23E96212E3F1B0064EE05 /* RxSwift.framework */,
 				220D7C1C20D02E5E007EC0DD /* RxSwift.framework */,
@@ -928,6 +933,7 @@
 		C28DC91820B61CB6007F881A /* Reef */ = {
 			isa = PBXGroup;
 			children = (
+				2241C3992136157E001AAC28 /* Reef.entitlements */,
 				22F23E9A212E41550064EE05 /* PersistenceManager */,
 				C28DC91920B61CB6007F881A /* AppDelegate.swift */,
 				C21EAD0220B745E3005F0F85 /* Coordinators */,
@@ -1263,6 +1269,14 @@
 					};
 					C28DC91520B61CB6007F881A = {
 						CreatedOnToolsVersion = 9.3;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -2202,6 +2216,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Reef/Reef.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = D9KU92KK65;
 				INFOPLIST_FILE = "$(SRCROOT)/Reef/Resources/Info.plist";
@@ -2212,7 +2227,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bigBeanie.finalChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "23b529ed-b2f2-4db8-9f20-e4806f6e4e23";
+				PROVISIONING_PROFILE = "ef0bd235-d3b1-4d9f-a27b-1d4d350208b7";
 				PROVISIONING_PROFILE_SPECIFIER = finalChallengeDev;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 4.0;
@@ -2226,6 +2241,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Reef/Reef.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = D9KU92KK65;
@@ -2237,7 +2253,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bigBeanie.finalChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "78172e39-28ea-4cd8-a3d9-04eeb8a67eac";
+				PROVISIONING_PROFILE = "dd496f6a-d8f6-4996-9b34-3fda7919c6f7";
 				PROVISIONING_PROFILE_SPECIFIER = FinalChallengeDist;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_VERSION = 4.0;
