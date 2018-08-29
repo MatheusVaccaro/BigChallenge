@@ -22,7 +22,7 @@ class LocalPersistence: PersistenceProtocol {
        return persistentContainer.viewContext
     }()
     
-    weak var delegate: LocalPersistenceDelegate?
+    weak var delegate: PersistenceDelegate?
     
     // MARK: - LocalPersistence Lifecycle
     
@@ -138,17 +138,17 @@ class LocalPersistence: PersistenceProtocol {
         
         if let insertSet = userInfo[NSInsertedObjectsKey] as? NSSet,
             let insertArray = insertSet.allObjects as? [Storable] {
-            delegate?.localPersistence(self, didInsertObjects: insertArray)
+            delegate?.persistence(self, didInsertObjects: insertArray)
         }
         
         if let updateSet = userInfo[NSUpdatedObjectsKey] as? NSSet,
             let updateArray = updateSet.allObjects as? [Storable] {
-            delegate?.localPersistence(self, didUpdateObjects: updateArray)
+            delegate?.persistence(self, didUpdateObjects: updateArray)
         }
         
         if let deleteSet = userInfo[NSDeletedObjectsKey] as? NSSet,
             let deleteArray = deleteSet.allObjects as? [Storable] {
-            delegate?.localPersistence(self, didDeleteObjects: deleteArray)
+            delegate?.persistence(self, didDeleteObjects: deleteArray)
         }
     }
     
@@ -187,19 +187,4 @@ enum CoreDataError: Error {
     case couldNotSaveContext(reason: String)
     case couldNotDeleteObject(reason: String)
 //     swiftlint:enable all
-}
-
-// MARK: - LocalPersistence Delegate
-
-protocol LocalPersistenceDelegate: class {
-    func localPersistence(_ localPersistence: LocalPersistence, didInsertObjects objects: [Storable])
-    func localPersistence(_ localPersistence: LocalPersistence, didUpdateObjects objects: [Storable])
-    func localPersistence(_ localPersistence: LocalPersistence, didDeleteObjects objects: [Storable])
-    func willSaveContext(in localPersistence: LocalPersistence)
-    func didSaveContext(in localPersistence: LocalPersistence)
-}
-
-extension LocalPersistenceDelegate {
-    func willSaveContext(in localPersistence: LocalPersistence) { }
-    func didSaveContext(in localPersistence: LocalPersistence) { }
 }
