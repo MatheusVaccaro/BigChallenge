@@ -75,7 +75,7 @@ public class ReefKit {
 }
 
 extension ReefKit: PersistenceDelegate {
-    public func persistence(_ persistence: Persistence, didInsert objects: [Storable]) {
+    public func persistence(_ persistence: PersistenceProtocol, didInsertObjects objects: [Storable]) {
         if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {
             tasksDelegate?.reef(self, didInsertTasks: tasks)
         }
@@ -85,7 +85,7 @@ extension ReefKit: PersistenceDelegate {
         }
     }
     
-    public func persistence(_ persistence: Persistence, didUpdate objects: [Storable]) {
+    public func persistence(_ persistence: PersistenceProtocol, didUpdateObjects objects: [Storable]) {
         if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {
             tasksDelegate?.reef(self, didUpdateTasks: tasks)
         }
@@ -95,7 +95,7 @@ extension ReefKit: PersistenceDelegate {
         }
     }
     
-    public func persistence(_ persistence: Persistence, didDelete objects: [Storable]) {
+    public func persistence(_ persistence: PersistenceProtocol, didDeleteObjects objects: [Storable]) {
         if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {
             tasksDelegate?.reef(self, didDeleteTasks: tasks)
         }

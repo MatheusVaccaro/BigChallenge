@@ -74,7 +74,7 @@ class LocalPersistence: PersistenceProtocol {
         return object
     }
     
-    func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate? = nil, completion: (([T]) -> Void)) throws {
+    func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate? = nil, completion: @escaping (([T]) -> Void)) throws {
         let entityName = String(describing: model)
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         
@@ -186,5 +186,12 @@ enum CoreDataError: Error {
     case couldNotFetchObject(reason: String)
     case couldNotSaveContext(reason: String)
     case couldNotDeleteObject(reason: String)
-//     swiftlint:enable all
+    //     swiftlint:enable all
+}
+
+extension NSManagedObject: Storable {
+    public var uuid: UUID {
+        //swiftlint:disable:next force_cast
+        return value(forKey: "id") as! UUID
+    }
 }

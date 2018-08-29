@@ -50,7 +50,7 @@ public class Persistence: PersistenceProtocol {
         }
     }
     
-    public func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate? = nil, completion: (([T]) -> Void)) {
+    public func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate? = nil, completion: @escaping (([T]) -> Void)) {
         do {
             try localPersistence.fetch(model, predicate: predicate, completion: completion)
         } catch CoreDataError.couldNotFetchObject(let reason) {
