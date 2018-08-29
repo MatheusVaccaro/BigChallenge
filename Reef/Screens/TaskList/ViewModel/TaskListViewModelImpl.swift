@@ -151,6 +151,7 @@ public class TaskListViewModelImpl: TaskListViewModel {
         taskCompleted
             .subscribe(onNext: { task in
                 self.model.save(task) // model updated handles changing the arrays
+                Answers.logCustomEvent(withName: "completed task")
             })
             .disposed(by: disposeBag)
     }
