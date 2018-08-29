@@ -36,9 +36,9 @@ protocol TaskListViewModel {
     init(model: TaskModel)
     
     func task(for indexPath: IndexPath) -> Task
-    func tags(forHeadersIn section: Int) -> [Tag]
-    func hasHeaderIn(_ section: Int) -> Bool
-    func isCard(_ section: Int) -> Bool
+    func tags(forHeadersInSection section: Int) -> [Tag]
+    func hasHeaderInSection(_ section: Int) -> Bool
+    func isCardSection(_ section: Int) -> Bool
     func filterTasks(with selectedTags: [Tag], relatedTags: [Tag])
     func taskCellViewModel(for task: Task) -> TaskCellViewModel
     func shouldGoToAddTask()

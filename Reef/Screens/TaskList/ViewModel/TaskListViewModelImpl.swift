@@ -61,7 +61,7 @@ public class TaskListViewModelImpl: TaskListViewModel {
         return tasks[indexPath.section][indexPath.row]
     }
     
-    func tags(forHeadersIn section: Int) -> [Tag] {
+    func tags(forHeadersInSection section: Int) -> [Tag] {
         let index = isShowingRecommendedSection
             ? section-1
             : section
@@ -70,11 +70,11 @@ public class TaskListViewModelImpl: TaskListViewModel {
             .filter { !selectedTags.contains($0) }
     }
     
-    func hasHeaderIn(_ section: Int) -> Bool {
-        return !(section == 0 && !selectedTags.isEmpty && isCard(section))
+    func hasHeaderInSection(_ section: Int) -> Bool {
+        return !(section == 0 && !selectedTags.isEmpty && isCardSection(section))
     }
     
-    func isCard(_ section: Int) -> Bool {
+    func isCardSection(_ section: Int) -> Bool {
         return section == 0 && isShowingCard
     }
     
