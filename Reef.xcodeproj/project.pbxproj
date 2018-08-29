@@ -10,6 +10,7 @@
 		09FB5E14F92E45162642AB92 /* Pods_ReefKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E3B37A82203D5E380D0390 /* Pods_ReefKit.framework */; };
 		1627171020C8793900AA0024 /* BigChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1627170F20C8793900AA0024 /* BigChallengeTests.swift */; };
 		1627EBEDDA20D9C1EB6BC691 /* Pods_ReefTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 558C6AF329AB768E11815BB8 /* Pods_ReefTests.framework */; };
+		1629967C2135D407008144CE /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FDC13B210F809A008FA931 /* NotificationManager.swift */; };
 		16E8DDC9211205E8004F66D6 /* Barlow-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC6211205C6004F66D6 /* Barlow-Black.ttf */; };
 		16E8DDCB211205E8004F66D6 /* Barlow-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDB8211205C2004F66D6 /* Barlow-Bold.ttf */; };
 		16E8DDCE211205E8004F66D6 /* Barlow-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDBD211205C4004F66D6 /* Barlow-ExtraBoldItalic.ttf */; };
@@ -19,7 +20,6 @@
 		16EC4CCB2125207600B8256D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 16EC4CCD2125207600B8256D /* InfoPlist.strings */; };
 		16EC6CEA21065B2500797D9C /* TagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EC6CE921065B2500797D9C /* TagTests.swift */; };
 		16FDC139210BB237008FA931 /* NotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FDC138210BB237008FA931 /* NotificationTests.swift */; };
-		16FDC13C210F809A008FA931 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FDC13B210F809A008FA931 /* NotificationManager.swift */; };
 		220FE8782134388200127C3E /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BAD432108C22400E74AA9 /* Fonts.swift */; };
 		221BA8AF20F6991200BE2AC1 /* HomeScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221BA8AE20F6991200BE2AC1 /* HomeScreen.storyboard */; };
 		221BA8B320F69E5C00BE2AC1 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BA8B220F69E5C00BE2AC1 /* HomeScreenViewController.swift */; };
@@ -513,7 +513,6 @@
 		16FDC13A210F8080008FA931 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				16FDC13B210F809A008FA931 /* NotificationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -630,13 +629,6 @@
 			path = View/ViewModel;
 			sourceTree = "<group>";
 		};
-		2299F07720F6287F0074A834 /* Location */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Location;
-			sourceTree = "<group>";
-		};
 		22D84C5E210BEFE4004B8969 /* LocationInput */ = {
 			isa = PBXGroup;
 			children = (
@@ -673,6 +665,7 @@
 			isa = PBXGroup;
 			children = (
 				228BAD432108C22400E74AA9 /* Fonts.swift */,
+				16FDC13B210F809A008FA931 /* NotificationManager.swift */,
 				22F78C1E212F365F0036A4EB /* ReefKit.swift */,
 				22F23EA1212E46060064EE05 /* ReefSpotlight.swift */,
 				22270EF92120C07000695223 /* Recommender.swift */,
@@ -932,7 +925,6 @@
 				C21EAD0320B745FE005F0F85 /* Screens */,
 				C21EAD0920B74EE6005F0F85 /* Helpers */,
 				C21EAD0120B745B6005F0F85 /* Resources */,
-				2299F07720F6287F0074A834 /* Location */,
 				16FDC13A210F8080008FA931 /* Managers */,
 			);
 			path = Reef;
@@ -1558,6 +1550,7 @@
 				22F23E8D212E3EA70064EE05 /* Model.xcdatamodeld in Sources */,
 				22FA2872213048AF00FC74D3 /* LocationManager.swift in Sources */,
 				22F23E98212E40640064EE05 /* Colors.swift in Sources */,
+				1629967C2135D407008144CE /* NotificationManager.swift in Sources */,
 				22F23E93212E3EC30064EE05 /* TaskAndTagHelpers.swift in Sources */,
 				22F23E95212E3ECC0064EE05 /* PersistenceProtocol.swift in Sources */,
 			);
@@ -1619,7 +1612,6 @@
 				C29742CC211244F800A1D213 /* MoreOptionsViewModelProtocol.swift in Sources */,
 				C231119120FFC92800BCB000 /* NewTaskViewModelProtocol.swift in Sources */,
 				22D14A1E212CBBF500B15B98 /* ArrayExtension.swift in Sources */,
-				16FDC13C210F809A008FA931 /* NotificationManager.swift in Sources */,
 				C2DD9A3321114ADD00E9B89B /* MoreOptionsViewController.swift in Sources */,
 				22F23E9D212E43B30064EE05 /* Tag+Extension.swift in Sources */,
 				22325A7920FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift in Sources */,
