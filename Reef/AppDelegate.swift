@@ -69,9 +69,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setNotificationCategories() {
         
         //TODO: Localizate
-        let completeAction = UNNotificationAction(identifier: "complete", title: "Complete", options: [])
-        let postponeOneHour = UNNotificationAction(identifier: "postponeOneHour", title: "Postpone one hour", options: [])
-        let postponeOneDay = UNNotificationAction(identifier: "postponeOneDay", title: "Postpone one day", options: [])
+        let completeAction = UNNotificationAction(identifier: "COMPLETE", title: "Complete", options: [])
+        let postponeOneHour = UNNotificationAction(identifier: "POSTPONE_ONE_HOUR", title: "Postpone one hour", options: [])
+        let postponeOneDay = UNNotificationAction(identifier: "POSTPONE_ONE_DAY", title: "Postpone one day", options: [])
         
         let taskNotification =  UNNotificationCategory(identifier: "TASK_NOTIFICATION", actions: [completeAction, postponeOneHour, postponeOneDay], intentIdentifiers: [], options: .customDismissAction)
         
