@@ -89,8 +89,6 @@ class HomeScreenViewController: UIViewController {
         observeSelectedTags()
         observeClickedAddTag()
         userActivity = viewModel.userActivity
-        
-        UNUserNotificationCenter.current().delegate = self
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -275,16 +273,6 @@ class HomeScreenViewController: UIViewController {
     
     override func updateUserActivityState(_ activity: NSUserActivity) {
         viewModel.updateUserActivity(activity)
-    }
-}
-
-extension HomeScreenViewController: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler:
-        @escaping (UNNotificationPresentationOptions) -> Void) {
-        
-        completionHandler([.alert, .sound, .badge])
     }
 }
 
