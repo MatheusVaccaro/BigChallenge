@@ -14,6 +14,14 @@ protocol CreationFramePresentable {
     func didTapMoreOptionsButton(_ sender: UIButton)
 }
 
+protocol CreationFrameViewControllerDelegate: class {
+    func viewDidLoad(in viewController: CreationFrameViewController)
+}
+
+extension CreationFrameViewControllerDelegate {
+    func viewDidLoad(in viewController: CreationFrameViewController) { }
+}
+
 class CreationFrameViewController: UIViewController {
 
     typealias FrameContent = CreationFramePresentable & UIViewController
@@ -27,6 +35,8 @@ class CreationFrameViewController: UIViewController {
     private var pendingPageIndex: Int?
     private let disposeBag = DisposeBag()
     private var isShowingKeyboard = false
+    
+    weak var delegate: CreationFrameViewControllerDelegate?
     
     // MARK: - IBOutlets
     
@@ -43,8 +53,6 @@ class CreationFrameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        setupPageViewController()
-        disablePageViewControllerBounce()
         subscribeToEnableDoneButton()
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(CreationFrameViewController.keyboardWillShow),
@@ -52,6 +60,7 @@ class CreationFrameViewController: UIViewController {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(CreationFrameViewController.keyboardWillHide),
                                                name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        delegate?.viewDidLoad(in: self)
     }
     
     // MARK: - IBActions
@@ -71,48 +80,6 @@ class CreationFrameViewController: UIViewController {
     }
     
     // MARK: - Functions
-
-    private func setupPageViewController() {
-        let pageViewController = UIPageViewController(transitionStyle: .scroll,
-                                                      navigationOrientation: .horizontal,
-                                                      options: nil)
-        pageViewController.delegate = self
-        pageViewController.dataSource = self
-        self.pageViewController = pageViewController
-        
-        pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(pageViewController.view)
-        
-        NSLayoutConstraint.activate([
-            pageViewController.view
-                .leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            pageViewController.view
-                .trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            pageViewController.view
-                .topAnchor.constraint(equalTo: containerView.topAnchor),
-            pageViewController.view
-                .bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
-            ])
-        
-        guard let initialViewController = pages.first else { return }
-        currentPageIndex = 0
-        pageViewController.setViewControllers([initialViewController],
-                                               direction: .forward,
-                                               animated: true,
-                                               completion: nil)
-        
-        pageViewController.didMove(toParentViewController: self)
-    }
-    
-    private func disablePageViewControllerBounce() {
-        guard let pageViewController = pageViewController else { return }
-        for subview in pageViewController.view.subviews {
-            if let scrollView = subview as? UIScrollView {
-                scrollView.delegate = self
-                break
-            }
-        }
-    }
     
     private func subscribeToEnableDoneButton() {
         viewModel.doneButtonObservable.subscribe {
@@ -120,9 +87,18 @@ class CreationFrameViewController: UIViewController {
             }.disposed(by: disposeBag)
     }
     
-    func configurePageViewController(with pages: [FrameContent]) {
-        self.pages = pages
+    func setFrameContent(viewController: FrameContent) {
+        addChildViewController(viewController)
+        
+        containerView.addSubview(viewController.view)
+        
+        viewController.view.frame = view.bounds
+        viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        viewController.didMove(toParentViewController: self)
     }
+    
+    
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if !isShowingKeyboard {

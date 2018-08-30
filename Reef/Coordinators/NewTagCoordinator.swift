@@ -69,6 +69,7 @@ class NewTagCoordinator: Coordinator {
                                                                   tagModel: model)
         tagCreationFrameViewModel.delegate = self
         tagCreationFrameViewController.viewModel = tagCreationFrameViewModel
+        tagCreationFrameViewController.delegate = self
         self.tagCreationFrameViewController = tagCreationFrameViewController
 
         tagCreationFrameViewController.configurePageViewController(with: [createTagViewController,
@@ -104,4 +105,10 @@ extension NewTagCoordinator: CreationFrameViewModelDelegate {
         delegate?.shouldDeinitCoordinator(self)
     }
     
+}
+
+extension NewTagCoordinator: CreationFrameViewControllerDelegate {
+    func viewDidLoad(in viewController: CreationFrameViewController) {
+        viewController.setFrameContent(viewController: createTagViewController!)
+    }
 }

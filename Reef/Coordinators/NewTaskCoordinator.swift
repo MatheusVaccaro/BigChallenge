@@ -31,6 +31,11 @@ class NewTaskCoordinator: Coordinator {
     
     weak var delegate: CoordinatorDelegate?
     
+    
+    
+    var newTaskViewModel: NewTaskViewModel?
+    
+    
     init(task: Task? = nil,
          presenter: UINavigationController,
          taskModel: TaskModel,
@@ -50,20 +55,10 @@ class NewTaskCoordinator: Coordinator {
     }
     
     func start() {
-        // New Task
-        let newTaskViewController = NewTaskViewController.instantiate()
-        self.newTaskViewController = newTaskViewController
-
         let newTaskViewModel = NewTaskViewModel(task: task,
                                                 taskModel: taskModel)
-        
-        newTaskViewController.viewModel = newTaskViewModel
+        self.newTaskViewModel = newTaskViewModel
 
-        let tagCollectionViewModel = TagCollectionViewModelImpl(model: tagModel,
-                                                            filtering: false,
-                                                            selectedTags: selectedTags)
-        newTaskViewController.tagCollectionViewModel = tagCollectionViewModel
-        
         // More Options
         let moreOptionsViewController = MoreOptionsViewController.instantiate()
         
@@ -94,6 +89,7 @@ class NewTaskCoordinator: Coordinator {
                                                                 taskModel: taskModel)
         creationFrameViewModel.delegate = self
         creationFrameViewController.viewModel = creationFrameViewModel
+        creationFrameViewController.delegate = self
         self.taskFrameViewController = creationFrameViewController
         
         //edit
@@ -102,9 +98,8 @@ class NewTaskCoordinator: Coordinator {
             creationFrameViewModel.doneButtonObservable.onNext(true)
         }
         
-        creationFrameViewController
-            .configurePageViewController(with: [newTaskViewController, moreOptionsViewController])
-
+        
+        
         // Modal Presenter
         let modalPresenter = UINavigationController(rootViewController: creationFrameViewController)
         modalPresenter.isNavigationBarHidden = true
@@ -160,5 +155,22 @@ extension NewTaskCoordinator: CreationFrameViewModelDelegate {
 extension NewTaskCoordinator: CoordinatorDelegate {
     func shouldDeinitCoordinator(_ coordinator: Coordinator) {
         releaseChild(coordinator: coordinator)
+    }
+}
+
+extension NewTaskCoordinator: CreationFrameViewControllerDelegate {
+    func viewDidLoad(in viewController: CreationFrameViewController) {
+        let newTaskViewController = NewTaskViewController.instantiate()
+        self.newTaskViewController = newTaskViewController
+        
+        
+        newTaskViewController.viewModel = newTaskViewModel
+        
+        let tagCollectionViewModel = TagCollectionViewModel(model: tagModel,
+                                                            filtering: false,
+                                                            selectedTags: selectedTags)
+        newTaskViewController.tagCollectionViewModel = tagCollectionViewModel
+        
+        viewController.setFrameContent(viewController: newTaskViewController)
     }
 }
