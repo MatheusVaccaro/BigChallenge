@@ -80,6 +80,7 @@ class TaskCRUD {
             task.isArriving = isArriving
         }
         updateNotifications(for: task)
+        NotificationManager.addAllTagsNotifications(from: task.allTags)
         return task
     }
     
