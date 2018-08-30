@@ -28,48 +28,6 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "22656929212F718F009714BC"
-               BuildableName = "Persistence.framework"
-               BlueprintName = "Persistence"
-               ReferencedContainer = "container:Reef.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "22F23E6B212E3E7F0064EE05"
-               BuildableName = "ReefKit.framework"
-               BlueprintName = "ReefKit"
-               ReferencedContainer = "container:Reef.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "22FEEA89213344BD00D8B049"
-               BuildableName = "ReefTableViewCell.framework"
-               BlueprintName = "ReefTableViewCell"
-               ReferencedContainer = "container:Reef.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "22FEEA732133419500D8B049"
                BuildableName = "ReefToday.appex"
                BlueprintName = "ReefToday"
