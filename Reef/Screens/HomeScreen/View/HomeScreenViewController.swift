@@ -10,6 +10,7 @@ import UIKit
 import Crashlytics
 import RxCocoa
 import RxSwift
+import UserNotifications
 
 class HomeScreenViewController: UIViewController {
     

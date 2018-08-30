@@ -79,7 +79,8 @@ class TaskCRUD {
             task.regionData = regionData
             task.isArriving = isArriving
         }
-        
+        updateNotifications(for: task)
+        NotificationManager.addAllTagsNotifications(from: task.allTags)
         return task
     }
     
@@ -98,7 +99,6 @@ class TaskCRUD {
         }
         if let isCompleted = attributes[.isCompleted] as? Bool {
             task.isCompleted = isCompleted
-            //TODO: update notification
         }
         if let notes = attributes[.notes] as? String {
             task.notes = notes
@@ -108,6 +108,7 @@ class TaskCRUD {
         }
         if let tags = attributes[.tags] as? [Tag] {
             task.tags = NSSet(array: tags)
+            NotificationManager.addAllTagsNotifications(from: task.allTags)
         }
         
         if let region = attributes[.region] as? CLCircularRegion {
@@ -120,6 +121,8 @@ class TaskCRUD {
         if let isPinned = attributes[.isPinned] as? Bool {
             task.isPinned = isPinned
         }
+        
+        updateNotifications(for: task)
     }
     
     func save(_ task: Task) {
@@ -127,7 +130,20 @@ class TaskCRUD {
     }
     
     func delete(_ task: Task) {
+        NotificationManager.removeLocationNotification(for: task)
+        NotificationManager.removeDateNotification(for: task)
+        NotificationManager.removeAllTagsNotifications(for: task)
         persistence.delete(task)
+    }
+    
+    fileprivate func updateNotifications(for task: Task) {
+        if task.isCompleted {
+            NotificationManager.removeLocationNotification(for: task)
+            NotificationManager.removeDateNotification(for: task)
+        } else {
+            NotificationManager.addLocationNotification(for: task)
+            NotificationManager.addDateNotification(for: task)
+        }
     }
 }
 
@@ -207,6 +223,7 @@ public class TagCRUD {
     }
     
     func delete(_ tag: Tag) {
+        NotificationManager.removeAllNotifications(from: tag)
         persistence.delete(tag)
     }
     
