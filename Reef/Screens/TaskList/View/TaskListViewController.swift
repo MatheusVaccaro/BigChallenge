@@ -12,6 +12,7 @@ import RxCocoa
 import RxDataSources
 import ReefKit
 import ReefTableViewCell
+import UserNotifications
 
 struct SectionedTaskModel {
     var items: [Task]
@@ -57,6 +58,7 @@ public class TaskListViewController: UIViewController {
         tableView.estimatedSectionFooterHeight = 46
                 
         bindTableView()
+        UNUserNotificationCenter.current().delegate = self
     }
     
     public override func viewDidAppear(_ animated: Bool) {
@@ -306,6 +308,46 @@ extension TaskListViewController: UITableViewDelegate {
         footerView.addSubview(cardView)
         
         return footerView
+    }
+}
+
+extension TaskListViewController: UNUserNotificationCenterDelegate {
+    public func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler:
+        @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        completionHandler([.alert, .sound, .badge])
+    }
+    
+    public func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        let userInfo = response.notification.request.content.userInfo
+        guard let taskID = userInfo["TASK_ID"] as? String else {
+            completionHandler()
+            return
+        }
+        
+        let taskUUID = UUID(uuidString: taskID)
+        
+        switch response.actionIdentifier {
+        case "COMPLETE":
+            print("Complete action")
+            
+        case "POSTPONE_ONE_HOUR":
+            print("Postpone one hour action")
+            
+        case "POSTPONE_ONE_DAY":
+            print("Postpone one day action")
+            
+        default:
+            break
+        }
+        
+        completionHandler()
     }
 }
 
