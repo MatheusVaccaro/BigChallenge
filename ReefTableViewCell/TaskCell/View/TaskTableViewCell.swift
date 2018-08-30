@@ -58,6 +58,7 @@ public class TaskTableViewCell: UITableViewCell {
         taskTitleTextView.textContainer.lineFragmentPadding = 0
         
         //TODO: Reef Font extension
+        selectionStyle = .none
         taskTitleTextView.font = UIFont.font(sized: 19, weight: .medium, with: .body)
         tagsLabel.font = UIFont.font(sized: 14, weight: .regular, with: .footnote)
     }

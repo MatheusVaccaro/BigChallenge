@@ -21,8 +21,7 @@ public class ReefKit {
         self.persistence = Persistence(configuration: .inDevice)
         self.taskCRUD = TaskCRUD(persistence: persistence)
         self.tagCRUD = TagCRUD(persistence: persistence)
-        persistence.tasksDelegate = self
-        persistence.tagsDelegate = self
+        persistence.delegate = self
     }
     
     public static func recommendedTasks(from tasks: [Task]) -> [Task] {
@@ -75,31 +74,35 @@ public class ReefKit {
     }
 }
 
-extension ReefKit: TagsPersistenceDelegate {
-    public func persistence(_ persistence: Persistence, didInsertTags tags: [Tag]) {
-        tagsDelegate?.reef(self, didInsertTags: tags)
-    }
-    
-    public func persistence(_ persistence: Persistence, didUpdateTags tags: [Tag]) {
-        tagsDelegate?.reef(self, didUpdateTags: tags)
-    }
-    
-    public func persistence(_ persistence: Persistence, didDeleteTags tags: [Tag]) {
-        tagsDelegate?.reef(self, didDeleteTags: tags)
-    }
-}
+extension ReefKit: PersistenceDelegate {
+    public func persistence(_ persistence: PersistenceProtocol, didInsertObjects objects: [Storable]) {
+        if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {
+            tasksDelegate?.reef(self, didInsertTasks: tasks)
+        }
 
-extension ReefKit: TasksPersistenceDelegate {
-    public func persistence(_ persistence: Persistence, didInsertTasks tasks: [Task]) {
-        tasksDelegate?.reef(self, didInsertTasks: tasks)
+        if let tags = (objects.filter { $0 is Tag }) as? [Tag], !tags.isEmpty {
+            tagsDelegate?.reef(self, didInsertTags: tags)
+        }
     }
     
-    public func persistence(_ persistence: Persistence, didUpdateTasks tasks: [Task]) {
-        tasksDelegate?.reef(self, didUpdateTasks: tasks)
+    public func persistence(_ persistence: PersistenceProtocol, didUpdateObjects objects: [Storable]) {
+        if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {
+            tasksDelegate?.reef(self, didUpdateTasks: tasks)
+        }
+        
+        if let tags = (objects.filter { $0 is Tag }) as? [Tag], !tags.isEmpty {
+            tagsDelegate?.reef(self, didUpdateTags: tags)
+        }
     }
     
-    public func persistence(_ persistence: Persistence, didDeleteTasks tasks: [Task]) {
-        tasksDelegate?.reef(self, didDeleteTasks: tasks)
+    public func persistence(_ persistence: PersistenceProtocol, didDeleteObjects objects: [Storable]) {
+        if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {
+            tasksDelegate?.reef(self, didDeleteTasks: tasks)
+        }
+        
+        if let tags = (objects.filter { $0 is Tag }) as? [Tag], !tags.isEmpty {
+            tagsDelegate?.reef(self, didDeleteTags: tags)
+        }
     }
 }
 

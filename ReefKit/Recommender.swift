@@ -53,7 +53,7 @@ public class Recommender {
         
         latestTasks = Array(
             toDo
-                .filter { !nextTasks.contains($0) }
+                .filter { !nextTasks.contains($0) && $0.creationDate!.timeIntervalSinceNow > -129.600 }
                 .sorted { $0.creationDate! > $1.creationDate! }
                 .prefix(latestTasksLimit)
         )
