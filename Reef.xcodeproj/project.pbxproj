@@ -154,6 +154,13 @@
 			remoteGlobalIDString = C28DC91520B61CB6007F881A;
 			remoteInfo = BigChallenge;
 		};
+		224BF7622139752900EA3596 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C28DC90E20B61CB6007F881A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22FEEA89213344BD00D8B049;
+			remoteInfo = ReefTableViewCell;
+		};
 		2265692F212F718F009714BC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C28DC90E20B61CB6007F881A /* Project object */;
@@ -1188,6 +1195,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				224BF7632139752900EA3596 /* PBXTargetDependency */,
 			);
 			name = ReefToday;
 			productName = ReefToday;
@@ -1689,6 +1697,11 @@
 			isa = PBXTargetDependency;
 			target = C28DC91520B61CB6007F881A /* Reef */;
 			targetProxy = 1627171220C8793900AA0024 /* PBXContainerItemProxy */;
+		};
+		224BF7632139752900EA3596 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22FEEA89213344BD00D8B049 /* ReefTableViewCell */;
+			targetProxy = 224BF7622139752900EA3596 /* PBXContainerItemProxy */;
 		};
 		22656930212F718F009714BC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
