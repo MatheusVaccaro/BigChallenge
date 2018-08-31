@@ -48,7 +48,9 @@ class ApplicationCoordinator: Coordinator {
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         showTaskList()
+        #if RELEASE
         startFabric()
+        #endif
         UITextField.appearance().keyboardAppearance = .light
     }
     
