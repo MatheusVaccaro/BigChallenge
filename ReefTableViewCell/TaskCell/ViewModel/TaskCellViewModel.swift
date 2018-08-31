@@ -49,15 +49,13 @@ public class TaskCellViewModel {
     }
     
     func changeTextTitle(to title: String) {
-        let attributes: [TaskAttributes : Any] = [.title: title]
+//        let attributes: [TaskAttributes : Any] = [.title: title]
 //        taskModel.update(task, with: attributes)
 //        taskModel.save(task)
     }
     
     func changedCheckButton(to bool: Bool) {
-        let attributes: [TaskAttributes : Any] = [.isCompleted: bool,
-                                                        .completionDate: Date()]
-        task.isCompleted = true
+        task.isCompleted = true //TODO: refactor
         task.completionDate = Date()
         
         taskObservable.onNext(task)

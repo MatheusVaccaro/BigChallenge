@@ -105,7 +105,11 @@ public class TaskListViewModelImpl: TaskListViewModel {
             
             flatTasks = flatTasks.filter { !tasksInSection.contains($0) } //remove from flattask to improve performance?
             
-            if tasksInSection.isEmpty { sections.remove(at: sections.index(of: tags)! ) }
+            if tasksInSection.isEmpty {
+                if let index = sections.index(of: tags) {
+                    sections.remove(at: index)
+                }
+            }
             tasks.append(tasksInSection)
         }
         

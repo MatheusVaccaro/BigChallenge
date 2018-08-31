@@ -34,6 +34,8 @@
 		22325A7920FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22325A7820FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift */; };
 		2241C39B213615AE001AAC28 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2241C39A213615AE001AAC28 /* CloudKit.framework */; };
 		22456D2920DC3BB000168894 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22456D2820DC3BB000168894 /* Date+Extension.swift */; };
+		224BF7652139772200EA3596 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224BF7642139772200EA3596 /* TodayViewModel.swift */; };
+		224BF7662139776F00EA3596 /* ReefTableViewCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FEEA8A213344BD00D8B049 /* ReefTableViewCell.framework */; };
 		2253179A20D147AD0065C9F9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2253179C20D147AD0065C9F9 /* Localizable.strings */; };
 		2255B3AC211295DD00F2F37C /* radiusMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2255B3AB211295DD00F2F37C /* radiusMapView.swift */; };
 		2255B3AE2113209800F2F37C /* LocationInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2255B3AD2113209800F2F37C /* LocationInputViewModel.swift */; };
@@ -143,6 +145,7 @@
 		C2C79D2D2123E7D70058F228 /* DateInputViewModel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C79D2C2123E7D70058F228 /* DateInputViewModel+Extension.swift */; };
 		C2DD9A28210D262D00E9B89B /* CreationFrameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DD9A27210D262D00E9B89B /* CreationFrameViewController.swift */; };
 		C2DD9A3321114ADD00E9B89B /* MoreOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DD9A3221114ADD00E9B89B /* MoreOptionsViewController.swift */; };
+		D1C16B3C3B80B9F3541EBA95 /* Pods_ReefToday.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B8EC753602DF26165A1745 /* Pods_ReefToday.framework */; };
 		D407DDD9BE3E0DF75EB26FC1 /* Pods_ReefTableViewCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1BB95B15A7B6F4F726F8BC9 /* Pods_ReefTableViewCell.framework */; };
 		EE3649E90DE055B9D5168F01 /* Pods_Reef.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8708FC5A67C933F755CB93 /* Pods_Reef.framework */; };
 /* End PBXBuildFile section */
@@ -161,6 +164,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 22FEEA89213344BD00D8B049;
 			remoteInfo = ReefTableViewCell;
+		};
+		224BF76721397D9000EA3596 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C28DC90E20B61CB6007F881A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22F23E6B212E3E7F0064EE05;
+			remoteInfo = ReefKit;
 		};
 		2265692F212F718F009714BC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -228,6 +238,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		10BB1786FDDE9BB5FC17D885 /* Pods-ReefToday.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefToday.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReefToday/Pods-ReefToday.debug.xcconfig"; sourceTree = "<group>"; };
 		1627170D20C8793900AA0024 /* ReefTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReefTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1627170F20C8793900AA0024 /* BigChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigChallengeTests.swift; sourceTree = "<group>"; };
 		1627171120C8793900AA0024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -279,6 +290,8 @@
 		2241C39A213615AE001AAC28 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		2241F36820ED08340069EFE9 /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		22456D2820DC3BB000168894 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		224BF7642139772200EA3596 /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
+		224BF7692139838E00EA3596 /* ReefToday.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReefToday.entitlements; sourceTree = "<group>"; };
 		2253179820D145AD0065C9F9 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/TaskList.strings"; sourceTree = "<group>"; };
 		2253179920D145AE0065C9F9 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		2253179B20D147AD0065C9F9 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -352,6 +365,7 @@
 		2D020A78B9BEB6EB771DFE12 /* Pods-Reef.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reef.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Reef/Pods-Reef.debug.xcconfig"; sourceTree = "<group>"; };
 		308B4012DD4C0AC91265A4DF /* Pods-ReefTableViewCell.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefTableViewCell.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReefTableViewCell/Pods-ReefTableViewCell.debug.xcconfig"; sourceTree = "<group>"; };
 		32F8AC4AA847D00A2CB492DF /* Pods_ReefTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReefTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3779A7FC0B59E497558D16B4 /* Pods-ReefToday.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefToday.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReefToday/Pods-ReefToday.release.xcconfig"; sourceTree = "<group>"; };
 		3B2823E64B1FC7A4411311AA /* Pods-ReefUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReefUITests/Pods-ReefUITests.release.xcconfig"; sourceTree = "<group>"; };
 		558C6AF329AB768E11815BB8 /* Pods_ReefTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReefTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65E3B37A82203D5E380D0390 /* Pods_ReefKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReefKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -362,6 +376,7 @@
 		9DB7A8532F97476DD9B7C724 /* Pods-ReefTableViewCell.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefTableViewCell.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReefTableViewCell/Pods-ReefTableViewCell.release.xcconfig"; sourceTree = "<group>"; };
 		9F87A6CB4388F73CB0FDA3A1 /* Pods-ReefTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReefTests/Pods-ReefTests.release.xcconfig"; sourceTree = "<group>"; };
 		A18C9FEFF01841372B83A1C4 /* Pods_ReefUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReefUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7B8EC753602DF26165A1745 /* Pods_ReefToday.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReefToday.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB08D99D8EA8EBF32B46628D /* Pods-Reef.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reef.release.xcconfig"; path = "Pods/Target Support Files/Pods-Reef/Pods-Reef.release.xcconfig"; sourceTree = "<group>"; };
 		C1BB95B15A7B6F4F726F8BC9 /* Pods_ReefTableViewCell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReefTableViewCell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C21EACFF20B741BC005F0F85 /* HomeScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenCoordinator.swift; sourceTree = "<group>"; };
@@ -444,7 +459,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				22FEEA842133429A00D8B049 /* ReefKit.framework in Frameworks */,
+				224BF7662139776F00EA3596 /* ReefTableViewCell.framework in Frameworks */,
 				22FEEA762133419500D8B049 /* NotificationCenter.framework in Frameworks */,
+				D1C16B3C3B80B9F3541EBA95 /* Pods_ReefToday.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -723,7 +740,9 @@
 		22FEEA772133419500D8B049 /* ReefToday */ = {
 			isa = PBXGroup;
 			children = (
+				224BF7692139838E00EA3596 /* ReefToday.entitlements */,
 				22FEEA782133419500D8B049 /* TodayViewController.swift */,
+				224BF7642139772200EA3596 /* TodayViewModel.swift */,
 				22FEEA7A2133419500D8B049 /* MainInterface.storyboard */,
 				22FEEA7D2133419500D8B049 /* Info.plist */,
 			);
@@ -808,6 +827,7 @@
 				22FA286221303A5B00FC74D3 /* QuickLook.framework */,
 				22FEEA752133419500D8B049 /* NotificationCenter.framework */,
 				C1BB95B15A7B6F4F726F8BC9 /* Pods_ReefTableViewCell.framework */,
+				A7B8EC753602DF26165A1745 /* Pods_ReefToday.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -825,6 +845,8 @@
 				CBEDB2B28E4B9B9C40FB7E0A /* Pods-ReefKit.release.xcconfig */,
 				308B4012DD4C0AC91265A4DF /* Pods-ReefTableViewCell.debug.xcconfig */,
 				9DB7A8532F97476DD9B7C724 /* Pods-ReefTableViewCell.release.xcconfig */,
+				10BB1786FDDE9BB5FC17D885 /* Pods-ReefToday.debug.xcconfig */,
+				3779A7FC0B59E497558D16B4 /* Pods-ReefToday.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1191,6 +1213,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22FEEA832133419500D8B049 /* Build configuration list for PBXNativeTarget "ReefToday" */;
 			buildPhases = (
+				9D457EBD14CEB345CE43307D /* [CP] Check Pods Manifest.lock */,
 				22FEEA702133419500D8B049 /* Sources */,
 				22FEEA712133419500D8B049 /* Frameworks */,
 				22FEEA722133419500D8B049 /* Resources */,
@@ -1198,6 +1221,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				224BF76821397D9000EA3596 /* PBXTargetDependency */,
 				224BF7632139752900EA3596 /* PBXTargetDependency */,
 			);
 			name = ReefToday;
@@ -1278,6 +1302,11 @@
 					};
 					22FEEA732133419500D8B049 = {
 						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					22FEEA89213344BD00D8B049 = {
 						CreatedOnToolsVersion = 10.0;
@@ -1285,6 +1314,9 @@
 					C28DC91520B61CB6007F881A = {
 						CreatedOnToolsVersion = 9.3;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -1488,6 +1520,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9D457EBD14CEB345CE43307D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ReefToday-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B82CD480A753E33953458C3C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1607,6 +1657,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				224BF7652139772200EA3596 /* TodayViewModel.swift in Sources */,
 				22FEEA792133419500D8B049 /* TodayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1706,6 +1757,11 @@
 			isa = PBXTargetDependency;
 			target = 22FEEA89213344BD00D8B049 /* ReefTableViewCell */;
 			targetProxy = 224BF7622139752900EA3596 /* PBXContainerItemProxy */;
+		};
+		224BF76821397D9000EA3596 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22F23E6B212E3E7F0064EE05 /* ReefKit */;
+			targetProxy = 224BF76721397D9000EA3596 /* PBXContainerItemProxy */;
 		};
 		22656930212F718F009714BC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2012,7 +2068,9 @@
 		};
 		22FEEA812133419500D8B049 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 10BB1786FDDE9BB5FC17D885 /* Pods-ReefToday.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ReefToday/ReefToday.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = D9KU92KK65;
 				INFOPLIST_FILE = ReefToday/Info.plist;
@@ -2028,17 +2086,19 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = ReefTodayDev;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		22FEEA822133419500D8B049 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3779A7FC0B59E497558D16B4 /* Pods-ReefToday.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ReefToday/ReefToday.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = D9KU92KK65;
 				INFOPLIST_FILE = ReefToday/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2049,9 +2109,9 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bigBeanie.finalChallenge.ReefWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = ReefTodayDist;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

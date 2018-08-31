@@ -14,7 +14,7 @@ class Authentication {
     static func authenticate(completion: @escaping ((Bool) -> Void)) {
         let context = LAContext()
         var error: NSError?
-        let reason = "Authenticate with Touch ID"
+        let reason = "Unlock to select private tag" //TODO; localize
         
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
