@@ -71,7 +71,7 @@ class TagCollectionViewController: UIViewController {
             
             if item.isSelected {
                 if self.viewModel.shouldAskForAuthentication(with: tag) {
-                    AuthenticationView.auth { sucess in
+                    Authentication.authenticate { sucess in
                         if sucess { self.viewModel.select(tag) }
                         else {
                             DispatchQueue.main.async {
