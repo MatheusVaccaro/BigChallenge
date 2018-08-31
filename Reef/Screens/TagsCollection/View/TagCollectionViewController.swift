@@ -43,10 +43,6 @@ class TagCollectionViewController: UIViewController {
         }
     }
     
-    struct Item {
-        var tag: Tag?
-    }
-    
     func bindCollectionView() {
         viewModel.tagsObservable
             .map {
@@ -64,19 +60,28 @@ class TagCollectionViewController: UIViewController {
                 
         }.disposed(by: disposeBag)
         
-        tagsCollectionView.rx.modelSelected(Item.self).subscribe { event in
-            guard let tag = event.element?.tag else {
-                self.addTagEvent?.onNext(true)
-                return
+        tagsCollectionView.rx.itemSelected.subscribe { event in
+            let indexPath = event.element!
+            UISelectionFeedbackGenerator().selectionChanged()
+            guard let item =
+                self.tagsCollectionView.cellForItem(at: indexPath) as? TagCollectionViewCell else { return }
+            guard item.kind == .tag, let tag = item.viewModel?.tag else {
+                    self.addTagEvent?.onNext(true); return
             }
-            UISelectionFeedbackGenerator().selectionChanged()
-            self.viewModel.selectedTagEvent.onNext(tag)
-        }.disposed(by: disposeBag)
-        
-        tagsCollectionView.rx.modelDeselected(Item.self).subscribe { event in
-            guard let tag = event.element?.tag else { return }
-            UISelectionFeedbackGenerator().selectionChanged()
-            self.viewModel.selectedTagEvent.onNext(tag)
+            
+            if item.isSelected {
+                if self.viewModel.shouldAskForAuthentication(with: tag) {
+                    AuthenticationView.auth { sucess in
+                        if sucess { self.viewModel.select(tag) }
+                        else {
+                            DispatchQueue.main.async {
+                                self.tagsCollectionView.deselectItem(at: indexPath, animated: true)
+                            }
+                        }
+                    }
+                } else { self.viewModel.select(tag) }
+            } else { self.viewModel.select(tag) }
+            
         }.disposed(by: disposeBag)
     }
     
@@ -116,8 +121,7 @@ class TagCollectionViewController: UIViewController {
                                           animated: animated,
                                           scrollPosition: UICollectionViewScrollPosition.bottom)
         } else {
-            tagsCollectionView.deselectItem(at: index,
-                                            animated: animated)
+            tagsCollectionView.deselectItem(at: index, animated: animated)
         }
     }
     

@@ -35,7 +35,7 @@ class TagCollectionViewModelImpl: TagCollectionViewModel {
     
     required init(model: TagModel, filtering: Bool, selectedTags: [Tag]) {
         self.model = model
-        self.tags = model.tags
+        self.tags = model.tags.map { if $0.title! == "Olar" { $0.requiresAuthentication = true; return $0 } else { return $0 } }
         self.selectedTags = []
         self.filteredTags = self.tags
         self.filtering = filtering
@@ -44,7 +44,6 @@ class TagCollectionViewModelImpl: TagCollectionViewModel {
         selectedTagsObservable = BehaviorSubject<[Tag]>(value: selectedTags)
         selectedTagEvent = PublishSubject<Tag>()
         
-        subscribeToSelectedTag()
         subscribeToModel()
         for tag in selectedTags { selectedTagEvent.onNext(tag) }
     }
@@ -74,18 +73,19 @@ class TagCollectionViewModelImpl: TagCollectionViewModel {
         return tags.filter { selectedTags.isEmpty ? true : selectedTags.first != $0 }
     }
     
-    fileprivate func subscribeToSelectedTag() {
-        selectedTagEvent
-            .subscribe { event in
-                guard let tag = event.element else { return }
-                
-                if let index = self.selectedTags.index(of: tag) {
-                    self.selectedTags.remove(at: index)
-                } else { self.selectedTags.append(tag) }
-                
-                if self.filtering { self.filterTags(with: self.selectedTags) }
-                self.selectedTagsObservable.onNext(self.selectedTags)
-            }.disposed(by: disposeBag)
+    func shouldAskForAuthentication(with tag: Tag) -> Bool {
+        return tag.requiresAuthentication && filtering
+    }
+    
+    func select(_ tag: Tag) {
+        if let index = selectedTags.index(of: tag) { selectedTags.remove(at: index) }
+        else { selectedTags.append(tag) }
+        updateAfterTagSelected()
+    }
+    
+    fileprivate func updateAfterTagSelected() {
+        if filtering { filterTags(with: selectedTags) }
+        selectedTagsObservable.onNext(selectedTags)
     }
     
     fileprivate func subscribeToModel() {
