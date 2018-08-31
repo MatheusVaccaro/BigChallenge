@@ -39,6 +39,7 @@ class TodayViewModel {
     
     func completed(_ task: Task) {
         if let index = tasks.index(of: task) {
+            reef.save(task)
             tasks.remove(at: index)
             delegate?.removedTasks(at: index)
         }
