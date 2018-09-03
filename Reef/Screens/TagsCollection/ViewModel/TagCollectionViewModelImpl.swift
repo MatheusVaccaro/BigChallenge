@@ -15,7 +15,6 @@ class TagCollectionViewModelImpl: TagCollectionViewModel {
     
     var tagsObservable: BehaviorSubject<[Tag]>
     var selectedTagsObservable: BehaviorSubject<[Tag]>
-    private(set) var selectedTagEvent: PublishSubject<Tag>
     
     var presentingActionSheet: Bool = false
     
@@ -35,17 +34,15 @@ class TagCollectionViewModelImpl: TagCollectionViewModel {
     
     required init(model: TagModel, filtering: Bool, selectedTags: [Tag]) {
         self.model = model
-        self.tags = model.tags.map { if $0.title! == "Olar" { $0.requiresAuthentication = true; return $0 } else { return $0 } }
-        self.selectedTags = []
+        self.tags = model.tags.map { if $0.title! == "Olar" { $0.requiresAuthentication = true; return $0 } else { return $0 } } //TODO: remove
+        self.selectedTags = selectedTags
         self.filteredTags = self.tags
         self.filtering = filtering
         
         tagsObservable = BehaviorSubject<[Tag]>(value: tags)
         selectedTagsObservable = BehaviorSubject<[Tag]>(value: selectedTags)
-        selectedTagEvent = PublishSubject<Tag>()
         
         subscribeToModel()
-        for tag in selectedTags { selectedTagEvent.onNext(tag) }
     }
     
     func tagCollectionCellViewModel(for tag: Tag) -> TagCollectionViewCellViewModel {
