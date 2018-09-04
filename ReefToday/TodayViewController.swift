@@ -58,9 +58,7 @@ extension TodayViewController: UITableViewDataSource {
         
         cellViewModel.taskObservable.subscribe { event in
             if let task = event.element {
-                if task.isCompleted {
-                    self.viewModel.completed(task)
-                }
+                self.viewModel.completed(task)
             }
             }.disposed(by: disposeBag)
         

@@ -82,6 +82,7 @@ extension TaskModel: ReefTaskDelegate {
             guard !self.tasks.contains(task) else { continue }
             self.tasks.append(task)
         }
+        self.recommended = ReefKit.recommendedTasks(from: self.tasks)
         self.didUpdateTasks.onNext(self.tasks)
     }
     
@@ -93,6 +94,7 @@ extension TaskModel: ReefTaskDelegate {
                 recommended[index] = task
             }
         }
+        self.recommended = ReefKit.recommendedTasks(from: self.tasks)
         self.didUpdateTasks.onNext(self.tasks)
     }
     
@@ -101,6 +103,7 @@ extension TaskModel: ReefTaskDelegate {
             if let index = tasks.index(of: task) { self.tasks.remove(at: index) }
             if let index = recommended.index(of: task) { recommended.remove(at: index) }
         }
+        self.recommended = ReefKit.recommendedTasks(from: self.tasks)
         didUpdateTasks.onNext(tasks)
     }
 }
