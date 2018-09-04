@@ -2,7 +2,7 @@
 use_frameworks!
 
 target 'Reef' do
-	platform :ios, '11.0'
+    platform :ios, '11.0'
 
     pod 'RxSwift',    '~> 4.0'
     pod 'RxCocoa',    '~> 4.0'
@@ -15,25 +15,21 @@ target 'Reef' do
 end
 
 target 'ReefKit' do
+    platform :ios, '11.0'
     pod 'RxSwift',    '~>4.0'
 end
 
 target 'ReefTableViewCell' do
+    platform :ios, '11.0'
     pod 'RxSwift', '~>4.0'
 end
 
 target 'ReefToday' do
+    platform :ios, '11.0'
     pod 'RxSwift',    '~>4.0'
 end
 
-# RxTest and RxBlocking make the most sense in the context of unit/integration tests
-# target 'YOUR_TESTING_TARGET' do
-#     pod 'RxBlocking', '~> 4.0'
-#     pod 'RxTest',     '~> 4.0'
-# end
-
 def testing_pods
-    platform :ios, '11.0'
     pod 'Quick'
     pod 'Nimble'
     pod 'RxCocoa', '~> 4.0'
@@ -41,5 +37,6 @@ def testing_pods
 end
 
 target 'ReefTests' do
+    platform :ios, '11.0'
     testing_pods
 end
