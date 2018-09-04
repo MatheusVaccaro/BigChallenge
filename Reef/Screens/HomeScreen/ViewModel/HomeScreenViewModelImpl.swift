@@ -51,15 +51,12 @@ class HomeScreenViewModelImpl: HomeScreenViewModel {
     }()
     
     var bigTitleText: String {
-        if let tag = selectedTags.first {
-            return tag.title!
-        } else {
-            return Strings.HomeScreen.title
-        }
-    }
-    
-    func deselectBigTitle(tag: Tag) {
-        tagCollectionViewModel.select(tag)
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateFormat = "d MMM"
+        let title = dateFormatter.string(from: Date())
+        
+        return title
     }
     
     fileprivate var userActivityTitle: String {

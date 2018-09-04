@@ -48,7 +48,6 @@ protocol HomeScreenViewModel: class {
          taskListViewModelType: TaskListViewModel.Type,
          tagCollectionViewModelType: TagCollectionViewModel.Type)
     
-    func deselectBigTitle(tag: Tag)
     func updateSelectedTagsIfNeeded(_ tags: [Tag]?)
     func updateUserActivity(_ activity: NSUserActivity)
 }
