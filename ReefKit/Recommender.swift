@@ -25,7 +25,7 @@ public class Recommender {
         let locationManager = LocationManager()
         
         var toDo = tasks
-            .filter { !$0.isCompleted }
+            .filter { !$0.isCompleted && !$0.isPrivate }
         
         toDo = toDo.filter {
             if $0.isPinned { pinnedTasks.append($0); return false }
