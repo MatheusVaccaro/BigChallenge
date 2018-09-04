@@ -40,6 +40,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         tableView.register(UINib(nibName: "TaskCell", bundle: Bundle(identifier: "com.Wide.ReefTableViewCell")),
                            forCellReuseIdentifier: TaskTableViewCell.identifier)
         tableView.dataSource = self
+        tableView.separatorStyle = .none
     }
     
 }

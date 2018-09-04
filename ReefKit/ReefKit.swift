@@ -45,6 +45,7 @@ public class ReefKit {
     }
     public func save(_ task: Task) {
         taskCRUD.save(task)
+        Recommender.reset()
     }
     public func delete(_ task: Task) {
         ReefSpotlight.deindex(task: task)
@@ -67,6 +68,7 @@ public class ReefKit {
     }
     public func save(_ tag: Tag) {
         tagCRUD.save(tag)
+        Recommender.reset()
     }
     public func delete(_ tag: Tag) {
         ReefSpotlight.deindex(tag: tag)

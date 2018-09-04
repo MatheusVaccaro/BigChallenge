@@ -89,10 +89,6 @@ extension TaskModel: ReefTaskDelegate {
     public func reef(_ reefKit: ReefKit, didUpdateTasks tasks: [Task]) {
         for task in tasks {
             if let index = self.tasks.index(of: task) { self.tasks[index] = task }
-            if let index = recommended.index(of: task) {
-                if task.isCompleted { recommended.remove(at: index); continue }
-                recommended[index] = task
-            }
         }
         self.recommended = ReefKit.recommendedTasks(from: self.tasks)
         self.didUpdateTasks.onNext(self.tasks)
