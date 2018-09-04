@@ -25,7 +25,7 @@ public class Recommender {
         let locationManager = LocationManager()
         
         var toDo = tasks
-            .filter { !$0.isCompleted }
+            .filter { !$0.isCompleted && !$0.isPrivate }
         
         toDo = toDo.filter {
             if $0.isPinned { pinnedTasks.append($0); return false }
@@ -53,7 +53,10 @@ public class Recommender {
         
         latestTasks = Array(
             toDo
-                .filter { !nextTasks.contains($0) && $0.creationDate!.timeIntervalSinceNow > -129.600 }
+                .filter {
+                    print($0.creationDate!.timeIntervalSinceNow)
+                    print($0.title!)
+                    return !nextTasks.contains($0) && $0.creationDate!.timeIntervalSinceNow > -129600 }
                 .sorted { $0.creationDate! > $1.creationDate! }
                 .prefix(latestTasksLimit)
         )

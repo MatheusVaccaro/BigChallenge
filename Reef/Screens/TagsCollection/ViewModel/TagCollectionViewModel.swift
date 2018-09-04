@@ -10,6 +10,10 @@ import Foundation
 import ReefKit
 import RxSwift
 
+struct Item {
+    var tag: Tag?
+}
+
 protocol TagCollectionViewModelDelegate: class {
     func willUpdate(tag: Tag)
 }
@@ -17,7 +21,6 @@ protocol TagCollectionViewModelDelegate: class {
 protocol TagCollectionViewModel: class {
     var tagsObservable: BehaviorSubject<[Tag]> { get set }
     var selectedTagsObservable: BehaviorSubject<[Tag]> { get set }
-    var selectedTagEvent: PublishSubject<Tag> { get }
     var presentingActionSheet: Bool { get set }
     
     var tags: [Tag] { get }
@@ -32,14 +35,11 @@ protocol TagCollectionViewModel: class {
     var delegate: TagCollectionViewModelDelegate? { get set }
     
     init(model: TagModel, filtering: Bool, selectedTags: [Tag])
-    
+    func shouldAskForAuthentication(with tag: Tag) -> Bool
+    func select(_ tag: Tag)
     func tagCollectionCellViewModel(for tag: Tag) -> TagCollectionViewCellViewModel
-    
     func delete(tag: Tag)
-    
     func update(tag: Tag)
-    
     func sortMostTasksIn(_ tags: [Tag]) -> [Tag]
-    
     func removeBigTitleTag(_ tags: [Tag]) -> [Tag]
 }

@@ -14,15 +14,28 @@ class LocalPersistence: PersistenceProtocol {
     // MARK: - Properties
     
     // This property is internal because MockPersistence needs to set it inside its init()
-    internal var persistentContainer: NSPersistentContainer
+    var persistentContainer: NSPersistentContainer?
     
     private var notificationCenter = NotificationCenter.default
     
-    private lazy var viewContext = {
-       return persistentContainer.viewContext
+    private lazy var viewContext: NSManagedObjectContext = {
+        return persistentContainer!.viewContext
     }()
     
     weak var delegate: PersistenceDelegate?
+    
+    lazy var applicationDocumentsDirectory: URL = {
+        return FileManager.default
+            .containerURL(forSecurityApplicationGroupIdentifier: "group.com.Beanie.Reef")!
+            .appendingPathComponent("Reef.sqlite")
+    }()
+    
+    private lazy var model: NSManagedObjectModel = {
+        let customKitBundle = Bundle(identifier: "com.Wide.ReefKit")!
+        let modelURL = customKitBundle.url(forResource: "Model", withExtension: "momd")!
+        
+        return NSManagedObjectModel(contentsOf: modelURL)!
+    }()
     
     // MARK: - LocalPersistence Lifecycle
     
@@ -31,11 +44,14 @@ class LocalPersistence: PersistenceProtocol {
             /* This property is optional since there are legitimate
              error conditions that could cause the creation of the store to fail.
              */
-            let customKitBundle = Bundle(identifier: "com.Wide.ReefKit")!
-            let modelURL = customKitBundle.url(forResource: "Model", withExtension: "momd")!
-            let model = NSManagedObjectModel(contentsOf: modelURL)!
             
             let container = NSPersistentContainer(name: "Model", managedObjectModel: model)
+            
+            let description = NSPersistentStoreDescription()
+            description.url = applicationDocumentsDirectory
+            
+            container.persistentStoreDescriptions = [description]
+            
             container.loadPersistentStores(completionHandler: { (storeDescription, error) in
                 if let error = error as NSError? {
                     // Replace this implementation with code to handle the error appropriately.

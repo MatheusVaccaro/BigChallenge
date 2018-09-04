@@ -63,6 +63,10 @@ public extension Task {
         return dates
     }
     
+    public var isPrivate: Bool {
+        return allTags.contains { $0.requiresAuthentication }
+    }
+    
     public func isInside(_ location: CLLocationCoordinate2D) -> Bool {
         for region in regions where region.contains( location ) { return true }
         return false

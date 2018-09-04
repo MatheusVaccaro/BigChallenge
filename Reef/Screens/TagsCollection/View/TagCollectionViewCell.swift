@@ -94,6 +94,7 @@ class TagCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with viewModel: TagCollectionViewCellViewModel? = nil) {
+        self.viewModel = viewModel
         
         guard let viewModel = viewModel else {
             configureDefault()
@@ -101,7 +102,6 @@ class TagCollectionViewCell: UICollectionViewCell {
         }
         
         addGestureRecognizer(longPressRecognizer)
-        self.viewModel = viewModel
         tagUILabel.text = viewModel.tagTitle
         maskLabel.text = viewModel.tagTitle
         gradientLayer.colors = viewModel.colors

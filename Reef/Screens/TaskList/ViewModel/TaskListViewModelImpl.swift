@@ -94,6 +94,15 @@ public class TaskListViewModelImpl: TaskListViewModel {
         var flatTasks = model.tasks
             .filter { !$0.isCompleted && (selectedTags.isEmpty ? !model.recommended.contains($0) : true) }
             .filter { for tag in selectedTags where !$0.tags!.contains(tag) { return false }; return true }
+            .filter {
+                let privateTags = selectedTags.filter { $0.requiresAuthentication }
+                // filter all privates if no private tag is selected
+                guard !privateTags.isEmpty else { return !$0.isPrivate }
+                
+                // filter only private tasks of tags that arent selected
+                for tag in privateTags { return tag.allTasks.contains($0) }
+                return false
+        }
         
         sections = relatedTags
             .powerSet
@@ -105,7 +114,11 @@ public class TaskListViewModelImpl: TaskListViewModel {
             
             flatTasks = flatTasks.filter { !tasksInSection.contains($0) } //remove from flattask to improve performance?
             
-            if tasksInSection.isEmpty { sections.remove(at: sections.index(of: tags)! ) }
+            if tasksInSection.isEmpty {
+                if let index = sections.index(of: tags) {
+                    sections.remove(at: index)
+                }
+            }
             tasks.append(tasksInSection)
         }
         

@@ -59,7 +59,7 @@ class HomeScreenViewModelImpl: HomeScreenViewModel {
     }
     
     func deselectBigTitle(tag: Tag) {
-        tagCollectionViewModel.selectedTagEvent.onNext(tag)
+        tagCollectionViewModel.select(tag)
     }
     
     fileprivate var userActivityTitle: String {
