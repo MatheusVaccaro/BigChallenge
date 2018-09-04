@@ -78,7 +78,7 @@ class TagCreationFrameViewModel: CreationFrameViewModelProtocol {
     
     private func createTagIfPossible() {
         guard canCreateTag else { return }
-        let _ = tagModel.createTag(with: tagAttributes)
+        _ = tagModel.createTag(with: tagAttributes)
     }
     
     private func updateTag() {

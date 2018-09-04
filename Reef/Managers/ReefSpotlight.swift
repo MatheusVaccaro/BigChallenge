@@ -93,7 +93,10 @@ class ReefSpotlight: NSObject {
 }
 
 extension ReefSpotlight: CSSearchableIndexDelegate {
-    func searchableIndex(_ searchableIndex: CSSearchableIndex, reindexAllSearchableItemsWithAcknowledgementHandler acknowledgementHandler: @escaping () -> Void) {
+    func searchableIndex(
+        _ searchableIndex: CSSearchableIndex,
+        reindexAllSearchableItemsWithAcknowledgementHandler acknowledgementHandler: @escaping () -> Void) {
+        
         let group = DispatchGroup()
         let dataStore = DispatchQueue(label: "dataStore")
         
@@ -109,7 +112,11 @@ extension ReefSpotlight: CSSearchableIndexDelegate {
         }
     }
     
-    func searchableIndex(_ searchableIndex: CSSearchableIndex, reindexSearchableItemsWithIdentifiers identifiers: [String], acknowledgementHandler: @escaping () -> Void) {
+    func searchableIndex(
+        _ searchableIndex: CSSearchableIndex,
+        reindexSearchableItemsWithIdentifiers identifiers: [String],
+        acknowledgementHandler: @escaping () -> Void) {
+        
         let group = DispatchGroup()
         let dataStore = DispatchQueue(label: "dataStore")
         

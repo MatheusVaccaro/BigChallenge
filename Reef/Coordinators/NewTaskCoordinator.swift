@@ -162,5 +162,3 @@ extension NewTaskCoordinator: CoordinatorDelegate {
         releaseChild(coordinator: coordinator)
     }
 }
-
-

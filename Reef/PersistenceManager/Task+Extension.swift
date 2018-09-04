@@ -9,7 +9,7 @@
 import Foundation
 import ReefKit
 
-extension Task {    
+extension Task {
     var notificationOptions: NotificationOptions {
         get {
             let frequency = NotificationOptions.Frequency(rawValue: self.frequency) ?? .none

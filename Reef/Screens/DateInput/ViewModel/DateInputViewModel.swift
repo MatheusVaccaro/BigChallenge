@@ -100,8 +100,10 @@ class DateInputViewModel: DateInputViewModelProtocol {
         let today = Date.now()
         guard let twoHoursFromNow = Calendar.current.date(byAdding: DateComponents(hour: 2), to: today) else { return }
         
-        let twoHoursFromNowDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: twoHoursFromNow)
-        let twoHoursFromNowTimeComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: twoHoursFromNow)
+        let twoHoursFromNowDateComponents = Calendar.current.dateComponents([.year, .month, .day],
+                                                                            from: twoHoursFromNow)
+        let twoHoursFromNowTimeComponents = Calendar.current.dateComponents([.hour, .minute, .second],
+                                                                            from: twoHoursFromNow)
         
         selectDate(twoHoursFromNowDateComponents)
         selectTimeOfDay(twoHoursFromNowTimeComponents)
@@ -111,7 +113,8 @@ class DateInputViewModel: DateInputViewModelProtocol {
         let today = Date.now()
         let todaysEvening = Calendar.current.date(bySettingHour: 20, minute: 0, second: 0, of: today)!
         
-        let date = today < todaysEvening ? todaysEvening : Calendar.current.date(byAdding: DateComponents(hour: 1), to: today)
+        let date = today < todaysEvening ? todaysEvening : Calendar.current.date(byAdding: DateComponents(hour: 1),
+                                                                                 to: today)
 
         guard let thisEvening = date else { return }
         

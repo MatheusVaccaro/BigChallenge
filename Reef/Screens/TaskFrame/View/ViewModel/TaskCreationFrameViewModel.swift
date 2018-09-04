@@ -136,8 +136,6 @@ extension TaskCreationFrameViewModel: NewTaskViewModelDelegate {
     func willAddTag() {
         delegate?.willAddTag()
     }
-    
-    
 }
 
 extension TaskCreationFrameViewModel: NewTaskViewModelOutputDelegate {
@@ -164,11 +162,13 @@ extension TaskCreationFrameViewModel: MoreOptionsViewModelDelegate {
         taskDueDate = date
     }
     
-    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectTimeOfDay timeOfDay: DateComponents) {
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
+                            didSelectTimeOfDay timeOfDay: DateComponents) {
         taskDueTimeOfDay = timeOfDay
     }
     
-    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectFrequency frequency: NotificationOptions.Frequency) {
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
+                            didSelectFrequency frequency: NotificationOptions.Frequency) {
         taskFrequency = frequency
     }
 }

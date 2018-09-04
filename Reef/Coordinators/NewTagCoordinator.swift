@@ -71,7 +71,8 @@ class NewTagCoordinator: Coordinator {
         tagCreationFrameViewController.viewModel = tagCreationFrameViewModel
         self.tagCreationFrameViewController = tagCreationFrameViewController
 
-        tagCreationFrameViewController.configurePageViewController(with: [createTagViewController, moreOptionsViewController])
+        tagCreationFrameViewController.configurePageViewController(with: [createTagViewController,
+                                                                          moreOptionsViewController])
         
         // Edit Mode
         if let tag = tag {
