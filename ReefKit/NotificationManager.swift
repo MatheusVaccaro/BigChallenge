@@ -154,6 +154,24 @@ open class NotificationManager {
         }
     }
     
+    
+    open class func postponeOneHour(request: UNNotificationRequest) {
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3600, repeats: false)
+        
+        let newRequest = UNNotificationRequest(identifier: request.identifier, content: request.content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(newRequest, withCompletionHandler: nil)
+    }
+    
+    open class func postponeOneDay(request: UNNotificationRequest) {
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 86400, repeats: false)
+        
+        let newRequest = UNNotificationRequest(identifier: request.identifier, content: request.content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(newRequest, withCompletionHandler: nil)
+    }
+    
     fileprivate class func addLocationNotification(_ identifier: String,
                                                    _ title: String,
                                                    _ arriving: Bool,
