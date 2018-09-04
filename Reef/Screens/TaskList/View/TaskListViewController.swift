@@ -336,15 +336,12 @@ extension TaskListViewController: UNUserNotificationCenterDelegate {
         
         switch response.actionIdentifier {
         case "COMPLETE":
-            print("Complete action")
             viewModel.completeTask(taskID: taskUUID)
             
         case "POSTPONE_ONE_HOUR":
-            print("Postpone one hour action")
             NotificationManager.postponeOneHour(request: response.notification.request)
             
         case "POSTPONE_ONE_DAY":
-            print("Postpone one day action")
             NotificationManager.postponeOneDay(request: response.notification.request)
             
         default:
