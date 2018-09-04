@@ -10,6 +10,8 @@
 		09FB5E14F92E45162642AB92 /* Pods_ReefKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E3B37A82203D5E380D0390 /* Pods_ReefKit.framework */; };
 		1627171020C8793900AA0024 /* BigChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1627170F20C8793900AA0024 /* BigChallengeTests.swift */; };
 		1627EBEDDA20D9C1EB6BC691 /* Pods_ReefTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 558C6AF329AB768E11815BB8 /* Pods_ReefTests.framework */; };
+		16294E38213F0B860092DEA2 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16294E37213F0B860092DEA2 /* TodayViewModel.swift */; };
+		16294E3A213F0C190092DEA2 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16294E39213F0C190092DEA2 /* Authentication.swift */; };
 		1629967C2135D407008144CE /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FDC13B210F809A008FA931 /* NotificationManager.swift */; };
 		16E8DDC9211205E8004F66D6 /* Barlow-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC6211205C6004F66D6 /* Barlow-Black.ttf */; };
 		16E8DDCB211205E8004F66D6 /* Barlow-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDB8211205C2004F66D6 /* Barlow-Bold.ttf */; };
@@ -109,6 +111,7 @@
 		29BA68A62120E147009B4AB9 /* Calendar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BA68A52120E147009B4AB9 /* Calendar+Extension.swift */; };
 		29BA68A821211754009B4AB9 /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BA68A721211754009B4AB9 /* CalendarHeaderView.swift */; };
 		29BEED5F2107E946008E2202 /* ImportDataPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BEED5E2107E946008E2202 /* ImportDataPacket.swift */; };
+		6110B268862E30431B395499 /* Pods_ReefToday.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3D5719BE4D8190FF95D6C87 /* Pods_ReefToday.framework */; };
 		8229D768F4B56D4F790756CD /* Pods_ReefTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32F8AC4AA847D00A2CB492DF /* Pods_ReefTests.framework */; };
 		C21EAD0020B741BC005F0F85 /* HomeScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EACFF20B741BC005F0F85 /* HomeScreenCoordinator.swift */; };
 		C21EAD0720B74757005F0F85 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD0620B74757005F0F85 /* TaskListViewController.swift */; };
@@ -230,6 +233,8 @@
 		1627170D20C8793900AA0024 /* ReefTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReefTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1627170F20C8793900AA0024 /* BigChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigChallengeTests.swift; sourceTree = "<group>"; };
 		1627171120C8793900AA0024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		16294E37213F0B860092DEA2 /* TodayViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
+		16294E39213F0C190092DEA2 /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Authentication.swift; path = Screens/Authentication.swift; sourceTree = "<group>"; };
 		1676FC8F20D99580003E2D79 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		16E8DDB6211205C1004F66D6 /* Barlow-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Barlow-ThinItalic.ttf"; sourceTree = "<group>"; };
 		16E8DDB7211205C2004F66D6 /* Barlow-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Barlow-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -255,6 +260,7 @@
 		16FDC138210BB237008FA931 /* NotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTests.swift; sourceTree = "<group>"; };
 		16FDC13B210F809A008FA931 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		1E128F2E25BA570ED73A4795 /* Pods_ReefUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReefUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EAEC118615E1724B631A7D9 /* Pods-ReefToday.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefToday.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReefToday/Pods-ReefToday.debug.xcconfig"; sourceTree = "<group>"; };
 		2207B3F2212ADB1800F26C55 /* TaskAndTagHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAndTagHelpers.swift; sourceTree = "<group>"; };
 		220D7C1C20D02E5E007EC0DD /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		221BA8AE20F6991200BE2AC1 /* HomeScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeScreen.storyboard; sourceTree = "<group>"; };
@@ -357,6 +363,7 @@
 		717F662667FED0B8BDFBAA0B /* Pods-ReefTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReefTests/Pods-ReefTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7184CCF59380519A67144175 /* Pods_Reef.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reef.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E8708FC5A67C933F755CB93 /* Pods_Reef.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reef.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		80FE837ABD65B31AB4D10AEB /* Pods-ReefToday.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefToday.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReefToday/Pods-ReefToday.release.xcconfig"; sourceTree = "<group>"; };
 		9DB7A8532F97476DD9B7C724 /* Pods-ReefTableViewCell.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefTableViewCell.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReefTableViewCell/Pods-ReefTableViewCell.release.xcconfig"; sourceTree = "<group>"; };
 		9F87A6CB4388F73CB0FDA3A1 /* Pods-ReefTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReefTests/Pods-ReefTests.release.xcconfig"; sourceTree = "<group>"; };
 		A18C9FEFF01841372B83A1C4 /* Pods_ReefUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReefUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -402,6 +409,7 @@
 		C2DD9A27210D262D00E9B89B /* CreationFrameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationFrameViewController.swift; sourceTree = "<group>"; };
 		C2DD9A3221114ADD00E9B89B /* MoreOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsViewController.swift; sourceTree = "<group>"; };
 		CBEDB2B28E4B9B9C40FB7E0A /* Pods-ReefKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReefKit/Pods-ReefKit.release.xcconfig"; sourceTree = "<group>"; };
+		F3D5719BE4D8190FF95D6C87 /* Pods_ReefToday.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReefToday.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -443,6 +451,7 @@
 			files = (
 				22FEEA842133429A00D8B049 /* ReefKit.framework in Frameworks */,
 				22FEEA762133419500D8B049 /* NotificationCenter.framework in Frameworks */,
+				6110B268862E30431B395499 /* Pods_ReefToday.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -722,6 +731,7 @@
 			isa = PBXGroup;
 			children = (
 				22FEEA782133419500D8B049 /* TodayViewController.swift */,
+				16294E37213F0B860092DEA2 /* TodayViewModel.swift */,
 				22FEEA7A2133419500D8B049 /* MainInterface.storyboard */,
 				22FEEA7D2133419500D8B049 /* Info.plist */,
 			);
@@ -806,6 +816,7 @@
 				22FA286221303A5B00FC74D3 /* QuickLook.framework */,
 				22FEEA752133419500D8B049 /* NotificationCenter.framework */,
 				C1BB95B15A7B6F4F726F8BC9 /* Pods_ReefTableViewCell.framework */,
+				F3D5719BE4D8190FF95D6C87 /* Pods_ReefToday.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -823,6 +834,8 @@
 				CBEDB2B28E4B9B9C40FB7E0A /* Pods-ReefKit.release.xcconfig */,
 				308B4012DD4C0AC91265A4DF /* Pods-ReefTableViewCell.debug.xcconfig */,
 				9DB7A8532F97476DD9B7C724 /* Pods-ReefTableViewCell.release.xcconfig */,
+				1EAEC118615E1724B631A7D9 /* Pods-ReefToday.debug.xcconfig */,
+				80FE837ABD65B31AB4D10AEB /* Pods-ReefToday.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -947,6 +960,7 @@
 				C28DC91920B61CB6007F881A /* AppDelegate.swift */,
 				C21EAD0220B745E3005F0F85 /* Coordinators */,
 				C21EAD0320B745FE005F0F85 /* Screens */,
+				16294E39213F0C190092DEA2 /* Authentication.swift */,
 				C21EAD0920B74EE6005F0F85 /* Helpers */,
 				C21EAD0120B745B6005F0F85 /* Resources */,
 				16FDC13A210F8080008FA931 /* Managers */,
@@ -1188,6 +1202,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22FEEA832133419500D8B049 /* Build configuration list for PBXNativeTarget "ReefToday" */;
 			buildPhases = (
+				AD3D1B43485F7F5A85FD823E /* [CP] Check Pods Manifest.lock */,
 				22FEEA702133419500D8B049 /* Sources */,
 				22FEEA712133419500D8B049 /* Frameworks */,
 				22FEEA722133419500D8B049 /* Resources */,
@@ -1230,10 +1245,10 @@
 				C28DC91320B61CB6007F881A /* Frameworks */,
 				C28DC91420B61CB6007F881A /* Resources */,
 				7B8A3E05277891C7E4FEF6D7 /* [CP] Embed Pods Frameworks */,
-				1628B48820C88A9E0038D65E /* Swift Lint Pod */,
-				226C31B62123BAC100BC5898 /* ShellScript */,
 				22F23E86212E3E800064EE05 /* Embed Frameworks */,
 				22FA2834212F7D0600FC74D3 /* Embed App Extensions */,
+				226C31B62123BAC100BC5898 /* Fabric Script */,
+				1628B48820C88A9E0038D65E /* Swift Lint Pod */,
 			);
 			buildRules = (
 			);
@@ -1425,7 +1440,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		226C31B62123BAC100BC5898 /* ShellScript */ = {
+		226C31B62123BAC100BC5898 /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1433,6 +1448,7 @@
 			inputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
+			name = "Fabric Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1479,6 +1495,24 @@
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-ReefTableViewCell-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AD3D1B43485F7F5A85FD823E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ReefToday-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1604,6 +1638,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16294E38213F0B860092DEA2 /* TodayViewModel.swift in Sources */,
 				22FEEA792133419500D8B049 /* TodayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1682,6 +1717,7 @@
 				222888D82117E5D90093EEF7 /* RadiusMapViewModel.swift in Sources */,
 				C2C231C120FD1AB2002A2371 /* NewTagViewModel.swift in Sources */,
 				C21EAD0720B74757005F0F85 /* TaskListViewController.swift in Sources */,
+				16294E3A213F0C190092DEA2 /* Authentication.swift in Sources */,
 				C29742D2211257A600A1D213 /* TimeTableViewCellViewModel.swift in Sources */,
 				221BA8B820F6A1DF00BE2AC1 /* TagCollectionViewController.swift in Sources */,
 				22F23E9B212E416C0064EE05 /* TaskModel.swift in Sources */,
@@ -1960,6 +1996,7 @@
 		22FA2859212F7E6E00FC74D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = D9KU92KK65;
@@ -1985,6 +2022,7 @@
 		22FA285A212F7E6E00FC74D3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = D9KU92KK65;
@@ -2008,7 +2046,9 @@
 		};
 		22FEEA812133419500D8B049 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1EAEC118615E1724B631A7D9 /* Pods-ReefToday.debug.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = D9KU92KK65;
 				INFOPLIST_FILE = ReefToday/Info.plist;
@@ -2024,14 +2064,16 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = ReefTodayDev;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		22FEEA822133419500D8B049 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 80FE837ABD65B31AB4D10AEB /* Pods-ReefToday.release.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = D9KU92KK65;
@@ -2048,7 +2090,7 @@
 				PROVISIONING_PROFILE = "138a5dd5-c081-4e61-87bb-e1f51949993f";
 				PROVISIONING_PROFILE_SPECIFIER = ReefTodayDist;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -2153,7 +2195,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -2170,7 +2212,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -2225,7 +2267,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

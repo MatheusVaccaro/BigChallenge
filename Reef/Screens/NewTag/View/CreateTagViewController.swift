@@ -64,7 +64,7 @@ class CreateTagViewController: UIViewController, CreationFramePresentable {
 
 // MARK: - UITextViewDelegate
 
-extension CreateTagViewController: UITextViewDelegate {    
+extension CreateTagViewController: UITextViewDelegate {
     func textViewDidChangeSelection(_ textView: UITextView) {
         if textView === tagTitleTextView {
             viewModel?.tagTitle = textView.text
@@ -95,13 +95,13 @@ extension CreateTagViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ColorCollectionViewCell.identifier,
-                                                            for: indexPath) as? ColorCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: ColorCollectionViewCell.identifier, for: indexPath) as? ColorCollectionViewCell else {
+                return UICollectionViewCell()
+        }
         cell.configure(with: indexPath.row)
         return cell
     }
-    
-    
 }
 
 extension CreateTagViewController: UICollectionViewDelegate {

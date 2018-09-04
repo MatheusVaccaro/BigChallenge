@@ -31,7 +31,6 @@ class ColorCollectionViewCell: UICollectionViewCell {
         return layer
     }()
     
-    
     func configure(with colorIndex: Int) {
         imageView.layer.zPosition = 1
         imageView.layer.cornerRadius = imageView.layer.frame.height / 2

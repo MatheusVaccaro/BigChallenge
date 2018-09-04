@@ -95,16 +95,19 @@ public class TaskListViewController: UIViewController {
     
     fileprivate func createDataSource() -> RxTableViewSectionedReloadDataSource<SectionedTaskModel> {
         let ans = RxTableViewSectionedReloadDataSource<SectionedTaskModel>(
-            configureCell: {(dataSource, table, indexPath, task) in
-                let cell =
-                    table.dequeueReusableCell(withIdentifier: TaskTableViewCell.identifier,
-                                              for: indexPath) as! TaskTableViewCell
+            configureCell: {(_, table, indexPath, task) in
+                guard let cell =
+                    table.dequeueReusableCell(
+                        withIdentifier: TaskTableViewCell.identifier,
+                        for: indexPath) as? TaskTableViewCell else {
+                    return UITableViewCell()
+                }
                 
                 let taskCellViewModel = self.viewModel.taskCellViewModel(for: task)
                 
                 taskCellViewModel.taskObservable.subscribe {
                     if let task = $0.element {
-                        if task.isCompleted {                        
+                        if task.isCompleted {
                             self.viewModel.taskCompleted.onNext(task)
                         }
                     }

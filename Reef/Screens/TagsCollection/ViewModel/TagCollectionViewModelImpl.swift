@@ -34,7 +34,9 @@ class TagCollectionViewModelImpl: TagCollectionViewModel {
     
     required init(model: TagModel, filtering: Bool, selectedTags: [Tag]) {
         self.model = model
-        self.tags = model.tags.map { if $0.title! == "Olar" { $0.requiresAuthentication = true; return $0 } else { return $0 } } //TODO: remove
+        self.tags = model.tags.map {
+            if $0.title! == "Privado" { $0.requiresAuthentication = true; return $0 } else { return $0 }
+        } //TODO: remove
         self.selectedTags = selectedTags
         self.filteredTags = self.tags
         self.filtering = filtering
@@ -75,8 +77,9 @@ class TagCollectionViewModelImpl: TagCollectionViewModel {
     }
     
     func select(_ tag: Tag) {
-        if let index = selectedTags.index(of: tag) { selectedTags.remove(at: index) }
-        else { selectedTags.append(tag) }
+        if let index = selectedTags.index(of: tag) { selectedTags.remove(at: index) } else {
+            selectedTags.append(tag)
+        }
         updateAfterTagSelected()
     }
     

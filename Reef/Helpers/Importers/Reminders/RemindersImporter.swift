@@ -126,9 +126,9 @@ public class RemindersImporter {
         let taskAttributes: [TaskAttributes : Any] =
             [.title : reminder.title,
              .isCompleted : reminder.isCompleted,
-             .completionDate : reminder.completionDate as? Date,
-             .dueDate : reminder.completionDate as? Date,
-             .creationDate : reminder.creationDate as? Date,
+             .completionDate : reminder.completionDate as Any,
+             .dueDate : reminder.completionDate as Any,
+             .creationDate : reminder.creationDate as Any,
              .tags : [tag] as Any]
         let task = taskModel.createTask(with: taskAttributes)
         

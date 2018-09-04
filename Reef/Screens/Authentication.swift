@@ -18,13 +18,13 @@ class Authentication {
         
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
-                                   localizedReason: reason) { success, error in
+                                   localizedReason: reason) { success, _ in
                                     
                                     completion(success)
             }
         } else if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
             context.evaluatePolicy(.deviceOwnerAuthentication,
-                                   localizedReason: reason) { success, error in
+                                   localizedReason: reason) { success, _ in
                                     completion(success)
             }
         }

@@ -130,7 +130,7 @@ extension NewTaskViewController: StoryboardInstantiable {
     }
 }
 
-extension NewTaskViewController: UITextViewDelegate {    
+extension NewTaskViewController: UITextViewDelegate {
     func textViewDidChangeSelection(_ textView: UITextView) {
         if textView === taskTitleTextView {
             viewModel?.taskTitleText = textView.text
