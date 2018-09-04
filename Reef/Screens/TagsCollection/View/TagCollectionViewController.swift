@@ -45,11 +45,6 @@ class TagCollectionViewController: UIViewController {
     
     func bindCollectionView() {
         viewModel.tagsObservable
-            .map {
-                return self.viewModel.filtering
-                    ? self.viewModel.removeBigTitleTag($0)
-                    : $0
-            }
             .map { return self.viewModel.sortMostTasksIn($0) }
             .map { return $0.map { Item(tag: $0) } + [Item(tag: nil)] } // map add button
             .bind(to: tagsCollectionView.rx
@@ -63,24 +58,33 @@ class TagCollectionViewController: UIViewController {
         tagsCollectionView.rx.itemSelected.subscribe { event in
             let indexPath = event.element!
             UISelectionFeedbackGenerator().selectionChanged()
+            
             guard let item =
                 self.tagsCollectionView.cellForItem(at: indexPath) as? TagCollectionViewCell else { return }
             guard item.kind == .tag, let tag = item.viewModel?.tag else {
                     self.addTagEvent?.onNext(true); return
             }
             
-            if item.isSelected {
-                if self.viewModel.shouldAskForAuthentication(with: tag) {
-                    Authentication.authenticate { sucess in
-                        if sucess { self.viewModel.select(tag) } else {
-                            DispatchQueue.main.async {
-                                self.tagsCollectionView.deselectItem(at: indexPath, animated: true)
-                            }
+            if self.viewModel.shouldAskForAuthentication(with: tag) {
+                Authentication.authenticate { sucess in
+                    if sucess { self.viewModel.select(tag) }
+                    else {
+                        DispatchQueue.main.async {
+                            self.tagsCollectionView.deselectItem(at: indexPath, animated: true)
                         }
                     }
-                } else { self.viewModel.select(tag) }
+                }
             } else { self.viewModel.select(tag) }
             
+        }.disposed(by: disposeBag)
+        
+        tagsCollectionView.rx.itemDeselected.subscribe { event in
+            UISelectionFeedbackGenerator().selectionChanged()
+            guard let item =
+                self.tagsCollectionView.cellForItem(at: event.element!) as? TagCollectionViewCell,
+                let tag = item.viewModel?.tag else { return }
+            
+            self.viewModel.select(tag)
         }.disposed(by: disposeBag)
     }
     

@@ -41,5 +41,4 @@ protocol TagCollectionViewModel: class {
     func delete(tag: Tag)
     func update(tag: Tag)
     func sortMostTasksIn(_ tags: [Tag]) -> [Tag]
-    func removeBigTitleTag(_ tags: [Tag]) -> [Tag]
 }

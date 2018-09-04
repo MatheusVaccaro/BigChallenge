@@ -68,10 +68,6 @@ class TagCollectionViewModelImpl: TagCollectionViewModel {
         }
     }
     
-    func removeBigTitleTag(_ tags: [Tag]) -> [Tag] {
-        return tags.filter { selectedTags.isEmpty ? true : selectedTags.first != $0 }
-    }
-    
     func shouldAskForAuthentication(with tag: Tag) -> Bool {
         return tag.requiresAuthentication && filtering
     }
