@@ -313,10 +313,10 @@ extension TaskListViewController: UITableViewDelegate {
 }
 
 extension TaskListViewController: UNUserNotificationCenterDelegate {
-    public func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler:
-        @escaping (UNNotificationPresentationOptions) -> Void) {
+    public func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
         completionHandler([.alert, .sound, .badge])
     }
@@ -332,17 +332,17 @@ extension TaskListViewController: UNUserNotificationCenterDelegate {
             return
         }
         
-        let taskUUID = UUID(uuidString: taskID)
+        guard let taskUUID = UUID(uuidString: taskID) else { return }
         
         switch response.actionIdentifier {
         case "COMPLETE":
-            print("Complete action")
+            viewModel.completeTask(taskID: taskUUID)
             
         case "POSTPONE_ONE_HOUR":
-            print("Postpone one hour action")
+            NotificationManager.postponeOneHour(request: response.notification.request)
             
         case "POSTPONE_ONE_DAY":
-            print("Postpone one day action")
+            NotificationManager.postponeOneDay(request: response.notification.request)
             
         default:
             break

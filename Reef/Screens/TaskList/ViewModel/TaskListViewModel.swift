@@ -39,4 +39,5 @@ protocol TaskListViewModel {
     func taskCellViewModel(for task: Task) -> TaskCellViewModel
     func shouldGoToAddTask()
     func shouldGoToEdit(_ task: Task)
+    func completeTask(taskID: UUID)
 }

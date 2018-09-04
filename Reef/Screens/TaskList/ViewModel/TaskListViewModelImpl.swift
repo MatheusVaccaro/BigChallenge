@@ -140,6 +140,15 @@ public class TaskListViewModelImpl: TaskListViewModel {
         self.shouldEditTask.onNext(task)
     }
     
+    func completeTask(taskID: UUID) {
+        guard let task = model.taskWith(id: taskID) else { return }
+        task.isCompleted = true
+        var taskAttributes: [TaskAttributes : Any] = [:]
+        taskAttributes[.isCompleted] = true
+        
+        model.update(task, with: taskAttributes)
+    }
+    
     // MARK: Helpers
     /**
      verifies that task contains only one tag, which is the current selected tag
