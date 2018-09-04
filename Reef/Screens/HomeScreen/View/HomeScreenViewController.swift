@@ -19,6 +19,7 @@ class HomeScreenViewController: UIViewController {
     @IBOutlet weak var tagContainerView: UIView!
     @IBOutlet weak var taskListContainerView: UIView!
     @IBOutlet weak var bigTitle: UILabel!
+    @IBOutlet weak var whiteBackgroundView: UIView!
     
     fileprivate var taskListViewController: TaskListViewController?
     fileprivate var tagCollectionViewController: TagCollectionViewController?
@@ -37,53 +38,24 @@ class HomeScreenViewController: UIViewController {
         return layer
     }()
     
-    lazy var titleGradient: CAGradientLayer = {
-        let layer = CAGradientLayer()
-        
-        layer.startPoint = CGPoint(x: 0, y: 1)
-        layer.endPoint = CGPoint(x: 1, y: 0)
-        
-        return layer
-    }()
-    
-    lazy var maskLabel: UILabel = {
-        let ans = UILabel()
-        
-        ans.textAlignment = bigTitle.textAlignment
-        ans.font = bigTitle.font
-        
-        return ans
-    }()
-    
-    lazy var gradientView: UIView = {
-        let gradientView = UIView(frame: view.bounds)
-        
-        gradientView.isUserInteractionEnabled = false
-        gradientView.layer.addSublayer(titleGradient)
-        gradientView.addSubview(maskLabel)
-        gradientView.mask = maskLabel
-        
-        return gradientView
-    }()
-    
-    override func viewDidLayoutSubviews() {
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        gradientView.frame = bigTitle.frame
-        titleGradient.frame = gradientView.bounds
-        maskLabel.frame = gradientView.bounds
-        CATransaction.commit()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bigTitle.textColor = UIColor.clear
-        bigTitle.font = UIFont.font(sized: 41, weight: .medium, with: .largeTitle)
+        bigTitle.textColor = UIColor.black
+        bigTitle.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
         bigTitle.adjustsFontForContentSizeCategory = true
         
+        whiteBackgroundView.layer.cornerRadius = 6.3
+        whiteBackgroundView.layer.maskedCorners = [ .layerMaxXMaxYCorner, .layerMinXMaxYCorner ]
+        whiteBackgroundView.tintColor = UIColor.white
+        
+        whiteBackgroundView.layer.shadowRadius = 6.3
+        whiteBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 10)
+        whiteBackgroundView.layer.masksToBounds = false
+        whiteBackgroundView.layer.shadowColor = CGColor.shadowColor
+        whiteBackgroundView.layer.shadowOpacity = 0.2
+        
         view.layer.addSublayer(gradientLayer)
-        view.addSubview(gradientView)
         
         configureEmptyState()
         observeSelectedTags()
@@ -93,7 +65,6 @@ class HomeScreenViewController: UIViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         bigTitle.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
-        maskLabel.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
         configureEmptyState()
     }
     
@@ -239,36 +210,10 @@ class HomeScreenViewController: UIViewController {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         bigTitle.text = viewModel.bigTitleText
-        maskLabel.text = viewModel.bigTitleText
         
         bigTitle.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
-        maskLabel.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
         
-        titleGradient.colors = bigTitleColors
         CATransaction.commit()
-    }
-    
-    var bigTitleColors: [CGColor] {
-        return viewModel.selectedTags.isEmpty
-            ? [UIColor.black.cgColor, UIColor.black.cgColor]
-            : viewModel.selectedTags.first!.colors
-    }
-    
-    @IBAction func didTapBigTitle(_ sender: Any) {
-        if let tag = viewModel.selectedTags.first {
-            UISelectionFeedbackGenerator().selectionChanged()
-            viewModel.deselectBigTitle(tag: tag)
-            
-            Answers.logCustomEvent(withName: "unselected tag on screen title")
-        }
-    }
-    
-    @IBAction func didLongpressBigTitle(_ sender: Any) {
-        if let tag = viewModel.selectedTags.first {
-            // TODO Refactor this to fit into architecture
-            tagCollectionViewController?.presentActionSheet(for: tag)
-            Answers.logCustomEvent(withName: "longpressed big title")
-        }
     }
     
     override func updateUserActivityState(_ activity: NSUserActivity) {

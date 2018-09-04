@@ -71,7 +71,7 @@ class TagCollectionViewCell: UICollectionViewCell {
         layer.masksToBounds = true
         
         layer.shadowRadius = 6.3
-        layer.shadowOffset = CGSize(width: 0, height: 20)
+        layer.shadowOffset = CGSize(width: 0, height: 5)
         layer.masksToBounds = false
         layer.shadowColor = CGColor.shadowColor
         layer.shadowOpacity = 0.2
