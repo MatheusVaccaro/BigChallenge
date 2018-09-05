@@ -44,6 +44,11 @@ public class TaskModel {
     // MARK: - CRUD Methods
     public func save(_ task: Task) {
         reefKit.save(task)
+        if recommended.contains(task) {
+            Recommender.reset()
+            recommended = Recommender.recommended(from: self.tasks)
+            didUpdateTasks.onNext(self.tasks)
+        }
     }
     
     public func delete(_ task: Task) {
