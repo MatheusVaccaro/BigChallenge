@@ -52,6 +52,12 @@ class NewTaskCoordinator: Coordinator {
         self.selectedTags = isEditing
             ? task!.allTags
             : selectedTags
+        
+        print("+++ INIT NewTaskCoordinator")
+    }
+    
+    deinit {
+        print("--- DEINIT NewTaskCoordinator")
     }
     
     func start() {
@@ -166,7 +172,7 @@ extension NewTaskCoordinator: CreationFrameViewControllerDelegate {
         
         newTaskViewController.viewModel = newTaskViewModel
         
-        let tagCollectionViewModel = TagCollectionViewModel(model: tagModel,
+        let tagCollectionViewModel = TagCollectionViewModelImpl(model: tagModel,
                                                             filtering: false,
                                                             selectedTags: selectedTags)
         newTaskViewController.tagCollectionViewModel = tagCollectionViewModel

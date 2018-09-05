@@ -45,6 +45,11 @@ class TaskCreationFrameViewModel: CreationFrameViewModelProtocol {
         mainInfoViewModel.delegate = self
         mainInfoViewModel.outputDelegate = self
         detailViewModel.delegate = self
+        print("+++ INIT TaskCreationFrameViewModel")
+    }
+    
+    deinit {
+        print("--- DEINIT TaskCreationFrameViewModel")
     }
     
     func didTapCancelButton() {
