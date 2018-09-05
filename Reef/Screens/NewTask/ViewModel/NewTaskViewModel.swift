@@ -50,6 +50,12 @@ class NewTaskViewModel: NewTaskViewModelProtocol {
         
         self.selectedTags = task == nil ? [] : task!.allTags
         self.taskNotesText = task?.notes ?? ""
+        
+        print("+++ INIT NewTaskViewModel")
+    }
+    
+    deinit {
+        print("--- DEINIT NewTaskViewModel")
     }
     
     func didTapDeleteTaskButton() {

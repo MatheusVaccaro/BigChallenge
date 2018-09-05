@@ -39,6 +39,12 @@ class NewTaskViewController: UIViewController, CreationFramePresentable {
         userActivity?.becomeCurrent()
         
         taskTitleTextView.delegate = self
+        
+        print("+++ INIT NewTaskViewController")
+    }
+    
+    deinit {
+        print("--- DEINIT NewTaskViewController")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -88,13 +94,13 @@ class NewTaskViewController: UIViewController, CreationFramePresentable {
         
         tagCollectionViewController.didMove(toParentViewController: self)
         
-        tagCollectionViewController.viewModel.selectedTagsObservable.subscribe { event in
-            self.viewModel?.selectedTags = event.element!
+        tagCollectionViewController.viewModel.selectedTagsObservable.subscribe { [weak self] event in
+            self?.viewModel?.selectedTags = event.element!
             print("selected tags are: \(event.element!.map {$0.title})")
         }.disposed(by: disposeBag)
         
-        tagCollectionViewController.addTagEvent?.subscribe { _ in
-            self.viewModel?.willAddTag()
+        tagCollectionViewController.addTagEvent?.subscribe { [weak self] in
+            self?.viewModel?.willAddTag()
         }.disposed(by: disposeBag)
     }
     
