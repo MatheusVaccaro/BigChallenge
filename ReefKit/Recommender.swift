@@ -14,7 +14,6 @@ public class Recommender {
     // MARK: - Recommendation
     fileprivate static var _recommendedTasks: [Task]?
     
-    
     public static func recommended(from tasks: [Task]) -> [Task] {
         guard _recommendedTasks == nil else { return _recommendedTasks! }
         
