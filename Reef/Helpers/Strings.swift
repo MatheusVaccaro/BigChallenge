@@ -116,6 +116,12 @@ struct Strings {
     struct Notification {
         static let placeholderTitle =
             NSLocalizedString("notificationTitle", comment: "placeholder for notification title")
+        static let complete =
+            NSLocalizedString("completeTask", comment: "placeholder for complete task from notification")
+        static let postponeOneHour =
+            NSLocalizedString("postponeOneHour", comment: "placeholder for postpone one hour the notification from a task")
+        static let postponeOneDay =
+            NSLocalizedString("postponeOneDay", comment: "placeholder for postpone one day the notification from a task")
     }
     
     struct MoreOptionsScreen {

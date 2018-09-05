@@ -234,7 +234,7 @@
 		1627170F20C8793900AA0024 /* BigChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigChallengeTests.swift; sourceTree = "<group>"; };
 		1627171120C8793900AA0024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16294E37213F0B860092DEA2 /* TodayViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
-		16294E39213F0C190092DEA2 /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Authentication.swift; path = Screens/Authentication.swift; sourceTree = "<group>"; };
+		16294E39213F0C190092DEA2 /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		1676FC8F20D99580003E2D79 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		16E8DDB6211205C1004F66D6 /* Barlow-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Barlow-ThinItalic.ttf"; sourceTree = "<group>"; };
 		16E8DDB7211205C2004F66D6 /* Barlow-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Barlow-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -866,6 +866,7 @@
 		C21EAD0320B745FE005F0F85 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				16294E39213F0C190092DEA2 /* Authentication.swift */,
 				221BA8B420F6A16300BE2AC1 /* TagsCollection */,
 				221BA8AA20F698D000BE2AC1 /* HomeScreen */,
 				C2C231BD20FD1A53002A2371 /* NewTag */,
@@ -960,7 +961,6 @@
 				C28DC91920B61CB6007F881A /* AppDelegate.swift */,
 				C21EAD0220B745E3005F0F85 /* Coordinators */,
 				C21EAD0320B745FE005F0F85 /* Screens */,
-				16294E39213F0C190092DEA2 /* Authentication.swift */,
 				C21EAD0920B74EE6005F0F85 /* Helpers */,
 				C21EAD0120B745B6005F0F85 /* Resources */,
 				16FDC13A210F8080008FA931 /* Managers */,

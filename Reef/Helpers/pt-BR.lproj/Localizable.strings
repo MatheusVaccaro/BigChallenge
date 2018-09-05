@@ -47,6 +47,15 @@
 /* placeholder title for notification */
 "notificationTitle" = "Sua task está esperando";
 
+/* complete task through notification action */
+"completeTask" = "Completar";
+
+/* postpone task one hour through notification action */
+"postponeOneHour" = "Me lembre em 1 hora";
+
+/* postpone task one day through notification action */
+"postponeOneDay" = "Me lembre amanhã";
+
 /* text for tomorrow shortcut button */
 "tomorrowShortcutDateInput" = "Amanhã";
 
