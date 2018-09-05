@@ -306,6 +306,7 @@
 		22D14A1D212CBBF500B15B98 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		22D84C62210BF1E3004B8969 /* LocationInputView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationInputView.storyboard; sourceTree = "<group>"; };
 		22D84C64210BF4D1004B8969 /* LocationInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputView.swift; sourceTree = "<group>"; };
+		22DE270D21406A0E00466187 /* ReefToday.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReefToday.entitlements; sourceTree = "<group>"; };
 		22ED5954211A7C21008EAD7D /* MKRadiusCircleRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKRadiusCircleRenderer.swift; sourceTree = "<group>"; };
 		22ED5956211B346F008EAD7D /* MKPlaceMarkExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKPlaceMarkExtension.swift; sourceTree = "<group>"; };
 		22F23E6C212E3E7F0064EE05 /* ReefKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReefKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -730,6 +731,7 @@
 		22FEEA772133419500D8B049 /* ReefToday */ = {
 			isa = PBXGroup;
 			children = (
+				22DE270D21406A0E00466187 /* ReefToday.entitlements */,
 				22FEEA782133419500D8B049 /* TodayViewController.swift */,
 				16294E37213F0B860092DEA2 /* TodayViewModel.swift */,
 				22FEEA7A2133419500D8B049 /* MainInterface.storyboard */,
@@ -1290,6 +1292,11 @@
 					};
 					22FEEA732133419500D8B049 = {
 						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					22FEEA89213344BD00D8B049 = {
 						CreatedOnToolsVersion = 10.0;
@@ -2049,6 +2056,7 @@
 			baseConfigurationReference = 1EAEC118615E1724B631A7D9 /* Pods-ReefToday.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
+				CODE_SIGN_ENTITLEMENTS = ReefToday/ReefToday.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = D9KU92KK65;
 				INFOPLIST_FILE = ReefToday/Info.plist;
@@ -2074,6 +2082,7 @@
 			baseConfigurationReference = 80FE837ABD65B31AB4D10AEB /* Pods-ReefToday.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
+				CODE_SIGN_ENTITLEMENTS = ReefToday/ReefToday.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = D9KU92KK65;
