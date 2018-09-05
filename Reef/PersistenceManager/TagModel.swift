@@ -46,7 +46,6 @@ public class TagModel {
         
         reefKit.tagsDelegate = self
         reefKit.fetchTags { self.tags = $0 }
-        didUpdateTags.onNext(tags)
     }
     
     // MARK: - CRUD Methods

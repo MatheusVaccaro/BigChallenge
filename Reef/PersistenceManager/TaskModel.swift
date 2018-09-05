@@ -30,11 +30,15 @@ public class TaskModel {
         self.didUpdateTasks = BehaviorSubject<[Task]>(value: tasks)
         reefKit.tasksDelegate = self
         
+        loadTasks()
+    }
+    
+    func loadTasks() {
         reefKit.fetchTasks {
             self.tasks = $0
             self.recommended = ReefKit.recommendedTasks(from: $0)
+            self.didUpdateTasks.onNext(self.tasks)
         }
-        didUpdateTasks.onNext(tasks)
     }
     
     // MARK: - CRUD Methods

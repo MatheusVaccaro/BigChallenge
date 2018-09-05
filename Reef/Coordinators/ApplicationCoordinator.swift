@@ -33,6 +33,10 @@ class ApplicationCoordinator: Coordinator {
         print(selectedTags.map { $0.title! })
     }
     
+    func updateModel() {
+        taskModel.loadTasks()
+    }
+    
     func start() {
         self.start(selectedTagIDs: nil, taskID: nil)
     }
