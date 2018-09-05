@@ -43,6 +43,12 @@ class DateInputViewModel: DateInputViewModelProtocol {
         self.twoHoursFromNowShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.twoHoursFromNowShortcut)
         self.thisEveningShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.thisEveningShortcut)
         self.nextMorningShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.nextMorningShortcut)
+        
+        print("+++ INIT DateInputViewModel")
+    }
+    
+    deinit {
+        print("--- DEINIT DateInputViewModel")
     }
     
     func selectDate(_ date: DateComponents) {

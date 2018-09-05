@@ -58,6 +58,12 @@ class DateInputViewController: UIViewController {
         currentSelector.subscribe(onNext: { [weak self] in
             self?.displaySelector(ofType: $0)
         }).disposed(by: disposeBag)
+        
+        print("+++ INIT DateInputViewController")
+    }
+    
+    deinit {
+        print("--- DEINIT DateInputViewController")
     }
     
     private func displaySelector(ofType selector: DateSelector) {

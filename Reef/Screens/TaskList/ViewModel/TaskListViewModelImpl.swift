@@ -54,6 +54,12 @@ public class TaskListViewModelImpl: TaskListViewModel {
         
         subscribeToCompletedTask()
         subscribeToModelUpdate()
+        
+        print("+++ INIT TaskListViewModel")
+    }
+    
+    deinit {
+        print("--- DEINIT TaskListViewModel")
     }
     
     func task(for indexPath: IndexPath) -> Task {

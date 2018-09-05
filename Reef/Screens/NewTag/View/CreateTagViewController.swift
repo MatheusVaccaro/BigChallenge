@@ -26,6 +26,12 @@ class CreateTagViewController: UIViewController, CreationFramePresentable {
         configureColorsCollectionView()
         configureWithViewModel()
         configureTagTitleTextView()
+        
+        print("+++ INIT CreateTagViewController")
+    }
+    
+    deinit {
+        print("--- DEINIT CreateTagViewController")
     }
     
     // MARK: - IBAction
