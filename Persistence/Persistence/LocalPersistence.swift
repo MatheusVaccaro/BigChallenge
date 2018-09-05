@@ -79,9 +79,12 @@ class LocalPersistence: PersistenceProtocol {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    
+    public func refresh() {
+        viewContext.refreshAllObjects()
+    }
 
     // MARK: - CRUD Methods
-    
     func create<T: Storable>(_ object: T.Type) throws -> T {
         let modelName = String(describing: object)
         guard let object = NSEntityDescription.insertNewObject(forEntityName: modelName, into: viewContext) as? T else {

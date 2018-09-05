@@ -33,7 +33,8 @@ class ApplicationCoordinator: Coordinator {
         print(selectedTags.map { $0.title! })
     }
     
-    func updateModel() {
+    func refreshModel() { //TODO: find a better solution
+        reefKit.refresh()
         taskModel.loadTasks()
     }
     

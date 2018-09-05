@@ -79,6 +79,10 @@ public class Persistence: PersistenceProtocol {
             fatalError("Unexpected error: \(error).")
         }
     }
+    
+    public func refresh() {
+        localPersistence.refresh()
+    }
 }
 
 // MARK: - LocalPersistenceDelegate Extension

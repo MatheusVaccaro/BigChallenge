@@ -28,6 +28,10 @@ public class ReefKit {
         return Recommender.recommended(from: tasks)
     }
     
+    public func refresh() {
+        persistence.refresh()
+    }
+    
     public func fetchTasks(predicate: NSPredicate = NSPredicate(value: true), completionHandler: @escaping (([Task]) -> ())) {
         taskCRUD.fetchTasks(predicate: predicate) { completionHandler($0) }
     }
