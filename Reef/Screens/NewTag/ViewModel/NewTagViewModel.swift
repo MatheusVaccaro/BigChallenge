@@ -47,6 +47,12 @@ class NewTagViewModel: NewTagViewModelProtocol {
         if let tag = tag {
             configureAttributes(from: tag)
         }
+        
+        print("+++ INIT NewTagViewModel")
+    }
+    
+    deinit {
+        print("--- DEINIT NewTagViewModel")
     }
     
     func didTapDeleteTagButton() {

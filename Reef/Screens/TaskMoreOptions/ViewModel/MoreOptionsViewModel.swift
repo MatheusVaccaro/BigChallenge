@@ -40,6 +40,12 @@ class MoreOptionsViewModel: MoreOptionsViewModelProtocol {
         self.dateInputViewModel = dateInputViewModel
         self.locationInputViewModel.delegate = self
         self.dateInputViewModel.delegate = self
+        
+        print("+++ INIT MoreOptionsViewModel")
+    }
+    
+    deinit {
+        print("--- DEINIT MoreOptionsViewModel")
     }
     
     func numberOfRows(in section: Int) -> Int {

@@ -60,6 +60,11 @@ public class TaskListViewController: UIViewController {
                 
         bindTableView()
         UNUserNotificationCenter.current().delegate = self
+        print("+++ INIT TaskListViewController")
+    }
+    
+    deinit {
+        print("--- DEINIT TaskListViewController")
     }
     
     public override func viewDidAppear(_ animated: Bool) {

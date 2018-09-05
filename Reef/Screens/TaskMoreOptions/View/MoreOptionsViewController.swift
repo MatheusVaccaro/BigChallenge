@@ -25,6 +25,12 @@ class MoreOptionsViewController: UIViewController, CreationFramePresentable {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        
+        print("+++ INIT MoreOptionsViewController")
+    }
+    
+    deinit {
+        print("--- DEINIT MoreOptionsViewController")
     }
     
     // MARK: - TaskFramePresentable

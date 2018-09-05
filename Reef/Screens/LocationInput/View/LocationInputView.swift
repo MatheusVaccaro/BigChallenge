@@ -52,6 +52,12 @@ class LocationInputView: UIViewController {
             mapView.arriving = arriving
             segmentedControl.selectedSegmentIndex = arriving ? 0 : 1
         }
+        
+        print("+++ INIT LocationInputViewController")
+    }
+    
+    deinit {
+        print("--- DEINIT LocationInputViewController")
     }
     
     @IBAction func segmentedControlSelected(_ sender: Any) {
