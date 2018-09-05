@@ -15,6 +15,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
     @IBOutlet weak var tableView: UITableView!
     private var viewModel: TodayViewModel!
+    @IBOutlet weak var emptyStateLabel: UILabel!
     
     private var disposeBag = DisposeBag()
     
@@ -23,7 +24,23 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // Do any additional setup after loading the view from its nib.
         viewModel = TodayViewModel()
         viewModel.delegate = self
+        
+        emptyStateLabel.font = UIFont.font(sized: 20, weight: .regular, with: .body)
+        emptyStateLabel.text = "emptyStatePlaceHolder" //TODO
+        
+        showLockedScreenStateIfNeeded()
         configureTableView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        viewModel.resetRecommendedTasks()
+    }
+    
+    func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
+        let expanded = activeDisplayMode == .expanded
+        preferredContentSize = expanded
+            ? CGSize(width: maxSize.width, height: 200)
+            : maxSize
     }
         
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
@@ -41,6 +58,21 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                            forCellReuseIdentifier: TaskTableViewCell.identifier)
         tableView.dataSource = self
         tableView.separatorStyle = .none
+    }
+    
+    fileprivate func showEmptyStateIfNeeded() {
+        tableView.isHidden = viewModel.shouldShowEmptyState
+        emptyStateLabel.isHidden = !viewModel.shouldShowEmptyState
+    }
+    
+    fileprivate func showExpandedOptionIfNeeded() {
+        extensionContext?.widgetLargestAvailableDisplayMode = viewModel.numberOfTasks > 2
+            ? .expanded
+            : .compact
+    }
+    
+    fileprivate func showLockedScreenStateIfNeeded() {
+        
     }
     
 }
@@ -71,9 +103,13 @@ extension TodayViewController: TodayViewModelDelegate {
     func removedTasks(at row: Int) {
         let indexPath = IndexPath(row: row, section: 0)
         self.tableView.deleteRows(at: [indexPath], with: .fade)
+        showEmptyStateIfNeeded()
+        showExpandedOptionIfNeeded()
     }
     
     func reloadedTasks() {
         tableView.reloadData()
+        showExpandedOptionIfNeeded()
+        showEmptyStateIfNeeded()
     }
 }

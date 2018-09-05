@@ -47,11 +47,9 @@ public class TaskTableViewCell: UITableViewCell {
     override public func awakeFromNib() {
         super.awakeFromNib()
         taskTitleTextView.delegate = self
+        
         checkButton.isSelected = false
         checkButton.layer.addSublayer(gradientLayer)
-        
-        layer.shadowOpacity = 1
-        layer.shadowOffset = CGSize(width: 0, height: 0)
         
         taskTitleTextView.textContainerInset =
             UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
