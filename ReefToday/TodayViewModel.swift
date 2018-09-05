@@ -39,7 +39,6 @@ class TodayViewModel {
             reef.save(task)
             if task.isCompleted {
                 tasks.remove(at: index)
-                Recommender.reset()
                 delegate?.removedTasks(at: index)
                 if tasks.isEmpty { resetRecommendedTasks() }
             }

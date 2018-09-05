@@ -12,11 +12,7 @@ import RxSwift
 
 public class Recommender {
     // MARK: - Recommendation
-    fileprivate static var _recommendedTasks: [Task]?
-    
     public static func recommended(from tasks: [Task]) -> [Task] {
-        guard _recommendedTasks == nil else { return _recommendedTasks! }
-        
         var pinnedTasks: [Task] = []
         var localTasks: [Task] = []; let localTasksLimit = 3
         var nextTasks: [Task] = []; let nextTasksLimit = 2
@@ -57,9 +53,6 @@ public class Recommender {
                 .prefix(latestTasksLimit)
         )
         
-        _recommendedTasks = latestTasks + nextTasks + localTasks
-        return _recommendedTasks!
+        return latestTasks + nextTasks + localTasks
     }
-    
-    public static func reset() { _recommendedTasks = nil }
 }
