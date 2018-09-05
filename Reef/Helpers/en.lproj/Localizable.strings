@@ -35,9 +35,6 @@
 /* description of map to voiceOver users */
 "mapViewAccessibilitylabel" = "Map";
 
-/* description of empty value of map for voiceOver users */
-"mapViewAccessibilityValueEmpty" = "Location";
-
 /* accessibility hint on searchBar for voiceOver users */
 "searchBarHint" = "tap to search location";
 
@@ -95,9 +92,6 @@
 /* title of empty state on taskList */
 "emptyStateTitle" = "Let’s get something DONE!";
 
-/* title of homeScreen with no tag selected */
-"title" = "Hello";
-
 /* title for location header */
 "locationHeaderTitle" = "Location";
 
@@ -115,3 +109,6 @@
 
 /* button that imports tasks from reminders */
 "importFromReminders" = "Import existing reminders";
+
+/* prompt when asking to unluck using touchID when selecting a private tag */
+"privateTagUnlockReason" = "Unlock to see private Tag";

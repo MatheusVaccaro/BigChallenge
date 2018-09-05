@@ -18,12 +18,13 @@ class LocationInputViewModel {
     public weak var delegate: LocationInputDelegate?
     
     var placeName = Strings.LocationInputView.defaultPlaceName
-    let searchBarHint = Strings.LocationInputView.accessibilityHintSearchBar
     let arrivingString = Strings.LocationInputView.arrivingString
     let leavingString = Strings.LocationInputView.leavingString
     let searchBarPlaceholder = Strings.LocationInputView.searchBarPlaceholder
 
+    let searchBarHint =
+        Strings.LocationInputView.VoiceOver.searchbarHint
     let mapViewAccessibilityLabel =
-        Strings.LocationInputView.accessibilitylabelMap
+        Strings.LocationInputView.VoiceOver.mapLabel
     
 }

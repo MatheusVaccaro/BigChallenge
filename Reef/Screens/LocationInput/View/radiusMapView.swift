@@ -117,7 +117,8 @@ class RadiusMapView: MKMapView {
     override var accessibilityValue: String? {
         get {
             guard _accessibilityValue == nil else { return _accessibilityValue }
-            let localizedString = Strings.LocationInputView.accessibilityValueMap
+            
+            let localizedString = Strings.LocationInputView.VoiceOver.mapValue
             let defaultPlaceName = Strings.LocationInputView.defaultPlaceName
             
             _accessibilityValue = String.localizedStringWithFormat(localizedString,

@@ -15,10 +15,10 @@ class HomeScreenViewModelImpl: HomeScreenViewModel {
     private(set) var taskModel: TaskModel
     private(set) var tagModel: TagModel
     
-    let emptyStateTitleText = Strings.HomeScreen.emptyStateTitle
-    let emptyStateSubtitleText = Strings.HomeScreen.emptyStateSubtitle
-    let emptyStateOrText = Strings.HomeScreen.emptyStateOr
-    let importFromRemindersText = Strings.HomeScreen.importFromReminders
+    let emptyStateTitleText = Strings.HomeScreen.EmptyState.title
+    let emptyStateSubtitleText = Strings.HomeScreen.EmptyState.subtitle
+    let emptyStateOrText = Strings.HomeScreen.EmptyState.or
+    let importFromRemindersText = Strings.HomeScreen.EmptyState.importFromReminders
     
     weak var delegate: HomeScreenViewModelDelegate?
     
