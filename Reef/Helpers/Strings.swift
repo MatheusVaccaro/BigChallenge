@@ -15,17 +15,16 @@ import Foundation
 struct Strings {
     
     struct HomeScreen {
-        static let emptyStateTitle =
-            NSLocalizedString("emptyStateTitle", comment: "title of empty state on taskList")
-        static let emptyStateSubtitle =
-            NSLocalizedString("emptyStateSubtitle", comment: "subtitle of empty state on taskList")
-        static let emptyStateOr =
-            NSLocalizedString("emptyStateOr", comment: "'or'")
-        static let importFromReminders =
-            NSLocalizedString("importFromReminders", comment: "button that imports tasks from reminders")
-        static let title =
-            NSLocalizedString("title", comment: "title of homeScreen with no tag selected")
-
+        struct EmptyState {
+            static let title =
+                NSLocalizedString("emptyStateTitle", comment: "title of empty state on taskList")
+            static let subtitle =
+                NSLocalizedString("emptyStateSubtitle", comment: "subtitle of empty state on taskList")
+            static let or =
+                NSLocalizedString("emptyStateOr", comment: "'or'")
+            static let importFromReminders =
+                NSLocalizedString("importFromReminders", comment: "button that imports tasks from reminders")
+        }
     }
     
     struct Task {
@@ -47,6 +46,9 @@ struct Strings {
     }
     
     struct Tag {
+        
+        static let privateTagUnlockReason =
+            NSLocalizedString("faceIDPermisson", comment: "prompt when requesting faceID to unlock private tag")
         
         struct CreationScreen {
             static let tagTitlePlaceholder =
@@ -100,17 +102,16 @@ struct Strings {
         
         static let defaultPlaceName = NSLocalizedString("defaultPlaceName", comment: "default place when reading location name in voiceOver")
         
-        static let accessibilitylabelMap = NSLocalizedString("mapViewAccessibilitylabel",
-                                                             comment: "description of map to voiceOver users")
-        
-        static let accessibilityValueEmptyMap = NSLocalizedString("mapViewAccessibilityValueEmpty",
-                                                                  comment: "description of empty value of map for voiceOver users")
-        
-        static let accessibilityValueMap = NSLocalizedString("%@ meters from %@",
-                                                             comment: "accessibility value on map for voiceOver users")
-        
-        static let accessibilityHintSearchBar = NSLocalizedString("searchBarHint",
-                                                                  comment: "accessibility hint on searchBar for voiceOver users")
+        struct VoiceOver {
+            static let mapLabel = NSLocalizedString("mapViewAccessibilitylabel",
+                                                    comment: "description of map to voiceOver users")
+            
+            static let mapValue = NSLocalizedString("%@ meters from %@",
+                                                    comment: "accessibility value on map for voiceOver users")
+            
+            static let searchbarHint = NSLocalizedString("searchBarHint",
+                                                         comment: "accessibility hint on searchBar for voiceOver users")
+        }
     }
     
     struct Notification {

@@ -45,8 +45,10 @@ public class TagModel {
         self.didUpdateTags = BehaviorSubject<[Tag]>(value: tags)
         
         reefKit.tagsDelegate = self
-        reefKit.fetchTags { self.tags = $0 }
-        didUpdateTags.onNext(tags)
+        reefKit.fetchTags {
+            self.tags = $0
+            self.didUpdateTags.onNext(self.tags)
+        }
     }
     
     // MARK: - CRUD Methods

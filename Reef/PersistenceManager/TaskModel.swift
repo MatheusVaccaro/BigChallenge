@@ -30,16 +30,25 @@ public class TaskModel {
         self.didUpdateTasks = BehaviorSubject<[Task]>(value: tasks)
         reefKit.tasksDelegate = self
         
+        loadTasks()
+    }
+    
+    func loadTasks() {
         reefKit.fetchTasks {
             self.tasks = $0
             self.recommended = ReefKit.recommendedTasks(from: $0)
+            self.didUpdateTasks.onNext(self.tasks)
         }
-        didUpdateTasks.onNext(tasks)
     }
     
     // MARK: - CRUD Methods
     public func save(_ task: Task) {
         reefKit.save(task)
+        if recommended.contains(task) {
+            Recommender.reset()
+            recommended = Recommender.recommended(from: self.tasks)
+            didUpdateTasks.onNext(self.tasks)
+        }
     }
     
     public func delete(_ task: Task) {
@@ -82,17 +91,15 @@ extension TaskModel: ReefTaskDelegate {
             guard !self.tasks.contains(task) else { continue }
             self.tasks.append(task)
         }
+        self.recommended = ReefKit.recommendedTasks(from: self.tasks)
         self.didUpdateTasks.onNext(self.tasks)
     }
     
     public func reef(_ reefKit: ReefKit, didUpdateTasks tasks: [Task]) {
-        for task in tasks {
-            if let index = self.tasks.index(of: task) { self.tasks[index] = task }
-            if let index = recommended.index(of: task) {
-                if task.isCompleted { recommended.remove(at: index); continue }
-                recommended[index] = task
-            }
-        }
+//        for task in tasks {
+//            if let index = self.tasks.index(of: task) { self.tasks[index] = task }
+//        }
+        self.recommended = ReefKit.recommendedTasks(from: self.tasks)
         self.didUpdateTasks.onNext(self.tasks)
     }
     
@@ -101,6 +108,7 @@ extension TaskModel: ReefTaskDelegate {
             if let index = tasks.index(of: task) { self.tasks.remove(at: index) }
             if let index = recommended.index(of: task) { recommended.remove(at: index) }
         }
+        self.recommended = ReefKit.recommendedTasks(from: self.tasks)
         didUpdateTasks.onNext(tasks)
     }
 }

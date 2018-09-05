@@ -26,14 +26,6 @@ class LocationManager {
     }
     
     func startMonitoring(region: CLCircularRegion) {
-        if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
-            //error: monitoring not available on device
-        }
-        
-        if CLLocationManager.authorizationStatus() != .authorizedAlways {
-            //error: location not authorized by use
-        }
-        
         manager.startMonitoring(for: region)
     }
     

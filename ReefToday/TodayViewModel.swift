@@ -23,10 +23,7 @@ class TodayViewModel {
     
     init() {
         self.tasks = []
-        reef.fetchTasks() { tasks in
-            self.tasks = ReefKit.recommendedTasks(from: tasks)
-            self.delegate?.reloadedTasks()
-        }
+        resetRecommendedTasks()
     }
     
     var numberOfTasks: Int {
@@ -40,8 +37,22 @@ class TodayViewModel {
     func completed(_ task: Task) {
         if let index = tasks.index(of: task) {
             reef.save(task)
-            tasks.remove(at: index)
-            delegate?.removedTasks(at: index)
+            if task.isCompleted {
+                tasks.remove(at: index)
+                delegate?.removedTasks(at: index)
+                if tasks.isEmpty { resetRecommendedTasks() }
+            }
         }
+    }
+    
+    func resetRecommendedTasks() {
+        reef.fetchTasks() { tasks in
+            self.tasks = ReefKit.recommendedTasks(from: tasks)
+            self.delegate?.reloadedTasks()
+        }
+    }
+    
+    var shouldShowEmptyState: Bool {
+        return tasks.isEmpty
     }
 }

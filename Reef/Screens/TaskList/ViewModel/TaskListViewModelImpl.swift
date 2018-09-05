@@ -180,5 +180,4 @@ public class TaskListViewModelImpl: TaskListViewModel {
     // MARK: Strings
     let recommendedHeaderTitle = Strings.Task.ListScreen.recommendedHeaderTitle
     let section2HeaderTitle = Strings.Task.ListScreen.section2HeaderTitle
-    
 }

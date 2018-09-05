@@ -95,10 +95,11 @@ extension CreateTagViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: ColorCollectionViewCell.identifier, for: indexPath) as? ColorCollectionViewCell else {
-                return UICollectionViewCell()
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ColorCollectionViewCell.identifier,
+                                                            for: indexPath) as? ColorCollectionViewCell else {
+                                                                return UICollectionViewCell()
         }
+        
         cell.configure(with: indexPath.row)
         return cell
     }
