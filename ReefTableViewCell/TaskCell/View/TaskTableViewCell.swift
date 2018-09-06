@@ -59,10 +59,10 @@ public class TaskTableViewCell: UITableViewCell {
         selectionStyle = .none
         taskTitleTextView.font = UIFont.font(sized: 19, weight: .medium, with: .body)
         tagsLabel.font = UIFont.font(sized: 14, weight: .regular, with: .footnote)
+        configureAccessibility()
     }
     
     // MARK: - Functions
-    
     public func configure(with viewModel: TaskCellViewModel) {
         self.viewModel = viewModel
         
@@ -93,6 +93,10 @@ public class TaskTableViewCell: UITableViewCell {
     
     public override func layoutSubviews() {
         gradientLayer.frame = checkButton.bounds
+    }
+    
+    fileprivate func configureAccessibility() {
+        checkButton.accessibilityIgnoresInvertColors = true
     }
 }
 

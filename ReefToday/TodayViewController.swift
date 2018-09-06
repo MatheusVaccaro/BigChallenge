@@ -26,7 +26,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         viewModel.delegate = self
         
         emptyStateLabel.font = UIFont.font(sized: 20, weight: .regular, with: .body)
-        emptyStateLabel.text = NSLocalizedString("emptyState", comment: "widget string when there are no tasks to present")
+        emptyStateLabel.text = NSLocalizedString("emptyState",
+                                                 comment: "widget string when there are no tasks to present")
         
         showLockedScreenStateIfNeeded()
         configureTableView()
