@@ -17,7 +17,7 @@ class NewTagCoordinator: Coordinator {
     
     fileprivate var createTagViewController: CreateTagViewController?
     fileprivate var moreOptionsViewController: MoreOptionsViewController?
-    fileprivate var tagCreationFrameViewController: CreationFrameViewController?
+//    fileprivate var tagCreationFrameViewController: CreationFrameViewController?
     fileprivate let model: TagModel
     fileprivate var tag: Tag?
     fileprivate var modalPresenter: UINavigationController?
@@ -59,38 +59,28 @@ class NewTagCoordinator: Coordinator {
         
         moreOptionsViewController.viewModel = moreOptionsViewModel
         self.moreOptionsViewController = moreOptionsViewController
-        moreOptionsViewController.locationCellContent = locationInputViewController
-        moreOptionsViewController.timeCellContent = dateInputViewController
         
-        // Tag Frame
-        let tagCreationFrameViewController = CreationFrameViewController.instantiate()
-        let tagCreationFrameViewModel = TagCreationFrameViewModel(mainInfoViewModel: newTagViewModel,
-                                                                  detailViewModel: moreOptionsViewModel,
-                                                                  tagModel: model)
-        tagCreationFrameViewModel.delegate = self
-        tagCreationFrameViewController.viewModel = tagCreationFrameViewModel
-        tagCreationFrameViewController.delegate = self
-        self.tagCreationFrameViewController = tagCreationFrameViewController
+//        tagCreationFrameViewController.delegate = self
+//        self.tagCreationFrameViewController = tagCreationFrameViewController
 
 //        tagCreationFrameViewController.configurePageViewController(with: [createTagViewController,
 //                                                                          moreOptionsViewController])
         
         // Edit Mode
         if let tag = tag {
-            tagCreationFrameViewModel.tag = tag
-            tagCreationFrameViewModel.doneButtonObservable.onNext(true)
+        
         }
         
         // Modal Presenter
-        let modalPresenter = UINavigationController(rootViewController: tagCreationFrameViewController)
-        modalPresenter.isNavigationBarHidden = true
-        self.modalPresenter = modalPresenter
+//        let modalPresenter = UINavigationController(rootViewController: tagCreationFrameViewController)
+//        modalPresenter.isNavigationBarHidden = true
+//        self.modalPresenter = modalPresenter
         
-        presenter.present(modalPresenter, animated: true, completion: nil)
+//        presenter.present(modalPresenter, animated: true, completion: nil)
     }
 }
 
-extension NewTagCoordinator: CreationFrameViewModelDelegate {
+extension NewTagCoordinator {
     
     func didTapCancelButton() {
         dismissViewController()
@@ -107,8 +97,8 @@ extension NewTagCoordinator: CreationFrameViewModelDelegate {
     
 }
 
-extension NewTagCoordinator: CreationFrameViewControllerDelegate {
-    func viewDidLoad(in viewController: CreationFrameViewController) {
-        viewController.setFrameContent(viewController: createTagViewController!)
-    }
+extension NewTagCoordinator {
+//    func viewDidLoad(in viewController: CreationFrameViewController) {
+//        viewController.setFrameContent(viewController: createTagViewController!)
+//    }
 }

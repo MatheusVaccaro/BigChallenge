@@ -8,18 +8,16 @@
 
 import Foundation
 
-class LocationTableViewCellViewModel: MoreOptionsTableViewCellViewModelProtocol {
-    
-    func title() -> String {
+extension LocationInputViewModel: OptionCellPresentable {
+    var title: String {
         return Strings.MoreOptionsScreen.LocationCell.title
     }
     
-    func subtitle() -> String {
+    var subtitle: String {
         return Strings.MoreOptionsScreen.LocationCell.subtitle
     }
     
-    func imageName() -> String {
+    var imageName: String {
         return "locationButton"
     }
-    
 }

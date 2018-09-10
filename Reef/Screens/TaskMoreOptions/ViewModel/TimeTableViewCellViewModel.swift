@@ -8,18 +8,16 @@
 
 import Foundation
 
-class TimeTableViewCellViewModel: MoreOptionsTableViewCellViewModelProtocol {
-    
-    func title() -> String {
+extension DateInputViewModel: OptionCellPresentable {
+    var title: String {
         return Strings.MoreOptionsScreen.TimeCell.title
     }
     
-    func subtitle() -> String {
+    var subtitle: String {
         return Strings.MoreOptionsScreen.TimeCell.subtitle
     }
     
-    func imageName() -> String {
+    var imageName: String {
         return "timeButton"
     }
-    
 }

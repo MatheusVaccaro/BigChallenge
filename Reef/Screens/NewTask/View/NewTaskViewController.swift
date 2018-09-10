@@ -8,125 +8,62 @@
 
 import UIKit
 import RxSwift
-import RxCocoa
 import UITextView_Placeholder
 
-class NewTaskViewController: UIViewController, CreationFramePresentable {
+class NewTaskViewController: UIViewController {
     
     // MARK: - Properties
-    
-    var viewModel: NewTaskViewModelProtocol?
-    var tagCollectionViewModel: TagCollectionViewModel?
-    fileprivate var tagCollectionViewController: TagCollectionViewController!
+    var viewModel: NewTaskViewModel!
     private let disposeBag = DisposeBag()
 
     // MARK: - IBOutlets
     
+    @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var taskTitleTextView: UITextView!
-    @IBOutlet weak var taskNotesTextView: UITextView!
-    @IBOutlet weak var tagCollectionContainerView: UIView!
+    @IBOutlet weak var taskDetailsButton: UIButton!
     
     // MARK: - NewTaskViewController Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureWithViewModel()
-        configureTagCollectionViewController()
         configureTaskTitleTextView()
-        configureTaskNotesTextView()
-        userActivity = viewModel!.userActivity
+        
+        userActivity = viewModel.userActivity
         userActivity?.becomeCurrent()
         
         taskTitleTextView.delegate = self
-        
-        print("+++ INIT NewTaskViewController")
-    }
-    
-    deinit {
-        print("--- DEINIT NewTaskViewController")
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        taskTitleTextView.becomeFirstResponder()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
         view.endEditing(true)
+        super.viewWillDisappear(animated)
     }
     
     // MARK: - IBActions
-    
-    @IBAction func didTapMoreOptionsButton(_ sender: UIButton) {
+    @IBAction func didClickDetailsButton(_ sender: Any) {
+        //TODO: bring more options view
     }
     
     // MARK: - Functions
-    
     private func configureWithViewModel() {
-        guard let viewModel = viewModel else { return }
-        if let taskTitle = viewModel.taskTitle(),
-            let taskNotes = viewModel.taskNotesText {
-            taskTitleTextView.text = taskTitle
-            taskNotesTextView.text = taskNotes
-        }
-    }
-    
-    private func configureTagCollectionViewController() {
-        let tagCollectionViewController = TagCollectionViewController.instantiate()
-        tagCollectionViewController.viewModel = tagCollectionViewModel
-        addChildViewController(tagCollectionViewController)
-        tagCollectionViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        self.tagCollectionViewController = tagCollectionViewController
-        tagCollectionContainerView.addSubview(tagCollectionViewController.view)
-        
-        NSLayoutConstraint.activate([
-            tagCollectionViewController.view
-                .leadingAnchor.constraint(equalTo: tagCollectionContainerView.leadingAnchor),
-            tagCollectionViewController.view
-                .trailingAnchor.constraint(equalTo: tagCollectionContainerView.trailingAnchor),
-            tagCollectionViewController.view
-                .topAnchor.constraint(equalTo: tagCollectionContainerView.topAnchor),
-            tagCollectionViewController.view
-                .bottomAnchor.constraint(equalTo: tagCollectionContainerView.bottomAnchor)
-            ])
-        
-        tagCollectionViewController.didMove(toParentViewController: self)
-        
-        tagCollectionViewController.viewModel.selectedTagsObservable.subscribe { [weak self] event in
-            self?.viewModel?.selectedTags = event.element!
-            print("selected tags are: \(event.element!.map {$0.title})")
-        }.disposed(by: disposeBag)
-        
-        tagCollectionViewController.addTagEvent?.subscribe { [weak self] in
-            self?.viewModel?.willAddTag()
-        }.disposed(by: disposeBag)
+        taskTitleTextView.text = viewModel.taskTitleText
     }
     
     private func configureTaskTitleTextView() {
-        taskTitleTextView.font = UIFont.font(sized: 38.0, weight: .bold, with: .title1, fontName: .barlow)
-        taskTitleTextView.placeholderColor = UIColor.lightGray.withAlphaComponent(0.5)
-        taskTitleTextView.becomeFirstResponder()
+        taskTitleTextView.font = UIFont.font(sized: 17, weight: .medium, with: .body)
+        
+        taskTitleTextView.placeholderColor = UIColor.lightGray.withAlphaComponent(0.5) //TODO set true color
         taskTitleTextView.placeholder = Strings.Task.CreationScreen.taskTitlePlaceholder
-        taskTitleTextView.textContainerInset =
-            UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        taskTitleTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         taskTitleTextView.textContainer.lineFragmentPadding = 0
-    }
-    
-    private func configureTaskNotesTextView() {
-        taskNotesTextView.delegate = self
-        taskNotesTextView.font = UIFont.font(sized: 14, weight: .regular, with: .body)
-        taskNotesTextView.textContainer.lineBreakMode = .byTruncatingTail
-        taskNotesTextView.placeholderColor = UIColor.lightGray.withAlphaComponent(0.5)
-        taskNotesTextView.placeholder = Strings.Task.CreationScreen.taskDescriptionPlaceholder
     }
 }
 
 // MARK: - StoryboardInstantiable
 
 extension NewTaskViewController: StoryboardInstantiable {
-    
     static var storyboardIdentifier: String {
         return "NewTask"
     }
@@ -138,10 +75,6 @@ extension NewTaskViewController: StoryboardInstantiable {
 
 extension NewTaskViewController: UITextViewDelegate {
     func textViewDidChangeSelection(_ textView: UITextView) {
-        if textView === taskTitleTextView {
-            viewModel?.taskTitleText = textView.text
-        } else {
-            viewModel?.taskNotesText = textView.text
-        }
+        viewModel.taskTitleText = textView.text
     }
 }

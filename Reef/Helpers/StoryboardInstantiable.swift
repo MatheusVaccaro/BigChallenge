@@ -11,8 +11,11 @@ import UIKit
 
 protocol StoryboardInstantiable {
     
+    /// viewController identifier inside storyboard file
     static var viewControllerID: String { get }
+    /// storyboard bundle name
     static var storyboardBundle: Bundle? { get }
+    /// storyboard file name
     static var storyboardIdentifier: String { get }
     
 }

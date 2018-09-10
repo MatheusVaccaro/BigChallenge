@@ -43,18 +43,19 @@ class HomeScreenCoordinator: Coordinator {
         self.childrenCoordinators = []
         
         self.remindersImporter = RemindersImporter(taskModel: taskModel, tagModel: tagModel)
-        self.remindersImporter.importIfGranted()
+//        self.remindersImporter.importIfGranted()
         
         self.taskModel.delegate = self
     }
 
     func start() {
         let homeScreenViewController = HomeScreenViewController.instantiate()
-        let homeScreenViewModel = HomeScreenViewModelImpl(taskModel: taskModel,
+        let homeScreenViewModel = HomeScreenViewModel(taskModel: taskModel,
                                                       tagModel: tagModel,
                                                       selectedTags: selectedTags,
                                                       taskListViewModelType: taskListViewModelType,
                                                       tagCollectionViewModelType: tagCollectionViewModelType)
+        
         homeScreenViewController.viewModel = homeScreenViewModel
 
         homeScreenViewModel.delegate = self

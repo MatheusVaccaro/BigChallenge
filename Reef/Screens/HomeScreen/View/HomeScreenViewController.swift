@@ -68,8 +68,7 @@ class HomeScreenViewController: UIViewController {
         configureEmptyState()
     }
     
-    func setupTaskList(viewModel: TaskListViewModel,
-                       viewController: TaskListViewController) {
+    func setupTaskList(viewModel: TaskListViewModel, viewController: TaskListViewController) {
         
         guard taskListViewController == nil else { return }
         taskListViewController = viewController

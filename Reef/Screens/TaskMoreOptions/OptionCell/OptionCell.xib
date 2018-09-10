@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="OptionTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" id="lgp-ch-F7O" userLabel="OptionCell" customClass="OptionTableViewCell" customModule="Reef" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lgp-ch-F7O" id="y4O-I7-yfu">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="66.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="vwT-xg-fCr">
+                        <rect key="frame" x="54" y="8" width="305" height="50.5"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" keyboardDismissMode="interactive" editable="NO" text="I am an option" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1w-aa-5F0">
+                                <rect key="frame" x="0.0" y="0.0" width="305" height="36"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" textContentType="name"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biZ-75-W1n">
+                                <rect key="frame" x="0.0" y="37" width="305" height="13.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3QI-Uu-sy9">
+                        <rect key="frame" x="16" y="23.5" width="22" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="3QI-Uu-sy9" secondAttribute="height" multiplier="11:10" id="Hyl-tI-1DJ"/>
+                            <constraint firstAttribute="width" constant="22" id="sTm-Sr-1h3"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="vwT-xg-fCr" secondAttribute="trailing" constant="16" id="9fy-Cf-KCx"/>
+                    <constraint firstItem="3QI-Uu-sy9" firstAttribute="centerY" secondItem="y4O-I7-yfu" secondAttribute="centerY" id="9hU-Cp-68B"/>
+                    <constraint firstAttribute="bottom" secondItem="vwT-xg-fCr" secondAttribute="bottom" constant="8" id="YDN-df-shT"/>
+                    <constraint firstItem="3QI-Uu-sy9" firstAttribute="leading" secondItem="y4O-I7-yfu" secondAttribute="leading" constant="16" id="ZEm-Rm-YhD"/>
+                    <constraint firstItem="vwT-xg-fCr" firstAttribute="top" secondItem="y4O-I7-yfu" secondAttribute="top" constant="8" id="mvq-5p-VgQ"/>
+                    <constraint firstItem="vwT-xg-fCr" firstAttribute="leading" secondItem="3QI-Uu-sy9" secondAttribute="trailing" constant="16" id="sll-Ey-voR"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="optionIcon" destination="3QI-Uu-sy9" id="ZGq-WD-Av3"/>
+                <outlet property="optionSubtitle" destination="biZ-75-W1n" id="IM0-qf-LmC"/>
+                <outlet property="optionTitle" destination="O1w-aa-5F0" id="wkl-7t-zsW"/>
+                <outlet property="tagsLabel" destination="biZ-75-W1n" id="4ma-zm-RD0"/>
+                <outlet property="taskTitleTextView" destination="O1w-aa-5F0" id="fUt-DB-In3"/>
+            </connections>
+            <point key="canvasLocation" x="25.5" y="183"/>
+        </tableViewCell>
+    </objects>
+</document>
