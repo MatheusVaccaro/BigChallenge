@@ -10,7 +10,4 @@ import Foundation
 
 class TaskCreationViewModel {
     
-    init(taskDetailViewModel: MoreOptionsViewModel, newTaskViewModel: NewTaskViewModel) {
-        
-    }
 }

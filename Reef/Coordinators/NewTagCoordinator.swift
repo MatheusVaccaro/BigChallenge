@@ -50,15 +50,8 @@ class NewTagCoordinator: Coordinator {
             locationInputViewController.arriving = tag.arriving
         }
         
-        let dateInputViewModel = DateInputViewModel(with: tag)
-        let dateInputViewController = DateInputViewController.instantiate()
-        dateInputViewController.viewModel = dateInputViewModel
-        
-        let moreOptionsViewModel = MoreOptionsViewModel(locationInputViewModel: locationInputViewModel,
-                                                        dateInputViewModel: dateInputViewModel)
-        
-        moreOptionsViewController.viewModel = moreOptionsViewModel
-        self.moreOptionsViewController = moreOptionsViewController
+//        moreOptionsViewController.viewModel = moreOptionsViewModel
+//        self.moreOptionsViewController = moreOptionsViewController
         
 //        tagCreationFrameViewController.delegate = self
 //        self.tagCreationFrameViewController = tagCreationFrameViewController

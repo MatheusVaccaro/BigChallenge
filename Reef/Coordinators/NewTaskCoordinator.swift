@@ -16,11 +16,13 @@ class NewTaskCoordinator: Coordinator {
     fileprivate let presenter: UINavigationController
     var childrenCoordinators: [Coordinator]
     
-    fileprivate var taskFrameViewController: TaskCreationFrameViewController?
+    fileprivate var taskFrameViewController: TaskCreationFrameViewController!
     fileprivate var newTaskViewController: NewTaskViewController?
     fileprivate var moreOptionsViewController: MoreOptionsViewController?
+    
     fileprivate let taskModel: TaskModel
     fileprivate let tagModel: TagModel
+    
     fileprivate let selectedTags: [Tag]
     fileprivate var task: Task?
     fileprivate let isEditing: Bool
@@ -30,9 +32,6 @@ class NewTaskCoordinator: Coordinator {
     fileprivate var date: Date?
     
     weak var delegate: CoordinatorDelegate?
-    
-    var newTaskViewModel: NewTaskViewModel?
-    
     
     init(task: Task? = nil,
          presenter: UINavigationController,
@@ -59,35 +58,18 @@ class NewTaskCoordinator: Coordinator {
     }
     
     func start() {
-        let locationInputViewController = LocationInputView.instantiate()
-        let locationInputViewModel = locationInputViewController.viewModel //TODO instantiate view model here
-        
-        let dateInputViewModel = DateInputViewModel(with: task)
-        let dateInputViewController = DateInputViewController.instantiate()
-        dateInputViewController.viewModel = dateInputViewModel
-        
         // new task (title)
-        let newTaskViewModel = NewTaskViewModel(task: task,
-                                                taskModel: taskModel)
-        self.newTaskViewModel = newTaskViewModel
-
-        // More Options
-        let moreOptionsViewController = MoreOptionsViewController.instantiate()
-        
-        let moreOptionsViewModel = MoreOptionsViewModel(locationInputViewModel: locationInputViewModel,
-                                                        dateInputViewModel: dateInputViewModel)
-        
-        moreOptionsViewController.viewModel = moreOptionsViewModel
-        self.moreOptionsViewController = moreOptionsViewController
-        
         let newTaskViewController = NewTaskViewController.instantiate()
+        
+        let newTaskViewModel = NewTaskViewModel(task: task, taskModel: taskModel)
+        
         newTaskViewController.viewModel = newTaskViewModel
+        
         self.newTaskViewController = newTaskViewController
     
         // Task Frame
         let creationFrameViewController = TaskCreationFrameViewController.instantiate()
-        let creationFrameViewModel = TaskCreationViewModel(taskDetailViewModel: moreOptionsViewModel,
-                                                           newTaskViewModel: newTaskViewModel)
+        let creationFrameViewModel = TaskCreationViewModel()
         
         creationFrameViewController.viewModel = creationFrameViewModel
         self.taskFrameViewController = creationFrameViewController
@@ -95,8 +77,8 @@ class NewTaskCoordinator: Coordinator {
         // edit task
         //TODO: move to respective viewModels
         if let task = self.task {
-            locationInputViewController.outputlocation = location
-            locationInputViewController.arriving = task.isArriving
+//            locationInputViewController.outputlocation = location
+//            locationInputViewController.arriving = task.isArriving
 //            creationFrameViewModel.task = task
 //            creationFrameViewModel.doneButtonObservable.onNext(true)
         }
@@ -109,6 +91,17 @@ class NewTaskCoordinator: Coordinator {
         presenter.present(modalPresenter, animated: true, completion: nil)
     }
     
+    fileprivate func showMoreOptions() {
+        // More Options
+        moreOptionsViewController = MoreOptionsViewController.instantiate()
+        
+        let moreOptionsViewModel = MoreOptionsViewModel()
+        
+        moreOptionsViewController!.viewModel = moreOptionsViewModel
+        
+        taskFrameViewController.present(moreOptionsViewController!)
+    }
+    
     fileprivate func showNewTag() {
         guard let modalPresenter = modalPresenter else { return }
         let newTagCoordinator = NewTagCoordinator(tag: nil,
@@ -119,7 +112,7 @@ class NewTaskCoordinator: Coordinator {
         newTagCoordinator.start()
     }
     
-    fileprivate func showMoreOptions() {
+//    fileprivate func showMoreOptions() {
         // init moreOptions coordinator
         // moreOptionsCoordinator presenter SHOULD be modalPresenter in this case
         // set coordinator's delegate to self
@@ -129,7 +122,7 @@ class NewTaskCoordinator: Coordinator {
         // IMPORTANT!
         // Use this Coordinator as exemple
         // Remember to call shouldDeinitCoordinator when needed
-    }
+//    }
     
 }
 

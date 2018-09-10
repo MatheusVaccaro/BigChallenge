@@ -24,18 +24,12 @@ protocol MoreOptionsViewModelDelegate: class {
 class MoreOptionsViewModel {
     
     weak var delegate: MoreOptionsViewModelDelegate?
-    let locationInputViewModel: LocationInputViewModel
-    let dateInputViewModel: DateInputViewModel
+    
+    var locationInputViewModel: LocationInputViewModel?
+    var dateInputViewModel: DateInputViewModel?
     
     let numberOfSections = 0
     let numberOfRows = 0
-    
-    init(locationInputViewModel: LocationInputViewModel, dateInputViewModel: DateInputViewModel) {
-        self.locationInputViewModel = locationInputViewModel
-        self.dateInputViewModel = dateInputViewModel
-        self.locationInputViewModel.delegate = self
-        self.dateInputViewModel.delegate = self
-    }
 }
 
 extension MoreOptionsViewModel: LocationInputDelegate {

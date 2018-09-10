@@ -13,13 +13,15 @@ class TaskCreationFrameViewController: UIViewController {
     @IBOutlet weak var taskDetailView: UIView!
     @IBOutlet weak var taskTitleView: UIView!
     
-    fileprivate var taskDetailViewController: MoreOptionsViewController!
-    fileprivate var newTaskViewController: NewTaskViewController!
+    var taskDetailViewController: MoreOptionsViewController?
+    var newTaskViewController: NewTaskViewController!
     
     var viewModel: TaskCreationViewModel!
     
-    func loadTaskDetails() {
+    func present(_ taskDetailViewController: MoreOptionsViewController) {
+        self.taskDetailViewController = taskDetailViewController
         
+        //present in tasjDetailView
     }
     
     func loadNewTask() {
