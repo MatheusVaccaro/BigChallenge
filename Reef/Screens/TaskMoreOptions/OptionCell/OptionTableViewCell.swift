@@ -16,6 +16,10 @@ class OptionTableViewCell: UITableViewCell {
     @IBOutlet weak var optionTitle: UITextView!
     @IBOutlet weak var optionSubtitle: UILabel!
     
+    var expectedHeight: CGFloat {
+        return optionTitle.frame.height + optionSubtitle.frame.height + 32
+    }
+    
     var viewModel: OptionCellPresentable! {
         didSet {
             optionTitle.text = viewModel.title
@@ -27,6 +31,17 @@ class OptionTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        selectionStyle = .none
+        
+        optionTitle.font = UIFont.font(sized: 25, weight: .medium, with: .title1)
+        optionSubtitle.font = UIFont.font(sized: 14, weight: .regular, with: .title3)
+        
+        optionTitle.textContainerInset =
+            UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        optionTitle.textContainer.lineFragmentPadding = 0
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         optionTitle.font = UIFont.font(sized: 25, weight: .medium, with: .title1)
         optionSubtitle.font = UIFont.font(sized: 14, weight: .regular, with: .title3)
     }

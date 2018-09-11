@@ -16,7 +16,7 @@ class LocationInputView: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var mapView: RadiusMapView!
     @IBOutlet weak var searchResultsTableView: UITableView!
-    let viewModel = LocationInputViewModel()
+    var viewModel: LocationInputViewModel!
     
     var outputlocation: CLCircularRegion? {
         didSet {
@@ -41,6 +41,8 @@ class LocationInputView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = viewModel.title
+        
         setupSegmentedControl()
         setupLocationManager()
         setupSearchBar()
@@ -58,6 +60,12 @@ class LocationInputView: UIViewController {
     
     deinit {
         print("--- DEINIT LocationInputViewController")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     @IBAction func segmentedControlSelected(_ sender: Any) {

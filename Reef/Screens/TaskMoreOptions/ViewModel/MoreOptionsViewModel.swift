@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import ReefKit
 
 protocol MoreOptionsViewModelDelegate: class {
     func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool)
@@ -23,13 +24,20 @@ protocol MoreOptionsViewModelDelegate: class {
 
 class MoreOptionsViewModel {
     
+    init(task: Task?) {
+        print(task)
+        
+        locationInputViewModel = LocationInputViewModel(task: task)
+        dateInputViewModel = DateInputViewModel(with: task)
+    }
+    
     weak var delegate: MoreOptionsViewModelDelegate?
     
-    var locationInputViewModel: LocationInputViewModel?
-    var dateInputViewModel: DateInputViewModel?
+    let locationInputViewModel: LocationInputViewModel
+    let dateInputViewModel: DateInputViewModel
     
-    let numberOfSections = 0
-    let numberOfRows = 0
+    let numberOfSections = 1
+    let numberOfRows = 2
 }
 
 extension MoreOptionsViewModel: LocationInputDelegate {

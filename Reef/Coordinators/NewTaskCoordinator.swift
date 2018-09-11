@@ -85,7 +85,13 @@ class NewTaskCoordinator: Coordinator {
         
         // Modal Presenter
         let modalPresenter = UINavigationController(rootViewController: creationFrameViewController)
+        
+        modalPresenter.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        modalPresenter.navigationBar.shadowImage = UIImage()
+        modalPresenter.navigationBar.isTranslucent = true
+        modalPresenter.view.backgroundColor = .clear
         modalPresenter.isNavigationBarHidden = true
+        
         self.modalPresenter = modalPresenter
         
         presenter.present(modalPresenter, animated: true) {
@@ -96,12 +102,19 @@ class NewTaskCoordinator: Coordinator {
     fileprivate func showMoreOptions() {
         // More Options
         moreOptionsViewController = MoreOptionsViewController.instantiate()
-        
-        let moreOptionsViewModel = MoreOptionsViewModel()
+        moreOptionsViewController?.delegate = self
+        let moreOptionsViewModel = MoreOptionsViewModel(task: self.task)
         
         moreOptionsViewController!.viewModel = moreOptionsViewModel
         
         taskFrameViewController.present(moreOptionsViewController!)
+    }
+    
+    fileprivate func showLocationInput() {
+        let locationInputView = LocationInputView.instantiate()
+        locationInputView.viewModel = moreOptionsViewController!.viewModel.locationInputViewModel
+
+        modalPresenter!.pushViewController(locationInputView, animated: true)
     }
     
     fileprivate func showNewTag() {
@@ -113,34 +126,15 @@ class NewTaskCoordinator: Coordinator {
         addChild(coordinator: newTagCoordinator)
         newTagCoordinator.start()
     }
-    
-//    fileprivate func showMoreOptions() {
-        // init moreOptions coordinator
-        // moreOptionsCoordinator presenter SHOULD be modalPresenter in this case
-        // set coordinator's delegate to self
-        // call addChild(moreOptionsCoordinator)
-        // call .start() of moreOptionsCoordinator
-        
-        // IMPORTANT!
-        // Use this Coordinator as exemple
-        // Remember to call shouldDeinitCoordinator when needed
-//    }
-    
+}
+
+extension NewTaskCoordinator: MoreOptionsDelegate {
+    func shouldPresentViewForLocationInput() {
+        showLocationInput()
+    }
 }
 
 extension NewTaskCoordinator {
-    
-    func willAddTag() {
-        showNewTag()
-    }
-    
-    func didTapCancelButton() {
-        dismissViewController()
-    }
-    
-    func didTapSaveButton() {
-        dismissViewController()
-    }
     
     private func dismissViewController() {
         presenter.dismiss(animated: true, completion: nil)

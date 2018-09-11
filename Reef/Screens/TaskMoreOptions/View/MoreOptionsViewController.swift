@@ -8,11 +8,16 @@
 
 import UIKit
 
+protocol MoreOptionsDelegate: class {
+    func shouldPresentViewForLocationInput()
+}
+
 class MoreOptionsViewController: UIViewController {
     
     // MARK: - Properties
     
     var viewModel: MoreOptionsViewModel!
+    weak var delegate: MoreOptionsDelegate?
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -23,11 +28,20 @@ class MoreOptionsViewController: UIViewController {
         setupTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     // MARK: - Functions
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.bounces = false
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 80
+        
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "OptionCell",
                                  bundle: nil),
@@ -49,6 +63,7 @@ extension MoreOptionsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: OptionTableViewCell.reuseIdentifier!,
                                                  for: indexPath) as! OptionTableViewCell
+        
         switch indexPath.row {
         case 0:
             cell.viewModel = viewModel.locationInputViewModel
@@ -58,16 +73,17 @@ extension MoreOptionsViewController: UITableViewDataSource {
         
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
-    }
 }
 
 // MARK: - UITableViewDelegate
 extension MoreOptionsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        switch indexPath.row {
+        case 0:
+            delegate?.shouldPresentViewForLocationInput()
+        default:
+            print("present date screen")
+        }
     }
 }
 
