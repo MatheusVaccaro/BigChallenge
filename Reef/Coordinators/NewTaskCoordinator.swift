@@ -88,7 +88,9 @@ class NewTaskCoordinator: Coordinator {
         modalPresenter.isNavigationBarHidden = true
         self.modalPresenter = modalPresenter
         
-        presenter.present(modalPresenter, animated: true, completion: nil)
+        presenter.present(modalPresenter, animated: true) {
+            self.showMoreOptions()
+        }
     }
     
     fileprivate func showMoreOptions() {

@@ -21,7 +21,8 @@ class TaskCreationFrameViewController: UIViewController {
     func present(_ taskDetailViewController: MoreOptionsViewController) {
         self.taskDetailViewController = taskDetailViewController
         
-        //present in tasjDetailView
+        addChildViewController(taskDetailViewController)
+        taskDetailView.addSubview(taskDetailViewController.view)
     }
     
     func loadNewTask() {
