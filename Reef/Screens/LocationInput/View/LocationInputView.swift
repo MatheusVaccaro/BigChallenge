@@ -26,9 +26,7 @@ class LocationInputView: UIViewController {
     
     var arriving: Bool = true {
         didSet {
-            if isViewLoaded {
-                mapView.arriving = arriving
-            }
+            mapView.arriving = arriving
             guard let location = outputlocation else { return }
             viewModel.delegate?.locationInput(self, didFind: location, arriving: arriving)
         }
@@ -42,6 +40,16 @@ class LocationInputView: UIViewController {
         super.viewDidLoad()
         
         title = viewModel.title
+        
+        if let location = viewModel.startingLocation {
+            outputlocation = location
+            arriving = viewModel.startingIsArriving
+        }
+
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.view.backgroundColor = .clear
         
         setupSegmentedControl()
         setupLocationManager()

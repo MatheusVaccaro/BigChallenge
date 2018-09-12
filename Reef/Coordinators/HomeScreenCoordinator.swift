@@ -70,7 +70,8 @@ class HomeScreenCoordinator: Coordinator {
                                                     presenter: presenter,
                                                     taskModel: taskModel,
                                                     tagModel: tagModel,
-                                                    selectedTags: selectedTags)
+                                                    selectedTags: selectedTags,
+                                                    in: homeScreenViewController!)
         newTaskCoordinator.delegate = self
         addChild(coordinator: newTaskCoordinator)
         newTaskCoordinator.start()
@@ -80,7 +81,8 @@ class HomeScreenCoordinator: Coordinator {
         let newTaskCoordinator = NewTaskCoordinator(task: task,
                                                     presenter: presenter,
                                                     taskModel: taskModel,
-                                                    tagModel: tagModel)
+                                                    tagModel: tagModel,
+                                                    in: homeScreenViewController!)
         newTaskCoordinator.delegate = self
         addChild(coordinator: newTaskCoordinator)
         newTaskCoordinator.start()
@@ -114,7 +116,7 @@ extension HomeScreenCoordinator: CoordinatorDelegate {
 extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
     func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
                              willAddTaskWithSelectedTags selectedTags: [Tag]) {
-        showNewTask(selectedTags: selectedTags)
+//        showNewTask(selectedTags: selectedTags) //TODO remove
     }
     
     func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel, willEdit task: Task) {
@@ -147,6 +149,7 @@ extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
         let tagCollectionVC = TagCollectionViewController.instantiate()
         tagCollectionVC.viewModel = tagCollectionViewModel
 		homeScreenViewController?.setupTagCollection(viewModel: tagCollectionViewModel, viewController: tagCollectionVC)
+        showNewTask(selectedTags: selectedTags)
     }
 }
 

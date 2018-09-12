@@ -19,26 +19,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iof-x6-2Zq" userLabel="DetailView">
-                                <rect key="frame" x="0.0" y="20" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="579"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sl8-Ip-pVP" userLabel="titleView">
                                 <rect key="frame" x="0.0" y="587" width="375" height="80"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="aOd-ga-GkN"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="NlQ-HN-lVl" appends="YES" id="Td0-Mt-qZY"/>
+                                    <outletCollection property="gestureRecognizers" destination="jif-0G-hmo" appends="YES" id="a1p-V4-EAA"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="iof-x6-2Zq" firstAttribute="leading" secondItem="isU-bp-1Xt" secondAttribute="leading" id="BI2-eW-fCa"/>
-                            <constraint firstItem="sl8-Ip-pVP" firstAttribute="leading" secondItem="isU-bp-1Xt" secondAttribute="leading" id="H6w-9Z-XTm"/>
-                            <constraint firstItem="isU-bp-1Xt" firstAttribute="bottom" secondItem="sl8-Ip-pVP" secondAttribute="bottom" id="Teb-yl-WTm"/>
+                            <constraint firstItem="iof-x6-2Zq" firstAttribute="leading" secondItem="FUJ-f1-wVI" secondAttribute="leading" id="BI2-eW-fCa"/>
+                            <constraint firstItem="sl8-Ip-pVP" firstAttribute="leading" secondItem="FUJ-f1-wVI" secondAttribute="leading" id="H6w-9Z-XTm"/>
+                            <constraint firstAttribute="bottom" secondItem="sl8-Ip-pVP" secondAttribute="bottom" id="Teb-yl-WTm"/>
                             <constraint firstItem="sl8-Ip-pVP" firstAttribute="top" secondItem="iof-x6-2Zq" secondAttribute="bottom" constant="8" id="e8E-cO-t7r"/>
-                            <constraint firstItem="isU-bp-1Xt" firstAttribute="trailing" secondItem="iof-x6-2Zq" secondAttribute="trailing" id="tIh-9V-6XC"/>
-                            <constraint firstItem="isU-bp-1Xt" firstAttribute="trailing" secondItem="sl8-Ip-pVP" secondAttribute="trailing" id="uDN-R7-Pgc"/>
-                            <constraint firstItem="iof-x6-2Zq" firstAttribute="top" secondItem="isU-bp-1Xt" secondAttribute="top" id="vdd-nV-9Xm"/>
+                            <constraint firstAttribute="trailing" secondItem="iof-x6-2Zq" secondAttribute="trailing" id="tIh-9V-6XC"/>
+                            <constraint firstAttribute="trailing" secondItem="sl8-Ip-pVP" secondAttribute="trailing" id="uDN-R7-Pgc"/>
+                            <constraint firstItem="iof-x6-2Zq" firstAttribute="top" secondItem="FUJ-f1-wVI" secondAttribute="top" id="vdd-nV-9Xm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="isU-bp-1Xt"/>
                     </view>
@@ -48,6 +53,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PwW-Yc-O2k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="NlQ-HN-lVl">
+                    <connections>
+                        <action selector="didTapAddTask:" destination="eGQ-ic-IlS" id="F5P-6G-G7h"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="jif-0G-hmo">
+                    <connections>
+                        <action selector="didPanAddTask:" destination="eGQ-ic-IlS" id="Tgs-BN-H0e"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="55" y="-69"/>
         </scene>

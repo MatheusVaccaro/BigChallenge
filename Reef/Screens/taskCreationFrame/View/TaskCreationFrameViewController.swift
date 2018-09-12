@@ -29,13 +29,20 @@ class TaskCreationFrameViewController: UIViewController {
         
     }
     
+    @IBAction func didTapAddTask(_ sender: Any) {
+        viewModel.delegate?.didTapAddTask()
+    }
+    
+    @IBAction func didPanAddTask(_ sender: Any) {
+        viewModel.delegate?.didPanAddTask()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-
-
+    
     /*
     // MARK: - Navigation
 

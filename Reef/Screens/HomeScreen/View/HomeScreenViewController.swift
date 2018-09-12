@@ -16,15 +16,19 @@ class HomeScreenViewController: UIViewController {
     
     var viewModel: HomeScreenViewModel!
     
+    @IBOutlet weak var newTaskView: UIView!
     @IBOutlet weak var tagContainerView: UIView!
     @IBOutlet weak var taskListContainerView: UIView!
     @IBOutlet weak var bigTitle: UILabel!
     @IBOutlet weak var whiteBackgroundView: UIView!
     
+    @IBOutlet weak var addTaskViewTopConstraint: NSLayoutConstraint!
     fileprivate var taskListViewController: TaskListViewController?
     fileprivate var tagCollectionViewController: TagCollectionViewController?
 
     private let disposeBag = DisposeBag()
+    
+    
     
     private lazy var gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
@@ -68,6 +72,24 @@ class HomeScreenViewController: UIViewController {
         configureEmptyState()
     }
     
+    func setupAddTask(viewModel: TaskCreationViewModel, viewController: TaskCreationFrameViewController) {
+        
+        addChildViewController(viewController)
+        newTaskView.addSubview(viewController.view)
+        
+        viewModel.delegate = self
+        
+        viewController.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            viewController.view.rightAnchor.constraint(equalTo: newTaskView.rightAnchor),
+            viewController.view.topAnchor.constraint(equalTo: newTaskView.topAnchor),
+            viewController.view.leftAnchor.constraint(equalTo: newTaskView.leftAnchor),
+            viewController.view.bottomAnchor.constraint(equalTo: newTaskView.bottomAnchor)
+            ])
+        
+    }
+    
     func setupTaskList(viewModel: TaskListViewModel, viewController: TaskListViewController) {
         
         guard taskListViewController == nil else { return }
@@ -108,8 +130,9 @@ class HomeScreenViewController: UIViewController {
             	if shouldAddTask {
                 	let selectedTags = self.viewModel.tagCollectionViewModel.selectedTags
                     // TODO: Refactor this to fit into architecture
-                	self.viewModel.delegate?.homeScreenViewModel(self.viewModel,
-                                                             willAddTaskWithSelectedTags: selectedTags)
+                	self.viewModel.delegate?
+                        .homeScreenViewModel(self.viewModel, willAddTaskWithSelectedTags: selectedTags)
+//                    self.addTaskViewTopConstraint.constant = 0 
             	}
         	})
             .disposed(by: disposeBag)
@@ -217,6 +240,21 @@ class HomeScreenViewController: UIViewController {
     
     override func updateUserActivityState(_ activity: NSUserActivity) {
         viewModel.updateUserActivity(activity)
+    }
+}
+
+extension HomeScreenViewController: TaskCreationDelegate {
+    func didTapAddTask() {
+        addTaskViewTopConstraint.constant = 0
+        viewModel.delegate?.homeScreenViewModel(viewModel, willAddTaskWithSelectedTags: viewModel.selectedTags)
+    }
+    
+    func didPanAddTask() {
+        //code
+    }
+    
+    func didPressAddDetails() {
+        //code
     }
 }
 

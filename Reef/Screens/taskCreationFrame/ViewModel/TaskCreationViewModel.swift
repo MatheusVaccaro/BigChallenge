@@ -8,6 +8,14 @@
 
 import Foundation
 
+protocol TaskCreationDelegate: class {
+    func didTapAddTask()
+    func didPanAddTask()
+    func didPressAddDetails()
+}
+
 class TaskCreationViewModel {
+    
+    weak var delegate: TaskCreationDelegate?
     
 }

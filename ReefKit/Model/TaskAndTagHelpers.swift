@@ -35,6 +35,14 @@ public extension Task {
         return tags!.allObjects as! [Tag] //swiftlint:disable:this force_cast
     }
     
+    public var region: CLCircularRegion? {
+        if let data = regionData {
+            return NSKeyedUnarchiver.unarchiveObject(with: data) as? CLCircularRegion
+        } else {
+            return nil
+        }
+    }
+    
     public var regions: [CLCircularRegion] {
         var ans: [CLCircularRegion] = []
         
