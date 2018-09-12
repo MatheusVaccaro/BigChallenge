@@ -67,6 +67,7 @@ class HomeScreenViewController: UIViewController {
         userActivity = viewModel.userActivity
     }
     
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         bigTitle.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
         configureEmptyState()
@@ -78,7 +79,6 @@ class HomeScreenViewController: UIViewController {
         newTaskView.addSubview(viewController.view)
         
         viewModel.delegate = self
-        
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -241,10 +241,22 @@ class HomeScreenViewController: UIViewController {
     override func updateUserActivityState(_ activity: NSUserActivity) {
         viewModel.updateUserActivity(activity)
     }
+    
+    fileprivate var presentingAddTask: Bool = false
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        guard presentingAddTask else { return }
+        presentingAddTask = false
+        addTaskViewTopConstraint.constant = -400
+        
+    }
 }
 
 extension HomeScreenViewController: TaskCreationDelegate {
     func didTapAddTask() {
+        guard !presentingAddTask else { return }
+        presentingAddTask = true
         addTaskViewTopConstraint.constant = 0
         viewModel.delegate?.homeScreenViewModel(viewModel, willAddTaskWithSelectedTags: viewModel.selectedTags)
     }
@@ -265,5 +277,22 @@ extension HomeScreenViewController: StoryboardInstantiable {
     
     static var storyboardIdentifier: String {
         return "HomeScreen"
+    }
+}
+
+extension UIView {
+    func applyBlur(style: UIBlurEffectStyle) {
+        //only apply the blur if the user hasn't disabled transparency effects
+        if !UIAccessibilityIsReduceTransparencyEnabled() {
+            let blurEffect = UIBlurEffect(style: style)
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            
+            blurEffectView.frame = bounds
+            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            
+            addSubview(blurEffectView)
+        } else {
+            backgroundColor = .black
+        }
     }
 }

@@ -23,6 +23,15 @@ class TaskCreationFrameViewController: UIViewController {
         
         addChildViewController(taskDetailViewController)
         taskDetailView.addSubview(taskDetailViewController.view)
+        
+        taskDetailViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            taskDetailViewController.view.rightAnchor.constraint(equalTo: taskDetailView.rightAnchor),
+            taskDetailViewController.view.topAnchor.constraint(equalTo: taskDetailView.topAnchor),
+            taskDetailViewController.view.leftAnchor.constraint(equalTo: taskDetailView.leftAnchor),
+            taskDetailViewController.view.bottomAnchor.constraint(equalTo: taskDetailView.bottomAnchor)
+            ])
     }
     
     func loadNewTask() {

@@ -78,14 +78,7 @@ class HomeScreenCoordinator: Coordinator {
     }
     
     fileprivate func showEditTask(_ task: Task) {
-        let newTaskCoordinator = NewTaskCoordinator(task: task,
-                                                    presenter: presenter,
-                                                    taskModel: taskModel,
-                                                    tagModel: tagModel,
-                                                    in: homeScreenViewController!)
-        newTaskCoordinator.delegate = self
-        addChild(coordinator: newTaskCoordinator)
-        newTaskCoordinator.start()
+
     }
     
     fileprivate func showNewTag() {
