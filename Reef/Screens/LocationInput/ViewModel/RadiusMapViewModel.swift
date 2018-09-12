@@ -11,7 +11,7 @@ import MapKit
 
 class RadiusMapViewModel {
     func spanToFit(circle: MKCircle) -> Double {
-        return (circle.radius * 2) * 0.00001
+        return circle.radius*2 / 40000
     }
     
     func shouldReplaceOverlay(with radius: Double) -> Bool {
