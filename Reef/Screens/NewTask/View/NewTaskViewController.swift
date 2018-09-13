@@ -28,6 +28,7 @@ class NewTaskViewController: UIViewController {
         
         configureWithViewModel()
         configureTaskTitleTextView()
+        configureViewDesign()
         
         userActivity = viewModel.userActivity
         userActivity?.becomeCurrent()
@@ -42,7 +43,7 @@ class NewTaskViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func didClickDetailsButton(_ sender: Any) {
-        //TODO: bring more options view
+        taskTitleTextView.becomeFirstResponder()
     }
     
     // MARK: - Functions
@@ -58,6 +59,17 @@ class NewTaskViewController: UIViewController {
         
         taskTitleTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         taskTitleTextView.textContainer.lineFragmentPadding = 0
+    }
+    
+    private func configureViewDesign() {
+        view.layer.cornerRadius = 6.3
+        view.tintColor = UIColor.white
+        
+        view.layer.shadowRadius = 6.3
+        view.layer.shadowOffset = CGSize(width: 0, height: 10)
+        view.layer.masksToBounds = false
+        view.layer.shadowColor = CGColor.shadowColor
+        view.layer.shadowOpacity = 0.2
     }
 }
 
