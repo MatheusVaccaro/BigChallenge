@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,26 +15,30 @@
             <objects>
                 <viewController storyboardIdentifier="NewTaskViewController" id="ArF-0o-Orl" customClass="NewTaskViewController" customModule="Reef" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TDj-t3-yHD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" keyboardDismissMode="interactive" editable="NO" text="i am a task with some very long text written here just for testing pourposes" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2W-Sr-tak">
-                                <rect key="frame" x="45" y="0.0" width="285" height="73"/>
+                                <rect key="frame" x="38" y="44" width="292" height="2"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" textContentType="name"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfX-U0-he8">
-                                <rect key="frame" x="8" y="22" width="29" height="29"/>
-                                <state key="normal" image="uncheckedBox"/>
+                                <rect key="frame" x="8" y="34" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="22" id="BPn-ah-Tyl"/>
+                                    <constraint firstAttribute="height" constant="22" id="ZUs-qg-2bY"/>
+                                </constraints>
+                                <state key="normal" image="teteuzika"/>
                                 <state key="selected" image="checkedBox"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5oG-Zr-dS9">
-                                <rect key="frame" x="330" y="0.0" width="45" height="73"/>
+                                <rect key="frame" x="330" y="44" width="45" height="2"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="UX2-bO-VSU"/>
                                 </constraints>
-                                <state key="normal" image="uncheckedBox"/>
+                                <state key="normal" image="teteuzika"/>
                                 <state key="selected" image="checkedBox"/>
                                 <connections>
                                     <action selector="didClickDetailsButton:" destination="ArF-0o-Orl" eventType="touchUpInside" id="5VE-NB-4uJ"/>
@@ -43,22 +47,22 @@
                         </subviews>
                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="w2W-Sr-tak" firstAttribute="centerY" secondItem="TDj-t3-yHD" secondAttribute="centerY" id="7p6-M0-K2G"/>
+                            <constraint firstItem="w2W-Sr-tak" firstAttribute="centerY" secondItem="S5p-sX-wPS" secondAttribute="centerY" id="7p6-M0-K2G"/>
                             <constraint firstItem="w2W-Sr-tak" firstAttribute="leading" secondItem="dfX-U0-he8" secondAttribute="trailing" constant="8" id="95s-uZ-HjK"/>
-                            <constraint firstAttribute="bottom" secondItem="w2W-Sr-tak" secondAttribute="bottom" id="9be-g2-QnE"/>
-                            <constraint firstItem="w2W-Sr-tak" firstAttribute="top" secondItem="TDj-t3-yHD" secondAttribute="top" id="DJY-tE-lUk"/>
-                            <constraint firstItem="dfX-U0-he8" firstAttribute="centerY" secondItem="TDj-t3-yHD" secondAttribute="centerY" id="Gku-gp-ZwI"/>
+                            <constraint firstItem="S5p-sX-wPS" firstAttribute="bottom" secondItem="w2W-Sr-tak" secondAttribute="bottom" id="9be-g2-QnE"/>
+                            <constraint firstItem="w2W-Sr-tak" firstAttribute="top" secondItem="S5p-sX-wPS" secondAttribute="top" id="DJY-tE-lUk"/>
+                            <constraint firstItem="dfX-U0-he8" firstAttribute="centerY" secondItem="S5p-sX-wPS" secondAttribute="centerY" id="Gku-gp-ZwI"/>
                             <constraint firstItem="dfX-U0-he8" firstAttribute="width" secondItem="dfX-U0-he8" secondAttribute="height" multiplier="1:1" id="JMC-JD-gIO"/>
-                            <constraint firstAttribute="bottom" secondItem="5oG-Zr-dS9" secondAttribute="bottom" id="Tl1-bT-N64"/>
-                            <constraint firstItem="5oG-Zr-dS9" firstAttribute="centerY" secondItem="TDj-t3-yHD" secondAttribute="centerY" id="W3S-uK-LgZ"/>
+                            <constraint firstItem="S5p-sX-wPS" firstAttribute="bottom" secondItem="5oG-Zr-dS9" secondAttribute="bottom" id="Tl1-bT-N64"/>
+                            <constraint firstItem="5oG-Zr-dS9" firstAttribute="centerY" secondItem="S5p-sX-wPS" secondAttribute="centerY" id="W3S-uK-LgZ"/>
                             <constraint firstItem="5oG-Zr-dS9" firstAttribute="leading" secondItem="w2W-Sr-tak" secondAttribute="trailing" id="Yhk-T2-IO3"/>
                             <constraint firstItem="S5p-sX-wPS" firstAttribute="trailing" secondItem="5oG-Zr-dS9" secondAttribute="trailing" id="iBk-6V-K9s"/>
                             <constraint firstItem="dfX-U0-he8" firstAttribute="leading" secondItem="S5p-sX-wPS" secondAttribute="leading" constant="8" id="pdF-b6-NEk"/>
-                            <constraint firstItem="5oG-Zr-dS9" firstAttribute="top" secondItem="TDj-t3-yHD" secondAttribute="top" id="rhb-ci-zWN"/>
+                            <constraint firstItem="5oG-Zr-dS9" firstAttribute="top" secondItem="S5p-sX-wPS" secondAttribute="top" id="rhb-ci-zWN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="S5p-sX-wPS"/>
                     </view>
-                    <size key="freeformSize" width="375" height="73"/>
+                    <size key="freeformSize" width="375" height="80"/>
                     <connections>
                         <outlet property="checkButton" destination="dfX-U0-he8" id="Ku7-hy-Ojy"/>
                         <outlet property="taskDetailsButton" destination="5oG-Zr-dS9" id="NLE-BI-v6y"/>
@@ -72,6 +76,6 @@
     </scenes>
     <resources>
         <image name="checkedBox" width="29" height="29"/>
-        <image name="uncheckedBox" width="29" height="29"/>
+        <image name="teteuzika" width="2928" height="3885"/>
     </resources>
 </document>

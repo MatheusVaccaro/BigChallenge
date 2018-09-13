@@ -26,7 +26,6 @@ class NewTaskViewModel {
         }
     }
     
-    
     init(task: Task?, taskModel: TaskModel) {
         self.taskModel = taskModel
         self.task = task

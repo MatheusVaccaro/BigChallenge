@@ -34,8 +34,20 @@ class TaskCreationFrameViewController: UIViewController {
             ])
     }
     
-    func loadNewTask() {
+    func present(_ taskTitleViewController: NewTaskViewController) {
+        self.newTaskViewController = taskTitleViewController
         
+        addChildViewController(taskTitleViewController)
+        taskTitleView.addSubview(taskTitleViewController.view)
+        
+        taskTitleViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            taskTitleViewController.view.rightAnchor.constraint(equalTo: taskTitleView.rightAnchor),
+            taskTitleViewController.view.topAnchor.constraint(equalTo: taskTitleView.topAnchor),
+            taskTitleViewController.view.leftAnchor.constraint(equalTo: taskTitleView.leftAnchor),
+            taskTitleViewController.view.bottomAnchor.constraint(equalTo: taskTitleView.bottomAnchor)
+            ])
     }
     
     @IBAction func didTapAddTask(_ sender: Any) {

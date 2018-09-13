@@ -78,6 +78,8 @@ class NewTaskCoordinator: Coordinator {
         self.taskFrameViewController = creationFrameViewController
         
         viewController.setupAddTask(viewModel: creationFrameViewModel, viewController: creationFrameViewController)
+        
+        self.taskFrameViewController.present(self.newTaskViewController!)
         showMoreOptions()//TODO remove
     }
     
