@@ -18,6 +18,6 @@ extension DateInputViewModel: IconCellPresentable {
     }
     
     var imageName: String {
-        return "timeButton"
+        return "dateIcon"
     }
 }

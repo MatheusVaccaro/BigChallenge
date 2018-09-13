@@ -16,19 +16,20 @@ class IconTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UITextView!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var imageHeight: NSLayoutConstraint!
+    @IBOutlet weak var arrowImage: UIImageView!
     
-    var titleFontSize: CGFloat = 25 {
+    var titleFontSize: CGFloat = 18 {
         didSet {
-            titleLabel.font = UIFont.font(sized: titleFontSize, weight: .medium, with: .title1)
+            titleLabel.font = UIFont.font(sized: titleFontSize, weight: .medium, with: .title1, fontName: .barlow)
         }
     }
-    var subtitleFontSize: CGFloat = 14 {
+    var subtitleFontSize: CGFloat = 13 {
         didSet {
             subtitleLabel.font = UIFont.font(sized: subtitleFontSize, weight: .regular, with: .title3)
         }
     }
     
-    var iconSize: CGFloat = 66.5 {
+    var iconSize: CGFloat = 20 {
         didSet {
             imageHeight.constant = iconSize
         }
@@ -47,7 +48,7 @@ class IconTableViewCell: UITableViewCell {
         // Initialization code
         selectionStyle = .none
         
-        titleLabel.font = UIFont.font(sized: titleFontSize, weight: .medium, with: .title1)
+        titleLabel.font = UIFont.font(sized: titleFontSize, weight: .medium, with: .title1, fontName: .barlow)
         subtitleLabel.font = UIFont.font(sized: subtitleFontSize, weight: .regular, with: .title3)
         
         titleLabel.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -56,7 +57,7 @@ class IconTableViewCell: UITableViewCell {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        titleLabel.font = UIFont.font(sized: titleFontSize, weight: .medium, with: .title1)
+        titleLabel.font = UIFont.font(sized: titleFontSize, weight: .medium, with: .title1, fontName: .barlow)
         subtitleLabel.font = UIFont.font(sized: subtitleFontSize, weight: .regular, with: .title3)
     }
 }
