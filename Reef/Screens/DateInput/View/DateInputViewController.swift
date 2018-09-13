@@ -15,7 +15,7 @@ class DateInputViewController: UIViewController {
     
     // MARK: - Properties
     
-    var viewModel: DateInputViewModelProtocol?
+    var viewModel: DateInputViewModel!
     var dateSelectorViewModel: DateInputViewModelProtocol?
     private let disposeBag = DisposeBag()
     
@@ -44,6 +44,7 @@ class DateInputViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = viewModel.title
         currentSelector = BehaviorSubject<DateSelector>(value: .date)
         
         loadSelectedDateLabel()
@@ -64,6 +65,12 @@ class DateInputViewController: UIViewController {
     
     deinit {
         print("--- DEINIT DateInputViewController")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func displaySelector(ofType selector: DateSelector) {

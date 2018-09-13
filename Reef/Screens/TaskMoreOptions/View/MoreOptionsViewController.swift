@@ -10,6 +10,7 @@ import UIKit
 
 protocol MoreOptionsDelegate: class {
     func shouldPresentViewForLocationInput()
+    func shouldPresentViewForDateInput()
 }
 
 class MoreOptionsViewController: UIViewController {
@@ -31,6 +32,8 @@ class MoreOptionsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        //TODO: reload only cells that have been edited
+        tableView.reloadData()
     }
     
     // MARK: - Functions
@@ -43,9 +46,9 @@ class MoreOptionsViewController: UIViewController {
         tableView.estimatedRowHeight = 80
         
         tableView.separatorStyle = .none
-        tableView.register(UINib(nibName: "OptionCell",
+        tableView.register(UINib(nibName: "IconCell",
                                  bundle: nil),
-                           forCellReuseIdentifier: OptionTableViewCell.reuseIdentifier!)
+                           forCellReuseIdentifier: IconTableViewCell.reuseIdentifier!)
     }
 }
 
@@ -61,8 +64,8 @@ extension MoreOptionsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: OptionTableViewCell.reuseIdentifier!,
-                                                 for: indexPath) as! OptionTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: IconTableViewCell.reuseIdentifier!,
+                                                 for: indexPath) as! IconTableViewCell
         
         switch indexPath.row {
         case 0:
@@ -81,6 +84,8 @@ extension MoreOptionsViewController: UITableViewDelegate {
         switch indexPath.row {
         case 0:
             delegate?.shouldPresentViewForLocationInput()
+        case 1:
+            delegate?.shouldPresentViewForDateInput()
         default:
             print("present date screen")
         }

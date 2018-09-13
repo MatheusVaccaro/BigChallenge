@@ -17,12 +17,12 @@ protocol LocationInputDelegate: class {
 class LocationInputViewModel {
     
     init(task: Task?) {
-        self.startingLocation = task?.region
-        self.startingIsArriving = task?.isArriving ?? false
+        self.location = task?.region
+        self.isArriving = task?.isArriving ?? false
     }
     
-    let startingLocation: CLCircularRegion?
-    let startingIsArriving: Bool
+    var location: CLCircularRegion?
+    var isArriving: Bool
     
     public weak var delegate: LocationInputDelegate?
     

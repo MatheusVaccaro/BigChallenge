@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol OptionCellPresentable {
+protocol IconCellPresentable {
     var title: String { get }
     var subtitle: String { get }
     var imageName: String { get }

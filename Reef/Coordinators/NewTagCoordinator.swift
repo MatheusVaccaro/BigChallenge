@@ -45,10 +45,10 @@ class NewTagCoordinator: Coordinator {
         let locationInputViewController = LocationInputView.instantiate()
         let locationInputViewModel = locationInputViewController.viewModel
         // edit tag
-        if let tag = self.tag, let location = TagModel.region(of: tag) {
-            locationInputViewController.outputlocation = location
-            locationInputViewController.arriving = tag.arriving
-        }
+//        if let tag = self.tag, let location = TagModel.region(of: tag) {
+//             .outputlocation = location
+//            locationInputViewController.arriving = tag.arriving
+//        }
         
 //        moreOptionsViewController.viewModel = moreOptionsViewModel
 //        self.moreOptionsViewController = moreOptionsViewController

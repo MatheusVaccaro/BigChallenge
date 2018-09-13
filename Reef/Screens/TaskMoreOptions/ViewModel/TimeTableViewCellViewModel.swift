@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension DateInputViewModel: OptionCellPresentable {
+extension DateInputViewModel: IconCellPresentable {
     var title: String {
         return Strings.MoreOptionsScreen.TimeCell.title
     }

@@ -64,21 +64,24 @@ class HomeScreenCoordinator: Coordinator {
         presenter.isNavigationBarHidden = true
         presenter.pushViewController(homeScreenViewController, animated: false)
     }
+    
+    lazy var newTaskCoordinator: NewTaskCoordinator = {
+        let ans = NewTaskCoordinator(presenter: presenter,
+                                     taskModel: taskModel,
+                                     tagModel: tagModel,
+                                     selectedTags: selectedTags,
+                                     in: homeScreenViewController!)
+        ans.delegate = self
+        addChild(coordinator: ans)
+        return ans
+    }()
 
     fileprivate func showNewTask(selectedTags: [Tag]) {
-        let newTaskCoordinator = NewTaskCoordinator(task: nil,
-                                                    presenter: presenter,
-                                                    taskModel: taskModel,
-                                                    tagModel: tagModel,
-                                                    selectedTags: selectedTags,
-                                                    in: homeScreenViewController!)
-        newTaskCoordinator.delegate = self
-        addChild(coordinator: newTaskCoordinator)
         newTaskCoordinator.start()
     }
     
     fileprivate func showEditTask(_ task: Task) {
-
+        newTaskCoordinator.edit(task)
     }
     
     fileprivate func showNewTag() {

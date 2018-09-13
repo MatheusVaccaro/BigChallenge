@@ -33,7 +33,6 @@ public class TaskTableViewCell: UITableViewCell {
         layer.startPoint = CGPoint(x: 0, y: 1)
         layer.endPoint = CGPoint(x: 1, y: 0)
         layer.zPosition = -1
-        layer.mask = checkButton.imageView!.layer
         
         return layer
     }()
@@ -50,6 +49,7 @@ public class TaskTableViewCell: UITableViewCell {
         
         checkButton.isSelected = false
         checkButton.layer.addSublayer(gradientLayer)
+        checkButton.mask = checkButton.imageView
         
         taskTitleTextView.textContainerInset =
             UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)

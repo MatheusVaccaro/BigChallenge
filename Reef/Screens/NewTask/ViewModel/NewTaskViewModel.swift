@@ -18,7 +18,6 @@ class NewTaskViewModel {
     
     weak var outputDelegate: NewTaskViewModelOutputDelegate?
     private let taskModel: TaskModel
-    private var task: Task?
     
     var taskTitleText: String? {
         didSet {
@@ -26,9 +25,12 @@ class NewTaskViewModel {
         }
     }
     
-    init(task: Task?, taskModel: TaskModel) {
+    init(taskModel: TaskModel) {
         self.taskModel = taskModel
-        self.task = task
+    }
+    
+    func edit(_ task: Task) {
+        taskTitleText = task.title
     }
     
     // MARK: - NSUserActivity

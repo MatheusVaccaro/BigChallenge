@@ -73,12 +73,11 @@ class HomeScreenViewController: UIViewController {
         configureEmptyState()
     }
     
-    func setupAddTask(viewModel: TaskCreationViewModel, viewController: TaskCreationFrameViewController) {
+    func setupAddTask(viewController: TaskCreationFrameViewController) {
         
         addChildViewController(viewController)
         newTaskView.addSubview(viewController.view)
         
-        viewModel.delegate = self
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -248,13 +247,12 @@ class HomeScreenViewController: UIViewController {
         super.touchesEnded(touches, with: event)
         guard presentingAddTask else { return }
         presentingAddTask = false
-        addTaskViewTopConstraint.constant = -400
-        
+        addTaskViewTopConstraint.constant = 60 - newTaskView.bounds.height
     }
 }
 
-extension HomeScreenViewController: TaskCreationDelegate {
-    func didTapAddTask() {
+extension HomeScreenViewController {
+    func prepareToPresentAddTask() {
         guard !presentingAddTask else { return }
         presentingAddTask = true
         addTaskViewTopConstraint.constant = 0
@@ -265,7 +263,7 @@ extension HomeScreenViewController: TaskCreationDelegate {
         //code
     }
     
-    func didPressAddDetails() {
+    func prepareToPresentMoreOptions() {
         //code
     }
 }
