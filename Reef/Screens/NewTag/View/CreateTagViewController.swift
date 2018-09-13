@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateTagViewController: UIViewController, CreationFramePresentable {
+class CreateTagViewController: UIViewController {
     
     // MARK: - Properties
     

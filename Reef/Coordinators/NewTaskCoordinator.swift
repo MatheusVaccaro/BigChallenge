@@ -16,42 +16,32 @@ class NewTaskCoordinator: Coordinator {
     fileprivate let presenter: UINavigationController
     var childrenCoordinators: [Coordinator]
     
-    fileprivate var taskFrameViewController: CreationFrameViewController?
+    fileprivate var taskFrameViewController: TaskCreationFrameViewController!
     fileprivate var newTaskViewController: NewTaskViewController?
     fileprivate var moreOptionsViewController: MoreOptionsViewController?
+    
     fileprivate let taskModel: TaskModel
     fileprivate let tagModel: TagModel
-    fileprivate let selectedTags: [Tag]
-    fileprivate var task: Task?
-    fileprivate let isEditing: Bool
-    fileprivate var modalPresenter: UINavigationController?
     
-    fileprivate var location: CLCircularRegion?
-    fileprivate var date: Date?
+    fileprivate var selectedTags: [Tag]
+    fileprivate let viewController: HomeScreenViewController
     
     weak var delegate: CoordinatorDelegate?
     
-    
-    
-    var newTaskViewModel: NewTaskViewModel?
-    
-    
-    init(task: Task? = nil,
-         presenter: UINavigationController,
+    init(presenter: UINavigationController,
          taskModel: TaskModel,
          tagModel: TagModel,
-         selectedTags: [Tag] = []) {
+         selectedTags: [Tag] = [],
+         in viewController: HomeScreenViewController) {
         
         self.taskModel = taskModel
         self.tagModel = tagModel
         self.presenter = presenter
         self.childrenCoordinators = []
-        self.isEditing = task != nil
-        self.task = task
         
-        self.selectedTags = isEditing
-            ? task!.allTags
-            : selectedTags
+        self.viewController = viewController
+        
+        self.selectedTags = selectedTags
         
         print("+++ INIT NewTaskCoordinator")
     }
@@ -61,97 +51,77 @@ class NewTaskCoordinator: Coordinator {
     }
     
     func start() {
-        let newTaskViewModel = NewTaskViewModel(task: task,
-                                                taskModel: taskModel)
-        self.newTaskViewModel = newTaskViewModel
-
-        // More Options
-        let moreOptionsViewController = MoreOptionsViewController.instantiate()
+        // new task (title)
+        let newTaskViewController = NewTaskViewController.instantiate()
+        newTaskViewController.viewModel = NewTaskViewModel(taskModel: taskModel)
         
-        let locationInputViewController = LocationInputView.instantiate()
-        let locationInputViewModel = locationInputViewController.viewModel
-        // edit task
-        if let task = self.task {
-            locationInputViewController.outputlocation = location
-            locationInputViewController.arriving = task.isArriving
-        }
-		
-        let dateInputViewModel = DateInputViewModel(with: task)
-        let dateInputViewController = DateInputViewController.instantiate()
-        dateInputViewController.viewModel = dateInputViewModel
-        
-        let moreOptionsViewModel = MoreOptionsViewModel(locationInputViewModel: locationInputViewModel,
-                                                        dateInputViewModel: dateInputViewModel)
-        
-        moreOptionsViewController.viewModel = moreOptionsViewModel
-        self.moreOptionsViewController = moreOptionsViewController
-        moreOptionsViewController.locationCellContent = locationInputViewController
-        moreOptionsViewController.timeCellContent = dateInputViewController
+        self.newTaskViewController = newTaskViewController
     
         // Task Frame
-        let creationFrameViewController = CreationFrameViewController.instantiate()
-        let creationFrameViewModel = TaskCreationFrameViewModel(mainInfoViewModel: newTaskViewModel,
-                                                                detailViewModel: moreOptionsViewModel,
-                                                                taskModel: taskModel)
+        let creationFrameViewController = TaskCreationFrameViewController.instantiate()
+        let creationFrameViewModel = TaskCreationViewModel()
         creationFrameViewModel.delegate = self
+        
         creationFrameViewController.viewModel = creationFrameViewModel
-        creationFrameViewController.delegate = self
         self.taskFrameViewController = creationFrameViewController
         
-        //edit
-        if let task = task {
-            creationFrameViewModel.task = task
-            creationFrameViewModel.doneButtonObservable.onNext(true)
-        }
+        viewController.setupAddTask(viewController: creationFrameViewController)
+        self.taskFrameViewController.present(self.newTaskViewController!)
+        showMoreOptions()//TODO remove
+    }
+    
+    func edit(_ task: Task) {
+        selectedTags = task.allTags
+        newTaskViewController?.viewModel.edit(task)
+        showMoreOptions(with: task)
+        viewController.prepareToPresentAddTask() //TODO: present moreOptions
+    }
+    
+    fileprivate func showMoreOptions(with task: Task? = nil) {
+        // More Options
+        moreOptionsViewController = MoreOptionsViewController.instantiate()
+        moreOptionsViewController?.delegate = self
         
+        moreOptionsViewController!.viewModel = MoreOptionsViewModel(task: task)
         
+        taskFrameViewController.present(moreOptionsViewController!)
+    }
+    
+    fileprivate func showLocationInput() {
+        let locationInputView = LocationInputView.instantiate()
+        locationInputView.viewModel = moreOptionsViewController!.viewModel.locationInputViewModel
+
+        presenter.pushViewController(locationInputView, animated: true)
+    }
+    
+    fileprivate func showDateInput() {
+        let dateInputView = DateInputViewController.instantiate()
+        dateInputView.viewModel = moreOptionsViewController!.viewModel.dateInputViewModel
         
-        // Modal Presenter
-        let modalPresenter = UINavigationController(rootViewController: creationFrameViewController)
-        modalPresenter.isNavigationBarHidden = true
-        self.modalPresenter = modalPresenter
-        
-        presenter.present(modalPresenter, animated: true, completion: nil)
+        presenter.pushViewController(dateInputView, animated: true)
     }
     
     fileprivate func showNewTag() {
-        guard let modalPresenter = modalPresenter else { return }
         let newTagCoordinator = NewTagCoordinator(tag: nil,
-                                                  presenter: modalPresenter,
+                                                  presenter: presenter,
                                                   model: tagModel)
         newTagCoordinator.delegate = self
         addChild(coordinator: newTagCoordinator)
         newTagCoordinator.start()
     }
-    
-    fileprivate func showMoreOptions() {
-        // init moreOptions coordinator
-        // moreOptionsCoordinator presenter SHOULD be modalPresenter in this case
-        // set coordinator's delegate to self
-        // call addChild(moreOptionsCoordinator)
-        // call .start() of moreOptionsCoordinator
-        
-        // IMPORTANT!
-        // Use this Coordinator as exemple
-        // Remember to call shouldDeinitCoordinator when needed
-    }
-    
 }
 
-extension NewTaskCoordinator: CreationFrameViewModelDelegate {
-    
-    func willAddTag() {
-        showNewTag()
+extension NewTaskCoordinator: MoreOptionsDelegate {
+    func shouldPresentViewForDateInput() {
+        showDateInput()
     }
     
-    func didTapCancelButton() {
-        dismissViewController()
+    func shouldPresentViewForLocationInput() {
+        showLocationInput()
     }
-    
-    func didTapSaveButton() {
-        dismissViewController()
-    }
-    
+}
+
+extension NewTaskCoordinator {
     private func dismissViewController() {
         presenter.dismiss(animated: true, completion: nil)
         delegate?.shouldDeinitCoordinator(self)
@@ -164,19 +134,25 @@ extension NewTaskCoordinator: CoordinatorDelegate {
     }
 }
 
-extension NewTaskCoordinator: CreationFrameViewControllerDelegate {
-    func viewDidLoad(in viewController: CreationFrameViewController) {
-        let newTaskViewController = NewTaskViewController.instantiate()
-        self.newTaskViewController = newTaskViewController
-        
-        
-        newTaskViewController.viewModel = newTaskViewModel
-        
-        let tagCollectionViewModel = TagCollectionViewModelImpl(model: tagModel,
-                                                            filtering: false,
-                                                            selectedTags: selectedTags)
-        newTaskViewController.tagCollectionViewModel = tagCollectionViewModel
-        
-        viewController.setFrameContent(viewController: newTaskViewController)
+extension NewTaskCoordinator: TaskCreationDelegate {
+    func didTapAddTask() {
+        viewController.prepareToPresentAddTask()
+    }
+    
+    func didPanAddTask() {
+        viewController.didPanAddTask()
+    }
+    
+    func didPressAddDetails() {
+        viewController.prepareToPresentMoreOptions()
     }
 }
+
+//extension NewTaskCoordinator: CreationFrameViewControllerDelegate { // used instead of segues to load subviews (?)
+//    func viewDidLoad(in viewController: CreationFrameViewController) {
+//        let newTaskViewController = NewTaskViewController.instantiate()
+//
+//        self.newTaskViewController = newTaskViewController
+//        newTaskViewController.viewModel = newTaskViewModel
+//    }
+//}

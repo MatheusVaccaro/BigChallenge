@@ -8,18 +8,21 @@
 
 import Foundation
 
-class LocationTableViewCellViewModel: MoreOptionsTableViewCellViewModelProtocol {
-    
-    func title() -> String {
+extension LocationInputViewModel: IconCellPresentable {
+    var title: String {
         return Strings.MoreOptionsScreen.LocationCell.title
     }
     
-    func subtitle() -> String {
-        return Strings.MoreOptionsScreen.LocationCell.subtitle
+    var subtitle: String {
+        if location != nil {
+            //TODO: Localize
+            return (isArriving ? "arriving" : "leaving") + " \(placeName)"
+        } else {
+            return Strings.MoreOptionsScreen.LocationCell.subtitle
+        }
     }
     
-    func imageName() -> String {
+    var imageName: String {
         return "locationButton"
     }
-    
 }

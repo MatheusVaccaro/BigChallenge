@@ -25,6 +25,10 @@ class ApplicationCoordinator: Coordinator {
         self.window = window
         self.rootViewController = UINavigationController()
         self.rootViewController.isNavigationBarHidden = true
+        rootViewController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        rootViewController.navigationBar.shadowImage = UIImage()
+        rootViewController.navigationBar.isTranslucent = true
+        rootViewController.view.backgroundColor = .clear
         self.childrenCoordinators = []
         self.reefKit = ReefKit()
         self.tagModel = TagModel(reefKit: reefKit)

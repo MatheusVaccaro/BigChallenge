@@ -16,19 +16,19 @@ class LocationInputView: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var mapView: RadiusMapView!
     @IBOutlet weak var searchResultsTableView: UITableView!
-    let viewModel = LocationInputViewModel()
+    var viewModel: LocationInputViewModel!
     
-    var outputlocation: CLCircularRegion? {
+    private var outputlocation: CLCircularRegion? {
         didSet {
+            viewModel.location = outputlocation
             viewModel.delegate?.locationInput(self, didFind: outputlocation!, arriving: arriving)
         }
     }
     
-    var arriving: Bool = true {
+    private var arriving: Bool = true {
         didSet {
-            if isViewLoaded {
-                mapView.arriving = arriving
-            }
+            viewModel.isArriving = arriving
+            mapView.arriving = arriving
             guard let location = outputlocation else { return }
             viewModel.delegate?.locationInput(self, didFind: location, arriving: arriving)
         }
@@ -40,6 +40,12 @@ class LocationInputView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = viewModel.title
+        
+        if let location = viewModel.location {
+            outputlocation = location
+            arriving = viewModel.isArriving
+        }
         
         setupSegmentedControl()
         setupLocationManager()
@@ -58,6 +64,12 @@ class LocationInputView: UIViewController {
     
     deinit {
         print("--- DEINIT LocationInputViewController")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     @IBAction func segmentedControlSelected(_ sender: Any) {
@@ -107,6 +119,12 @@ class LocationInputView: UIViewController {
         searchResultsTableView.delegate = self
         searchResultsTableView.isHidden = true
         searchResultsTableView.layer.cornerRadius = 6.3
+        searchResultsTableView.register(UINib(nibName: "IconCell",
+                                              bundle: nil),
+                                        forCellReuseIdentifier: IconTableViewCell.reuseIdentifier!)
+        
+        searchResultsTableView.estimatedRowHeight = 50
+        searchResultsTableView.rowHeight = UITableViewAutomaticDimension
     }
     
     fileprivate func addCircle(on location: CLCircularRegion) {
@@ -146,19 +164,36 @@ extension LocationInputView: UISearchBarDelegate {
 extension LocationInputView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView
-            .dequeueReusableCell(withIdentifier: "searchResultCell",
-                                 for: indexPath) as? LocationTableViewCell else { return UITableViewCell() }
+            .dequeueReusableCell(withIdentifier: IconTableViewCell.reuseIdentifier!,
+                                 for: indexPath) as? IconTableViewCell else { return UITableViewCell() }
         
-        cell.titleLabel.text = tableViewData[indexPath.row].name
-        cell.subtitleLabel.text = tableViewData[indexPath.row].placemark.fullAddress
+        cell.titleFontSize = 17
+        cell.subtitleFontSize = 12
+        cell.iconSize = 40
+        cell.viewModel = tableViewData[indexPath.row]
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(tableViewData.count)
         return tableViewData.count
     }
+}
+
+extension MKMapItem: IconCellPresentable {
+    var title: String {
+        return name!
+    }
+    
+    var subtitle: String {
+        return placemark.fullAddress
+    }
+    
+    var imageName: String {
+        return "locationButton"
+    }
+    
+    
 }
 
 extension LocationInputView: UITableViewDelegate {
@@ -168,6 +203,7 @@ extension LocationInputView: UITableViewDelegate {
         guard let location = place.placemark.location else { return }
         if let name = place.placemark.name {
             mapView.placeName = name
+            viewModel.placeName = name
         }
         
         mapView.removeOverlays(mapView.overlays)

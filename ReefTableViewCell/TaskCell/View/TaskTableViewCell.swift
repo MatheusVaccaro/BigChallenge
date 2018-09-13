@@ -33,7 +33,6 @@ public class TaskTableViewCell: UITableViewCell {
         layer.startPoint = CGPoint(x: 0, y: 1)
         layer.endPoint = CGPoint(x: 1, y: 0)
         layer.zPosition = -1
-        layer.mask = checkButton.imageView!.layer
         
         return layer
     }()
@@ -50,6 +49,7 @@ public class TaskTableViewCell: UITableViewCell {
         
         checkButton.isSelected = false
         checkButton.layer.addSublayer(gradientLayer)
+        checkButton.mask = checkButton.imageView
         
         taskTitleTextView.textContainerInset =
             UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -59,10 +59,10 @@ public class TaskTableViewCell: UITableViewCell {
         selectionStyle = .none
         taskTitleTextView.font = UIFont.font(sized: 19, weight: .medium, with: .body)
         tagsLabel.font = UIFont.font(sized: 14, weight: .regular, with: .footnote)
+        configureAccessibility()
     }
     
     // MARK: - Functions
-    
     public func configure(with viewModel: TaskCellViewModel) {
         self.viewModel = viewModel
         
@@ -93,6 +93,10 @@ public class TaskTableViewCell: UITableViewCell {
     
     public override func layoutSubviews() {
         gradientLayer.frame = checkButton.bounds
+    }
+    
+    fileprivate func configureAccessibility() {
+        checkButton.accessibilityIgnoresInvertColors = true
     }
 }
 

@@ -78,6 +78,9 @@ class TagCollectionViewCell: UICollectionViewCell {
         
         tagUILabel.textColor = UIColor.white
         
+        accessibilityIgnoresInvertColors = true
+        tagUILabel.accessibilityIgnoresInvertColors = true
+        
         contentView.addSubview(maskLabel)
         kind = .tag
         

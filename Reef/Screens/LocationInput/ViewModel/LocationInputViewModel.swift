@@ -8,12 +8,21 @@
 
 import Foundation
 import CoreLocation
+import ReefKit
 
 protocol LocationInputDelegate: class {
     func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool)
 }
 
 class LocationInputViewModel {
+    
+    init(task: Task?) {
+        self.location = task?.region
+        self.isArriving = task?.isArriving ?? false
+    }
+    
+    var location: CLCircularRegion?
+    var isArriving: Bool
     
     public weak var delegate: LocationInputDelegate?
     

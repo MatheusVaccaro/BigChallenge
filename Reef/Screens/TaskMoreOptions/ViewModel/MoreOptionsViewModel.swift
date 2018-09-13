@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import ReefKit
 
 protocol MoreOptionsViewModelDelegate: class {
     func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool)
@@ -21,82 +22,22 @@ protocol MoreOptionsViewModelDelegate: class {
                             didSelectFrequency frequency: NotificationOptions.Frequency)
 }
 
-class MoreOptionsViewModel: MoreOptionsViewModelProtocol {
+class MoreOptionsViewModel {
+    
+    init(task: Task?) {
+        print(task)
+        
+        locationInputViewModel = LocationInputViewModel(task: task)
+        dateInputViewModel = DateInputViewModel(with: task)
+    }
     
     weak var delegate: MoreOptionsViewModelDelegate?
+    
     let locationInputViewModel: LocationInputViewModel
-    private(set) var dateInputViewModel: DateInputViewModelProtocol
-    private var numberOfRowsInSection0: Int
-    private var numberOfRowsInSection1: Int
-    private(set) var isShowingLocationCell: Bool
-    private(set) var isShowingTimeCell: Bool
+    let dateInputViewModel: DateInputViewModel
     
-    init(locationInputViewModel: LocationInputViewModel, dateInputViewModel: DateInputViewModelProtocol) {
-        self.numberOfRowsInSection0 = 0
-        self.numberOfRowsInSection1 = 0
-        self.isShowingLocationCell = false
-        self.isShowingTimeCell = false
-        self.locationInputViewModel = locationInputViewModel
-        self.dateInputViewModel = dateInputViewModel
-        self.locationInputViewModel.delegate = self
-        self.dateInputViewModel.delegate = self
-        
-        print("+++ INIT MoreOptionsViewModel")
-    }
-    
-    deinit {
-        print("--- DEINIT MoreOptionsViewModel")
-    }
-    
-    func numberOfRows(in section: Int) -> Int {
-        if section == 0 {
-            return numberOfRowsInSection0
-        } else if section == 1 {
-            return numberOfRowsInSection1
-        } else {
-            return 0
-        }
-    }
-    
-    func numberOfSections() -> Int {
-        return 2
-    }
-    
-    func showLocationCell() {
-        if !isShowingLocationCell {
-            isShowingLocationCell = !isShowingLocationCell
-            numberOfRowsInSection0 += 1
-        }
-    }
-    
-    func collapseLocationCell() {
-        if isShowingLocationCell {
-            isShowingLocationCell = !isShowingLocationCell
-            numberOfRowsInSection0 -= 1
-        }
-    }
-    
-    func showTimeCell() {
-        if !isShowingTimeCell {
-            isShowingTimeCell = !isShowingTimeCell
-            numberOfRowsInSection1 += 1
-        }
-    }
-    
-    func collapseTimeCell() {
-        if isShowingTimeCell {
-            isShowingTimeCell = !isShowingTimeCell
-            numberOfRowsInSection1 -= 1
-        }
-    }
-    
-    func locationViewModel() -> MoreOptionsTableViewCellViewModelProtocol {
-        return LocationTableViewCellViewModel()
-    }
-    
-    func timeViewModel() -> MoreOptionsTableViewCellViewModelProtocol {
-        return TimeTableViewCellViewModel()
-    }
+    let numberOfSections = 1
+    let numberOfRows = 2
 }
 
 extension MoreOptionsViewModel: LocationInputDelegate {

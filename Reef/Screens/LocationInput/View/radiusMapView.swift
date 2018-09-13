@@ -65,7 +65,7 @@ class RadiusMapView: MKMapView {
             self.totalDistance = distanceX
             self.startLocation = currentLocation
             
-            let multiplier = 100 * region.span.latitudeDelta
+            let multiplier = 150 * region.span.latitudeDelta
             changeCircle(adding: Double(totalDistance * CGFloat(multiplier))) // raise multiplier based on distance
         }
     }

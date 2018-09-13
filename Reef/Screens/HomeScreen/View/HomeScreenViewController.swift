@@ -16,15 +16,19 @@ class HomeScreenViewController: UIViewController {
     
     var viewModel: HomeScreenViewModel!
     
+    @IBOutlet weak var newTaskView: UIView!
     @IBOutlet weak var tagContainerView: UIView!
     @IBOutlet weak var taskListContainerView: UIView!
     @IBOutlet weak var bigTitle: UILabel!
     @IBOutlet weak var whiteBackgroundView: UIView!
     
+    @IBOutlet weak var addTaskViewTopConstraint: NSLayoutConstraint!
     fileprivate var taskListViewController: TaskListViewController?
     fileprivate var tagCollectionViewController: TagCollectionViewController?
 
     private let disposeBag = DisposeBag()
+    
+    
     
     private lazy var gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
@@ -63,13 +67,29 @@ class HomeScreenViewController: UIViewController {
         userActivity = viewModel.userActivity
     }
     
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         bigTitle.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
         configureEmptyState()
     }
     
-    func setupTaskList(viewModel: TaskListViewModel,
-                       viewController: TaskListViewController) {
+    func setupAddTask(viewController: TaskCreationFrameViewController) {
+        
+        addChildViewController(viewController)
+        newTaskView.addSubview(viewController.view)
+        
+        viewController.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            viewController.view.rightAnchor.constraint(equalTo: newTaskView.rightAnchor),
+            viewController.view.topAnchor.constraint(equalTo: newTaskView.topAnchor),
+            viewController.view.leftAnchor.constraint(equalTo: newTaskView.leftAnchor),
+            viewController.view.bottomAnchor.constraint(equalTo: newTaskView.bottomAnchor)
+            ])
+        
+    }
+    
+    func setupTaskList(viewModel: TaskListViewModel, viewController: TaskListViewController) {
         
         guard taskListViewController == nil else { return }
         taskListViewController = viewController
@@ -109,8 +129,9 @@ class HomeScreenViewController: UIViewController {
             	if shouldAddTask {
                 	let selectedTags = self.viewModel.tagCollectionViewModel.selectedTags
                     // TODO: Refactor this to fit into architecture
-                	self.viewModel.delegate?.homeScreenViewModel(self.viewModel,
-                                                             willAddTaskWithSelectedTags: selectedTags)
+                	self.viewModel.delegate?
+                        .homeScreenViewModel(self.viewModel, willAddTaskWithSelectedTags: selectedTags)
+//                    self.addTaskViewTopConstraint.constant = 0 
             	}
         	})
             .disposed(by: disposeBag)
@@ -219,6 +240,32 @@ class HomeScreenViewController: UIViewController {
     override func updateUserActivityState(_ activity: NSUserActivity) {
         viewModel.updateUserActivity(activity)
     }
+    
+    fileprivate var presentingAddTask: Bool = false
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        guard presentingAddTask else { return }
+        presentingAddTask = false
+        addTaskViewTopConstraint.constant = 60 - newTaskView.bounds.height
+    }
+}
+
+extension HomeScreenViewController {
+    func prepareToPresentAddTask() {
+        guard !presentingAddTask else { return }
+        presentingAddTask = true
+        addTaskViewTopConstraint.constant = 0
+        viewModel.delegate?.homeScreenViewModel(viewModel, willAddTaskWithSelectedTags: viewModel.selectedTags)
+    }
+    
+    func didPanAddTask() {
+        //code
+    }
+    
+    func prepareToPresentMoreOptions() {
+        //code
+    }
 }
 
 extension HomeScreenViewController: StoryboardInstantiable {
@@ -228,5 +275,22 @@ extension HomeScreenViewController: StoryboardInstantiable {
     
     static var storyboardIdentifier: String {
         return "HomeScreen"
+    }
+}
+
+extension UIView {
+    func applyBlur(style: UIBlurEffectStyle) {
+        //only apply the blur if the user hasn't disabled transparency effects
+        if !UIAccessibilityIsReduceTransparencyEnabled() {
+            let blurEffect = UIBlurEffect(style: style)
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            
+            blurEffectView.frame = bounds
+            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            
+            addSubview(blurEffectView)
+        } else {
+            backgroundColor = .black
+        }
     }
 }
