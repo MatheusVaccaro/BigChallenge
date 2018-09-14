@@ -64,10 +64,14 @@ class HomeScreenViewController: UIViewController {
         userActivity = viewModel.userActivity
     }
     
-    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         bigTitle.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
         configureEmptyState()
+        if isPresentingAddTask {
+            setupAddTaskShowing()
+        } else {
+            setupAddTaskHidden()
+        }
     }
     
     @IBOutlet weak var newTaskView: UIView!
@@ -75,6 +79,15 @@ class HomeScreenViewController: UIViewController {
     @IBOutlet weak var addTaskViewTopConstraint: NSLayoutConstraint!
     private var taskCreationFrameViewController: TaskCreationFrameViewController!
 
+    fileprivate func setupAddTaskHidden() {
+        addTaskViewTopConstraint.constant =
+            taskCreationFrameViewController.hiddenHeight - newTaskView.bounds.height
+    }
+    
+    fileprivate func setupAddTaskShowing() {
+        addTaskViewTopConstraint.constant =
+            taskCreationFrameViewController.contentSize - newTaskView.bounds.height
+    }
     
     func setupAddTask(viewController: TaskCreationFrameViewController) {
         
@@ -135,7 +148,6 @@ class HomeScreenViewController: UIViewController {
                     // TODO: Refactor this to fit into architecture
                 	self.viewModel.delegate?
                         .homeScreenViewModel(self.viewModel, willAddTaskWithSelectedTags: selectedTags)
-//                    self.addTaskViewTopConstraint.constant = 0 
             	}
         	})
             .disposed(by: disposeBag)
@@ -245,13 +257,13 @@ class HomeScreenViewController: UIViewController {
         viewModel.updateUserActivity(activity)
     }
     
-    fileprivate var presentingAddTask: Bool = false
+    fileprivate var isPresentingAddTask: Bool = false
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        guard presentingAddTask else { return }
-        presentingAddTask = false
-        addTaskViewTopConstraint.constant = taskCreationFrameViewController.hiddenHeight - newTaskView.bounds.height
+        guard isPresentingAddTask else { return }
+        isPresentingAddTask = false
+        setupAddTaskHidden()
     }
 }
 
@@ -265,10 +277,10 @@ extension HomeScreenViewController {
     }
     
     func prepareToPresentMoreOptions() {
-        guard !presentingAddTask else { return }
-        presentingAddTask = true
+        guard !isPresentingAddTask else { return }
+        isPresentingAddTask = true
         viewModel.delegate?.homeScreenViewModel(viewModel, willAddTaskWithSelectedTags: viewModel.selectedTags)
-        addTaskViewTopConstraint.constant = taskCreationFrameViewController.contentSize - newTaskView.bounds.height
+        setupAddTaskShowing()
     }
 }
 

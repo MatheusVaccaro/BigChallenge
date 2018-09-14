@@ -28,11 +28,11 @@
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7M5-vg-US5">
                                 <rect key="frame" x="16" y="36" width="343" height="224"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="geK-Td-d2V">
-                                        <rect key="frame" x="0.0" y="59" width="80" height="106"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="geK-Td-d2V">
+                                        <rect key="frame" x="0.0" y="59" width="173" height="106"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KDU-qd-iY5">
-                                                <rect key="frame" x="0.0" y="0.0" width="69" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="173" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <state key="normal" title="Tomorrow"/>
                                                 <connections>
@@ -40,14 +40,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VST-pw-ufN">
-                                                <rect key="frame" x="0.0" y="38" width="72" height="30"/>
+                                                <rect key="frame" x="0.0" y="38" width="173" height="30"/>
                                                 <state key="normal" title="Next week"/>
                                                 <connections>
                                                     <action selector="touchUpInsideNextWeekShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="Lvj-3N-Ht1"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Deg-a9-9om">
-                                                <rect key="frame" x="0.0" y="76" width="80" height="30"/>
+                                                <rect key="frame" x="0.0" y="76" width="173" height="30"/>
                                                 <state key="normal" title="Next month"/>
                                                 <connections>
                                                     <action selector="touchUpInsideNextMonthShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="dbz-T2-L2H"/>
@@ -55,8 +55,11 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <datePicker contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="YgX-4j-r0O">
-                                        <rect key="frame" x="100" y="4" width="243" height="216"/>
+                                    <datePicker contentMode="scaleToFill" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="YgX-4j-r0O">
+                                        <rect key="frame" x="193" y="4" width="150" height="216"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="mdp-LF-uIC"/>
+                                        </constraints>
                                         <date key="date" timeIntervalSinceReferenceDate="555793516.040452">
                                             <!--2018-08-12 19:05:16 +0000-->
                                         </date>

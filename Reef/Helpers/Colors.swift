@@ -19,7 +19,7 @@ extension UIColor {
             UIColor(red: 80/255.0, green: 255/255.0, blue: 163/255.0, alpha: 1)
         
         static var shortcutButtonsColor: UIColor {
-            return UIColor.DateInput.defaultColor
+            return UIColor.black
         }
         //swiftlint:disable nesting
         struct Calendar {

@@ -34,6 +34,10 @@ class MoreOptionsViewController: UIViewController {
         setupTableView()
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        tableView.reloadData()
+    }
+    
     override func viewWillLayoutSubviews() {
         tableViewHeight.constant = tableView.contentSize.height
     }

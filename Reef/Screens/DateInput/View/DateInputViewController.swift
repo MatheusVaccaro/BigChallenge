@@ -57,6 +57,13 @@ class DateInputViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        loadSelectedTimeOfDayLabel()
+        loadDateSelectorView()
+        loadTimeOfDaySelectorView()
+        loadShortcutButtons()
+    }
+    
     private func loadDateSelectorView() {
         calendarViewController = CalendarViewController.instantiate()
         calendarViewController.delegate = self
@@ -164,7 +171,7 @@ class DateInputViewController: UIViewController {
         shortcutButtons.forEach { self.configure($0) }
     }
     private func configure(_ shortcutButton: UIButton) {
-        let shortcutButtonFont = UIFont.font(sized: 19.77, weight: .semibold, with: .body)
+        let shortcutButtonFont = UIFont.font(sized: 18, weight: .medium, with: .body)
         shortcutButton.titleLabel?.font = shortcutButtonFont
         shortcutButton.tintColor = UIColor.DateInput.shortcutButtonsColor
     }
