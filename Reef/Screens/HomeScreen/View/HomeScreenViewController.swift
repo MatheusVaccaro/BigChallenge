@@ -18,8 +18,8 @@ class HomeScreenViewController: UIViewController {
     
     @IBOutlet weak var tagContainerView: UIView!
     @IBOutlet weak var taskListContainerView: UIView!
-    @IBOutlet weak var bigTitle: UILabel!
     @IBOutlet weak var whiteBackgroundView: UIView!
+    
     fileprivate var taskListViewController: TaskListViewController?
     fileprivate var tagCollectionViewController: TagCollectionViewController?
 
@@ -39,10 +39,9 @@ class HomeScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        bigTitle.textColor = UIColor.black
-        bigTitle.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
-        bigTitle.adjustsFontForContentSizeCategory = true
+        title = viewModel.bigTitleText
+        navigationController?.navigationBar.titleTextAttributes =
+            [ NSAttributedStringKey.font : UIFont.font(sized: 20, weight: .bold , with: .title1, fontName: .barlow) ]
         
         whiteBackgroundView.layer.cornerRadius = 6.3
         whiteBackgroundView.layer.maskedCorners = [ .layerMaxXMaxYCorner, .layerMinXMaxYCorner ]
@@ -62,12 +61,7 @@ class HomeScreenViewController: UIViewController {
         userActivity = viewModel.userActivity
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        bigTitle.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
         configureEmptyState()
         if isPresentingAddTask {
             setupAddTaskShowing()
@@ -183,7 +177,6 @@ class HomeScreenViewController: UIViewController {
         viewModel.tagCollectionViewModel.selectedTagsObservable
             .subscribe(onNext: { selectedTags in
                 self.viewModel.updateSelectedTagsIfNeeded(selectedTags)
-                self.configureBigTitle()
                 
                 let relatedTags = self.viewModel.tagCollectionViewModel.filteredTags.filter {
                     !selectedTags.contains($0)
@@ -243,16 +236,6 @@ class HomeScreenViewController: UIViewController {
         emptyStateOrLabel.text = viewModel.emptyStateOrText
         importFromRemindersButton.setTitle(viewModel.importFromRemindersText,
                                            for: .normal)
-    }
-    
-    fileprivate func configureBigTitle() {
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        bigTitle.text = viewModel.bigTitleText
-        
-        bigTitle.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
-        
-        CATransaction.commit()
     }
     
     override func updateUserActivityState(_ activity: NSUserActivity) {

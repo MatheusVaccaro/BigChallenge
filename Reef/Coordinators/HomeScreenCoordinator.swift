@@ -61,7 +61,6 @@ class HomeScreenCoordinator: Coordinator {
         homeScreenViewModel.delegate = self
         self.homeScreenViewController = homeScreenViewController
         
-        presenter.isNavigationBarHidden = true
         presenter.pushViewController(homeScreenViewController, animated: false)
     }
     

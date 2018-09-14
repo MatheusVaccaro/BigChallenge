@@ -66,18 +66,6 @@ class LocationInputView: UIViewController {
         print("--- DEINIT LocationInputViewController")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.backItem?.title = " "
-//        navigationController?.navigationBar.backIndicatorImage
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     @IBAction func segmentedControlSelected(_ sender: Any) {
         arriving = segmentedControl.selectedSegmentIndex == 0
     }

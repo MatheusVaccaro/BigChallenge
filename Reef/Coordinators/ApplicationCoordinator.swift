@@ -24,9 +24,10 @@ class ApplicationCoordinator: Coordinator {
     init(window: UIWindow) {
         self.window = window
         self.rootViewController = UINavigationController()
-        self.rootViewController.isNavigationBarHidden = true
         rootViewController.navigationBar.setBackgroundImage(UIImage(), for: .default)
         rootViewController.navigationBar.shadowImage = UIImage()
+        rootViewController.navigationBar.isHidden = false
+        rootViewController.navigationBar.prefersLargeTitles = true
         rootViewController.navigationBar.isTranslucent = true
         rootViewController.view.backgroundColor = .clear
         self.childrenCoordinators = []

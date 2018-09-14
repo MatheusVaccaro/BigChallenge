@@ -53,8 +53,6 @@ class DateInputViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
