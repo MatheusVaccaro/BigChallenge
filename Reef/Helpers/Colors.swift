@@ -25,7 +25,7 @@ extension UIColor {
         struct Calendar {
             static let dateOffCurrentMonth = UIColor(red: 0, green: 0, blue: 0, alpha: 0.05)
             static let deselectedDate = UIColor.black
-            static let selectedDate = UIColor.DateInput.defaultColor
+            static let selectedDate = UIColor.white
         }
     }
 }

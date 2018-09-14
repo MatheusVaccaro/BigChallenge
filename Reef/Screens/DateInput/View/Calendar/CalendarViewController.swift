@@ -27,10 +27,13 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource {
         view.translatesAutoresizingMaskIntoConstraints = false
         calendar.scrollingMode = .stopAtEachSection
         calendar.allowsDateCellStretching = false
-        calendar.minimumInteritemSpacing = 5
-        calendar.minimumLineSpacing = 5
+        calendar.minimumInteritemSpacing = 0
+        calendar.minimumLineSpacing = 0
+        calendar.contentInset =
+            UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         // TODO Figure out how to calculate the optimal value for cellSize and make it accessibility-friendly
         calendar.cellSize = (calendar.frame.width - 3 * calendar.minimumLineSpacing)/7
+        calendar.selectDates([Date()])
     }
     
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
@@ -84,6 +87,7 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         guard let calendarCell = cell as? CalendarCell else { return }
         
         calendarCell.select(basedOn: cellState)
+        
         delegate?.calendar(calendar, didSelectDate: date, cell: cell, cellState: cellState)
     }
     

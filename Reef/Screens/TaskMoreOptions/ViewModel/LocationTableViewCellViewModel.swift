@@ -14,12 +14,8 @@ extension LocationInputViewModel: IconCellPresentable {
     }
     
     var subtitle: String {
-        if location != nil {
-            return
-                (isArriving
-                ? Strings.LocationInputView.arrivingString
-                : Strings.LocationInputView.leavingString)
-                    + " \(placeName)"
+        if hasLocation {
+            return placeName
         } else {
             return Strings.MoreOptionsScreen.LocationCell.subtitle
         }
@@ -27,5 +23,9 @@ extension LocationInputViewModel: IconCellPresentable {
     
     var imageName: String {
         return "locationIcon"
+    }
+    
+    var hasLocation: Bool {
+        return location != nil
     }
 }
