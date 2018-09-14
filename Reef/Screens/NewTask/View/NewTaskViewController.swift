@@ -10,12 +10,19 @@ import UIKit
 import RxSwift
 import UITextView_Placeholder
 
+protocol NewTaskDelegate: class {
+    func shouldPresentMoreOptions()
+    func shouldHideMoreOptions()
+}
+
 class NewTaskViewController: UIViewController {
     
     // MARK: - Properties
     var viewModel: NewTaskViewModel!
     private let disposeBag = DisposeBag()
 
+    weak var delegate: NewTaskDelegate?
+    
     // MARK: - IBOutlets
     
     @IBOutlet weak var checkButton: UIButton!
@@ -43,7 +50,8 @@ class NewTaskViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func didClickDetailsButton(_ sender: Any) {
-        taskTitleTextView.becomeFirstResponder()
+        taskTitleTextView.resignFirstResponder()
+        delegate?.shouldPresentMoreOptions()
     }
     
     // MARK: - Functions
@@ -88,5 +96,9 @@ extension NewTaskViewController: StoryboardInstantiable {
 extension NewTaskViewController: UITextViewDelegate {
     func textViewDidChangeSelection(_ textView: UITextView) {
         viewModel.taskTitleText = textView.text
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        delegate?.shouldHideMoreOptions()
     }
 }

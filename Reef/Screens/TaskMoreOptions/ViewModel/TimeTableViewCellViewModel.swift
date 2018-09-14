@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 extension DateInputViewModel: IconCellPresentable {
     var title: String {
@@ -14,7 +15,17 @@ extension DateInputViewModel: IconCellPresentable {
     }
     
     var subtitle: String {
-        return Strings.MoreOptionsScreen.TimeCell.subtitle
+        if date.value != nil {
+            let subTitleDate = Calendar.current.date(from: date.value!)!
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale.current
+            dateFormatter.dateFormat = "d MMM hh:mm"
+            let subtitle = dateFormatter.string(from: subTitleDate)
+            
+            return subtitle
+        } else {
+            return Strings.MoreOptionsScreen.TimeCell.subtitle
+        }
     }
     
     var imageName: String {

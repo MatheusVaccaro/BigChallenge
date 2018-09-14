@@ -53,6 +53,7 @@ class NewTaskCoordinator: Coordinator {
     func start() {
         // new task (title)
         let newTaskViewController = NewTaskViewController.instantiate()
+        newTaskViewController.delegate = self
         newTaskViewController.viewModel = NewTaskViewModel(taskModel: taskModel)
         
         self.newTaskViewController = newTaskViewController
@@ -136,8 +137,7 @@ extension NewTaskCoordinator: CoordinatorDelegate {
 
 extension NewTaskCoordinator: TaskCreationDelegate {
     func didTapAddTask() {
-        //        viewController.prepareToPresentAddTask() //TODO: change
-        viewController.prepareToPresentMoreOptions()
+        viewController.prepareToPresentAddTask()
     }
     
     func didPanAddTask() {
@@ -149,6 +149,15 @@ extension NewTaskCoordinator: TaskCreationDelegate {
     }
 }
 
+extension NewTaskCoordinator: NewTaskDelegate {
+    func shouldPresentMoreOptions() {
+        viewController.prepareToPresentMoreOptions()
+    }
+    
+    func shouldHideMoreOptions() {
+        viewController.prepareToPresentAddTask()
+    }
+}
 //extension NewTaskCoordinator: CreationFrameViewControllerDelegate { // used instead of segues to load subviews (?)
 //    func viewDidLoad(in viewController: CreationFrameViewController) {
 //        let newTaskViewController = NewTaskViewController.instantiate()

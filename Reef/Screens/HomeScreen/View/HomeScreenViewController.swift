@@ -40,8 +40,6 @@ class HomeScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = viewModel.bigTitleText
-        navigationController?.navigationBar.titleTextAttributes =
-            [ NSAttributedStringKey.font : UIFont.font(sized: 20, weight: .bold , with: .title1, fontName: .barlow) ]
         
         whiteBackgroundView.layer.cornerRadius = 6.3
         whiteBackgroundView.layer.maskedCorners = [ .layerMaxXMaxYCorner, .layerMinXMaxYCorner ]
@@ -63,7 +61,7 @@ class HomeScreenViewController: UIViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         configureEmptyState()
-        if isPresentingAddTask {
+        if isPresentingMoreOptions {
             setupAddTaskShowing()
         } else {
             setupAddTaskHidden()
@@ -242,19 +240,20 @@ class HomeScreenViewController: UIViewController {
         viewModel.updateUserActivity(activity)
     }
     
-    fileprivate var isPresentingAddTask: Bool = false
+    fileprivate var isPresentingMoreOptions: Bool = false
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        guard isPresentingAddTask else { return }
-        isPresentingAddTask = false
+        guard isPresentingMoreOptions else { return }
+        isPresentingMoreOptions = false
         setupAddTaskHidden()
     }
 }
 
 extension HomeScreenViewController {
     func prepareToPresentAddTask() {
-        //TODO:
+        setupAddTaskHidden()
+        isPresentingMoreOptions = false
     }
     
     func didPanAddTask() {
@@ -262,8 +261,8 @@ extension HomeScreenViewController {
     }
     
     func prepareToPresentMoreOptions() {
-        guard !isPresentingAddTask else { return }
-        isPresentingAddTask = true
+        guard !isPresentingMoreOptions else { return }
+        isPresentingMoreOptions = true
         viewModel.delegate?.homeScreenViewModel(viewModel, willAddTaskWithSelectedTags: viewModel.selectedTags)
         setupAddTaskShowing()
     }

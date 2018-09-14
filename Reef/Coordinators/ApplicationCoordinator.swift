@@ -30,6 +30,9 @@ class ApplicationCoordinator: Coordinator {
         rootViewController.navigationBar.prefersLargeTitles = true
         rootViewController.navigationBar.isTranslucent = true
         rootViewController.view.backgroundColor = .clear
+        rootViewController.navigationBar.titleTextAttributes =
+            [ NSAttributedStringKey.font : UIFont(name: "Barlow-Bold", size: 34)! ]
+
         self.childrenCoordinators = []
         self.reefKit = ReefKit()
         self.tagModel = TagModel(reefKit: reefKit)

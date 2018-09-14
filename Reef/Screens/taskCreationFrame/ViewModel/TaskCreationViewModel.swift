@@ -15,7 +15,5 @@ protocol TaskCreationDelegate: class {
 }
 
 class TaskCreationViewModel {
-    
     weak var delegate: TaskCreationDelegate?
-    
 }
