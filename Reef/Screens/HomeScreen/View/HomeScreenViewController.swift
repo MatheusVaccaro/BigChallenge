@@ -25,8 +25,6 @@ class HomeScreenViewController: UIViewController {
 
     private let disposeBag = DisposeBag()
     
-    
-    
     private lazy var gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
         
@@ -62,6 +60,10 @@ class HomeScreenViewController: UIViewController {
         observeSelectedTags()
         observeClickedAddTag()
         userActivity = viewModel.userActivity
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

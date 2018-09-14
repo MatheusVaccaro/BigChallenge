@@ -44,7 +44,6 @@ class MoreOptionsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
         //TODO: reload only cells that have been edited
         tableView.reloadData()
     }
