@@ -16,13 +16,10 @@ class HomeScreenViewController: UIViewController {
     
     var viewModel: HomeScreenViewModel!
     
-    @IBOutlet weak var newTaskView: UIView!
     @IBOutlet weak var tagContainerView: UIView!
     @IBOutlet weak var taskListContainerView: UIView!
     @IBOutlet weak var bigTitle: UILabel!
     @IBOutlet weak var whiteBackgroundView: UIView!
-    
-    @IBOutlet weak var addTaskViewTopConstraint: NSLayoutConstraint!
     fileprivate var taskListViewController: TaskListViewController?
     fileprivate var tagCollectionViewController: TagCollectionViewController?
 
@@ -73,7 +70,15 @@ class HomeScreenViewController: UIViewController {
         configureEmptyState()
     }
     
+    @IBOutlet weak var newTaskView: UIView!
+    @IBOutlet weak var addTaskHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var addTaskViewTopConstraint: NSLayoutConstraint!
+    private var taskCreationFrameViewController: TaskCreationFrameViewController!
+
+    
     func setupAddTask(viewController: TaskCreationFrameViewController) {
+        
+        taskCreationFrameViewController = viewController
         
         addChildViewController(viewController)
         newTaskView.addSubview(viewController.view)
@@ -86,7 +91,6 @@ class HomeScreenViewController: UIViewController {
             viewController.view.leftAnchor.constraint(equalTo: newTaskView.leftAnchor),
             viewController.view.bottomAnchor.constraint(equalTo: newTaskView.bottomAnchor)
             ])
-        
     }
     
     func setupTaskList(viewModel: TaskListViewModel, viewController: TaskListViewController) {
@@ -247,16 +251,13 @@ class HomeScreenViewController: UIViewController {
         super.touchesEnded(touches, with: event)
         guard presentingAddTask else { return }
         presentingAddTask = false
-        addTaskViewTopConstraint.constant = 60 - newTaskView.bounds.height
+        addTaskViewTopConstraint.constant = taskCreationFrameViewController.hiddenHeight - newTaskView.bounds.height
     }
 }
 
 extension HomeScreenViewController {
     func prepareToPresentAddTask() {
-        guard !presentingAddTask else { return }
-        presentingAddTask = true
-        addTaskViewTopConstraint.constant = 0
-        viewModel.delegate?.homeScreenViewModel(viewModel, willAddTaskWithSelectedTags: viewModel.selectedTags)
+        //TODO:
     }
     
     func didPanAddTask() {
@@ -264,7 +265,10 @@ extension HomeScreenViewController {
     }
     
     func prepareToPresentMoreOptions() {
-        //code
+        guard !presentingAddTask else { return }
+        presentingAddTask = true
+        viewModel.delegate?.homeScreenViewModel(viewModel, willAddTaskWithSelectedTags: viewModel.selectedTags)
+        addTaskViewTopConstraint.constant = taskCreationFrameViewController.contentSize - newTaskView.bounds.height
     }
 }
 

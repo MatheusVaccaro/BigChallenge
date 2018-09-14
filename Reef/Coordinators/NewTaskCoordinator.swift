@@ -136,7 +136,8 @@ extension NewTaskCoordinator: CoordinatorDelegate {
 
 extension NewTaskCoordinator: TaskCreationDelegate {
     func didTapAddTask() {
-        viewController.prepareToPresentAddTask()
+        //        viewController.prepareToPresentAddTask() //TODO: change
+        viewController.prepareToPresentMoreOptions()
     }
     
     func didPanAddTask() {
