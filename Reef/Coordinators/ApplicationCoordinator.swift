@@ -24,21 +24,24 @@ class ApplicationCoordinator: Coordinator {
     init(window: UIWindow) {
         self.window = window
         self.rootViewController = UINavigationController()
-        rootViewController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        rootViewController.navigationBar.shadowImage = UIImage()
-        rootViewController.navigationBar.isHidden = false
-        rootViewController.navigationBar.prefersLargeTitles = true
-        rootViewController.navigationBar.isTranslucent = true
-        rootViewController.view.backgroundColor = .clear
-        rootViewController.navigationBar.titleTextAttributes =
-            [ NSAttributedStringKey.font : UIFont(name: "Barlow-Bold", size: 34)! ]
-
         self.childrenCoordinators = []
         self.reefKit = ReefKit()
         self.tagModel = TagModel(reefKit: reefKit)
         self.taskModel = TaskModel(reefKit: reefKit)
         self.selectedTags = []
-        print(selectedTags.map { $0.title! })
+        
+        configureNavigationController()
+    }
+    
+    private func configureNavigationController() {
+        rootViewController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        rootViewController.navigationBar.shadowImage = UIImage()
+        rootViewController.navigationBar.prefersLargeTitles = true
+        rootViewController.navigationBar.isTranslucent = true
+        rootViewController.view.backgroundColor = .clear
+        rootViewController.navigationBar.largeTitleTextAttributes =
+            [ NSAttributedStringKey.font : UIFont.font(sized: 34, weight: .bold, with: .largeTitle, fontName: .barlow) ]
+
     }
     
     func refreshModel() { //TODO: find a better solution
