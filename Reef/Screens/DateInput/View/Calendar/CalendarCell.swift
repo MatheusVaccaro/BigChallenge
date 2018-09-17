@@ -12,6 +12,12 @@ import JTAppleCalendar
 class CalendarCell: JTAppleCell {
     
     @IBOutlet weak var dayLabel: UILabel!
+    @IBOutlet weak var roundedView: UIView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        roundedView.layer.cornerRadius = roundedView.bounds.width/2
+    }
     
     func configure(with cellState: CellState) {
         let day = Calendar.current.component(.day, from: cellState.date)
@@ -25,10 +31,13 @@ class CalendarCell: JTAppleCell {
     }
     
     func select(basedOn cellState: CellState? = nil) {
-        dayLabel.textColor = UIColor.DateInput.Calendar.selectedDate
+        dayLabel.textColor = UIColor.white
+        roundedView.backgroundColor = UIColor.black
     }
     
     func deselect(basedOn cellState: CellState? = nil) {
+        backgroundColor = UIColor.clear
+        roundedView.backgroundColor = UIColor.clear
         if let cellState = cellState, cellState.dateBelongsTo != .thisMonth {
             dayLabel.textColor = UIColor.DateInput.Calendar.dateOffCurrentMonth
         } else {

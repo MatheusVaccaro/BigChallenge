@@ -84,7 +84,7 @@
 "newTaskDescriptionPlaceholder" = "Notas";
 
 /* placeholder title for a new task */
-"newTaskTitle" = "Sua tarefa";
+"newTaskTitle" = "Nova tarefa";
 
 /* subtitle of empty state on taskList */
 "emptyStateSubtitle" = "Deslize para baixo para adicionar sua primeira tarefa";

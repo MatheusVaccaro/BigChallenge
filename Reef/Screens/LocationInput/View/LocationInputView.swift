@@ -66,12 +66,6 @@ class LocationInputView: UIViewController {
         print("--- DEINIT LocationInputViewController")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
     @IBAction func segmentedControlSelected(_ sender: Any) {
         arriving = segmentedControl.selectedSegmentIndex == 0
     }
@@ -169,7 +163,8 @@ extension LocationInputView: UITableViewDataSource {
         
         cell.titleFontSize = 17
         cell.subtitleFontSize = 12
-        cell.iconSize = 40
+        cell.iconSize = 20
+        cell.arrowImage.isHidden = true
         cell.viewModel = tableViewData[indexPath.row]
         
         return cell
@@ -190,7 +185,7 @@ extension MKMapItem: IconCellPresentable {
     }
     
     var imageName: String {
-        return "locationButton"
+        return "locationIcon"
     }
     
     

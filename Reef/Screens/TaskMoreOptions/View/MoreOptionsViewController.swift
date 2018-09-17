@@ -22,6 +22,11 @@ class MoreOptionsViewController: UIViewController {
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    
+    var contentSize: CGFloat {
+        return tableViewHeight.constant
+    }
     
     // MARK: - MoreOptionsViewController Lifecycle
     override func viewDidLoad() {
@@ -29,9 +34,16 @@ class MoreOptionsViewController: UIViewController {
         setupTableView()
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        tableView.reloadData()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        tableViewHeight.constant = tableView.contentSize.height
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
         //TODO: reload only cells that have been edited
         tableView.reloadData()
     }
@@ -42,6 +54,7 @@ class MoreOptionsViewController: UIViewController {
         tableView.dataSource = self
         tableView.bounces = false
         
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 80
         
@@ -72,6 +85,7 @@ extension MoreOptionsViewController: UITableViewDataSource {
             cell.viewModel = viewModel.locationInputViewModel
         default:
             cell.viewModel = viewModel.dateInputViewModel
+            viewWillLayoutSubviews()
         }
         
         return cell

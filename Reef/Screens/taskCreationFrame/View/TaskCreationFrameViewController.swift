@@ -21,6 +21,10 @@ class TaskCreationFrameViewController: UIViewController {
         return hiddenHeight + taskDetailViewController!.tableView.contentSize.height + 20
     }()
     
+    var contentSize: CGFloat {
+        return taskDetailViewController!.contentSize + taskTitleView.bounds.height + 8
+    }
+    
     var taskDetailViewController: MoreOptionsViewController?
     var newTaskViewController: NewTaskViewController!
     

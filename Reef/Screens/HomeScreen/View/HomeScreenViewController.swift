@@ -16,19 +16,14 @@ class HomeScreenViewController: UIViewController {
     
     var viewModel: HomeScreenViewModel!
     
-    @IBOutlet weak var newTaskView: UIView!
     @IBOutlet weak var tagContainerView: UIView!
     @IBOutlet weak var taskListContainerView: UIView!
-    @IBOutlet weak var bigTitle: UILabel!
     @IBOutlet weak var whiteBackgroundView: UIView!
     
-    @IBOutlet weak var addTaskViewTopConstraint: NSLayoutConstraint!
     fileprivate var taskListViewController: TaskListViewController?
     fileprivate var tagCollectionViewController: TagCollectionViewController?
 
     private let disposeBag = DisposeBag()
-    
-    
     
     private lazy var gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
@@ -44,10 +39,7 @@ class HomeScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        bigTitle.textColor = UIColor.black
-        bigTitle.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
-        bigTitle.adjustsFontForContentSizeCategory = true
+        title = viewModel.bigTitleText
         
         whiteBackgroundView.layer.cornerRadius = 6.3
         whiteBackgroundView.layer.maskedCorners = [ .layerMaxXMaxYCorner, .layerMinXMaxYCorner ]
@@ -67,13 +59,33 @@ class HomeScreenViewController: UIViewController {
         userActivity = viewModel.userActivity
     }
     
-    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        bigTitle.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
         configureEmptyState()
+        if isPresentingMoreOptions {
+            setupAddTaskShowing()
+        } else {
+            setupAddTaskHidden()
+        }
+    }
+    
+    @IBOutlet weak var newTaskView: UIView!
+    @IBOutlet weak var addTaskHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var addTaskViewTopConstraint: NSLayoutConstraint!
+    private var taskCreationFrameViewController: TaskCreationFrameViewController!
+
+    fileprivate func setupAddTaskHidden() {
+        addTaskViewTopConstraint.constant =
+            taskCreationFrameViewController.hiddenHeight - newTaskView.bounds.height
+    }
+    
+    fileprivate func setupAddTaskShowing() {
+        addTaskViewTopConstraint.constant =
+            taskCreationFrameViewController.contentSize - newTaskView.bounds.height
     }
     
     func setupAddTask(viewController: TaskCreationFrameViewController) {
+        
+        taskCreationFrameViewController = viewController
         
         addChildViewController(viewController)
         newTaskView.addSubview(viewController.view)
@@ -86,7 +98,6 @@ class HomeScreenViewController: UIViewController {
             viewController.view.leftAnchor.constraint(equalTo: newTaskView.leftAnchor),
             viewController.view.bottomAnchor.constraint(equalTo: newTaskView.bottomAnchor)
             ])
-        
     }
     
     func setupTaskList(viewModel: TaskListViewModel, viewController: TaskListViewController) {
@@ -131,7 +142,6 @@ class HomeScreenViewController: UIViewController {
                     // TODO: Refactor this to fit into architecture
                 	self.viewModel.delegate?
                         .homeScreenViewModel(self.viewModel, willAddTaskWithSelectedTags: selectedTags)
-//                    self.addTaskViewTopConstraint.constant = 0 
             	}
         	})
             .disposed(by: disposeBag)
@@ -165,7 +175,6 @@ class HomeScreenViewController: UIViewController {
         viewModel.tagCollectionViewModel.selectedTagsObservable
             .subscribe(onNext: { selectedTags in
                 self.viewModel.updateSelectedTagsIfNeeded(selectedTags)
-                self.configureBigTitle()
                 
                 let relatedTags = self.viewModel.tagCollectionViewModel.filteredTags.filter {
                     !selectedTags.contains($0)
@@ -227,36 +236,24 @@ class HomeScreenViewController: UIViewController {
                                            for: .normal)
     }
     
-    fileprivate func configureBigTitle() {
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        bigTitle.text = viewModel.bigTitleText
-        
-        bigTitle.font = UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow)
-        
-        CATransaction.commit()
-    }
-    
     override func updateUserActivityState(_ activity: NSUserActivity) {
         viewModel.updateUserActivity(activity)
     }
     
-    fileprivate var presentingAddTask: Bool = false
+    fileprivate var isPresentingMoreOptions: Bool = false
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        guard presentingAddTask else { return }
-        presentingAddTask = false
-        addTaskViewTopConstraint.constant = 60 - newTaskView.bounds.height
+        guard isPresentingMoreOptions else { return }
+        isPresentingMoreOptions = false
+        setupAddTaskHidden()
     }
 }
 
 extension HomeScreenViewController {
     func prepareToPresentAddTask() {
-        guard !presentingAddTask else { return }
-        presentingAddTask = true
-        addTaskViewTopConstraint.constant = 0
-        viewModel.delegate?.homeScreenViewModel(viewModel, willAddTaskWithSelectedTags: viewModel.selectedTags)
+        setupAddTaskHidden()
+        isPresentingMoreOptions = false
     }
     
     func didPanAddTask() {
@@ -264,7 +261,10 @@ extension HomeScreenViewController {
     }
     
     func prepareToPresentMoreOptions() {
-        //code
+        guard !isPresentingMoreOptions else { return }
+        isPresentingMoreOptions = true
+        viewModel.delegate?.homeScreenViewModel(viewModel, willAddTaskWithSelectedTags: viewModel.selectedTags)
+        setupAddTaskShowing()
     }
 }
 

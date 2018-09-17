@@ -14,15 +14,18 @@ extension LocationInputViewModel: IconCellPresentable {
     }
     
     var subtitle: String {
-        if location != nil {
-            //TODO: Localize
-            return (isArriving ? "arriving" : "leaving") + " \(placeName)"
+        if hasLocation {
+            return placeName
         } else {
             return Strings.MoreOptionsScreen.LocationCell.subtitle
         }
     }
     
     var imageName: String {
-        return "locationButton"
+        return "locationIcon"
+    }
+    
+    var hasLocation: Bool {
+        return location != nil
     }
 }

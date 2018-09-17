@@ -693,8 +693,8 @@
 		22DE27162146B7AA00466187 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				220BB9452146ED88004A8309 /* TaskCreationFrameViewController.swift */,
 				220BB9492146F1C2004A8309 /* TaskCreation.storyboard */,
+				220BB9452146ED88004A8309 /* TaskCreationFrameViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
