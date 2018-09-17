@@ -62,9 +62,9 @@ class HomeScreenViewController: UIViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         configureEmptyState()
         if isPresentingMoreOptions {
-            setupAddTaskShowing()
+            animateAddTaskShowing()
         } else {
-            setupAddTaskHidden()
+            animateAddTaskHidden()
         }
     }
     
@@ -72,15 +72,21 @@ class HomeScreenViewController: UIViewController {
     @IBOutlet weak var addTaskHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var addTaskViewTopConstraint: NSLayoutConstraint!
     private var taskCreationFrameViewController: TaskCreationFrameViewController!
-
-    fileprivate func setupAddTaskHidden() {
-        addTaskViewTopConstraint.constant =
-            taskCreationFrameViewController.hiddenHeight - newTaskView.bounds.height
+    
+    fileprivate func animateAddTaskHidden() {
+        UIView.animate(withDuration: 0.25) {
+            self.addTaskViewTopConstraint.constant =
+                self.taskCreationFrameViewController.hiddenHeight - self.newTaskView.bounds.height
+            self.view.layoutIfNeeded()
+        }
     }
     
-    fileprivate func setupAddTaskShowing() {
-        addTaskViewTopConstraint.constant =
-            taskCreationFrameViewController.contentSize - newTaskView.bounds.height
+    fileprivate func animateAddTaskShowing() {
+        UIView.animate(withDuration: 0.25) {
+            self.addTaskViewTopConstraint.constant =
+                self.taskCreationFrameViewController.contentSize - self.newTaskView.bounds.height
+            self.view.layoutIfNeeded()
+        }
     }
     
     func setupAddTask(viewController: TaskCreationFrameViewController) {
@@ -246,14 +252,14 @@ class HomeScreenViewController: UIViewController {
         super.touchesEnded(touches, with: event)
         guard isPresentingMoreOptions else { return }
         isPresentingMoreOptions = false
-        setupAddTaskHidden()
+        animateAddTaskHidden()
     }
 }
 
 extension HomeScreenViewController {
     func prepareToPresentAddTask() {
-        setupAddTaskHidden()
         isPresentingMoreOptions = false
+        animateAddTaskHidden()
     }
     
     func didPanAddTask() {
@@ -264,7 +270,7 @@ extension HomeScreenViewController {
         guard !isPresentingMoreOptions else { return }
         isPresentingMoreOptions = true
         viewModel.delegate?.homeScreenViewModel(viewModel, willAddTaskWithSelectedTags: viewModel.selectedTags)
-        setupAddTaskShowing()
+        animateAddTaskShowing()
     }
 }
 
