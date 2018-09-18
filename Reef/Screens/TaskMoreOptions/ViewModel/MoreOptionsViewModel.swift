@@ -11,7 +11,7 @@ import CoreLocation
 import ReefKit
 
 protocol MoreOptionsViewModelDelegate: class {
-    func locationInput(_ locationInputView: LocationInputView,
+    func locationInput(_ locationInputViewModel: LocationInputViewModel,
                        didFind location: CLCircularRegion, arriving: Bool)
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
@@ -21,21 +21,28 @@ protocol MoreOptionsViewModelDelegate: class {
                             didSelectFrequency frequency: NotificationOptions.Frequency)
 }
 
+protocol MoreOptionsViewModelUIDelegate: class {
+    func shouldUpdateTableView()
+}
+
 class MoreOptionsViewModel {
     
-    init(task: Task?) {        
+    init() {
         locationInputViewModel = LocationInputViewModel()
         dateInputViewModel = DateInputViewModel()
+
+        locationInputViewModel.delegate = self
+        dateInputViewModel.delegate = self
     }
     
-    var task: Task? {
-        didSet {
-            locationInputViewModel.task = task
-            dateInputViewModel.task = task
-        }
+    func edit(task: Task?) {
+        locationInputViewModel.task = task
+        dateInputViewModel.task = task
+        delegate.shouldUpdateTableView()
     }
     
-    weak var delegate: MoreOptionsViewModelDelegate?
+    weak var outputDelegate: MoreOptionsViewModelDelegate?
+    weak var delegate: MoreOptionsViewModelUIDelegate!
     
     let locationInputViewModel: LocationInputViewModel
     let dateInputViewModel: DateInputViewModel
@@ -45,8 +52,8 @@ class MoreOptionsViewModel {
 }
 
 extension MoreOptionsViewModel: LocationInputDelegate {    
-    func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool) {
-        delegate?.locationInput(locationInputView, didFind: location, arriving: arriving)
+    func locationInput(_ locationInputViewModel: LocationInputViewModel, didFind location: CLCircularRegion, arriving: Bool) {
+        outputDelegate?.locationInput(locationInputViewModel, didFind: location, arriving: arriving)
     }
 }
 
@@ -54,11 +61,11 @@ extension MoreOptionsViewModel: DateInputViewModelDelegate {
 
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
                             didSelectDate date: DateComponents) {
-        delegate?.dateInputViewModel(dateInputViewModel, didSelectDate: date)
+        outputDelegate?.dateInputViewModel(dateInputViewModel, didSelectDate: date)
     }
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
                             didSelectFrequency frequency: NotificationOptions.Frequency) {
-        delegate?.dateInputViewModel(dateInputViewModel, didSelectFrequency: frequency)
+        outputDelegate?.dateInputViewModel(dateInputViewModel, didSelectFrequency: frequency)
     }
 }

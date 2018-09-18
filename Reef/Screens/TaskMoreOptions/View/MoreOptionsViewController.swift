@@ -116,3 +116,9 @@ extension MoreOptionsViewController: StoryboardInstantiable {
         return "MoreOptionsViewController"
     }
 }
+
+extension MoreOptionsViewController: MoreOptionsViewModelUIDelegate {
+    func shouldUpdateTableView() {
+        tableView.reloadData()
+    }
+}

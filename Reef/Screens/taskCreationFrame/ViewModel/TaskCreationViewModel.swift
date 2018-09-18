@@ -20,11 +20,24 @@ class TaskCreationViewModel {
     weak var delegate: TaskCreationDelegate?
     
     fileprivate var model: TaskModel
-    var task: Task?
     fileprivate var attributes: [TaskAttributes : Any] = [:]
+    fileprivate let moreOptionsViewModel: MoreOptionsViewModel
+    fileprivate let newTaskViewModel: NewTaskViewModel
     
-    init(taskModel: TaskModel) {
+    var task: Task? {
+        didSet {
+            moreOptionsViewModel.edit(task: task)
+            newTaskViewModel.edit(task)
+        }
+    }
+    
+    init(taskModel: TaskModel, moreOptionsViewModel: MoreOptionsViewModel, newTaskViewModel: NewTaskViewModel) {
         self.model = taskModel
+        self.moreOptionsViewModel = moreOptionsViewModel
+        self.newTaskViewModel = newTaskViewModel
+        
+        moreOptionsViewModel.outputDelegate = self
+        newTaskViewModel.outputDelegate = self
     }
 }
 
@@ -35,6 +48,8 @@ extension TaskCreationViewModel: NewTaskViewModelOutputDelegate {
         } else {
             model.update(task!, with: attributes)
         }
+        
+        task = nil
     }
     
     func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateTitle title: String?) {
@@ -43,7 +58,7 @@ extension TaskCreationViewModel: NewTaskViewModelOutputDelegate {
 }
 
 extension TaskCreationViewModel: MoreOptionsViewModelDelegate {
-    func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool) {
+    func locationInput(_ locationInputViewModel: LocationInputViewModel, didFind location: CLCircularRegion, arriving: Bool) {
         attributes[.region] = location
         attributes[.isArriving] = arriving
     }

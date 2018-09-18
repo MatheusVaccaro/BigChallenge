@@ -18,22 +18,6 @@ class LocationInputView: UIViewController {
     @IBOutlet weak var searchResultsTableView: UITableView!
     var viewModel: LocationInputViewModel!
     
-    private var outputlocation: CLCircularRegion? {
-        didSet {
-            viewModel.location = outputlocation
-            viewModel.delegate?.locationInput(self, didFind: outputlocation!, arriving: arriving)
-        }
-    }
-    
-    private var arriving: Bool = true {
-        didSet {
-            viewModel.isArriving = arriving
-            mapView.arriving = arriving
-            guard let location = outputlocation else { return }
-            viewModel.delegate?.locationInput(self, didFind: location, arriving: arriving)
-        }
-    }
-    
     // MARK: - Internal
     fileprivate var tableViewData: [MKMapItem] = []
     fileprivate let locationManager = CLLocationManager()
@@ -42,21 +26,16 @@ class LocationInputView: UIViewController {
         super.viewDidLoad()
         title = viewModel.title
         
-        if let location = viewModel.location {
-            outputlocation = location
-            arriving = viewModel.isArriving
-        }
-        
         setupSegmentedControl()
         setupLocationManager()
         setupSearchBar()
         setupMapView()
         setupTableView()
         
-        if let location = outputlocation {
+        if let location = viewModel.location {
             addCircle(on: location)
-            mapView.arriving = arriving
-            segmentedControl.selectedSegmentIndex = arriving ? 0 : 1
+            mapView.arriving = viewModel.isArriving
+            segmentedControl.selectedSegmentIndex = viewModel.isArriving ? 0 : 1
         }
         
         print("+++ INIT LocationInputViewController")
@@ -67,7 +46,8 @@ class LocationInputView: UIViewController {
     }
     
     @IBAction func segmentedControlSelected(_ sender: Any) {
-        arriving = segmentedControl.selectedSegmentIndex == 0
+        viewModel.isArriving = segmentedControl.selectedSegmentIndex == 0
+        mapView.arriving = viewModel.isArriving
     }
     
     fileprivate func setupSegmentedControl() {
@@ -209,16 +189,16 @@ extension LocationInputView: UITableViewDelegate {
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
                                             longitude: location.coordinate.longitude)
         
-        outputlocation = CLCircularRegion(center: center,
+        viewModel.location = CLCircularRegion(center: center,
                                           radius: 100,
                                           identifier: String(describing: center))
-        addCircle(on: outputlocation!)
+        addCircle(on: viewModel.location!)
     }
 }
 
 extension LocationInputView: RadiusMapViewDelegate {
     func radiusMapView(_ radiusMapView: RadiusMapView, didFind region: CLCircularRegion) {
-        outputlocation = region
+        viewModel.location = region
     }
 }
 

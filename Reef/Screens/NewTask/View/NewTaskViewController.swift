@@ -112,3 +112,9 @@ extension NewTaskViewController: UITextViewDelegate {
         }
     }
 }
+
+extension NewTaskViewController: NewTaskViewModelDelegate {
+    func updateTextViewWith(text: String) {
+        taskTitleTextView.text = text
+    }
+}

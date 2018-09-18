@@ -14,9 +14,14 @@ protocol NewTaskViewModelOutputDelegate: class {
     func didPressCreateTask()
 }
 
+protocol NewTaskViewModelDelegate: class {
+    func updateTextViewWith(text: String)
+}
+
 class NewTaskViewModel {
     
     weak var outputDelegate: NewTaskViewModelOutputDelegate?
+    weak var delegate: NewTaskViewModelDelegate!
     private let taskModel: TaskModel
     
     var taskTitleText: String? {
@@ -29,8 +34,8 @@ class NewTaskViewModel {
         self.taskModel = taskModel
     }
     
-    func edit(_ task: Task) {
-        taskTitleText = task.title
+    func edit(_ task: Task?) {
+        delegate.updateTextViewWith(text: task?.title ?? "")
     }
     
     // MARK: - NSUserActivity
