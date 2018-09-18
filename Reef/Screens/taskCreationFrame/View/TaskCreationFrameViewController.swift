@@ -13,13 +13,9 @@ class TaskCreationFrameViewController: UIViewController {
     @IBOutlet weak var taskDetailView: UIView!
     @IBOutlet weak var taskTitleView: UIView!
     
-    lazy var hiddenHeight: CGFloat = {
+    var hiddenHeight: CGFloat {
         return taskTitleView.bounds.height
-    }()
-    
-    lazy var detailActiveHeight: CGFloat = {
-        return hiddenHeight + taskDetailViewController!.tableView.contentSize.height + 20
-    }()
+    }
     
     var contentSize: CGFloat {
         return taskDetailViewController!.contentSize + taskTitleView.bounds.height + 8

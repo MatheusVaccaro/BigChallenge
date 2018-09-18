@@ -11,12 +11,11 @@ import CoreLocation
 import ReefKit
 
 protocol MoreOptionsViewModelDelegate: class {
-    func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool)
-    
-    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: DateComponents)
+    func locationInput(_ locationInputView: LocationInputView,
+                       didFind location: CLCircularRegion, arriving: Bool)
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
-                            didSelectTimeOfDay timeOfDay: DateComponents)
+                            didSelectDate date: DateComponents)
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
                             didSelectFrequency frequency: NotificationOptions.Frequency)
@@ -24,11 +23,16 @@ protocol MoreOptionsViewModelDelegate: class {
 
 class MoreOptionsViewModel {
     
-    init(task: Task?) {
-        print(task)
-        
-        locationInputViewModel = LocationInputViewModel(task: task)
-        dateInputViewModel = DateInputViewModel(with: task)
+    init(task: Task?) {        
+        locationInputViewModel = LocationInputViewModel()
+        dateInputViewModel = DateInputViewModel()
+    }
+    
+    var task: Task? {
+        didSet {
+            locationInputViewModel.task = task
+            dateInputViewModel.task = task
+        }
     }
     
     weak var delegate: MoreOptionsViewModelDelegate?
@@ -40,7 +44,7 @@ class MoreOptionsViewModel {
     let numberOfRows = 2
 }
 
-extension MoreOptionsViewModel: LocationInputDelegate {
+extension MoreOptionsViewModel: LocationInputDelegate {    
     func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool) {
         delegate?.locationInput(locationInputView, didFind: location, arriving: arriving)
     }
@@ -51,11 +55,6 @@ extension MoreOptionsViewModel: DateInputViewModelDelegate {
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
                             didSelectDate date: DateComponents) {
         delegate?.dateInputViewModel(dateInputViewModel, didSelectDate: date)
-    }
-    
-    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
-                            didSelectTimeOfDay timeOfDay: DateComponents) {
-        delegate?.dateInputViewModel(dateInputViewModel, didSelectTimeOfDay: timeOfDay)
     }
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,

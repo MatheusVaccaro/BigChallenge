@@ -5,8 +5,8 @@
 //  Created by Max Zorzetti on 31/07/18.
 //  Copyright © 2018 Matheus Vaccaro. All rights reserved.
 //
-
 import UIKit
+import ReefKit
 import RxSwift
 
 class DateInputViewModel: DateInputViewModelProtocol {
@@ -24,6 +24,14 @@ class DateInputViewModel: DateInputViewModelProtocol {
     private(set) var twoHoursFromNowShortcutText: BehaviorSubject<String>
     private(set) var thisEveningShortcutText: BehaviorSubject<String>
     private(set) var nextMorningShortcutText: BehaviorSubject<String>
+    
+    var task: Task? {
+        didSet {
+            if let date = task?.dueDate {
+                dateComponents = Calendar.current.dateComponents(Set([.year, .month, .day, .hour, .minute]), from: date)
+            }
+        }
+    }
     
     init(date: DateComponents? = nil,
          timeOfDay: DateComponents? = nil,
@@ -51,10 +59,14 @@ class DateInputViewModel: DateInputViewModelProtocol {
         print("--- DEINIT DateInputViewModel")
     }
     
+    private var dateComponents: DateComponents = Calendar.current.dateComponents(Set([.year, .month, .day, .hour, .minute]), from: Date()) //TODO: did set: configure calendar from task
+    
     func selectDate(_ date: DateComponents) {
         guard let day = date.day, let month = date.month, let year = date.year else { return }
         
-        let dateComponents = DateComponents(year: year, month: month, day: day)
+        dateComponents.day = day
+        dateComponents.month = month
+        dateComponents.year = year
         
         self.date.value = dateComponents
         delegate?.dateInputViewModel(self, didSelectDate: dateComponents)
@@ -63,10 +75,11 @@ class DateInputViewModel: DateInputViewModelProtocol {
     func selectTimeOfDay(_ timeOfDay: DateComponents) {
         guard let hour = timeOfDay.hour, let minute = timeOfDay.minute else { return }
         
-        let dateComponents = DateComponents(hour: hour, minute: minute)
+        dateComponents.hour = hour
+        dateComponents.minute = minute
         
         self.timeOfDay.value = dateComponents
-        delegate?.dateInputViewModel(self, didSelectTimeOfDay: dateComponents)
+        delegate?.dateInputViewModel(self, didSelectDate: dateComponents)
     }
     
     func select(frequency: NotificationOptions.Frequency) {
@@ -159,6 +172,5 @@ class DateInputViewModel: DateInputViewModelProtocol {
 protocol DateInputViewModelDelegate: class {
     //swiftlint:disable next line_length
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: DateComponents)
-    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectTimeOfDay timeOfDay: DateComponents)
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectFrequency frequency: NotificationOptions.Frequency)
 }

@@ -41,7 +41,6 @@ class ApplicationCoordinator: Coordinator {
         rootViewController.view.backgroundColor = .clear
         rootViewController.navigationBar.largeTitleTextAttributes =
             [ NSAttributedStringKey.font : UIFont.font(sized: 34, weight: .bold, with: .largeTitle, fontName: .barlow) ]
-
     }
     
     func refreshModel() { //TODO: find a better solution

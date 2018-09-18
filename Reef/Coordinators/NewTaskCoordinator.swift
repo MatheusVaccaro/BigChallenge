@@ -16,7 +16,7 @@ class NewTaskCoordinator: Coordinator {
     fileprivate let presenter: UINavigationController
     var childrenCoordinators: [Coordinator]
     
-    fileprivate var taskFrameViewController: TaskCreationFrameViewController!
+    fileprivate var creationFrameViewController: TaskCreationFrameViewController!
     fileprivate var newTaskViewController: NewTaskViewController?
     fileprivate var moreOptionsViewController: MoreOptionsViewController?
     
@@ -60,32 +60,36 @@ class NewTaskCoordinator: Coordinator {
     
         // Task Frame
         let creationFrameViewController = TaskCreationFrameViewController.instantiate()
-        let creationFrameViewModel = TaskCreationViewModel()
+        let creationFrameViewModel = TaskCreationViewModel(taskModel: taskModel)
         creationFrameViewModel.delegate = self
         
         creationFrameViewController.viewModel = creationFrameViewModel
-        self.taskFrameViewController = creationFrameViewController
+        self.creationFrameViewController = creationFrameViewController
+
+        newTaskViewController.viewModel.outputDelegate = creationFrameViewModel
         
         viewController.setupAddTask(viewController: creationFrameViewController)
-        self.taskFrameViewController.present(self.newTaskViewController!)
-        showMoreOptions()//TODO remove
+        self.creationFrameViewController.present(self.newTaskViewController!)
+        showMoreOptions()
     }
     
     func edit(_ task: Task) {
         selectedTags = task.allTags
+        creationFrameViewController.viewModel.task = task
         newTaskViewController?.viewModel.edit(task)
-        showMoreOptions(with: task)
-        viewController.prepareToPresentAddTask() //TODO: present moreOptions
+        moreOptionsViewController?.viewModel.task = task
+        viewController.prepareToPresentAddTask()
     }
     
-    fileprivate func showMoreOptions(with task: Task? = nil) {
-        // More Options
+    fileprivate func showMoreOptions() {
         moreOptionsViewController = MoreOptionsViewController.instantiate()
         moreOptionsViewController?.delegate = self
         
-        moreOptionsViewController!.viewModel = MoreOptionsViewModel(task: task)
+        moreOptionsViewController!.viewModel = MoreOptionsViewModel(task: nil)
         
-        taskFrameViewController.present(moreOptionsViewController!)
+        moreOptionsViewController!.viewModel.delegate = creationFrameViewController.viewModel
+        
+        creationFrameViewController.present(moreOptionsViewController!)
     }
     
     fileprivate func showLocationInput() {
@@ -143,10 +147,6 @@ extension NewTaskCoordinator: TaskCreationDelegate {
     func didPanAddTask() {
         viewController.didPanAddTask()
     }
-    
-    func didPressAddDetails() {
-        viewController.prepareToPresentMoreOptions()
-    }
 }
 
 extension NewTaskCoordinator: NewTaskDelegate {
@@ -158,11 +158,3 @@ extension NewTaskCoordinator: NewTaskDelegate {
         viewController.prepareToPresentAddTask()
     }
 }
-//extension NewTaskCoordinator: CreationFrameViewControllerDelegate { // used instead of segues to load subviews (?)
-//    func viewDidLoad(in viewController: CreationFrameViewController) {
-//        let newTaskViewController = NewTaskViewController.instantiate()
-//
-//        self.newTaskViewController = newTaskViewController
-//        newTaskViewController.viewModel = newTaskViewModel
-//    }
-//}
