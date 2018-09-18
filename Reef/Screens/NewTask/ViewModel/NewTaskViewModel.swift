@@ -11,7 +11,7 @@ import ReefKit
 
 protocol NewTaskViewModelOutputDelegate: class {
     func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateTitle title: String?)
-    func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateTags tags: [Tag]?)
+    func didPressCreateTask()
 }
 
 class NewTaskViewModel {

@@ -69,7 +69,6 @@ class HomeScreenViewController: UIViewController {
     }
     
     @IBOutlet weak var newTaskView: UIView!
-    @IBOutlet weak var addTaskHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var addTaskViewTopConstraint: NSLayoutConstraint!
     private var taskCreationFrameViewController: TaskCreationFrameViewController!
     
@@ -97,6 +96,9 @@ class HomeScreenViewController: UIViewController {
         newTaskView.addSubview(viewController.view)
         
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.addTaskViewTopConstraint.constant =
+            self.taskCreationFrameViewController.hiddenHeight - self.newTaskView.bounds.height
         
         NSLayoutConstraint.activate([
             viewController.view.rightAnchor.constraint(equalTo: newTaskView.rightAnchor),

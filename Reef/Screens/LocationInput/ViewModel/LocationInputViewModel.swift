@@ -16,13 +16,15 @@ protocol LocationInputDelegate: class {
 
 class LocationInputViewModel {
     
-    init(task: Task?) {
-        self.location = task?.region
-        self.isArriving = task?.isArriving ?? false
+    var task: Task? {
+        didSet {
+            location = task?.region
+            isArriving = task?.isArriving ?? false
+        }
     }
     
     var location: CLCircularRegion?
-    var isArriving: Bool
+    var isArriving: Bool = false
     
     public weak var delegate: LocationInputDelegate?
     

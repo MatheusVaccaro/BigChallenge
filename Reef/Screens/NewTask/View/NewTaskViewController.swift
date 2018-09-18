@@ -101,4 +101,14 @@ extension NewTaskViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         delegate?.shouldHideMoreOptions()
     }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            viewModel.outputDelegate?.didPressCreateTask()
+            return false
+        } else {
+            return true
+        }
+    }
 }
