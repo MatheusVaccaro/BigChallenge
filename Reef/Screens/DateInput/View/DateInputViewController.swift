@@ -17,7 +17,7 @@ class DateInputViewController: UIViewController {
     
     var viewModel: DateInputViewModel!
     var dateSelectorViewModel: DateInputViewModelProtocol?
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     private(set) var selectedTimeOfDayLabel: ToggleableLabel!
     
@@ -60,6 +60,7 @@ class DateInputViewController: UIViewController {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        disposeBag = DisposeBag()
         loadSelectedTimeOfDayLabel()
         loadDateSelectorView()
         loadTimeOfDaySelectorView()
