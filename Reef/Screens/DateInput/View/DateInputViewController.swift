@@ -44,12 +44,16 @@ class DateInputViewController: UIViewController {
         loadTimeOfDaySelectorView()
         loadShortcutButtons()
         
+        #if DEBUG
         print("+++ INIT DateInputViewController")
+        #endif
     }
     
+    #if DEBUG
     deinit {
         print("--- DEINIT DateInputViewController")
     }
+    #endif
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

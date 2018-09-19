@@ -9,7 +9,7 @@
 import Foundation
 import ReefKit
 
-extension DateInputViewModel {    
+extension DateInputViewModel {
     convenience init(with tag: Tag?) {
         let timeOfDay = Calendar.current.dateComponents([.hour, .minute, .second], from: Date())
         guard let tag = tag else {

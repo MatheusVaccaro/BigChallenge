@@ -51,12 +51,16 @@ class DateInputViewModel: DateInputViewModelProtocol {
         self.thisEveningShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.thisEveningShortcut)
         self.nextMorningShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.nextMorningShortcut)
         
+        #if DEBUG
         print("+++ INIT DateInputViewModel")
+        #endif
     }
     
+    #if DEBUG
     deinit {
         print("--- DEINIT DateInputViewModel")
     }
+    #endif
     
     private var dateComponents: DateComponents! = Calendar.current.dateComponents(Set([.year, .month, .day, .hour, .minute]), from: Date()) {
         didSet {
