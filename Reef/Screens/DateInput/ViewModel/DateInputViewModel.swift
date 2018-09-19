@@ -27,9 +27,8 @@ class DateInputViewModel: DateInputViewModelProtocol {
     
     var task: Task? {
         didSet {
-            if let date = task?.dueDate {
-                dateComponents = Calendar.current.dateComponents(Set([.year, .month, .day, .hour, .minute]), from: date)
-            }
+            let date = task?.dueDate ?? Date()
+            dateComponents = Calendar.current.dateComponents(Set([.year, .month, .day, .hour, .minute]), from: date)
         }
     }
     
@@ -59,7 +58,18 @@ class DateInputViewModel: DateInputViewModelProtocol {
         print("--- DEINIT DateInputViewModel")
     }
     
-    private var dateComponents: DateComponents = Calendar.current.dateComponents(Set([.year, .month, .day, .hour, .minute]), from: Date()) //TODO: did set: configure calendar from task
+    private var dateComponents: DateComponents! = Calendar.current.dateComponents(Set([.year, .month, .day, .hour, .minute]), from: Date()) {
+        didSet {
+            if date.value == nil { date = Variable(dateComponents) }
+            if timeOfDay.value == nil { timeOfDay = Variable(dateComponents) }
+            
+            date.value!.year = dateComponents.year
+            date.value!.month = dateComponents.month
+            date.value!.day = dateComponents.day
+            timeOfDay.value!.hour = dateComponents.hour
+            timeOfDay.value!.minute = dateComponents.minute
+        }
+    }
     
     func selectDate(_ date: DateComponents) {
         guard let day = date.day, let month = date.month, let year = date.year else { return }

@@ -10,8 +10,6 @@ import Foundation
 import ReefKit
 
 protocol HomeScreenViewModelDelegate: class {
-    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
-                             willAddTaskWithSelectedTags selectedTags: [Tag])
     func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel, willEdit task: Task)
     
     func homeScreenViewModelWillImportFromReminders(_ homeScreenViewModel: HomeScreenViewModel)
@@ -24,6 +22,9 @@ protocol HomeScreenViewModelDelegate: class {
                              didInstantiate taskListViewModel: TaskListViewModel)
     func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
                              didInstantiate tagCollectionViewModel: TagCollectionViewModel)
+    
+    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
+                             didChange selectedTags: [Tag])
 }
 
 class HomeScreenViewModel {
@@ -108,6 +109,7 @@ class HomeScreenViewModel {
     
     func updateSelectedTagsIfNeeded(_ tags: [Tag]?) {
         selectedTags = tags ?? []
+        delegate?.homeScreenViewModel(self, didChange: selectedTags)
         print("selected tags are: \(selectedTags.map { $0.title })")
     }
     

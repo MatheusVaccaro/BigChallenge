@@ -11,7 +11,7 @@ import CoreLocation
 import ReefKit
 
 protocol LocationInputDelegate: class {
-    func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool)
+    func locationInput(_ locationInputViewModel: LocationInputViewModel, didFind location: CLCircularRegion, arriving: Bool)
 }
 
 class LocationInputViewModel {
@@ -23,8 +23,19 @@ class LocationInputViewModel {
         }
     }
     
-    var location: CLCircularRegion?
-    var isArriving: Bool = false
+    var location: CLCircularRegion? {
+        didSet {
+            guard location != nil else { return }
+            delegate?.locationInput(self, didFind: location!, arriving: isArriving)
+        }
+    }
+    
+    var isArriving: Bool = false {
+        didSet {
+            guard location != nil else { return }
+            delegate?.locationInput(self, didFind: location!, arriving: isArriving)
+        }
+    }
     
     public weak var delegate: LocationInputDelegate?
     
@@ -37,5 +48,4 @@ class LocationInputViewModel {
         Strings.LocationInputView.VoiceOver.searchbarHint
     let mapViewAccessibilityLabel =
         Strings.LocationInputView.VoiceOver.mapLabel
-    
 }

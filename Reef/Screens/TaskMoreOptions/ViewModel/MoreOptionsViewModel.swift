@@ -11,7 +11,7 @@ import CoreLocation
 import ReefKit
 
 protocol MoreOptionsViewModelDelegate: class {
-    func locationInput(_ locationInputView: LocationInputView,
+    func locationInput(_ locationInputViewModel: LocationInputViewModel,
                        didFind location: CLCircularRegion, arriving: Bool)
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
@@ -19,23 +19,33 @@ protocol MoreOptionsViewModelDelegate: class {
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
                             didSelectFrequency frequency: NotificationOptions.Frequency)
+    
+    func shouldPresentViewForLocationInput()
+    func shouldPresentViewForDateInput()
+}
+
+protocol MoreOptionsViewModelUIDelegate: class {
+    func shouldUpdateTableView()
 }
 
 class MoreOptionsViewModel {
     
-    init(task: Task?) {        
+    init() {
         locationInputViewModel = LocationInputViewModel()
         dateInputViewModel = DateInputViewModel()
+
+        locationInputViewModel.delegate = self
+        dateInputViewModel.delegate = self
     }
     
-    var task: Task? {
-        didSet {
-            locationInputViewModel.task = task
-            dateInputViewModel.task = task
-        }
+    func edit(task: Task?) {
+        locationInputViewModel.task = task
+        dateInputViewModel.task = task
+        UIDelegate.shouldUpdateTableView()
     }
     
     weak var delegate: MoreOptionsViewModelDelegate?
+    weak var UIDelegate: MoreOptionsViewModelUIDelegate!
     
     let locationInputViewModel: LocationInputViewModel
     let dateInputViewModel: DateInputViewModel
@@ -45,8 +55,8 @@ class MoreOptionsViewModel {
 }
 
 extension MoreOptionsViewModel: LocationInputDelegate {    
-    func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool) {
-        delegate?.locationInput(locationInputView, didFind: location, arriving: arriving)
+    func locationInput(_ locationInputViewModel: LocationInputViewModel, didFind location: CLCircularRegion, arriving: Bool) {
+        delegate?.locationInput(locationInputViewModel, didFind: location, arriving: arriving)
     }
 }
 

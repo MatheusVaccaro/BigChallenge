@@ -13,6 +13,8 @@ import CoreLocation
 protocol TaskCreationDelegate: class {
     func didTapAddTask()
     func didPanAddTask()
+    func shouldPresentViewForLocationInput()
+    func shouldPresentViewForDateInput()
 }
 
 class TaskCreationViewModel {
@@ -20,11 +22,28 @@ class TaskCreationViewModel {
     weak var delegate: TaskCreationDelegate?
     
     fileprivate var model: TaskModel
-    var task: Task?
     fileprivate var attributes: [TaskAttributes : Any] = [:]
+    fileprivate let moreOptionsViewModel: MoreOptionsViewModel
+    fileprivate let newTaskViewModel: NewTaskViewModel
     
-    init(taskModel: TaskModel) {
+    var task: Task? {
+        didSet {
+            moreOptionsViewModel.edit(task: task)
+            newTaskViewModel.edit(task)
+        }
+    }
+    
+    init(taskModel: TaskModel, moreOptionsViewModel: MoreOptionsViewModel, newTaskViewModel: NewTaskViewModel) {
         self.model = taskModel
+        self.moreOptionsViewModel = moreOptionsViewModel
+        self.newTaskViewModel = newTaskViewModel
+        
+        moreOptionsViewModel.delegate = self
+        newTaskViewModel.outputDelegate = self
+    }
+    
+    func set(tags: [Tag]) {
+        attributes[.tags] = tags
     }
 }
 
@@ -35,6 +54,8 @@ extension TaskCreationViewModel: NewTaskViewModelOutputDelegate {
         } else {
             model.update(task!, with: attributes)
         }
+        
+        task = nil
     }
     
     func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateTitle title: String?) {
@@ -43,16 +64,28 @@ extension TaskCreationViewModel: NewTaskViewModelOutputDelegate {
 }
 
 extension TaskCreationViewModel: MoreOptionsViewModelDelegate {
-    func locationInput(_ locationInputView: LocationInputView, didFind location: CLCircularRegion, arriving: Bool) {
+    func shouldPresentViewForLocationInput() {
+        delegate?.shouldPresentViewForLocationInput()
+    }
+    
+    func shouldPresentViewForDateInput() {
+        delegate?.shouldPresentViewForDateInput()
+    }
+    
+    func locationInput(_ locationInputViewModel: LocationInputViewModel,
+                       didFind location: CLCircularRegion, arriving: Bool) {
+        
         attributes[.region] = location
         attributes[.isArriving] = arriving
     }
     
-    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: DateComponents) {
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
+                            didSelectDate date: DateComponents) {
         attributes[.dueDate] = Calendar.current.date(from: date)
     }
     
-    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectFrequency frequency: NotificationOptions.Frequency) {
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
+                            didSelectFrequency frequency: NotificationOptions.Frequency) {
         //TODO: implement frequency
     }
 }
