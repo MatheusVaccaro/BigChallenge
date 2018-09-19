@@ -56,6 +56,14 @@ class DateInputViewModel: DateInputViewModelProtocol {
         #endif
     }
     
+    convenience init() {
+        let now = Date.now()
+        let timeOfDayNow = Calendar.current.dateComponents([.hour, .minute, .second], from: now)
+        let today = Calendar.current.dateComponents([.day, .month, .year], from: now)
+        
+        self.init(date: today, timeOfDay: timeOfDayNow, frequency: .none)
+    }
+    
     #if DEBUG
     deinit {
         print("--- DEINIT DateInputViewModel")

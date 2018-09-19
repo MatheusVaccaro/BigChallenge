@@ -11,9 +11,8 @@ import ReefKit
 
 extension DateInputViewModel {
     convenience init(with tag: Tag?) {
-        let timeOfDay = Calendar.current.dateComponents([.hour, .minute, .second], from: Date())
         guard let tag = tag else {
-            self.init(timeOfDay: timeOfDay)
+            self.init()
             return
         }
         
@@ -24,7 +23,7 @@ extension DateInputViewModel {
             self.init(date: date, timeOfDay: timeOfDay, frequency: frequency)
             
         } else {
-            self.init(timeOfDay: timeOfDay)
+            self.init()
         }
     }
 }
