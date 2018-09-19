@@ -112,6 +112,10 @@ class NewTaskCoordinator: Coordinator {
         addChild(coordinator: newTagCoordinator)
         newTagCoordinator.start()
     }
+    
+    func update(selectedTags: [Tag]) {
+        creationFrameViewController.viewModel.set(tags: selectedTags)
+    }
 }
 
 extension NewTaskCoordinator: MoreOptionsDelegate {
@@ -148,6 +152,10 @@ extension NewTaskCoordinator: TaskCreationDelegate {
 }
 
 extension NewTaskCoordinator: NewTaskDelegate {
+    func didPressCreateTask() {
+        viewController.prepareToHideAddTask()
+    }
+    
     func shouldPresentMoreOptions() {
         viewController.prepareToPresentMoreOptions()
     }

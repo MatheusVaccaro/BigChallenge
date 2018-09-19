@@ -62,31 +62,15 @@ class HomeScreenViewController: UIViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         configureEmptyState()
         if isPresentingMoreOptions {
-            animateAddTaskShowing()
+            animateMoreOptionsShowing()
         } else {
-            animateAddTaskHidden()
+            animateAddTaskShowing()
         }
     }
     
     @IBOutlet weak var newTaskView: UIView!
     @IBOutlet weak var addTaskViewTopConstraint: NSLayoutConstraint!
     private var taskCreationFrameViewController: TaskCreationFrameViewController!
-    
-    fileprivate func animateAddTaskHidden() {
-        UIView.animate(withDuration: 0.25) {
-            self.addTaskViewTopConstraint.constant =
-                self.taskCreationFrameViewController.hiddenHeight - self.newTaskView.bounds.height
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    fileprivate func animateAddTaskShowing() {
-        UIView.animate(withDuration: 0.25) {
-            self.addTaskViewTopConstraint.constant =
-                self.taskCreationFrameViewController.contentSize - self.newTaskView.bounds.height
-            self.view.layoutIfNeeded()
-        }
-    }
     
     func setupAddTask(viewController: TaskCreationFrameViewController) {
         
@@ -143,17 +127,6 @@ class HomeScreenViewController: UIViewController {
     }
     
     fileprivate func subscribe(to taskListViewModel: TaskListViewModel) {
-        taskListViewModel.shouldAddTask
-            .subscribe(onNext: { shouldAddTask in
-            	if shouldAddTask {
-                	let selectedTags = self.viewModel.tagCollectionViewModel.selectedTags
-                    // TODO: Refactor this to fit into architecture
-                	self.viewModel.delegate?
-                        .homeScreenViewModel(self.viewModel, willAddTaskWithSelectedTags: selectedTags)
-            	}
-        	})
-            .disposed(by: disposeBag)
-        
         taskListViewModel.shouldEditTask
             .subscribe(onNext: { task in
                 // TODO: Refactor this to fit into architecture
@@ -249,31 +222,7 @@ class HomeScreenViewController: UIViewController {
     }
     
     fileprivate var isPresentingMoreOptions: Bool = false
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        guard isPresentingMoreOptions else { return }
-        isPresentingMoreOptions = false
-        animateAddTaskHidden()
-    }
-}
-
-extension HomeScreenViewController {
-    func prepareToPresentAddTask() {
-        isPresentingMoreOptions = false
-        animateAddTaskHidden()
-    }
-    
-    func didPanAddTask() {
-        //code
-    }
-    
-    func prepareToPresentMoreOptions() {
-        guard !isPresentingMoreOptions else { return }
-        isPresentingMoreOptions = true
-        viewModel.delegate?.homeScreenViewModel(viewModel, willAddTaskWithSelectedTags: viewModel.selectedTags)
-        animateAddTaskShowing()
-    }
+    fileprivate var isPresentingAddTask: Bool = false
 }
 
 extension HomeScreenViewController: StoryboardInstantiable {
@@ -285,6 +234,63 @@ extension HomeScreenViewController: StoryboardInstantiable {
         return "HomeScreen"
     }
 }
+
+extension HomeScreenViewController {
+    func prepareToPresentAddTask() {
+        guard !isPresentingAddTask else { return }
+        isPresentingAddTask = true
+        tagCollectionViewController!.viewModel.filtering = false
+        animateAddTaskShowing()
+    }
+    
+    func prepareToHideAddTask() {
+        guard isPresentingAddTask else { return }
+        isPresentingAddTask = false
+        tagCollectionViewController!.viewModel.filtering = true
+        animateAddTaskHidden()
+    }
+    
+    func didPanAddTask() {
+        //code
+    }
+    
+    func prepareToPresentMoreOptions() {
+        guard !isPresentingMoreOptions else { return }
+        isPresentingMoreOptions = true
+        animateMoreOptionsShowing()
+    }
+    
+    func prepareToHideMoreOptions() {
+        guard isPresentingMoreOptions else { return }
+        isPresentingMoreOptions = false
+        animateAddTaskShowing()
+    }
+    
+    fileprivate func animateAddTaskHidden() {
+        UIView.animate(withDuration: 0.25) {
+            self.addTaskViewTopConstraint.constant =
+                (self.taskCreationFrameViewController.hiddenHeight + 20) - self.newTaskView.bounds.height
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    fileprivate func animateAddTaskShowing() {
+        UIView.animate(withDuration: 0.25) {
+            self.addTaskViewTopConstraint.constant =
+                self.taskCreationFrameViewController.hiddenHeight - self.newTaskView.bounds.height
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    fileprivate func animateMoreOptionsShowing() {
+        UIView.animate(withDuration: 0.25) {
+            self.addTaskViewTopConstraint.constant =
+                self.taskCreationFrameViewController.contentSize - self.newTaskView.bounds.height
+            self.view.layoutIfNeeded()
+        }
+    }
+}
+
 
 extension UIView {
     func applyBlur(style: UIBlurEffectStyle) {

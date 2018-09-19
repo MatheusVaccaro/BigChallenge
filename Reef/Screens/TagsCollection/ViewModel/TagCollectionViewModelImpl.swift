@@ -21,7 +21,12 @@ class TagCollectionViewModelImpl: TagCollectionViewModel {
     private(set) var tags: [Tag]
     private(set) var filteredTags: [Tag]
     private(set) var selectedTags: [Tag]
-    var filtering: Bool
+    
+    var filtering: Bool {
+        didSet {
+            filterTags(with: selectedTags)
+        }
+    }
     
     private let disposeBag = DisposeBag()
     private var model: TagModel

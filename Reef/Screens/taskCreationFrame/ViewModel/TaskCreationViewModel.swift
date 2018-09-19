@@ -39,6 +39,10 @@ class TaskCreationViewModel {
         moreOptionsViewModel.outputDelegate = self
         newTaskViewModel.outputDelegate = self
     }
+    
+    func set(tags: [Tag]) {
+        attributes[.tags] = tags
+    }
 }
 
 extension TaskCreationViewModel: NewTaskViewModelOutputDelegate {

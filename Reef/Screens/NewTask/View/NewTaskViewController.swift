@@ -13,6 +13,7 @@ import UITextView_Placeholder
 protocol NewTaskDelegate: class {
     func shouldPresentMoreOptions()
     func shouldHideMoreOptions()
+    func didPressCreateTask()
 }
 
 class NewTaskViewController: UIViewController {
@@ -106,6 +107,7 @@ extension NewTaskViewController: UITextViewDelegate {
         if text == "\n" {
             textView.resignFirstResponder()
             viewModel.outputDelegate?.didPressCreateTask()
+            delegate?.didPressCreateTask()
             return false
         } else {
             return true
