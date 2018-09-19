@@ -24,7 +24,7 @@ class TagCollectionViewModelImpl: TagCollectionViewModel {
     
     var filtering: Bool {
         didSet {
-            filterTags(with: selectedTags)
+            filterTags(with: [])
         }
     }
     

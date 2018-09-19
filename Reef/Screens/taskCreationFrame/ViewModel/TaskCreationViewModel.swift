@@ -13,6 +13,8 @@ import CoreLocation
 protocol TaskCreationDelegate: class {
     func didTapAddTask()
     func didPanAddTask()
+    func shouldPresentViewForLocationInput()
+    func shouldPresentViewForDateInput()
 }
 
 class TaskCreationViewModel {
@@ -36,7 +38,7 @@ class TaskCreationViewModel {
         self.moreOptionsViewModel = moreOptionsViewModel
         self.newTaskViewModel = newTaskViewModel
         
-        moreOptionsViewModel.outputDelegate = self
+        moreOptionsViewModel.delegate = self
         newTaskViewModel.outputDelegate = self
     }
     
@@ -62,16 +64,28 @@ extension TaskCreationViewModel: NewTaskViewModelOutputDelegate {
 }
 
 extension TaskCreationViewModel: MoreOptionsViewModelDelegate {
-    func locationInput(_ locationInputViewModel: LocationInputViewModel, didFind location: CLCircularRegion, arriving: Bool) {
+    func shouldPresentViewForLocationInput() {
+        delegate?.shouldPresentViewForLocationInput()
+    }
+    
+    func shouldPresentViewForDateInput() {
+        delegate?.shouldPresentViewForDateInput()
+    }
+    
+    func locationInput(_ locationInputViewModel: LocationInputViewModel,
+                       didFind location: CLCircularRegion, arriving: Bool) {
+        
         attributes[.region] = location
         attributes[.isArriving] = arriving
     }
     
-    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: DateComponents) {
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
+                            didSelectDate date: DateComponents) {
         attributes[.dueDate] = Calendar.current.date(from: date)
     }
     
-    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectFrequency frequency: NotificationOptions.Frequency) {
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
+                            didSelectFrequency frequency: NotificationOptions.Frequency) {
         //TODO: implement frequency
     }
 }

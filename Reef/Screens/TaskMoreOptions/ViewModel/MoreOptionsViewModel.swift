@@ -19,6 +19,9 @@ protocol MoreOptionsViewModelDelegate: class {
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
                             didSelectFrequency frequency: NotificationOptions.Frequency)
+    
+    func shouldPresentViewForLocationInput()
+    func shouldPresentViewForDateInput()
 }
 
 protocol MoreOptionsViewModelUIDelegate: class {
@@ -38,11 +41,11 @@ class MoreOptionsViewModel {
     func edit(task: Task?) {
         locationInputViewModel.task = task
         dateInputViewModel.task = task
-        delegate.shouldUpdateTableView()
+        UIDelegate.shouldUpdateTableView()
     }
     
-    weak var outputDelegate: MoreOptionsViewModelDelegate?
-    weak var delegate: MoreOptionsViewModelUIDelegate!
+    weak var delegate: MoreOptionsViewModelDelegate?
+    weak var UIDelegate: MoreOptionsViewModelUIDelegate!
     
     let locationInputViewModel: LocationInputViewModel
     let dateInputViewModel: DateInputViewModel
@@ -53,7 +56,7 @@ class MoreOptionsViewModel {
 
 extension MoreOptionsViewModel: LocationInputDelegate {    
     func locationInput(_ locationInputViewModel: LocationInputViewModel, didFind location: CLCircularRegion, arriving: Bool) {
-        outputDelegate?.locationInput(locationInputViewModel, didFind: location, arriving: arriving)
+        delegate?.locationInput(locationInputViewModel, didFind: location, arriving: arriving)
     }
 }
 
@@ -61,11 +64,11 @@ extension MoreOptionsViewModel: DateInputViewModelDelegate {
 
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
                             didSelectDate date: DateComponents) {
-        outputDelegate?.dateInputViewModel(dateInputViewModel, didSelectDate: date)
+        delegate?.dateInputViewModel(dateInputViewModel, didSelectDate: date)
     }
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
                             didSelectFrequency frequency: NotificationOptions.Frequency) {
-        outputDelegate?.dateInputViewModel(dateInputViewModel, didSelectFrequency: frequency)
+        delegate?.dateInputViewModel(dateInputViewModel, didSelectFrequency: frequency)
     }
 }

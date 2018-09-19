@@ -37,6 +37,7 @@ class NewTaskViewController: UIViewController {
         configureWithViewModel()
         configureTaskTitleTextView()
         configureViewDesign()
+        configureMoreOptionsButton()
         
         userActivity = viewModel.userActivity
         userActivity?.becomeCurrent()
@@ -56,6 +57,10 @@ class NewTaskViewController: UIViewController {
     }
     
     // MARK: - Functions
+    private func configureMoreOptionsButton() {
+        taskDetailsButton.setImage(UIImage(named: "option"), for: .normal)
+    }
+    
     private func configureWithViewModel() {
         taskTitleTextView.text = viewModel.taskTitleText
     }
@@ -105,6 +110,7 @@ extension NewTaskViewController: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
+            guard textView.text != "" else { return false }
             textView.resignFirstResponder()
             viewModel.outputDelegate?.didPressCreateTask()
             delegate?.didPressCreateTask()

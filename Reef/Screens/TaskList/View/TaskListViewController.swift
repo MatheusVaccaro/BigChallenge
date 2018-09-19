@@ -67,10 +67,6 @@ public class TaskListViewController: UIViewController {
         print("--- DEINIT TaskListViewController")
     }
     
-    public override func viewDidAppear(_ animated: Bool) {
-        resetFeedback()
-    }
-    
     private func bindTableView() {
         let dataSource = createDataSource()
         
@@ -126,8 +122,6 @@ public class TaskListViewController: UIViewController {
                 return cell
             })
         
-        subscribeToDragging(in: self.tableView)
-        
         return ans
     }
     
@@ -156,96 +150,6 @@ public class TaskListViewController: UIViewController {
                            colored: UIColor.purple)
         
         heightOfHeaderTag = alsoTaggedHeader.bounds.size.height
-    }
-    
-    // MARK: - Haptics
-    
-    fileprivate var feedbackGenerator: UIImpactFeedbackGenerator?
-    fileprivate var lightImpactOcurred: Bool = true
-    fileprivate var heavyImpactOcurred: Bool = false
-    fileprivate var mediumImpactOcurred: Bool = false
-    
-    func subscribeToDragging(in tableView: UITableView) {
-        tableView.rx.willBeginDragging.subscribe { _ in
-            self.resetFeedback()
-            self.prepareFeedback()
-        }.disposed(by: disposeBag)
-        
-        tableView.rx.didScroll.subscribe { _ in
-            self.triggerLightImpactIfNeeded()
-            self.triggerMediumImpactIfNeeded()
-            self.triggerHeavyImpactIfNeeded()
-            }.disposed(by: disposeBag)
-        
-        tableView.rx.didEndDragging.subscribe { _ in
-            self.feedbackGenerator = nil
-            if tableView.shouldAddNewTask {
-                self.viewModel.shouldGoToAddTask()
-            }
-            }.disposed(by: disposeBag)
-    }
-    
-    fileprivate func prepareFeedback() {
-        print("preparing feedback")
-        feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
-        feedbackGenerator?.prepare()
-    }
-    
-    fileprivate func resetFeedback() {
-        lightImpactOcurred = true
-        mediumImpactOcurred = false
-        heavyImpactOcurred = false
-    }
-    
-    fileprivate func triggerLightImpactIfNeeded() {
-        if shouldTriggerLightImpact {
-            print( "triggered light impact" )
-            feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
-            feedbackGenerator?.impactOccurred()
-            resetFeedback() // reach end of feedback cycle
-        }
-        
-    }
-    
-    fileprivate func triggerMediumImpactIfNeeded() {
-        if shouldTriggerMediumImpact {
-            print( "triggered medium impact" )
-            feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
-            feedbackGenerator?.impactOccurred()
-            mediumImpactOcurred = true
-        }
-        
-    }
-    
-    fileprivate func triggerHeavyImpactIfNeeded() {
-        if shouldTriggerHeavyImpact {
-            print( "triggered heavy impact" )
-            feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-            feedbackGenerator?.impactOccurred()
-            heavyImpactOcurred = true
-            lightImpactOcurred = false // prepare back drag light impact
-        }
-    }
-    
-    fileprivate var shouldTriggerLightImpact: Bool {
-        guard !lightImpactOcurred else { return false }
-        return tableView.contentOffset.y > -50.0
-    }
-    
-    fileprivate var shouldTriggerMediumImpact: Bool {
-        guard !mediumImpactOcurred else { return false }
-        return tableView.contentOffset.y < -50.0
-    }
-    
-    fileprivate var shouldTriggerHeavyImpact: Bool {
-        guard !heavyImpactOcurred else { return false }
-        return tableView.shouldAddNewTask
-    }
-}
-
-fileprivate extension UITableView {
-    var shouldAddNewTask: Bool {
-        return contentOffset.y < -80.0
     }
 }
 

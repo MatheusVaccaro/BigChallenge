@@ -39,11 +39,8 @@ class DateInputViewModel: DateInputViewModelProtocol {
         
         self.delegate = delegate
         
-        let currentDate =
-            Calendar.current.dateComponents(Set([.year, .month, .day, .hour, .minute]), from: Date())
-        
-        self.date = Variable(date ?? currentDate)
-        self.timeOfDay = Variable(timeOfDay ?? currentDate)
+        self.date = Variable(date)
+        self.timeOfDay = Variable(timeOfDay)
         self.frequency = Variable(frequency)
         
         self.tomorrowShortcutText = Variable<String>(Strings.DateInputView.tomorrowShortcut)
@@ -63,6 +60,9 @@ class DateInputViewModel: DateInputViewModelProtocol {
     
     private var dateComponents: DateComponents! = Calendar.current.dateComponents(Set([.year, .month, .day, .hour, .minute]), from: Date()) {
         didSet {
+            if date.value == nil { date = Variable(dateComponents) }
+            if timeOfDay.value == nil { timeOfDay = Variable(dateComponents) }
+            
             date.value!.year = dateComponents.year
             date.value!.month = dateComponents.month
             date.value!.day = dateComponents.day

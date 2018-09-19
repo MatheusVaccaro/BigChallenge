@@ -24,7 +24,7 @@ class NewTaskCoordinator: Coordinator {
     fileprivate let tagModel: TagModel
     
     fileprivate var selectedTags: [Tag]
-    fileprivate let viewController: HomeScreenViewController
+    fileprivate let homeScreen: HomeScreenViewController
     
     weak var delegate: CoordinatorDelegate?
     
@@ -39,7 +39,7 @@ class NewTaskCoordinator: Coordinator {
         self.presenter = presenter
         self.childrenCoordinators = []
         
-        self.viewController = viewController
+        self.homeScreen = viewController
         
         self.selectedTags = selectedTags
         
@@ -63,9 +63,7 @@ class NewTaskCoordinator: Coordinator {
         // more options
         moreOptionsViewController = MoreOptionsViewController.instantiate()
         let moreOptionsViewModel = MoreOptionsViewModel()
-
-        moreOptionsViewController?.delegate = self
-        moreOptionsViewModel.delegate = moreOptionsViewController
+        moreOptionsViewModel.UIDelegate = moreOptionsViewController
         
         moreOptionsViewController!.viewModel = moreOptionsViewModel
     
@@ -79,7 +77,7 @@ class NewTaskCoordinator: Coordinator {
         creationFrameViewController.viewModel = creationFrameViewModel
         self.creationFrameViewController = creationFrameViewController
         
-        viewController.setupAddTask(viewController: creationFrameViewController)
+        homeScreen.setupAddTask(viewController: creationFrameViewController)
         self.creationFrameViewController.present(self.newTaskViewController!)
         creationFrameViewController.present(moreOptionsViewController!)
     }
@@ -87,7 +85,7 @@ class NewTaskCoordinator: Coordinator {
     func edit(_ task: Task) {
         selectedTags = task.allTags
         creationFrameViewController.viewModel.task = task
-        viewController.prepareToPresentAddTask()
+        homeScreen.prepareToPresentAddTask()
     }
     
     fileprivate func showLocationInput() {
@@ -118,16 +116,6 @@ class NewTaskCoordinator: Coordinator {
     }
 }
 
-extension NewTaskCoordinator: MoreOptionsDelegate {
-    func shouldPresentViewForDateInput() {
-        showDateInput()
-    }
-    
-    func shouldPresentViewForLocationInput() {
-        showLocationInput()
-    }
-}
-
 extension NewTaskCoordinator {
     private func dismissViewController() {
         presenter.dismiss(animated: true, completion: nil)
@@ -143,24 +131,32 @@ extension NewTaskCoordinator: CoordinatorDelegate {
 
 extension NewTaskCoordinator: TaskCreationDelegate {
     func didTapAddTask() {
-        viewController.prepareToPresentAddTask()
+        homeScreen.prepareToPresentAddTask()
     }
     
     func didPanAddTask() {
-        viewController.didPanAddTask()
+        homeScreen.didPanAddTask()
+    }
+    
+    func shouldPresentViewForDateInput() {
+        showDateInput()
+    }
+    
+    func shouldPresentViewForLocationInput() {
+        showLocationInput()
     }
 }
 
 extension NewTaskCoordinator: NewTaskDelegate {
     func didPressCreateTask() {
-        viewController.prepareToHideAddTask()
+        homeScreen.prepareToHideAddTask()
     }
     
     func shouldPresentMoreOptions() {
-        viewController.prepareToPresentMoreOptions()
+        homeScreen.prepareToPresentMoreOptions()
     }
     
     func shouldHideMoreOptions() {
-        viewController.prepareToPresentAddTask()
+        homeScreen.prepareToPresentAddTask()
     }
 }

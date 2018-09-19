@@ -8,17 +8,11 @@
 
 import UIKit
 
-protocol MoreOptionsDelegate: class {
-    func shouldPresentViewForLocationInput()
-    func shouldPresentViewForDateInput()
-}
-
 class MoreOptionsViewController: UIViewController {
     
     // MARK: - Properties
     
     var viewModel: MoreOptionsViewModel!
-    weak var delegate: MoreOptionsDelegate?
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -97,9 +91,9 @@ extension MoreOptionsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            delegate?.shouldPresentViewForLocationInput()
+            viewModel.delegate?.shouldPresentViewForLocationInput()
         case 1:
-            delegate?.shouldPresentViewForDateInput()
+            viewModel.delegate?.shouldPresentViewForDateInput()
         default:
             print("present date screen")
         }

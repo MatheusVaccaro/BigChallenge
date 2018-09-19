@@ -42,7 +42,7 @@ class HomeScreenViewController: UIViewController {
         title = viewModel.bigTitleText
         
         whiteBackgroundView.layer.cornerRadius = 6.3
-        whiteBackgroundView.layer.maskedCorners = [ .layerMaxXMaxYCorner, .layerMinXMaxYCorner ]
+        whiteBackgroundView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         whiteBackgroundView.tintColor = UIColor.white
         
         whiteBackgroundView.layer.shadowRadius = 6.3
@@ -80,9 +80,6 @@ class HomeScreenViewController: UIViewController {
         newTaskView.addSubview(viewController.view)
         
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.addTaskViewTopConstraint.constant =
-            self.taskCreationFrameViewController.hiddenHeight - self.newTaskView.bounds.height
         
         NSLayoutConstraint.activate([
             viewController.view.rightAnchor.constraint(equalTo: newTaskView.rightAnchor),
@@ -239,6 +236,7 @@ extension HomeScreenViewController {
     func prepareToPresentAddTask() {
         guard !isPresentingAddTask else { return }
         isPresentingAddTask = true
+        isPresentingMoreOptions = false
         tagCollectionViewController!.viewModel.filtering = false
         animateAddTaskShowing()
     }
@@ -246,30 +244,33 @@ extension HomeScreenViewController {
     func prepareToHideAddTask() {
         guard isPresentingAddTask else { return }
         isPresentingAddTask = false
+        isPresentingMoreOptions = false
         tagCollectionViewController!.viewModel.filtering = true
         animateAddTaskHidden()
-    }
-    
-    func didPanAddTask() {
-        //code
     }
     
     func prepareToPresentMoreOptions() {
         guard !isPresentingMoreOptions else { return }
         isPresentingMoreOptions = true
+        isPresentingAddTask = false
         animateMoreOptionsShowing()
     }
     
     func prepareToHideMoreOptions() {
         guard isPresentingMoreOptions else { return }
         isPresentingMoreOptions = false
+        isPresentingAddTask = true
         animateAddTaskShowing()
+    }
+    
+    func didPanAddTask() {
+        //code
     }
     
     fileprivate func animateAddTaskHidden() {
         UIView.animate(withDuration: 0.25) {
             self.addTaskViewTopConstraint.constant =
-                (self.taskCreationFrameViewController.hiddenHeight + 20) - self.newTaskView.bounds.height
+                (self.taskCreationFrameViewController.hiddenHeight - 20) - self.newTaskView.bounds.height
             self.view.layoutIfNeeded()
         }
     }
