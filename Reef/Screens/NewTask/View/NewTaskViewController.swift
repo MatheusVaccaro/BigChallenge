@@ -29,6 +29,7 @@ class NewTaskViewController: UIViewController {
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var taskTitleTextView: UITextView!
     @IBOutlet weak var taskDetailsButton: UIButton!
+    @IBOutlet weak var doneButton: UIButton!
     
     // MARK: - NewTaskViewController Lifecycle
     override func viewDidLoad() {
@@ -54,11 +55,27 @@ class NewTaskViewController: UIViewController {
     @IBAction func didClickDetailsButton(_ sender: Any) {
         taskTitleTextView.resignFirstResponder()
         delegate?.shouldPresentMoreOptions()
+        doneButton.isHidden = false
+        taskDetailsButton.isHidden = true
+    }
+    
+    @IBAction func didClickDoneButton(_ sender: Any) {
+        _ = createTaskIfPossible()
+    }
+    
+    private func createTaskIfPossible() -> Bool {
+        guard taskTitleTextView.text != "" else { return false }
+        taskTitleTextView.resignFirstResponder()
+        delegate?.didPressCreateTask()
+        viewModel.outputDelegate?.didPressCreateTask()
+        return true
     }
     
     // MARK: - Functions
     private func configureMoreOptionsButton() {
         taskDetailsButton.setImage(UIImage(named: "option"), for: .normal)
+        doneButton.setImage(UIImage(named: "teteuzika"), for: .normal)
+        doneButton.isHidden = true
     }
     
     private func configureWithViewModel() {
@@ -106,15 +123,13 @@ extension NewTaskViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         delegate?.shouldHideMoreOptions()
+        doneButton.isHidden = true
+        taskDetailsButton.isHidden = false
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
-            guard textView.text != "" else { return false }
-            textView.resignFirstResponder()
-            viewModel.outputDelegate?.didPressCreateTask()
-            delegate?.didPressCreateTask()
-            return false
+            return createTaskIfPossible()
         } else {
             return true
         }

@@ -252,7 +252,7 @@ extension HomeScreenViewController {
     func prepareToPresentMoreOptions() {
         guard !isPresentingMoreOptions else { return }
         isPresentingMoreOptions = true
-        isPresentingAddTask = false
+        isPresentingAddTask = true
         animateMoreOptionsShowing()
     }
     
