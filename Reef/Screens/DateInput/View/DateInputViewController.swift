@@ -15,8 +15,7 @@ class DateInputViewController: UIViewController {
     
     // MARK: - Properties
     
-    var viewModel: DateInputViewModel!
-    var dateSelectorViewModel: DateInputViewModelProtocol?
+    var viewModel: DateInputViewModelProtocol!
     private var disposeBag = DisposeBag()
     
     private(set) var selectedTimeOfDayLabel: ToggleableLabel!

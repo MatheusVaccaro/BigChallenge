@@ -9,14 +9,15 @@
 import Foundation
 import RxSwift
 
-extension DateInputViewModel: IconCellPresentable {
+extension IconCellPresentable where Self: DateInputViewModelProtocol {
+    
     var title: String {
         return Strings.MoreOptionsScreen.TimeCell.title
     }
     
     var subtitle: String {
-        if date.value != nil {
-            let subTitleDate = Calendar.current.date(from: date.value!)!
+        if let date = date.value {
+            let subTitleDate = Calendar.current.date(from: date)!
             let dateFormatter = DateFormatter()
             dateFormatter.locale = Locale.current
             dateFormatter.dateFormat = "d MMM hh:mm"

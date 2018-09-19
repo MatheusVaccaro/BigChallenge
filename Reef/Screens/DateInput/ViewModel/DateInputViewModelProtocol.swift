@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-protocol DateInputViewModelProtocol {
+protocol DateInputViewModelProtocol: IconCellPresentable {
     var delegate: DateInputViewModelDelegate? { get set }
     
     var date: Variable<DateComponents?> { get }
