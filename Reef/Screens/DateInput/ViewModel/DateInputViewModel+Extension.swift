@@ -9,6 +9,17 @@
 import Foundation
 import ReefKit
 
+extension DateInputViewModelProtocol {
+    func configure(with task: Task?) {
+        guard let task = task, let dueDate = task.dueDate else { return }
+        
+        let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: dueDate)
+        
+        self.timeOfDay.value = timeOfDay
+        self.date.value = calendarDate
+    }
+}
+
 extension DateInputViewModel {
     convenience init(with tag: Tag?) {
         guard let tag = tag else {
@@ -17,13 +28,23 @@ extension DateInputViewModel {
         }
         
         if let triggerDate = tag.notificationOptions.triggerDate {
-            let date = Calendar.current.dateComponents([.year, .month, .day], from: triggerDate)
-            let timeOfDay = Calendar.current.dateComponents([.hour, .minute, .second], from: triggerDate)
+            let date = Calendar.current.calendarDate(from: triggerDate)
+            let timeOfDay = Calendar.current.timeOfDay(from: triggerDate)
             let frequency = tag.notificationOptions.frequency
             self.init(date: date, timeOfDay: timeOfDay, frequency: frequency)
             
         } else {
             self.init()
         }
+    }
+    
+    convenience init(with task: Task?) {
+        guard let task = task, let dueDate = task.dueDate else {
+            self.init()
+            return
+        }
+        
+        let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: dueDate)
+        self.init(date: calendarDate, timeOfDay: timeOfDay, frequency: nil)
     }
 }

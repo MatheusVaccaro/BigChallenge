@@ -25,13 +25,6 @@ class DateInputViewModel: DateInputViewModelProtocol {
     private(set) var thisEveningShortcutText: BehaviorSubject<String>
     private(set) var nextMorningShortcutText: BehaviorSubject<String>
     
-    var task: Task? {
-        didSet {
-            let date = task?.dueDate ?? Date()
-            dateComponents = Calendar.current.dateComponents(Set([.year, .month, .day, .hour, .minute]), from: date)
-        }
-    }
-    
     init(date: DateComponents? = nil,
          timeOfDay: DateComponents? = nil,
          frequency: NotificationOptions.Frequency? = nil,

@@ -45,7 +45,7 @@ class MoreOptionsViewModel {
     
     func edit(task: Task?) {
         locationInputViewModel.task = task
-        dateInputViewModel.task = task
+        dateInputViewModel.configure(with: task)
         UIDelegate.shouldUpdateTableView()
     }
     

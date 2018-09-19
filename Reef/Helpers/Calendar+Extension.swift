@@ -15,7 +15,25 @@ extension Calendar {
         return date(from: dateComponents)
     }
     
-    func combine(date dateComponents: DateComponents?, andTimeOfDay timeOfDayComponents: DateComponents?) -> Date? {
+    func calendarDate(from date: Date) -> DateComponents {
+        let calendarDate = dateComponents([.year, .month, .day], from: date)
+        
+        return calendarDate
+    }
+    
+    func timeOfDay(from date: Date) -> DateComponents {
+        let timeOfDay = dateComponents([.hour, .minute, .second], from: date)
+        
+        return timeOfDay
+    }
+    
+    func splitCalendarDateAndTimeOfDay(from date: Date) -> (calendarDate: DateComponents, timeOfDay: DateComponents) {
+        return (calendarDate(from: date), timeOfDay(from: date))
+    }
+    
+    func combine(calendarDate dateComponents: DateComponents?,
+                 andTimeOfDay timeOfDayComponents: DateComponents?) -> Date? {
+        
         let dateComponents = dateComponents ?? DateComponents()
         let timeOfDayComponents = timeOfDayComponents ?? DateComponents()
         
