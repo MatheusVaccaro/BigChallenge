@@ -28,6 +28,10 @@ extension UIColor {
             static let selectedDate = UIColor.white
         }
     }
+    
+    static var placeholder: UIColor {
+        return UIColor(red: 63/255, green: 69/255, blue: 79/255, alpha: 0.3)
+    }
 }
 
 extension CGColor {
