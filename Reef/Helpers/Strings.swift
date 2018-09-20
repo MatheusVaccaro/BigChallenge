@@ -109,8 +109,14 @@ struct Strings {
             static let mapValue = NSLocalizedString("%@ meters from %@",
                                                     comment: "accessibility value on map for voiceOver users")
             
+            static let mapValueEmpty = NSLocalizedString("mapValueEmpty",
+                                                    comment: "accessibility value on map for voiceOver users when empty")
+            
             static let searchbarHint = NSLocalizedString("searchBarHint",
                                                          comment: "accessibility hint on searchBar for voiceOver users")
+            
+            static let locationCellHint = NSLocalizedString("MapViewAccessibilityHint",
+                                                    comment: "hint of cell that displays a location to voiceOver users")
         }
     }
     
@@ -135,15 +141,19 @@ struct Strings {
     struct MoreOptionsScreen {
         
         struct LocationCell {
-            static let title = NSLocalizedString("locationHeaderTitle", comment: "title for location header")
+            static let title = NSLocalizedString("locationHeaderTitle", comment: "title for location cell on task details menu")
             
-            static let subtitle = NSLocalizedString("locationHeaderSubtitle", comment: "subtitle for location header")
+            static let subtitle = NSLocalizedString("locationHeaderSubtitle", comment: "subtitle for location cell on task details menu")
+            
+            static let voiceOverHint = NSLocalizedString("locationVoiceOverHint", comment: "(VoiceOver) hint for location cell on task details menu")
         }
         
         struct TimeCell {
-            static let title = NSLocalizedString("timeHeaderTitle", comment: "title for time header")
+            static let title = NSLocalizedString("timeHeaderTitle", comment: "title for date cell on task details menu")
             
-            static let subtitle = NSLocalizedString("timeHeaderSubtitle", comment: "subtitle for time header")
+            static let subtitle = NSLocalizedString("timeHeaderSubtitle", comment: "subtitle for date cell on task details menu")
+            
+            static let voiceOverHint = NSLocalizedString("dateVoiceOverHint", comment: "(VoiceOver) hint for date cell on task details menu")
         }
         
         struct NotesCell {

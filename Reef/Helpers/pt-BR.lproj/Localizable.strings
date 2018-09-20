@@ -36,7 +36,7 @@
 "mapViewAccessibilitylabel" = "Mapa";
 
 /* accessibility hint on searchBar for voiceOver users */
-"searchBarHint" = "toque para buscar lugares";
+"searchBarHint" = "Dê dois toques para buscar lugares";
 
 /* placeholder for empty state location search bar */
 "searchBarPlaceholder" = "Pesquisar";

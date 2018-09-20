@@ -80,6 +80,8 @@ class NewTaskCoordinator: Coordinator {
         homeScreen.setupAddTask(viewController: creationFrameViewController)
         self.creationFrameViewController.present(self.newTaskViewController!)
         creationFrameViewController.present(moreOptionsViewController!)
+        
+        moreOptionsViewController.accessibilityElementsHidden = true
     }
     
     func edit(_ task: Task) {
@@ -171,9 +173,11 @@ extension NewTaskCoordinator: NewTaskDelegate {
     
     func shouldPresentMoreOptions() {
         homeScreen.prepareToPresentMoreOptions()
+        moreOptionsViewController.accessibilityElementsHidden = false
     }
     
     func shouldHideMoreOptions() {
         homeScreen.prepareToPresentAddTask()
+        moreOptionsViewController.accessibilityElementsHidden = true
     }
 }

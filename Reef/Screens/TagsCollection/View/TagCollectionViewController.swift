@@ -41,6 +41,8 @@ class TagCollectionViewController: UIViewController {
         if let layout = tagsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.estimatedItemSize = CGSize(width: 150, height: 40)
         }
+        
+        configureAccessibility()
     }
     
     func bindCollectionView() {
@@ -52,6 +54,8 @@ class TagCollectionViewController: UIViewController {
                cellType: TagCollectionViewCell.self)) { (row, item, cell) in
                 
                 self.configureCell(row: row, item: item, cell: cell)
+                
+                cell.isAccessibilityElement = true
                 
         }.disposed(by: disposeBag)
         
@@ -166,6 +170,11 @@ class TagCollectionViewController: UIViewController {
         
         resignFirstResponder()
         present(bigTagVC, animated: true)
+    }
+    
+    private func configureAccessibility() {
+        isAccessibilityElement = true
+        tagsCollectionView.isAccessibilityElement = true
     }
 }
 

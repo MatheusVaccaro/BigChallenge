@@ -57,6 +57,12 @@ class MoreOptionsViewController: UIViewController {
                                  bundle: nil),
                            forCellReuseIdentifier: IconTableViewCell.reuseIdentifier!)
     }
+    
+    override var accessibilityElementsHidden: Bool {
+        didSet {
+            tableView.accessibilityElementsHidden = accessibilityElementsHidden
+        }
+    }
 }
 
 // MARK: - UITableViewDataSourceDataSource

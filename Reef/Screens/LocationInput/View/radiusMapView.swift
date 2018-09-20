@@ -78,6 +78,7 @@ class RadiusMapView: MKMapView {
                                             span: span)
             
             setRegion(region, animated: true)
+            isEmpty = false
             
             if annotations.isEmpty {
                 let annotation = MKPointAnnotation()
@@ -106,6 +107,7 @@ class RadiusMapView: MKMapView {
     }
     
     // MARK: - Accessibility
+    var isEmpty: Bool = true
     var placeName: String? {
         didSet { _accessibilityValue = nil }
     }
@@ -118,12 +120,17 @@ class RadiusMapView: MKMapView {
         get {
             guard _accessibilityValue == nil else { return _accessibilityValue }
             
-            let localizedString = Strings.LocationInputView.VoiceOver.mapValue
-            let defaultPlaceName = Strings.LocationInputView.defaultPlaceName
+            if isEmpty {
+                _accessibilityValue = Strings.LocationInputView.VoiceOver.mapValueEmpty
+            } else {
+                let localizedString = Strings.LocationInputView.VoiceOver.mapValue
+                let defaultPlaceName = Strings.LocationInputView.defaultPlaceName
+                
+                _accessibilityValue = String.localizedStringWithFormat(localizedString,
+                                                                       radius.description,
+                                                                       placeName ?? defaultPlaceName)
+            }
             
-            _accessibilityValue = String.localizedStringWithFormat(localizedString,
-                                                                   radius.description,
-                                                                   placeName ?? defaultPlaceName)
             return _accessibilityValue
         }
         set { _accessibilityValue = accessibilityValue }

@@ -121,6 +121,9 @@ class HomeScreenViewController: UIViewController {
             viewController.view.leftAnchor.constraint(equalTo: tagContainerView.leftAnchor),
             viewController.view.bottomAnchor.constraint(equalTo: tagContainerView.bottomAnchor)
         ])
+        
+        tagContainerView.isAccessibilityElement = true
+        tagCollectionViewController!.isAccessibilityElement = true
     }
     
     fileprivate func subscribe(to taskListViewModel: TaskListViewModel) {

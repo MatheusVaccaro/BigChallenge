@@ -31,4 +31,8 @@ extension DateInputViewModel: IconCellPresentable {
     var imageName: String {
         return "dateIcon"
     }
+    
+    var voiceOverHint: String {
+        return Strings.MoreOptionsScreen.TimeCell.voiceOverHint
+    }
 }

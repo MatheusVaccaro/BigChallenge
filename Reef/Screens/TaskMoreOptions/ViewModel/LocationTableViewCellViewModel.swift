@@ -28,4 +28,8 @@ extension LocationInputViewModel: IconCellPresentable {
     var hasLocation: Bool {
         return location != nil
     }
+    
+    var voiceOverHint: String {
+        return Strings.MoreOptionsScreen.LocationCell.voiceOverHint
+    }
 }
