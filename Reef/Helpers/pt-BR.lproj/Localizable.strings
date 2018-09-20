@@ -96,13 +96,13 @@
 "locationHeaderTitle" = "Localização";
 
 /* subtitle for location header */
-"locationHeaderSubtitle" = "Lembre-se em um lugar específico";
+"locationHeaderSubtitle" = "Seja lembrado em um lugar";
 
 /* title for time header */
 "timeHeaderTitle" = "Data";
 
 /* subtitle for time header */
-"timeHeaderSubtitle" = "Selecione uma data para sua task";
+"timeHeaderSubtitle" = "Seja lembrado em uma data específica";
 
 /* title for notes header */
 "notesHeaderTitle" = "Notas";
