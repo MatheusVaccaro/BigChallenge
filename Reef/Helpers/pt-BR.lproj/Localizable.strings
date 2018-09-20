@@ -110,6 +110,9 @@
 /* subtitle for notes header */
 "notesHeaderSubtitle" = "Escreva detalhes adicionais";
 
+/* placeholder for notes input text view */
+"notesInputPlaceholder" = "Escreva o que está em sua mente...";
+
 /* 'or' */
 "emptyStateOr" = "Ou";
 

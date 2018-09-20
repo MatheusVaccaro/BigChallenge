@@ -114,6 +114,13 @@ struct Strings {
         }
     }
     
+    struct NotesInputView {
+        
+        static let textViewPlaceholder =
+            NSLocalizedString("notesInputPlaceholder", comment: "placeholder for notes input text view")
+        
+    }
+    
     struct Notification {
         static let placeholderTitle =
             NSLocalizedString("notificationTitle", comment: "placeholder for notification title")
