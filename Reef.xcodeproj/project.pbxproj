@@ -127,6 +127,8 @@
 		C25F5AA92108FEB3001E1561 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25F5AA82108FEB3001E1561 /* NewTaskViewController.swift */; };
 		C26EC73721544CFA000E9CB9 /* NotesInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26EC73621544CFA000E9CB9 /* NotesInputViewModel.swift */; };
 		C26EC73921544D19000E9CB9 /* NotesTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26EC73821544D19000E9CB9 /* NotesTableViewCellViewModel.swift */; };
+		C26EC73B21545A25000E9CB9 /* NotesInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26EC73A21545A25000E9CB9 /* NotesInputViewController.swift */; };
+		C26EC73D21545A4F000E9CB9 /* NotesInput.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C26EC73C21545A4F000E9CB9 /* NotesInput.storyboard */; };
 		C28DC91A20B61CB6007F881A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28DC91920B61CB6007F881A /* AppDelegate.swift */; };
 		C28DC91F20B61CB6007F881A /* TaskList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C28DC91D20B61CB6007F881A /* TaskList.storyboard */; };
 		C28DC92120B61CB9007F881A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C28DC92020B61CB9007F881A /* Assets.xcassets */; };
@@ -382,6 +384,8 @@
 		C25F5AA82108FEB3001E1561 /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
 		C26EC73621544CFA000E9CB9 /* NotesInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesInputViewModel.swift; sourceTree = "<group>"; };
 		C26EC73821544D19000E9CB9 /* NotesTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		C26EC73A21545A25000E9CB9 /* NotesInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesInputViewController.swift; sourceTree = "<group>"; };
+		C26EC73C21545A4F000E9CB9 /* NotesInput.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NotesInput.storyboard; sourceTree = "<group>"; };
 		C28DC91620B61CB6007F881A /* Reef.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reef.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C28DC91920B61CB6007F881A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C28DC91E20B61CB6007F881A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TaskList.storyboard; sourceTree = "<group>"; };
@@ -967,6 +971,8 @@
 		C26EC73521544CB8000E9CB9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C26EC73C21545A4F000E9CB9 /* NotesInput.storyboard */,
+				C26EC73A21545A25000E9CB9 /* NotesInputViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1416,6 +1422,7 @@
 				C29742CA21123E2D00A1D213 /* MoreOptions.storyboard in Resources */,
 				22D84C63210BF1E3004B8969 /* LocationInputView.storyboard in Resources */,
 				16E8DDC9211205E8004F66D6 /* Barlow-Black.ttf in Resources */,
+				C26EC73D21545A4F000E9CB9 /* NotesInput.storyboard in Resources */,
 				221BA8B620F6A18500BE2AC1 /* TagCollection.storyboard in Resources */,
 				2253179A20D147AD0065C9F9 /* Localizable.strings in Resources */,
 				220BB94A2146F1C2004A8309 /* TaskCreation.storyboard in Resources */,
@@ -1746,6 +1753,7 @@
 				C2C231C120FD1AB2002A2371 /* NewTagViewModel.swift in Sources */,
 				C21EAD0720B74757005F0F85 /* TaskListViewController.swift in Sources */,
 				16294E3A213F0C190092DEA2 /* Authentication.swift in Sources */,
+				C26EC73B21545A25000E9CB9 /* NotesInputViewController.swift in Sources */,
 				C29742D2211257A600A1D213 /* TimeTableViewCellViewModel.swift in Sources */,
 				221BA8B820F6A1DF00BE2AC1 /* TagCollectionViewController.swift in Sources */,
 				C26EC73921544D19000E9CB9 /* NotesTableViewCellViewModel.swift in Sources */,
