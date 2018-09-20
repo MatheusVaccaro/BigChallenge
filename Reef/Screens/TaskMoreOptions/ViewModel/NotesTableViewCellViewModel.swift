@@ -7,3 +7,19 @@
 //
 
 import Foundation
+
+extension NotesInputViewModel: IconCellPresentable {
+    var title: String {
+        return Strings.MoreOptionsScreen.NotesCell.title
+    }
+    
+    var subtitle: String {
+        return Strings.MoreOptionsScreen.NotesCell.subtitle
+    }
+    
+    var imageName: String {
+        return "notesIcon"
+    }
+    
+    
+}
