@@ -76,6 +76,8 @@ extension MoreOptionsViewController: UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
+            cell.viewModel = viewModel.notesInputViewModel
+        case 1:
             cell.viewModel = viewModel.locationInputViewModel
         default:
             cell.viewModel = viewModel.dateInputViewModel
@@ -91,11 +93,13 @@ extension MoreOptionsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            viewModel.delegate?.shouldPresentViewForLocationInput()
+            print("present notes screen")
         case 1:
+            viewModel.delegate?.shouldPresentViewForLocationInput()
+        case 2:
             viewModel.delegate?.shouldPresentViewForDateInput()
         default:
-            print("present date screen")
+            print("Invalid row selected. Won't display any screen.")
         }
     }
 }

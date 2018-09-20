@@ -33,6 +33,7 @@ class MoreOptionsViewModel {
     init() {
         locationInputViewModel = LocationInputViewModel()
         dateInputViewModel = DateInputViewModel()
+        notesInputViewModel = NotesInputViewModel()
 
         locationInputViewModel.delegate = self
         dateInputViewModel.delegate = self
@@ -49,9 +50,10 @@ class MoreOptionsViewModel {
     
     let locationInputViewModel: LocationInputViewModel
     let dateInputViewModel: DateInputViewModel
+    let notesInputViewModel: NotesInputViewModel
     
     let numberOfSections = 1
-    let numberOfRows = 2
+    let numberOfRows = 3
 }
 
 extension MoreOptionsViewModel: LocationInputDelegate {    
