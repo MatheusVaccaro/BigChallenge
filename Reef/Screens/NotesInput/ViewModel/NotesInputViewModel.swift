@@ -8,8 +8,22 @@
 
 import Foundation
 
+protocol NotesInputViewModelOutputDelegate: class {
+    func notesInput(_ notesInputViewModel: NotesInputViewModel, didUpdateNotes notes: String?)
+}
+
 class NotesInputViewModel {
     
+    weak var outputDelegate: NotesInputViewModelOutputDelegate?
     
+    var notes: String? {
+        didSet {
+            outputDelegate?.notesInput(self, didUpdateNotes: notes)
+        }
+    }
+    
+    var textFieldPlaceholder: String {
+        return Strings.NotesInputView.textViewPlaceholder
+    }
     
 }
