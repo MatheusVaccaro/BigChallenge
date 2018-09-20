@@ -22,7 +22,7 @@ class NotesInputViewModel {
         }
     }
     
-    var textFieldPlaceholder: String {
+    var textViewPlaceholder: String {
         return Strings.NotesInputView.textViewPlaceholder
     }
     
