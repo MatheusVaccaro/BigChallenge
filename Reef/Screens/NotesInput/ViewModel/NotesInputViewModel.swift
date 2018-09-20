@@ -10,4 +10,6 @@ import Foundation
 
 class NotesInputViewModel {
     
+    
+    
 }

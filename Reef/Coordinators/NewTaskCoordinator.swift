@@ -53,7 +53,7 @@ class NewTaskCoordinator: Coordinator {
     func start() {
         // new task (title)
         let newTaskViewController = NewTaskViewController.instantiate()
-        let newTaskViewModel = NewTaskViewModel(taskModel: taskModel)
+        let newTaskViewModel = NewTaskViewModel()
         newTaskViewController.delegate = self
         newTaskViewModel.delegate = newTaskViewController
         newTaskViewController.viewModel = newTaskViewModel

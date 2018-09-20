@@ -22,16 +22,11 @@ class NewTaskViewModel {
     
     weak var outputDelegate: NewTaskViewModelOutputDelegate?
     weak var delegate: NewTaskViewModelDelegate!
-    private let taskModel: TaskModel
     
     var taskTitleText: String? {
         didSet {
             outputDelegate?.newTask(self, didUpdateTitle: taskTitleText)
         }
-    }
-    
-    init(taskModel: TaskModel) {
-        self.taskModel = taskModel
     }
     
     func edit(_ task: Task?) {
