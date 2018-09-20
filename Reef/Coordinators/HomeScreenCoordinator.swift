@@ -109,6 +109,10 @@ extension HomeScreenCoordinator: CoordinatorDelegate {
 }
 
 extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
+    func homeScreenViewModelDidEndAddTask(_ homeScreenViewModel: HomeScreenViewModel) {
+        newTaskCoordinator.endAddTask()
+    }
+    
     func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel, didChange selectedTags: [Tag]) {
         newTaskCoordinator.update(selectedTags: selectedTags)
     }

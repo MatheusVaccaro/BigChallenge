@@ -17,8 +17,8 @@ class NewTaskCoordinator: Coordinator {
     var childrenCoordinators: [Coordinator]
     
     fileprivate var creationFrameViewController: TaskCreationFrameViewController!
-    fileprivate var newTaskViewController: NewTaskViewController?
-    fileprivate var moreOptionsViewController: MoreOptionsViewController?
+    fileprivate var newTaskViewController: NewTaskViewController!
+    fileprivate var moreOptionsViewController: MoreOptionsViewController!
     
     fileprivate let taskModel: TaskModel
     fileprivate let tagModel: TagModel
@@ -52,13 +52,14 @@ class NewTaskCoordinator: Coordinator {
     
     func start() {
         // new task (title)
-        let newTaskViewController = NewTaskViewController.instantiate()
+        self.newTaskViewController = NewTaskViewController.instantiate()
         let newTaskViewModel = NewTaskViewModel()
         newTaskViewController.delegate = self
         newTaskViewModel.delegate = newTaskViewController
         newTaskViewController.viewModel = newTaskViewModel
         
-        self.newTaskViewController = newTaskViewController
+        newTaskViewController.delegate = self
+        newTaskViewModel.delegate = newTaskViewController
         
         // more options
         moreOptionsViewController = MoreOptionsViewController.instantiate()
@@ -68,14 +69,13 @@ class NewTaskCoordinator: Coordinator {
         moreOptionsViewController!.viewModel = moreOptionsViewModel
     
         // Task Frame
-        let creationFrameViewController = TaskCreationFrameViewController.instantiate()
+        creationFrameViewController = TaskCreationFrameViewController.instantiate()
         let creationFrameViewModel = TaskCreationViewModel(taskModel: taskModel,
-                                                           moreOptionsViewModel: moreOptionsViewController!.viewModel,
+                                                           moreOptionsViewModel: moreOptionsViewController.viewModel,
                                                            newTaskViewModel: newTaskViewController.viewModel)
         creationFrameViewModel.delegate = self
         
         creationFrameViewController.viewModel = creationFrameViewModel
-        self.creationFrameViewController = creationFrameViewController
         
         homeScreen.setupAddTask(viewController: creationFrameViewController)
         self.creationFrameViewController.present(self.newTaskViewController!)
@@ -86,6 +86,10 @@ class NewTaskCoordinator: Coordinator {
         selectedTags = task.allTags
         creationFrameViewController.viewModel.task = task
         homeScreen.prepareToPresentAddTask()
+    }
+    
+    func endAddTask() {
+        newTaskViewController.cancelAddTask()
     }
     
     fileprivate func showLocationInput() {

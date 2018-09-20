@@ -220,6 +220,32 @@ class HomeScreenViewController: UIViewController {
     
     fileprivate var isPresentingMoreOptions: Bool = false
     fileprivate var isPresentingAddTask: Bool = false
+    
+    lazy var blurView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .light)
+        let view = UIVisualEffectView(effect: blurEffect)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(prepareToHideAddTask))
+        view.addGestureRecognizer(tapGesture)
+        
+        return view
+    }()
+    
+    private func applyBlur() {
+        //only apply the blur if the user hasn't disabled transparency effects
+        if !UIAccessibilityIsReduceTransparencyEnabled() {
+            blurView.frame = view.bounds
+            blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            
+            taskListContainerView.addSubview(blurView)
+        } else {
+            view.backgroundColor = .black
+        }
+    }
+    
+    private func removeBlur() {
+        blurView.removeFromSuperview()
+    }
 }
 
 extension HomeScreenViewController: StoryboardInstantiable {
@@ -239,27 +265,30 @@ extension HomeScreenViewController {
         isPresentingMoreOptions = false
         tagCollectionViewController!.viewModel.filtering = false
         animateAddTaskShowing()
+        applyBlur()
     }
     
-    func prepareToHideAddTask() {
-        guard isPresentingAddTask else { return }
+    @objc func prepareToHideAddTask() {
+        guard isPresentingAddTask || isPresentingMoreOptions else { return }
         isPresentingAddTask = false
         isPresentingMoreOptions = false
         tagCollectionViewController!.viewModel.filtering = true
         animateAddTaskHidden()
+        viewModel.endAddTask()
+        removeBlur()
     }
     
     func prepareToPresentMoreOptions() {
         guard !isPresentingMoreOptions else { return }
+        isPresentingAddTask = false
         isPresentingMoreOptions = true
-        isPresentingAddTask = true
         animateMoreOptionsShowing()
     }
     
     func prepareToHideMoreOptions() {
         guard isPresentingMoreOptions else { return }
-        isPresentingMoreOptions = false
         isPresentingAddTask = true
+        isPresentingMoreOptions = false
         animateAddTaskShowing()
     }
     
@@ -288,24 +317,6 @@ extension HomeScreenViewController {
             self.addTaskViewTopConstraint.constant =
                 self.taskCreationFrameViewController.contentSize - self.newTaskView.bounds.height
             self.view.layoutIfNeeded()
-        }
-    }
-}
-
-
-extension UIView {
-    func applyBlur(style: UIBlurEffectStyle) {
-        //only apply the blur if the user hasn't disabled transparency effects
-        if !UIAccessibilityIsReduceTransparencyEnabled() {
-            let blurEffect = UIBlurEffect(style: style)
-            let blurEffectView = UIVisualEffectView(effect: blurEffect)
-            
-            blurEffectView.frame = bounds
-            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            
-            addSubview(blurEffectView)
-        } else {
-            backgroundColor = .black
         }
     }
 }

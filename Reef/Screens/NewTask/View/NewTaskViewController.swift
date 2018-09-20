@@ -26,14 +26,27 @@ class NewTaskViewController: UIViewController {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var checkButton: UIButton!
+    @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var taskTitleTextView: UITextView!
     @IBOutlet weak var taskDetailsButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
+    private lazy var gradientLayer: CAGradientLayer = {
+        let layer = CAGradientLayer()
+        
+        layer.frame = view.frame
+        layer.frame.size.width = 10
+        layer.startPoint = CGPoint(x: 0, y: 0)
+        layer.endPoint = CGPoint(x: 1, y: 0)
+        
+        return layer
+    }()
     
     // MARK: - NewTaskViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        gradientView.layer.addSublayer(gradientLayer)
+        gradientView.clipsToBounds = true
         
         configureWithViewModel()
         configureTaskTitleTextView()
@@ -63,23 +76,36 @@ class NewTaskViewController: UIViewController {
         _ = createTaskIfPossible()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        taskTitleTextView.becomeFirstResponder()
+    }
+    
+    func cancelAddTask() {
+        taskTitleTextView.resignFirstResponder()
+        viewModel.edit(nil)
+    }
+    
     private func createTaskIfPossible() -> Bool {
         guard taskTitleTextView.text != "" else { return false }
         taskTitleTextView.resignFirstResponder()
         delegate?.didPressCreateTask()
         viewModel.outputDelegate?.didPressCreateTask()
+        doneButton.isHidden = true
+        taskDetailsButton.isHidden = false
         return true
     }
     
     // MARK: - Functions
     private func configureMoreOptionsButton() {
         taskDetailsButton.setImage(UIImage(named: "option"), for: .normal)
-        doneButton.setImage(UIImage(named: "teteuzika"), for: .normal)
+        doneButton.setImage(UIImage(named: "DoneButtonAddTask"), for: .normal)
         doneButton.isHidden = true
     }
     
     private func configureWithViewModel() {
         taskTitleTextView.text = viewModel.taskTitleText
+        gradientLayer.colors = viewModel.taskColors
     }
     
     private func configureTaskTitleTextView() {
@@ -139,5 +165,9 @@ extension NewTaskViewController: UITextViewDelegate {
 extension NewTaskViewController: NewTaskViewModelDelegate {
     func updateTextViewWith(text: String) {
         taskTitleTextView.text = text
+    }
+    
+    func didUpdateColors() {
+        gradientLayer.colors = viewModel.taskColors
     }
 }

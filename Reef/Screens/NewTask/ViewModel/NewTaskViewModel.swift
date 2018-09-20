@@ -16,6 +16,7 @@ protocol NewTaskViewModelOutputDelegate: class {
 
 protocol NewTaskViewModelDelegate: class {
     func updateTextViewWith(text: String)
+    func didUpdateColors()
 }
 
 class NewTaskViewModel {
@@ -29,8 +30,14 @@ class NewTaskViewModel {
         }
     }
     
+    var taskColors: [CGColor] = [UIColor.black.cgColor, UIColor.black.cgColor]
+    
     func edit(_ task: Task?) {
         delegate.updateTextViewWith(text: task?.title ?? "")
+        if let colors = task?.allTags.first?.colors {
+            taskColors = colors
+            delegate.didUpdateColors()
+        }
     }
     
     // MARK: - NSUserActivity
