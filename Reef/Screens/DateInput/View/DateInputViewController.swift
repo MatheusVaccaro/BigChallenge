@@ -143,8 +143,8 @@ class DateInputViewController: UIViewController {
             .disposed(by: disposeBag)
         
         currentSelector
-            .subscribe(onNext: { [weak self] in
-            	self?.selectedTimeOfDayLabel.isToggled = ($0 == .timeOfDay)
+            .subscribe(onNext: { [weak self] currentSelector in
+            	self?.selectedTimeOfDayLabel.isToggled = (currentSelector == .timeOfDay)
         	})
             .disposed(by: disposeBag)
     }
@@ -214,7 +214,7 @@ extension DateInputViewController: CalendarDelegate {
         guard let calendarCell = cell as? CalendarCell else { return }
         
         let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
-        viewModel?.selectDate(dateComponents)
+        viewModel?.selectCalendarDate(dateComponents)
         
         calendarCell.select()
     }

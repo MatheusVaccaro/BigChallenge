@@ -97,13 +97,11 @@ extension TaskCreationViewModel: MoreOptionsViewModelDelegate {
         attributes[.isArriving] = arriving
     }
     
-    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
-                            didSelectDate date: Date) {
+    func moreOptionsViewModel(_ moreOptionsViewModel: MoreOptionsViewModel, dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: Date) {
         attributes[.dueDate] = date
     }
     
-    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
-                            didSelectFrequency frequency: NotificationOptions.Frequency) {
+    func moreOptionsViewModel(_ moreOptionsViewModel: MoreOptionsViewModel, dateInputViewModel: DateInputViewModelProtocol, didSelectFrequency frequency: NotificationOptions.Frequency) {
         //TODO: implement frequency
     }
     

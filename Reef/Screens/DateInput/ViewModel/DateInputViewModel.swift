@@ -12,9 +12,11 @@ import RxSwift
 class DateInputViewModel: DateInputViewModelProtocol {
     
     weak var delegate: DateInputViewModelDelegate?
+    private let disposeBag = DisposeBag()
     
     private(set) var calendarDate: BehaviorSubject<DateComponents?>
     private(set) var timeOfDay: BehaviorSubject<DateComponents?>
+    private(set) var date: Observable<Date?>
     private(set) var frequency: BehaviorSubject<NotificationOptions.Frequency?>
     
     private(set) var tomorrowShortcutText: BehaviorSubject<String>
@@ -25,14 +27,13 @@ class DateInputViewModel: DateInputViewModelProtocol {
     private(set) var thisEveningShortcutText: BehaviorSubject<String>
     private(set) var nextMorningShortcutText: BehaviorSubject<String>
     
-    init(date: DateComponents? = nil,
-         timeOfDay: DateComponents? = nil,
+    init(calendarDate: DateComponents? = nil, timeOfDay: DateComponents? = nil,
          frequency: NotificationOptions.Frequency? = nil,
          delegate: DateInputViewModelDelegate? = nil) {
         
         self.delegate = delegate
         
-        self.calendarDate = BehaviorSubject(value: date)
+        self.calendarDate = BehaviorSubject(value: calendarDate)
         self.timeOfDay = BehaviorSubject(value: timeOfDay)
         self.frequency = BehaviorSubject(value: frequency)
         
@@ -44,6 +45,17 @@ class DateInputViewModel: DateInputViewModelProtocol {
         self.thisEveningShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.thisEveningShortcut)
         self.nextMorningShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.nextMorningShortcut)
         
+        self.date = Observable
+            .combineLatest(self.calendarDate, self.timeOfDay) { (calendarDate, timeOfDay) -> Date? in
+                guard let calendarDate = calendarDate, let timeOfDay = timeOfDay else {
+                    return nil
+                }
+                let date = Calendar.current.combine(calendarDate: calendarDate, andTimeOfDay: timeOfDay)
+                
+                return date
+            }
+        setupDateDelegate()
+
         #if DEBUG
         print("+++ INIT DateInputViewModel")
         #endif
@@ -51,10 +63,9 @@ class DateInputViewModel: DateInputViewModelProtocol {
     
     convenience init() {
         let now = Date.now()
-        let timeOfDayNow = Calendar.current.dateComponents([.hour, .minute, .second], from: now)
-        let today = Calendar.current.dateComponents([.day, .month, .year], from: now)
+        let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: now)
         
-        self.init(date: today, timeOfDay: timeOfDayNow, frequency: .none)
+        self.init(calendarDate: calendarDate, timeOfDay: timeOfDay, frequency: .none)
     }
     
     #if DEBUG
@@ -63,7 +74,16 @@ class DateInputViewModel: DateInputViewModelProtocol {
     }
     #endif
     
-    func selectDate(_ calendarDate: DateComponents) {
+    private func setupDateDelegate() {
+        date.subscribe(onNext: { date in
+                if let date = date {
+                    self.delegate?.dateInputViewModel(self, didSelectDate: date)
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func selectCalendarDate(_ calendarDate: DateComponents) {
         guard let day = calendarDate.day, let month = calendarDate.month, let year = calendarDate.year else { return }
         
         let calendarDateComponent = DateComponents(year: year, month: month, day: day)
@@ -91,7 +111,7 @@ class DateInputViewModel: DateInputViewModelProtocol {
         
         let tomorrowComponents = Calendar.current.dateComponents([.year, .month, .day], from: tomorrow)
         
-        selectDate(tomorrowComponents)
+        selectCalendarDate(tomorrowComponents)
     }
     
     func selectNextWeek() {
@@ -100,7 +120,7 @@ class DateInputViewModel: DateInputViewModelProtocol {
                                                    to: today, wrappingComponents: false) else { return }
         
         let nextWeekComponents = Calendar.current.dateComponents([.year, .month, .day], from: nextWeek)
-        selectDate(nextWeekComponents)
+        selectCalendarDate(nextWeekComponents)
     }
     
     func selectNextMonth() {
@@ -109,19 +129,18 @@ class DateInputViewModel: DateInputViewModelProtocol {
                                                     to: today, wrappingComponents: false) else { return }
         
         let nextMonthComponents = Calendar.current.dateComponents([.year, .month, .day], from: nextMonth)
-        selectDate(nextMonthComponents)
+        selectCalendarDate(nextMonthComponents)
     }
     
     func selectTwoHoursFromNow() {
         let today = Date.now()
         guard let twoHoursFromNow = Calendar.current.date(byAdding: DateComponents(hour: 2), to: today) else { return }
         
-        let twoHoursFromNowDateComponents = Calendar.current.dateComponents([.year, .month, .day],
-                                                                            from: twoHoursFromNow)
-        let twoHoursFromNowTimeComponents = Calendar.current.dateComponents([.hour, .minute, .second],
-                                                                            from: twoHoursFromNow)
+        let twoHoursFromNowDateComponents = Calendar.current.calendarDate(from: twoHoursFromNow)
         
-        selectDate(twoHoursFromNowDateComponents)
+        let twoHoursFromNowTimeComponents = Calendar.current.timeOfDay(from: twoHoursFromNow)
+        
+        selectCalendarDate(twoHoursFromNowDateComponents)
         selectTimeOfDay(twoHoursFromNowTimeComponents)
     }
     
@@ -134,10 +153,10 @@ class DateInputViewModel: DateInputViewModelProtocol {
 
         guard let thisEvening = date else { return }
         
-        let thisEveningDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: thisEvening)
-        let thisEveningTimeComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: thisEvening)
+        let thisEveningDateComponents = Calendar.current.calendarDate(from: thisEvening)
+        let thisEveningTimeComponents = Calendar.current.timeOfDay(from: thisEvening)
         
-        selectDate(thisEveningDateComponents)
+        selectCalendarDate(thisEveningDateComponents)
         selectTimeOfDay(thisEveningTimeComponents)
     }
     
@@ -157,10 +176,10 @@ class DateInputViewModel: DateInputViewModelProtocol {
         
         guard let nextMorning = date else { return }
 
-        let nextMorningDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: nextMorning)
-        let nextMorningTimeComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: nextMorning)
+        let nextMorningDateComponents = Calendar.current.calendarDate(from: nextMorning)
+        let nextMorningTimeComponents = Calendar.current.timeOfDay(from: nextMorning)
         
-        selectDate(nextMorningDateComponents)
+        selectCalendarDate(nextMorningDateComponents)
         selectTimeOfDay(nextMorningTimeComponents)
     }
     

@@ -16,12 +16,12 @@ extension IconCellPresentable where Self: DateInputViewModelProtocol {
     }
     
     var subtitle: String {
-        if let date = try? calendarDate.value() {
-            let subTitleDate = Calendar.current.date(from: date)!
+        if let calendarDate = try? calendarDate.value(), let timeOfDay = try? timeOfDay.value(),
+            let date = Calendar.current.combine(calendarDate: calendarDate, andTimeOfDay: timeOfDay) {
             let dateFormatter = DateFormatter()
             dateFormatter.locale = Locale.current
             dateFormatter.dateFormat = "d MMM hh:mm"
-            let subtitle = dateFormatter.string(from: subTitleDate)
+            let subtitle = dateFormatter.string(from: date)
             
             return subtitle
         } else {

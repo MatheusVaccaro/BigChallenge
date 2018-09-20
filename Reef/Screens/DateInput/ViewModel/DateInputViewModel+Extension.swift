@@ -31,7 +31,7 @@ extension DateInputViewModel {
             let date = Calendar.current.calendarDate(from: triggerDate)
             let timeOfDay = Calendar.current.timeOfDay(from: triggerDate)
             let frequency = tag.notificationOptions.frequency
-            self.init(date: date, timeOfDay: timeOfDay, frequency: frequency)
+            self.init(calendarDate: date, timeOfDay: timeOfDay, frequency: frequency)
             
         } else {
             self.init()
@@ -45,6 +45,6 @@ extension DateInputViewModel {
         }
         
         let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: dueDate)
-        self.init(date: calendarDate, timeOfDay: timeOfDay, frequency: nil)
+        self.init(calendarDate: calendarDate, timeOfDay: timeOfDay, frequency: nil)
     }
 }

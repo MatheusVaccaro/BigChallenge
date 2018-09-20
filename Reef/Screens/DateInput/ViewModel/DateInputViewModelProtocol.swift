@@ -12,11 +12,16 @@ import RxSwift
 protocol DateInputViewModelProtocol: IconCellPresentable {
     var delegate: DateInputViewModelDelegate? { get set }
     
+    /** The last year, month and day values selected. */
     var calendarDate: BehaviorSubject<DateComponents?> { get }
+    /** The last hour, minute and second values selected */
     var timeOfDay: BehaviorSubject<DateComponents?> { get }
+    /** The last calendar date and time of day selected, combined. */
+    var date: Observable<Date?> { get }
+    /** The last frequency value selected. */
     var frequency: BehaviorSubject<NotificationOptions.Frequency?> { get }
     
-    func selectDate(_ date: DateComponents)
+    func selectCalendarDate(_ calendarDate: DateComponents)
     func selectTimeOfDay(_ timeOfDay: DateComponents)
     func select(frequency: NotificationOptions.Frequency)
     
