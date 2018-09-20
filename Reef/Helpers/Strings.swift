@@ -139,5 +139,11 @@ struct Strings {
             static let subtitle = NSLocalizedString("timeHeaderSubtitle", comment: "subtitle for time header")
         }
         
+        struct NotesCell {
+            static let title = NSLocalizedString("notesHeaderTitle", comment: "title for notes header")
+            
+            static let subtitle = NSLocalizedString("notesHeaderSubtitle", comment: "subtitle for notes header")
+        }
+        
     }
 }

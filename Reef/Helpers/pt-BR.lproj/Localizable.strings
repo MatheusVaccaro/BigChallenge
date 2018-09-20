@@ -104,6 +104,12 @@
 /* subtitle for time header */
 "timeHeaderSubtitle" = "Selecione uma data para sua task";
 
+/* title for notes header */
+"notesHeaderTitle" = "Notas";
+
+/* subtitle for notes header */
+"notesHeaderSubtitle" = "Escreva detalhes adicionais";
+
 /* 'or' */
 "emptyStateOr" = "Ou";
 
