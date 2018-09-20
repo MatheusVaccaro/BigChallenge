@@ -15,7 +15,7 @@ protocol MoreOptionsViewModelDelegate: class {
                        didFind location: CLCircularRegion, arriving: Bool)
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
-                            didSelectDate date: DateComponents)
+                            didSelectDate date: Date)
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
                             didSelectFrequency frequency: NotificationOptions.Frequency)
@@ -60,8 +60,9 @@ class MoreOptionsViewModel {
     let numberOfRows = 3
 }
 
-extension MoreOptionsViewModel: LocationInputDelegate {    
-    func locationInput(_ locationInputViewModel: LocationInputViewModel, didFind location: CLCircularRegion, arriving: Bool) {
+extension MoreOptionsViewModel: LocationInputDelegate {
+    func locationInput(_ locationInputViewModel: LocationInputViewModel,
+                       didFind location: CLCircularRegion, arriving: Bool) {
         delegate?.locationInput(locationInputViewModel, didFind: location, arriving: arriving)
     }
 }
@@ -69,7 +70,7 @@ extension MoreOptionsViewModel: LocationInputDelegate {
 extension MoreOptionsViewModel: DateInputViewModelDelegate {
 
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
-                            didSelectDate date: DateComponents) {
+                            didSelectDate date: Date) {
         delegate?.dateInputViewModel(dateInputViewModel, didSelectDate: date)
     }
     

@@ -15,8 +15,8 @@ extension DateInputViewModelProtocol {
         
         let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: dueDate)
         
-        self.timeOfDay.value = timeOfDay
-        self.date.value = calendarDate
+        self.calendarDate.onNext(calendarDate)
+        self.timeOfDay.onNext(timeOfDay)
     }
 }
 

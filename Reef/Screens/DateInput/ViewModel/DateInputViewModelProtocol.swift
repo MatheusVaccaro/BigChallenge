@@ -12,18 +12,18 @@ import RxSwift
 protocol DateInputViewModelProtocol: IconCellPresentable {
     var delegate: DateInputViewModelDelegate? { get set }
     
-    var date: Variable<DateComponents?> { get }
-    var timeOfDay: Variable<DateComponents?> { get }
-    var frequency: Variable<NotificationOptions.Frequency?> { get }
+    var calendarDate: BehaviorSubject<DateComponents?> { get }
+    var timeOfDay: BehaviorSubject<DateComponents?> { get }
+    var frequency: BehaviorSubject<NotificationOptions.Frequency?> { get }
     
     func selectDate(_ date: DateComponents)
     func selectTimeOfDay(_ timeOfDay: DateComponents)
     func select(frequency: NotificationOptions.Frequency)
     
     // MARK: - Date shortcuts
-    var tomorrowShortcutText: Variable<String> { get }
-    var nextWeekShortcutText: Variable<String> { get }
-    var nextMonthShortcutText: Variable<String> { get }
+    var tomorrowShortcutText: BehaviorSubject<String> { get }
+    var nextWeekShortcutText: BehaviorSubject<String> { get }
+    var nextMonthShortcutText: BehaviorSubject<String> { get }
     
     var twoHoursFromNowShortcutText: BehaviorSubject<String> { get }
     var thisEveningShortcutText: BehaviorSubject<String> { get }

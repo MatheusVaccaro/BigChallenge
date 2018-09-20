@@ -98,8 +98,8 @@ extension TaskCreationViewModel: MoreOptionsViewModelDelegate {
     }
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
-                            didSelectDate date: DateComponents) {
-        attributes[.dueDate] = Calendar.current.date(from: date)
+                            didSelectDate date: Date) {
+        attributes[.dueDate] = date
     }
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,

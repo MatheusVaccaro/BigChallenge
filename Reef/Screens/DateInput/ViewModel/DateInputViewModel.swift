@@ -13,13 +13,13 @@ class DateInputViewModel: DateInputViewModelProtocol {
     
     weak var delegate: DateInputViewModelDelegate?
     
-    private(set) var date: Variable<DateComponents?>
-    private(set) var timeOfDay: Variable<DateComponents?>
-    private(set) var frequency: Variable<NotificationOptions.Frequency?>
+    private(set) var calendarDate: BehaviorSubject<DateComponents?>
+    private(set) var timeOfDay: BehaviorSubject<DateComponents?>
+    private(set) var frequency: BehaviorSubject<NotificationOptions.Frequency?>
     
-    private(set) var tomorrowShortcutText: Variable<String>
-    private(set) var nextWeekShortcutText: Variable<String>
-    private(set) var nextMonthShortcutText: Variable<String>
+    private(set) var tomorrowShortcutText: BehaviorSubject<String>
+    private(set) var nextWeekShortcutText: BehaviorSubject<String>
+    private(set) var nextMonthShortcutText: BehaviorSubject<String>
     
     private(set) var twoHoursFromNowShortcutText: BehaviorSubject<String>
     private(set) var thisEveningShortcutText: BehaviorSubject<String>
@@ -32,13 +32,13 @@ class DateInputViewModel: DateInputViewModelProtocol {
         
         self.delegate = delegate
         
-        self.date = Variable(date)
-        self.timeOfDay = Variable(timeOfDay)
-        self.frequency = Variable(frequency)
+        self.calendarDate = BehaviorSubject(value: date)
+        self.timeOfDay = BehaviorSubject(value: timeOfDay)
+        self.frequency = BehaviorSubject(value: frequency)
         
-        self.tomorrowShortcutText = Variable<String>(Strings.DateInputView.tomorrowShortcut)
-        self.nextWeekShortcutText = Variable<String>(Strings.DateInputView.nextWeekShortcut)
-        self.nextMonthShortcutText = Variable<String>(Strings.DateInputView.nextMonthShortcut)
+        self.tomorrowShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.tomorrowShortcut)
+        self.nextWeekShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.nextWeekShortcut)
+        self.nextMonthShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.nextMonthShortcut)
         
         self.twoHoursFromNowShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.twoHoursFromNowShortcut)
         self.thisEveningShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.thisEveningShortcut)
@@ -63,42 +63,24 @@ class DateInputViewModel: DateInputViewModelProtocol {
     }
     #endif
     
-    private var dateComponents: DateComponents! = Calendar.current.dateComponents(Set([.year, .month, .day, .hour, .minute]), from: Date()) {
-        didSet {
-            if date.value == nil { date = Variable(dateComponents) }
-            if timeOfDay.value == nil { timeOfDay = Variable(dateComponents) }
-            
-            date.value!.year = dateComponents.year
-            date.value!.month = dateComponents.month
-            date.value!.day = dateComponents.day
-            timeOfDay.value!.hour = dateComponents.hour
-            timeOfDay.value!.minute = dateComponents.minute
-        }
-    }
-    
-    func selectDate(_ date: DateComponents) {
-        guard let day = date.day, let month = date.month, let year = date.year else { return }
+    func selectDate(_ calendarDate: DateComponents) {
+        guard let day = calendarDate.day, let month = calendarDate.month, let year = calendarDate.year else { return }
         
-        dateComponents.day = day
-        dateComponents.month = month
-        dateComponents.year = year
+        let calendarDateComponent = DateComponents(year: year, month: month, day: day)
         
-        self.date.value = dateComponents
-        delegate?.dateInputViewModel(self, didSelectDate: dateComponents)
+        self.calendarDate.onNext(calendarDateComponent)
     }
     
     func selectTimeOfDay(_ timeOfDay: DateComponents) {
         guard let hour = timeOfDay.hour, let minute = timeOfDay.minute else { return }
         
-        dateComponents.hour = hour
-        dateComponents.minute = minute
+        let timeOfDayComponent = DateComponents(hour: hour, minute: minute)
         
-        self.timeOfDay.value = dateComponents
-        delegate?.dateInputViewModel(self, didSelectDate: dateComponents)
+        self.timeOfDay.onNext(timeOfDayComponent)
     }
     
     func select(frequency: NotificationOptions.Frequency) {
-    	self.frequency.value = frequency
+    	self.frequency.onNext(frequency)
         delegate?.dateInputViewModel(self, didSelectFrequency: frequency)
     }
     
@@ -186,6 +168,6 @@ class DateInputViewModel: DateInputViewModelProtocol {
 
 protocol DateInputViewModelDelegate: class {
     //swiftlint:disable next line_length
-    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: DateComponents)
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: Date)
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectFrequency frequency: NotificationOptions.Frequency)
 }

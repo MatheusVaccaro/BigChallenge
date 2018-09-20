@@ -16,7 +16,7 @@ extension IconCellPresentable where Self: DateInputViewModelProtocol {
     }
     
     var subtitle: String {
-        if let date = date.value {
+        if let date = try? calendarDate.value() {
             let subTitleDate = Calendar.current.date(from: date)!
             let dateFormatter = DateFormatter()
             dateFormatter.locale = Locale.current

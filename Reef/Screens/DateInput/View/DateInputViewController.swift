@@ -81,7 +81,7 @@ class DateInputViewController: UIViewController {
         	calendarView.bottomAnchor.constraint(equalTo: calendarContainerView.bottomAnchor)]
         NSLayoutConstraint.activate(constraints)
         
-        viewModel?.date.asObservable()
+        viewModel?.calendarDate.asObservable()
             .map { dateComponent in
             	Calendar.current.date(from: dateComponent)
         	}
