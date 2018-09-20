@@ -26,6 +26,12 @@
 		220BB94A2146F1C2004A8309 /* TaskCreation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 220BB9492146F1C2004A8309 /* TaskCreation.storyboard */; };
 		220BB94C2146FAF9004A8309 /* TaskCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220BB94B2146FAF9004A8309 /* TaskCreationViewModel.swift */; };
 		220FE8782134388200127C3E /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BAD432108C22400E74AA9 /* Fonts.swift */; };
+		2211EA552152E8FE0010C0E6 /* TaskCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211EA512152E8FE0010C0E6 /* TaskCellViewModel.swift */; };
+		2211EA562152E8FE0010C0E6 /* TaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2211EA532152E8FE0010C0E6 /* TaskCell.xib */; };
+		2211EA572152E8FE0010C0E6 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211EA542152E8FE0010C0E6 /* TableViewCell.swift */; };
+		2211EA582152EBBC0010C0E6 /* TodayTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22292D88213338110024DA03 /* TodayTaskCell.xib */; };
+		2211EA592152EBBF0010C0E6 /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1114120B8AED400ABB161 /* TodayTableViewCell.swift */; };
+		2211EA5A2152EBC40010C0E6 /* TodayTaskCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113F20B8A70A00ABB161 /* TodayTaskCellViewModel.swift */; };
 		221BA8AF20F6991200BE2AC1 /* HomeScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221BA8AE20F6991200BE2AC1 /* HomeScreen.storyboard */; };
 		221BA8B320F69E5C00BE2AC1 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BA8B220F69E5C00BE2AC1 /* HomeScreenViewController.swift */; };
 		221BA8B620F6A18500BE2AC1 /* TagCollection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221BA8B520F6A18500BE2AC1 /* TagCollection.storyboard */; };
@@ -62,6 +68,8 @@
 		22DE27142145A64C00466187 /* IconCellPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE27132145A64C00466187 /* IconCellPresentable.swift */; };
 		22ED5955211A7C21008EAD7D /* MKRadiusCircleRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ED5954211A7C21008EAD7D /* MKRadiusCircleRenderer.swift */; };
 		22ED5957211B346F008EAD7D /* MKPlaceMarkExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ED5956211B346F008EAD7D /* MKPlaceMarkExtension.swift */; };
+		22EF559B2153F0B30025C1AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EF559A2153F0B30025C1AD /* Assets.xcassets */; };
+		22EF559E2153F5380025C1AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22EF55A02153F5380025C1AD /* Localizable.strings */; };
 		22F23E7E212E3E800064EE05 /* ReefKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 22F23E6E212E3E7F0064EE05 /* ReefKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22F23E81212E3E800064EE05 /* ReefKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F23E6C212E3E7F0064EE05 /* ReefKit.framework */; };
 		22F23E82212E3E800064EE05 /* ReefKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22F23E6C212E3E7F0064EE05 /* ReefKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -325,6 +333,9 @@
 		22DE27132145A64C00466187 /* IconCellPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconCellPresentable.swift; sourceTree = "<group>"; };
 		22ED5954211A7C21008EAD7D /* MKRadiusCircleRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKRadiusCircleRenderer.swift; sourceTree = "<group>"; };
 		22ED5956211B346F008EAD7D /* MKPlaceMarkExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKPlaceMarkExtension.swift; sourceTree = "<group>"; };
+		22EF559A2153F0B30025C1AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		22EF559F2153F5380025C1AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		22EF55A12153F53C0025C1AD /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		22F23E6C212E3E7F0064EE05 /* ReefKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReefKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F23E6E212E3E7F0064EE05 /* ReefKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReefKit.h; sourceTree = "<group>"; };
 		22F23E6F212E3E7F0064EE05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -771,6 +782,8 @@
 				16294E37213F0B860092DEA2 /* TodayViewModel.swift */,
 				22FEEA7A2133419500D8B049 /* MainInterface.storyboard */,
 				22FEEA7D2133419500D8B049 /* Info.plist */,
+				22EF559A2153F0B30025C1AD /* Assets.xcassets */,
+				22EF55A02153F5380025C1AD /* Localizable.strings */,
 			);
 			path = ReefToday;
 			sourceTree = "<group>";
@@ -1414,7 +1427,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2211EA582152EBBC0010C0E6 /* TodayTaskCell.xib in Resources */,
+				22EF559B2153F0B30025C1AD /* Assets.xcassets in Resources */,
 				22FEEA7C2133419500D8B049 /* MainInterface.storyboard in Resources */,
+				22EF559E2153F5380025C1AD /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1842,6 +1858,15 @@
 			children = (
 				2253179B20D147AD0065C9F9 /* pt-BR */,
 				2253179D20D147B10065C9F9 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		22EF55A02153F5380025C1AD /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22EF559F2153F5380025C1AD /* en */,
+				22EF55A12153F53C0025C1AD /* pt-BR */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

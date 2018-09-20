@@ -33,11 +33,9 @@ class NewTaskViewModel {
     var taskColors: [CGColor] = [UIColor.black.cgColor, UIColor.black.cgColor]
     
     func edit(_ task: Task?) {
+        if let colors = task?.allTags.first?.colors { taskColors = colors }
         delegate.updateTextViewWith(text: task?.title ?? "")
-        if let colors = task?.allTags.first?.colors {
-            taskColors = colors
-            delegate.didUpdateColors()
-        }
+        delegate.didUpdateColors()
     }
     
     // MARK: - NSUserActivity

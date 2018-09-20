@@ -45,7 +45,6 @@ public class TaskTableViewCell: UITableViewCell {
     // MARK: - TableViewCell Lifecycle
     override public func awakeFromNib() {
         super.awakeFromNib()
-        taskTitleTextView.delegate = self
         
         checkButton.isSelected = false
         checkButton.layer.addSublayer(gradientLayer)
@@ -97,22 +96,5 @@ public class TaskTableViewCell: UITableViewCell {
     
     fileprivate func configureAccessibility() {
         checkButton.accessibilityIgnoresInvertColors = true
-    }
-}
-
-extension TaskTableViewCell: UITextViewDelegate {
-    public func textViewDidEndEditing(_ textView: UITextView) {
-        guard let text = textView.text else { return }
-        viewModel?.changeTextTitle(to: text)
-    }
-    
-    public func textViewDidChange(_ textView: UITextView) {
-        let lastCharPos = textView.endOfDocument
-
-        let currentRect = textView.caretRect(for: lastCharPos)
-        if currentRect.origin.y < previousRect.origin.y {
-            delegate?.shouldUpdateSize(of: self)
-        }
-        previousRect = currentRect
     }
 }

@@ -48,12 +48,6 @@ public class TaskCellViewModel {
             ?? [UIColor.black.cgColor, UIColor.black.cgColor]
     }
     
-    func changeTextTitle(to title: String) {
-//        let attributes: [TaskAttributes : Any] = [.title: title]
-//        taskModel.update(task, with: attributes)
-//        taskModel.save(task)
-    }
-    
     func changedCheckButton(to bool: Bool) {
         task.isCompleted = true //TODO: refactor
         task.completionDate = Date()

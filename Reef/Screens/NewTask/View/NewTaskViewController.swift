@@ -89,8 +89,8 @@ class NewTaskViewController: UIViewController {
     private func createTaskIfPossible() -> Bool {
         guard taskTitleTextView.text != "" else { return false }
         taskTitleTextView.resignFirstResponder()
-        delegate?.didPressCreateTask()
         viewModel.outputDelegate?.didPressCreateTask()
+        delegate?.didPressCreateTask()
         doneButton.isHidden = true
         taskDetailsButton.isHidden = false
         return true

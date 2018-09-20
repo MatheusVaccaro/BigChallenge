@@ -119,5 +119,5 @@
 /* button that imports tasks from reminders */
 "importFromReminders" = "Importe seus lembretes";
 
-/* prompt when asking to unluck using touchID when selecting a private tag */
-"privateTagUnlockReason" = "Desbloqueie para ver etiqueta privada";
+/* prompt when requesting faceID to unlock private tag */
+"faceIDPermisson" = "";

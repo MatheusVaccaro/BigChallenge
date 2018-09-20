@@ -55,4 +55,7 @@ class TodayViewModel {
     var shouldShowEmptyState: Bool {
         return tasks.isEmpty
     }
+    
+    let emptyStateText = NSLocalizedString("emptyState",
+                                           comment: "widget string when there are no tasks to present")
 }
