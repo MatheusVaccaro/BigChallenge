@@ -20,8 +20,11 @@ protocol MoreOptionsViewModelDelegate: class {
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
                             didSelectFrequency frequency: NotificationOptions.Frequency)
     
+    func notesInput(_ notesInputViewModel: NotesInputViewModel, didUpdateNotes notes: String)
+    
     func shouldPresentViewForLocationInput()
     func shouldPresentViewForDateInput()
+    func shouldPresentViewForNotesInput()
 }
 
 protocol MoreOptionsViewModelUIDelegate: class {
@@ -37,6 +40,7 @@ class MoreOptionsViewModel {
 
         locationInputViewModel.delegate = self
         dateInputViewModel.delegate = self
+        notesInputViewModel.delegate = self
     }
     
     func edit(task: Task?) {
@@ -73,4 +77,12 @@ extension MoreOptionsViewModel: DateInputViewModelDelegate {
                             didSelectFrequency frequency: NotificationOptions.Frequency) {
         delegate?.dateInputViewModel(dateInputViewModel, didSelectFrequency: frequency)
     }
+}
+
+extension MoreOptionsViewModel: NotesInputViewModelDelegate {
+    
+    func notesInput(_ notesInputViewModel: NotesInputViewModel, didUpdateNotes notes: String) {
+        delegate?.notesInput(notesInputViewModel, didUpdateNotes: notes)
+    }
+    
 }

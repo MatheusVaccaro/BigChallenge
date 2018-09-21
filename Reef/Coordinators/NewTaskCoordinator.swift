@@ -102,6 +102,13 @@ class NewTaskCoordinator: Coordinator {
         presenter.pushViewController(dateInputView, animated: true)
     }
     
+    fileprivate func showNotesInput() {
+        let notesInputViewController = NotesInputViewController.instantiate()
+        notesInputViewController.viewModel = moreOptionsViewController!.viewModel.notesInputViewModel
+        
+        presenter.pushViewController(notesInputViewController, animated: true)
+    }
+    
     fileprivate func showNewTag() {
         let newTagCoordinator = NewTagCoordinator(tag: nil,
                                                   presenter: presenter,
@@ -130,6 +137,7 @@ extension NewTaskCoordinator: CoordinatorDelegate {
 }
 
 extension NewTaskCoordinator: TaskCreationDelegate {
+    
     func didTapAddTask() {
         homeScreen.prepareToPresentAddTask()
     }
@@ -145,6 +153,11 @@ extension NewTaskCoordinator: TaskCreationDelegate {
     func shouldPresentViewForLocationInput() {
         showLocationInput()
     }
+    
+    func shouldPresentViewForNotesInput() {
+        showNotesInput()
+    }
+    
 }
 
 extension NewTaskCoordinator: NewTaskDelegate {

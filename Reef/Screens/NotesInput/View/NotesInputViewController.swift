@@ -20,14 +20,26 @@ class NotesInputViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureNavigationBarTitle()
         configureNotesInputTextView()
+        
+        print("+++ INIT NotesInputViewController")
+    }
+    
+    deinit {
+        print("--- DEINIT NotesInputViewController")
     }
     
     // MARK: - Functions
     private func configureNotesInputTextView() {
-        notesInputTextView.font = UIFont.font(sized: 22, weight: .semibold, with: .body, fontName: .barlow)
+        notesInputTextView.font = UIFont.font(sized: 22, weight: .bold, with: .body, fontName: .barlow)
         notesInputTextView.placeholder = viewModel.textViewPlaceholder
         notesInputTextView.placeholderColor = UIColor.placeholder
+    }
+    
+    private func configureNavigationBarTitle() {
+        title = viewModel.title
     }
 }
 
@@ -39,7 +51,7 @@ extension NotesInputViewController: StoryboardInstantiable {
     }
     
     static var storyboardIdentifier: String {
-        return "NewTask"
+        return "NotesInput"
     }
     
 }

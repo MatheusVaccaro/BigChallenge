@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_9" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -14,11 +14,11 @@
             <objects>
                 <viewController storyboardIdentifier="NotesInputViewController" id="T7K-7c-Bex" customClass="NotesInputViewController" customModule="Reef" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NW1-2M-kwA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Write down what's on your mind..." textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="WMZ-9x-siu">
-                                <rect key="frame" x="16" y="82" width="343" height="680"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="WMZ-9x-siu">
+                                <rect key="frame" x="16" y="58" width="343" height="526"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -26,13 +26,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="e86-L1-T7c" firstAttribute="bottom" secondItem="WMZ-9x-siu" secondAttribute="bottom" constant="16" id="4ZA-2G-mjo"/>
-                            <constraint firstItem="WMZ-9x-siu" firstAttribute="leading" secondItem="e86-L1-T7c" secondAttribute="leading" constant="16" id="AYN-QZ-LHI"/>
-                            <constraint firstItem="e86-L1-T7c" firstAttribute="trailing" secondItem="WMZ-9x-siu" secondAttribute="trailing" constant="16" id="dV7-le-Qsu"/>
-                            <constraint firstItem="WMZ-9x-siu" firstAttribute="top" secondItem="e86-L1-T7c" secondAttribute="top" constant="38" id="efm-Yq-DrE"/>
+                            <constraint firstItem="WMZ-9x-siu" firstAttribute="top" secondItem="e86-L1-T7c" secondAttribute="top" constant="38" id="Bbe-wo-43Q"/>
+                            <constraint firstItem="e86-L1-T7c" firstAttribute="bottom" secondItem="WMZ-9x-siu" secondAttribute="bottom" constant="16" id="Wvt-WX-WMF"/>
+                            <constraint firstItem="WMZ-9x-siu" firstAttribute="leading" secondItem="e86-L1-T7c" secondAttribute="leading" constant="16" id="aTQ-Xm-pE7"/>
+                            <constraint firstItem="e86-L1-T7c" firstAttribute="trailing" secondItem="WMZ-9x-siu" secondAttribute="trailing" constant="16" id="aak-vp-5Wt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="e86-L1-T7c"/>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="600"/>
                     <connections>
                         <outlet property="notesInputTextView" destination="WMZ-9x-siu" id="JR0-X7-IHt"/>
                     </connections>

@@ -8,17 +8,17 @@
 
 import Foundation
 
-protocol NotesInputViewModelOutputDelegate: class {
-    func notesInput(_ notesInputViewModel: NotesInputViewModel, didUpdateNotes notes: String?)
+protocol NotesInputViewModelDelegate: class {
+    func notesInput(_ notesInputViewModel: NotesInputViewModel, didUpdateNotes notes: String)
 }
 
 class NotesInputViewModel {
     
-    weak var outputDelegate: NotesInputViewModelOutputDelegate?
+    weak var delegate: NotesInputViewModelDelegate?
     
-    var notes: String? {
+    var notes: String = "" {
         didSet {
-            outputDelegate?.notesInput(self, didUpdateNotes: notes)
+            delegate?.notesInput(self, didUpdateNotes: notes)
         }
     }
     
