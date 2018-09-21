@@ -12,17 +12,22 @@ import RxCocoa
 import RxSwift
 import UserNotifications
 
+enum State {
+    case collapsed
+    case expanded
+}
+
 class HomeScreenViewController: UIViewController {
     
+    // MARK: - Properties
+    fileprivate var isPresentingMoreOptions: Bool = false
+    fileprivate var isPresentingAddTask: Bool = false
+    
     var viewModel: HomeScreenViewModel!
-    
-    @IBOutlet weak var tagContainerView: UIView!
-    @IBOutlet weak var taskListContainerView: UIView!
-    @IBOutlet weak var whiteBackgroundView: UIView!
-    
     fileprivate var taskListViewController: TaskListViewController?
     fileprivate var tagCollectionViewController: TagCollectionViewController?
-
+    private var taskCreationFrameViewController: TaskCreationFrameViewController!
+    
     private let disposeBag = DisposeBag()
     
     private lazy var gradientLayer: CAGradientLayer = {
@@ -37,6 +42,17 @@ class HomeScreenViewController: UIViewController {
         return layer
     }()
     
+    // MARK: - IBOutlets
+    @IBOutlet weak var whiteBackgroundView: UIView!
+    @IBOutlet weak var taskListContainerView: UIView!
+    @IBOutlet weak var tagContainerView: UIView!
+    @IBOutlet weak var newTaskView: UIView!
+    @IBOutlet weak var addTaskViewTopConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var pullDownView: UIView!
+    @IBOutlet weak var pullDownViewTopConstraint: NSLayoutConstraint!
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = viewModel.bigTitleText
@@ -57,6 +73,53 @@ class HomeScreenViewController: UIViewController {
         observeSelectedTags()
         observeClickedAddTag()
         userActivity = viewModel.userActivity
+        
+        
+        pullDownView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:))))
+        
+    }
+    
+    var animator1: UIViewPropertyAnimator!
+    var animator2: UIViewPropertyAnimator!
+    var state: State = .collapsed
+    
+    @objc func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
+        switch recognizer.state {
+        case .began:
+            let translation = recognizer.translation(in: pullDownView)
+            if state == .collapsed && translation.y >= 0 {
+                animator1 = UIViewPropertyAnimator(duration: 1, curve: .easeOut, animations: { [weak self] in
+                    self?.pullDownViewTopConstraint.constant = 16 // add 38 to constant
+                    self?.view.layoutIfNeeded()
+                    self?.state = .expanded
+                    print("DOWN ANIMATION")
+                })
+                animator1.pauseAnimation()
+            } else if state == .expanded && translation.y <= 0 {
+                animator2 = UIViewPropertyAnimator(duration: 1, curve: .easeOut, animations: { [weak self] in
+                    self?.pullDownViewTopConstraint.constant = -22 // substract from 16
+                    self?.view.layoutIfNeeded()
+                    self?.state = .collapsed
+                    print("UP ANIMATION")
+                })
+                animator2.pauseAnimation()
+            }
+        case .changed:
+            let translation = recognizer.translation(in: pullDownView)
+            if state == .collapsed {
+                animator2.fractionComplete = -translation.y/38
+            } else {
+                animator1.fractionComplete = translation.y/38
+            }
+        case .ended:
+            if state == .collapsed {
+                animator2.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+            } else {
+                animator1.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+            }
+        default:
+            break
+        }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -253,9 +316,6 @@ class HomeScreenViewController: UIViewController {
     override func updateUserActivityState(_ activity: NSUserActivity) {
         viewModel.updateUserActivity(activity)
     }
-    
-    fileprivate var isPresentingMoreOptions: Bool = false
-    fileprivate var isPresentingAddTask: Bool = false
     
     lazy var blurView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .light)
