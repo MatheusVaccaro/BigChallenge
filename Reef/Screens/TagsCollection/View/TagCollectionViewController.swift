@@ -168,8 +168,15 @@ class TagCollectionViewController: UIViewController {
     }
     
     //MARK - Accessibility
-    
     private var accessibilityElement: TagCollectionAccessibilityElement?
+    
+//    override var accessibilityElements: [Any]? {
+//        get {
+//            
+//        }
+//        
+//        set { }
+//    }
 }
 
 extension TagCollectionViewController: StoryboardInstantiable {
@@ -180,17 +187,4 @@ extension TagCollectionViewController: StoryboardInstantiable {
     static var storyboardIdentifier: String {
         return "TagCollection"
     }
-}
-
-class TagCollectionAccessibilityElement: UIAccessibilityElement {
-    
-    private let viewModel: TagCollectionViewModel
-    
-    init(accessibilityContainer container: Any, viewModel: TagCollectionViewModel) {
-        self.viewModel = viewModel
-        
-        super.init(accessibilityContainer: container)
-    }
-    
-    
 }

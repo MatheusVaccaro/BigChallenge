@@ -240,7 +240,9 @@ class HomeScreenViewController: UIViewController {
             blurView.frame = view.bounds
             blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             
-            view.insertSubview(blurView, belowSubview: newTaskView)
+            if !blurView.isDescendant(of: view) {            
+                view.insertSubview(blurView, belowSubview: newTaskView)
+            }
         } else {
             view.backgroundColor = .black
         }
@@ -286,6 +288,7 @@ extension HomeScreenViewController {
         isPresentingAddTask = false
         isPresentingMoreOptions = true
         animateMoreOptionsShowing()
+        applyBlur()
     }
     
     func prepareToHideMoreOptions() {
