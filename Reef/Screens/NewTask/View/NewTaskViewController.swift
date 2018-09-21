@@ -84,6 +84,8 @@ class NewTaskViewController: UIViewController {
     func cancelAddTask() {
         taskTitleTextView.resignFirstResponder()
         viewModel.edit(nil)
+        doneButton.isHidden = true
+        taskDetailsButton.isHidden = false
     }
     
     private func createTaskIfPossible() -> Bool {
