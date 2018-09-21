@@ -25,10 +25,11 @@ class CalendarCell: JTAppleCell {
     }
     
     func setupBackgroundCircleLayer() {
-        let circleRadius = min(contentView.frame.width, contentView.frame.height) / 2
+        let shrinkMod: CGFloat = 0.9
+        let circleRadius = min(contentView.frame.width, contentView.frame.height) * shrinkMod / 2
         
-        let circleBounds =  CGRect(origin: CGPoint(x: max(0, contentView.frame.width - contentView.frame.height) / 2,
-                                                   y: max(0, contentView.frame.height - contentView.frame.width) / 2),
+        let circleBounds =  CGRect(origin: CGPoint(x: contentView.frame.midX - circleRadius,
+                                                   y: contentView.frame.midY - circleRadius),
                                    size: CGSize(width: circleRadius * 2, height: circleRadius * 2))
         backgroundCircleLayer.path = UIBezierPath(roundedRect: circleBounds, cornerRadius: circleRadius).cgPath
         backgroundCircleLayer.zPosition = -1000
@@ -43,6 +44,14 @@ class CalendarCell: JTAppleCell {
         let day = Calendar.current.component(.day, from: cellState.date)
         dayLabel.text = "\(day)"
         
+        // Configure "today" visuals
+        if Calendar.current.isDateInToday(cellState.date) {
+            backgroundCircleLayer.strokeColor = UIColor.DateInput.defaultColor.cgColor
+        } else {
+            backgroundCircleLayer.strokeColor = UIColor.clear.cgColor
+        }
+        
+        // Configure selection visuals
         if isSelected {
             select(basedOn: cellState, animated: false)
         } else {
