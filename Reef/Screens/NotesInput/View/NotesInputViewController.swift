@@ -32,11 +32,16 @@ class NotesInputViewController: UIViewController {
         print("--- DEINIT NotesInputViewController")
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        viewModel.notes = notesInputTextView.text
+    }
+    
     // MARK: - Functions
     private func configureNotesInputTextView() {
         notesInputTextView.font = UIFont.font(sized: 22, weight: .semibold, with: .body, fontName: .barlow)
         notesInputTextView.placeholder = viewModel.textViewPlaceholder
         notesInputTextView.placeholderColor = UIColor.placeholder
+        notesInputTextView.text = viewModel.notes
     }
     
     private func configureNavigationBarTitle() {

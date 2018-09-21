@@ -14,12 +14,15 @@ extension NotesInputViewModel: IconCellPresentable {
     }
     
     var subtitle: String {
-        return Strings.MoreOptionsScreen.NotesCell.subtitle
+        if notes != "" {
+            return notes
+        } else {
+            return Strings.MoreOptionsScreen.NotesCell.subtitle
+        }
     }
     
     var imageName: String {
         return "notesIcon"
     }
-    
     
 }
