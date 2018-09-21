@@ -36,7 +36,7 @@ class TagCollectionAccessibilityElement: UIAccessibilityElement {
     
     override var accessibilityTraits: UIAccessibilityTraits {
         get {
-            return UIAccessibilityTraitAdjustable
+            return UIAccessibilityTraits.adjustable
         }
         set { }
     }
