@@ -122,7 +122,7 @@ class TagCollectionViewController: UIViewController {
         if bool {
             tagsCollectionView.selectItem(at: index,
                                           animated: animated,
-                                          scrollPosition: UICollectionViewScrollPosition.bottom)
+                                          scrollPosition: UICollectionView.ScrollPosition.bottom)
         } else {
             tagsCollectionView.deselectItem(at: index, animated: animated)
         }

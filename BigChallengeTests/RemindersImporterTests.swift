@@ -11,7 +11,7 @@ import Nimble
 import os
 
 @testable
-import BigChallenge
+import Reef
 
 /*
  Affected user stories:

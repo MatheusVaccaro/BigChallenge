@@ -76,7 +76,7 @@ class HomeScreenViewController: UIViewController {
         
         taskCreationFrameViewController = viewController
         
-        addChildViewController(viewController)
+        addChild(viewController)
         newTaskView.addSubview(viewController.view)
         
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -96,7 +96,7 @@ class HomeScreenViewController: UIViewController {
         
         subscribe(to: viewModel)
         
-        addChildViewController(viewController)
+        addChild(viewController)
         taskListContainerView.addSubview(viewController.view)
         
         NSLayoutConstraint.activate([
@@ -112,7 +112,7 @@ class HomeScreenViewController: UIViewController {
         
         tagCollectionViewController = viewController
         
-        addChildViewController(viewController)
+        addChild(viewController)
         tagContainerView.addSubview(viewController.view)
         
         NSLayoutConstraint.activate([
@@ -236,7 +236,7 @@ class HomeScreenViewController: UIViewController {
     
     private func applyBlur() {
         //only apply the blur if the user hasn't disabled transparency effects
-        if !UIAccessibilityIsReduceTransparencyEnabled() {
+        if !UIAccessibility.isReduceTransparencyEnabled {
             blurView.frame = view.bounds
             blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             

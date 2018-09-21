@@ -65,7 +65,7 @@ class DateInputViewController: UIViewController {
     private func loadDateSelectorView() {
         calendarViewController = CalendarViewController.instantiate()
         calendarViewController.delegate = self
-        addChildViewController(calendarViewController)
+        addChild(calendarViewController)
         
         calendarContainerView.addSubview(calendarViewController.view)
         

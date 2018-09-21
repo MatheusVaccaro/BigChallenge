@@ -12,7 +12,7 @@ import UIKit
 public extension UIFont {
     public static func font(sized size: CGFloat,
                      weight: UIFont.Weight,
-                     with style: UIFontTextStyle,
+                     with style: UIFont.TextStyle,
                      fontName: FontName = .system) -> UIFont {
         let font = fontNamed(name: fontName, weight: weight, size: size)
         
@@ -50,7 +50,7 @@ public extension UIFont {
         }
     }
     
-    private func withTraits(traits: UIFontDescriptorSymbolicTraits) -> UIFont {
+    private func withTraits(traits: UIFontDescriptor.SymbolicTraits) -> UIFont {
         let descriptor = fontDescriptor.withSymbolicTraits(traits)
         return UIFont(descriptor: descriptor!, size: 0) //size 0 means keep the size as it is
     }

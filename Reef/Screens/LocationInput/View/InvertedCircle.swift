@@ -23,7 +23,7 @@ class MKInvertedCircleOverlayRenderer: MKOverlayRenderer {
     }
     
     override func draw(_ mapRect: MKMapRect, zoomScale: MKZoomScale, in context: CGContext) {
-        let path = UIBezierPath(rect: rect(for: MKMapRectWorld))
+        let path = UIBezierPath(rect: rect(for: MKMapRect.world))
         
         let excludePath: UIBezierPath = UIBezierPath(roundedRect: CGRect(x: circle.coordinate.latitude,
                                                                          y: circle.coordinate.longitude,
