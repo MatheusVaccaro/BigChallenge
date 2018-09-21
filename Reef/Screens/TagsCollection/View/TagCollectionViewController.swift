@@ -32,7 +32,6 @@ class TagCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.translatesAutoresizingMaskIntoConstraints = false
         
         addTagEvent = PublishSubject<Bool>()
@@ -41,8 +40,6 @@ class TagCollectionViewController: UIViewController {
         if let layout = tagsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.estimatedItemSize = CGSize(width: 150, height: 40)
         }
-        
-        configureAccessibility()
     }
     
     func bindCollectionView() {
@@ -54,8 +51,6 @@ class TagCollectionViewController: UIViewController {
                cellType: TagCollectionViewCell.self)) { (row, item, cell) in
                 
                 self.configureCell(row: row, item: item, cell: cell)
-                
-                cell.isAccessibilityElement = true
                 
         }.disposed(by: disposeBag)
         
@@ -172,10 +167,9 @@ class TagCollectionViewController: UIViewController {
         present(bigTagVC, animated: true)
     }
     
-    private func configureAccessibility() {
-        isAccessibilityElement = true
-        tagsCollectionView.isAccessibilityElement = true
-    }
+    //MARK - Accessibility
+    
+    private var accessibilityElement: TagCollectionAccessibilityElement?
 }
 
 extension TagCollectionViewController: StoryboardInstantiable {
@@ -186,4 +180,17 @@ extension TagCollectionViewController: StoryboardInstantiable {
     static var storyboardIdentifier: String {
         return "TagCollection"
     }
+}
+
+class TagCollectionAccessibilityElement: UIAccessibilityElement {
+    
+    private let viewModel: TagCollectionViewModel
+    
+    init(accessibilityContainer container: Any, viewModel: TagCollectionViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(accessibilityContainer: container)
+    }
+    
+    
 }

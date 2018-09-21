@@ -98,6 +98,7 @@ class TagCollectionViewCell: UICollectionViewCell {
     
     func configure(with viewModel: TagCollectionViewCellViewModel? = nil) {
         self.viewModel = viewModel
+        configureAccessibility()
         
         guard let viewModel = viewModel else {
             configureDefault()
@@ -145,5 +146,13 @@ class TagCollectionViewCell: UICollectionViewCell {
         gradientLayer.frame = bounds
         maskLabel.frame = bounds
         CATransaction.commit()
+    }
+    
+    private func configureAccessibility() {
+        isAccessibilityElement = true
+        accessibilityLabel = viewModel?.tagTitle ?? "add tag" //TODO: localize
+        accessibilityHint = kind == .tag
+            ? "accessibilityHintTagCell"
+            : "accessibilityHintAddCell"
     }
 }
