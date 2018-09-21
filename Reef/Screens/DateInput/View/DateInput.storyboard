@@ -80,6 +80,7 @@
                     <size key="freeformSize" width="375" height="600"/>
                     <connections>
                         <outlet property="calendarContainerView" destination="qv3-lM-uBA" id="4vH-bI-Pks"/>
+                        <outlet property="prepositionLabel" destination="9wo-QD-7Qu" id="DJw-ah-SD0"/>
                         <outlet property="selectedCalendarDateDayLabel" destination="GZf-fB-Mas" id="8rw-bb-I6Y"/>
                         <outlet property="selectedCalendarDateDayLabelHeight" destination="uPA-A8-kGt" id="P9Q-0j-YUX"/>
                         <outlet property="selectedCalendarDateDayLabelWidth" destination="rnc-8c-2xK" id="KCn-nW-tF7"/>

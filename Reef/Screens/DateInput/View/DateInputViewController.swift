@@ -24,6 +24,8 @@ class DateInputViewController: UIViewController {
     @IBOutlet weak var selectedCalendarDateMonthLabel: UILabel!
     private(set) var selectedTimeOfDayLabel: ToggleableLabel!
     
+    @IBOutlet weak var prepositionLabel: UILabel!
+    
     private(set) var currentSelector: BehaviorSubject<DateSelector>!
     
     @IBOutlet weak var calendarContainerView: UIView!
@@ -42,9 +44,8 @@ class DateInputViewController: UIViewController {
         title = viewModel.title
         currentSelector = BehaviorSubject<DateSelector>(value: .date)
         
-        selectedCalendarDateMonthLabel.adjustsFontSizeToFitWidth = true
-        
         configureCalendarDateLabels()
+        configurePrepositionLabel()
         loadSelectedTimeOfDayLabel()
         loadDateSelectorView()
         loadTimeOfDaySelectorView()
@@ -86,6 +87,7 @@ class DateInputViewController: UIViewController {
         	}
         
         // Day Label
+        selectedCalendarDateDayLabel.textColor = UIColor.DateInput.defaultColor
         let dayDateFormatter = DateFormatter()
         dayDateFormatter.locale = Locale.current
         dayDateFormatter.dateFormat = "dd"
@@ -95,6 +97,7 @@ class DateInputViewController: UIViewController {
             .disposed(by: disposeBag)
         
         // Month Label
+        selectedCalendarDateMonthLabel.textColor = UIColor.DateInput.defaultColor
         let monthDateFormatter = DateFormatter()
         monthDateFormatter.locale = Locale.current
         monthDateFormatter.dateFormat = "MMMM"
@@ -102,6 +105,10 @@ class DateInputViewController: UIViewController {
             .map { monthDateFormatter.string(from: $0).uppercased()	}
         	.bind(to: selectedCalendarDateMonthLabel.rx.text)
         	.disposed(by: disposeBag)
+    }
+    
+    private func configurePrepositionLabel() {
+        prepositionLabel.textColor = UIColor.DateInput.defaultColor
     }
     
     private func loadDateSelectorView() {
