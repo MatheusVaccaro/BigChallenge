@@ -26,18 +26,32 @@ class NewTaskViewController: UIViewController {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var checkButton: UIButton!
+    @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var taskTitleTextView: UITextView!
     @IBOutlet weak var taskDetailsButton: UIButton!
+    @IBOutlet weak var doneButton: UIButton!
+    private lazy var gradientLayer: CAGradientLayer = {
+        let layer = CAGradientLayer()
+        
+        layer.frame = view.frame
+        layer.frame.size.width = 10
+        layer.startPoint = CGPoint(x: 0, y: 0)
+        layer.endPoint = CGPoint(x: 1, y: 0)
+        
+        return layer
+    }()
     
     // MARK: - NewTaskViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        gradientView.layer.addSublayer(gradientLayer)
+        gradientView.clipsToBounds = true
+        
         configureWithViewModel()
         configureTaskTitleTextView()
         configureViewDesign()
-        configureMoreOptionsButton()
+        doneButton.isHidden = true
         
         userActivity = viewModel.userActivity
         userActivity?.becomeCurrent()
@@ -54,15 +68,40 @@ class NewTaskViewController: UIViewController {
     @IBAction func didClickDetailsButton(_ sender: Any) {
         taskTitleTextView.resignFirstResponder()
         delegate?.shouldPresentMoreOptions()
+        doneButton.isHidden = false
+        taskDetailsButton.isHidden = true
+    }
+    
+    @IBAction func didClickDoneButton(_ sender: Any) {
+        _ = createTaskIfPossible()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        taskTitleTextView.becomeFirstResponder()
+    }
+    
+    func cancelAddTask() {
+        taskTitleTextView.resignFirstResponder()
+        viewModel.edit(nil)
+        doneButton.isHidden = true
+        taskDetailsButton.isHidden = false
+    }
+    
+    private func createTaskIfPossible() -> Bool {
+        guard taskTitleTextView.text != "" else { return false }
+        taskTitleTextView.resignFirstResponder()
+        viewModel.outputDelegate?.didPressCreateTask()
+        delegate?.didPressCreateTask()
+        doneButton.isHidden = true
+        taskDetailsButton.isHidden = false
+        return true
     }
     
     // MARK: - Functions
-    private func configureMoreOptionsButton() {
-        taskDetailsButton.setImage(UIImage(named: "option"), for: .normal)
-    }
-    
     private func configureWithViewModel() {
         taskTitleTextView.text = viewModel.taskTitleText
+        gradientLayer.colors = viewModel.taskColors
     }
     
     private func configureTaskTitleTextView() {
@@ -106,15 +145,13 @@ extension NewTaskViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         delegate?.shouldHideMoreOptions()
+        doneButton.isHidden = true
+        taskDetailsButton.isHidden = false
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
-            guard textView.text != "" else { return false }
-            textView.resignFirstResponder()
-            viewModel.outputDelegate?.didPressCreateTask()
-            delegate?.didPressCreateTask()
-            return false
+            return createTaskIfPossible()
         } else {
             return true
         }
@@ -124,5 +161,9 @@ extension NewTaskViewController: UITextViewDelegate {
 extension NewTaskViewController: NewTaskViewModelDelegate {
     func updateTextViewWith(text: String) {
         taskTitleTextView.text = text
+    }
+    
+    func didUpdateColors() {
+        gradientLayer.colors = viewModel.taskColors
     }
 }

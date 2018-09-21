@@ -67,16 +67,26 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.springboard">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C28DC91520B61CB6007F881A"
-            BuildableName = "Reef.app"
-            BlueprintName = "Reef"
+            BlueprintIdentifier = "22FEEA732133419500D8B049"
+            BuildableName = "ReefToday.appex"
+            BlueprintName = "ReefToday"
             ReferencedContainer = "container:Reef.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "22FEEA732133419500D8B049"
+            BuildableName = "ReefToday.appex"
+            BlueprintName = "ReefToday"
+            ReferencedContainer = "container:Reef.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

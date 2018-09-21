@@ -53,11 +53,42 @@ class IconTableViewCell: UITableViewCell {
         
         titleLabel.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         titleLabel.textContainer.lineFragmentPadding = 0
+        
+        configureAccessibility()
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         titleLabel.font = UIFont.font(sized: titleFontSize, weight: .medium, with: .title1, fontName: .barlow)
         subtitleLabel.font = UIFont.font(sized: subtitleFontSize, weight: .regular, with: .title3)
+    }
+    
+    // MARK: - Accessibility
+    
+    private func configureAccessibility() {
+        titleLabel.isAccessibilityElement = false
+        subtitleLabel.isAccessibilityElement = false
+        icon.isAccessibilityElement = false
+    }
+    
+    private var _accessibilityLabel: String?
+    override var accessibilityLabel: String? {
+        get {
+            guard _accessibilityLabel == nil else {
+                return _accessibilityLabel
+            }
+            _accessibilityLabel = titleLabel.text + ", " + (subtitleLabel.text ?? "")
+            return _accessibilityLabel
+        }
+        set {
+            _accessibilityLabel = newValue
+        }
+    }
+    
+    override var accessibilityHint: String? {
+        get {
+            return viewModel.voiceOverHint
+        }
+        set {}
     }
 }

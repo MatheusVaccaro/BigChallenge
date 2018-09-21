@@ -32,7 +32,6 @@ class TagCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.translatesAutoresizingMaskIntoConstraints = false
         
         addTagEvent = PublishSubject<Bool>()
@@ -167,6 +166,10 @@ class TagCollectionViewController: UIViewController {
         resignFirstResponder()
         present(bigTagVC, animated: true)
     }
+    
+    //MARK - Accessibility
+    
+    private var accessibilityElement: TagCollectionAccessibilityElement?
 }
 
 extension TagCollectionViewController: StoryboardInstantiable {
@@ -177,4 +180,17 @@ extension TagCollectionViewController: StoryboardInstantiable {
     static var storyboardIdentifier: String {
         return "TagCollection"
     }
+}
+
+class TagCollectionAccessibilityElement: UIAccessibilityElement {
+    
+    private let viewModel: TagCollectionViewModel
+    
+    init(accessibilityContainer container: Any, viewModel: TagCollectionViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(accessibilityContainer: container)
+    }
+    
+    
 }

@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  Reef
+
+  Created by Bruno Fulber Wide on 20/09/18.
+  Copyright © 2018 Matheus Vaccaro. All rights reserved.
+*/
+
+//widget string when there are no tasks to present
+"emptyState" = "empty state placeholder";

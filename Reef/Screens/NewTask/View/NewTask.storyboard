@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,65 +15,80 @@
             <objects>
                 <viewController storyboardIdentifier="NewTaskViewController" id="ArF-0o-Orl" customClass="NewTaskViewController" customModule="Reef" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TDj-t3-yHD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" keyboardDismissMode="interactive" text="i am a task with some very long text written here just for testing pourposes" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w2W-Sr-tak">
-                                <rect key="frame" x="38" y="0.0" width="292" height="80"/>
+                            <textView clipsSubviews="YES" contentMode="center" horizontalHuggingPriority="750" layoutMarginsFollowReadableWidth="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" keyboardDismissMode="interactive" text="i am a task with some ver" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w2W-Sr-tak">
+                                <rect key="frame" x="16" y="24" width="295" height="25"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" textContentType="name"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfX-U0-he8">
-                                <rect key="frame" x="0.0" y="21" width="38" height="38"/>
-                                <state key="normal" image="diamond"/>
-                                <state key="selected" image="checkedBox"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5oG-Zr-dS9">
-                                <rect key="frame" x="330" y="0.0" width="45" height="80"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="45" id="UX2-bO-VSU"/>
-                                </constraints>
+                                <rect key="frame" x="311" y="0.0" width="56" height="73"/>
                                 <state key="normal" image="option"/>
-                                <state key="selected" image="checkedBox"/>
                                 <connections>
                                     <action selector="didClickDetailsButton:" destination="ArF-0o-Orl" eventType="touchUpInside" id="5VE-NB-4uJ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WYf-bH-Bnh" userLabel="doneButton">
+                                <rect key="frame" x="311" y="0.0" width="56" height="73"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="hlF-sJ-aRI"/>
+                                </constraints>
+                                <state key="normal" image="doneButton"/>
+                                <connections>
+                                    <action selector="didClickDetailsButton:" destination="ArF-0o-Orl" eventType="touchUpInside" id="JDp-Xh-H9C"/>
+                                    <action selector="didClickDoneButton:" destination="ArF-0o-Orl" eventType="touchUpInside" id="jGC-Qa-EDq"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wme-eo-wSe">
+                                <rect key="frame" x="5" y="5" width="5" height="63"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="5" id="RJB-vn-p7U"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="WYf-bH-Bnh" firstAttribute="top" secondItem="S5p-sX-wPS" secondAttribute="top" id="3ba-gw-bft"/>
+                            <constraint firstItem="wme-eo-wSe" firstAttribute="leading" secondItem="S5p-sX-wPS" secondAttribute="leading" constant="5" id="4CH-LM-Pyx"/>
                             <constraint firstItem="w2W-Sr-tak" firstAttribute="centerY" secondItem="S5p-sX-wPS" secondAttribute="centerY" id="7p6-M0-K2G"/>
-                            <constraint firstItem="w2W-Sr-tak" firstAttribute="leading" secondItem="dfX-U0-he8" secondAttribute="trailing" id="95s-uZ-HjK"/>
-                            <constraint firstItem="S5p-sX-wPS" firstAttribute="bottom" secondItem="w2W-Sr-tak" secondAttribute="bottom" id="9be-g2-QnE"/>
-                            <constraint firstItem="w2W-Sr-tak" firstAttribute="top" secondItem="S5p-sX-wPS" secondAttribute="top" id="DJY-tE-lUk"/>
-                            <constraint firstItem="dfX-U0-he8" firstAttribute="centerY" secondItem="S5p-sX-wPS" secondAttribute="centerY" id="Gku-gp-ZwI"/>
-                            <constraint firstItem="dfX-U0-he8" firstAttribute="width" secondItem="dfX-U0-he8" secondAttribute="height" multiplier="1:1" id="JMC-JD-gIO"/>
-                            <constraint firstItem="w2W-Sr-tak" firstAttribute="width" secondItem="TDj-t3-yHD" secondAttribute="width" multiplier="0.778" id="Mja-3Y-0vp"/>
+                            <constraint firstItem="WYf-bH-Bnh" firstAttribute="centerY" secondItem="TDj-t3-yHD" secondAttribute="centerY" id="92k-7q-zjU"/>
+                            <constraint firstItem="wme-eo-wSe" firstAttribute="centerY" secondItem="TDj-t3-yHD" secondAttribute="centerY" id="9Ph-2M-AaK"/>
+                            <constraint firstItem="S5p-sX-wPS" firstAttribute="bottom" secondItem="w2W-Sr-tak" secondAttribute="bottom" constant="24" id="9be-g2-QnE"/>
+                            <constraint firstItem="w2W-Sr-tak" firstAttribute="leading" secondItem="wme-eo-wSe" secondAttribute="trailing" constant="6" id="9lT-TQ-FlE"/>
+                            <constraint firstItem="w2W-Sr-tak" firstAttribute="top" secondItem="S5p-sX-wPS" secondAttribute="top" constant="24" id="DJY-tE-lUk"/>
+                            <constraint firstItem="WYf-bH-Bnh" firstAttribute="bottom" secondItem="S5p-sX-wPS" secondAttribute="bottom" id="M8t-qh-6qb"/>
+                            <constraint firstItem="wme-eo-wSe" firstAttribute="top" secondItem="S5p-sX-wPS" secondAttribute="top" constant="5" id="OdW-PN-eUt"/>
+                            <constraint firstItem="S5p-sX-wPS" firstAttribute="bottom" secondItem="wme-eo-wSe" secondAttribute="bottom" constant="5" id="ThR-oS-Eec"/>
                             <constraint firstItem="S5p-sX-wPS" firstAttribute="bottom" secondItem="5oG-Zr-dS9" secondAttribute="bottom" id="Tl1-bT-N64"/>
                             <constraint firstItem="5oG-Zr-dS9" firstAttribute="centerY" secondItem="S5p-sX-wPS" secondAttribute="centerY" id="W3S-uK-LgZ"/>
                             <constraint firstItem="5oG-Zr-dS9" firstAttribute="leading" secondItem="w2W-Sr-tak" secondAttribute="trailing" id="Yhk-T2-IO3"/>
-                            <constraint firstItem="S5p-sX-wPS" firstAttribute="trailing" secondItem="5oG-Zr-dS9" secondAttribute="trailing" id="iBk-6V-K9s"/>
-                            <constraint firstItem="dfX-U0-he8" firstAttribute="leading" secondItem="S5p-sX-wPS" secondAttribute="leading" id="pdF-b6-NEk"/>
+                            <constraint firstItem="S5p-sX-wPS" firstAttribute="trailing" secondItem="5oG-Zr-dS9" secondAttribute="trailing" constant="8" id="iBk-6V-K9s"/>
+                            <constraint firstItem="WYf-bH-Bnh" firstAttribute="leading" secondItem="w2W-Sr-tak" secondAttribute="trailing" id="jXm-ZK-Lqw"/>
+                            <constraint firstItem="WYf-bH-Bnh" firstAttribute="trailing" secondItem="S5p-sX-wPS" secondAttribute="trailing" constant="-8" id="orc-4p-JUg"/>
                             <constraint firstItem="5oG-Zr-dS9" firstAttribute="top" secondItem="S5p-sX-wPS" secondAttribute="top" id="rhb-ci-zWN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="S5p-sX-wPS"/>
                     </view>
-                    <size key="freeformSize" width="375" height="80"/>
+                    <size key="freeformSize" width="375" height="73"/>
                     <connections>
-                        <outlet property="checkButton" destination="dfX-U0-he8" id="Ku7-hy-Ojy"/>
+                        <outlet property="doneButton" destination="WYf-bH-Bnh" id="MRf-eM-ora"/>
+                        <outlet property="gradientView" destination="wme-eo-wSe" id="yY4-W2-skA"/>
                         <outlet property="taskDetailsButton" destination="5oG-Zr-dS9" id="NLE-BI-v6y"/>
                         <outlet property="taskTitleTextView" destination="w2W-Sr-tak" id="gYP-lC-EAC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V4H-El-wg5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1773.5999999999999" y="242.87856071964021"/>
+            <point key="canvasLocation" x="1773.1884057971015" y="242.11956521739131"/>
         </scene>
     </scenes>
     <resources>
-        <image name="checkedBox" width="29" height="29"/>
-        <image name="diamond" width="17" height="17"/>
+        <image name="doneButton" width="56" height="40"/>
         <image name="option" width="18" height="6"/>
     </resources>
 </document>
