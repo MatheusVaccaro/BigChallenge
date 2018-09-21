@@ -20,6 +20,8 @@ class CalendarCell: JTAppleCell {
         
         backgroundCircleLayer = CAShapeLayer()
         contentView.layer.addSublayer(backgroundCircleLayer)
+        
+        backgroundCircleLayer.fillColor = UIColor.DateInput.Calendar.deselectedDateBackground.cgColor
     }
     
     func setupBackgroundCircleLayer() {
@@ -30,7 +32,6 @@ class CalendarCell: JTAppleCell {
                                    size: CGSize(width: circleRadius * 2, height: circleRadius * 2))
         backgroundCircleLayer.path = UIBezierPath(roundedRect: circleBounds, cornerRadius: circleRadius).cgPath
         backgroundCircleLayer.zPosition = -1000
-        backgroundCircleLayer.fillColor = UIColor.DateInput.Calendar.deselectedDateBackground.cgColor
     }
     
     override func layoutSubviews() {
@@ -43,23 +44,43 @@ class CalendarCell: JTAppleCell {
         dayLabel.text = "\(day)"
         
         if isSelected {
-            select(basedOn: cellState)
+            select(basedOn: cellState, animated: false)
         } else {
-        	deselect(basedOn: cellState)
+            deselect(basedOn: cellState, animated: false)
         }
     }
     
-    func select(basedOn cellState: CellState? = nil) {
+    func select(basedOn cellState: CellState? = nil, animated: Bool = true) {
+        // Change background visuals
+        let selectedBackgroundColor = UIColor.DateInput.Calendar.selectedDateBackground
+        if animated {
+            setBackgroundColor(to: selectedBackgroundColor)
+        } else {
+            CATransaction.disableAnimationsIn { setBackgroundColor(to: selectedBackgroundColor) }
+        }
+        
+        // Change label visuals
         dayLabel.textColor = UIColor.DateInput.Calendar.selectedDate
-        backgroundCircleLayer.fillColor = UIColor.DateInput.Calendar.selectedDateBackground.cgColor
     }
     
-    func deselect(basedOn cellState: CellState? = nil) {
-        backgroundCircleLayer.fillColor = UIColor.DateInput.Calendar.deselectedDateBackground.cgColor
+    func deselect(basedOn cellState: CellState? = nil, animated: Bool = true) {
+        // Change background visuals
+        let deselectedBackgroundColor = UIColor.DateInput.Calendar.deselectedDateBackground
+        if animated {
+            setBackgroundColor(to: deselectedBackgroundColor)
+        } else {
+            CATransaction.disableAnimationsIn { setBackgroundColor(to: deselectedBackgroundColor) }
+        }
+        
+        // Change label visuals
         if let cellState = cellState, cellState.dateBelongsTo != .thisMonth {
             dayLabel.textColor = UIColor.DateInput.Calendar.dateOffCurrentMonth
         } else {
             dayLabel.textColor = UIColor.DateInput.Calendar.deselectedDate
         }
+    }
+    
+    private func setBackgroundColor(to color: UIColor) {
+        backgroundCircleLayer.fillColor = color.cgColor
     }
 }

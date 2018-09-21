@@ -87,6 +87,7 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         guard let calendarCell = cell as? CalendarCell else { return }
         
         calendarCell.select(basedOn: cellState)
+//        calendarCell.configure(with: cellState)
         
         delegate?.calendar(calendar, didSelectDate: date, cell: cell, cellState: cellState)
     }
@@ -96,6 +97,8 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         guard let calendarCell = cell as? CalendarCell else { return }
         
         calendarCell.deselect(basedOn: cellState)
+//        calendarCell.configure(with: cellState)
+        
         delegate?.calendar(calendar, didDeselectDate: date, cell: cell, cellState: cellState)
     }
 }
