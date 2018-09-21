@@ -18,6 +18,10 @@ class DateInputViewController: UIViewController {
     var viewModel: DateInputViewModelProtocol!
     private var disposeBag = DisposeBag()
     
+    @IBOutlet weak var selectedCalendarDateDayLabel: UILabel!
+    @IBOutlet weak var selectedCalendarDateDayLabelWidth: NSLayoutConstraint!
+    @IBOutlet weak var selectedCalendarDateDayLabelHeight: NSLayoutConstraint!
+    @IBOutlet weak var selectedCalendarDateMonthLabel: UILabel!
     private(set) var selectedTimeOfDayLabel: ToggleableLabel!
     
     private(set) var currentSelector: BehaviorSubject<DateSelector>!
@@ -38,6 +42,9 @@ class DateInputViewController: UIViewController {
         title = viewModel.title
         currentSelector = BehaviorSubject<DateSelector>(value: .date)
         
+        selectedCalendarDateMonthLabel.adjustsFontSizeToFitWidth = true
+        
+        configureCalendarDateLabels()
         loadSelectedTimeOfDayLabel()
         loadDateSelectorView()
         loadTimeOfDaySelectorView()
@@ -59,11 +66,42 @@ class DateInputViewController: UIViewController {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        disposeBag = DisposeBag()
-        loadSelectedTimeOfDayLabel()
-        loadDateSelectorView()
-        loadTimeOfDaySelectorView()
-        loadShortcutButtons()
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        view.setNeedsLayout()
+//        disposeBag = DisposeBag()
+//        loadSelectedTimeOfDayLabel()
+//        loadDateSelectorView()
+//        loadTimeOfDaySelectorView()
+//        loadShortcutButtons()
+    }
+    
+    private func configureCalendarDateLabels() {
+        let calendarDate = viewModel.calendarDate
+            .map { calendarDateComponent -> Date in
+                guard let date = Calendar.current.date(from: calendarDateComponent) else {
+                    throw NSError(domain: "Invalid calendar date component", code: 0, userInfo: nil)
+                }
+                return date
+        	}
+        
+        // Day Label
+        let dayDateFormatter = DateFormatter()
+        dayDateFormatter.locale = Locale.current
+        dayDateFormatter.dateFormat = "dd"
+        calendarDate
+            .map { dayDateFormatter.string(from: $0) }
+            .bind(to: selectedCalendarDateDayLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        // Month Label
+        let monthDateFormatter = DateFormatter()
+        monthDateFormatter.locale = Locale.current
+        monthDateFormatter.dateFormat = "MMMM"
+        calendarDate
+            .map { monthDateFormatter.string(from: $0).uppercased()	}
+        	.bind(to: selectedCalendarDateMonthLabel.rx.text)
+        	.disposed(by: disposeBag)
     }
     
     private func loadDateSelectorView() {
@@ -154,19 +192,19 @@ class DateInputViewController: UIViewController {
     }
     
     private func loadShortcutButtons() {
-        configure([tomorrowShortcutButton, nextWeekShortcutButton, nextMonthShortcutButton])
-        // RXSwift binding
-        viewModel?.tomorrowShortcutText.asObservable().subscribe(onNext: { [weak self] in
-            self?.tomorrowShortcutButton.setTitle($0, for: .normal)
-        }).disposed(by: disposeBag)
-        
-        viewModel?.nextWeekShortcutText.asObservable().subscribe(onNext: { [weak self] in
-            self?.nextWeekShortcutButton.setTitle($0, for: .normal)
-        }).disposed(by: disposeBag)
-        
-        viewModel?.nextMonthShortcutText.asObservable().subscribe(onNext: { [weak self] in
-            self?.nextMonthShortcutButton.setTitle($0, for: .normal)
-        }).disposed(by: disposeBag)
+//        configure([tomorrowShortcutButton, nextWeekShortcutButton, nextMonthShortcutButton])
+//        // RXSwift binding
+//        viewModel?.tomorrowShortcutText.asObservable().subscribe(onNext: { [weak self] in
+//            self?.tomorrowShortcutButton.setTitle($0, for: .normal)
+//        }).disposed(by: disposeBag)
+//        
+//        viewModel?.nextWeekShortcutText.asObservable().subscribe(onNext: { [weak self] in
+//            self?.nextWeekShortcutButton.setTitle($0, for: .normal)
+//        }).disposed(by: disposeBag)
+//        
+//        viewModel?.nextMonthShortcutText.asObservable().subscribe(onNext: { [weak self] in
+//            self?.nextMonthShortcutButton.setTitle($0, for: .normal)
+//        }).disposed(by: disposeBag)
     }
     
     private func configure(_ shortcutButtons: [UIButton]) {
@@ -227,5 +265,22 @@ extension DateInputViewController: StoryboardInstantiable {
     
     static var storyboardIdentifier: String {
         return "DateInput"
+    }
+}
+
+
+extension String {
+    func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [.font: font], context: nil)
+        
+        return ceil(boundingBox.height)
+    }
+    
+    func width(withConstrainedHeight height: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [.font: font], context: nil)
+        
+        return ceil(boundingBox.width)
     }
 }

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,57 +24,53 @@
                                     <constraint firstAttribute="height" constant="308" id="rBd-vH-428"/>
                                 </constraints>
                             </containerView>
-                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7M5-vg-US5">
-                                <rect key="frame" x="16" y="36" width="343" height="224"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="geK-Td-d2V">
-                                        <rect key="frame" x="0.0" y="59" width="173" height="106"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KDU-qd-iY5">
-                                                <rect key="frame" x="0.0" y="0.0" width="173" height="30"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <state key="normal" title="Tomorrow"/>
-                                                <connections>
-                                                    <action selector="touchUpInsideTomorrowShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="ToY-T4-0OM"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VST-pw-ufN">
-                                                <rect key="frame" x="0.0" y="38" width="173" height="30"/>
-                                                <state key="normal" title="Next week"/>
-                                                <connections>
-                                                    <action selector="touchUpInsideNextWeekShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="Lvj-3N-Ht1"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Deg-a9-9om">
-                                                <rect key="frame" x="0.0" y="76" width="173" height="30"/>
-                                                <state key="normal" title="Next month"/>
-                                                <connections>
-                                                    <action selector="touchUpInsideNextMonthShortcutButton:" destination="oKG-w4-TWy" eventType="touchUpInside" id="dbz-T2-L2H"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <datePicker contentMode="scaleToFill" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="YgX-4j-r0O">
-                                        <rect key="frame" x="193" y="4" width="150" height="216"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="mdp-LF-uIC"/>
-                                        </constraints>
-                                        <date key="date" timeIntervalSinceReferenceDate="555793516.040452">
-                                            <!--2018-08-12 19:05:16 +0000-->
-                                        </date>
-                                    </datePicker>
-                                </subviews>
-                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZf-fB-Mas">
+                                <rect key="frame" x="44.5" y="64" width="149.5" height="94"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="149.5" id="rnc-8c-2xK"/>
+                                    <constraint firstAttribute="height" constant="94" id="uPA-A8-kGt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="123"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SETEMBRO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odQ-yO-HSV">
+                                <rect key="frame" x="44.5" y="158" width="149.5" height="27.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="at" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9wo-QD-7Qu">
+                                <rect key="frame" x="194" y="137.5" width="15" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="YgX-4j-r0O">
+                                <rect key="frame" x="209" y="40" width="150" height="216"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="mdp-LF-uIC"/>
+                                </constraints>
+                                <date key="date" timeIntervalSinceReferenceDate="555793516.040452">
+                                    <!--2018-08-12 19:05:16 +0000-->
+                                </date>
+                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="9wo-QD-7Qu" firstAttribute="leading" secondItem="GZf-fB-Mas" secondAttribute="trailing" id="2Dz-Ix-09R"/>
+                            <constraint firstItem="qv3-lM-uBA" firstAttribute="top" secondItem="YgX-4j-r0O" secondAttribute="bottom" constant="20" id="6gQ-w7-mlG"/>
+                            <constraint firstItem="9wo-QD-7Qu" firstAttribute="centerY" secondItem="YgX-4j-r0O" secondAttribute="centerY" id="8u1-vG-u4p"/>
                             <constraint firstItem="Thx-CC-uDZ" firstAttribute="bottom" secondItem="qv3-lM-uBA" secondAttribute="bottom" constant="16" id="ITC-9q-vWr"/>
                             <constraint firstItem="qv3-lM-uBA" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" constant="16" id="LQa-NE-OIk"/>
-                            <constraint firstItem="7M5-vg-US5" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" constant="16" id="YcX-Af-yAP"/>
-                            <constraint firstItem="qv3-lM-uBA" firstAttribute="top" secondItem="7M5-vg-US5" secondAttribute="bottom" constant="16" id="ahb-fi-rcB"/>
-                            <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="7M5-vg-US5" secondAttribute="trailing" constant="16" id="gvA-1B-YbF"/>
+                            <constraint firstItem="odQ-yO-HSV" firstAttribute="width" secondItem="GZf-fB-Mas" secondAttribute="width" id="Mfs-Ot-JJ5"/>
+                            <constraint firstItem="GZf-fB-Mas" firstAttribute="top" secondItem="Thx-CC-uDZ" secondAttribute="top" constant="44" id="Rb5-TR-wUr"/>
+                            <constraint firstItem="odQ-yO-HSV" firstAttribute="centerX" secondItem="GZf-fB-Mas" secondAttribute="centerX" id="VC8-4u-5mR"/>
+                            <constraint firstItem="odQ-yO-HSV" firstAttribute="top" secondItem="GZf-fB-Mas" secondAttribute="bottom" id="hfe-6N-evd"/>
                             <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="qv3-lM-uBA" secondAttribute="trailing" constant="16" id="hxY-Ra-HUr"/>
-                            <constraint firstItem="7M5-vg-US5" firstAttribute="top" secondItem="Thx-CC-uDZ" secondAttribute="top" constant="16" id="ijF-mp-q70"/>
+                            <constraint firstItem="YgX-4j-r0O" firstAttribute="leading" secondItem="9wo-QD-7Qu" secondAttribute="trailing" id="lfK-3T-Bx0"/>
+                            <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="YgX-4j-r0O" secondAttribute="trailing" constant="16" id="mZ8-Ju-ZmO"/>
+                            <constraint firstItem="YgX-4j-r0O" firstAttribute="top" secondItem="Thx-CC-uDZ" secondAttribute="top" constant="20" id="ze4-La-Alo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Thx-CC-uDZ"/>
                     </view>
@@ -85,11 +80,9 @@
                     <size key="freeformSize" width="375" height="600"/>
                     <connections>
                         <outlet property="calendarContainerView" destination="qv3-lM-uBA" id="4vH-bI-Pks"/>
-                        <outlet property="dateShortcutsStackView" destination="geK-Td-d2V" id="F9d-xD-CtE"/>
-                        <outlet property="nextMonthShortcutButton" destination="Deg-a9-9om" id="gtK-dp-T55"/>
-                        <outlet property="nextWeekShortcutButton" destination="VST-pw-ufN" id="f0r-cQ-PXd"/>
+                        <outlet property="selectedCalendarDateDayLabel" destination="GZf-fB-Mas" id="8rw-bb-I6Y"/>
+                        <outlet property="selectedCalendarDateMonthLabel" destination="odQ-yO-HSV" id="Y2f-tA-AUQ"/>
                         <outlet property="timeOfDaySelector" destination="YgX-4j-r0O" id="gzN-GG-RpH"/>
-                        <outlet property="tomorrowShortcutButton" destination="KDU-qd-iY5" id="bYU-BW-m1Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Zr-Nm-Ffb" userLabel="First Responder" sceneMemberID="firstResponder"/>
