@@ -8,7 +8,6 @@
 
 import UIKit
 import NotificationCenter
-import ReefTableViewCell
 import RxSwift
 
 class TodayViewController: UIViewController, NCWidgetProviding {
@@ -54,8 +53,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     fileprivate func configureTableView() {
-        tableView.register(UINib(nibName: "TaskCell", bundle: nil),
-                           forCellReuseIdentifier: TaskTableViewCell.identifier)
+        tableView.register(UINib(nibName: "TodayTaskCell", bundle: nil),
+                           forCellReuseIdentifier: TodayTaskTableViewCell.identifier)
         tableView.dataSource = self
         tableView.separatorStyle = .none
     }
@@ -83,8 +82,8 @@ extension TodayViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: TaskTableViewCell.identifier,
-                                                       for: indexPath) as? TaskTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TodayTaskTableViewCell.identifier,
+                                                       for: indexPath) as? TodayTaskTableViewCell else { return UITableViewCell() }
         
         let cellViewModel = TodayTaskCellViewModel(task: viewModel.task(for: indexPath.row))
         cell.configure(with: cellViewModel)

@@ -10,7 +10,7 @@ import UIKit
 import ReefKit
 
 public protocol TodayTaskCellDelegate: class {
-    func shouldUpdateSize(of cell: TaskTableViewCell)
+    func shouldUpdateSize(of cell: TodayTaskTableViewCell)
 }
 
 public enum CellType {
@@ -18,7 +18,7 @@ public enum CellType {
     case none
 }
 
-public class TaskTableViewCell: UITableViewCell {
+public class TodayTaskTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     public static let identifier = "todayTaskCell"

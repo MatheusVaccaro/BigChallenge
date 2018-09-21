@@ -12,7 +12,6 @@ import UIKit
 import RxCocoa
 import RxSwift
 import ReefKit
-import ReefTableViewCell
 
 public class TaskListViewModelImpl: TaskListViewModel {
     

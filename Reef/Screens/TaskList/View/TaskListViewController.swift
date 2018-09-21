@@ -11,7 +11,6 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import ReefKit
-import ReefTableViewCell
 import UserNotifications
 
 struct SectionedTaskModel {
