@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="todayTaskCell" id="TcC-Ie-kYy" customClass="TodayTaskTableViewCell" customModule="ReefTableViewCell" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TcC-Ie-kYy" id="uR2-n7-Ubs">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="65.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PPe-BE-AFv">
+                        <rect key="frame" x="0.0" y="-0.5" width="66" height="66.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="66" id="F0E-rk-vVk"/>
+                            <constraint firstAttribute="width" secondItem="PPe-BE-AFv" secondAttribute="height" multiplier="1:1" id="Kot-VR-4JC"/>
+                        </constraints>
+                        <state key="normal" image="checkBox"/>
+                        <state key="selected" image="checkBox"/>
+                        <connections>
+                            <action selector="didPressCheckButton:" destination="TcC-Ie-kYy" eventType="touchUpInside" id="LVv-Ss-bjM"/>
+                        </connections>
+                    </button>
+                    <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" axis="vertical" distribution="fillProportionally" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="0D5-ij-Kb6">
+                        <rect key="frame" x="66" y="8" width="293" height="49.5"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" keyboardDismissMode="interactive" editable="NO" text="i am a task" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OW8-xT-sLf">
+                                <rect key="frame" x="0.0" y="0.0" width="293" height="35"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" textContentType="name"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fn8-Lx-bVj">
+                                <rect key="frame" x="0.0" y="36" width="293" height="13.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="0D5-ij-Kb6" firstAttribute="leading" secondItem="PPe-BE-AFv" secondAttribute="trailing" id="JmH-tp-crd"/>
+                    <constraint firstItem="0D5-ij-Kb6" firstAttribute="top" secondItem="uR2-n7-Ubs" secondAttribute="top" constant="8" id="Kzg-fd-aIy"/>
+                    <constraint firstItem="PPe-BE-AFv" firstAttribute="leading" secondItem="uR2-n7-Ubs" secondAttribute="leading" id="OO7-vO-9r7"/>
+                    <constraint firstAttribute="trailing" secondItem="0D5-ij-Kb6" secondAttribute="trailing" constant="16" id="a7M-es-6BE"/>
+                    <constraint firstAttribute="bottom" secondItem="0D5-ij-Kb6" secondAttribute="bottom" constant="8" id="ax4-9R-njR"/>
+                    <constraint firstItem="0D5-ij-Kb6" firstAttribute="centerY" secondItem="PPe-BE-AFv" secondAttribute="centerY" id="sE2-yK-IRE"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="checkButton" destination="PPe-BE-AFv" id="9QI-qr-Dc8"/>
+                <outlet property="tagsLabel" destination="Fn8-Lx-bVj" id="MQc-Oy-qqr"/>
+                <outlet property="taskTitleTextView" destination="OW8-xT-sLf" id="SmA-D6-qM7"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="checkBox" width="25" height="26"/>
+    </resources>
+</document>

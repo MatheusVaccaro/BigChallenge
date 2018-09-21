@@ -51,7 +51,7 @@ class NewTaskViewController: UIViewController {
         configureWithViewModel()
         configureTaskTitleTextView()
         configureViewDesign()
-        configureMoreOptionsButton()
+        doneButton.isHidden = true
         
         userActivity = viewModel.userActivity
         userActivity?.becomeCurrent()
@@ -97,12 +97,6 @@ class NewTaskViewController: UIViewController {
     }
     
     // MARK: - Functions
-    private func configureMoreOptionsButton() {
-        taskDetailsButton.setImage(UIImage(named: "option"), for: .normal)
-        doneButton.setImage(UIImage(named: "DoneButtonAddTask"), for: .normal)
-        doneButton.isHidden = true
-    }
-    
     private func configureWithViewModel() {
         taskTitleTextView.text = viewModel.taskTitleText
         gradientLayer.colors = viewModel.taskColors

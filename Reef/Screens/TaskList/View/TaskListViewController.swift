@@ -49,8 +49,7 @@ public class TaskListViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.sectionHeaderHeight = UITableViewAutomaticDimension
         tableView.sectionFooterHeight = UITableViewAutomaticDimension
-        tableView.register(UINib(nibName: "TaskCell",
-                                 bundle: Bundle(identifier: "com.Wide.ReefTableViewCell")),
+        tableView.register(UINib(nibName: "TaskCell", bundle: nil),
                            forCellReuseIdentifier: TaskTableViewCell.identifier)
         
         tableView.estimatedRowHeight = 60

@@ -54,7 +54,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     fileprivate func configureTableView() {
-        tableView.register(UINib(nibName: "TaskCell", bundle: Bundle(identifier: "com.Wide.ReefTableViewCell")),
+        tableView.register(UINib(nibName: "TaskCell", bundle: nil),
                            forCellReuseIdentifier: TaskTableViewCell.identifier)
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -86,7 +86,7 @@ extension TodayViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TaskTableViewCell.identifier,
                                                        for: indexPath) as? TaskTableViewCell else { return UITableViewCell() }
         
-        let cellViewModel = TaskCellViewModel(task: viewModel.task(for: indexPath.row))
+        let cellViewModel = TodayTaskCellViewModel(task: viewModel.task(for: indexPath.row))
         cell.configure(with: cellViewModel)
         
         cellViewModel.taskObservable.subscribe { event in
