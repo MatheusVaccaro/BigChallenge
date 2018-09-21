@@ -240,7 +240,7 @@ class HomeScreenViewController: UIViewController {
             blurView.frame = view.bounds
             blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             
-            taskListContainerView.addSubview(blurView)
+            view.insertSubview(blurView, belowSubview: newTaskView)
         } else {
             view.backgroundColor = .black
         }
