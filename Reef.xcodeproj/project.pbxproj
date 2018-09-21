@@ -129,6 +129,18 @@
 		C26EC73921544D19000E9CB9 /* NotesTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26EC73821544D19000E9CB9 /* NotesTableViewCellViewModel.swift */; };
 		C26EC73B21545A25000E9CB9 /* NotesInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26EC73A21545A25000E9CB9 /* NotesInputViewController.swift */; };
 		C26EC73D21545A4F000E9CB9 /* NotesInput.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C26EC73C21545A4F000E9CB9 /* NotesInput.storyboard */; };
+		C26EC73E21547282000E9CB9 /* Barlow-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDBB211205C3004F66D6 /* Barlow-BlackItalic.ttf */; };
+		C26EC73F21547282000E9CB9 /* Barlow-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDBE211205C4004F66D6 /* Barlow-BoldItalic.ttf */; };
+		C26EC74021547282000E9CB9 /* Barlow-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDB7211205C2004F66D6 /* Barlow-ExtraBold.ttf */; };
+		C26EC74121547282000E9CB9 /* Barlow-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC3211205C5004F66D6 /* Barlow-ExtraLight.ttf */; };
+		C26EC74221547282000E9CB9 /* Barlow-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDB9211205C3004F66D6 /* Barlow-ExtraLightItalic.ttf */; };
+		C26EC74321547282000E9CB9 /* Barlow-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC7211205C6004F66D6 /* Barlow-Italic.ttf */; };
+		C26EC74421547282000E9CB9 /* Barlow-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC4211205C5004F66D6 /* Barlow-Light.ttf */; };
+		C26EC74521547282000E9CB9 /* Barlow-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDBC211205C3004F66D6 /* Barlow-LightItalic.ttf */; };
+		C26EC74621547282000E9CB9 /* Barlow-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC0211205C4004F66D6 /* Barlow-Regular.ttf */; };
+		C26EC74721547282000E9CB9 /* Barlow-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC2211205C5004F66D6 /* Barlow-SemiBold.ttf */; };
+		C26EC74821547282000E9CB9 /* Barlow-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC1211205C4004F66D6 /* Barlow-Thin.ttf */; };
+		C26EC74921547282000E9CB9 /* Barlow-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDB6211205C1004F66D6 /* Barlow-ThinItalic.ttf */; };
 		C28DC91A20B61CB6007F881A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28DC91920B61CB6007F881A /* AppDelegate.swift */; };
 		C28DC91F20B61CB6007F881A /* TaskList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C28DC91D20B61CB6007F881A /* TaskList.storyboard */; };
 		C28DC92120B61CB9007F881A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C28DC92020B61CB9007F881A /* Assets.xcassets */; };
@@ -1422,6 +1434,7 @@
 				C29742CA21123E2D00A1D213 /* MoreOptions.storyboard in Resources */,
 				22D84C63210BF1E3004B8969 /* LocationInputView.storyboard in Resources */,
 				16E8DDC9211205E8004F66D6 /* Barlow-Black.ttf in Resources */,
+				C26EC74221547282000E9CB9 /* Barlow-ExtraLightItalic.ttf in Resources */,
 				C26EC73D21545A4F000E9CB9 /* NotesInput.storyboard in Resources */,
 				221BA8B620F6A18500BE2AC1 /* TagCollection.storyboard in Resources */,
 				2253179A20D147AD0065C9F9 /* Localizable.strings in Resources */,
@@ -1431,16 +1444,27 @@
 				22DE27102141BC6700466187 /* IconCell.xib in Resources */,
 				C28DC92420B61CB9007F881A /* LaunchScreen.storyboard in Resources */,
 				16EC4CCB2125207600B8256D /* InfoPlist.strings in Resources */,
+				C26EC73E21547282000E9CB9 /* Barlow-BlackItalic.ttf in Resources */,
+				C26EC74121547282000E9CB9 /* Barlow-ExtraLight.ttf in Resources */,
+				C26EC74321547282000E9CB9 /* Barlow-Italic.ttf in Resources */,
+				C26EC74021547282000E9CB9 /* Barlow-ExtraBold.ttf in Resources */,
+				C26EC74821547282000E9CB9 /* Barlow-Thin.ttf in Resources */,
 				16E8DDCE211205E8004F66D6 /* Barlow-ExtraBoldItalic.ttf in Resources */,
+				C26EC74721547282000E9CB9 /* Barlow-SemiBold.ttf in Resources */,
+				C26EC74621547282000E9CB9 /* Barlow-Regular.ttf in Resources */,
+				C26EC74521547282000E9CB9 /* Barlow-LightItalic.ttf in Resources */,
 				221BA8AF20F6991200BE2AC1 /* HomeScreen.storyboard in Resources */,
 				16E8DDD4211205E8004F66D6 /* Barlow-Medium.ttf in Resources */,
 				16E8DDCB211205E8004F66D6 /* Barlow-Bold.ttf in Resources */,
 				29BA689D2120C345009B4AB9 /* Calendar.storyboard in Resources */,
 				C28DC92120B61CB9007F881A /* Assets.xcassets in Resources */,
 				16E8DDD8211205E8004F66D6 /* Barlow-SemiBoldItalic.ttf in Resources */,
+				C26EC73F21547282000E9CB9 /* Barlow-BoldItalic.ttf in Resources */,
 				C231118E20FFC75200BCB000 /* NewTag.storyboard in Resources */,
 				16E8DDD5211205E8004F66D6 /* Barlow-MediumItalic.ttf in Resources */,
 				C28DC91F20B61CB6007F881A /* TaskList.storyboard in Resources */,
+				C26EC74921547282000E9CB9 /* Barlow-ThinItalic.ttf in Resources */,
+				C26EC74421547282000E9CB9 /* Barlow-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
