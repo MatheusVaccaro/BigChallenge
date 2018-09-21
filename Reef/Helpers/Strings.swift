@@ -160,6 +160,7 @@ struct Strings {
             static let title = NSLocalizedString("notesHeaderTitle", comment: "title for notes header")
             
             static let subtitle = NSLocalizedString("notesHeaderSubtitle", comment: "subtitle for notes header")
+            static let voiceOverHint = NSLocalizedString("notesVoiceOverHint", comment: "(VoiceOver) hint for notes cell on task details menu")
         }
         
     }

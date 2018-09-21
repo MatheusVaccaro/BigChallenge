@@ -25,4 +25,7 @@ extension NotesInputViewModel: IconCellPresentable {
         return "notesIcon"
     }
     
+    var voiceOverHint: String {
+        return Strings.MoreOptionsScreen.NotesCell.voiceOverHint
+    }
 }
