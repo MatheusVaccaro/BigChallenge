@@ -11,19 +11,19 @@ import UIKit
 
 extension UIViewController {
     func addChild(viewController: UIViewController) {
-        addChildViewController(viewController)
+        addChild(viewController)
         
         view.addSubview(viewController.view)
         
         viewController.view.frame = view.bounds
         viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        viewController.didMove(toParentViewController: self)
+        viewController.didMove(toParent: self)
     }
     
     func removeFromParent() {
-        willMove(toParentViewController: nil)
+        willMove(toParent: nil)
         view.removeFromSuperview()
-        removeFromParentViewController()
+        removeFromParent()
     }
 }

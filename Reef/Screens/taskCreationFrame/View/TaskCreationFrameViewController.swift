@@ -29,7 +29,7 @@ class TaskCreationFrameViewController: UIViewController {
     func present(_ taskDetailViewController: MoreOptionsViewController) {
         self.taskDetailViewController = taskDetailViewController
         
-        addChildViewController(taskDetailViewController)
+        addChild(taskDetailViewController)
         taskDetailView.addSubview(taskDetailViewController.view)
         
         taskDetailViewController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -45,7 +45,7 @@ class TaskCreationFrameViewController: UIViewController {
     func present(_ taskTitleViewController: NewTaskViewController) {
         self.newTaskViewController = taskTitleViewController
         
-        addChildViewController(taskTitleViewController)
+        addChild(taskTitleViewController)
         taskTitleView.addSubview(taskTitleViewController.view)
         
         taskTitleViewController.view.translatesAutoresizingMaskIntoConstraints = false

@@ -16,7 +16,7 @@ class TagCollectionView: UICollectionView {
         super.init(frame: frame, collectionViewLayout: layout)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(update),
-                                               name: NSNotification.Name.UIContentSizeCategoryDidChange,
+                                               name: UIContentSizeCategory.didChangeNotification,
                                                object: nil)
     }
 
@@ -28,7 +28,7 @@ class TagCollectionView: UICollectionView {
         super.init(coder: aDecoder)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(update),
-                                               name: NSNotification.Name.UIContentSizeCategoryDidChange,
+                                               name: UIContentSizeCategory.didChangeNotification,
                                                object: nil)
     }
     

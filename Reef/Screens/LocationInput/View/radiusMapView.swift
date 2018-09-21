@@ -70,10 +70,10 @@ class RadiusMapView: MKMapView {
         }
     }
     
-    override func add(_ overlay: MKOverlay) {
+    override func addOverlay(_ overlay: MKOverlay) {
         if let circle = overlay as? MKCircle {
             let spanToFit = viewModel.spanToFit(circle: circle)
-            let span = MKCoordinateSpanMake(spanToFit, spanToFit)
+            let span = MKCoordinateSpan(latitudeDelta: spanToFit, longitudeDelta: spanToFit)
             let region = MKCoordinateRegion(center: circle.coordinate,
                                             span: span)
             
@@ -86,7 +86,7 @@ class RadiusMapView: MKMapView {
                 addAnnotation(annotation)
             }
         }
-        super.add(overlay)
+        super.addOverlay(overlay)
     }
     
     fileprivate func changeCircle(adding radius: Double) {
@@ -96,14 +96,14 @@ class RadiusMapView: MKMapView {
         
         guard viewModel.shouldReplaceOverlay(with: newRadius) else { return }
         
-        remove(circleOverlay)
+        removeOverlay(circleOverlay)
         let newOverlay = MKCircle(center: circleOverlay.coordinate,
                                   radius: newRadius)
         outputDelegate?.radiusMapView(self,
                                       didFind: CLCircularRegion(center: newOverlay.coordinate,
                                                                 radius: newRadius,
                                                                 identifier: String(describing: newOverlay.coordinate)))
-        add(newOverlay)
+        addOverlay(newOverlay)
     }
     
     // MARK: - Accessibility

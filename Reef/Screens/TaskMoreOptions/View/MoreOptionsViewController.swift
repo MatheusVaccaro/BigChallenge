@@ -49,7 +49,7 @@ class MoreOptionsViewController: UIViewController {
         tableView.bounces = false
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 80
         
         tableView.separatorStyle = .none

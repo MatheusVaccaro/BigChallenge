@@ -98,14 +98,14 @@ class LocationInputView: UIViewController {
                                         forCellReuseIdentifier: IconTableViewCell.reuseIdentifier!)
         
         searchResultsTableView.estimatedRowHeight = 50
-        searchResultsTableView.rowHeight = UITableViewAutomaticDimension
+        searchResultsTableView.rowHeight = UITableView.automaticDimension
     }
     
     fileprivate func addCircle(on location: CLCircularRegion) {
         locationManager.stopUpdatingLocation()
         mapView.showsUserLocation = false
         let circle = MKCircle(center: location.center, radius: location.radius)
-        mapView.add(circle)
+        mapView.addOverlay(circle)
     }
 }
 
@@ -113,7 +113,7 @@ extension LocationInputView: UISearchBarDelegate {
     // This method updates filteredData based on the text in the Search Box
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        let request = MKLocalSearchRequest()
+        let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = searchText
         request.region = mapView.region
         let search = MKLocalSearch(request: request)
@@ -208,7 +208,7 @@ extension LocationInputView: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             
-            let span = MKCoordinateSpanMake(0.05, 0.05)
+            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
             let region = MKCoordinateRegion(center: location.coordinate, span: span)
             
             mapView.setRegion(region, animated: true)

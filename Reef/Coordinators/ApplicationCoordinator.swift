@@ -40,7 +40,7 @@ class ApplicationCoordinator: Coordinator {
         rootViewController.navigationBar.isTranslucent = true
         rootViewController.view.backgroundColor = .clear
         rootViewController.navigationBar.largeTitleTextAttributes =
-            [ NSAttributedStringKey.font : UIFont.font(sized: 34, weight: .bold, with: .largeTitle, fontName: .barlow) ]
+            [ NSAttributedString.Key.font : UIFont.font(sized: 34, weight: .bold, with: .largeTitle, fontName: .barlow) ]
     }
     
     func refreshModel() { //TODO: find a better solution
@@ -72,10 +72,9 @@ class ApplicationCoordinator: Coordinator {
     private func startFabric() {
         Fabric.with([Crashlytics.self])
         Answers.logCustomEvent(withName: "started app",
-                               customAttributes: ["fontSize":UIApplication.shared.preferredContentSizeCategory])
-        
-        //TODO: add when iOS 12 is available
-        //"isVoiceOverOn":UIAccessibility.isVoiceOverRunning, "hasInvertedColors":UIAccessibility.isInvertColorsEnabled
+                               customAttributes: ["fontSize":UIApplication.shared.preferredContentSizeCategory,
+                                                  "isVoiceOverOn":UIAccessibility.isVoiceOverRunning,
+                                                  "hasInvertedColors":UIAccessibility.isInvertColorsEnabled])
     }
     
     private func showTaskList() {
