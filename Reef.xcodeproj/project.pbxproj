@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		09FB5E14F92E45162642AB92 /* Pods_ReefKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E3B37A82203D5E380D0390 /* Pods_ReefKit.framework */; };
+		160E627F2152FBDE001F3D01 /* TagCreation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 160E627E2152FBDE001F3D01 /* TagCreation.storyboard */; };
+		160E62812155A129001F3D01 /* TagCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160E62802155A129001F3D01 /* TagCreationViewController.swift */; };
 		1627171020C8793900AA0024 /* BigChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1627170F20C8793900AA0024 /* BigChallengeTests.swift */; };
 		1627EBEDDA20D9C1EB6BC691 /* Pods_ReefTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 558C6AF329AB768E11815BB8 /* Pods_ReefTests.framework */; };
 		16294E38213F0B860092DEA2 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16294E37213F0B860092DEA2 /* TodayViewModel.swift */; };
@@ -229,6 +231,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		160E627E2152FBDE001F3D01 /* TagCreation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TagCreation.storyboard; sourceTree = "<group>"; };
+		160E62802155A129001F3D01 /* TagCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCreationViewController.swift; sourceTree = "<group>"; };
 		1627170D20C8793900AA0024 /* ReefTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReefTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1627170F20C8793900AA0024 /* BigChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigChallengeTests.swift; sourceTree = "<group>"; };
 		1627171120C8793900AA0024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -472,6 +476,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		160E627D2152FB96001F3D01 /* tagCreationFrame */ = {
+			isa = PBXGroup;
+			children = (
+				160E627E2152FBDE001F3D01 /* TagCreation.storyboard */,
+				160E62802155A129001F3D01 /* TagCreationViewController.swift */,
+			);
+			path = tagCreationFrame;
+			sourceTree = "<group>";
+		};
 		1627170E20C8793900AA0024 /* BigChallengeTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -916,6 +929,7 @@
 				221BA8AA20F698D000BE2AC1 /* HomeScreen */,
 				C2C231BD20FD1A53002A2371 /* NewTag */,
 				22DE27152146B6B500466187 /* taskCreationFrame */,
+				160E627D2152FB96001F3D01 /* tagCreationFrame */,
 				C2A1114320B9F65200ABB161 /* NewTask */,
 				22DE270E2141BBFA00466187 /* ImageCell */,
 				C29742C621123DCD00A1D213 /* TaskMoreOptions */,
@@ -1432,6 +1446,7 @@
 				C26EC73F21547282000E9CB9 /* Barlow-BoldItalic.ttf in Resources */,
 				C231118E20FFC75200BCB000 /* NewTag.storyboard in Resources */,
 				16E8DDD5211205E8004F66D6 /* Barlow-MediumItalic.ttf in Resources */,
+				160E627F2152FBDE001F3D01 /* TagCreation.storyboard in Resources */,
 				C28DC91F20B61CB6007F881A /* TaskList.storyboard in Resources */,
 				C26EC74921547282000E9CB9 /* Barlow-ThinItalic.ttf in Resources */,
 				C26EC74421547282000E9CB9 /* Barlow-Light.ttf in Resources */,
@@ -1670,6 +1685,7 @@
 				22DE27142145A64C00466187 /* IconCellPresentable.swift in Sources */,
 				29B93B70212E07C00057A771 /* TagCollectionViewModel.swift in Sources */,
 				C25169952139BD6200999BD0 /* UIViewController+Extension.swift in Sources */,
+				160E62812155A129001F3D01 /* TagCreationViewController.swift in Sources */,
 				222BFF9420ED92C7001B6BBF /* RemindersCommunicator.swift in Sources */,
 				2252216E21552F7800E8BD5E /* AccessibilityElements.swift in Sources */,
 				2255B3AE2113209800F2F37C /* LocationInputViewModel.swift in Sources */,
