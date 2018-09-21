@@ -14,29 +14,37 @@
             <objects>
                 <viewController storyboardIdentifier="NotesInputViewController" id="T7K-7c-Bex" customClass="NotesInputViewController" customModule="Reef" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NW1-2M-kwA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="WMZ-9x-siu">
-                                <rect key="frame" x="16" y="58" width="343" height="526"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PVe-Ue-nNV" userLabel="Claytinho: The Master of the Gambis Returns Once Again">
+                                <rect key="frame" x="0.0" y="20" width="375" height="0.0"/>
+                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="WkT-1K-FWW"/>
+                                </constraints>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4vQ-hD-wUg">
+                                <rect key="frame" x="16" y="56" width="343" height="595"/>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="WMZ-9x-siu" firstAttribute="top" secondItem="e86-L1-T7c" secondAttribute="top" constant="38" id="Bbe-wo-43Q"/>
-                            <constraint firstItem="e86-L1-T7c" firstAttribute="bottom" secondItem="WMZ-9x-siu" secondAttribute="bottom" constant="16" id="Wvt-WX-WMF"/>
-                            <constraint firstItem="WMZ-9x-siu" firstAttribute="leading" secondItem="e86-L1-T7c" secondAttribute="leading" constant="16" id="aTQ-Xm-pE7"/>
-                            <constraint firstItem="e86-L1-T7c" firstAttribute="trailing" secondItem="WMZ-9x-siu" secondAttribute="trailing" constant="16" id="aak-vp-5Wt"/>
+                            <constraint firstItem="4vQ-hD-wUg" firstAttribute="leading" secondItem="e86-L1-T7c" secondAttribute="leading" constant="16" id="7QK-v1-qRs"/>
+                            <constraint firstItem="e86-L1-T7c" firstAttribute="trailing" secondItem="4vQ-hD-wUg" secondAttribute="trailing" constant="16" id="ORp-nz-6UF"/>
+                            <constraint firstItem="4vQ-hD-wUg" firstAttribute="top" secondItem="PVe-Ue-nNV" secondAttribute="bottom" constant="36" id="Sbv-TT-B5b"/>
+                            <constraint firstItem="e86-L1-T7c" firstAttribute="bottom" secondItem="4vQ-hD-wUg" secondAttribute="bottom" constant="16" id="fso-xj-Lbs"/>
+                            <constraint firstItem="PVe-Ue-nNV" firstAttribute="leading" secondItem="e86-L1-T7c" secondAttribute="leading" id="g6T-Wx-xZs"/>
+                            <constraint firstItem="e86-L1-T7c" firstAttribute="trailing" secondItem="PVe-Ue-nNV" secondAttribute="trailing" id="iV9-qJ-w7Q"/>
+                            <constraint firstItem="PVe-Ue-nNV" firstAttribute="top" secondItem="e86-L1-T7c" secondAttribute="top" id="l3H-VM-EOO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="e86-L1-T7c"/>
                     </view>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="600"/>
                     <connections>
-                        <outlet property="notesInputTextView" destination="WMZ-9x-siu" id="JR0-X7-IHt"/>
+                        <outlet property="notesInputTextView" destination="4vQ-hD-wUg" id="9KO-Iz-zSm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oyF-6z-LUf" userLabel="First Responder" sceneMemberID="firstResponder"/>
