@@ -41,6 +41,10 @@ public extension UIFont {
             return FontWeight.bold
         case .black:
             return FontWeight.black
+        case .thin:
+            return FontWeight.thin
+        case .semibold:
+            return FontWeight.semiBold
         default:
             return FontWeight.regular
         }

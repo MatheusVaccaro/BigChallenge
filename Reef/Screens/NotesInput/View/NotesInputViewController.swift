@@ -8,6 +8,7 @@
 
 import UIKit
 import UITextView_Placeholder
+import ReefKit
 
 class NotesInputViewController: UIViewController {
 
@@ -33,7 +34,7 @@ class NotesInputViewController: UIViewController {
     
     // MARK: - Functions
     private func configureNotesInputTextView() {
-        notesInputTextView.font = UIFont.font(sized: 22, weight: .bold, with: .body, fontName: .barlow)
+        notesInputTextView.font = UIFont.font(sized: 22, weight: .semibold, with: .body, fontName: .barlow)
         notesInputTextView.placeholder = viewModel.textViewPlaceholder
         notesInputTextView.placeholderColor = UIColor.placeholder
     }
