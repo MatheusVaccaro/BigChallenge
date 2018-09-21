@@ -22,6 +22,7 @@ class NotesInputViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureBackground()
         configureNavigationBarTitle()
         configureNotesInputTextView()
         
@@ -37,6 +38,18 @@ class NotesInputViewController: UIViewController {
     }
     
     // MARK: - Functions
+    private func configureBackground() {
+        let layer = CAGradientLayer()
+        
+        layer.frame = view.frame
+        layer.startPoint = CGPoint(x: 0, y: 0.5)
+        layer.endPoint = CGPoint(x: 1, y: 0.5)
+        layer.colors = UIColor.backGroundGradient
+        layer.zPosition = -1
+        
+        view.layer.addSublayer(layer)
+    }
+    
     private func configureNotesInputTextView() {
         notesInputTextView.font = UIFont.font(sized: 22, weight: .semibold, with: .body, fontName: .barlow)
         notesInputTextView.placeholder = viewModel.textViewPlaceholder

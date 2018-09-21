@@ -26,12 +26,12 @@
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4vQ-hD-wUg">
                                 <rect key="frame" x="16" y="56" width="343" height="595"/>
-                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="4vQ-hD-wUg" firstAttribute="leading" secondItem="e86-L1-T7c" secondAttribute="leading" constant="16" id="7QK-v1-qRs"/>
                             <constraint firstItem="e86-L1-T7c" firstAttribute="trailing" secondItem="4vQ-hD-wUg" secondAttribute="trailing" constant="16" id="ORp-nz-6UF"/>
