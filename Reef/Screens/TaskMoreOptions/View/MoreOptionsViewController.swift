@@ -76,10 +76,13 @@ extension MoreOptionsViewController: UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
+            cell.viewModel = viewModel.notesInputViewModel
+        case 1:
             cell.viewModel = viewModel.locationInputViewModel
-        default:
+        case 2:
             cell.viewModel = viewModel.dateInputViewModel
-            viewWillLayoutSubviews()
+        default:
+            fatalError("Invalid row (\(indexPath.row)) selected.")
         }
         
         return cell
@@ -91,11 +94,13 @@ extension MoreOptionsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            viewModel.delegate?.shouldPresentViewForLocationInput()
+            viewModel.delegate?.shouldPresentViewForNotesInput()
         case 1:
+            viewModel.delegate?.shouldPresentViewForLocationInput()
+        case 2:
             viewModel.delegate?.shouldPresentViewForDateInput()
         default:
-            print("present date screen")
+            fatalError("Invalid row (\(indexPath.row)) selected.")
         }
     }
 }

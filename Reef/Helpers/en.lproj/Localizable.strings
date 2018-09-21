@@ -96,13 +96,22 @@
 "locationHeaderTitle" = "Location";
 
 /* subtitle for location header */
-"locationHeaderSubtitle" = "Remember at a specific location";
+"locationHeaderSubtitle" = "Be reminded at a location";
 
 /* title for time header */
 "timeHeaderTitle" = "Time";
 
 /* subtitle for time header */
-"timeHeaderSubtitle" = "Set a date for your task";
+"timeHeaderSubtitle" = "Be reminded at a specific moment";
+
+/* title for notes header */
+"notesHeaderTitle" = "Notes";
+
+/* subtitle for notes header */
+"notesHeaderSubtitle" = "Write additional details";
+
+/* placeholder for notes input text view */
+"notesInputPlaceholder" = "Write down what's on your mind...";
 
 /* 'or' */
 "emptyStateOr" = "Or";

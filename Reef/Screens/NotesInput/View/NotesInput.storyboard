@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Notes Input View Controller-->
+        <scene sceneID="Vlb-D6-epX">
+            <objects>
+                <viewController storyboardIdentifier="NotesInputViewController" id="T7K-7c-Bex" customClass="NotesInputViewController" customModule="Reef" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NW1-2M-kwA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PVe-Ue-nNV" userLabel="Claytinho: The Master of the Gambis Returns Once Again">
+                                <rect key="frame" x="0.0" y="20" width="375" height="0.0"/>
+                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="WkT-1K-FWW"/>
+                                </constraints>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4vQ-hD-wUg">
+                                <rect key="frame" x="16" y="56" width="343" height="595"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="4vQ-hD-wUg" firstAttribute="leading" secondItem="e86-L1-T7c" secondAttribute="leading" constant="16" id="7QK-v1-qRs"/>
+                            <constraint firstItem="e86-L1-T7c" firstAttribute="trailing" secondItem="4vQ-hD-wUg" secondAttribute="trailing" constant="16" id="ORp-nz-6UF"/>
+                            <constraint firstItem="4vQ-hD-wUg" firstAttribute="top" secondItem="PVe-Ue-nNV" secondAttribute="bottom" constant="36" id="Sbv-TT-B5b"/>
+                            <constraint firstItem="e86-L1-T7c" firstAttribute="bottom" secondItem="4vQ-hD-wUg" secondAttribute="bottom" constant="16" id="fso-xj-Lbs"/>
+                            <constraint firstItem="PVe-Ue-nNV" firstAttribute="leading" secondItem="e86-L1-T7c" secondAttribute="leading" id="g6T-Wx-xZs"/>
+                            <constraint firstItem="e86-L1-T7c" firstAttribute="trailing" secondItem="PVe-Ue-nNV" secondAttribute="trailing" id="iV9-qJ-w7Q"/>
+                            <constraint firstItem="PVe-Ue-nNV" firstAttribute="top" secondItem="e86-L1-T7c" secondAttribute="top" id="l3H-VM-EOO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="e86-L1-T7c"/>
+                    </view>
+                    <connections>
+                        <outlet property="notesInputTextView" destination="4vQ-hD-wUg" id="9KO-Iz-zSm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oyF-6z-LUf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-198" y="170"/>
+        </scene>
+    </scenes>
+</document>

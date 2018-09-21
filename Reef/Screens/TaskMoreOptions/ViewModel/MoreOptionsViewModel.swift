@@ -20,8 +20,11 @@ protocol MoreOptionsViewModelDelegate: class {
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
                             didSelectFrequency frequency: NotificationOptions.Frequency)
     
+    func notesInput(_ notesInputViewModel: NotesInputViewModel, didUpdateNotes notes: String)
+    
     func shouldPresentViewForLocationInput()
     func shouldPresentViewForDateInput()
+    func shouldPresentViewForNotesInput()
 }
 
 protocol MoreOptionsViewModelUIDelegate: class {
@@ -33,9 +36,11 @@ class MoreOptionsViewModel {
     init() {
         locationInputViewModel = LocationInputViewModel()
         dateInputViewModel = DateInputViewModel()
+        notesInputViewModel = NotesInputViewModel()
 
         locationInputViewModel.delegate = self
         dateInputViewModel.delegate = self
+        notesInputViewModel.delegate = self
     }
     
     func edit(task: Task?) {
@@ -49,9 +54,10 @@ class MoreOptionsViewModel {
     
     let locationInputViewModel: LocationInputViewModel
     let dateInputViewModel: DateInputViewModel
+    let notesInputViewModel: NotesInputViewModel
     
     let numberOfSections = 1
-    let numberOfRows = 2
+    let numberOfRows = 3
 }
 
 extension MoreOptionsViewModel: LocationInputDelegate {    
@@ -71,4 +77,12 @@ extension MoreOptionsViewModel: DateInputViewModelDelegate {
                             didSelectFrequency frequency: NotificationOptions.Frequency) {
         delegate?.dateInputViewModel(dateInputViewModel, didSelectFrequency: frequency)
     }
+}
+
+extension MoreOptionsViewModel: NotesInputViewModelDelegate {
+    
+    func notesInput(_ notesInputViewModel: NotesInputViewModel, didUpdateNotes notes: String) {
+        delegate?.notesInput(notesInputViewModel, didUpdateNotes: notes)
+    }
+    
 }

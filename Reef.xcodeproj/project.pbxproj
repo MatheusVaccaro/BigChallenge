@@ -125,6 +125,22 @@
 		C23753B020B6463700C1CE15 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23753AF20B6463700C1CE15 /* ApplicationCoordinator.swift */; };
 		C25169952139BD6200999BD0 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25169942139BD6200999BD0 /* UIViewController+Extension.swift */; };
 		C25F5AA92108FEB3001E1561 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25F5AA82108FEB3001E1561 /* NewTaskViewController.swift */; };
+		C26EC73721544CFA000E9CB9 /* NotesInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26EC73621544CFA000E9CB9 /* NotesInputViewModel.swift */; };
+		C26EC73921544D19000E9CB9 /* NotesTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26EC73821544D19000E9CB9 /* NotesTableViewCellViewModel.swift */; };
+		C26EC73B21545A25000E9CB9 /* NotesInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26EC73A21545A25000E9CB9 /* NotesInputViewController.swift */; };
+		C26EC73D21545A4F000E9CB9 /* NotesInput.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C26EC73C21545A4F000E9CB9 /* NotesInput.storyboard */; };
+		C26EC73E21547282000E9CB9 /* Barlow-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDBB211205C3004F66D6 /* Barlow-BlackItalic.ttf */; };
+		C26EC73F21547282000E9CB9 /* Barlow-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDBE211205C4004F66D6 /* Barlow-BoldItalic.ttf */; };
+		C26EC74021547282000E9CB9 /* Barlow-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDB7211205C2004F66D6 /* Barlow-ExtraBold.ttf */; };
+		C26EC74121547282000E9CB9 /* Barlow-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC3211205C5004F66D6 /* Barlow-ExtraLight.ttf */; };
+		C26EC74221547282000E9CB9 /* Barlow-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDB9211205C3004F66D6 /* Barlow-ExtraLightItalic.ttf */; };
+		C26EC74321547282000E9CB9 /* Barlow-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC7211205C6004F66D6 /* Barlow-Italic.ttf */; };
+		C26EC74421547282000E9CB9 /* Barlow-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC4211205C5004F66D6 /* Barlow-Light.ttf */; };
+		C26EC74521547282000E9CB9 /* Barlow-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDBC211205C3004F66D6 /* Barlow-LightItalic.ttf */; };
+		C26EC74621547282000E9CB9 /* Barlow-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC0211205C4004F66D6 /* Barlow-Regular.ttf */; };
+		C26EC74721547282000E9CB9 /* Barlow-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC2211205C5004F66D6 /* Barlow-SemiBold.ttf */; };
+		C26EC74821547282000E9CB9 /* Barlow-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC1211205C4004F66D6 /* Barlow-Thin.ttf */; };
+		C26EC74921547282000E9CB9 /* Barlow-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDB6211205C1004F66D6 /* Barlow-ThinItalic.ttf */; };
 		C28DC91A20B61CB6007F881A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28DC91920B61CB6007F881A /* AppDelegate.swift */; };
 		C28DC91F20B61CB6007F881A /* TaskList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C28DC91D20B61CB6007F881A /* TaskList.storyboard */; };
 		C28DC92120B61CB9007F881A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C28DC92020B61CB9007F881A /* Assets.xcassets */; };
@@ -378,6 +394,10 @@
 		C23753AF20B6463700C1CE15 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
 		C25169942139BD6200999BD0 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		C25F5AA82108FEB3001E1561 /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
+		C26EC73621544CFA000E9CB9 /* NotesInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesInputViewModel.swift; sourceTree = "<group>"; };
+		C26EC73821544D19000E9CB9 /* NotesTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		C26EC73A21545A25000E9CB9 /* NotesInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesInputViewController.swift; sourceTree = "<group>"; };
+		C26EC73C21545A4F000E9CB9 /* NotesInput.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NotesInput.storyboard; sourceTree = "<group>"; };
 		C28DC91620B61CB6007F881A /* Reef.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reef.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C28DC91920B61CB6007F881A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C28DC91E20B61CB6007F881A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TaskList.storyboard; sourceTree = "<group>"; };
@@ -891,6 +911,7 @@
 				C2A1114320B9F65200ABB161 /* NewTask */,
 				22DE270E2141BBFA00466187 /* ImageCell */,
 				C29742C621123DCD00A1D213 /* TaskMoreOptions */,
+				C26EC73321544C75000E9CB9 /* NotesInput */,
 				29A4F8862110F05200AE4FA1 /* DateInput */,
 				22D84C5E210BEFE4004B8969 /* LocationInput */,
 				C21EAD0420B74710005F0F85 /* TaskList */,
@@ -940,6 +961,32 @@
 				29B93B6D212DFF360057A771 /* TaskListViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C26EC73321544C75000E9CB9 /* NotesInput */ = {
+			isa = PBXGroup;
+			children = (
+				C26EC73521544CB8000E9CB9 /* View */,
+				C26EC73421544CB0000E9CB9 /* ViewModel */,
+			);
+			path = NotesInput;
+			sourceTree = "<group>";
+		};
+		C26EC73421544CB0000E9CB9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C26EC73621544CFA000E9CB9 /* NotesInputViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C26EC73521544CB8000E9CB9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C26EC73C21545A4F000E9CB9 /* NotesInput.storyboard */,
+				C26EC73A21545A25000E9CB9 /* NotesInputViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		C28DC90D20B61CB6007F881A = {
@@ -1002,6 +1049,7 @@
 				C29742CD211249B000A1D213 /* MoreOptionsViewModel.swift */,
 				C29742D1211257A600A1D213 /* TimeTableViewCellViewModel.swift */,
 				C29742D3211257B600A1D213 /* LocationTableViewCellViewModel.swift */,
+				C26EC73821544D19000E9CB9 /* NotesTableViewCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1386,6 +1434,8 @@
 				C29742CA21123E2D00A1D213 /* MoreOptions.storyboard in Resources */,
 				22D84C63210BF1E3004B8969 /* LocationInputView.storyboard in Resources */,
 				16E8DDC9211205E8004F66D6 /* Barlow-Black.ttf in Resources */,
+				C26EC74221547282000E9CB9 /* Barlow-ExtraLightItalic.ttf in Resources */,
+				C26EC73D21545A4F000E9CB9 /* NotesInput.storyboard in Resources */,
 				221BA8B620F6A18500BE2AC1 /* TagCollection.storyboard in Resources */,
 				2253179A20D147AD0065C9F9 /* Localizable.strings in Resources */,
 				220BB94A2146F1C2004A8309 /* TaskCreation.storyboard in Resources */,
@@ -1394,16 +1444,27 @@
 				22DE27102141BC6700466187 /* IconCell.xib in Resources */,
 				C28DC92420B61CB9007F881A /* LaunchScreen.storyboard in Resources */,
 				16EC4CCB2125207600B8256D /* InfoPlist.strings in Resources */,
+				C26EC73E21547282000E9CB9 /* Barlow-BlackItalic.ttf in Resources */,
+				C26EC74121547282000E9CB9 /* Barlow-ExtraLight.ttf in Resources */,
+				C26EC74321547282000E9CB9 /* Barlow-Italic.ttf in Resources */,
+				C26EC74021547282000E9CB9 /* Barlow-ExtraBold.ttf in Resources */,
+				C26EC74821547282000E9CB9 /* Barlow-Thin.ttf in Resources */,
 				16E8DDCE211205E8004F66D6 /* Barlow-ExtraBoldItalic.ttf in Resources */,
+				C26EC74721547282000E9CB9 /* Barlow-SemiBold.ttf in Resources */,
+				C26EC74621547282000E9CB9 /* Barlow-Regular.ttf in Resources */,
+				C26EC74521547282000E9CB9 /* Barlow-LightItalic.ttf in Resources */,
 				221BA8AF20F6991200BE2AC1 /* HomeScreen.storyboard in Resources */,
 				16E8DDD4211205E8004F66D6 /* Barlow-Medium.ttf in Resources */,
 				16E8DDCB211205E8004F66D6 /* Barlow-Bold.ttf in Resources */,
 				29BA689D2120C345009B4AB9 /* Calendar.storyboard in Resources */,
 				C28DC92120B61CB9007F881A /* Assets.xcassets in Resources */,
 				16E8DDD8211205E8004F66D6 /* Barlow-SemiBoldItalic.ttf in Resources */,
+				C26EC73F21547282000E9CB9 /* Barlow-BoldItalic.ttf in Resources */,
 				C231118E20FFC75200BCB000 /* NewTag.storyboard in Resources */,
 				16E8DDD5211205E8004F66D6 /* Barlow-MediumItalic.ttf in Resources */,
 				C28DC91F20B61CB6007F881A /* TaskList.storyboard in Resources */,
+				C26EC74921547282000E9CB9 /* Barlow-ThinItalic.ttf in Resources */,
+				C26EC74421547282000E9CB9 /* Barlow-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1697,6 +1758,7 @@
 				C21EAD0020B741BC005F0F85 /* HomeScreenCoordinator.swift in Sources */,
 				C2901059211E4492008F2807 /* ColorCollectionViewCell.swift in Sources */,
 				C23753B020B6463700C1CE15 /* ApplicationCoordinator.swift in Sources */,
+				C26EC73721544CFA000E9CB9 /* NotesInputViewModel.swift in Sources */,
 				29320435213632E400E23E72 /* TagCollectionViewModelImpl.swift in Sources */,
 				C29742CE211249B000A1D213 /* MoreOptionsViewModel.swift in Sources */,
 				29BA68A62120E147009B4AB9 /* Calendar+Extension.swift in Sources */,
@@ -1715,8 +1777,10 @@
 				C2C231C120FD1AB2002A2371 /* NewTagViewModel.swift in Sources */,
 				C21EAD0720B74757005F0F85 /* TaskListViewController.swift in Sources */,
 				16294E3A213F0C190092DEA2 /* Authentication.swift in Sources */,
+				C26EC73B21545A25000E9CB9 /* NotesInputViewController.swift in Sources */,
 				C29742D2211257A600A1D213 /* TimeTableViewCellViewModel.swift in Sources */,
 				221BA8B820F6A1DF00BE2AC1 /* TagCollectionViewController.swift in Sources */,
+				C26EC73921544D19000E9CB9 /* NotesTableViewCellViewModel.swift in Sources */,
 				22F23E9B212E416C0064EE05 /* TaskModel.swift in Sources */,
 				22DE27122141BFF300466187 /* IconTableViewCell.swift in Sources */,
 				29722024211E36CF00CF80CE /* ToggleableLabel.swift in Sources */,

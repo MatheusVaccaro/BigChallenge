@@ -15,6 +15,7 @@ protocol TaskCreationDelegate: class {
     func didPanAddTask()
     func shouldPresentViewForLocationInput()
     func shouldPresentViewForDateInput()
+    func shouldPresentViewForNotesInput()
 }
 
 class TaskCreationViewModel {
@@ -64,12 +65,17 @@ extension TaskCreationViewModel: NewTaskViewModelOutputDelegate {
 }
 
 extension TaskCreationViewModel: MoreOptionsViewModelDelegate {
+    
     func shouldPresentViewForLocationInput() {
         delegate?.shouldPresentViewForLocationInput()
     }
     
     func shouldPresentViewForDateInput() {
         delegate?.shouldPresentViewForDateInput()
+    }
+    
+    func shouldPresentViewForNotesInput() {
+        delegate?.shouldPresentViewForNotesInput()
     }
     
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
@@ -87,5 +93,9 @@ extension TaskCreationViewModel: MoreOptionsViewModelDelegate {
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
                             didSelectFrequency frequency: NotificationOptions.Frequency) {
         //TODO: implement frequency
+    }
+    
+    func notesInput(_ notesInputViewModel: NotesInputViewModel, didUpdateNotes notes: String) {
+        attributes[.notes] = notes
     }
 }
