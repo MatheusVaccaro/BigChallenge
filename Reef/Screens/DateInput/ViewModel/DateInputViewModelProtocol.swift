@@ -8,7 +8,14 @@
 
 import Foundation
 import RxSwift
-
+/**
+ A view model for a date picking screen.
+ To use this view model, either subscribe to a specific value (```calendarDate``` or ```timeOfDay```) or subscribe to ```date```, which is the last two combined values of ```calendarDate``` and ```timeOfDay```.
+ Alternatively, you can listen to the changes made to ```date``` using the delegate.
+ 
+ - Note: "Calendar date" refers to a DateComponents object with only year, month and day values;
+ while "Time of day" refers to a DateComponents object with only hour, minute and seconds values.
+ */
 protocol DateInputViewModelProtocol: IconCellPresentable {
     var delegate: DateInputViewModelDelegate? { get set }
     
