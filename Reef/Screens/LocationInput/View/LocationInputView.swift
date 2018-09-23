@@ -171,6 +171,10 @@ extension MKMapItem: IconCellPresentable {
     var voiceOverHint: String {
         return Strings.LocationInputView.VoiceOver.locationCellHint
     }
+    
+    var voiceOverValue: String? {
+        return subtitle
+    }
 }
 
 extension LocationInputView: UITableViewDelegate {

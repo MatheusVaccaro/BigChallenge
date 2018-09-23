@@ -121,9 +121,6 @@ class HomeScreenViewController: UIViewController {
             viewController.view.leftAnchor.constraint(equalTo: tagContainerView.leftAnchor),
             viewController.view.bottomAnchor.constraint(equalTo: tagContainerView.bottomAnchor)
         ])
-        
-        tagContainerView.isAccessibilityElement = true
-        tagCollectionViewController!.isAccessibilityElement = true
     }
     
     fileprivate func subscribe(to taskListViewModel: TaskListViewModel) {
@@ -228,7 +225,7 @@ class HomeScreenViewController: UIViewController {
         let blurEffect = UIBlurEffect(style: .light)
         let view = UIVisualEffectView(effect: blurEffect)
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(prepareToHideAddTask))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideAddTask))
         view.addGestureRecognizer(tapGesture)
         
         return view
@@ -264,6 +261,19 @@ extension HomeScreenViewController: StoryboardInstantiable {
 }
 
 extension HomeScreenViewController {
+    // action from homescreen
+    @objc func hideAddTask() {
+        prepareToHideAddTask()
+        viewModel.endAddTask()
+    }
+    
+    @objc func presentAddTask() {
+        prepareToPresentAddTask()
+        viewModel.startAddTask()
+    }
+    
+    
+    //actions from other screens
     func prepareToPresentAddTask() {
         guard !isPresentingAddTask else { return }
         isPresentingAddTask = true
@@ -273,13 +283,12 @@ extension HomeScreenViewController {
         applyBlur()
     }
     
-    @objc func prepareToHideAddTask() {
+    func prepareToHideAddTask() {
         guard isPresentingAddTask || isPresentingMoreOptions else { return }
         isPresentingAddTask = false
         isPresentingMoreOptions = false
         tagCollectionViewController!.viewModel.filtering = true
         animateAddTaskHidden()
-        viewModel.endAddTask()
         removeBlur()
     }
     
@@ -323,6 +332,27 @@ extension HomeScreenViewController {
             self.addTaskViewTopConstraint.constant =
                 self.taskCreationFrameViewController.contentSize - self.newTaskView.bounds.height
             self.view.layoutIfNeeded()
+        }
+    }
+}
+
+// MARK: - Accessibility
+extension HomeScreenViewController {
+    override func accessibilityPerformMagicTap() -> Bool {
+        if !isPresentingAddTask {
+            presentAddTask()
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    override func accessibilityPerformEscape() -> Bool {
+        if isPresentingAddTask {
+            hideAddTask()
+            return true
+        } else {
+            return false
         }
     }
 }

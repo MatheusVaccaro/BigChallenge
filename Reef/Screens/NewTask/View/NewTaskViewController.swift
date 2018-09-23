@@ -10,19 +10,11 @@ import UIKit
 import RxSwift
 import UITextView_Placeholder
 
-protocol NewTaskDelegate: class {
-    func shouldPresentMoreOptions()
-    func shouldHideMoreOptions()
-    func didPressCreateTask()
-}
-
 class NewTaskViewController: UIViewController {
     
     // MARK: - Properties
     var viewModel: NewTaskViewModel!
     private let disposeBag = DisposeBag()
-
-    weak var delegate: NewTaskDelegate?
     
     // MARK: - IBOutlets
     
@@ -57,6 +49,9 @@ class NewTaskViewController: UIViewController {
         userActivity?.becomeCurrent()
         
         taskTitleTextView.delegate = self
+        
+        view.isAccessibilityElement = true
+        (view as! NewTaskView).delegate = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -67,7 +62,7 @@ class NewTaskViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func didClickDetailsButton(_ sender: Any) {
         taskTitleTextView.resignFirstResponder()
-        delegate?.shouldPresentMoreOptions()
+        viewModel.shouldPresentMoreOptions(true)
         doneButton.isHidden = false
         taskDetailsButton.isHidden = true
     }
@@ -88,11 +83,14 @@ class NewTaskViewController: UIViewController {
         taskDetailsButton.isHidden = false
     }
     
+    func start() {
+        taskTitleTextView.becomeFirstResponder()
+    }
+    
     private func createTaskIfPossible() -> Bool {
         guard taskTitleTextView.text != "" else { return false }
         taskTitleTextView.resignFirstResponder()
-        viewModel.outputDelegate?.didPressCreateTask()
-        delegate?.didPressCreateTask()
+        viewModel.shouldCreateTask()
         doneButton.isHidden = true
         taskDetailsButton.isHidden = false
         return true
@@ -144,7 +142,7 @@ extension NewTaskViewController: UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        delegate?.shouldHideMoreOptions()
+        viewModel.shouldPresentMoreOptions(false)
         doneButton.isHidden = true
         taskDetailsButton.isHidden = false
     }
@@ -165,5 +163,15 @@ extension NewTaskViewController: NewTaskViewModelDelegate {
     
     func didUpdateColors() {
         gradientLayer.colors = viewModel.taskColors
+    }
+}
+
+extension NewTaskViewController: NewTaskViewDelegate {
+    func presentDetails() {
+        self.didClickDetailsButton(taskDetailsButton)
+    }
+    
+    func doneEditing() {
+        self.didClickDoneButton(doneButton)
     }
 }

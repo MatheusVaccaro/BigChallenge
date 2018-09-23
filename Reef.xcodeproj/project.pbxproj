@@ -84,6 +84,7 @@
 		22F23EA0212E452E0064EE05 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F23E9F212E452E0064EE05 /* Colors.swift */; };
 		22F78C1D212F31390036A4EB /* CRUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F78C1C212F31390036A4EB /* CRUD.swift */; };
 		22F78C1F212F365F0036A4EB /* ReefKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F78C1E212F365F0036A4EB /* ReefKit.swift */; };
+		22F8FD4421580DAB00ECF10F /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F8FD4321580DAB00ECF10F /* NewTaskView.swift */; };
 		22FA2853212F7E6E00FC74D3 /* IndexRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FA2852212F7E6E00FC74D3 /* IndexRequestHandler.swift */; };
 		22FA2857212F7E6E00FC74D3 /* ReefIndexExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 22FA2850212F7E6D00FC74D3 /* ReefIndexExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22FA285B212F7EA200FC74D3 /* ReefSpotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F23EA1212E46060064EE05 /* ReefSpotlight.swift */; };
@@ -324,6 +325,7 @@
 		22F23EA1212E46060064EE05 /* ReefSpotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReefSpotlight.swift; sourceTree = "<group>"; };
 		22F78C1C212F31390036A4EB /* CRUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUD.swift; sourceTree = "<group>"; };
 		22F78C1E212F365F0036A4EB /* ReefKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReefKit.swift; sourceTree = "<group>"; };
+		22F8FD4321580DAB00ECF10F /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 		22FA2850212F7E6D00FC74D3 /* ReefIndexExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ReefIndexExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		22FA2852212F7E6E00FC74D3 /* IndexRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexRequestHandler.swift; sourceTree = "<group>"; };
 		22FA2854212F7E6E00FC74D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1100,6 +1102,7 @@
 			children = (
 				C2A1114620B9F6EF00ABB161 /* NewTask.storyboard */,
 				C25F5AA82108FEB3001E1561 /* NewTaskViewController.swift */,
+				22F8FD4321580DAB00ECF10F /* NewTaskView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1684,6 +1687,7 @@
 				22ED5955211A7C21008EAD7D /* MKRadiusCircleRenderer.swift in Sources */,
 				22325A7720FBC3F100E5F8C6 /* TagCollectionViewCell.swift in Sources */,
 				226CEA0520E17E87008CEB97 /* Strings.swift in Sources */,
+				22F8FD4421580DAB00ECF10F /* NewTaskView.swift in Sources */,
 				29BA68A821211754009B4AB9 /* CalendarHeaderView.swift in Sources */,
 				29BEED5F2107E946008E2202 /* ImportDataPacket.swift in Sources */,
 				293204312135EA4100E23E72 /* TaskListViewModelImpl.swift in Sources */,

@@ -10,14 +10,46 @@ import Foundation
 import UIKit
 import ReefKit
 
+class TagCollectionAccessibilityView: UIView {
+    var viewModel: TagCollectionViewModel!
+    var collection: TagCollectionView!
+    
+    private var tagAccessibilityElement: TagCollectionAccessibilityElement?
+    override var accessibilityElements: [Any]? {
+        get {
+            var elements: [Any] = []
+            
+            let tagElement: TagCollectionAccessibilityElement
+            if tagAccessibilityElement != nil {
+                tagElement = tagAccessibilityElement!
+            } else {
+                tagElement = TagCollectionAccessibilityElement(accessibilityContainer: self,
+                                                               viewModel: viewModel)
+//                tagElement.accessibilityFrame = frame
+                tagElement.accessibilityFrameInContainerSpace = frame
+                self.tagAccessibilityElement = tagElement
+            }
+            
+            elements = [ tagElement ]
+            
+            return elements
+        }
+        
+        set { }
+    }
+}
+
 class TagCollectionAccessibilityElement: UIAccessibilityElement {
     
     private let viewModel: TagCollectionAccessibilityViewModel
+    private var collection: TagCollectionView?
     
     init(accessibilityContainer container: Any, viewModel: TagCollectionViewModel) {
         self.viewModel = TagCollectionAccessibilityViewModel(viewModel)
-        
         super.init(accessibilityContainer: container)
+        if let collection = (accessibilityContainer as? TagCollectionAccessibilityView)?.collection {
+            self.collection = collection
+        }
     }
     
     override var accessibilityLabel: String? {
@@ -49,37 +81,36 @@ class TagCollectionAccessibilityElement: UIAccessibilityElement {
         _ = scrollCollection(forwards: false)
     }
     
-    //    override var accessibilityCustomActions: [UIAccessibilityCustomAction]? //TODO: add tag action
+    private var index = 0
     
     private func scrollCollection(forwards: Bool) -> Bool {
-        guard let collectionView = (accessibilityContainer as? TagCollectionViewController)?.tagsCollectionView,
-              let tag = viewModel.currentTag else {
+        guard let collectionView = self.collection else {
             return false
         }
         
         if forwards {
-            guard
-                let index = viewModel.filteredTags.index(of: tag),
-                index < viewModel.filteredTags.count - 1
-                else {
-                return false
-            }
-                
+//            guard
+//                let index = viewModel.filteredTags.index(of: tag),
+//                index < viewModel.filteredTags.count - 1
+//                else {
+//                return false
+//            }
+            
             collectionView.scrollToItem(
-                at: IndexPath(row: index+1, section: 0),
+                at: IndexPath(row: index, section: 0),
                 at: .centeredHorizontally,
                 animated: true
             )
         } else {
-            guard
-                let index = viewModel.filteredTags.index(of: tag),
-                index > 0
-                else {
-                    return false
-            }
+//            guard
+//                let index = viewModel.filteredTags.index(of: tag),
+//                index > 0
+//                else {
+//                    return false
+//            }
             
             collectionView.scrollToItem(
-                at: IndexPath(row: index-1, section: 0),
+                at: IndexPath(row: index, section: 0),
                 at: .centeredHorizontally,
                 animated: true
             )
@@ -91,11 +122,9 @@ class TagCollectionAccessibilityElement: UIAccessibilityElement {
 
 class TagCollectionAccessibilityViewModel {
     private let viewModel: TagCollectionViewModel
-    var currentTag: Tag?
     
     init(_ viewModel: TagCollectionViewModel) {
         self.viewModel = viewModel
-        currentTag = viewModel.tags.first
     }
     
     var filteredTags: [Tag] {

@@ -33,6 +33,14 @@ extension DateInputViewModel: IconCellPresentable {
     }
     
     var voiceOverHint: String {
-        return Strings.MoreOptionsScreen.TimeCell.voiceOverHint
+        return Strings.MoreOptionsScreen.TimeCell.subtitle
+    }
+    
+    var voiceOverValue: String? {
+        if date.value != nil {
+            return subtitle
+        } else {
+            return nil
+        }
     }
 }
