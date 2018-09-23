@@ -13,4 +13,5 @@ protocol IconCellPresentable {
     var subtitle: String { get }
     var imageName: String { get }
     var voiceOverHint: String { get }
+    var voiceOverValue: String? { get }
 }

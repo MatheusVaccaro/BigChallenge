@@ -54,12 +54,9 @@ class NewTaskCoordinator: Coordinator {
         // new task (title)
         self.newTaskViewController = NewTaskViewController.instantiate()
         let newTaskViewModel = NewTaskViewModel()
-        newTaskViewController.delegate = self
+        
         newTaskViewModel.delegate = newTaskViewController
         newTaskViewController.viewModel = newTaskViewModel
-        
-        newTaskViewController.delegate = self
-        newTaskViewModel.delegate = newTaskViewController
         
         // more options
         moreOptionsViewController = MoreOptionsViewController.instantiate()
@@ -92,6 +89,10 @@ class NewTaskCoordinator: Coordinator {
     
     func endAddTask() {
         newTaskViewController.cancelAddTask()
+    }
+    
+    func startAddTask() {
+        newTaskViewController.start()
     }
     
     fileprivate func showLocationInput() {
@@ -143,6 +144,9 @@ extension NewTaskCoordinator: CoordinatorDelegate {
 }
 
 extension NewTaskCoordinator: TaskCreationDelegate {
+    func didCreateTask() {
+        homeScreen.prepareToHideAddTask()
+    }
     
     func didTapAddTask() {
         homeScreen.prepareToPresentAddTask()
@@ -162,13 +166,6 @@ extension NewTaskCoordinator: TaskCreationDelegate {
     
     func shouldPresentViewForNotesInput() {
         showNotesInput()
-    }
-    
-}
-
-extension NewTaskCoordinator: NewTaskDelegate {
-    func didPressCreateTask() {
-        homeScreen.prepareToHideAddTask()
     }
     
     func shouldPresentMoreOptions() {

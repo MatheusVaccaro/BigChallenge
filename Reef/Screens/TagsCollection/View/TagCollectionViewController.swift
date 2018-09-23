@@ -10,7 +10,7 @@ import UIKit
 import Crashlytics
 import RxCocoa
 import RxSwift
-import ReefKit //TODO: remove
+import ReefKit
 
 class TagCollectionViewController: UIViewController {
     
@@ -40,6 +40,10 @@ class TagCollectionViewController: UIViewController {
         if let layout = tagsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.estimatedItemSize = CGSize(width: 150, height: 40)
         }
+        
+//        accessibleView.viewModel = viewModel
+//        accessibleView.collection = tagsCollectionView as! TagCollectionView
+        tagsCollectionView.isAccessibilityElement = true
     }
     
     func bindCollectionView() {
@@ -166,10 +170,6 @@ class TagCollectionViewController: UIViewController {
         resignFirstResponder()
         present(bigTagVC, animated: true)
     }
-    
-    //MARK - Accessibility
-    
-    private var accessibilityElement: TagCollectionAccessibilityElement?
 }
 
 extension TagCollectionViewController: StoryboardInstantiable {
@@ -180,17 +180,4 @@ extension TagCollectionViewController: StoryboardInstantiable {
     static var storyboardIdentifier: String {
         return "TagCollection"
     }
-}
-
-class TagCollectionAccessibilityElement: UIAccessibilityElement {
-    
-    private let viewModel: TagCollectionViewModel
-    
-    init(accessibilityContainer container: Any, viewModel: TagCollectionViewModel) {
-        self.viewModel = viewModel
-        
-        super.init(accessibilityContainer: container)
-    }
-    
-    
 }

@@ -11,6 +11,8 @@ import ReefKit
 
 protocol NewTaskViewModelOutputDelegate: class {
     func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateTitle title: String?)
+    func shouldPresentMoreOptions()
+    func shouldHideMoreOptions()
     func didPressCreateTask()
 }
 
@@ -40,6 +42,18 @@ class NewTaskViewModel {
         }
         delegate.updateTextViewWith(text: task?.title ?? "")
         delegate.didUpdateColors()
+    }
+    
+    func shouldPresentMoreOptions(_ bool: Bool) {
+        if bool {
+            outputDelegate?.shouldPresentMoreOptions()
+        } else {
+            outputDelegate?.shouldHideMoreOptions()
+        }
+    }
+    
+    func shouldCreateTask() {
+        outputDelegate?.didPressCreateTask()
     }
     
     // MARK: - NSUserActivity

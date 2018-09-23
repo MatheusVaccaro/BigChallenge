@@ -71,24 +71,31 @@ class IconTableViewCell: UITableViewCell {
         icon.isAccessibilityElement = false
     }
     
-    private var _accessibilityLabel: String?
+    override var accessibilityValue: String? {
+        get {
+            return viewModel.voiceOverValue
+        }
+        set { }
+    }
+    
     override var accessibilityLabel: String? {
         get {
-            guard _accessibilityLabel == nil else {
-                return _accessibilityLabel
-            }
-            _accessibilityLabel = titleLabel.text + ", " + (subtitleLabel.text ?? "")
-            return _accessibilityLabel
+            return viewModel.title
         }
-        set {
-            _accessibilityLabel = newValue
-        }
+        set { }
     }
     
     override var accessibilityHint: String? {
         get {
             return viewModel.voiceOverHint
         }
-        set {}
+        set { }
+    }
+    
+    override var accessibilityTraits: UIAccessibilityTraits {
+        get {
+            return UIAccessibilityTraits.allowsDirectInteraction
+        }
+        set { }
     }
 }

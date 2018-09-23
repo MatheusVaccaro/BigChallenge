@@ -14,7 +14,7 @@
         <scene sceneID="lM0-20-gYl">
             <objects>
                 <viewController storyboardIdentifier="NewTaskViewController" id="ArF-0o-Orl" customClass="NewTaskViewController" customModule="Reef" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="TDj-t3-yHD">
+                    <view key="view" contentMode="scaleToFill" id="TDj-t3-yHD" customClass="NewTaskView" customModule="Reef" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

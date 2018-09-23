@@ -26,6 +26,14 @@ extension NotesInputViewModel: IconCellPresentable {
     }
     
     var voiceOverHint: String {
-        return Strings.MoreOptionsScreen.NotesCell.voiceOverHint
+        return Strings.MoreOptionsScreen.NotesCell.subtitle
+    }
+    
+    var voiceOverValue: String? {
+        if notes != "" {
+            return subtitle
+        } else {
+            return nil
+        }
     }
 }

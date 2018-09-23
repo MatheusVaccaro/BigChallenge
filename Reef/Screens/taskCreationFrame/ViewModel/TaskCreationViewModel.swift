@@ -13,9 +13,12 @@ import CoreLocation
 protocol TaskCreationDelegate: class {
     func didTapAddTask()
     func didPanAddTask()
+    func didCreateTask()
     func shouldPresentViewForLocationInput()
     func shouldPresentViewForDateInput()
     func shouldPresentViewForNotesInput()
+    func shouldPresentMoreOptions()
+    func shouldHideMoreOptions()
 }
 
 class TaskCreationViewModel {
@@ -49,6 +52,14 @@ class TaskCreationViewModel {
 }
 
 extension TaskCreationViewModel: NewTaskViewModelOutputDelegate {
+    func shouldPresentMoreOptions() {
+        delegate?.shouldPresentMoreOptions()
+    }
+    
+    func shouldHideMoreOptions() {
+        delegate?.shouldHideMoreOptions()
+    }
+    
     func didPressCreateTask() {
         if task == nil {
             model.save(model.createTask(with: attributes))
@@ -57,6 +68,7 @@ extension TaskCreationViewModel: NewTaskViewModelOutputDelegate {
         }
         
         task = nil
+        delegate?.didCreateTask()
     }
     
     func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateTitle title: String?) {

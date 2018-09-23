@@ -30,6 +30,14 @@ extension LocationInputViewModel: IconCellPresentable {
     }
     
     var voiceOverHint: String {
-        return Strings.MoreOptionsScreen.LocationCell.voiceOverHint
+        return Strings.MoreOptionsScreen.LocationCell.subtitle
+    }
+    
+    var voiceOverValue: String? {
+        if hasLocation {
+            return subtitle
+        } else {
+            return nil
+        }
     }
 }
