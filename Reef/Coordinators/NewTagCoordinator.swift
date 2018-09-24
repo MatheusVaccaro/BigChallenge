@@ -17,6 +17,7 @@ class NewTagCoordinator: Coordinator {
     
     fileprivate var createTagFrameViewController: TagCreationFrameViewController!
     fileprivate var addTagTitleViewController: AddTagTitleViewController!
+    fileprivate var addTagColorsViewController: AddTagColorsViewController!
     fileprivate var moreOptionsViewController: MoreOptionsViewController!
     fileprivate let model: TagModel
     fileprivate var tag: Tag? // ???
@@ -41,17 +42,24 @@ class NewTagCoordinator: Coordinator {
         addTagTitleViewController = AddTagTitleViewController.instantiate()
         let addTagTitleViewModel = AddTagTitleViewModel()
         addTagTitleViewController.viewModel = addTagTitleViewModel
-        // more options
-        moreOptionsViewController = MoreOptionsViewController.instantiate()
-        let moreOptionsViewModel = MoreOptionsViewModel()
-        moreOptionsViewModel.UIDelegate = moreOptionsViewController
         
-        moreOptionsViewController!.viewModel = moreOptionsViewModel
-    
-        let creationFrameViewModel = TagCreationViewModel(tagModel: model, moreOptionsViewModel: moreOptionsViewModel)
+        // Colors Picker
+        addTagColorsViewController = AddTagColorsViewController.instantiate()
+        let addTagColorsViewModel = AddTagColorsViewModel(tag: nil, model: model)
+        addTagColorsViewController.viewModel = addTagColorsViewModel
+        
+        // More Options
+        moreOptionsViewController = MoreOptionsViewController.instantiate()
+        let addTagDetailsViewModel = AddTagDetailsViewModel()
+        moreOptionsViewController!.viewModel = addTagDetailsViewModel
+        
+        let creationFrameViewModel = TagCreationViewModel(tagModel: model,
+                                                          addTagDetailsViewModel,
+                                                          addTagTitleViewModel)
+        creationFrameViewModel.delegate = self
         createTagFrameViewController.viewModel = creationFrameViewModel
         
-        createTagFrameViewController.present(addTagTitleViewController)
+        createTagFrameViewController.present(addTagTitleViewController, addTagColorsViewController, moreOptionsViewController)
     }
 }
 
@@ -69,7 +77,28 @@ extension NewTagCoordinator {
         presenter.dismiss(animated: true, completion: nil)
         delegate?.shouldDeinitCoordinator(self)
     }
+}
+
+extension NewTagCoordinator: TagCreationDelegate {
+    func didTapAddTag() {
+        //TODO
+    }
     
+    func shouldPresent(viewModel: IconCellPresentable) {
+        var inputView: UIViewController?
+        
+        if let locationViewModel = viewModel as? LocationInputViewModel {
+            let locationInput = LocationInputView.instantiate()
+            locationInput.viewModel = locationViewModel
+            inputView = locationInput
+        } else if let dateViewModel = viewModel as? DateInputViewModel {
+            let dateInput = DateInputViewController.instantiate()
+            dateInput.viewModel = dateViewModel
+            inputView = dateInput
+        }
+        
+        presenter.pushViewController(inputView!, animated: true)
+    }
 }
 
 extension NewTagCoordinator {

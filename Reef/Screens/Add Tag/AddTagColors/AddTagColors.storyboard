@@ -13,12 +13,12 @@
         <!--Add Tag Colors View Controller-->
         <scene sceneID="ZoL-xA-H6E">
             <objects>
-                <viewController id="OXx-9j-cfa" customClass="AddTagColorsViewController" customModule="Reef" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addTagColors" id="OXx-9j-cfa" customClass="AddTagColorsViewController" customModule="Reef" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Emk-gz-t2b">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="28"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zg7-nV-y3h">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zg7-nV-y3h">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="28"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="srT-j1-4AI">

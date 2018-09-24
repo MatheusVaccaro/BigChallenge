@@ -60,15 +60,14 @@ class NewTaskCoordinator: Coordinator {
         
         // more options
         moreOptionsViewController = MoreOptionsViewController.instantiate()
-        let moreOptionsViewModel = MoreOptionsViewModel()
-        moreOptionsViewModel.UIDelegate = moreOptionsViewController
+        let moreOptionsViewModel: MoreOptionsViewModel = MoreOptionsViewModel()
         
         moreOptionsViewController!.viewModel = moreOptionsViewModel
     
         // Task Frame
         creationFrameViewController = TaskCreationFrameViewController.instantiate()
         let creationFrameViewModel = TaskCreationViewModel(taskModel: taskModel,
-                                                           moreOptionsViewModel: moreOptionsViewController.viewModel,
+                                                           moreOptionsViewModel: moreOptionsViewModel,
                                                            newTaskViewModel: newTaskViewController.viewModel)
         creationFrameViewModel.delegate = self
         
@@ -93,27 +92,6 @@ class NewTaskCoordinator: Coordinator {
     
     func startAddTask() {
         newTaskViewController.start()
-    }
-    
-    fileprivate func showLocationInput() {
-        let locationInputView = LocationInputView.instantiate()
-        locationInputView.viewModel = moreOptionsViewController!.viewModel.locationInputViewModel
-
-        presenter.pushViewController(locationInputView, animated: true)
-    }
-    
-    fileprivate func showDateInput() {
-        let dateInputView = DateInputViewController.instantiate()
-        dateInputView.viewModel = moreOptionsViewController!.viewModel.dateInputViewModel
-        
-        presenter.pushViewController(dateInputView, animated: true)
-    }
-    
-    fileprivate func showNotesInput() {
-        let notesInputViewController = NotesInputViewController.instantiate()
-        notesInputViewController.viewModel = moreOptionsViewController!.viewModel.notesInputViewModel
-        
-        presenter.pushViewController(notesInputViewController, animated: true)
     }
     
     fileprivate func showNewTag() {
@@ -153,6 +131,26 @@ extension NewTaskCoordinator: TaskCreationDelegate {
         homeScreen.prepareToHideAddTask()
     }
     
+    func shouldPresent(viewModel: IconCellPresentable) {
+        var inputView: UIViewController?
+        
+        if let locationViewModel = viewModel as? LocationInputViewModel {
+            let locationInput = LocationInputView.instantiate()
+            locationInput.viewModel = locationViewModel
+            inputView = locationInput
+        } else if let dateViewModel = viewModel as? DateInputViewModel {
+            let dateInput = DateInputViewController.instantiate()
+            dateInput.viewModel = dateViewModel
+            inputView = dateInput
+        } else if let notesViewModel = viewModel as? NotesInputViewModel {
+            let notesInput = NotesInputViewController.instantiate()
+            notesInput.viewModel = notesViewModel
+            inputView = notesInput
+        }
+        
+        presenter.pushViewController(inputView!, animated: true)
+    }
+    
     func didTapAddTask() {
         homeScreen.prepareToPresentAddTask()
     }
@@ -160,18 +158,9 @@ extension NewTaskCoordinator: TaskCreationDelegate {
     func didPanAddTask() {
         homeScreen.didPanAddTask()
     }
-    
-    func shouldPresentViewForDateInput() {
-        showDateInput()
-    }
-    
-    func shouldPresentViewForLocationInput() {
-        showLocationInput()
-    }
-    
-    func shouldPresentViewForNotesInput() {
-        showNotesInput()
-    }
+}
+
+extension NewTaskCoordinator: NewTaskDelegate {
     
     func shouldPresentMoreOptions() {
         homeScreen.prepareToPresentMoreOptions()

@@ -15,11 +15,9 @@ protocol TaskCreationDelegate: class {
     func didPanAddTask()
     func didCreateTask()
     func shouldEscape()
-    func shouldPresentViewForLocationInput()
-    func shouldPresentViewForDateInput()
-    func shouldPresentViewForNotesInput()
     func shouldPresentMoreOptions()
     func shouldHideMoreOptions()
+    func shouldPresent(viewModel: IconCellPresentable)
 }
 
 class TaskCreationViewModel {
@@ -82,22 +80,12 @@ extension TaskCreationViewModel: NewTaskViewModelOutputDelegate {
 }
 
 extension TaskCreationViewModel: MoreOptionsViewModelDelegate {
-  
-    func shouldPresentViewForLocationInput() {
-        delegate?.shouldPresentViewForLocationInput()
-    }
-    
-    func shouldPresentViewForDateInput() {
-        delegate?.shouldPresentViewForDateInput()
-    }
-    
-    func shouldPresentViewForNotesInput() {
-        delegate?.shouldPresentViewForNotesInput()
+    func shouldPresent(viewModel: IconCellPresentable) {
+        delegate?.shouldPresent(viewModel: viewModel)
     }
     
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
                        didFind location: CLCircularRegion, arriving: Bool) {
-        
         attributes[.region] = location
         attributes[.isArriving] = arriving
     }

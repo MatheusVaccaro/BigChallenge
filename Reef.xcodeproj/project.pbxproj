@@ -30,6 +30,7 @@
 		16E8DDD8211205E8004F66D6 /* Barlow-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC5211205C5004F66D6 /* Barlow-SemiBoldItalic.ttf */; };
 		16EC4CCB2125207600B8256D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 16EC4CCD2125207600B8256D /* InfoPlist.strings */; };
 		16EC6CEA21065B2500797D9C /* TagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EC6CE921065B2500797D9C /* TagTests.swift */; };
+		16F9D93A21596C8D00304ECE /* AddTagDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F9D93921596C8D00304ECE /* AddTagDetailsViewModel.swift */; };
 		16FDC139210BB237008FA931 /* NotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FDC138210BB237008FA931 /* NotificationTests.swift */; };
 		220BB9472146ED88004A8309 /* TaskCreationFrameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220BB9452146ED88004A8309 /* TaskCreationFrameViewController.swift */; };
 		220BB94A2146F1C2004A8309 /* TaskCreation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 220BB9492146F1C2004A8309 /* TaskCreation.storyboard */; };
@@ -274,6 +275,7 @@
 		16EC4CCC2125207600B8256D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		16EC4CCE2125207900B8256D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		16EC6CE921065B2500797D9C /* TagTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTests.swift; sourceTree = "<group>"; };
+		16F9D93921596C8D00304ECE /* AddTagDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagDetailsViewModel.swift; sourceTree = "<group>"; };
 		16FDC138210BB237008FA931 /* NotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTests.swift; sourceTree = "<group>"; };
 		16FDC13B210F809A008FA931 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		1E128F2E25BA570ED73A4795 /* Pods_ReefUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReefUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -540,6 +542,7 @@
 				160E6290215929E6001F3D01 /* AddTagColors */,
 				160E627D2152FB96001F3D01 /* tagCreationFrame */,
 				160E628721592378001F3D01 /* AddTagTitle */,
+				16F9D936215963C300304ECE /* AddTagDetails */,
 			);
 			path = "Add Tag";
 			sourceTree = "<group>";
@@ -620,6 +623,14 @@
 				16E8DDB6211205C1004F66D6 /* Barlow-ThinItalic.ttf */,
 			);
 			path = Barlow;
+			sourceTree = "<group>";
+		};
+		16F9D936215963C300304ECE /* AddTagDetails */ = {
+			isa = PBXGroup;
+			children = (
+				16F9D93921596C8D00304ECE /* AddTagDetailsViewModel.swift */,
+			);
+			path = AddTagDetails;
 			sourceTree = "<group>";
 		};
 		16FDC13A210F8080008FA931 /* Managers */ = {
@@ -1766,6 +1777,7 @@
 				C25169952139BD6200999BD0 /* UIViewController+Extension.swift in Sources */,
 				160E62812155A129001F3D01 /* TagCreationViewController.swift in Sources */,
 				222BFF9420ED92C7001B6BBF /* RemindersCommunicator.swift in Sources */,
+				16F9D93A21596C8D00304ECE /* AddTagDetailsViewModel.swift in Sources */,
 				2252216E21552F7800E8BD5E /* AccessibilityElements.swift in Sources */,
 				2255B3AE2113209800F2F37C /* LocationInputViewModel.swift in Sources */,
 				160E62862155B30A001F3D01 /* TagCreationViewModel.swift in Sources */,

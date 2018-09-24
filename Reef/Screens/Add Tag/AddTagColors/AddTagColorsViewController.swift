@@ -17,20 +17,13 @@ class AddTagColorsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tagColorsCollectionView.delegate = self
-        // Do any additional setup after loading the view.
+        configureColorsCollectionView()
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func configureColorsCollectionView() {
+        tagColorsCollectionView.dataSource = self
+        tagColorsCollectionView.delegate = self
     }
-    */
-
 }
 
 extension AddTagColorsViewController: UICollectionViewDelegate {
@@ -54,5 +47,15 @@ extension AddTagColorsViewController: UICollectionViewDataSource {
         
         cell.configure(with: indexPath.row)
         return cell
+    }
+}
+
+extension AddTagColorsViewController: StoryboardInstantiable {
+    static var viewControllerID: String {
+        return "addTagColors"
+    }
+    
+    static var storyboardIdentifier: String {
+        return "AddTagColors"
     }
 }

@@ -24,9 +24,7 @@ protocol MoreOptionsViewModelDelegate: class {
     
     func notesInput(_ notesInputViewModel: NotesInputViewModel, didUpdateNotes notes: String)
     
-    func shouldPresentViewForLocationInput()
-    func shouldPresentViewForDateInput()
-    func shouldPresentViewForNotesInput()
+    func shouldPresent(viewModel: IconCellPresentable)
 }
 
 protocol MoreOptionsViewModelUIDelegate: class {
@@ -58,8 +56,30 @@ class MoreOptionsViewModel {
     let dateInputViewModel: DateInputViewModel
     let notesInputViewModel: NotesInputViewModel
     
-    let numberOfSections = 1
-    let numberOfRows = 3
+    private let _numberOfSections = 1
+    private let _numberOfRows = 3
+    
+    private var cells: [IconCellPresentable] {
+        return [ notesInputViewModel, locationInputViewModel, dateInputViewModel ]
+    }
+}
+
+extension MoreOptionsViewModel: MoreOptionsViewModelProtocol {
+    var numberOfSections: Int {
+        return _numberOfSections
+    }
+    
+    var numberOfRows: Int {
+        return _numberOfRows
+    }
+    
+    func viewModelForCell(at row: Int) -> IconCellPresentable {
+        return cells[row]
+    }
+    
+    func shouldPresentView(at row: Int) {
+        delegate?.shouldPresent(viewModel: cells[row])
+    }
 }
 
 extension MoreOptionsViewModel: LocationInputDelegate {
