@@ -109,6 +109,8 @@ class DateInputViewController: UIViewController {
     
     private func configurePrepositionLabel() {
         prepositionLabel.textColor = UIColor.DateInput.defaultColor
+        prepositionLabel.text = NSLocalizedString("dateInputPreposition",
+                                                  comment: "Preposition that connects calendar date to time of day.")
     }
     
     private func loadDateSelectorView() {

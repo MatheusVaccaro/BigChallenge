@@ -135,7 +135,7 @@ class TagCollectionViewCell: UICollectionViewCell {
     }
     
     override func layoutSubviews() {
-        CATransaction.disableAnimationsIn {
+        CATransaction.disableAnimations {
             super.layoutSubviews()
             
             maskLabel.font = UIFont.preferredFont(forTextStyle: .title3)

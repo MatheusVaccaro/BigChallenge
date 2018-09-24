@@ -17,11 +17,14 @@ extension UIColor {
     struct DateInput {
         static let defaultColor: UIColor = UIColor(red: 63/255.0, green: 69/255.0, blue: 79/255.0, alpha: 1)
         
-        static var shortcutButtonsColor: UIColor { return UIColor.black }
+        static var shortcutButtonsColor: UIColor { return defaultColor }
         //swiftlint:disable nesting
         struct Calendar {
-            static let dateOffCurrentMonth = UIColor(red: 0, green: 0, blue: 0, alpha: 0.05)
-            static let deselectedDate = UIColor.black
+            static let weekday: UIColor = { return DateInput.defaultColor.adjusted(alpha: 0.5) }()
+            static var month: UIColor { return DateInput.defaultColor }
+            static let dateOffCurrentMonth: UIColor = { return DateInput.defaultColor.adjusted(alpha: 0.4) }()
+            static let unselectableDate: UIColor = { return DateInput.defaultColor.adjusted(alpha: 0.2) }()
+            static var deselectedDate: UIColor { return DateInput.defaultColor }
             static let deselectedDateBackground = UIColor.clear
             static let selectedDate = UIColor.white
             static var selectedDateBackground: UIColor { return DateInput.defaultColor }
@@ -30,6 +33,15 @@ extension UIColor {
     
     static var placeholder: UIColor {
         return UIColor(red: 63/255, green: 69/255, blue: 79/255, alpha: 0.3)
+    }
+}
+
+extension UIColor {
+    func adjusted(red: CGFloat? = nil, green: CGFloat? = nil, blue: CGFloat? = nil, alpha: CGFloat? = nil) -> UIColor {
+        var oldRed: CGFloat = 0, oldGreen: CGFloat = 0, oldBlue: CGFloat = 0, oldAlpha: CGFloat = 0
+        getRed(&oldRed, green: &oldGreen, blue: &oldBlue, alpha: &oldAlpha)
+        
+        return UIColor(red: red ?? oldRed, green: green ?? oldGreen, blue: blue ?? oldBlue, alpha: alpha ?? oldAlpha)
     }
 }
 

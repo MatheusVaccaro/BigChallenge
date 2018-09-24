@@ -25,8 +25,8 @@ class CalendarCell: JTAppleCell {
     }
     
     func setupBackgroundCircleLayer() {
-        let shrinkMod: CGFloat = 0.9
-        let circleRadius = min(contentView.frame.width, contentView.frame.height) * shrinkMod / 2
+        let sizeMod: CGFloat = 0.9
+        let circleRadius = min(contentView.frame.width, contentView.frame.height) / 2 * sizeMod
         
         let circleBounds =  CGRect(origin: CGPoint(x: contentView.frame.midX - circleRadius,
                                                    y: contentView.frame.midY - circleRadius),
@@ -40,15 +40,24 @@ class CalendarCell: JTAppleCell {
         setupBackgroundCircleLayer()
     }
     
-    func configure(with cellState: CellState) {
+    func configure(with cellState: CellState, for calendar: JTAppleCalendarView) {
         let day = Calendar.current.component(.day, from: cellState.date)
         dayLabel.text = "\(day)"
         
+        // Configure selectable visuals
+        let isSelectable = calendar.calendarDelegate?.calendar(calendar, shouldSelectDate: cellState.date,
+                                                               cell: self, cellState: cellState) ?? true
+        guard isSelectable else {
+            deselect(basedOn: cellState, animated: false)
+            dayLabel.textColor = UIColor.DateInput.Calendar.unselectableDate
+            return
+        }
+        
         // Configure "today" visuals
         if Calendar.current.isDateInToday(cellState.date) {
-            backgroundCircleLayer.strokeColor = UIColor.DateInput.defaultColor.cgColor
+            dayLabel.font = UIFont.font(sized: 18, weight: .bold, with: .body)
         } else {
-            backgroundCircleLayer.strokeColor = UIColor.clear.cgColor
+            dayLabel.font = UIFont.font(sized: 18, weight: .regular, with: .body)
         }
         
         // Configure selection visuals
@@ -65,7 +74,7 @@ class CalendarCell: JTAppleCell {
         if animated {
             setBackgroundColor(to: selectedBackgroundColor)
         } else {
-            CATransaction.disableAnimationsIn { setBackgroundColor(to: selectedBackgroundColor) }
+            CATransaction.disableAnimations { setBackgroundColor(to: selectedBackgroundColor) }
         }
         
         // Change label visuals
@@ -78,7 +87,7 @@ class CalendarCell: JTAppleCell {
         if animated {
             setBackgroundColor(to: deselectedBackgroundColor)
         } else {
-            CATransaction.disableAnimationsIn { setBackgroundColor(to: deselectedBackgroundColor) }
+            CATransaction.disableAnimations { setBackgroundColor(to: deselectedBackgroundColor) }
         }
         
         // Change label visuals

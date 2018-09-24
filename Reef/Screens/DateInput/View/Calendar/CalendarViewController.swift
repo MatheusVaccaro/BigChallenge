@@ -20,6 +20,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource {
     
     weak var delegate: CalendarDelegate?
     @IBOutlet weak var calendar: JTAppleCalendarView!
+    @IBOutlet weak var weekdaysContainerView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +30,18 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource {
         calendar.allowsDateCellStretching = false
         calendar.minimumInteritemSpacing = 0
         calendar.minimumLineSpacing = 0
-        calendar.contentInset =
-            UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        // TODO Figure out how to calculate the optimal value for cellSize and make it accessibility-friendly
-        calendar.cellSize = (calendar.frame.width - 3 * calendar.minimumLineSpacing)/7
-        calendar.selectDates([Date()])
+        calendar.cellSize = (calendar.frame.width)/7
+        
+        setupWeekdays()
+    }
+    
+    func setupWeekdays() {
+        let weekdays = weekdaysContainerView.subviews.compactMap({ $0 as? UILabel })
+        
+        for (index, weekdayLabel) in weekdays.enumerated() {
+            weekdayLabel.text = Calendar.current.veryShortWeekdaySymbols[index]
+            weekdayLabel.textColor = UIColor.DateInput.Calendar.weekday
+        }
     }
     
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
@@ -55,7 +63,7 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         let cell =  calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath)
         guard let calendarCell = cell as? CalendarCell else { return cell }
         
-        calendarCell.configure(with: cellState)
+        calendarCell.configure(with: cellState, for: calendar)
         
         return calendarCell
     }
@@ -64,12 +72,12 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
                   forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
         guard let calendarCell = cell as? CalendarCell else { return }
         
-        calendarCell.configure(with: cellState)
+        calendarCell.configure(with: cellState, for: calendar)
     }
     
     func calendarSizeForMonths(_ calendar: JTAppleCalendarView?) -> MonthSize? {
         // TODO Make this accessibility-friendly
-        return MonthSize(defaultSize: 25)
+        return MonthSize(defaultSize: 20)
     }
     
     func calendar(_ calendar: JTAppleCalendarView, headerViewForDateRange range: (start: Date, end: Date),
@@ -87,7 +95,6 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         guard let calendarCell = cell as? CalendarCell else { return }
         
         calendarCell.select(basedOn: cellState)
-//        calendarCell.configure(with: cellState)
         
         delegate?.calendar(calendar, didSelectDate: date, cell: cell, cellState: cellState)
     }
@@ -97,9 +104,15 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         guard let calendarCell = cell as? CalendarCell else { return }
         
         calendarCell.deselect(basedOn: cellState)
-//        calendarCell.configure(with: cellState)
         
         delegate?.calendar(calendar, didDeselectDate: date, cell: cell, cellState: cellState)
+    }
+    
+    func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date,
+                  cell: JTAppleCell?, cellState: CellState) -> Bool {
+        // Check if selected date is after today
+        let comparisonResult = Calendar.current.compare(Date.now(), to: date, toGranularity: .day)
+        return comparisonResult == .orderedAscending || comparisonResult == .orderedSame
     }
 }
 

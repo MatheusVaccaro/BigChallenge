@@ -9,7 +9,7 @@
 import QuartzCore
 
 extension CATransaction {
-    static func disableAnimationsIn(_ block: () -> Void) {
+    static func disableAnimations(in block: () -> Void) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         block()
