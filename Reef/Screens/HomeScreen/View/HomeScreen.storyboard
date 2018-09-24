@@ -120,8 +120,14 @@
                             <constraint firstItem="hi9-8n-jJk" firstAttribute="centerX" secondItem="C6D-bh-Zj8" secondAttribute="centerX" id="zrC-1P-1es"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QKa-yH-x6F"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="RhD-jV-Qic"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
+                        <outlet property="addTagView" destination="RhD-jV-Qic" id="gYq-qh-S0e"/>
                         <outlet property="addTaskViewTopConstraint" destination="mB8-Jc-8hI" id="54v-Di-QFt"/>
                         <outlet property="emptyStateImage" destination="Qdj-bK-Hkb" id="Lx1-rQ-beF"/>
                         <outlet property="emptyStateOrLabel" destination="Fea-br-2cN" id="fgG-Tc-tuU"/>

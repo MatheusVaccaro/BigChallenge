@@ -119,7 +119,7 @@ class NewTaskCoordinator: Coordinator {
     fileprivate func showNewTag() {
         let newTagCoordinator = NewTagCoordinator(tag: nil,
                                                   presenter: presenter,
-                                                  model: tagModel)
+                                                  model: tagModel, in: homeScreen)
         newTagCoordinator.delegate = self
         addChild(coordinator: newTagCoordinator)
         newTagCoordinator.start()

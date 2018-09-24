@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Add Tag Title View Controller-->
+        <scene sceneID="mEj-cg-hon">
+            <objects>
+                <viewController storyboardIdentifier="addTagTitle" id="5bj-Mj-8qe" customClass="AddTagTitleViewController" customModule="Reef" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="H2z-cY-E6t">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e3o-zv-pzw">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Z1-ho-1LV">
+                                <rect key="frame" x="337" y="4.5" width="30" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="+">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="didPressDoneButton:" destination="5bj-Mj-8qe" eventType="touchUpInside" id="uCY-V3-Wwc"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="e3o-zv-pzw" firstAttribute="top" secondItem="H8r-tH-A7O" secondAttribute="top" id="4pb-Nt-oAQ"/>
+                            <constraint firstItem="H8r-tH-A7O" firstAttribute="trailing" secondItem="9Z1-ho-1LV" secondAttribute="trailing" constant="8" id="B38-mt-y9G"/>
+                            <constraint firstItem="H8r-tH-A7O" firstAttribute="bottom" secondItem="e3o-zv-pzw" secondAttribute="bottom" id="lGA-No-naP"/>
+                            <constraint firstItem="H8r-tH-A7O" firstAttribute="trailing" secondItem="e3o-zv-pzw" secondAttribute="trailing" id="mIX-bt-pDF"/>
+                            <constraint firstItem="9Z1-ho-1LV" firstAttribute="centerY" secondItem="H2z-cY-E6t" secondAttribute="centerY" id="sMe-c7-nzx"/>
+                            <constraint firstItem="e3o-zv-pzw" firstAttribute="leading" secondItem="H8r-tH-A7O" secondAttribute="leading" id="sTX-l7-ZiU"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="H8r-tH-A7O"/>
+                    </view>
+                    <size key="freeformSize" width="375" height="45"/>
+                    <connections>
+                        <outlet property="tagTitleDoneButton" destination="9Z1-ho-1LV" id="o1a-HC-Auh"/>
+                        <outlet property="tagTitleTextField" destination="e3o-zv-pzw" id="njP-Pc-U43"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XhF-0a-Idv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
