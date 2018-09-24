@@ -38,13 +38,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fea-br-2cN">
-                                <rect key="frame" x="8" y="469" width="359" height="21"/>
+                                <rect key="frame" x="8" y="469" width="359" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxw-1p-TGH">
-                                <rect key="frame" x="164.5" y="510" width="46" height="30"/>
+                                <rect key="frame" x="164.5" y="509.5" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="didClickImportFromRemindersButton:" destination="hA5-o5-LMg" eventType="touchUpInside" id="7rb-Ir-ZCN"/>
@@ -57,14 +57,34 @@
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cg0-Uy-cLM" userLabel="addTaskView">
                                 <rect key="frame" x="8" y="-437" width="359" height="620"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="620" id="mmK-4e-MAF"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yry-e8-Psj" userLabel="PullDownView">
                                 <rect key="frame" x="8" y="101" width="359" height="73"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rVB-LF-LaO">
+                                        <rect key="frame" x="84" y="38" width="191.5" height="23"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pullDownArrow" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XCG-QJ-7v0">
+                                                <rect key="frame" x="0.0" y="0.0" width="17" height="23"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pull down to add a new task" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuF-D9-9c3">
+                                                <rect key="frame" x="25" y="3.5" width="166.5" height="16"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                                <color key="textColor" red="0.61568627450000002" green="0.6588235294" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
                                 <color key="backgroundColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="rVB-LF-LaO" firstAttribute="centerX" secondItem="Yry-e8-Psj" secondAttribute="centerX" id="MGk-tL-zGe"/>
+                                    <constraint firstAttribute="bottom" secondItem="rVB-LF-LaO" secondAttribute="bottom" constant="12" id="gPF-wP-moi"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lah-lf-SBT" userLabel="whiteBackgroundView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="123"/>
@@ -152,10 +172,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OAl-vn-cbj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-69.599999999999994" y="-429.31034482758622"/>
+            <point key="canvasLocation" x="-69.599999999999994" y="-429.53523238380814"/>
         </scene>
     </scenes>
     <resources>
         <image name="emptyState" width="187" height="165"/>
+        <image name="pullDownArrow" width="17" height="23"/>
     </resources>
 </document>

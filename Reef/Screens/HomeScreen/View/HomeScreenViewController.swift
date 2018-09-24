@@ -82,7 +82,10 @@ class HomeScreenViewController: UIViewController {
         observeClickedAddTag()
         userActivity = viewModel.userActivity
         
+        configurePullDownView()
         addGestureRecognizersForAnimations()
+        
+        newTaskView.alpha = 0
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -431,6 +434,20 @@ private prefix func ! (_ state: State) -> State {
 
 extension HomeScreenViewController {
     
+    // MARK: View Configuration
+    private func configurePullDownView() {
+        pullDownView.backgroundColor = .white
+        pullDownView.layer.cornerRadius = 6.3
+        pullDownView.tintColor = .white
+        
+        pullDownView.layer.shadowRadius = 6.3
+        pullDownView.layer.shadowOffset = CGSize(width: 0, height: 10)
+        pullDownView.layer.masksToBounds = false
+        pullDownView.layer.shadowColor = .shadowColor
+        pullDownView.layer.shadowOpacity = 0.2
+    }
+    
+    // MARK: Animations
     func addGestureRecognizersForAnimations() {
         pullDownView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:))))
         pullDownView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:))))
@@ -460,6 +477,8 @@ extension HomeScreenViewController {
     private func animateTransitionIfNeeded(state: State, duration: TimeInterval) {
         guard runningAnimators.isEmpty else { return }
         addPullDownAnimation(for: state, with: duration)
+        addPullDownFadeOutAnimation(for: state, with: duration)
+        addNewTaskViewFadeInAnimation(for: state, with: duration)
     }
     
     // Starts transition if necessary or reverses it on tap
@@ -483,7 +502,6 @@ extension HomeScreenViewController {
     private func updateInteractiveTransition(fractionComplete: CGFloat) {
         runningAnimators.forEach {
             $0.fractionComplete = fractionComplete
-            
         }
     }
     
@@ -524,6 +542,42 @@ extension HomeScreenViewController {
                 break
             }
             self?.runningAnimators.removeAll()
+        }
+        runningAnimators.append(animator)
+    }
+    
+    private func addPullDownFadeOutAnimation(for state: State, with duration: TimeInterval) {
+        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) {
+            UIView.animateKeyframes(withDuration: 0, delay: 0, options: [], animations: {
+                switch state {
+                case .collapsed:
+                    UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: duration / 2) { [weak self] in
+                        self?.pullDownView.alpha = 1
+                    }
+                case .expanded:
+                    UIView.addKeyframe(withRelativeStartTime: duration / 2, relativeDuration: duration / 2) { [weak self] in
+                        self?.pullDownView.alpha = 0
+                    }
+                }
+            }, completion: nil)
+        }
+        runningAnimators.append(animator)
+    }
+    
+    private func addNewTaskViewFadeInAnimation(for state: State, with duration: TimeInterval) {
+        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) {
+            UIView.animateKeyframes(withDuration: 0, delay: 0, options: [], animations: {
+                switch state {
+                case .collapsed:
+                    UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: duration / 2) { [weak self] in
+                        self?.newTaskView.alpha = 0
+                    }
+                case .expanded:
+                    UIView.addKeyframe(withRelativeStartTime: duration / 2, relativeDuration: duration / 2) { [weak self] in
+                        self?.newTaskView.alpha = 1
+                    }
+                }
+            }, completion: nil)
         }
         runningAnimators.append(animator)
     }
