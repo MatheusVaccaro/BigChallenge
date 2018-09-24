@@ -11,7 +11,9 @@ import CoreLocation
 import ReefKit
 
 protocol LocationInputDelegate: class {
-    func locationInput(_ locationInputViewModel: LocationInputViewModel, didFind location: CLCircularRegion, arriving: Bool)
+    func locationInput(_ locationInputViewModel: LocationInputViewModel,
+                       didFind location: CLCircularRegion,
+                       arriving: Bool)
 }
 
 class LocationInputViewModel {

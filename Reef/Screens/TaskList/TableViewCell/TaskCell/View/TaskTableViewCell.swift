@@ -119,7 +119,7 @@ extension TaskTableViewCell { // MARK: - Accessibility
                 ans.append(tagsDescription)
             }
             
-            if let dateDescription = viewModel!.dateString(with: "dd mmmm yyyy") {
+            if let dateDescription = viewModel!.accessibilityDateString {
                 ans.append(", \(dateDescription)")
             }
             

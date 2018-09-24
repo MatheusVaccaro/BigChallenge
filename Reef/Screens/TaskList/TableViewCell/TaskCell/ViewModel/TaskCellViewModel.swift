@@ -43,14 +43,15 @@ public class TaskCellViewModel {
     
     func dateString(with format: String) -> String? {
         guard let date = task.dates.min() else { return nil }
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale.current
-        dateFormatter.dateFormat = format
-        let dateStr = dateFormatter.string(from: date)
-        
-        return dateStr
+    
+        return date.string(with: format)
     }
+    
+    lazy var accessibilityDateString: String? = {
+        guard let date = task.dates.min() else { return nil }
+        
+        return date.accessibilityDescription
+    }()
     
     var checkButtonGradient: [CGColor] {
         return task.allTags.first?.colors

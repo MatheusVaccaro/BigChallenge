@@ -85,6 +85,7 @@
 		22F78C1D212F31390036A4EB /* CRUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F78C1C212F31390036A4EB /* CRUD.swift */; };
 		22F78C1F212F365F0036A4EB /* ReefKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F78C1E212F365F0036A4EB /* ReefKit.swift */; };
 		22F8FD4421580DAB00ECF10F /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F8FD4321580DAB00ECF10F /* NewTaskView.swift */; };
+		22F8FD4A215963BC00ECF10F /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F8FD49215963BC00ECF10F /* CalendarView.swift */; };
 		22FA2853212F7E6E00FC74D3 /* IndexRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FA2852212F7E6E00FC74D3 /* IndexRequestHandler.swift */; };
 		22FA2857212F7E6E00FC74D3 /* ReefIndexExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 22FA2850212F7E6D00FC74D3 /* ReefIndexExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22FA285B212F7EA200FC74D3 /* ReefSpotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F23EA1212E46060064EE05 /* ReefSpotlight.swift */; };
@@ -326,6 +327,7 @@
 		22F78C1C212F31390036A4EB /* CRUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUD.swift; sourceTree = "<group>"; };
 		22F78C1E212F365F0036A4EB /* ReefKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReefKit.swift; sourceTree = "<group>"; };
 		22F8FD4321580DAB00ECF10F /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
+		22F8FD49215963BC00ECF10F /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		22FA2850212F7E6D00FC74D3 /* ReefIndexExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ReefIndexExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		22FA2852212F7E6E00FC74D3 /* IndexRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexRequestHandler.swift; sourceTree = "<group>"; };
 		22FA2854212F7E6E00FC74D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -837,6 +839,7 @@
 				29BA689F2120C37D009B4AB9 /* CalendarViewController.swift */,
 				29BA68A721211754009B4AB9 /* CalendarHeaderView.swift */,
 				29BA68A32120CC2F009B4AB9 /* CalendarCell.swift */,
+				22F8FD49215963BC00ECF10F /* CalendarView.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -1711,6 +1714,7 @@
 				29BA68A62120E147009B4AB9 /* Calendar+Extension.swift in Sources */,
 				C29742D4211257B600A1D213 /* LocationTableViewCellViewModel.swift in Sources */,
 				22D84C65210BF4D1004B8969 /* LocationInputView.swift in Sources */,
+				22F8FD4A215963BC00ECF10F /* CalendarView.swift in Sources */,
 				222BFF9720EDB854001B6BBF /* RemindersImporter.swift in Sources */,
 				29A4F88B21125C1C00AE4FA1 /* DateInputViewModelProtocol.swift in Sources */,
 				C25F5AA92108FEB3001E1561 /* NewTaskViewController.swift in Sources */,

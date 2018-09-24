@@ -200,3 +200,47 @@ protocol DateInputViewModelDelegate: class {
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: Date)
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectFrequency frequency: NotificationOptions.Frequency)
 }
+
+extension DateInputViewModel: CalendarViewAccessibilityProvider {
+    func currentDate() -> String? {
+        let current = try! Calendar.current.date(from: calendarDate.value())!
+        
+        return current.accessibilityDescription
+    }
+    
+    func scrollDate(forwards: Bool) {
+        let current = try! Calendar.current.date(from: calendarDate.value())!
+        var next = DateComponents()
+        
+        if forwards {
+            let aDayFromCurrent =
+                Calendar.current.date(byAdding: .day, value: 1, to: current)!
+            next = Calendar.current.calendarDate(from: aDayFromCurrent)
+        } else {
+            let aDayBeforeCurrent =
+                Calendar.current.date(byAdding: .day, value: -1, to: current)!
+            next = Calendar.current.calendarDate(from: aDayBeforeCurrent)
+        }
+        
+        selectCalendarDate(next)
+    }
+    
+    func scrollMonth(forwards: Bool) {
+        let current = try! Calendar.current.date(from: calendarDate.value())!
+        var next = DateComponents()
+        
+        if forwards {
+            let aMonthFromCurrent =
+                Calendar.current.date(byAdding: .month, value: 1, to: current)!
+            next = Calendar.current.calendarDate(from: aMonthFromCurrent)
+        } else {
+            let aMonthBeforeCurrent =
+                Calendar.current.date(byAdding: .month, value: -1, to: current)!
+            next = Calendar.current.calendarDate(from: aMonthBeforeCurrent)
+        }
+        
+        selectCalendarDate(next)
+        UIAccessibility.post(notification: UIAccessibility.Notification.layoutChanged, argument: nil)
+        // value did change ????????????
+    }
+}

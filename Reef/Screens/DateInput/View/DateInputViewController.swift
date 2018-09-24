@@ -15,7 +15,7 @@ class DateInputViewController: UIViewController {
     
     // MARK: - Properties
     
-    var viewModel: DateInputViewModelProtocol!
+    var viewModel: DateInputViewModel!
     private var disposeBag = DisposeBag()
     
     @IBOutlet weak var selectedCalendarDateDayLabel: UILabel!
@@ -28,7 +28,8 @@ class DateInputViewController: UIViewController {
     
     private(set) var currentSelector: BehaviorSubject<DateSelector>!
     
-    @IBOutlet weak var calendarContainerView: UIView!
+    
+    @IBOutlet weak var calendarContainerView: CalendarView!
     private var calendarViewController: CalendarViewController!
     private var calendar: JTAppleCalendarView { return calendarViewController.calendar }
     
@@ -117,6 +118,9 @@ class DateInputViewController: UIViewController {
         calendarViewController = CalendarViewController.instantiate()
         calendarViewController.delegate = self
         addChild(calendarViewController)
+        
+        calendarContainerView.accessibilityProvider = viewModel
+        calendarContainerView.isAccessibilityElement = true
         
         calendarContainerView.addSubview(calendarViewController.view)
         

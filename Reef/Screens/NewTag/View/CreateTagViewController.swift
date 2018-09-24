@@ -65,7 +65,6 @@ class CreateTagViewController: UIViewController {
             colorsCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .left)
         }
     }
-    
 }
 
 // MARK: - UITextViewDelegate
