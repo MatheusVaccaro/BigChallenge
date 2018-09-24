@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qv3-lM-uBA">
-                                <rect key="frame" x="16" y="242" width="343" height="308"/>
+                                <rect key="frame" x="0.0" y="242" width="375" height="308"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="308" id="rBd-vH-428"/>
                                 </constraints>
@@ -62,11 +62,11 @@
                             <constraint firstItem="qv3-lM-uBA" firstAttribute="top" secondItem="YgX-4j-r0O" secondAttribute="bottom" constant="20" id="6gQ-w7-mlG"/>
                             <constraint firstItem="9wo-QD-7Qu" firstAttribute="centerY" secondItem="YgX-4j-r0O" secondAttribute="centerY" id="8u1-vG-u4p"/>
                             <constraint firstItem="Thx-CC-uDZ" firstAttribute="bottom" secondItem="qv3-lM-uBA" secondAttribute="bottom" constant="16" id="ITC-9q-vWr"/>
-                            <constraint firstItem="qv3-lM-uBA" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" constant="16" id="LQa-NE-OIk"/>
+                            <constraint firstItem="qv3-lM-uBA" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" id="LQa-NE-OIk"/>
                             <constraint firstItem="odQ-yO-HSV" firstAttribute="width" secondItem="GZf-fB-Mas" secondAttribute="width" id="Mfs-Ot-JJ5"/>
                             <constraint firstItem="odQ-yO-HSV" firstAttribute="centerX" secondItem="GZf-fB-Mas" secondAttribute="centerX" id="VC8-4u-5mR"/>
                             <constraint firstItem="GZf-fB-Mas" firstAttribute="centerY" secondItem="9wo-QD-7Qu" secondAttribute="centerY" constant="-20" id="W3S-82-dkV"/>
-                            <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="qv3-lM-uBA" secondAttribute="trailing" constant="16" id="hxY-Ra-HUr"/>
+                            <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="qv3-lM-uBA" secondAttribute="trailing" id="hxY-Ra-HUr"/>
                             <constraint firstItem="YgX-4j-r0O" firstAttribute="leading" secondItem="9wo-QD-7Qu" secondAttribute="trailing" constant="10" id="lfK-3T-Bx0"/>
                             <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="YgX-4j-r0O" secondAttribute="trailing" constant="16" id="mZ8-Ju-ZmO"/>
                             <constraint firstItem="odQ-yO-HSV" firstAttribute="top" secondItem="GZf-fB-Mas" secondAttribute="bottom" constant="-15" id="xx6-na-imc"/>

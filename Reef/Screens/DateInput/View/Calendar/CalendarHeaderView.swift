@@ -32,7 +32,7 @@ class CalendarHeaderView: JTAppleCollectionReusableView {
     private func clean(_ labels: [UILabel]) {
         for label in labels {
             label.text = ""
-            label.textColor = UIColor.DateInput.defaultColor
+            label.textColor = UIColor.DateInput.Calendar.month
         }
     }
 }

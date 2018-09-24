@@ -25,8 +25,8 @@ class CalendarCell: JTAppleCell {
     }
     
     func setupBackgroundCircleLayer() {
-        let shrinkMod: CGFloat = 0.9
-        let circleRadius = min(contentView.frame.width, contentView.frame.height) * shrinkMod / 2
+        let sizeMod: CGFloat = 0.9
+        let circleRadius = min(contentView.frame.width, contentView.frame.height) / 2 * sizeMod
         
         let circleBounds =  CGRect(origin: CGPoint(x: contentView.frame.midX - circleRadius,
                                                    y: contentView.frame.midY - circleRadius),
@@ -48,6 +48,7 @@ class CalendarCell: JTAppleCell {
         let isSelectable = calendar.calendarDelegate?.calendar(calendar, shouldSelectDate: cellState.date,
                                                                cell: self, cellState: cellState) ?? true
         guard isSelectable else {
+            deselect(basedOn: cellState, animated: false)
             dayLabel.textColor = UIColor.DateInput.Calendar.unselectableDate
             return
         }

@@ -20,6 +20,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource {
     
     weak var delegate: CalendarDelegate?
     @IBOutlet weak var calendar: JTAppleCalendarView!
+    @IBOutlet weak var weekdaysContainerView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +30,18 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource {
         calendar.allowsDateCellStretching = false
         calendar.minimumInteritemSpacing = 0
         calendar.minimumLineSpacing = 0
-        calendar.contentInset =
-            UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        // TODO Figure out how to calculate the optimal value for cellSize and make it accessibility-friendly
-        calendar.cellSize = (calendar.frame.width - 3 * calendar.minimumLineSpacing)/7
+        calendar.cellSize = (calendar.frame.width)/7
+        
+        setupWeekdays()
+    }
+    
+    func setupWeekdays() {
+        let weekdays = weekdaysContainerView.subviews.compactMap({ $0 as? UILabel })
+        
+        for (index, weekdayLabel) in weekdays.enumerated() {
+            weekdayLabel.text = Calendar.current.veryShortWeekdaySymbols[index]
+            weekdayLabel.textColor = UIColor.DateInput.Calendar.weekday
+        }
     }
     
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
