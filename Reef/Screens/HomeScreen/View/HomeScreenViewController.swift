@@ -91,9 +91,9 @@ class HomeScreenViewController: UIViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         configureEmptyState()
         if isPresentingMoreOptions {
-            animateMoreOptionsShowing()
+//            animateMoreOptionsShowing()
         } else {
-            animateAddTaskShowing()
+//            animateAddTaskShowing()
         }
     }
     
@@ -287,8 +287,8 @@ class HomeScreenViewController: UIViewController {
         let blurEffect = UIBlurEffect(style: .light)
         let view = UIVisualEffectView(effect: blurEffect)
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideAddTask))
-        view.addGestureRecognizer(tapGesture)
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideAddTask))
+//        view.addGestureRecognizer(tapGesture)
         
         return view
     }()
@@ -322,87 +322,87 @@ extension HomeScreenViewController: StoryboardInstantiable {
     }
 }
 
-extension HomeScreenViewController {
-    // action from homescreen
-    @objc func hideAddTask() {
-        prepareToHideAddTask()
-        viewModel.endAddTask()
-    }
-    
-    @objc func presentAddTask() {
-        prepareToPresentAddTask()
-        viewModel.startAddTask()
-    }
-    
-    
-    //actions from other screens
-    func prepareToPresentAddTask() {
-        guard !isPresentingAddTask else { return }
-        isPresentingAddTask = true
-        isPresentingMoreOptions = false
-        tagCollectionViewController!.viewModel.filtering = false
-        animateAddTaskShowing()
-        applyBlur()
-    }
-    
-    func prepareToHideAddTask() {
-        guard isPresentingAddTask || isPresentingMoreOptions else { return }
-        isPresentingAddTask = false
-        isPresentingMoreOptions = false
-        tagCollectionViewController!.viewModel.filtering = true
-        animateAddTaskHidden()
-        removeBlur()
-    }
-    
-    func prepareToPresentMoreOptions() {
-        guard !isPresentingMoreOptions else { return }
-        isPresentingAddTask = false
-        isPresentingMoreOptions = true
-        animateMoreOptionsShowing()
-        applyBlur()
-    }
-    
-    func prepareToHideMoreOptions() {
-        guard isPresentingMoreOptions else { return }
-        isPresentingAddTask = true
-        isPresentingMoreOptions = false
-        animateAddTaskShowing()
-    }
-    
-    func didPanAddTask() {
-        //code
-    }
-    
-    fileprivate func animateAddTaskHidden() {
-        UIView.animate(withDuration: 0.25) {
-            self.addTaskViewTopConstraint.constant =
-                (self.taskCreationFrameViewController.hiddenHeight - 20) - self.newTaskView.bounds.height
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    fileprivate func animateAddTaskShowing() {
-        UIView.animate(withDuration: 0.25) {
-            self.addTaskViewTopConstraint.constant =
-                self.taskCreationFrameViewController.hiddenHeight - self.newTaskView.bounds.height
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    fileprivate func animateMoreOptionsShowing() {
-        UIView.animate(withDuration: 0.25) {
-            self.addTaskViewTopConstraint.constant =
-                self.taskCreationFrameViewController.contentSize - self.newTaskView.bounds.height
-            self.view.layoutIfNeeded()
-        }
-    }
-}
+//extension HomeScreenViewController {
+//    // action from homescreen
+//    @objc func hideAddTask() {
+//        prepareToHideAddTask()
+//        viewModel.endAddTask()
+//    }
+//
+//    @objc func presentAddTask() {
+////        prepareToPresentAddTask()
+//        viewModel.startAddTask()
+//    }
+//
+//
+//    //actions from other screens
+//    func prepareToPresentAddTask() {
+//        guard !isPresentingAddTask else { return }
+//        isPresentingAddTask = true
+//        isPresentingMoreOptions = false
+//        tagCollectionViewController!.viewModel.filtering = false
+//        animateAddTaskShowing()
+//        applyBlur()
+//    }
+//
+//    func prepareToHideAddTask() {
+//        guard isPresentingAddTask || isPresentingMoreOptions else { return }
+//        isPresentingAddTask = false
+//        isPresentingMoreOptions = false
+//        tagCollectionViewController!.viewModel.filtering = true
+//        animateAddTaskHidden()
+//        removeBlur()
+//    }
+//
+//    func prepareToPresentMoreOptions() {
+//        guard !isPresentingMoreOptions else { return }
+//        isPresentingAddTask = false
+//        isPresentingMoreOptions = true
+//        animateMoreOptionsShowing()
+//        applyBlur()
+//    }
+//
+//    func prepareToHideMoreOptions() {
+//        guard isPresentingMoreOptions else { return }
+//        isPresentingAddTask = true
+//        isPresentingMoreOptions = false
+//        animateAddTaskShowing()
+//    }
+//
+//    func didPanAddTask() {
+//        //code
+//    }
+//
+//    fileprivate func animateAddTaskHidden() {
+//        UIView.animate(withDuration: 0.25) {
+//            self.addTaskViewTopConstraint.constant =
+//                (self.taskCreationFrameViewController.hiddenHeight - 20) - self.newTaskView.bounds.height
+//            self.view.layoutIfNeeded()
+//        }
+//    }
+//
+//    fileprivate func animateAddTaskShowing() {
+////        UIView.animate(withDuration: 0.25) {
+////            self.addTaskViewTopConstraint.constant =
+////                self.taskCreationFrameViewController.hiddenHeight - self.newTaskView.bounds.height
+////            self.view.layoutIfNeeded()
+////        }
+//    }
+//
+//    fileprivate func animateMoreOptionsShowing() {
+//        UIView.animate(withDuration: 0.25) {
+//            self.addTaskViewTopConstraint.constant =
+//                self.taskCreationFrameViewController.contentSize - self.newTaskView.bounds.height
+//            self.view.layoutIfNeeded()
+//        }
+//    }
+//}
 
 // MARK: - Accessibility
 extension HomeScreenViewController {
     override func accessibilityPerformMagicTap() -> Bool {
         if !isPresentingAddTask {
-            presentAddTask()
+//            presentAddTask()
             return true
         } else {
             return false
@@ -411,7 +411,7 @@ extension HomeScreenViewController {
     
     override func accessibilityPerformEscape() -> Bool {
         if isPresentingAddTask {
-            hideAddTask()
+//            hideAddTask()
             return true
         } else {
             return false
@@ -449,8 +449,14 @@ extension HomeScreenViewController {
     
     // MARK: Animations
     func addGestureRecognizersForAnimations() {
-        pullDownView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:))))
-        pullDownView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:))))
+//        pullDownView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:))))
+//        pullDownView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:))))
+        
+        pullDownView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(startAddTask)))
+    }
+    
+    @objc private func startAddTask() {
+        viewModel.startAddTask()
     }
     
     @objc private func handleTapGesture(_ recognizer: UITapGestureRecognizer) {
@@ -478,7 +484,7 @@ extension HomeScreenViewController {
         guard runningAnimators.isEmpty else { return }
         addPullDownAnimation(for: state, with: duration)
         addPullDownFadeOutAnimation(for: state, with: duration)
-        addNewTaskViewFadeInAnimation(for: state, with: duration)
+//        addNewTaskViewFadeInAnimation(for: state, with: duration)
     }
     
     // Starts transition if necessary or reverses it on tap
@@ -556,7 +562,7 @@ extension HomeScreenViewController {
                     }
                 case .expanded:
                     UIView.addKeyframe(withRelativeStartTime: duration / 2, relativeDuration: duration / 2) { [weak self] in
-                        self?.pullDownView.alpha = 0
+                        self?.pullDownView.alpha = 0.1
                     }
                 }
             }, completion: nil)

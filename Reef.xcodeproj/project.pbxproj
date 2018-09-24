@@ -132,6 +132,7 @@
 		C21EAD0020B741BC005F0F85 /* HomeScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EACFF20B741BC005F0F85 /* HomeScreenCoordinator.swift */; };
 		C21EAD0720B74757005F0F85 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD0620B74757005F0F85 /* TaskListViewController.swift */; };
 		C21EAD0B20B74F01005F0F85 /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD0A20B74F01005F0F85 /* StoryboardInstantiable.swift */; };
+		C22EF7DE215932CB00BFB255 /* TaskCreationFramePresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EF7DD215932CB00BFB255 /* TaskCreationFramePresentAnimationController.swift */; };
 		C231118E20FFC75200BCB000 /* NewTag.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C231118C20FFC75200BCB000 /* NewTag.storyboard */; };
 		C231119320FFC95300BCB000 /* NewTagViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C231119220FFC95300BCB000 /* NewTagViewModelProtocol.swift */; };
 		C23753AE20B6461E00C1CE15 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23753AD20B6461E00C1CE15 /* Coordinator.swift */; };
@@ -399,6 +400,7 @@
 		C21EACFF20B741BC005F0F85 /* HomeScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenCoordinator.swift; sourceTree = "<group>"; };
 		C21EAD0620B74757005F0F85 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		C21EAD0A20B74F01005F0F85 /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
+		C22EF7DD215932CB00BFB255 /* TaskCreationFramePresentAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreationFramePresentAnimationController.swift; sourceTree = "<group>"; };
 		C231118C20FFC75200BCB000 /* NewTag.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewTag.storyboard; sourceTree = "<group>"; };
 		C231119220FFC95300BCB000 /* NewTagViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTagViewModelProtocol.swift; sourceTree = "<group>"; };
 		C23753AD20B6461E00C1CE15 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -784,6 +786,7 @@
 		22DE27152146B6B500466187 /* taskCreationFrame */ = {
 			isa = PBXGroup;
 			children = (
+				C22EF7DC2159327700BFB255 /* AnimationController */,
 				22DE27162146B7AA00466187 /* View */,
 				22DE27172146BB2700466187 /* ViewModel */,
 			);
@@ -1089,6 +1092,14 @@
 				293204302135EA4100E23E72 /* TaskListViewModelImpl.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C22EF7DC2159327700BFB255 /* AnimationController */ = {
+			isa = PBXGroup;
+			children = (
+				C22EF7DD215932CB00BFB255 /* TaskCreationFramePresentAnimationController.swift */,
+			);
+			path = AnimationController;
 			sourceTree = "<group>";
 		};
 		C26EC73321544C75000E9CB9 /* NotesInput */ = {
@@ -1852,6 +1863,7 @@
 				C21EAD0B20B74F01005F0F85 /* StoryboardInstantiable.swift in Sources */,
 				222888D82117E5D90093EEF7 /* RadiusMapViewModel.swift in Sources */,
 				C2C231C120FD1AB2002A2371 /* NewTagViewModel.swift in Sources */,
+				C22EF7DE215932CB00BFB255 /* TaskCreationFramePresentAnimationController.swift in Sources */,
 				C21EAD0720B74757005F0F85 /* TaskListViewController.swift in Sources */,
 				16294E3A213F0C190092DEA2 /* Authentication.swift in Sources */,
 				C26EC73B21545A25000E9CB9 /* NotesInputViewController.swift in Sources */,

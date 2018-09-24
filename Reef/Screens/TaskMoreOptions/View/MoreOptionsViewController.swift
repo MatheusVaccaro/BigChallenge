@@ -58,7 +58,7 @@ class MoreOptionsViewController: UIViewController {
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 80
+        tableView.estimatedRowHeight = 70
         
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "IconCell",

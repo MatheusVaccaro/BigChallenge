@@ -113,11 +113,11 @@ extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
     }
     
     func homeScreenViewModelDidStartAddTask(_ homeScreenViewModel: HomeScreenViewModel) {
-        newTaskCoordinator.startAddTask()
+        newTaskCoordinator.start()
     }
     
     func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel, didChange selectedTags: [Tag]) {
-        newTaskCoordinator.update(selectedTags: selectedTags)
+//        newTaskCoordinator.update(selectedTags: selectedTags)
     }
     
     func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel, willEdit task: Task) {
@@ -150,7 +150,7 @@ extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
         let tagCollectionVC = TagCollectionViewController.instantiate()
         tagCollectionVC.viewModel = tagCollectionViewModel
 		homeScreenViewController?.setupTagCollection(viewModel: tagCollectionViewModel, viewController: tagCollectionVC)
-        showNewTask(selectedTags: selectedTags)
+//        showNewTask(selectedTags: selectedTags)
     }
 }
 

@@ -66,13 +66,13 @@
                                 <rect key="frame" x="8" y="101" width="359" height="73"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rVB-LF-LaO">
-                                        <rect key="frame" x="84" y="38" width="191.5" height="23"/>
+                                        <rect key="frame" x="121.5" y="38" width="116.5" height="23"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pullDownArrow" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XCG-QJ-7v0">
                                                 <rect key="frame" x="0.0" y="0.0" width="17" height="23"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pull down to add a new task" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuF-D9-9c3">
-                                                <rect key="frame" x="25" y="3.5" width="166.5" height="16"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a new task" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuF-D9-9c3">
+                                                <rect key="frame" x="25" y="3.5" width="91.5" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                                 <color key="textColor" red="0.61568627450000002" green="0.6588235294" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>

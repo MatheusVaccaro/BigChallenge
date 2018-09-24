@@ -10,6 +10,8 @@ import UIKit
 
 class TaskCreationFrameViewController: UIViewController {
 
+    @IBOutlet weak var whiteBackgroundView: UIView!
+    @IBOutlet weak var tagCollectionView: UIView!
     @IBOutlet weak var taskDetailView: UIView!
     @IBOutlet weak var taskTitleView: UIView!
     
@@ -21,7 +23,8 @@ class TaskCreationFrameViewController: UIViewController {
         return taskDetailViewController!.contentSize + taskTitleView.bounds.height + 8
     }
     
-    var taskDetailViewController: MoreOptionsViewController?
+    var tagCollectionViewController: TagCollectionViewController!
+    var taskDetailViewController: MoreOptionsViewController!
     var newTaskViewController: NewTaskViewController!
     
     var viewModel: TaskCreationViewModel!
@@ -31,8 +34,12 @@ class TaskCreationFrameViewController: UIViewController {
         
         addChild(taskDetailViewController)
         taskDetailView.addSubview(taskDetailViewController.view)
+        taskDetailView.layer.zPosition = -1
         
+        taskDetailViewController.view.layer.cornerRadius = 6.3
+        taskDetailViewController.view.layer.masksToBounds = true
         taskDetailViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        
         
         NSLayoutConstraint.activate([
             taskDetailViewController.view.rightAnchor.constraint(equalTo: taskDetailView.rightAnchor),
@@ -40,6 +47,8 @@ class TaskCreationFrameViewController: UIViewController {
             taskDetailViewController.view.leftAnchor.constraint(equalTo: taskDetailView.leftAnchor),
             taskDetailViewController.view.bottomAnchor.constraint(equalTo: taskDetailView.bottomAnchor)
             ])
+        
+        taskDetailViewController.didMove(toParent: self)
     }
     
     func present(_ taskTitleViewController: NewTaskViewController) {
@@ -47,6 +56,7 @@ class TaskCreationFrameViewController: UIViewController {
         
         addChild(taskTitleViewController)
         taskTitleView.addSubview(taskTitleViewController.view)
+        taskTitleView.layer.zPosition = -1
         
         taskTitleViewController.view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -56,6 +66,26 @@ class TaskCreationFrameViewController: UIViewController {
             taskTitleViewController.view.leftAnchor.constraint(equalTo: taskTitleView.leftAnchor),
             taskTitleViewController.view.bottomAnchor.constraint(equalTo: taskTitleView.bottomAnchor)
             ])
+        
+        newTaskViewController.didMove(toParent: self)
+    }
+    
+    func present(_ tagCollectionViewController: TagCollectionViewController) {
+        self.tagCollectionViewController = tagCollectionViewController
+        
+        addChild(tagCollectionViewController)
+        tagCollectionView.addSubview(tagCollectionViewController.view)
+        
+        tagCollectionViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            tagCollectionViewController.view.rightAnchor.constraint(equalTo: tagCollectionView.rightAnchor),
+            tagCollectionViewController.view.topAnchor.constraint(equalTo: tagCollectionView.topAnchor),
+            tagCollectionViewController.view.leftAnchor.constraint(equalTo: tagCollectionView.leftAnchor),
+            tagCollectionViewController.view.bottomAnchor.constraint(equalTo: tagCollectionView.bottomAnchor)
+            ])
+        
+        tagCollectionViewController.didMove(toParent: self)
     }
     
     @IBAction func didTapAddTask(_ sender: Any) {
@@ -68,8 +98,22 @@ class TaskCreationFrameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        title = "New Task"
+        configureShadows(in: whiteBackgroundView)
+        configureShadows(in: taskDetailView)
+        configureShadows(in: taskTitleView)
+        viewModel.delegate?.viewDidLoad()
+    }
+    
+    private func configureShadows(in view: UIView) {
+        view.layer.cornerRadius = 6.3
+        view.tintColor = UIColor.white
+        
+        view.layer.shadowRadius = 6.3
+        view.layer.shadowOffset = CGSize(width: 0, height: 10)
+        view.layer.masksToBounds = false
+        view.layer.shadowColor = CGColor.shadowColor
+        view.layer.shadowOpacity = 0.2
     }
     
     /*

@@ -11,12 +11,14 @@ import UIKit
 import CoreLocation
 import ReefKit
 
-class NewTaskCoordinator: Coordinator {
+class NewTaskCoordinator: NSObject, Coordinator {
     
     fileprivate let presenter: UINavigationController
+    fileprivate var modalPresenter: UINavigationController!
     var childrenCoordinators: [Coordinator]
     
     fileprivate var creationFrameViewController: TaskCreationFrameViewController!
+    fileprivate var tagCollectionViewController: TagCollectionViewController!
     fileprivate var newTaskViewController: NewTaskViewController!
     fileprivate var moreOptionsViewController: MoreOptionsViewController!
     
@@ -51,17 +53,22 @@ class NewTaskCoordinator: Coordinator {
     }
     
     func start() {
+        // tagCollection
+        self.tagCollectionViewController = TagCollectionViewController.instantiate()
+        let tagCollectionViewModel = TagCollectionViewModelImpl(model: tagModel, filtering: false, selectedTags: [])
+        tagCollectionViewModel.delegate = self
+        tagCollectionViewController.viewModel = tagCollectionViewModel
+        
         // new task (title)
         self.newTaskViewController = NewTaskViewController.instantiate()
         let newTaskViewModel = NewTaskViewModel()
-        
         newTaskViewModel.delegate = newTaskViewController
         newTaskViewController.viewModel = newTaskViewModel
         
         // more options
         moreOptionsViewController = MoreOptionsViewController.instantiate()
-        let moreOptionsViewModel: MoreOptionsViewModel = MoreOptionsViewModel()
-        
+        let moreOptionsViewModel = MoreOptionsViewModel()
+        moreOptionsViewModel.UIDelegate = moreOptionsViewController
         moreOptionsViewController!.viewModel = moreOptionsViewModel
         
         moreOptionsViewModel.UIDelegate = moreOptionsViewController
@@ -72,20 +79,22 @@ class NewTaskCoordinator: Coordinator {
                                                            moreOptionsViewModel: moreOptionsViewModel,
                                                            newTaskViewModel: newTaskViewController.viewModel)
         creationFrameViewModel.delegate = self
-        
         creationFrameViewController.viewModel = creationFrameViewModel
         
-        homeScreen.setupAddTask(viewController: creationFrameViewController)
-        self.creationFrameViewController.present(self.newTaskViewController!)
-        creationFrameViewController.present(moreOptionsViewController!)
+//        homeScreen.setupAddTask(viewController: creationFrameViewController)
         
-        moreOptionsViewController.accessibilityElementsHidden = true
+        
+//        moreOptionsViewController.accessibilityElementsHidden = true
+        let modalPresenter = UINavigationController(rootViewController: creationFrameViewController)
+        self.modalPresenter = modalPresenter
+        configureModalPresenter()
+        presenter.present(modalPresenter, animated: true, completion: nil)
     }
     
     func edit(_ task: Task) {
         selectedTags = task.allTags
         creationFrameViewController.viewModel.task = task
-        homeScreen.prepareToPresentAddTask()
+//        homeScreen.prepareToPresentAddTask()
     }
     
     func endAddTask() {
@@ -105,8 +114,28 @@ class NewTaskCoordinator: Coordinator {
         newTagCoordinator.start()
     }
     
+    fileprivate func showEditTag(_ tag: Tag) {
+        let editTagCoordinator = NewTagCoordinator(tag: tag,
+                                                   presenter: presenter,
+                                                   model: tagModel)
+        editTagCoordinator.delegate = self
+        addChild(coordinator: editTagCoordinator)
+        editTagCoordinator.start()
+    }
+    
     func update(selectedTags: [Tag]) {
         creationFrameViewController.viewModel.set(tags: selectedTags)
+    }
+    
+    private func configureModalPresenter() {
+        modalPresenter.transitioningDelegate = self
+        modalPresenter.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        modalPresenter.navigationBar.shadowImage = UIImage()
+        modalPresenter.navigationBar.prefersLargeTitles = true
+        modalPresenter.navigationBar.isTranslucent = true
+        modalPresenter.view.backgroundColor = .clear
+        modalPresenter.navigationBar.largeTitleTextAttributes =
+            [ NSAttributedString.Key.font : UIFont.font(sized: 34, weight: .bold, with: .largeTitle, fontName: .barlow) ]
     }
 }
 
@@ -124,14 +153,58 @@ extension NewTaskCoordinator: CoordinatorDelegate {
 }
 
 extension NewTaskCoordinator: TaskCreationDelegate {
+    
+    func viewDidLoad() {
+        creationFrameViewController.present(newTaskViewController)
+        creationFrameViewController.present(moreOptionsViewController)
+        creationFrameViewController.present(tagCollectionViewController)
+    }
+    
+    func didCreateTask() {
+//        homeScreen.prepareToHideAddTask()
+    }
+    
+    func didTapAddTask() {
+//        homeScreen.prepareToPresentAddTask()
+    }
+    
+    func didPanAddTask() {
+//        homeScreen.didPanAddTask()
+    }
+    
+    func shouldPresentViewForDateInput() {
+        showDateInput()
+    }
+    
+    func shouldPresentViewForLocationInput() {
+        showLocationInput()
+    }
+    
+    func shouldPresentViewForNotesInput() {
+        showNotesInput()
+    }
+    
     func shouldPresentMoreOptions() {
-        homeScreen.prepareToPresentMoreOptions()
-        moreOptionsViewController.accessibilityElementsHidden = false
+//        homeScreen.prepareToPresentMoreOptions()
+//        moreOptionsViewController.accessibilityElementsHidden = false
     }
     
     func shouldHideMoreOptions() {
-        homeScreen.prepareToPresentAddTask()
-        moreOptionsViewController.accessibilityElementsHidden = true
+//        homeScreen.prepareToPresentAddTask()
+//        moreOptionsViewController.accessibilityElementsHidden = true
+    }
+}
+
+extension NewTaskCoordinator: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        print("HELP")
+        return TaskCreationFramePresentAnimationController()
+    }
+}
+
+extension NewTaskCoordinator: TagCollectionViewModelDelegate {
+    func willUpdate(tag: Tag) {
+        showEditTag(tag)
     }
     
     func shouldEscape() {
