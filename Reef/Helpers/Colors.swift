@@ -20,8 +20,17 @@ extension UIColor {
         static var shortcutButtonsColor: UIColor { return UIColor.black }
         //swiftlint:disable nesting
         struct Calendar {
-            static let dateOffCurrentMonth = UIColor(red: 0, green: 0, blue: 0, alpha: 0.05)
-            static let deselectedDate = UIColor.black
+            static let dateOffCurrentMonth: UIColor = {
+                var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+                DateInput.defaultColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+                return UIColor(red: red, green: green, blue: blue, alpha: 0.3)
+            }()
+            static let unselectableDate: UIColor = {
+                var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+                DateInput.defaultColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+                return UIColor(red: red, green: green, blue: blue, alpha: 0.1)
+            }()
+            static let deselectedDate = DateInput.defaultColor
             static let deselectedDateBackground = UIColor.clear
             static let selectedDate = UIColor.white
             static var selectedDateBackground: UIColor { return DateInput.defaultColor }

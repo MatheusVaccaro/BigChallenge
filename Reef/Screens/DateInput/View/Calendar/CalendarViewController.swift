@@ -68,7 +68,7 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
     
     func calendarSizeForMonths(_ calendar: JTAppleCalendarView?) -> MonthSize? {
         // TODO Make this accessibility-friendly
-        return MonthSize(defaultSize: 25)
+        return MonthSize(defaultSize: 20)
     }
     
     func calendar(_ calendar: JTAppleCalendarView, headerViewForDateRange range: (start: Date, end: Date),

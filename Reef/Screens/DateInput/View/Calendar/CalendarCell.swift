@@ -48,7 +48,7 @@ class CalendarCell: JTAppleCell {
         let isSelectable = calendar.calendarDelegate?.calendar(calendar, shouldSelectDate: cellState.date,
                                                                cell: self, cellState: cellState) ?? true
         guard isSelectable else {
-            dayLabel.textColor = UIColor.DateInput.Calendar.dateOffCurrentMonth
+            dayLabel.textColor = UIColor.DateInput.Calendar.unselectableDate
             return
         }
         
@@ -73,7 +73,7 @@ class CalendarCell: JTAppleCell {
         if animated {
             setBackgroundColor(to: selectedBackgroundColor)
         } else {
-            CATransaction.disableAnimationsIn { setBackgroundColor(to: selectedBackgroundColor) }
+            CATransaction.disableAnimations { setBackgroundColor(to: selectedBackgroundColor) }
         }
         
         // Change label visuals
@@ -86,7 +86,7 @@ class CalendarCell: JTAppleCell {
         if animated {
             setBackgroundColor(to: deselectedBackgroundColor)
         } else {
-            CATransaction.disableAnimationsIn { setBackgroundColor(to: deselectedBackgroundColor) }
+            CATransaction.disableAnimations { setBackgroundColor(to: deselectedBackgroundColor) }
         }
         
         // Change label visuals

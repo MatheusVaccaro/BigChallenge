@@ -121,3 +121,6 @@
 
 /* prompt when requesting faceID to unlock private tag */
 "faceIDPermisson" = "";
+
+/* Preposition that connects calendar date to time of day. */
+"dateInputPreposition" = "at";
