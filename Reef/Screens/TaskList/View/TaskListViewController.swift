@@ -154,7 +154,7 @@ public class TaskListViewController: UIViewController {
 extension TaskListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let task = viewModel.task(for: indexPath)
-        viewModel.shouldEditTask.onNext(task)
+        viewModel.shouldGoToEdit(task)
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -263,6 +263,20 @@ extension TaskListViewController: UNUserNotificationCenterDelegate {
 }
 
 extension TaskListViewController: TaskCellDelegate {
+    public func edit(_ cell: TaskTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let task = viewModel.task(for: indexPath)
+        
+        viewModel.shouldGoToEdit(task)
+    }
+    
+    public func delete(_ cell: TaskTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let task = viewModel.task(for: indexPath)
+        viewModel.delete(task)
+    }
+    
+    
     public func shouldUpdateSize(of cell: TaskTableViewCell) {
         UIView.performWithoutAnimation {
             tableView.beginUpdates()

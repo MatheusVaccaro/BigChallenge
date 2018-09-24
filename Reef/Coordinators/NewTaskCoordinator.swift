@@ -144,6 +144,11 @@ extension NewTaskCoordinator: CoordinatorDelegate {
 }
 
 extension NewTaskCoordinator: TaskCreationDelegate {
+    func shouldEscape() {
+        homeScreen.prepareToHideAddTask()
+        endAddTask()
+    }
+    
     func didCreateTask() {
         homeScreen.prepareToHideAddTask()
     }

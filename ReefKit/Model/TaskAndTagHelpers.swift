@@ -32,6 +32,7 @@ extension Tag: Comparable {
 
 public extension Task {
     public var allTags: [Tag] {
+        guard tags != nil else { return [] }
         return tags!.allObjects as! [Tag] //swiftlint:disable:this force_cast
     }
     

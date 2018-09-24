@@ -12,6 +12,24 @@ extension Date {
     static func now() -> Date {
 		return DateGenerator.shared?.now ?? Date()
     }
+    
+    func string(with format: String) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateFormat = format
+        let dateStr = dateFormatter.string(from: self)
+        
+        return dateStr
+    }
+    
+    var accessibilityDescription: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateStyle = .full
+        let dateStr = dateFormatter.string(from: self)
+        
+        return dateStr
+    }
 }
 
 class DateGenerator {

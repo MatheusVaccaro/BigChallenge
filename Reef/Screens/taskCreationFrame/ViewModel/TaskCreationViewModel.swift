@@ -14,6 +14,7 @@ protocol TaskCreationDelegate: class {
     func didTapAddTask()
     func didPanAddTask()
     func didCreateTask()
+    func shouldEscape()
     func shouldPresentViewForLocationInput()
     func shouldPresentViewForDateInput()
     func shouldPresentViewForNotesInput()
@@ -48,6 +49,10 @@ class TaskCreationViewModel {
     
     func set(tags: [Tag]) {
         attributes[.tags] = tags
+    }
+    
+    func performEscape() {
+        delegate?.shouldEscape()
     }
 }
 

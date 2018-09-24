@@ -84,6 +84,13 @@ class TaskCreationFrameViewController: UIViewController {
 
 }
 
+extension TaskCreationFrameViewController {
+    override func accessibilityPerformEscape() -> Bool {
+        viewModel.performEscape()
+        return true
+    }
+}
+
 extension TaskCreationFrameViewController: StoryboardInstantiable {
     static var viewControllerID: String {
         return "taskCreationFrame"

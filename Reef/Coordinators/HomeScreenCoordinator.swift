@@ -38,12 +38,12 @@ class HomeScreenCoordinator: Coordinator {
         self.selectedTags = selectedTags
         
         self.tagCollectionViewModelType = TagCollectionViewModelImpl.self
-        self.taskListViewModelType = TaskListViewModelImpl.self
+        self.taskListViewModelType = TaskListViewModel.self
         
         self.childrenCoordinators = []
         
         self.remindersImporter = RemindersImporter(taskModel: taskModel, tagModel: tagModel)
-//        self.remindersImporter.importIfGranted()
+        //        self.remindersImporter.importIfGranted() TODO: fix
         
         self.taskModel.delegate = self
     }

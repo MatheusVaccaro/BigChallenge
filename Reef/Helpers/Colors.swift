@@ -9,13 +9,17 @@
 import UIKit
 
 extension UIColor {
+    static let largeTitleColor: UIColor =
+        UIColor(red: 63/255.0, green: 69/255.0, blue: 79/255.0, alpha: 1)
+    
+    
     static let backGroundGradient: [CGColor] = [
         UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1).cgColor,
         UIColor(red: 235/255, green: 239/255, blue: 250/255, alpha: 1).cgColor
     ]
     
     struct DateInput {
-        static let defaultColor: UIColor = UIColor(red: 63/255.0, green: 69/255.0, blue: 79/255.0, alpha: 1)
+        static let defaultColor: UIColor = UIColor.largeTitleColor
         
         static var shortcutButtonsColor: UIColor { return defaultColor }
         //swiftlint:disable nesting

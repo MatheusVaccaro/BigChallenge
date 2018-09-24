@@ -11,9 +11,7 @@ import RxSwift
 import ReefKit
 
 public class TaskCellViewModel {
-    
     var taskIsCompleted: Bool { return task.isCompleted }
-    
     public var taskObservable: PublishSubject<Task>
     
     private var task: Task
@@ -27,8 +25,8 @@ public class TaskCellViewModel {
         return task.title!
     }()
     
-    lazy var tagsDescription: String = {
-        guard !task.tags!.allObjects.isEmpty else { return "" }
+    lazy var tagsDescription: String? = {
+        guard !task.tags!.allObjects.isEmpty else { return nil }
         var ans = ""
         
         let tagArray = task.allTags
@@ -43,6 +41,18 @@ public class TaskCellViewModel {
         return ans
     }()
     
+    func dateString(with format: String) -> String? {
+        guard let date = task.dates.min() else { return nil }
+    
+        return date.string(with: format)
+    }
+    
+    lazy var accessibilityDateString: String? = {
+        guard let date = task.dates.min() else { return nil }
+        
+        return date.accessibilityDescription
+    }()
+    
     var checkButtonGradient: [CGColor] {
         return task.allTags.first?.colors
             ?? [UIColor.black.cgColor, UIColor.black.cgColor]
@@ -54,4 +64,15 @@ public class TaskCellViewModel {
         
         taskObservable.onNext(task)
     }
+    
+    // MARK: - Accessibility
+    lazy var locationDescription: String? = {
+        guard !task.regions.isEmpty else { return nil }
+        
+        return "set to \(task.regions.count) locations" //TODO: localize
+    }()
+    
+    let voiceOverHint: String = "voiceOverHint" //TODO: tap to complete / uncomplete
+    let editActionTitle: String = "editActionTitle"
+    let deleteActionTitle: String = "deleteActionTitle"
 }
