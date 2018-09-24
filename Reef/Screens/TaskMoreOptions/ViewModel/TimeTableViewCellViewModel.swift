@@ -38,7 +38,7 @@ extension IconCellPresentable where Self: DateInputViewModelProtocol {
     }
     
     var voiceOverValue: String? {
-        if date.value != nil {
+        if wasLastDateNonnil {
             return subtitle
         } else {
             return nil

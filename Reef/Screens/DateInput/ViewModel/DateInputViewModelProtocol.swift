@@ -28,6 +28,9 @@ protocol DateInputViewModelProtocol: IconCellPresentable {
     /** The last frequency value selected. */
     var frequency: BehaviorSubject<NotificationOptions.Frequency?> { get }
     
+    /** Convenience property to bypass RX. */
+    var wasLastDateNonnil: Bool { get }
+    
     func selectCalendarDate(_ calendarDate: DateComponents)
     func selectTimeOfDay(_ timeOfDay: DateComponents)
     func select(frequency: NotificationOptions.Frequency)

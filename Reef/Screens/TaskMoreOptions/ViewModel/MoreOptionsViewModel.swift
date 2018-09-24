@@ -11,9 +11,8 @@ import CoreLocation
 import ReefKit
 
 protocol MoreOptionsViewModelDelegate: class {
-    func moreOptionsViewModel(_ moreOptionsViewModel: MoreOptionsViewModel,
-                              locationInputViewModel: LocationInputViewModel,
-                              didFind location: CLCircularRegion, arriving: Bool)
+    func locationInput(_ locationInputViewModel: LocationInputViewModel,
+                                didFind location: CLCircularRegion, arriving: Bool)
     
     func moreOptionsViewModel(_ moreOptionsViewModel: MoreOptionsViewModel,
                               dateInputViewModel: DateInputViewModelProtocol,
@@ -66,7 +65,7 @@ class MoreOptionsViewModel {
 extension MoreOptionsViewModel: LocationInputDelegate {
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
                        didFind location: CLCircularRegion, arriving: Bool) {
-        delegate?.moreOptionsViewModel(self, locationInputViewModel: locationInputViewModel,
+        delegate?.locationInput(locationInputViewModel,
                                        didFind: location, arriving: arriving)
     }
 }

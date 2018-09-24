@@ -19,6 +19,8 @@ class DateInputViewModel: DateInputViewModelProtocol {
     private(set) var date: Observable<Date?>
     private(set) var frequency: BehaviorSubject<NotificationOptions.Frequency?>
     
+    private(set) var wasLastDateNonnil: Bool
+    
     private(set) var tomorrowShortcutText: BehaviorSubject<String>
     private(set) var nextWeekShortcutText: BehaviorSubject<String>
     private(set) var nextMonthShortcutText: BehaviorSubject<String>
@@ -37,6 +39,8 @@ class DateInputViewModel: DateInputViewModelProtocol {
         self.timeOfDay = BehaviorSubject(value: timeOfDay)
         self.frequency = BehaviorSubject(value: frequency)
         
+        self.wasLastDateNonnil = false
+        
         self.tomorrowShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.tomorrowShortcut)
         self.nextWeekShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.nextWeekShortcut)
         self.nextMonthShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.nextMonthShortcut)
@@ -54,6 +58,12 @@ class DateInputViewModel: DateInputViewModelProtocol {
                 
                 return date
             }
+        
+        date.subscribe(onNext: { date in
+        		self.wasLastDateNonnil = date != nil
+        	})
+            .disposed(by: disposeBag)
+        
         setupDateDelegate()
 
         #if DEBUG
