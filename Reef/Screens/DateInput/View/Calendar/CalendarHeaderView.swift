@@ -33,7 +33,6 @@ class CalendarHeaderView: JTAppleCollectionReusableView {
         for label in labels {
             label.text = ""
             label.textColor = UIColor.DateInput.defaultColor
-//            label.alpha = 0
         }
     }
 }

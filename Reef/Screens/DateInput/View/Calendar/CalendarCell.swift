@@ -40,15 +40,23 @@ class CalendarCell: JTAppleCell {
         setupBackgroundCircleLayer()
     }
     
-    func configure(with cellState: CellState) {
+    func configure(with cellState: CellState, for calendar: JTAppleCalendarView) {
         let day = Calendar.current.component(.day, from: cellState.date)
         dayLabel.text = "\(day)"
         
+        // Configure selectable visuals
+        let isSelectable = calendar.calendarDelegate?.calendar(calendar, shouldSelectDate: cellState.date,
+                                                               cell: self, cellState: cellState) ?? true
+        guard isSelectable else {
+            dayLabel.textColor = UIColor.DateInput.Calendar.dateOffCurrentMonth
+            return
+        }
+        
         // Configure "today" visuals
         if Calendar.current.isDateInToday(cellState.date) {
-            backgroundCircleLayer.strokeColor = UIColor.DateInput.defaultColor.cgColor
+            dayLabel.font = UIFont.font(sized: 18, weight: .bold, with: .body)
         } else {
-            backgroundCircleLayer.strokeColor = UIColor.clear.cgColor
+            dayLabel.font = UIFont.font(sized: 18, weight: .regular, with: .body)
         }
         
         // Configure selection visuals

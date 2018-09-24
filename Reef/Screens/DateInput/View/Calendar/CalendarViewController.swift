@@ -33,7 +33,6 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource {
             UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         // TODO Figure out how to calculate the optimal value for cellSize and make it accessibility-friendly
         calendar.cellSize = (calendar.frame.width - 3 * calendar.minimumLineSpacing)/7
-        calendar.selectDates([Date()])
     }
     
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
@@ -55,7 +54,7 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         let cell =  calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath)
         guard let calendarCell = cell as? CalendarCell else { return cell }
         
-        calendarCell.configure(with: cellState)
+        calendarCell.configure(with: cellState, for: calendar)
         
         return calendarCell
     }
@@ -64,7 +63,7 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
                   forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
         guard let calendarCell = cell as? CalendarCell else { return }
         
-        calendarCell.configure(with: cellState)
+        calendarCell.configure(with: cellState, for: calendar)
     }
     
     func calendarSizeForMonths(_ calendar: JTAppleCalendarView?) -> MonthSize? {
@@ -87,7 +86,6 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         guard let calendarCell = cell as? CalendarCell else { return }
         
         calendarCell.select(basedOn: cellState)
-//        calendarCell.configure(with: cellState)
         
         delegate?.calendar(calendar, didSelectDate: date, cell: cell, cellState: cellState)
     }
@@ -97,9 +95,15 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         guard let calendarCell = cell as? CalendarCell else { return }
         
         calendarCell.deselect(basedOn: cellState)
-//        calendarCell.configure(with: cellState)
         
         delegate?.calendar(calendar, didDeselectDate: date, cell: cell, cellState: cellState)
+    }
+    
+    func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date,
+                  cell: JTAppleCell?, cellState: CellState) -> Bool {
+        // Check if selected date is after today
+        let comparisonResult = Calendar.current.compare(Date.now(), to: date, toGranularity: .day)
+        return comparisonResult == .orderedAscending || comparisonResult == .orderedSame
     }
 }
 
