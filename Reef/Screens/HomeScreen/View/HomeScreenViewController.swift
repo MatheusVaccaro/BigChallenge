@@ -12,15 +12,6 @@ import RxCocoa
 import RxSwift
 import UserNotifications
 
-enum State {
-    case collapsed
-    case expanded
-}
-
-prefix func ! (_ state: State) -> State {
-    return state == State.expanded ? .collapsed : .expanded
-}
-
 class HomeScreenViewController: UIViewController {
     
     // MARK: - Properties
@@ -53,6 +44,21 @@ class HomeScreenViewController: UIViewController {
     @IBOutlet weak var newTaskView: UIView!
     @IBOutlet weak var addTaskViewTopConstraint: NSLayoutConstraint!
     
+    // MARK: - Animations Properties
+    private let duration: TimeInterval = 0.5
+    private let animationDistance: CGFloat = 38
+    private var runningAnimators = [UIViewPropertyAnimator]()
+    private var progressWhenInterrupted: CGFloat = 0
+    
+    private var state: State = .collapsed {
+        didSet {
+            print("Current State: \(state)")
+        }
+    }
+    
+    // MARK: - Animation IBOutlets
+    @IBOutlet weak var pullDownView: UIView!
+    @IBOutlet weak var pullDownViewTopConstraint: NSLayoutConstraint!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -76,88 +82,8 @@ class HomeScreenViewController: UIViewController {
         observeClickedAddTag()
         userActivity = viewModel.userActivity
         
-        
-        pullDownView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:))))
+        addGestureRecognizersForAnimations()
     }
-    
-    // MARK: - START ANIMATION
-    // WWDC Keynote Reference: https://developer.apple.com/videos/play/wwdc2017/230/
-    // Github Reference: https://github.com/cgoldsby/WWDC-2017-Session-230-Advance-Animations-with-UIKit/blob/master/WWDC%202017%20Advanced%20Animations%20with%20UIKit/ViewController.swift
-    @IBOutlet weak var pullDownView: UIView!
-    @IBOutlet weak var pullDownViewTopConstraint: NSLayoutConstraint!
-    
-    var state: State = .collapsed {
-        didSet {
-            print("Current State: \(state)")
-        }
-    }
-    let duration: TimeInterval = 0.5
-    let animationDistance: CGFloat = 38
-    
-    // Tracks all runnings animators
-    var runningAnimators = [UIViewPropertyAnimator]()
-    
-    // Tracks animation progress when interupted for all animators
-    var progressWhenInterrupted = [UIViewPropertyAnimator : CGFloat]()
-    
-    @objc func handleTapGesture(_ recognizer: UITapGestureRecognizer) {
-        animateOrReverseRunningTransition(state: !state, duration: duration)
-    }
-    
-    // Perform all animations with animators if not already running
-    func animateTransitionIfNeeded(state: State, duration: TimeInterval) {
-        guard runningAnimators.isEmpty else { return }
-        addPullDownAnimation(for: state, with: duration)
-    }
-    
-    // Starts transition if necessary or reverses it on tap
-    func animateOrReverseRunningTransition(state: State, duration: TimeInterval) {
-        if runningAnimators.isEmpty {
-            animateTransitionIfNeeded(state: state, duration: duration)
-            startAnimators()
-        } else {
-            reverseRunningAnimators()
-        }
-    }
-    
-    func addPullDownAnimation(for state: State, with duration: TimeInterval) {
-        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) { [weak self] in
-            switch state {
-            case .collapsed:
-                self?.pullDownViewTopConstraint.constant = -22
-            case .expanded:
-                self?.pullDownViewTopConstraint.constant = 16
-                
-            }
-            self?.view.layoutIfNeeded()
-        }
-        animator.addCompletion { [weak self] status in
-            switch status {
-            case .end:
-                self?.state = state
-            default:
-                break
-            }
-            self?.runningAnimators.removeAll()
-        }
-        runningAnimators.append(animator)
-    }
-    
-    private func startAnimators() {
-        // Added setNeedsLayout to fix a bug where animations would not play if they were reversed
-        view.setNeedsLayout()
-        for animator in runningAnimators {
-            animator.startAnimation()
-        }
-    }
-    
-    private func reverseRunningAnimators() {
-        for animator in runningAnimators {
-            animator.isReversed = !animator.isReversed
-        }
-    }
-
-    // MARK: END ANIMATION
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         configureEmptyState()
@@ -487,5 +413,152 @@ extension HomeScreenViewController {
         } else {
             return false
         }
+    }
+}
+
+// MARK: - Animations
+// WWDC Keynote Reference: https://developer.apple.com/videos/play/wwdc2017/230/
+// Github Reference: https://github.com/kane-liu/AdvancedAnimations
+
+private enum State {
+    case collapsed
+    case expanded
+}
+
+private prefix func ! (_ state: State) -> State {
+    return state == State.expanded ? .collapsed : .expanded
+}
+
+extension HomeScreenViewController {
+    
+    func addGestureRecognizersForAnimations() {
+        pullDownView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:))))
+        pullDownView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:))))
+    }
+    
+    @objc private func handleTapGesture(_ recognizer: UITapGestureRecognizer) {
+        animateOrReverseRunningTransition(state: !state, duration: duration)
+    }
+    
+    @objc private func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
+        let translation = recognizer.translation(in: pullDownView)
+        let fraction = fractionComplete(state: !state, translation: translation)
+        
+        switch recognizer.state {
+        case .began:
+            startInteractiveTransition(state: !state, duration: duration)
+        case .changed:
+            updateInteractiveTransition(fractionComplete: fraction)
+        case .ended:
+            continueInteractiveTransition(fractionComplete: fraction)
+        default:
+            break
+        }
+    }
+    
+    // Perform all animations with animators if not already running
+    private func animateTransitionIfNeeded(state: State, duration: TimeInterval) {
+        guard runningAnimators.isEmpty else { return }
+        addPullDownAnimation(for: state, with: duration)
+    }
+    
+    // Starts transition if necessary or reverses it on tap
+    private func animateOrReverseRunningTransition(state: State, duration: TimeInterval) {
+        if runningAnimators.isEmpty {
+            animateTransitionIfNeeded(state: state, duration: duration)
+            startAnimators()
+        } else {
+            reverseRunningAnimators()
+        }
+    }
+    
+    // Starts transition if necessary and pauses on pan .began
+    private func startInteractiveTransition(state: State, duration: TimeInterval) {
+        animateTransitionIfNeeded(state: state, duration: duration)
+        pauseAnimators()
+        progressWhenInterrupted = runningAnimators.first?.fractionComplete ?? 0
+    }
+    
+    // Scrubs transition on pan .changed
+    private func updateInteractiveTransition(fractionComplete: CGFloat) {
+        runningAnimators.forEach {
+            $0.fractionComplete = fractionComplete
+            
+        }
+    }
+    
+    // Continues or reverse transition on pan .ended
+    private func continueInteractiveTransition(fractionComplete: CGFloat) {
+        let cancel: Bool = fractionComplete < 0.35
+        
+        if cancel {
+            runningAnimators.forEach {
+                $0.isReversed = !$0.isReversed
+                $0.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+            }
+            return
+        }
+        
+        let timing = UICubicTimingParameters(animationCurve: .easeOut)
+        runningAnimators.forEach {
+            $0.continueAnimation(withTimingParameters: timing, durationFactor: 0)
+        }
+    }
+    
+    private func addPullDownAnimation(for state: State, with duration: TimeInterval) {
+        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) { [weak self] in
+            switch state {
+            case .collapsed:
+                self?.pullDownViewTopConstraint.constant = -22
+            case .expanded:
+                self?.pullDownViewTopConstraint.constant = 16
+                
+            }
+            self?.view.layoutIfNeeded()
+        }
+        animator.addCompletion { [weak self] status in
+            switch status {
+            case .end:
+                self?.state = state
+            default:
+                break
+            }
+            self?.runningAnimators.removeAll()
+        }
+        runningAnimators.append(animator)
+    }
+    
+    private func startAnimators() {
+        // Added setNeedsLayout to fix a bug where animations would not play if they were reversed
+        view.setNeedsLayout()
+        for animator in runningAnimators {
+            animator.startAnimation()
+        }
+    }
+    
+    private func reverseRunningAnimators() {
+        for animator in runningAnimators {
+            animator.isReversed = !animator.isReversed
+        }
+    }
+    
+    private func pauseAnimators() {
+        // Added setNeedsLayout to fix a bug where animations would not play if they were reversed
+        view.setNeedsLayout()
+        for animator in runningAnimators {
+            animator.pauseAnimation()
+        }
+    }
+    
+    private func fractionComplete(state: State, translation: CGPoint) -> CGFloat {
+        let translationY: CGFloat
+        if state == .expanded {
+            translationY = translation.y
+        } else {
+            translationY = -translation.y
+        }
+        
+        let fractionComplete = translationY / animationDistance + progressWhenInterrupted
+        return fractionComplete
     }
 }
