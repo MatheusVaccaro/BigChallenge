@@ -11,6 +11,8 @@ import ReefKit
 
 public protocol TaskCellDelegate: class {
     func shouldUpdateSize(of cell: TaskTableViewCell)
+    func edit(_ cell: TaskTableViewCell)
+    func delete(_ cell: TaskTableViewCell)
 }
 
 public enum CellType {
@@ -96,5 +98,78 @@ public class TaskTableViewCell: UITableViewCell {
     
     fileprivate func configureAccessibility() {
         checkButton.accessibilityIgnoresInvertColors = true
+    }
+}
+
+extension TaskTableViewCell { // MARK: - Accessibility
+    
+    public override var accessibilityLabel: String? {
+        get {
+            return viewModel!.title
+        }
+        set { }
+    }
+    
+    public override var accessibilityValue: String? {
+        get {
+            
+            var ans = ""
+            
+            if let tagsDescription = viewModel!.tagsDescription {
+                ans.append(tagsDescription)
+            }
+            
+            if let dateDescription = viewModel!.dateString(with: "dd mmmm yyyy") {
+                ans.append(", \(dateDescription)")
+            }
+            
+            if let locationDescription = viewModel!.locationDescription {
+                ans.append(", \(locationDescription)")
+            }
+            
+            return ans
+        }
+        set { }
+    }
+    
+    public override var accessibilityHint: String? {
+        get {
+            return viewModel!.voiceOverHint
+        }
+        set { }
+    }
+    
+    public override var accessibilityCustomActions: [UIAccessibilityCustomAction]? {
+        get {
+            let editAction = UIAccessibilityCustomAction(name: viewModel!.editActionTitle,
+                                                         target: self,
+                                                         selector: #selector(performEditAction))
+            let deleteAction = UIAccessibilityCustomAction(name: viewModel!.deleteActionTitle,
+                                                           target: self,
+                                                           selector: #selector(performDeleteAction))
+            
+            return [editAction, deleteAction]
+        }
+        set { }
+    }
+    
+    public override var accessibilityTraits: UIAccessibilityTraits {
+        get {
+            return UIAccessibilityTraits.allowsDirectInteraction
+        }
+        set { }
+    }
+    
+    public override func accessibilityActivate() -> Bool {
+        didPressCheckButton(checkButton)
+        return true
+    }
+    
+    @objc private func performEditAction() {
+        delegate?.edit(self)
+    }
+    
+    @objc private func performDeleteAction() {
+        delegate?.delete(self)
     }
 }

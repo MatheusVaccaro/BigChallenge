@@ -13,7 +13,7 @@ import RxCocoa
 import RxSwift
 import ReefKit
 
-public class TaskListViewModelImpl: TaskListViewModel {
+public class TaskListViewModel {
     
     var tasksObservable: BehaviorSubject<[[Task]]>
     var taskCompleted: PublishSubject<Task>
@@ -142,6 +142,10 @@ public class TaskListViewModelImpl: TaskListViewModel {
     
     func shouldGoToEdit(_ task: Task) {
         self.shouldEditTask.onNext(task)
+    }
+    
+    func delete(_ task: Task) {
+        model.delete(task)
     }
     
     func completeTask(taskID: UUID) {
