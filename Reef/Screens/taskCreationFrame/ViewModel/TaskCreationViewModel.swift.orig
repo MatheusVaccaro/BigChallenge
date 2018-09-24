@@ -77,7 +77,8 @@ extension TaskCreationViewModel: NewTaskViewModelOutputDelegate {
 }
 
 extension TaskCreationViewModel: MoreOptionsViewModelDelegate {
-  
+<<<<<<< HEAD
+    
     func shouldPresentViewForLocationInput() {
         delegate?.shouldPresentViewForLocationInput()
     }
@@ -93,6 +94,9 @@ extension TaskCreationViewModel: MoreOptionsViewModelDelegate {
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
                        didFind location: CLCircularRegion, arriving: Bool) {
         
+=======
+    func moreOptionsViewModel(_ moreOptionsViewModel: MoreOptionsViewModel, locationInputViewModel: LocationInputViewModel, didFind location: CLCircularRegion, arriving: Bool) {
+>>>>>>> Refactor DateInput date propagation by delegate
         attributes[.region] = location
         attributes[.isArriving] = arriving
     }
@@ -105,7 +109,16 @@ extension TaskCreationViewModel: MoreOptionsViewModelDelegate {
         //TODO: implement frequency
     }
     
+<<<<<<< HEAD
     func notesInput(_ notesInputViewModel: NotesInputViewModel, didUpdateNotes notes: String) {
         attributes[.notes] = notes
+=======
+    func shouldPresentViewForLocationInput() {
+        delegate?.shouldPresentViewForLocationInput()
+    }
+    
+    func shouldPresentViewForDateInput() {
+        delegate?.shouldPresentViewForDateInput()
+>>>>>>> Refactor DateInput date propagation by delegate
     }
 }

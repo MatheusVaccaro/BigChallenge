@@ -15,17 +15,16 @@ extension UIColor {
     ]
     
     struct DateInput {
-        static let defaultColor: UIColor =
-            UIColor(red: 80/255.0, green: 255/255.0, blue: 163/255.0, alpha: 1)
+        static let defaultColor: UIColor = UIColor(red: 63/255.0, green: 69/255.0, blue: 79/255.0, alpha: 1)
         
-        static var shortcutButtonsColor: UIColor {
-            return UIColor.black
-        }
+        static var shortcutButtonsColor: UIColor { return UIColor.black }
         //swiftlint:disable nesting
         struct Calendar {
             static let dateOffCurrentMonth = UIColor(red: 0, green: 0, blue: 0, alpha: 0.05)
             static let deselectedDate = UIColor.black
+            static let deselectedDateBackground = UIColor.clear
             static let selectedDate = UIColor.white
+            static var selectedDateBackground: UIColor { return DateInput.defaultColor }
         }
     }
     

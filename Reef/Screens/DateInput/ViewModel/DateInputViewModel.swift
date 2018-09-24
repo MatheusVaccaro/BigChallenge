@@ -12,88 +12,105 @@ import RxSwift
 class DateInputViewModel: DateInputViewModelProtocol {
     
     weak var delegate: DateInputViewModelDelegate?
+    private let disposeBag = DisposeBag()
     
-    private(set) var date: Variable<DateComponents?>
-    private(set) var timeOfDay: Variable<DateComponents?>
-    private(set) var frequency: Variable<NotificationOptions.Frequency?>
+    private(set) var calendarDate: BehaviorSubject<DateComponents?>
+    private(set) var timeOfDay: BehaviorSubject<DateComponents?>
+    private(set) var date: Observable<Date?>
+    private(set) var frequency: BehaviorSubject<NotificationOptions.Frequency?>
     
-    private(set) var tomorrowShortcutText: Variable<String>
-    private(set) var nextWeekShortcutText: Variable<String>
-    private(set) var nextMonthShortcutText: Variable<String>
+    private(set) var wasLastDateNonnil: Bool
+    
+    private(set) var tomorrowShortcutText: BehaviorSubject<String>
+    private(set) var nextWeekShortcutText: BehaviorSubject<String>
+    private(set) var nextMonthShortcutText: BehaviorSubject<String>
     
     private(set) var twoHoursFromNowShortcutText: BehaviorSubject<String>
     private(set) var thisEveningShortcutText: BehaviorSubject<String>
     private(set) var nextMorningShortcutText: BehaviorSubject<String>
     
-    var task: Task? {
-        didSet {
-            let date = task?.dueDate ?? Date()
-            dateComponents = Calendar.current.dateComponents(Set([.year, .month, .day, .hour, .minute]), from: date)
-        }
-    }
-    
-    init(date: DateComponents? = nil,
-         timeOfDay: DateComponents? = nil,
+    init(calendarDate: DateComponents? = nil, timeOfDay: DateComponents? = nil,
          frequency: NotificationOptions.Frequency? = nil,
          delegate: DateInputViewModelDelegate? = nil) {
         
         self.delegate = delegate
         
-        self.date = Variable(date)
-        self.timeOfDay = Variable(timeOfDay)
-        self.frequency = Variable(frequency)
+        self.calendarDate = BehaviorSubject(value: calendarDate)
+        self.timeOfDay = BehaviorSubject(value: timeOfDay)
+        self.frequency = BehaviorSubject(value: frequency)
         
-        self.tomorrowShortcutText = Variable<String>(Strings.DateInputView.tomorrowShortcut)
-        self.nextWeekShortcutText = Variable<String>(Strings.DateInputView.nextWeekShortcut)
-        self.nextMonthShortcutText = Variable<String>(Strings.DateInputView.nextMonthShortcut)
+        self.wasLastDateNonnil = false
+        
+        self.tomorrowShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.tomorrowShortcut)
+        self.nextWeekShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.nextWeekShortcut)
+        self.nextMonthShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.nextMonthShortcut)
         
         self.twoHoursFromNowShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.twoHoursFromNowShortcut)
         self.thisEveningShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.thisEveningShortcut)
         self.nextMorningShortcutText = BehaviorSubject<String>(value: Strings.DateInputView.nextMorningShortcut)
         
+        self.date = Observable
+            .combineLatest(self.calendarDate, self.timeOfDay) { (calendarDate, timeOfDay) -> Date? in
+                guard let calendarDate = calendarDate, let timeOfDay = timeOfDay else {
+                    return nil
+                }
+                let date = Calendar.current.combine(calendarDate: calendarDate, andTimeOfDay: timeOfDay)
+                
+                return date
+            }
+        
+        date.subscribe(onNext: { date in
+        		self.wasLastDateNonnil = date != nil
+        	})
+            .disposed(by: disposeBag)
+        
+        setupDateDelegate()
+
+        #if DEBUG
         print("+++ INIT DateInputViewModel")
+        #endif
     }
     
+    convenience init() {
+        let now = Date.now()
+        let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: now)
+        
+        self.init(calendarDate: calendarDate, timeOfDay: timeOfDay, frequency: .none)
+    }
+    
+    #if DEBUG
     deinit {
         print("--- DEINIT DateInputViewModel")
     }
+    #endif
     
-    private var dateComponents: DateComponents! = Calendar.current.dateComponents(Set([.year, .month, .day, .hour, .minute]), from: Date()) {
-        didSet {
-            if date.value == nil { date = Variable(dateComponents) }
-            if timeOfDay.value == nil { timeOfDay = Variable(dateComponents) }
-            
-            date.value!.year = dateComponents.year
-            date.value!.month = dateComponents.month
-            date.value!.day = dateComponents.day
-            timeOfDay.value!.hour = dateComponents.hour
-            timeOfDay.value!.minute = dateComponents.minute
-        }
+    private func setupDateDelegate() {
+        date.subscribe(onNext: { date in
+                if let date = date {
+                    self.delegate?.dateInputViewModel(self, didSelectDate: date)
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
-    func selectDate(_ date: DateComponents) {
-        guard let day = date.day, let month = date.month, let year = date.year else { return }
+    func selectCalendarDate(_ calendarDate: DateComponents) {
+        guard let day = calendarDate.day, let month = calendarDate.month, let year = calendarDate.year else { return }
         
-        dateComponents.day = day
-        dateComponents.month = month
-        dateComponents.year = year
+        let calendarDateComponent = DateComponents(year: year, month: month, day: day)
         
-        self.date.value = dateComponents
-        delegate?.dateInputViewModel(self, didSelectDate: dateComponents)
+        self.calendarDate.onNext(calendarDateComponent)
     }
     
     func selectTimeOfDay(_ timeOfDay: DateComponents) {
         guard let hour = timeOfDay.hour, let minute = timeOfDay.minute else { return }
         
-        dateComponents.hour = hour
-        dateComponents.minute = minute
+        let timeOfDayComponent = DateComponents(hour: hour, minute: minute)
         
-        self.timeOfDay.value = dateComponents
-        delegate?.dateInputViewModel(self, didSelectDate: dateComponents)
+        self.timeOfDay.onNext(timeOfDayComponent)
     }
     
     func select(frequency: NotificationOptions.Frequency) {
-    	self.frequency.value = frequency
+    	self.frequency.onNext(frequency)
         delegate?.dateInputViewModel(self, didSelectFrequency: frequency)
     }
     
@@ -104,7 +121,7 @@ class DateInputViewModel: DateInputViewModelProtocol {
         
         let tomorrowComponents = Calendar.current.dateComponents([.year, .month, .day], from: tomorrow)
         
-        selectDate(tomorrowComponents)
+        selectCalendarDate(tomorrowComponents)
     }
     
     func selectNextWeek() {
@@ -113,7 +130,7 @@ class DateInputViewModel: DateInputViewModelProtocol {
                                                    to: today, wrappingComponents: false) else { return }
         
         let nextWeekComponents = Calendar.current.dateComponents([.year, .month, .day], from: nextWeek)
-        selectDate(nextWeekComponents)
+        selectCalendarDate(nextWeekComponents)
     }
     
     func selectNextMonth() {
@@ -122,19 +139,18 @@ class DateInputViewModel: DateInputViewModelProtocol {
                                                     to: today, wrappingComponents: false) else { return }
         
         let nextMonthComponents = Calendar.current.dateComponents([.year, .month, .day], from: nextMonth)
-        selectDate(nextMonthComponents)
+        selectCalendarDate(nextMonthComponents)
     }
     
     func selectTwoHoursFromNow() {
         let today = Date.now()
         guard let twoHoursFromNow = Calendar.current.date(byAdding: DateComponents(hour: 2), to: today) else { return }
         
-        let twoHoursFromNowDateComponents = Calendar.current.dateComponents([.year, .month, .day],
-                                                                            from: twoHoursFromNow)
-        let twoHoursFromNowTimeComponents = Calendar.current.dateComponents([.hour, .minute, .second],
-                                                                            from: twoHoursFromNow)
+        let twoHoursFromNowDateComponents = Calendar.current.calendarDate(from: twoHoursFromNow)
         
-        selectDate(twoHoursFromNowDateComponents)
+        let twoHoursFromNowTimeComponents = Calendar.current.timeOfDay(from: twoHoursFromNow)
+        
+        selectCalendarDate(twoHoursFromNowDateComponents)
         selectTimeOfDay(twoHoursFromNowTimeComponents)
     }
     
@@ -147,10 +163,10 @@ class DateInputViewModel: DateInputViewModelProtocol {
 
         guard let thisEvening = date else { return }
         
-        let thisEveningDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: thisEvening)
-        let thisEveningTimeComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: thisEvening)
+        let thisEveningDateComponents = Calendar.current.calendarDate(from: thisEvening)
+        let thisEveningTimeComponents = Calendar.current.timeOfDay(from: thisEvening)
         
-        selectDate(thisEveningDateComponents)
+        selectCalendarDate(thisEveningDateComponents)
         selectTimeOfDay(thisEveningTimeComponents)
     }
     
@@ -170,10 +186,10 @@ class DateInputViewModel: DateInputViewModelProtocol {
         
         guard let nextMorning = date else { return }
 
-        let nextMorningDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: nextMorning)
-        let nextMorningTimeComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: nextMorning)
+        let nextMorningDateComponents = Calendar.current.calendarDate(from: nextMorning)
+        let nextMorningTimeComponents = Calendar.current.timeOfDay(from: nextMorning)
         
-        selectDate(nextMorningDateComponents)
+        selectCalendarDate(nextMorningDateComponents)
         selectTimeOfDay(nextMorningTimeComponents)
     }
     
@@ -181,6 +197,6 @@ class DateInputViewModel: DateInputViewModelProtocol {
 
 protocol DateInputViewModelDelegate: class {
     //swiftlint:disable next line_length
-    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: DateComponents)
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: Date)
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectFrequency frequency: NotificationOptions.Frequency)
 }

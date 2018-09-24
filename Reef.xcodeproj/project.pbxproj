@@ -101,6 +101,7 @@
 		29320435213632E400E23E72 /* TagCollectionViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29320434213632E400E23E72 /* TagCollectionViewModelImpl.swift */; };
 		2934BCCA21003E0700B6A05A /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2934BCC921003E0700B6A05A /* TaskTests.swift */; };
 		294490EE20FD297200333F11 /* TaskViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294490ED20FD297200333F11 /* TaskViewModelTests.swift */; };
+		296424BB21559A7400480CB4 /* CoreAnimation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296424BA21559A7400480CB4 /* CoreAnimation+Extension.swift */; };
 		2972201F211CCD8F00CF80CE /* DateInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2972201E211CCD8F00CF80CE /* DateInputViewController.swift */; };
 		29722022211CD1AE00CF80CE /* DateInput.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29722021211CD1AE00CF80CE /* DateInput.storyboard */; };
 		29722024211E36CF00CF80CE /* ToggleableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29722023211E36CF00CF80CE /* ToggleableLabel.swift */; };
@@ -342,6 +343,7 @@
 		29320434213632E400E23E72 /* TagCollectionViewModelImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionViewModelImpl.swift; sourceTree = "<group>"; };
 		2934BCC921003E0700B6A05A /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		294490ED20FD297200333F11 /* TaskViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModelTests.swift; sourceTree = "<group>"; };
+		296424BA21559A7400480CB4 /* CoreAnimation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreAnimation+Extension.swift"; sourceTree = "<group>"; };
 		2972201E211CCD8F00CF80CE /* DateInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputViewController.swift; sourceTree = "<group>"; };
 		29722021211CD1AE00CF80CE /* DateInput.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DateInput.storyboard; sourceTree = "<group>"; };
 		29722023211E36CF00CF80CE /* ToggleableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleableLabel.swift; sourceTree = "<group>"; };
@@ -953,6 +955,7 @@
 				22456D2820DC3BB000168894 /* Date+Extension.swift */,
 				29BA68A52120E147009B4AB9 /* Calendar+Extension.swift */,
 				22F23E9F212E452E0064EE05 /* Colors.swift */,
+				296424BA21559A7400480CB4 /* CoreAnimation+Extension.swift */,
 				22D14A1D212CBBF500B15B98 /* ArrayExtension.swift */,
 				226CEA0420E17E87008CEB97 /* Strings.swift */,
 				C25169942139BD6200999BD0 /* UIViewController+Extension.swift */,
@@ -1702,6 +1705,7 @@
 				2972201F211CCD8F00CF80CE /* DateInputViewController.swift in Sources */,
 				226B311D211C954200881E34 /* CreateTagViewController.swift in Sources */,
 				C21EAD0020B741BC005F0F85 /* HomeScreenCoordinator.swift in Sources */,
+				296424BB21559A7400480CB4 /* CoreAnimation+Extension.swift in Sources */,
 				C2901059211E4492008F2807 /* ColorCollectionViewCell.swift in Sources */,
 				C23753B020B6463700C1CE15 /* ApplicationCoordinator.swift in Sources */,
 				C26EC73721544CFA000E9CB9 /* NotesInputViewModel.swift in Sources */,

@@ -135,17 +135,16 @@ class TagCollectionViewCell: UICollectionViewCell {
     }
     
     override func layoutSubviews() {
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        super.layoutSubviews()
-        
-        maskLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        tagUILabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        
-        frame.size.width = tagUILabel.frame.size.width + 8*3
-        gradientLayer.frame = bounds
-        maskLabel.frame = bounds
-        CATransaction.commit()
+        CATransaction.disableAnimationsIn {
+            super.layoutSubviews()
+            
+            maskLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+            tagUILabel.font = UIFont.preferredFont(forTextStyle: .title3)
+            
+            frame.size.width = tagUILabel.frame.size.width + 8*3
+            gradientLayer.frame = bounds
+            maskLabel.frame = bounds
+        }
     }
     
     private func configureAccessibility() {

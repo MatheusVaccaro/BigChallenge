@@ -9,22 +9,42 @@
 import Foundation
 import ReefKit
 
-extension DateInputViewModel {    
+extension DateInputViewModelProtocol {
+    func configure(with task: Task?) {
+        guard let task = task, let dueDate = task.dueDate else { return }
+        
+        let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: dueDate)
+        
+        self.calendarDate.onNext(calendarDate)
+        self.timeOfDay.onNext(timeOfDay)
+    }
+}
+
+extension DateInputViewModel {
     convenience init(with tag: Tag?) {
-        let timeOfDay = Calendar.current.dateComponents([.hour, .minute, .second], from: Date())
         guard let tag = tag else {
-            self.init(timeOfDay: timeOfDay)
+            self.init()
             return
         }
         
         if let triggerDate = tag.notificationOptions.triggerDate {
-            let date = Calendar.current.dateComponents([.year, .month, .day], from: triggerDate)
-            let timeOfDay = Calendar.current.dateComponents([.hour, .minute, .second], from: triggerDate)
+            let date = Calendar.current.calendarDate(from: triggerDate)
+            let timeOfDay = Calendar.current.timeOfDay(from: triggerDate)
             let frequency = tag.notificationOptions.frequency
-            self.init(date: date, timeOfDay: timeOfDay, frequency: frequency)
+            self.init(calendarDate: date, timeOfDay: timeOfDay, frequency: frequency)
             
         } else {
-            self.init(timeOfDay: timeOfDay)
+            self.init()
         }
+    }
+    
+    convenience init(with task: Task?) {
+        guard let task = task, let dueDate = task.dueDate else {
+            self.init()
+            return
+        }
+        
+        let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: dueDate)
+        self.init(calendarDate: calendarDate, timeOfDay: timeOfDay, frequency: nil)
     }
 }

@@ -8,22 +8,37 @@
 
 import Foundation
 import RxSwift
-
-protocol DateInputViewModelProtocol {
+/**
+ A view model for a date picking screen.
+ To use this view model, either subscribe to a specific value (```calendarDate``` or ```timeOfDay```) or subscribe to ```date```, which is the last two combined values of ```calendarDate``` and ```timeOfDay```.
+ Alternatively, you can listen to the changes made to ```date``` using the delegate.
+ 
+ - Note: "Calendar date" refers to a DateComponents object with only year, month and day values;
+ while "Time of day" refers to a DateComponents object with only hour, minute and seconds values.
+ */
+protocol DateInputViewModelProtocol: IconCellPresentable {
     var delegate: DateInputViewModelDelegate? { get set }
     
-    var date: Variable<DateComponents?> { get }
-    var timeOfDay: Variable<DateComponents?> { get }
-    var frequency: Variable<NotificationOptions.Frequency?> { get }
+    /** The last year, month and day values selected. */
+    var calendarDate: BehaviorSubject<DateComponents?> { get }
+    /** The last hour, minute and second values selected */
+    var timeOfDay: BehaviorSubject<DateComponents?> { get }
+    /** The last calendar date and time of day selected, combined. */
+    var date: Observable<Date?> { get }
+    /** The last frequency value selected. */
+    var frequency: BehaviorSubject<NotificationOptions.Frequency?> { get }
     
-    func selectDate(_ date: DateComponents)
+    /** Convenience property to bypass RX. */
+    var wasLastDateNonnil: Bool { get }
+    
+    func selectCalendarDate(_ calendarDate: DateComponents)
     func selectTimeOfDay(_ timeOfDay: DateComponents)
     func select(frequency: NotificationOptions.Frequency)
     
     // MARK: - Date shortcuts
-    var tomorrowShortcutText: Variable<String> { get }
-    var nextWeekShortcutText: Variable<String> { get }
-    var nextMonthShortcutText: Variable<String> { get }
+    var tomorrowShortcutText: BehaviorSubject<String> { get }
+    var nextWeekShortcutText: BehaviorSubject<String> { get }
+    var nextMonthShortcutText: BehaviorSubject<String> { get }
     
     var twoHoursFromNowShortcutText: BehaviorSubject<String> { get }
     var thisEveningShortcutText: BehaviorSubject<String> { get }
