@@ -120,7 +120,7 @@
 "importFromReminders" = "Import existing reminders";
 
 /* prompt when requesting faceID to unlock private tag */
-"faceIDPermisson" = "";
+"faceIDPermisson" = "Unlock private tag";
 
 /* Preposition that connects calendar date to time of day. */
 "dateInputPreposition" = "at";

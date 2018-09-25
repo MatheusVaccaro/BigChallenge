@@ -10,7 +10,7 @@
 
 "NSContactsUsageDescription" = "";
 
-"faceIDPermisson" = "usamos o faceID para desbloquear suas tarefas privadas mais facilmente";
+"NSFaceIDUsageDescription" = "Usamos o faceID para desbloquear suas tarefas privadas mais facilmente";
 
 "NSLocationWhenInUseUsageDescription" = "Reef precisa usar sua localização para lembrar das tarefas proximas a você. Caso não queira esquecer de comprar aquele cereal na próxima vez que estiver no supermercado.";
 
