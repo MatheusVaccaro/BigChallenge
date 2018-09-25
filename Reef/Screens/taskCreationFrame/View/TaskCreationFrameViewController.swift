@@ -9,7 +9,7 @@
 import UIKit
 
 class TaskCreationFrameViewController: UIViewController {
-
+    
     @IBOutlet weak var taskContainerViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var whiteBackgroundView: UIView!
     @IBOutlet weak var tagCollectionView: UIView!
@@ -37,6 +37,18 @@ class TaskCreationFrameViewController: UIViewController {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissViewController)))
         return view
     }()
+    
+    // MARK: - Animations Properties
+    private let duration: TimeInterval = 0.5
+    private let animationDistance: CGFloat = 38
+    private var runningAnimators = [UIViewPropertyAnimator]()
+    private var progressWhenInterrupted: CGFloat = 0
+    
+    private var state: State = .collapsed {
+        didSet {
+            print("Current State: \(state)")
+        }
+    }
     
     func present(_ taskDetailViewController: MoreOptionsViewController) {
         self.taskDetailViewController = taskDetailViewController
@@ -114,16 +126,15 @@ class TaskCreationFrameViewController: UIViewController {
         configureShadows(in: taskDetailView)
         configureShadows(in: taskTitleView)
         
-        
         whiteBackgroundView.layer.zPosition = 10
         tagCollectionView.layer.zPosition = 10
-        
-        
         taskContainerView.layer.zPosition = 5
         
         let blur = blurView
         blur.frame = view.frame
         view.insertSubview(blur, at: 0)
+        
+        addGestureRecognizersForAnimations()
         
         viewModel.delegate?.viewDidLoad()
     }
@@ -156,4 +167,147 @@ extension TaskCreationFrameViewController: StoryboardInstantiable {
     static var storyboardIdentifier: String {
         return "TaskCreation"
     }
+}
+
+
+extension TaskCreationFrameViewController {
+    // MARK: Animations
+    func addGestureRecognizersForAnimations() {
+        taskContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:))))
+//        taskContainerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:))))
+    }
+    
+    @objc private func handleTapGesture(_ recognizer: UITapGestureRecognizer) {
+        animateOrReverseRunningTransition(state: !state, duration: duration)
+    }
+    
+    @objc private func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
+        let translation = recognizer.translation(in: taskContainerView)
+        let fraction = fractionComplete(state: !state, translation: translation)
+        
+        switch recognizer.state {
+        case .began:
+            startInteractiveTransition(state: !state, duration: duration)
+        case .changed:
+            updateInteractiveTransition(fractionComplete: fraction)
+        case .ended:
+            continueInteractiveTransition(fractionComplete: fraction)
+        default:
+            break
+        }
+    }
+
+    // Perform all animations with animators if not already running
+    private func animateTransitionIfNeeded(state: State, duration: TimeInterval) {
+        guard runningAnimators.isEmpty else { return }
+        addTaskContainerAnimation(for: state, with: duration)
+    }
+    
+    // Starts transition if necessary or reverses it on tap
+    private func animateOrReverseRunningTransition(state: State, duration: TimeInterval) {
+        if runningAnimators.isEmpty {
+            animateTransitionIfNeeded(state: state, duration: duration)
+            startAnimators()
+        } else {
+            reverseRunningAnimators()
+        }
+    }
+    
+    // Starts transition if necessary and pauses on pan .began
+    private func startInteractiveTransition(state: State, duration: TimeInterval) {
+        animateTransitionIfNeeded(state: state, duration: duration)
+        pauseAnimators()
+        progressWhenInterrupted = runningAnimators.first?.fractionComplete ?? 0
+    }
+    
+    // Scrubs transition on pan .changed
+    private func updateInteractiveTransition(fractionComplete: CGFloat) {
+        runningAnimators.forEach {
+            $0.fractionComplete = fractionComplete
+        }
+    }
+    
+    // Continues or reverse transition on pan .ended
+    private func continueInteractiveTransition(fractionComplete: CGFloat) {
+        let cancel: Bool = fractionComplete < 0.35
+        
+        if cancel {
+            runningAnimators.forEach {
+                $0.isReversed = !$0.isReversed
+                $0.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+            }
+            return
+        }
+        
+        let timing = UICubicTimingParameters(animationCurve: .easeOut)
+        runningAnimators.forEach {
+            $0.continueAnimation(withTimingParameters: timing, durationFactor: 0)
+        }
+    }
+    
+    private func addTaskContainerAnimation(for state: State, with duration: TimeInterval) {
+        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) { [weak self] in
+            switch state {
+            case .collapsed:
+                self?.taskContainerViewTopConstraint.constant = -210
+            case .expanded:
+                self?.taskContainerViewTopConstraint.constant = 0
+                
+            }
+            self?.view.layoutIfNeeded()
+        }
+        animator.addCompletion { [weak self] status in
+            switch status {
+            case .end:
+                self?.state = state
+            default:
+                break
+            }
+            self?.runningAnimators.removeAll()
+        }
+        runningAnimators.append(animator)
+    }
+    
+    private func startAnimators() {
+        // Added setNeedsLayout to fix a bug where animations would not play if they were reversed
+        view.setNeedsLayout()
+        for animator in runningAnimators {
+            animator.startAnimation()
+        }
+    }
+    
+    private func reverseRunningAnimators() {
+        for animator in runningAnimators {
+            animator.isReversed = !animator.isReversed
+        }
+    }
+    
+    private func pauseAnimators() {
+        // Added setNeedsLayout to fix a bug where animations would not play if they were reversed
+        view.setNeedsLayout()
+        for animator in runningAnimators {
+            animator.pauseAnimation()
+        }
+    }
+    
+    private func fractionComplete(state: State, translation: CGPoint) -> CGFloat {
+        let translationY: CGFloat
+        if state == .expanded {
+            translationY = translation.y
+        } else {
+            translationY = -translation.y
+        }
+        
+        let fractionComplete = translationY / animationDistance + progressWhenInterrupted
+        return fractionComplete
+    }
+}
+
+private enum State {
+    case collapsed
+    case expanded
+}
+
+private prefix func ! (_ state: State) -> State {
+    return state == State.expanded ? .collapsed : .expanded
 }

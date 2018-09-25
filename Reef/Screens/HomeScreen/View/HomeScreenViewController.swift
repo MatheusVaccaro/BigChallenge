@@ -44,18 +44,6 @@ class HomeScreenViewController: UIViewController {
     @IBOutlet weak var newTaskView: UIView!
     @IBOutlet weak var addTaskViewTopConstraint: NSLayoutConstraint!
     
-    // MARK: - Animations Properties
-    private let duration: TimeInterval = 0.5
-    private let animationDistance: CGFloat = 38
-    private var runningAnimators = [UIViewPropertyAnimator]()
-    private var progressWhenInterrupted: CGFloat = 0
-    
-    private var state: State = .collapsed {
-        didSet {
-            print("Current State: \(state)")
-        }
-    }
-    
     // MARK: - Animation IBOutlets
     @IBOutlet weak var pullDownView: UIView!
     @IBOutlet weak var pullDownViewTopConstraint: NSLayoutConstraint!
@@ -83,7 +71,6 @@ class HomeScreenViewController: UIViewController {
         userActivity = viewModel.userActivity
         
         configurePullDownView()
-        addGestureRecognizersForAnimations()
         
         newTaskView.alpha = 0
     }
@@ -310,6 +297,24 @@ class HomeScreenViewController: UIViewController {
     private func removeBlur() {
         blurView.removeFromSuperview()
     }
+    
+    private func configurePullDownView() {
+        pullDownView.backgroundColor = .white
+        pullDownView.layer.cornerRadius = 6.3
+        pullDownView.tintColor = .white
+        
+        pullDownView.layer.shadowRadius = 6.3
+        pullDownView.layer.shadowOffset = CGSize(width: 0, height: 10)
+        pullDownView.layer.masksToBounds = false
+        pullDownView.layer.shadowColor = .shadowColor
+        pullDownView.layer.shadowOpacity = 0.2
+        
+        pullDownView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(startAddTask)))
+    }
+    
+    @objc private func startAddTask() {
+        viewModel.startAddTask()
+    }
 }
 
 extension HomeScreenViewController: StoryboardInstantiable {
@@ -321,82 +326,6 @@ extension HomeScreenViewController: StoryboardInstantiable {
         return "HomeScreen"
     }
 }
-
-//extension HomeScreenViewController {
-//    // action from homescreen
-//    @objc func hideAddTask() {
-//        prepareToHideAddTask()
-//        viewModel.endAddTask()
-//    }
-//
-//    @objc func presentAddTask() {
-////        prepareToPresentAddTask()
-//        viewModel.startAddTask()
-//    }
-//
-//
-//    //actions from other screens
-//    func prepareToPresentAddTask() {
-//        guard !isPresentingAddTask else { return }
-//        isPresentingAddTask = true
-//        isPresentingMoreOptions = false
-//        tagCollectionViewController!.viewModel.filtering = false
-//        animateAddTaskShowing()
-//        applyBlur()
-//    }
-//
-//    func prepareToHideAddTask() {
-//        guard isPresentingAddTask || isPresentingMoreOptions else { return }
-//        isPresentingAddTask = false
-//        isPresentingMoreOptions = false
-//        tagCollectionViewController!.viewModel.filtering = true
-//        animateAddTaskHidden()
-//        removeBlur()
-//    }
-//
-//    func prepareToPresentMoreOptions() {
-//        guard !isPresentingMoreOptions else { return }
-//        isPresentingAddTask = false
-//        isPresentingMoreOptions = true
-//        animateMoreOptionsShowing()
-//        applyBlur()
-//    }
-//
-//    func prepareToHideMoreOptions() {
-//        guard isPresentingMoreOptions else { return }
-//        isPresentingAddTask = true
-//        isPresentingMoreOptions = false
-//        animateAddTaskShowing()
-//    }
-//
-//    func didPanAddTask() {
-//        //code
-//    }
-//
-//    fileprivate func animateAddTaskHidden() {
-//        UIView.animate(withDuration: 0.25) {
-//            self.addTaskViewTopConstraint.constant =
-//                (self.taskCreationFrameViewController.hiddenHeight - 20) - self.newTaskView.bounds.height
-//            self.view.layoutIfNeeded()
-//        }
-//    }
-//
-//    fileprivate func animateAddTaskShowing() {
-////        UIView.animate(withDuration: 0.25) {
-////            self.addTaskViewTopConstraint.constant =
-////                self.taskCreationFrameViewController.hiddenHeight - self.newTaskView.bounds.height
-////            self.view.layoutIfNeeded()
-////        }
-//    }
-//
-//    fileprivate func animateMoreOptionsShowing() {
-//        UIView.animate(withDuration: 0.25) {
-//            self.addTaskViewTopConstraint.constant =
-//                self.taskCreationFrameViewController.contentSize - self.newTaskView.bounds.height
-//            self.view.layoutIfNeeded()
-//        }
-//    }
-//}
 
 // MARK: - Accessibility
 extension HomeScreenViewController {
@@ -416,209 +345,5 @@ extension HomeScreenViewController {
         } else {
             return false
         }
-    }
-}
-
-// MARK: - Animations
-// WWDC Keynote Reference: https://developer.apple.com/videos/play/wwdc2017/230/
-// Github Reference: https://github.com/kane-liu/AdvancedAnimations
-
-private enum State {
-    case collapsed
-    case expanded
-}
-
-private prefix func ! (_ state: State) -> State {
-    return state == State.expanded ? .collapsed : .expanded
-}
-
-extension HomeScreenViewController {
-    
-    // MARK: View Configuration
-    private func configurePullDownView() {
-        pullDownView.backgroundColor = .white
-        pullDownView.layer.cornerRadius = 6.3
-        pullDownView.tintColor = .white
-        
-        pullDownView.layer.shadowRadius = 6.3
-        pullDownView.layer.shadowOffset = CGSize(width: 0, height: 10)
-        pullDownView.layer.masksToBounds = false
-        pullDownView.layer.shadowColor = .shadowColor
-        pullDownView.layer.shadowOpacity = 0.2
-    }
-    
-    // MARK: Animations
-    func addGestureRecognizersForAnimations() {
-//        pullDownView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:))))
-//        pullDownView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:))))
-        
-        pullDownView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(startAddTask)))
-    }
-    
-    @objc private func startAddTask() {
-        viewModel.startAddTask()
-    }
-    
-    @objc private func handleTapGesture(_ recognizer: UITapGestureRecognizer) {
-        animateOrReverseRunningTransition(state: !state, duration: duration)
-    }
-    
-    @objc private func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
-        let translation = recognizer.translation(in: pullDownView)
-        let fraction = fractionComplete(state: !state, translation: translation)
-        
-        switch recognizer.state {
-        case .began:
-            startInteractiveTransition(state: !state, duration: duration)
-        case .changed:
-            updateInteractiveTransition(fractionComplete: fraction)
-        case .ended:
-            continueInteractiveTransition(fractionComplete: fraction)
-        default:
-            break
-        }
-    }
-    
-    // Perform all animations with animators if not already running
-    private func animateTransitionIfNeeded(state: State, duration: TimeInterval) {
-        guard runningAnimators.isEmpty else { return }
-        addPullDownAnimation(for: state, with: duration)
-        addPullDownFadeOutAnimation(for: state, with: duration)
-//        addNewTaskViewFadeInAnimation(for: state, with: duration)
-    }
-    
-    // Starts transition if necessary or reverses it on tap
-    private func animateOrReverseRunningTransition(state: State, duration: TimeInterval) {
-        if runningAnimators.isEmpty {
-            animateTransitionIfNeeded(state: state, duration: duration)
-            startAnimators()
-        } else {
-            reverseRunningAnimators()
-        }
-    }
-    
-    // Starts transition if necessary and pauses on pan .began
-    private func startInteractiveTransition(state: State, duration: TimeInterval) {
-        animateTransitionIfNeeded(state: state, duration: duration)
-        pauseAnimators()
-        progressWhenInterrupted = runningAnimators.first?.fractionComplete ?? 0
-    }
-    
-    // Scrubs transition on pan .changed
-    private func updateInteractiveTransition(fractionComplete: CGFloat) {
-        runningAnimators.forEach {
-            $0.fractionComplete = fractionComplete
-        }
-    }
-    
-    // Continues or reverse transition on pan .ended
-    private func continueInteractiveTransition(fractionComplete: CGFloat) {
-        let cancel: Bool = fractionComplete < 0.35
-        
-        if cancel {
-            runningAnimators.forEach {
-                $0.isReversed = !$0.isReversed
-                $0.continueAnimation(withTimingParameters: nil, durationFactor: 0)
-            }
-            return
-        }
-        
-        let timing = UICubicTimingParameters(animationCurve: .easeOut)
-        runningAnimators.forEach {
-            $0.continueAnimation(withTimingParameters: timing, durationFactor: 0)
-        }
-    }
-    
-    private func addPullDownAnimation(for state: State, with duration: TimeInterval) {
-        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) { [weak self] in
-            switch state {
-            case .collapsed:
-                self?.pullDownViewTopConstraint.constant = -22
-            case .expanded:
-                self?.pullDownViewTopConstraint.constant = 16
-                
-            }
-            self?.view.layoutIfNeeded()
-        }
-        animator.addCompletion { [weak self] status in
-            switch status {
-            case .end:
-                self?.state = state
-            default:
-                break
-            }
-            self?.runningAnimators.removeAll()
-        }
-        runningAnimators.append(animator)
-    }
-    
-    private func addPullDownFadeOutAnimation(for state: State, with duration: TimeInterval) {
-        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) {
-            UIView.animateKeyframes(withDuration: 0, delay: 0, options: [], animations: {
-                switch state {
-                case .collapsed:
-                    UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: duration / 2) { [weak self] in
-                        self?.pullDownView.alpha = 1
-                    }
-                case .expanded:
-                    UIView.addKeyframe(withRelativeStartTime: duration / 2, relativeDuration: duration / 2) { [weak self] in
-                        self?.pullDownView.alpha = 0.1
-                    }
-                }
-            }, completion: nil)
-        }
-        runningAnimators.append(animator)
-    }
-    
-    private func addNewTaskViewFadeInAnimation(for state: State, with duration: TimeInterval) {
-        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) {
-            UIView.animateKeyframes(withDuration: 0, delay: 0, options: [], animations: {
-                switch state {
-                case .collapsed:
-                    UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: duration / 2) { [weak self] in
-                        self?.newTaskView.alpha = 0
-                    }
-                case .expanded:
-                    UIView.addKeyframe(withRelativeStartTime: duration / 2, relativeDuration: duration / 2) { [weak self] in
-                        self?.newTaskView.alpha = 1
-                    }
-                }
-            }, completion: nil)
-        }
-        runningAnimators.append(animator)
-    }
-    
-    private func startAnimators() {
-        // Added setNeedsLayout to fix a bug where animations would not play if they were reversed
-        view.setNeedsLayout()
-        for animator in runningAnimators {
-            animator.startAnimation()
-        }
-    }
-    
-    private func reverseRunningAnimators() {
-        for animator in runningAnimators {
-            animator.isReversed = !animator.isReversed
-        }
-    }
-    
-    private func pauseAnimators() {
-        // Added setNeedsLayout to fix a bug where animations would not play if they were reversed
-        view.setNeedsLayout()
-        for animator in runningAnimators {
-            animator.pauseAnimation()
-        }
-    }
-    
-    private func fractionComplete(state: State, translation: CGPoint) -> CGFloat {
-        let translationY: CGFloat
-        if state == .expanded {
-            translationY = translation.y
-        } else {
-            translationY = -translation.y
-        }
-        
-        let fractionComplete = translationY / animationDistance + progressWhenInterrupted
-        return fractionComplete
     }
 }
