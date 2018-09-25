@@ -26,21 +26,21 @@ class ColorCollectionViewCell: UICollectionViewCell {
         layer.startPoint = CGPoint(x: 0, y: 1)
         layer.endPoint = CGPoint(x: 1, y: 0)
         layer.frame = contentView.bounds
-        layer.cornerRadius = layer.frame.height/2
+        layer.cornerRadius = layer.frame.height/3.5
         
         return layer
     }()
     
     func configure(with colorIndex: Int) {
         imageView.layer.zPosition = 1
-        imageView.layer.cornerRadius = imageView.layer.frame.height / 2
+        imageView.layer.cornerRadius = imageView.layer.frame.height / 3.5
         imageView.layer.masksToBounds = true
         gradientLayer.colors = UIColor.tagColors[colorIndex]
         contentView.layer.addSublayer(gradientLayer)
     }
     
     func select() {
-        imageView.image = UIImage(named: "checkButton")
+        imageView.image = UIImage(named: "option")
     }
     
     func deselect() {

@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		09FB5E14F92E45162642AB92 /* Pods_ReefKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E3B37A82203D5E380D0390 /* Pods_ReefKit.framework */; };
+		160E627F2152FBDE001F3D01 /* TagCreation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 160E627E2152FBDE001F3D01 /* TagCreation.storyboard */; };
+		160E62812155A129001F3D01 /* TagCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160E62802155A129001F3D01 /* TagCreationViewController.swift */; };
+		160E62862155B30A001F3D01 /* TagCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160E62852155B30A001F3D01 /* TagCreationViewModel.swift */; };
+		160E6289215923AE001F3D01 /* AddTagTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160E6288215923AE001F3D01 /* AddTagTitleViewController.swift */; };
+		160E628B215923C4001F3D01 /* AddTagTitle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 160E628A215923C4001F3D01 /* AddTagTitle.storyboard */; };
+		160E628D215923DD001F3D01 /* AddTagTitleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160E628C215923DD001F3D01 /* AddTagTitleViewModel.swift */; };
+		160E6292215929FD001F3D01 /* AddTagColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160E6291215929FD001F3D01 /* AddTagColorsViewController.swift */; };
+		160E629421592A1B001F3D01 /* AddTagColors.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 160E629321592A1B001F3D01 /* AddTagColors.storyboard */; };
+		160E629721592A30001F3D01 /* AddTagColorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160E629621592A30001F3D01 /* AddTagColorsViewModel.swift */; };
 		1627171020C8793900AA0024 /* BigChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1627170F20C8793900AA0024 /* BigChallengeTests.swift */; };
 		1627EBEDDA20D9C1EB6BC691 /* Pods_ReefTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 558C6AF329AB768E11815BB8 /* Pods_ReefTests.framework */; };
 		16294E38213F0B860092DEA2 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16294E37213F0B860092DEA2 /* TodayViewModel.swift */; };
@@ -21,6 +30,7 @@
 		16E8DDD8211205E8004F66D6 /* Barlow-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC5211205C5004F66D6 /* Barlow-SemiBoldItalic.ttf */; };
 		16EC4CCB2125207600B8256D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 16EC4CCD2125207600B8256D /* InfoPlist.strings */; };
 		16EC6CEA21065B2500797D9C /* TagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EC6CE921065B2500797D9C /* TagTests.swift */; };
+		16F9D93A21596C8D00304ECE /* AddTagDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F9D93921596C8D00304ECE /* AddTagDetailsViewModel.swift */; };
 		16FDC139210BB237008FA931 /* NotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FDC138210BB237008FA931 /* NotificationTests.swift */; };
 		220BB9472146ED88004A8309 /* TaskCreationFrameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220BB9452146ED88004A8309 /* TaskCreationFrameViewController.swift */; };
 		220BB94A2146F1C2004A8309 /* TaskCreation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 220BB9492146F1C2004A8309 /* TaskCreation.storyboard */; };
@@ -229,6 +239,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		160E627E2152FBDE001F3D01 /* TagCreation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TagCreation.storyboard; sourceTree = "<group>"; };
+		160E62802155A129001F3D01 /* TagCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCreationViewController.swift; sourceTree = "<group>"; };
+		160E62852155B30A001F3D01 /* TagCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCreationViewModel.swift; sourceTree = "<group>"; };
+		160E6288215923AE001F3D01 /* AddTagTitleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagTitleViewController.swift; sourceTree = "<group>"; };
+		160E628A215923C4001F3D01 /* AddTagTitle.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddTagTitle.storyboard; sourceTree = "<group>"; };
+		160E628C215923DD001F3D01 /* AddTagTitleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagTitleViewModel.swift; sourceTree = "<group>"; };
+		160E6291215929FD001F3D01 /* AddTagColorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagColorsViewController.swift; sourceTree = "<group>"; };
+		160E629321592A1B001F3D01 /* AddTagColors.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddTagColors.storyboard; sourceTree = "<group>"; };
+		160E629621592A30001F3D01 /* AddTagColorsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagColorsViewModel.swift; sourceTree = "<group>"; };
 		1627170D20C8793900AA0024 /* ReefTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReefTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1627170F20C8793900AA0024 /* BigChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigChallengeTests.swift; sourceTree = "<group>"; };
 		1627171120C8793900AA0024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -256,6 +275,7 @@
 		16EC4CCC2125207600B8256D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		16EC4CCE2125207900B8256D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		16EC6CE921065B2500797D9C /* TagTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTests.swift; sourceTree = "<group>"; };
+		16F9D93921596C8D00304ECE /* AddTagDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagDetailsViewModel.swift; sourceTree = "<group>"; };
 		16FDC138210BB237008FA931 /* NotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTests.swift; sourceTree = "<group>"; };
 		16FDC13B210F809A008FA931 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		1E128F2E25BA570ED73A4795 /* Pods_ReefUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReefUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -472,6 +492,77 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		160E627D2152FB96001F3D01 /* tagCreationFrame */ = {
+			isa = PBXGroup;
+			children = (
+				160E62832155B2A9001F3D01 /* View */,
+				160E62842155B2B6001F3D01 /* ViewModel */,
+			);
+			path = tagCreationFrame;
+			sourceTree = "<group>";
+		};
+		160E62832155B2A9001F3D01 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				160E627E2152FBDE001F3D01 /* TagCreation.storyboard */,
+				160E62802155A129001F3D01 /* TagCreationViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		160E62842155B2B6001F3D01 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				160E62852155B30A001F3D01 /* TagCreationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		160E628721592378001F3D01 /* AddTagTitle */ = {
+			isa = PBXGroup;
+			children = (
+				22F8FD4B2159C83800ECF10F /* View */,
+				160E628E215923E6001F3D01 /* ViewModel */,
+			);
+			path = AddTagTitle;
+			sourceTree = "<group>";
+		};
+		160E628E215923E6001F3D01 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				160E628C215923DD001F3D01 /* AddTagTitleViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		160E628F215927B1001F3D01 /* Add Tag */ = {
+			isa = PBXGroup;
+			children = (
+				160E627D2152FB96001F3D01 /* tagCreationFrame */,
+				160E628721592378001F3D01 /* AddTagTitle */,
+				160E6290215929E6001F3D01 /* AddTagColors */,
+				16F9D936215963C300304ECE /* AddTagDetails */,
+			);
+			path = "Add Tag";
+			sourceTree = "<group>";
+		};
+		160E6290215929E6001F3D01 /* AddTagColors */ = {
+			isa = PBXGroup;
+			children = (
+				22F8FD4C2159D3C900ECF10F /* View */,
+				160E629521592A21001F3D01 /* ViewModel */,
+			);
+			path = AddTagColors;
+			sourceTree = "<group>";
+		};
+		160E629521592A21001F3D01 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				160E629621592A30001F3D01 /* AddTagColorsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		1627170E20C8793900AA0024 /* BigChallengeTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -529,6 +620,14 @@
 				16E8DDB6211205C1004F66D6 /* Barlow-ThinItalic.ttf */,
 			);
 			path = Barlow;
+			sourceTree = "<group>";
+		};
+		16F9D936215963C300304ECE /* AddTagDetails */ = {
+			isa = PBXGroup;
+			children = (
+				16F9D93921596C8D00304ECE /* AddTagDetailsViewModel.swift */,
+			);
+			path = AddTagDetails;
 			sourceTree = "<group>";
 		};
 		16FDC13A210F8080008FA931 /* Managers */ = {
@@ -769,6 +868,25 @@
 			path = PersistenceManager;
 			sourceTree = "<group>";
 		};
+		22F8FD4B2159C83800ECF10F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				160E628A215923C4001F3D01 /* AddTagTitle.storyboard */,
+				160E6288215923AE001F3D01 /* AddTagTitleViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		22F8FD4C2159D3C900ECF10F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				160E629321592A1B001F3D01 /* AddTagColors.storyboard */,
+				160E6291215929FD001F3D01 /* AddTagColorsViewController.swift */,
+				C2901058211E4492008F2807 /* ColorCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		22FA2851212F7E6E00FC74D3 /* ReefIndexExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -916,6 +1034,7 @@
 				221BA8AA20F698D000BE2AC1 /* HomeScreen */,
 				C2C231BD20FD1A53002A2371 /* NewTag */,
 				22DE27152146B6B500466187 /* taskCreationFrame */,
+				160E628F215927B1001F3D01 /* Add Tag */,
 				C2A1114320B9F65200ABB161 /* NewTask */,
 				22DE270E2141BBFA00466187 /* ImageCell */,
 				C29742C621123DCD00A1D213 /* TaskMoreOptions */,
@@ -1132,7 +1251,6 @@
 			children = (
 				C231118C20FFC75200BCB000 /* NewTag.storyboard */,
 				226B311C211C954200881E34 /* CreateTagViewController.swift */,
-				C2901058211E4492008F2807 /* ColorCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1429,9 +1547,12 @@
 				29BA689D2120C345009B4AB9 /* Calendar.storyboard in Resources */,
 				C28DC92120B61CB9007F881A /* Assets.xcassets in Resources */,
 				16E8DDD8211205E8004F66D6 /* Barlow-SemiBoldItalic.ttf in Resources */,
+				160E628B215923C4001F3D01 /* AddTagTitle.storyboard in Resources */,
 				C26EC73F21547282000E9CB9 /* Barlow-BoldItalic.ttf in Resources */,
 				C231118E20FFC75200BCB000 /* NewTag.storyboard in Resources */,
 				16E8DDD5211205E8004F66D6 /* Barlow-MediumItalic.ttf in Resources */,
+				160E629421592A1B001F3D01 /* AddTagColors.storyboard in Resources */,
+				160E627F2152FBDE001F3D01 /* TagCreation.storyboard in Resources */,
 				C28DC91F20B61CB6007F881A /* TaskList.storyboard in Resources */,
 				C26EC74921547282000E9CB9 /* Barlow-ThinItalic.ttf in Resources */,
 				C26EC74421547282000E9CB9 /* Barlow-Light.ttf in Resources */,
@@ -1670,9 +1791,13 @@
 				22DE27142145A64C00466187 /* IconCellPresentable.swift in Sources */,
 				29B93B70212E07C00057A771 /* TagCollectionViewModel.swift in Sources */,
 				C25169952139BD6200999BD0 /* UIViewController+Extension.swift in Sources */,
+				160E62812155A129001F3D01 /* TagCreationViewController.swift in Sources */,
 				222BFF9420ED92C7001B6BBF /* RemindersCommunicator.swift in Sources */,
+				16F9D93A21596C8D00304ECE /* AddTagDetailsViewModel.swift in Sources */,
 				2252216E21552F7800E8BD5E /* AccessibilityElements.swift in Sources */,
 				2255B3AE2113209800F2F37C /* LocationInputViewModel.swift in Sources */,
+				160E62862155B30A001F3D01 /* TagCreationViewModel.swift in Sources */,
+				160E6292215929FD001F3D01 /* AddTagColorsViewController.swift in Sources */,
 				22ED5957211B346F008EAD7D /* MKPlaceMarkExtension.swift in Sources */,
 				C28DC91A20B61CB6007F881A /* AppDelegate.swift in Sources */,
 				228946392113F1A4009D05CB /* InvertedCircle.swift in Sources */,
@@ -1700,6 +1825,7 @@
 				22325A7920FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift in Sources */,
 				225852822100C5BE0011F4B0 /* TagsCollectionView.swift in Sources */,
 				220BB9472146ED88004A8309 /* TaskCreationFrameViewController.swift in Sources */,
+				160E6289215923AE001F3D01 /* AddTagTitleViewController.swift in Sources */,
 				29A4F8852110F04600AE4FA1 /* DateInputViewModel.swift in Sources */,
 				29BA68A42120CC2F009B4AB9 /* CalendarCell.swift in Sources */,
 				2972201F211CCD8F00CF80CE /* DateInputViewController.swift in Sources */,
@@ -1708,6 +1834,7 @@
 				296424BB21559A7400480CB4 /* CoreAnimation+Extension.swift in Sources */,
 				C2901059211E4492008F2807 /* ColorCollectionViewCell.swift in Sources */,
 				C23753B020B6463700C1CE15 /* ApplicationCoordinator.swift in Sources */,
+				160E628D215923DD001F3D01 /* AddTagTitleViewModel.swift in Sources */,
 				C26EC73721544CFA000E9CB9 /* NotesInputViewModel.swift in Sources */,
 				29320435213632E400E23E72 /* TagCollectionViewModelImpl.swift in Sources */,
 				C29742CE211249B000A1D213 /* MoreOptionsViewModel.swift in Sources */,
@@ -1734,6 +1861,7 @@
 				22F23E9B212E416C0064EE05 /* TaskModel.swift in Sources */,
 				22DE27122141BFF300466187 /* IconTableViewCell.swift in Sources */,
 				29722024211E36CF00CF80CE /* ToggleableLabel.swift in Sources */,
+				160E629721592A30001F3D01 /* AddTagColorsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
