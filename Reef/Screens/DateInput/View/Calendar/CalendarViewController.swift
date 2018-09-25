@@ -30,9 +30,18 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource {
         calendar.allowsDateCellStretching = false
         calendar.minimumInteritemSpacing = 0
         calendar.minimumLineSpacing = 0
-        calendar.cellSize = (calendar.frame.width)/7
         
         setupWeekdays()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        calendar.cellSize = (calendar.frame.width)/7
+        calendar.invalidateIntrinsicContentSize()
     }
     
     func setupWeekdays() {
