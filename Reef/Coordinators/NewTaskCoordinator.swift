@@ -252,7 +252,7 @@ extension NewTaskCoordinator: TagCollectionViewModelDelegate {
             inputView = notesInput
         }
         
-        presenter.pushViewController(inputView!, animated: true)
+        modalPresenter.pushViewController(inputView!, animated: true)
     }
     
     func didTapAddTask() {

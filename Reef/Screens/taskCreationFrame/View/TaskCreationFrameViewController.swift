@@ -60,7 +60,6 @@ class TaskCreationFrameViewController: UIViewController {
         taskDetailViewController.view.layer.masksToBounds = true
         taskDetailViewController.view.translatesAutoresizingMaskIntoConstraints = false
         
-        
         NSLayoutConstraint.activate([
             taskDetailViewController.view.rightAnchor.constraint(equalTo: taskDetailView.rightAnchor),
             taskDetailViewController.view.topAnchor.constraint(equalTo: taskDetailView.topAnchor),
@@ -134,9 +133,14 @@ class TaskCreationFrameViewController: UIViewController {
         blur.frame = view.frame
         view.insertSubview(blur, at: 0)
         
-        addGestureRecognizersForAnimations()
+//        addGestureRecognizersForAnimations()
         
         viewModel.delegate?.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        animateOrReverseRunningTransition(state: !state, duration: duration)
     }
     
     private func configureShadows(in view: UIView) {
@@ -174,7 +178,7 @@ extension TaskCreationFrameViewController {
     // MARK: Animations
     func addGestureRecognizersForAnimations() {
         taskContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:))))
-//        taskContainerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:))))
+        taskContainerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:))))
     }
     
     @objc private func handleTapGesture(_ recognizer: UITapGestureRecognizer) {
