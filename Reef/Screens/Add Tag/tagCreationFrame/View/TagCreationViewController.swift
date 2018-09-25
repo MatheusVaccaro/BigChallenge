@@ -24,7 +24,6 @@ class TagCreationFrameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.delegate?.viewDidLoad()
 //        applyBlur()
     }
     

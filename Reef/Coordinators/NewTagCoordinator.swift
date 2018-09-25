@@ -54,13 +54,12 @@ class NewTagCoordinator: Coordinator {
         
         creationFrameViewModel.edit(tag)
         
+        createTagFrameViewController.viewModel = creationFrameViewModel
         addTagTitleViewController.viewModel = addTagTitleViewModel
         addTagColorsViewController.viewModel = addTagColorsViewModel
         moreOptionsViewController!.viewModel = addTagDetailsViewModel
         
         creationFrameViewModel.delegate = self
-        createTagFrameViewController.viewModel = creationFrameViewModel
-        
         createTagFrameViewController.present(addTagTitleViewController, addTagColorsViewController, moreOptionsViewController)
     }
 }
@@ -82,6 +81,10 @@ extension NewTagCoordinator {
 }
 
 extension NewTagCoordinator: TagCreationDelegate {
+    func viewDidLoad() {
+        //TODO
+    }
+    
     func didAddTag() {
         dismissViewController()
     }
