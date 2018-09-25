@@ -12,6 +12,7 @@ import CoreLocation
 
 protocol TagCreationDelegate: class {
     func didAddTag()
+    func viewDidLoad()
     func shouldPresent(viewModel: IconCellPresentable)
 }
 
@@ -42,7 +43,12 @@ class TagCreationViewModel {
     }
     
     func edit(_ tag: Tag?) {
-        //TOOD
+        if let tag = tag {
+            self.tag = tag
+            addTagTitleViewModel.edit(tag)
+            addTagColorsViewModel.edit(tag)
+            addTagDetailsViewModel.edit(tag)
+        }
     }
     
     func saveTag() {
@@ -53,6 +59,10 @@ class TagCreationViewModel {
         }
         
         tag = nil
+        delegate?.didAddTag()
+    }
+    
+    func cancelAddTag() {
         delegate?.didAddTag()
     }
 }

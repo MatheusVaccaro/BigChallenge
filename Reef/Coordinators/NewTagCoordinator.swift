@@ -31,32 +31,33 @@ class NewTagCoordinator: Coordinator {
         self.presenter = presenter
         self.childrenCoordinators = []
         self.tag = tag
-        
         self.homeScreen = viewController
     }
     
     func start() {
         createTagFrameViewController = TagCreationFrameViewController.instantiate()
         homeScreen.setupAddTag(viewController: createTagFrameViewController)
-        // New Tag
+        //View Comtrollers
         addTagTitleViewController = AddTagTitleViewController.instantiate()
-        let addTagTitleViewModel = AddTagTitleViewModel()
-        addTagTitleViewController.viewModel = addTagTitleViewModel
-        
-        // Colors Picker
         addTagColorsViewController = AddTagColorsViewController.instantiate()
-        let addTagColorsViewModel = AddTagColorsViewModel(tag: nil, model: model)
-        addTagColorsViewController.viewModel = addTagColorsViewModel
-        
-        // More Options
         moreOptionsViewController = MoreOptionsViewController.instantiate()
+        
+        //viewModels
+        let addTagTitleViewModel = AddTagTitleViewModel()
+        let addTagColorsViewModel = AddTagColorsViewModel()
         let addTagDetailsViewModel = AddTagDetailsViewModel()
-        moreOptionsViewController!.viewModel = addTagDetailsViewModel
         
         let creationFrameViewModel = TagCreationViewModel(tagModel: model,
                                                           addTagTitleViewModel,
                                                           addTagColorsViewModel,
                                                           addTagDetailsViewModel)
+        
+        creationFrameViewModel.edit(tag)
+        
+        addTagTitleViewController.viewModel = addTagTitleViewModel
+        addTagColorsViewController.viewModel = addTagColorsViewModel
+        moreOptionsViewController!.viewModel = addTagDetailsViewModel
+        
         creationFrameViewModel.delegate = self
         createTagFrameViewController.viewModel = creationFrameViewModel
         
@@ -82,7 +83,7 @@ extension NewTagCoordinator {
 
 extension NewTagCoordinator: TagCreationDelegate {
     func didAddTag() {
-        //TODO
+        dismissViewController()
     }
     
     func shouldPresent(viewModel: IconCellPresentable) {

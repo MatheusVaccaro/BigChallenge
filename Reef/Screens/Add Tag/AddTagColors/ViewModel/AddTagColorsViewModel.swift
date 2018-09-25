@@ -14,20 +14,16 @@ protocol AddTagColorsViewModelDelegate: class {
 
 class AddTagColorsViewModel {
     
-    private let model: TagModel
-    private var tag: Tag?
-    
     weak var delegate: AddTagColorsViewModelDelegate?
     
-    var colorIndex: Int? {
+    var colorIndex: Int = UIColor.tagColors.startIndex { //TODO: get next index
         didSet {
             delegate?.addTagColorsViewModel(self, didUpdateColorIndex: colorIndex)
         }
     }
     
-    init(tag: Tag?, model: TagModel) {
-        self.model = model
-        self.tag = tag
+    func edit(_ tag: Tag) {
+        colorIndex = Int(tag.colorIndex)
     }
     
     func numberOfColors() -> Int {

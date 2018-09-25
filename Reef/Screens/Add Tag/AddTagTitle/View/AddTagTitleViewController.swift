@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ReefKit
 
 protocol AddTagDelegate: class {
     func didPressCreateTask()
@@ -20,12 +21,14 @@ class AddTagTitleViewController: UIViewController {
     
     // MARK: - Properties
     var viewModel: AddTagTitleViewModel!
+    
     weak var delegate: AddTagDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tagTitleTextField.delegate = self
+        tagTitleTextField.text = viewModel.tagTitle
     }
     
     @IBAction func didPressDoneButton(_ sender: UIButton) {
