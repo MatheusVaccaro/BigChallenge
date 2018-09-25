@@ -171,6 +171,7 @@
 		C2C231C520FD41AE002A2371 /* NewTagCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C231C420FD41AE002A2371 /* NewTagCoordinator.swift */; };
 		C2C79D2D2123E7D70058F228 /* DateInputViewModel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C79D2C2123E7D70058F228 /* DateInputViewModel+Extension.swift */; };
 		C2DD9A3321114ADD00E9B89B /* MoreOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DD9A3221114ADD00E9B89B /* MoreOptionsViewController.swift */; };
+		C2F7229A2159AD2100ED16DB /* TaskCreationFrameDismissAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F722992159AD2100ED16DB /* TaskCreationFrameDismissAnimationController.swift */; };
 		EE3649E90DE055B9D5168F01 /* Pods_Reef.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8708FC5A67C933F755CB93 /* Pods_Reef.framework */; };
 /* End PBXBuildFile section */
 
@@ -433,6 +434,7 @@
 		C2C79D2C2123E7D70058F228 /* DateInputViewModel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateInputViewModel+Extension.swift"; sourceTree = "<group>"; };
 		C2C79D2E2123E89A0058F228 /* Tag+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+Extension.swift"; sourceTree = "<group>"; };
 		C2DD9A3221114ADD00E9B89B /* MoreOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsViewController.swift; sourceTree = "<group>"; };
+		C2F722992159AD2100ED16DB /* TaskCreationFrameDismissAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreationFrameDismissAnimationController.swift; sourceTree = "<group>"; };
 		CBEDB2B28E4B9B9C40FB7E0A /* Pods-ReefKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReefKit/Pods-ReefKit.release.xcconfig"; sourceTree = "<group>"; };
 		F3D5719BE4D8190FF95D6C87 /* Pods_ReefToday.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReefToday.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1098,6 +1100,7 @@
 			isa = PBXGroup;
 			children = (
 				C22EF7DD215932CB00BFB255 /* TaskCreationFramePresentAnimationController.swift */,
+				C2F722992159AD2100ED16DB /* TaskCreationFrameDismissAnimationController.swift */,
 			);
 			path = AnimationController;
 			sourceTree = "<group>";
@@ -1816,6 +1819,7 @@
 				221BA8B320F69E5C00BE2AC1 /* HomeScreenViewController.swift in Sources */,
 				2255B3AC211295DD00F2F37C /* radiusMapView.swift in Sources */,
 				22F23EA0212E452E0064EE05 /* Colors.swift in Sources */,
+				C2F7229A2159AD2100ED16DB /* TaskCreationFrameDismissAnimationController.swift in Sources */,
 				22F23E9C212E41700064EE05 /* TagModel.swift in Sources */,
 				220BB94C2146FAF9004A8309 /* TaskCreationViewModel.swift in Sources */,
 				C2A1115320BA036800ABB161 /* NewTaskCoordinator.swift in Sources */,

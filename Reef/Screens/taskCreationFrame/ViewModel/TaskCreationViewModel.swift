@@ -19,6 +19,7 @@ protocol TaskCreationDelegate: class {
     func shouldHideMoreOptions()
     func shouldPresent(viewModel: IconCellPresentable)
     func viewDidLoad()
+    func dismiss()
 }
 
 class TaskCreationViewModel {

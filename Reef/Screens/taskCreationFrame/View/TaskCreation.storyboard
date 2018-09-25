@@ -37,38 +37,51 @@
                                     <constraint firstItem="BY2-pz-7Ub" firstAttribute="top" secondItem="L3c-CN-lzT" secondAttribute="top" id="vdG-0e-2eg"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGT-TV-WCP">
-                                <rect key="frame" x="8" y="123" width="359" height="210"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsi-pl-HXe" userLabel="Task Container View">
+                                <rect key="frame" x="8" y="-119" width="359" height="293"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGh-JP-lcF">
+                                        <rect key="frame" x="0.0" y="220" width="359" height="73"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="73" id="Vpy-yl-EIx"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGT-TV-WCP">
+                                        <rect key="frame" x="0.0" y="0.0" width="359" height="210"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="210" id="htd-30-sjX"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="210" id="htd-30-sjX"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGh-JP-lcF">
-                                <rect key="frame" x="8" y="343" width="359" height="73"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="73" id="Vpy-yl-EIx"/>
+                                    <constraint firstItem="WGh-JP-lcF" firstAttribute="leading" secondItem="dsi-pl-HXe" secondAttribute="leading" id="1gQ-c9-NT8"/>
+                                    <constraint firstItem="oGT-TV-WCP" firstAttribute="leading" secondItem="dsi-pl-HXe" secondAttribute="leading" id="4zT-Yx-Ra4"/>
+                                    <constraint firstAttribute="bottom" secondItem="WGh-JP-lcF" secondAttribute="bottom" id="D3M-sL-gEH"/>
+                                    <constraint firstAttribute="trailing" secondItem="WGh-JP-lcF" secondAttribute="trailing" id="IVh-6A-gck"/>
+                                    <constraint firstItem="WGh-JP-lcF" firstAttribute="top" secondItem="oGT-TV-WCP" secondAttribute="bottom" constant="10" id="b8U-pK-oMo"/>
+                                    <constraint firstItem="oGT-TV-WCP" firstAttribute="top" secondItem="dsi-pl-HXe" secondAttribute="top" id="hdO-yo-JC4"/>
+                                    <constraint firstAttribute="trailing" secondItem="oGT-TV-WCP" secondAttribute="trailing" id="kHT-Kc-tvl"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="WGh-JP-lcF" firstAttribute="top" secondItem="oGT-TV-WCP" secondAttribute="bottom" constant="10" id="IqB-KM-2bQ"/>
-                            <constraint firstItem="oGT-TV-WCP" firstAttribute="leading" secondItem="isU-bp-1Xt" secondAttribute="leading" constant="8" id="JJk-Lu-3Dl"/>
-                            <constraint firstItem="oGT-TV-WCP" firstAttribute="top" secondItem="L3c-CN-lzT" secondAttribute="bottom" id="P1u-cf-Ysi"/>
+                            <constraint firstItem="isU-bp-1Xt" firstAttribute="trailing" secondItem="dsi-pl-HXe" secondAttribute="trailing" constant="8" id="2bW-pu-SgF"/>
+                            <constraint firstItem="dsi-pl-HXe" firstAttribute="top" secondItem="L3c-CN-lzT" secondAttribute="bottom" constant="-242" id="MEt-SI-DDx"/>
                             <constraint firstItem="L3c-CN-lzT" firstAttribute="leading" secondItem="isU-bp-1Xt" secondAttribute="leading" id="PQW-5v-D4Y"/>
                             <constraint firstItem="L3c-CN-lzT" firstAttribute="top" secondItem="isU-bp-1Xt" secondAttribute="top" id="SVu-Fg-qn8"/>
-                            <constraint firstItem="WGh-JP-lcF" firstAttribute="leading" secondItem="isU-bp-1Xt" secondAttribute="leading" constant="8" id="UuY-Pn-Tgb"/>
                             <constraint firstItem="isU-bp-1Xt" firstAttribute="trailing" secondItem="L3c-CN-lzT" secondAttribute="trailing" id="eKp-y9-2u7"/>
-                            <constraint firstItem="isU-bp-1Xt" firstAttribute="trailing" secondItem="oGT-TV-WCP" secondAttribute="trailing" constant="8" id="h5w-fd-J0O"/>
-                            <constraint firstItem="isU-bp-1Xt" firstAttribute="trailing" secondItem="WGh-JP-lcF" secondAttribute="trailing" constant="8" id="hkJ-PH-NbU"/>
-                            <constraint firstItem="isU-bp-1Xt" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="WGh-JP-lcF" secondAttribute="bottom" id="tPP-rC-5EC"/>
+                            <constraint firstItem="dsi-pl-HXe" firstAttribute="leading" secondItem="isU-bp-1Xt" secondAttribute="leading" constant="8" id="v40-mE-yNE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="isU-bp-1Xt"/>
                     </view>
                     <connections>
                         <outlet property="tagCollectionView" destination="BY2-pz-7Ub" id="sy1-Yd-sm6"/>
+                        <outlet property="taskContainerView" destination="dsi-pl-HXe" id="Nd5-zB-A61"/>
+                        <outlet property="taskContainerViewTopConstraint" destination="MEt-SI-DDx" id="PXM-eq-euL"/>
                         <outlet property="taskDetailView" destination="oGT-TV-WCP" id="glE-Nc-56A"/>
                         <outlet property="taskTitleView" destination="WGh-JP-lcF" id="sIX-Al-NaH"/>
                         <outlet property="whiteBackgroundView" destination="L3c-CN-lzT" id="6r0-bg-nM3"/>

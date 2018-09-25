@@ -160,6 +160,10 @@ extension NewTaskCoordinator: TaskCreationDelegate {
         creationFrameViewController.present(tagCollectionViewController)
     }
     
+    func dismiss() {
+         dismissViewController()
+    }
+    
     func didCreateTask() {
 //        homeScreen.prepareToHideAddTask()
     }
@@ -197,8 +201,23 @@ extension NewTaskCoordinator: TaskCreationDelegate {
 
 extension NewTaskCoordinator: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        print("HELP")
-        return TaskCreationFramePresentAnimationController()
+        guard let homeScreenViewController = presenting.children.first else { return nil }
+        let swipeInteractionController = SwipeInteractionController(viewController: homeScreenViewController)
+        return TaskCreationFramePresentAnimationController(interactionController: swipeInteractionController)
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        guard let dismissedViewController = dismissed.children.first as? TaskCreationFrameViewController else { return nil }
+        return TaskCreationFrameDismissAnimationController()
+    }
+    
+    // TODO: Fix interactive gesture
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        guard let animator = animator as? TaskCreationFramePresentAnimationController,
+            let interactionController = animator.interactionController,
+            interactionController.interactionInProgress
+        else { return nil }
+        return interactionController
     }
 }
 

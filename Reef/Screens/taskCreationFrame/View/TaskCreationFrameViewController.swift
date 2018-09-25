@@ -10,10 +10,12 @@ import UIKit
 
 class TaskCreationFrameViewController: UIViewController {
 
+    @IBOutlet weak var taskContainerViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var whiteBackgroundView: UIView!
     @IBOutlet weak var tagCollectionView: UIView!
     @IBOutlet weak var taskDetailView: UIView!
     @IBOutlet weak var taskTitleView: UIView!
+    @IBOutlet weak var taskContainerView: UIView!
     
     var hiddenHeight: CGFloat {
         return taskTitleView.bounds.height
@@ -29,12 +31,18 @@ class TaskCreationFrameViewController: UIViewController {
     
     var viewModel: TaskCreationViewModel!
     
+    lazy var blurView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .light)
+        let view = UIVisualEffectView(effect: blurEffect)
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissViewController)))
+        return view
+    }()
+    
     func present(_ taskDetailViewController: MoreOptionsViewController) {
         self.taskDetailViewController = taskDetailViewController
         
         addChild(taskDetailViewController)
         taskDetailView.addSubview(taskDetailViewController.view)
-        taskDetailView.layer.zPosition = -1
         
         taskDetailViewController.view.layer.cornerRadius = 6.3
         taskDetailViewController.view.layer.masksToBounds = true
@@ -56,7 +64,6 @@ class TaskCreationFrameViewController: UIViewController {
         
         addChild(taskTitleViewController)
         taskTitleView.addSubview(taskTitleViewController.view)
-        taskTitleView.layer.zPosition = -1
         
         taskTitleViewController.view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -96,12 +103,28 @@ class TaskCreationFrameViewController: UIViewController {
         viewModel.delegate?.didPanAddTask()
     }
     
+    @objc func dismissViewController() {
+        viewModel.delegate?.dismiss()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "New Task"
         configureShadows(in: whiteBackgroundView)
         configureShadows(in: taskDetailView)
         configureShadows(in: taskTitleView)
+        
+        
+        whiteBackgroundView.layer.zPosition = 10
+        tagCollectionView.layer.zPosition = 10
+        
+        
+        taskContainerView.layer.zPosition = 5
+        
+        let blur = blurView
+        blur.frame = view.frame
+        view.insertSubview(blur, at: 0)
+        
         viewModel.delegate?.viewDidLoad()
     }
     
@@ -116,16 +139,6 @@ class TaskCreationFrameViewController: UIViewController {
         view.layer.shadowOpacity = 0.2
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension TaskCreationFrameViewController {
