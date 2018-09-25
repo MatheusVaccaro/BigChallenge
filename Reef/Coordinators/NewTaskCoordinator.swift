@@ -63,6 +63,8 @@ class NewTaskCoordinator: Coordinator {
         let moreOptionsViewModel: MoreOptionsViewModel = MoreOptionsViewModel()
         
         moreOptionsViewController!.viewModel = moreOptionsViewModel
+        
+        moreOptionsViewModel.UIDelegate = moreOptionsViewController
     
         // Task Frame
         creationFrameViewController = TaskCreationFrameViewController.instantiate()

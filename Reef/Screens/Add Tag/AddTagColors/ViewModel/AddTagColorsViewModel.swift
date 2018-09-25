@@ -21,7 +21,7 @@ class AddTagColorsViewModel {
     
     var colorIndex: Int? {
         didSet {
-            outputDelegate?.addTagColorsViewModel(self, didUpdateColorIndex: colorIndex)
+            delegate?.addTagColorsViewModel(self, didUpdateColorIndex: colorIndex)
         }
     }
     
