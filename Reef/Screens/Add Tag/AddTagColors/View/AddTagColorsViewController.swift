@@ -18,6 +18,7 @@ class AddTagColorsViewController: UIViewController {
         super.viewDidLoad()
         
         configureColorsCollectionView()
+        tagColorsCollectionView.selectItem(at: IndexPath(row: viewModel.colorIndex, section: 0), animated: false, scrollPosition: .bottom)
     }
     
     private func configureColorsCollectionView() {

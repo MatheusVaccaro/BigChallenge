@@ -45,9 +45,6 @@ class LocationInputViewModel {
     let arrivingString = Strings.LocationInputView.arrivingString
     let leavingString = Strings.LocationInputView.leavingString
     let searchBarPlaceholder = Strings.LocationInputView.searchBarPlaceholder
-
-    let searchBarHint =
-        Strings.LocationInputView.VoiceOver.searchbarHint
-    let mapViewAccessibilityLabel =
-        Strings.LocationInputView.VoiceOver.mapLabel
+    let searchBarHint = Strings.LocationInputView.VoiceOver.searchbarHint
+    let mapViewAccessibilityLabel = Strings.LocationInputView.VoiceOver.mapLabel
 }

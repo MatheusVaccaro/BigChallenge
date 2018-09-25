@@ -6,6 +6,8 @@
 //  Copyright © 2018 Matheus Vaccaro. All rights reserved.
 //
 import CoreLocation
+import ReefKit
+import RxSwift
 
 protocol AddTagDetailsViewModelDelegate: class {
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
@@ -33,6 +35,7 @@ class AddTagDetailsViewModel {
     private var cells: [IconCellPresentable] {
         return [ locationInputViewModel, dateInputViewModel ]
     }
+    
     init() {
         //TODO: Private
         locationInputViewModel = LocationInputViewModel()
@@ -40,6 +43,11 @@ class AddTagDetailsViewModel {
         
         locationInputViewModel.delegate = self
         dateInputViewModel.delegate = self
+    }
+    
+    func edit(_ tag: Tag?) {
+        locationInputViewModel.edit(tag)
+        dateInputViewModel.edit(tag)
     }
 }
 
@@ -74,5 +82,23 @@ extension AddTagDetailsViewModel: DateInputViewModelDelegate {
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectFrequency frequency: NotificationOptions.Frequency) {
         delegate?.dateInputViewModel(dateInputViewModel, didSelectFrequency: frequency)
+    }
+}
+
+private extension DateInputViewModel {
+    func edit(_ tag: Tag?) {
+        guard let tag = tag, let dueDate = tag.dueDate else { return }
+        
+        let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: dueDate)
+        
+        self.calendarDate.onNext(calendarDate)
+        self.timeOfDay.onNext(timeOfDay)
+    }
+}
+
+private extension LocationInputViewModel {
+    func edit(_ tag: Tag?) {
+        location = tag?.region
+        isArriving = tag?.arriving ?? false
     }
 }

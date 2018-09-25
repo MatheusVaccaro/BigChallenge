@@ -93,7 +93,8 @@ class HomeScreenCoordinator: Coordinator {
     fileprivate func showEditTag(_ tag: Tag) {
         let editTagCoordinator = NewTagCoordinator(tag: tag,
                                                   presenter: presenter,
-                                                  model: tagModel, in: homeScreenViewController!)
+                                                  model: tagModel,
+                                                  in: homeScreenViewController!)
         editTagCoordinator.delegate = self
         addChild(coordinator: editTagCoordinator)
         editTagCoordinator.start()

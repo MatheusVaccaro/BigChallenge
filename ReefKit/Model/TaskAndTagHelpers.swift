@@ -22,6 +22,14 @@ public extension Tag {
     public var colors: [CGColor] {
         return UIColor.tagColors[Int(colorIndex)]
     }
+    
+    public var region: CLCircularRegion? {
+        if let data = regionData {
+            return NSKeyedUnarchiver.unarchiveObject(with: data) as? CLCircularRegion
+        } else {
+            return nil
+        }
+    }
 }
 
 extension Tag: Comparable {

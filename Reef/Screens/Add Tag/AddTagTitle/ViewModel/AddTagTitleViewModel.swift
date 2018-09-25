@@ -24,4 +24,10 @@ class AddTagTitleViewModel {
             return false
         }
     }
+    
+    private(set) var tagTitle: String?
+    
+    func edit(_ tag: Tag) {
+        tagTitle = tag.title
+    }
 }
