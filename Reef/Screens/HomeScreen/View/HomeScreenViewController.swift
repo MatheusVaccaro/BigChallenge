@@ -314,7 +314,6 @@ class HomeScreenViewController: UIViewController {
     
     @objc private func startAddTask() {
         viewModel.startAddTask()
-        
     }
 }
 

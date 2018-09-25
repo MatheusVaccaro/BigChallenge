@@ -52,6 +52,8 @@ class NewTaskViewController: UIViewController {
         
         view.isAccessibilityElement = true
         (view as! NewTaskView).delegate = self
+        
+        taskTitleTextView.becomeFirstResponder()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

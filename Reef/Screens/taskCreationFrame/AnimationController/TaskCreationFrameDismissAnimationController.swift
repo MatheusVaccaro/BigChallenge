@@ -17,7 +17,7 @@ class TaskCreationFrameDismissAnimationController: NSObject, UIViewControllerAni
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.25
+        return 0.1
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {

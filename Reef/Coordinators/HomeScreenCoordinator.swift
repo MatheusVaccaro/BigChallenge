@@ -109,7 +109,7 @@ extension HomeScreenCoordinator: CoordinatorDelegate {
 
 extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
     func homeScreenViewModelDidEndAddTask(_ homeScreenViewModel: HomeScreenViewModel) {
-        newTaskCoordinator.endAddTask()
+//        newTaskCoordinator.endAddTask()
     }
     
     func homeScreenViewModelDidStartAddTask(_ homeScreenViewModel: HomeScreenViewModel) {

@@ -12,9 +12,6 @@ import CoreLocation
 
 protocol TaskCreationDelegate: class {
     func didCreateTask()
-    func shouldEscape()
-    func shouldPresentMoreOptions()
-    func shouldHideMoreOptions()
     func shouldPresent(viewModel: IconCellPresentable)
     func viewDidLoad()
     func dismiss()
@@ -54,10 +51,7 @@ class TaskCreationViewModel {
     func set(tags: [Tag]) {
         attributes[.tags] = tags
     }
-    
-    func performEscape() {
-        delegate?.shouldEscape()
-    }
+
 }
 
 extension TaskCreationViewModel: NewTaskViewModelOutputDelegate {

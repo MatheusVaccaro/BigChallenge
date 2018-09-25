@@ -97,10 +97,6 @@ class NewTaskCoordinator: NSObject, Coordinator {
         //        homeScreen.prepareToPresentAddTask()
     }
     
-    func endAddTask() {
-        newTaskViewController.cancelAddTask()
-    }
-    
     func startAddTask() {
         newTaskViewController.start()
     }
@@ -117,7 +113,7 @@ class NewTaskCoordinator: NSObject, Coordinator {
     fileprivate func showEditTag(_ tag: Tag) {
         let editTagCoordinator = NewTagCoordinator(tag: tag,
                                                    presenter: presenter,
-                                                   model: tagModel)
+                                                   model: tagModel, in: homeScreen)
         editTagCoordinator.delegate = self
         addChild(coordinator: editTagCoordinator)
         editTagCoordinator.start()
@@ -167,20 +163,7 @@ extension NewTaskCoordinator: TaskCreationDelegate {
     func didCreateTask() {
         dismissViewController()
     }
-    
-    func shouldPresentViewForDateInput() {
-        showDateInput()
-    }
-    
-    func shouldPresentViewForLocationInput() {
-        showLocationInput()
-    }
-    
-    func shouldPresentViewForNotesInput() {
-        showNotesInput()
-    }
-    
-    
+
 }
 
 extension NewTaskCoordinator: UIViewControllerTransitioningDelegate {
@@ -210,15 +193,6 @@ extension NewTaskCoordinator: TagCollectionViewModelDelegate {
         showEditTag(tag)
     }
     
-    func shouldEscape() {
-        homeScreen.prepareToHideAddTask()
-        endAddTask()
-    }
-    
-    func didCreateTask() {
-        homeScreen.prepareToHideAddTask()
-    }
-    
     func shouldPresent(viewModel: IconCellPresentable) {
         var inputView: UIViewController?
         
@@ -238,12 +212,5 @@ extension NewTaskCoordinator: TagCollectionViewModelDelegate {
         
         modalPresenter.pushViewController(inputView!, animated: true)
     }
-    
-    func didTapAddTask() {
-        homeScreen.prepareToPresentAddTask()
-    }
-    
-    func didPanAddTask() {
-        homeScreen.didPanAddTask()
-    }
+
 }

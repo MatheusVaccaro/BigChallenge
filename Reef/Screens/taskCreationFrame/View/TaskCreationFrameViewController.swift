@@ -142,12 +142,11 @@ class TaskCreationFrameViewController: UIViewController {
         view.layer.shadowColor = CGColor.shadowColor
         view.layer.shadowOpacity = 0.2
     }
-    
 }
 
 extension TaskCreationFrameViewController {
     override func accessibilityPerformEscape() -> Bool {
-        viewModel.performEscape()
+        viewModel.delegate?.dismiss()
         return true
     }
 }
