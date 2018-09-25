@@ -44,7 +44,6 @@ class TaskCreationFramePresentAnimationController: NSObject, UIViewControllerAni
             taskCreationFrameViewController.view.layoutIfNeeded()
         }
         animator.addCompletion { _ in
-            
             toViewController.view.isHidden = false
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }

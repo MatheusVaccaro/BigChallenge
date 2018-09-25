@@ -11,19 +11,30 @@ import ReefKit
 import CoreLocation
 
 protocol TaskCreationDelegate: class {
-    func didTapAddTask()
-    func didPanAddTask()
     func didCreateTask()
+<<<<<<< HEAD
     func shouldEscape()
     func shouldPresentMoreOptions()
     func shouldHideMoreOptions()
     func shouldPresent(viewModel: IconCellPresentable)
+=======
+    func shouldPresentViewForLocationInput()
+    func shouldPresentViewForDateInput()
+    func shouldPresentViewForNotesInput()
+>>>>>>> Add moreoptions hide and unhide
     func viewDidLoad()
+    func dismiss()
+}
+
+protocol TaskCreationUIDelegate: class {
+    func presentMoreOptions()
+    func hideMoreOptions()
 }
 
 class TaskCreationViewModel {
     
     weak var delegate: TaskCreationDelegate?
+    weak var uiDelegate: TaskCreationUIDelegate?
     
     fileprivate var model: TaskModel
     fileprivate var attributes: [TaskAttributes : Any] = [:]
@@ -57,11 +68,11 @@ class TaskCreationViewModel {
 
 extension TaskCreationViewModel: NewTaskViewModelOutputDelegate {
     func shouldPresentMoreOptions() {
-        delegate?.shouldPresentMoreOptions()
+        uiDelegate?.presentMoreOptions()
     }
     
     func shouldHideMoreOptions() {
-        delegate?.shouldHideMoreOptions()
+        uiDelegate?.hideMoreOptions()
     }
     
     func didPressCreateTask() {

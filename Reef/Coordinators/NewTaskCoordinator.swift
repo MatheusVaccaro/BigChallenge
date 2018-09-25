@@ -79,22 +79,22 @@ class NewTaskCoordinator: NSObject, Coordinator {
                                                            moreOptionsViewModel: moreOptionsViewModel,
                                                            newTaskViewModel: newTaskViewController.viewModel)
         creationFrameViewModel.delegate = self
+        creationFrameViewModel.uiDelegate = creationFrameViewController
         creationFrameViewController.viewModel = creationFrameViewModel
         
-//        homeScreen.setupAddTask(viewController: creationFrameViewController)
-        
-        
-//        moreOptionsViewController.accessibilityElementsHidden = true
         let modalPresenter = UINavigationController(rootViewController: creationFrameViewController)
         self.modalPresenter = modalPresenter
         configureModalPresenter()
-        presenter.present(modalPresenter, animated: true, completion: nil)
+        
+        presenter.present(modalPresenter, animated: true) {
+            UIAccessibility.post(notification: UIAccessibility.Notification.screenChanged, argument: nil)
+        }
     }
     
     func edit(_ task: Task) {
         selectedTags = task.allTags
         creationFrameViewController.viewModel.task = task
-//        homeScreen.prepareToPresentAddTask()
+        //        homeScreen.prepareToPresentAddTask()
     }
     
     func endAddTask() {
@@ -161,19 +161,11 @@ extension NewTaskCoordinator: TaskCreationDelegate {
     }
     
     func dismiss() {
-         dismissViewController()
+        dismissViewController()
     }
     
     func didCreateTask() {
-//        homeScreen.prepareToHideAddTask()
-    }
-    
-    func didTapAddTask() {
-//        homeScreen.prepareToPresentAddTask()
-    }
-    
-    func didPanAddTask() {
-//        homeScreen.didPanAddTask()
+        dismissViewController()
     }
     
     func shouldPresentViewForDateInput() {
@@ -188,15 +180,7 @@ extension NewTaskCoordinator: TaskCreationDelegate {
         showNotesInput()
     }
     
-    func shouldPresentMoreOptions() {
-//        homeScreen.prepareToPresentMoreOptions()
-//        moreOptionsViewController.accessibilityElementsHidden = false
-    }
     
-    func shouldHideMoreOptions() {
-//        homeScreen.prepareToPresentAddTask()
-//        moreOptionsViewController.accessibilityElementsHidden = true
-    }
 }
 
 extension NewTaskCoordinator: UIViewControllerTransitioningDelegate {
@@ -216,7 +200,7 @@ extension NewTaskCoordinator: UIViewControllerTransitioningDelegate {
         guard let animator = animator as? TaskCreationFramePresentAnimationController,
             let interactionController = animator.interactionController,
             interactionController.interactionInProgress
-        else { return nil }
+            else { return nil }
         return interactionController
     }
 }

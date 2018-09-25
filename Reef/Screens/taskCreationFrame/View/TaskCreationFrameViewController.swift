@@ -106,20 +106,13 @@ class TaskCreationFrameViewController: UIViewController {
         tagCollectionViewController.didMove(toParent: self)
     }
     
-    @IBAction func didTapAddTask(_ sender: Any) {
-        viewModel.delegate?.didTapAddTask()
-    }
-    
-    @IBAction func didPanAddTask(_ sender: Any) {
-        viewModel.delegate?.didPanAddTask()
-    }
-    
     @objc func dismissViewController() {
         viewModel.delegate?.dismiss()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         title = "New Task"
         configureShadows(in: whiteBackgroundView)
         configureShadows(in: taskDetailView)
@@ -136,11 +129,7 @@ class TaskCreationFrameViewController: UIViewController {
 //        addGestureRecognizersForAnimations()
         
         viewModel.delegate?.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        animateOrReverseRunningTransition(state: !state, duration: duration)
+        taskDetailViewController.accessibilityElementsHidden = true
     }
     
     private func configureShadows(in view: UIView) {
@@ -305,6 +294,22 @@ extension TaskCreationFrameViewController {
         let fractionComplete = translationY / animationDistance + progressWhenInterrupted
         return fractionComplete
     }
+}
+
+extension TaskCreationFrameViewController: TaskCreationUIDelegate {
+    
+    func presentMoreOptions() {
+        guard state == .collapsed else { return }
+        animateOrReverseRunningTransition(state: .expanded, duration: duration)
+        taskDetailViewController.accessibilityElementsHidden = false
+    }
+    
+    func hideMoreOptions() {
+        guard state == .expanded else { return }
+        animateOrReverseRunningTransition(state: .collapsed, duration: duration)
+        taskDetailViewController.accessibilityElementsHidden = true
+    }
+
 }
 
 private enum State {
