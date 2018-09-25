@@ -149,9 +149,15 @@ class TagCollectionViewCell: UICollectionViewCell {
     
     private func configureAccessibility() {
         isAccessibilityElement = true
-        accessibilityLabel = viewModel?.tagTitle ?? "add tag" //TODO: localize
+        accessibilityLabel = viewModel?.tagTitle ??
+            Strings.Tag.CollectionScreen.AddTag.accessibilityLabel
         accessibilityHint = kind == .tag
-            ? "accessibilityHintTagCell"
-            : "accessibilityHintAddCell"
+            ? Strings.Tag.CollectionScreen.accessibilityHint
+            : Strings.Tag.CollectionScreen.AddTag.accessibilityHint
+        accessibilityValue = isSelected
+            ? Strings.Tag.CollectionScreen.accessibilityValueSelected
+            : Strings.Tag.CollectionScreen.accessibilityValueDeselected
+        
+        accessibilityTraits = UIAccessibilityTraits.button
     }
 }

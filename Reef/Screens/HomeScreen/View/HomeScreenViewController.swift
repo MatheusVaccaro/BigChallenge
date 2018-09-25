@@ -68,9 +68,14 @@ class HomeScreenViewController: UIViewController {
         }
     }
     
+    func dismissAddTag() {
+        addTagView.removeFromSuperview()
+    }
+    
     //MARK: Add task
     @IBOutlet weak var newTaskView: UIView!
     @IBOutlet weak var addTaskViewTopConstraint: NSLayoutConstraint!
+    
     private var taskCreationFrameViewController: TaskCreationFrameViewController!
     
     func setupAddTask(viewController: TaskCreationFrameViewController) {

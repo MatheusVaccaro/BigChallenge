@@ -23,8 +23,7 @@ class TagCreationFrameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        applyBlur()
+        applyBlur()
     }
     
     func present(_ addTagTitleViewController: AddTagTitleViewController,
@@ -95,7 +94,7 @@ class TagCreationFrameViewController: UIViewController {
             blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             
             if !blurView.isDescendant(of: view) {
-                view.insertSubview(blurView, belowSubview: view)
+                view.insertSubview(blurView, at: 0)
             }
         } else {
             view.backgroundColor = .black

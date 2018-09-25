@@ -72,7 +72,7 @@ public class TaskCellViewModel {
         return "set to \(task.regions.count) locations" //TODO: localize
     }()
     
-    let voiceOverHint: String = "voiceOverHint" //TODO: tap to complete / uncomplete
-    let editActionTitle: String = "editActionTitle"
-    let deleteActionTitle: String = "deleteActionTitle"
+    let voiceOverHint: String = "dica" //TODO: tap to complete / uncomplete
+    let editActionTitle: String = "editar"
+    let deleteActionTitle: String = "deletar"
 }
