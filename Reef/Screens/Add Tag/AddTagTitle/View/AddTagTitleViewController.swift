@@ -24,10 +24,18 @@ class AddTagTitleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        tagTitleTextField.delegate = self
     }
     
     @IBAction func didPressDoneButton(_ sender: UIButton) {
+        _ = viewModel.createTagIfPossible(tagTitleTextField.text!)
+    }
+}
+
+extension AddTagTitleViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return viewModel.createTagIfPossible(textField.text!)
     }
 }
 

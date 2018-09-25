@@ -54,8 +54,9 @@ class NewTagCoordinator: Coordinator {
         moreOptionsViewController!.viewModel = addTagDetailsViewModel
         
         let creationFrameViewModel = TagCreationViewModel(tagModel: model,
-                                                          addTagDetailsViewModel,
-                                                          addTagTitleViewModel)
+                                                          addTagTitleViewModel,
+                                                          addTagColorsViewModel,
+                                                          addTagDetailsViewModel)
         creationFrameViewModel.delegate = self
         createTagFrameViewController.viewModel = creationFrameViewModel
         
@@ -80,7 +81,7 @@ extension NewTagCoordinator {
 }
 
 extension NewTagCoordinator: TagCreationDelegate {
-    func didTapAddTag() {
+    func didAddTag() {
         //TODO
     }
     

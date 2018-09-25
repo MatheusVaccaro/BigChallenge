@@ -8,7 +8,7 @@
 
 import ReefKit
 
-protocol AddTagColorsViewModelOutputDelegate: class {
+protocol AddTagColorsViewModelDelegate: class {
     func addTagColorsViewModel(_ addTagColorsViewModel: AddTagColorsViewModel, didUpdateColorIndex colorIndex: Int?)
 }
 
@@ -17,7 +17,7 @@ class AddTagColorsViewModel {
     private let model: TagModel
     private var tag: Tag?
     
-    weak var outputDelegate: AddTagColorsViewModelOutputDelegate?
+    weak var delegate: AddTagColorsViewModelDelegate?
     
     var colorIndex: Int? {
         didSet {

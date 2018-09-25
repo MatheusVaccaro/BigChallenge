@@ -122,6 +122,16 @@ extension NewTaskCoordinator: CoordinatorDelegate {
 }
 
 extension NewTaskCoordinator: TaskCreationDelegate {
+    func shouldPresentMoreOptions() {
+        homeScreen.prepareToPresentMoreOptions()
+        moreOptionsViewController.accessibilityElementsHidden = false
+    }
+    
+    func shouldHideMoreOptions() {
+        homeScreen.prepareToPresentAddTask()
+        moreOptionsViewController.accessibilityElementsHidden = true
+    }
+    
     func shouldEscape() {
         homeScreen.prepareToHideAddTask()
         endAddTask()
@@ -157,18 +167,5 @@ extension NewTaskCoordinator: TaskCreationDelegate {
     
     func didPanAddTask() {
         homeScreen.didPanAddTask()
-    }
-}
-
-extension NewTaskCoordinator: NewTaskDelegate {
-    
-    func shouldPresentMoreOptions() {
-        homeScreen.prepareToPresentMoreOptions()
-        moreOptionsViewController.accessibilityElementsHidden = false
-    }
-    
-    func shouldHideMoreOptions() {
-        homeScreen.prepareToPresentAddTask()
-        moreOptionsViewController.accessibilityElementsHidden = true
     }
 }

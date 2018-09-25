@@ -12,7 +12,7 @@ protocol AddTagDetailsViewModelDelegate: class {
                        didFind location: CLCircularRegion, arriving: Bool)
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
-                            didSelectDate date: DateComponents)
+                            didSelectDate date: Date)
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
                             didSelectFrequency frequency: NotificationOptions.Frequency)
@@ -68,7 +68,7 @@ extension AddTagDetailsViewModel: LocationInputDelegate {
 }
 
 extension AddTagDetailsViewModel: DateInputViewModelDelegate {
-    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: DateComponents) {
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: Date) {
         delegate?.dateInputViewModel(dateInputViewModel, didSelectDate: date)
     }
     

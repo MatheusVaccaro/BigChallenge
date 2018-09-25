@@ -11,7 +11,7 @@ import ReefKit
 import CoreLocation
 
 protocol TagCreationDelegate: class {
-    func didTapAddTag()
+    func didAddTag()
     func shouldPresent(viewModel: IconCellPresentable)
 }
 
@@ -19,17 +19,54 @@ class TagCreationViewModel {
     weak var delegate: TagCreationDelegate?
     
     fileprivate var model: TagModel
+    fileprivate var tag: Tag?
     fileprivate var attributes: [TagAttributes: Any] = [:]
-    fileprivate let addTagDetailsViewModel: AddTagDetailsViewModel
-    fileprivate let addTagTitleViewModel: AddTagTitleViewModel
     
-    init(tagModel: TagModel, _ addTagDetailsViewModel: AddTagDetailsViewModel, _ addTagTitleViewModel: AddTagTitleViewModel) {
+    fileprivate let addTagTitleViewModel: AddTagTitleViewModel
+    fileprivate let addTagColorsViewModel: AddTagColorsViewModel
+    fileprivate let addTagDetailsViewModel: AddTagDetailsViewModel
+    
+    init(tagModel: TagModel,
+         _ addTagTitleViewModel: AddTagTitleViewModel,
+         _ addTagColorsViewModel: AddTagColorsViewModel,
+         _ addTagDetailsViewModel: AddTagDetailsViewModel) {
         self.model = tagModel
+        
         self.addTagTitleViewModel = addTagTitleViewModel
+        self.addTagColorsViewModel = addTagColorsViewModel
         self.addTagDetailsViewModel = addTagDetailsViewModel
         
-//        addTagTitleViewModel.delegate = self TODO
+        addTagTitleViewModel.delegate = self
+        addTagColorsViewModel.delegate = self
         addTagDetailsViewModel.delegate = self
+    }
+    
+    func edit(_ tag: Tag?) {
+        //TOOD
+    }
+    
+    func saveTag() {
+        if tag == nil {
+            model.save(model.createTag(with: attributes))
+        } else {
+            model.update(tag!, with: attributes)
+        }
+        
+        tag = nil
+        delegate?.didAddTag()
+    }
+}
+
+extension TagCreationViewModel: AddTagTitleViewModelDelegate {
+    func addTag(_ addTagTitleViewModel: AddTagTitleViewModel, createdTag title: String?) {
+        attributes[.title] = title
+        saveTag()
+    }
+}
+
+extension TagCreationViewModel: AddTagColorsViewModelDelegate {
+    func addTagColorsViewModel(_ addTagColorsViewModel: AddTagColorsViewModel, didUpdateColorIndex colorIndex: Int?) {
+        attributes[.colorIndex] = colorIndex
     }
 }
 
@@ -43,7 +80,7 @@ extension TagCreationViewModel: AddTagDetailsViewModelDelegate {
         attributes[.arriving] = arriving
     }
     
-    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: DateComponents) {
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: Date) {
         attributes[.dueDate] = date
     }
     

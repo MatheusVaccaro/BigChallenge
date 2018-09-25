@@ -8,6 +8,20 @@
 
 import ReefKit
 
+protocol AddTagTitleViewModelDelegate: class {
+    func addTag(_ addTagTitleViewModel: AddTagTitleViewModel,
+                createdTag named: String?)
+}
+
 class AddTagTitleViewModel {
+    weak var delegate: AddTagTitleViewModelDelegate!
     
+    func createTagIfPossible(_ text: String) -> Bool {
+        if !text.isEmpty {
+            delegate.addTag(self, createdTag: text)
+            return true
+        } else {
+            return false
+        }
+    }
 }

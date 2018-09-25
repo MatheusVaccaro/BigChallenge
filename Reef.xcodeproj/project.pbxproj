@@ -521,8 +521,7 @@
 		160E628721592378001F3D01 /* AddTagTitle */ = {
 			isa = PBXGroup;
 			children = (
-				160E628A215923C4001F3D01 /* AddTagTitle.storyboard */,
-				160E6288215923AE001F3D01 /* AddTagTitleViewController.swift */,
+				22F8FD4B2159C83800ECF10F /* View */,
 				160E628E215923E6001F3D01 /* ViewModel */,
 			);
 			path = AddTagTitle;
@@ -539,9 +538,9 @@
 		160E628F215927B1001F3D01 /* Add Tag */ = {
 			isa = PBXGroup;
 			children = (
-				160E6290215929E6001F3D01 /* AddTagColors */,
 				160E627D2152FB96001F3D01 /* tagCreationFrame */,
 				160E628721592378001F3D01 /* AddTagTitle */,
+				160E6290215929E6001F3D01 /* AddTagColors */,
 				16F9D936215963C300304ECE /* AddTagDetails */,
 			);
 			path = "Add Tag";
@@ -550,9 +549,7 @@
 		160E6290215929E6001F3D01 /* AddTagColors */ = {
 			isa = PBXGroup;
 			children = (
-				160E629321592A1B001F3D01 /* AddTagColors.storyboard */,
-				160E6291215929FD001F3D01 /* AddTagColorsViewController.swift */,
-				C2901058211E4492008F2807 /* ColorCollectionViewCell.swift */,
+				22F8FD4C2159D3C900ECF10F /* View */,
 				160E629521592A21001F3D01 /* ViewModel */,
 			);
 			path = AddTagColors;
@@ -869,6 +866,25 @@
 				C2C79D2E2123E89A0058F228 /* Tag+Extension.swift */,
 			);
 			path = PersistenceManager;
+			sourceTree = "<group>";
+		};
+		22F8FD4B2159C83800ECF10F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				160E628A215923C4001F3D01 /* AddTagTitle.storyboard */,
+				160E6288215923AE001F3D01 /* AddTagTitleViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		22F8FD4C2159D3C900ECF10F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				160E629321592A1B001F3D01 /* AddTagColors.storyboard */,
+				160E6291215929FD001F3D01 /* AddTagColorsViewController.swift */,
+				C2901058211E4492008F2807 /* ColorCollectionViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		22FA2851212F7E6E00FC74D3 /* ReefIndexExtension */ = {
