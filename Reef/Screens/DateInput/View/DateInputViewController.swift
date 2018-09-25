@@ -28,7 +28,6 @@ class DateInputViewController: UIViewController {
     
     private(set) var currentSelector: BehaviorSubject<DateSelector>!
     
-    
     @IBOutlet weak var calendarContainerView: CalendarView!
     private var calendarViewController: CalendarViewController!
     private var calendar: JTAppleCalendarView { return calendarViewController.calendar }
@@ -50,7 +49,6 @@ class DateInputViewController: UIViewController {
         loadSelectedTimeOfDayLabel()
         loadDateSelectorView()
         loadTimeOfDaySelectorView()
-        loadShortcutButtons()
         
         #if DEBUG
         print("+++ INIT DateInputViewController")
@@ -204,22 +202,6 @@ class DateInputViewController: UIViewController {
         currentSelector.onNext(.timeOfDay)
     }
     
-    private func loadShortcutButtons() {
-//        configure([tomorrowShortcutButton, nextWeekShortcutButton, nextMonthShortcutButton])
-//        // RXSwift binding
-//        viewModel?.tomorrowShortcutText.asObservable().subscribe(onNext: { [weak self] in
-//            self?.tomorrowShortcutButton.setTitle($0, for: .normal)
-//        }).disposed(by: disposeBag)
-//        
-//        viewModel?.nextWeekShortcutText.asObservable().subscribe(onNext: { [weak self] in
-//            self?.nextWeekShortcutButton.setTitle($0, for: .normal)
-//        }).disposed(by: disposeBag)
-//        
-//        viewModel?.nextMonthShortcutText.asObservable().subscribe(onNext: { [weak self] in
-//            self?.nextMonthShortcutButton.setTitle($0, for: .normal)
-//        }).disposed(by: disposeBag)
-    }
-    
     private func configure(_ shortcutButtons: [UIButton]) {
         shortcutButtons.forEach { self.configure($0) }
     }
@@ -278,22 +260,5 @@ extension DateInputViewController: StoryboardInstantiable {
     
     static var storyboardIdentifier: String {
         return "DateInput"
-    }
-}
-
-
-extension String {
-    func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
-        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [.font: font], context: nil)
-        
-        return ceil(boundingBox.height)
-    }
-    
-    func width(withConstrainedHeight height: CGFloat, font: UIFont) -> CGFloat {
-        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
-        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [.font: font], context: nil)
-        
-        return ceil(boundingBox.width)
     }
 }
