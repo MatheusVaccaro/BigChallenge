@@ -27,11 +27,15 @@ class NewTaskView: UIView {
     }
     
     override var accessibilityCustomActions: [UIAccessibilityCustomAction]? {
-        get { //TODO: localize
-            let detailsAction = UIAccessibilityCustomAction(name: "add details",
+        get {
+            let detailsActionName = Strings.Task.CreationScreen.accessibilityShowDetailsAction
+            let doneActionName =
+                Strings.Task.CreationScreen.accessibilityDoneAction
+            
+            let detailsAction = UIAccessibilityCustomAction(name: detailsActionName,
                                                             target: self,
                                                             selector: #selector(activateDetailsButton))
-            let doneAction = UIAccessibilityCustomAction(name: "create",
+            let doneAction = UIAccessibilityCustomAction(name: doneActionName,
                                                          target: self,
                                                          selector: #selector(activateDoneButton))
             return [detailsAction, doneAction]

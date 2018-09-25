@@ -34,6 +34,8 @@ struct Strings {
                 NSLocalizedString("newTaskTitle", comment: "placeholder title for a new task")
             static let taskDescriptionPlaceholder =
                 NSLocalizedString("newTaskDescriptionPlaceholder", comment: "placeholder title for a new task description")
+            static let accessibilityShowDetailsAction = NSLocalizedString("showDetailsActionName", comment: "")
+            static let accessibilityDoneAction = NSLocalizedString("doneActionName", comment: "")
         }
         
         struct ListScreen {
@@ -62,6 +64,14 @@ struct Strings {
             static let updateActionTitle = NSLocalizedString("updateActionTitle", comment: "update button title on edit action sheet")
             static let deleteActionTitle = NSLocalizedString("deleteActionTitle", comment: "delete button title on edit action sheet")
             static let cancelActionTitle = NSLocalizedString("cancelActionTitle", comment: "cancel button title on edit action sheet")
+            static let accessibilityHint = NSLocalizedString("tag accessibility hint", comment: "")
+            static let accessibilityValueSelected = NSLocalizedString("tag accessibility value selected", comment: "")
+            static let accessibilityValueDeselected = NSLocalizedString("tag accessibility value not selected", comment: "")
+            
+            struct AddTag {
+                static let accessibilityLabel = NSLocalizedString("add tag accessibility label", comment: "")
+                static let accessibilityHint = NSLocalizedString("add tag accessibility hint", comment: "")
+            }
         }
     }
     

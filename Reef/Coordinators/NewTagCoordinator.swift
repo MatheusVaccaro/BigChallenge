@@ -86,7 +86,7 @@ extension NewTagCoordinator: TagCreationDelegate {
     }
     
     func didAddTag() {
-        dismissViewController()
+        homeScreen.dismissAddTag()
     }
     
     func shouldPresent(viewModel: IconCellPresentable) {
