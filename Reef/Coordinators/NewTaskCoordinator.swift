@@ -34,7 +34,7 @@ class NewTaskCoordinator: NSObject, Coordinator {
          presenter: UINavigationController,
          taskModel: TaskModel,
          tagModel: TagModel,
-         selectedTags: [Tag] = []) {
+         selectedTags: [Tag]) {
         
         self.taskModel = taskModel
         self.tagModel = tagModel
@@ -57,9 +57,7 @@ class NewTaskCoordinator: NSObject, Coordinator {
         creationFrameViewController = TaskCreationFrameViewController.instantiate()
         
         let tagCollectionViewModel =
-            TagCollectionViewModel(model: tagModel,
-                                       filtering: false,
-                                       selectedTags: task?.allTags ?? [])
+            TagCollectionViewModel(model: tagModel, filtering: false, selectedTags: selectedTags)
         let newTaskViewModel = NewTaskViewModel()
         let moreOptionsViewModel = MoreOptionsViewModel()
         let creationFrameViewModel =
@@ -77,7 +75,6 @@ class NewTaskCoordinator: NSObject, Coordinator {
         tagCollectionViewModel.delegate = self
         creationFrameViewModel.delegate = self
         creationFrameViewModel.uiDelegate = creationFrameViewController
-        
         
         modalPresenter = UINavigationController(rootViewController: creationFrameViewController)
         configureModalPresenter()

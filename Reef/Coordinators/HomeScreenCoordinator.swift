@@ -64,7 +64,7 @@ class HomeScreenCoordinator: Coordinator {
         presenter.pushViewController(homeScreenViewController, animated: false)
     }
 
-    fileprivate func showNewTask(selectedTags: [Tag]) {
+    fileprivate func showNewTask() {
         let newTaskCoordinator = NewTaskCoordinator(presenter: presenter,
                                                     taskModel: taskModel,
                                                     tagModel: tagModel,
@@ -79,7 +79,7 @@ class HomeScreenCoordinator: Coordinator {
                                                     presenter: presenter,
                                                     taskModel: taskModel,
                                                     tagModel: tagModel,
-                                                    selectedTags: selectedTags)
+                                                    selectedTags: task.allTags)
         newTaskCoordinator.delegate = self
         addChild(coordinator: newTaskCoordinator)
         newTaskCoordinator.start()
@@ -110,7 +110,7 @@ extension HomeScreenCoordinator: CoordinatorDelegate {
 
 extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
     func homeScreenViewModelDidStartAddTask(_ homeScreenViewModel: HomeScreenViewModel) {
-        showNewTask(selectedTags: selectedTags)
+        showNewTask()
     }
     
     func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel, willEdit task: Task) {
@@ -144,7 +144,7 @@ extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
 
 extension HomeScreenCoordinator: TagCollectionViewModelDelegate {
     func didUpdate(_ selectedTags: [Tag]) {
-        //code
+        self.selectedTags = selectedTags
     }
     
     func didClickUpdate(tag: Tag) {
