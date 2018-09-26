@@ -24,7 +24,6 @@ protocol NewTaskViewModelDelegate: class {
 class NewTaskViewModel {
     
     weak var outputDelegate: NewTaskViewModelOutputDelegate?
-    weak var delegate: NewTaskViewModelDelegate!
     
     var taskTitleText: String? {
         didSet {
@@ -35,13 +34,13 @@ class NewTaskViewModel {
     var taskColors: [CGColor] = [UIColor.black.cgColor, UIColor.black.cgColor]
     
     func edit(_ task: Task?) {
+        taskTitleText = task?.title
+        
         if let colors = task?.allTags.first?.colors {
             taskColors = colors
         } else {
             taskColors = [UIColor.black.cgColor, UIColor.black.cgColor]
         }
-        delegate.updateTextViewWith(text: task?.title ?? "")
-        delegate.didUpdateColors()
     }
     
     func shouldPresentMoreOptions(_ bool: Bool) {

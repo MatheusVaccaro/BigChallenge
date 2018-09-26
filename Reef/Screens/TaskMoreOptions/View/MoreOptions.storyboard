@@ -30,6 +30,7 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="s4O-RU-C88" secondAttribute="bottom" id="88f-Ka-dNC"/>
                             <constraint firstAttribute="trailing" secondItem="s4O-RU-C88" secondAttribute="trailing" id="PLq-kR-hSC"/>
+                            <constraint firstItem="s4O-RU-C88" firstAttribute="top" secondItem="iqX-hM-5lK" secondAttribute="top" id="col-CJ-DGT"/>
                             <constraint firstItem="s4O-RU-C88" firstAttribute="leading" secondItem="ard-7Y-5Mm" secondAttribute="leading" id="psr-pW-scz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iqX-hM-5lK"/>

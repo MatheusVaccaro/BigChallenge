@@ -14,15 +14,15 @@ import UserNotifications
 
 class HomeScreenViewController: UIViewController {
     
+    // MARK: - Properties
+    fileprivate var isPresentingMoreOptions: Bool = false
+    fileprivate var isPresentingAddTask: Bool = false
+    
     var viewModel: HomeScreenViewModel!
-    
-    @IBOutlet weak var tagContainerView: UIView!
-    @IBOutlet weak var taskListContainerView: UIView!
-    @IBOutlet weak var whiteBackgroundView: UIView!
-    
     fileprivate var taskListViewController: TaskListViewController?
     fileprivate var tagCollectionViewController: TagCollectionViewController?
-
+    private var taskCreationFrameViewController: TaskCreationFrameViewController!
+    
     private let disposeBag = DisposeBag()
     
     private lazy var gradientLayer: CAGradientLayer = {
@@ -37,6 +37,18 @@ class HomeScreenViewController: UIViewController {
         return layer
     }()
     
+    // MARK: - IBOutlets
+    @IBOutlet weak var whiteBackgroundView: UIView!
+    @IBOutlet weak var taskListContainerView: UIView!
+    @IBOutlet weak var tagContainerView: UIView!
+    @IBOutlet weak var newTaskView: UIView!
+    @IBOutlet weak var addTaskViewTopConstraint: NSLayoutConstraint!
+    
+    // MARK: - Animation IBOutlets
+    @IBOutlet weak var pullDownView: UIView!
+    @IBOutlet weak var pullDownViewTopConstraint: NSLayoutConstraint!
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = viewModel.bigTitleText
@@ -57,72 +69,19 @@ class HomeScreenViewController: UIViewController {
         observeSelectedTags()
         observeClickedAddTag()
         userActivity = viewModel.userActivity
+        
+        configurePullDownView()
+        
+        newTaskView.alpha = 0
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         configureEmptyState()
         if isPresentingMoreOptions {
-            animateMoreOptionsShowing()
+//            animateMoreOptionsShowing()
         } else {
-            animateAddTaskShowing()
+//            animateAddTaskShowing()
         }
-    }
-    
-    func dismissAddTag() {
-        addTagView.removeFromSuperview()
-    }
-    
-    //MARK: Add task
-    @IBOutlet weak var newTaskView: UIView!
-    @IBOutlet weak var addTaskViewTopConstraint: NSLayoutConstraint!
-    
-    private var taskCreationFrameViewController: TaskCreationFrameViewController!
-    
-    func setupAddTask(viewController: TaskCreationFrameViewController) {
-        
-        taskCreationFrameViewController = viewController
-        
-        addChild(viewController)
-        newTaskView.addSubview(viewController.view)
-        
-        viewController.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            viewController.view.rightAnchor.constraint(equalTo: newTaskView.rightAnchor),
-            viewController.view.topAnchor.constraint(equalTo: newTaskView.topAnchor),
-            viewController.view.leftAnchor.constraint(equalTo: newTaskView.leftAnchor),
-            viewController.view.bottomAnchor.constraint(equalTo: newTaskView.bottomAnchor)
-            ])
-    }
-    
-    // MARK: Add tag
-    
-    @IBOutlet weak var addTagView: UIView!
-    private var tagCreationFrameViewController: TagCreationFrameViewController!
-    func setupAddTag(viewController: TagCreationFrameViewController) {
-        tagCreationFrameViewController = viewController
-        
-        addTagView.backgroundColor = UIColor.clear
-        self.view.addSubview(addTagView!)
-        
-        NSLayoutConstraint.activate([
-            addTagView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-            addTagView.topAnchor.constraint(equalTo: tagContainerView.topAnchor),
-            addTagView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            addTagView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
-            ])
-        
-        addChild(viewController)
-        addTagView.addSubview(viewController.view)
-        
-        viewController.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            viewController.view.rightAnchor.constraint(equalTo: addTagView.rightAnchor),
-            viewController.view.topAnchor.constraint(equalTo: addTagView.topAnchor),
-            viewController.view.leftAnchor.constraint(equalTo: addTagView.leftAnchor),
-            viewController.view.bottomAnchor.constraint(equalTo: addTagView.bottomAnchor)
-            ])
     }
     
     func setupTaskList(viewModel: TaskListViewModel, viewController: TaskListViewController) {
@@ -254,15 +213,12 @@ class HomeScreenViewController: UIViewController {
         viewModel.updateUserActivity(activity)
     }
     
-    fileprivate var isPresentingMoreOptions: Bool = false
-    fileprivate var isPresentingAddTask: Bool = false
-    
     lazy var blurView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .light)
         let view = UIVisualEffectView(effect: blurEffect)
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideAddTask))
-        view.addGestureRecognizer(tapGesture)
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideAddTask))
+//        view.addGestureRecognizer(tapGesture)
         
         return view
     }()
@@ -284,6 +240,24 @@ class HomeScreenViewController: UIViewController {
     private func removeBlur() {
         blurView.removeFromSuperview()
     }
+    
+    private func configurePullDownView() {
+        pullDownView.backgroundColor = .white
+        pullDownView.layer.cornerRadius = 6.3
+        pullDownView.tintColor = .white
+        
+        pullDownView.layer.shadowRadius = 6.3
+        pullDownView.layer.shadowOffset = CGSize(width: 0, height: 10)
+        pullDownView.layer.masksToBounds = false
+        pullDownView.layer.shadowColor = .shadowColor
+        pullDownView.layer.shadowOpacity = 0.2
+        
+        pullDownView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(startAddTask)))
+    }
+    
+    @objc private func startAddTask() {
+        viewModel.startAddTask()
+    }
 }
 
 extension HomeScreenViewController: StoryboardInstantiable {
@@ -296,87 +270,11 @@ extension HomeScreenViewController: StoryboardInstantiable {
     }
 }
 
-extension HomeScreenViewController {
-    // action from homescreen
-    @objc func hideAddTask() {
-        prepareToHideAddTask()
-        viewModel.endAddTask()
-    }
-    
-    @objc func presentAddTask() {
-        prepareToPresentAddTask()
-        viewModel.startAddTask()
-    }
-    
-    
-    //actions from other screens
-    func prepareToPresentAddTask() {
-        guard !isPresentingAddTask else { return }
-        isPresentingAddTask = true
-        isPresentingMoreOptions = false
-        tagCollectionViewController!.viewModel.filtering = false
-        animateAddTaskShowing()
-        applyBlur()
-    }
-    
-    func prepareToHideAddTask() {
-        guard isPresentingAddTask || isPresentingMoreOptions else { return }
-        isPresentingAddTask = false
-        isPresentingMoreOptions = false
-        tagCollectionViewController!.viewModel.filtering = true
-        animateAddTaskHidden()
-        removeBlur()
-    }
-    
-    func prepareToPresentMoreOptions() {
-        guard !isPresentingMoreOptions else { return }
-        isPresentingAddTask = false
-        isPresentingMoreOptions = true
-        animateMoreOptionsShowing()
-        applyBlur()
-    }
-    
-    func prepareToHideMoreOptions() {
-        guard isPresentingMoreOptions else { return }
-        isPresentingAddTask = true
-        isPresentingMoreOptions = false
-        animateAddTaskShowing()
-    }
-    
-    func didPanAddTask() {
-        //code
-    }
-    
-    fileprivate func animateAddTaskHidden() {
-        UIView.animate(withDuration: 0.25) {
-            self.addTaskViewTopConstraint.constant =
-                (self.taskCreationFrameViewController.hiddenHeight - 20) - self.newTaskView.bounds.height
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    fileprivate func animateAddTaskShowing() {
-        UIView.animate(withDuration: 0.25) {
-            self.addTaskViewTopConstraint.constant =
-                self.taskCreationFrameViewController.hiddenHeight - self.newTaskView.bounds.height
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    fileprivate func animateMoreOptionsShowing() {
-        UIView.animate(withDuration: 0.25) {
-            self.addTaskViewTopConstraint.constant =
-                self.taskCreationFrameViewController.contentSize - self.newTaskView.bounds.height
-            self.view.layoutIfNeeded()
-        }
-    }
-}
-
 // MARK: - Accessibility
 extension HomeScreenViewController {
     override func accessibilityPerformMagicTap() -> Bool {
         if !isPresentingAddTask {
-            presentAddTask()
+//            presentAddTask()
             return true
         } else {
             return false
@@ -385,7 +283,7 @@ extension HomeScreenViewController {
     
     override func accessibilityPerformEscape() -> Bool {
         if isPresentingAddTask {
-            hideAddTask()
+//            hideAddTask()
             return true
         } else {
             return false

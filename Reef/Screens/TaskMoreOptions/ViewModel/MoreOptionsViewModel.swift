@@ -27,10 +27,6 @@ protocol MoreOptionsViewModelDelegate: class {
     func shouldPresent(viewModel: IconCellPresentable)
 }
 
-protocol MoreOptionsViewModelUIDelegate: class {
-    func shouldUpdateTableView()
-}
-
 class MoreOptionsViewModel {
     
     init() {
@@ -46,11 +42,9 @@ class MoreOptionsViewModel {
     func edit(task: Task?) {
         locationInputViewModel.task = task
         dateInputViewModel.configure(with: task)
-        UIDelegate.shouldUpdateTableView()
     }
     
     weak var delegate: MoreOptionsViewModelDelegate?
-    weak var UIDelegate: MoreOptionsViewModelUIDelegate!
     
     let locationInputViewModel: LocationInputViewModel
     let dateInputViewModel: DateInputViewModel

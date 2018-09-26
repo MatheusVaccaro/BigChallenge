@@ -11,30 +11,27 @@ import ReefKit
 import CoreLocation
 
 protocol TaskCreationDelegate: class {
-    func didTapAddTask()
-    func didPanAddTask()
     func didCreateTask()
-    func shouldEscape()
-    func shouldPresentMoreOptions()
-    func shouldHideMoreOptions()
     func shouldPresent(viewModel: IconCellPresentable)
+    func viewDidLoad()
+    func dismiss()
+}
+
+protocol TaskCreationUIDelegate: class {
+    func presentMoreOptions()
+    func hideMoreOptions()
 }
 
 class TaskCreationViewModel {
     
     weak var delegate: TaskCreationDelegate?
+    weak var uiDelegate: TaskCreationUIDelegate?
     
     fileprivate var model: TaskModel
     fileprivate var attributes: [TaskAttributes : Any] = [:]
     fileprivate let moreOptionsViewModel: MoreOptionsViewModel
     fileprivate let newTaskViewModel: NewTaskViewModel
-    
-    var task: Task? {
-        didSet {
-            moreOptionsViewModel.edit(task: task)
-            newTaskViewModel.edit(task)
-        }
-    }
+    fileprivate var task: Task?
     
     init(taskModel: TaskModel, moreOptionsViewModel: MoreOptionsViewModel, newTaskViewModel: NewTaskViewModel) {
         self.model = taskModel
@@ -45,22 +42,27 @@ class TaskCreationViewModel {
         newTaskViewModel.outputDelegate = self
     }
     
+    func edit(_ task: Task?) {
+        if let task = task {
+            self.task = task
+            moreOptionsViewModel.edit(task: task)
+            newTaskViewModel.edit(task)
+        }
+    }
+    
     func set(tags: [Tag]) {
         attributes[.tags] = tags
     }
-    
-    func performEscape() {
-        delegate?.shouldEscape()
-    }
+
 }
 
 extension TaskCreationViewModel: NewTaskViewModelOutputDelegate {
     func shouldPresentMoreOptions() {
-        delegate?.shouldPresentMoreOptions()
+        uiDelegate?.presentMoreOptions()
     }
     
     func shouldHideMoreOptions() {
-        delegate?.shouldHideMoreOptions()
+        uiDelegate?.hideMoreOptions()
     }
     
     func didPressCreateTask() {

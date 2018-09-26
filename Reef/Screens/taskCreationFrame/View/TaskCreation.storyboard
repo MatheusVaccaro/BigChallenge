@@ -18,38 +18,73 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sl8-Ip-pVP" userLabel="titleView">
-                                <rect key="frame" x="0.0" y="594" width="375" height="73"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsi-pl-HXe" userLabel="Task Container View">
+                                <rect key="frame" x="8" y="-119" width="359" height="293"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGh-JP-lcF">
+                                        <rect key="frame" x="0.0" y="220" width="359" height="73"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="73" id="Vpy-yl-EIx"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGT-TV-WCP">
+                                        <rect key="frame" x="0.0" y="0.0" width="359" height="210"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="210" id="htd-30-sjX"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="73" id="aOd-ga-GkN"/>
+                                    <constraint firstItem="WGh-JP-lcF" firstAttribute="leading" secondItem="dsi-pl-HXe" secondAttribute="leading" id="1gQ-c9-NT8"/>
+                                    <constraint firstItem="oGT-TV-WCP" firstAttribute="leading" secondItem="dsi-pl-HXe" secondAttribute="leading" id="4zT-Yx-Ra4"/>
+                                    <constraint firstAttribute="bottom" secondItem="WGh-JP-lcF" secondAttribute="bottom" id="D3M-sL-gEH"/>
+                                    <constraint firstAttribute="trailing" secondItem="WGh-JP-lcF" secondAttribute="trailing" id="IVh-6A-gck"/>
+                                    <constraint firstItem="WGh-JP-lcF" firstAttribute="top" secondItem="oGT-TV-WCP" secondAttribute="bottom" constant="10" id="b8U-pK-oMo"/>
+                                    <constraint firstItem="oGT-TV-WCP" firstAttribute="top" secondItem="dsi-pl-HXe" secondAttribute="top" id="hdO-yo-JC4"/>
+                                    <constraint firstAttribute="trailing" secondItem="oGT-TV-WCP" secondAttribute="trailing" id="kHT-Kc-tvl"/>
                                 </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="NlQ-HN-lVl" appends="YES" id="Td0-Mt-qZY"/>
-                                    <outletCollection property="gestureRecognizers" destination="jif-0G-hmo" appends="YES" id="a1p-V4-EAA"/>
-                                </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iof-x6-2Zq" userLabel="DetailView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="586"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L3c-CN-lzT" userLabel="whiteBackgroundView">
+                                <rect key="frame" x="0.0" y="20" width="375" height="103"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BY2-pz-7Ub" userLabel="Tag Collection View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="87"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="87" id="YVd-UW-yoD"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="BY2-pz-7Ub" firstAttribute="leading" secondItem="L3c-CN-lzT" secondAttribute="leading" id="8Mu-eB-bb0"/>
+                                    <constraint firstAttribute="height" constant="103" id="9IJ-aP-bqv"/>
+                                    <constraint firstAttribute="trailing" secondItem="BY2-pz-7Ub" secondAttribute="trailing" id="mhz-xg-96V"/>
+                                    <constraint firstItem="BY2-pz-7Ub" firstAttribute="top" secondItem="L3c-CN-lzT" secondAttribute="top" id="vdG-0e-2eg"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="iof-x6-2Zq" firstAttribute="leading" secondItem="FUJ-f1-wVI" secondAttribute="leading" id="BI2-eW-fCa"/>
-                            <constraint firstItem="sl8-Ip-pVP" firstAttribute="leading" secondItem="FUJ-f1-wVI" secondAttribute="leading" id="H6w-9Z-XTm"/>
-                            <constraint firstItem="iof-x6-2Zq" firstAttribute="top" secondItem="FUJ-f1-wVI" secondAttribute="top" id="SID-k5-1zX"/>
-                            <constraint firstItem="sl8-Ip-pVP" firstAttribute="bottom" secondItem="FUJ-f1-wVI" secondAttribute="bottom" id="Tm1-jR-DNy"/>
-                            <constraint firstItem="sl8-Ip-pVP" firstAttribute="top" secondItem="iof-x6-2Zq" secondAttribute="bottom" constant="8" id="e8E-cO-t7r"/>
-                            <constraint firstAttribute="trailing" secondItem="iof-x6-2Zq" secondAttribute="trailing" id="tIh-9V-6XC"/>
-                            <constraint firstAttribute="trailing" secondItem="sl8-Ip-pVP" secondAttribute="trailing" id="uDN-R7-Pgc"/>
+                            <constraint firstItem="isU-bp-1Xt" firstAttribute="trailing" secondItem="dsi-pl-HXe" secondAttribute="trailing" constant="8" id="2bW-pu-SgF"/>
+                            <constraint firstItem="dsi-pl-HXe" firstAttribute="top" secondItem="L3c-CN-lzT" secondAttribute="bottom" constant="-242" id="MEt-SI-DDx"/>
+                            <constraint firstItem="L3c-CN-lzT" firstAttribute="leading" secondItem="isU-bp-1Xt" secondAttribute="leading" id="PQW-5v-D4Y"/>
+                            <constraint firstItem="L3c-CN-lzT" firstAttribute="top" secondItem="isU-bp-1Xt" secondAttribute="top" id="SVu-Fg-qn8"/>
+                            <constraint firstItem="isU-bp-1Xt" firstAttribute="trailing" secondItem="L3c-CN-lzT" secondAttribute="trailing" id="eKp-y9-2u7"/>
+                            <constraint firstItem="dsi-pl-HXe" firstAttribute="leading" secondItem="isU-bp-1Xt" secondAttribute="leading" constant="8" id="v40-mE-yNE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="isU-bp-1Xt"/>
                     </view>
                     <connections>
-                        <outlet property="taskDetailView" destination="iof-x6-2Zq" id="gZH-km-5Kx"/>
-                        <outlet property="taskTitleView" destination="sl8-Ip-pVP" id="9TM-CW-joo"/>
+                        <outlet property="tagCollectionView" destination="BY2-pz-7Ub" id="sy1-Yd-sm6"/>
+                        <outlet property="taskContainerView" destination="dsi-pl-HXe" id="Nd5-zB-A61"/>
+                        <outlet property="taskContainerViewTopConstraint" destination="MEt-SI-DDx" id="PXM-eq-euL"/>
+                        <outlet property="taskDetailView" destination="oGT-TV-WCP" id="glE-Nc-56A"/>
+                        <outlet property="taskTitleView" destination="WGh-JP-lcF" id="sIX-Al-NaH"/>
+                        <outlet property="whiteBackgroundView" destination="L3c-CN-lzT" id="6r0-bg-nM3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PwW-Yc-O2k" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -64,7 +99,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="55" y="-69"/>
+            <point key="canvasLocation" x="53.600000000000001" y="-69.715142428785612"/>
         </scene>
     </scenes>
 </document>

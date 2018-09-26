@@ -11,36 +11,36 @@ import UIKit
 import CoreLocation
 import ReefKit
 
-class NewTaskCoordinator: Coordinator {
+class NewTaskCoordinator: NSObject, Coordinator {
     
     fileprivate let presenter: UINavigationController
+    fileprivate var modalPresenter: UINavigationController!
     var childrenCoordinators: [Coordinator]
     
     fileprivate var creationFrameViewController: TaskCreationFrameViewController!
+    fileprivate var tagCollectionViewController: TagCollectionViewController!
     fileprivate var newTaskViewController: NewTaskViewController!
     fileprivate var moreOptionsViewController: MoreOptionsViewController!
     
     fileprivate let taskModel: TaskModel
     fileprivate let tagModel: TagModel
     
+    fileprivate var task: Task?
     fileprivate var selectedTags: [Tag]
-    fileprivate let homeScreen: HomeScreenViewController
     
     weak var delegate: CoordinatorDelegate?
     
-    init(presenter: UINavigationController,
+    init(task: Task? = nil,
+         presenter: UINavigationController,
          taskModel: TaskModel,
          tagModel: TagModel,
-         selectedTags: [Tag] = [],
-         in viewController: HomeScreenViewController) {
+         selectedTags: [Tag] = []) {
         
         self.taskModel = taskModel
         self.tagModel = tagModel
         self.presenter = presenter
         self.childrenCoordinators = []
-        
-        self.homeScreen = viewController
-        
+        self.task = task
         self.selectedTags = selectedTags
         
         print("+++ INIT NewTaskCoordinator")
@@ -51,45 +51,40 @@ class NewTaskCoordinator: Coordinator {
     }
     
     func start() {
-        // new task (title)
-        self.newTaskViewController = NewTaskViewController.instantiate()
-        let newTaskViewModel = NewTaskViewModel()
-        
-        newTaskViewModel.delegate = newTaskViewController
-        newTaskViewController.viewModel = newTaskViewModel
-        
-        // more options
+        tagCollectionViewController = TagCollectionViewController.instantiate()
+        newTaskViewController = NewTaskViewController.instantiate()
         moreOptionsViewController = MoreOptionsViewController.instantiate()
-        let moreOptionsViewModel: MoreOptionsViewModel = MoreOptionsViewModel()
-        
-        moreOptionsViewController!.viewModel = moreOptionsViewModel
-        
-        moreOptionsViewModel.UIDelegate = moreOptionsViewController
-    
-        // Task Frame
         creationFrameViewController = TaskCreationFrameViewController.instantiate()
-        let creationFrameViewModel = TaskCreationViewModel(taskModel: taskModel,
-                                                           moreOptionsViewModel: moreOptionsViewModel,
-                                                           newTaskViewModel: newTaskViewController.viewModel)
-        creationFrameViewModel.delegate = self
         
+        let tagCollectionViewModel =
+            TagCollectionViewModelImpl(model: tagModel,
+                                       filtering: false,
+                                       selectedTags: task?.allTags ?? [])
+        let newTaskViewModel = NewTaskViewModel()
+        let moreOptionsViewModel = MoreOptionsViewModel()
+        let creationFrameViewModel =
+            TaskCreationViewModel(taskModel: taskModel,
+                                  moreOptionsViewModel: moreOptionsViewModel,
+                                  newTaskViewModel: newTaskViewModel)
+        
+        creationFrameViewModel.edit(task)
+        
+        tagCollectionViewController.viewModel = tagCollectionViewModel
+        newTaskViewController.viewModel = newTaskViewModel
+        moreOptionsViewController!.viewModel = moreOptionsViewModel
         creationFrameViewController.viewModel = creationFrameViewModel
         
-        homeScreen.setupAddTask(viewController: creationFrameViewController)
-        self.creationFrameViewController.present(self.newTaskViewController!)
-        creationFrameViewController.present(moreOptionsViewController!)
+        tagCollectionViewModel.delegate = self
+        creationFrameViewModel.delegate = self
+        creationFrameViewModel.uiDelegate = creationFrameViewController
         
-        moreOptionsViewController.accessibilityElementsHidden = true
-    }
-    
-    func edit(_ task: Task) {
-        selectedTags = task.allTags
-        creationFrameViewController.viewModel.task = task
-        homeScreen.prepareToPresentAddTask()
-    }
-    
-    func endAddTask() {
-        newTaskViewController.cancelAddTask()
+        
+        modalPresenter = UINavigationController(rootViewController: creationFrameViewController)
+        configureModalPresenter()
+        
+        presenter.present(modalPresenter, animated: true) {
+            UIAccessibility.post(notification: UIAccessibility.Notification.screenChanged, argument: nil)
+        }
     }
     
     func startAddTask() {
@@ -99,14 +94,32 @@ class NewTaskCoordinator: Coordinator {
     fileprivate func showNewTag() {
         let newTagCoordinator = NewTagCoordinator(tag: nil,
                                                   presenter: presenter,
-                                                  model: tagModel, in: homeScreen)
+                                                  model: tagModel)
         newTagCoordinator.delegate = self
         addChild(coordinator: newTagCoordinator)
         newTagCoordinator.start()
     }
     
+    fileprivate func showEditTag(_ tag: Tag) {
+        let editTagCoordinator = NewTagCoordinator(tag: tag,
+                                                   presenter: presenter,
+                                                   model: tagModel)
+        editTagCoordinator.delegate = self
+        addChild(coordinator: editTagCoordinator)
+        editTagCoordinator.start()
+    }
+    
     func update(selectedTags: [Tag]) {
         creationFrameViewController.viewModel.set(tags: selectedTags)
+    }
+    
+    private func configureModalPresenter() {
+        modalPresenter.transitioningDelegate = self
+        modalPresenter.navigationBar.shadowImage = UIImage()
+        modalPresenter.navigationBar.prefersLargeTitles = true
+        modalPresenter.navigationBar.isTranslucent = false
+        modalPresenter.navigationBar.largeTitleTextAttributes =
+            [ NSAttributedString.Key.font : UIFont.font(sized: 34, weight: .bold, with: .largeTitle, fontName: .barlow) ]
     }
 }
 
@@ -124,23 +137,48 @@ extension NewTaskCoordinator: CoordinatorDelegate {
 }
 
 extension NewTaskCoordinator: TaskCreationDelegate {
-    func shouldPresentMoreOptions() {
-        homeScreen.prepareToPresentMoreOptions()
-        moreOptionsViewController.accessibilityElementsHidden = false
+    
+    func viewDidLoad() {
+        creationFrameViewController.present(newTaskViewController)
+        creationFrameViewController.present(moreOptionsViewController)
+        creationFrameViewController.present(tagCollectionViewController)
     }
     
-    func shouldHideMoreOptions() {
-        homeScreen.prepareToPresentAddTask()
-        moreOptionsViewController.accessibilityElementsHidden = true
-    }
-    
-    func shouldEscape() {
-        homeScreen.prepareToHideAddTask()
-        endAddTask()
+    func dismiss() {
+        dismissViewController()
     }
     
     func didCreateTask() {
-        homeScreen.prepareToHideAddTask()
+        dismissViewController()
+    }
+
+}
+
+extension NewTaskCoordinator: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        guard let homeScreenViewController = presenting.children.first else { return nil }
+        let swipeInteractionController = SwipeInteractionController(viewController: homeScreenViewController)
+        return TaskCreationFramePresentAnimationController(interactionController: swipeInteractionController)
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        guard let dismissedViewController = dismissed.children.first as? TaskCreationFrameViewController else { return nil }
+        return TaskCreationFrameDismissAnimationController()
+    }
+    
+    // TODO: Fix interactive gesture
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        guard let animator = animator as? TaskCreationFramePresentAnimationController,
+            let interactionController = animator.interactionController,
+            interactionController.interactionInProgress
+            else { return nil }
+        return interactionController
+    }
+}
+
+extension NewTaskCoordinator: TagCollectionViewModelDelegate {
+    func willUpdate(tag: Tag) {
+        showEditTag(tag)
     }
     
     func shouldPresent(viewModel: IconCellPresentable) {
@@ -160,14 +198,7 @@ extension NewTaskCoordinator: TaskCreationDelegate {
             inputView = notesInput
         }
         
-        presenter.pushViewController(inputView!, animated: true)
+        modalPresenter.pushViewController(inputView!, animated: true)
     }
-    
-    func didTapAddTask() {
-        homeScreen.prepareToPresentAddTask()
-    }
-    
-    func didPanAddTask() {
-        homeScreen.didPanAddTask()
-    }
+
 }

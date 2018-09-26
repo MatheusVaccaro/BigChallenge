@@ -12,8 +12,6 @@ import ReefKit
 protocol HomeScreenViewModelDelegate: class {
     func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel, willEdit task: Task)
     
-    func homeScreenViewModelDidEndAddTask(_ homeScreenViewModel: HomeScreenViewModel)
-    
     func homeScreenViewModelDidStartAddTask(_ homeScreenViewModel: HomeScreenViewModel)
     
     func homeScreenViewModelWillImportFromReminders(_ homeScreenViewModel: HomeScreenViewModel)
@@ -79,10 +77,6 @@ class HomeScreenViewModel {
         let title = dateFormatter.string(from: Date())
         
         return title
-    }
-    
-    func endAddTask() {
-        delegate?.homeScreenViewModelDidEndAddTask(self)
     }
     
     func startAddTask() {
