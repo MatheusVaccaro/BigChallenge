@@ -25,13 +25,8 @@
                                     <constraint firstAttribute="height" constant="45" id="q5E-Ki-Rvp"/>
                                 </constraints>
                             </view>
-<<<<<<< HEAD
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iTz-em-9Wn" userLabel="tagDetailsView">
-                                <rect key="frame" x="16" y="132" width="343" height="535"/>
-=======
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iTz-em-9Wn" userLabel="More Options View">
                                 <rect key="frame" x="16" y="132" width="343" height="160"/>
->>>>>>> fix add tag colors and presentation improvements
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="160" id="HQx-Cs-ZY3"/>
