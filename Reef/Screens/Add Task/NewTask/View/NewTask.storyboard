@@ -19,11 +19,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" contentMode="center" horizontalHuggingPriority="750" layoutMarginsFollowReadableWidth="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" keyboardDismissMode="interactive" text="i am a task with some ver" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w2W-Sr-tak">
-                                <rect key="frame" x="16" y="24" width="295" height="25"/>
+                                <rect key="frame" x="16" y="17.666666666666671" width="295" height="38"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5oG-Zr-dS9">
                                 <rect key="frame" x="311" y="0.0" width="56" height="73"/>
@@ -58,9 +58,7 @@
                             <constraint firstItem="w2W-Sr-tak" firstAttribute="centerY" secondItem="S5p-sX-wPS" secondAttribute="centerY" id="7p6-M0-K2G"/>
                             <constraint firstItem="WYf-bH-Bnh" firstAttribute="centerY" secondItem="TDj-t3-yHD" secondAttribute="centerY" id="92k-7q-zjU"/>
                             <constraint firstItem="wme-eo-wSe" firstAttribute="centerY" secondItem="TDj-t3-yHD" secondAttribute="centerY" id="9Ph-2M-AaK"/>
-                            <constraint firstItem="S5p-sX-wPS" firstAttribute="bottom" secondItem="w2W-Sr-tak" secondAttribute="bottom" constant="24" id="9be-g2-QnE"/>
                             <constraint firstItem="w2W-Sr-tak" firstAttribute="leading" secondItem="wme-eo-wSe" secondAttribute="trailing" constant="6" id="9lT-TQ-FlE"/>
-                            <constraint firstItem="w2W-Sr-tak" firstAttribute="top" secondItem="S5p-sX-wPS" secondAttribute="top" constant="24" id="DJY-tE-lUk"/>
                             <constraint firstItem="WYf-bH-Bnh" firstAttribute="bottom" secondItem="S5p-sX-wPS" secondAttribute="bottom" id="M8t-qh-6qb"/>
                             <constraint firstItem="wme-eo-wSe" firstAttribute="top" secondItem="S5p-sX-wPS" secondAttribute="top" constant="5" id="OdW-PN-eUt"/>
                             <constraint firstItem="S5p-sX-wPS" firstAttribute="bottom" secondItem="wme-eo-wSe" secondAttribute="bottom" constant="5" id="ThR-oS-Eec"/>

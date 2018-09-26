@@ -36,6 +36,13 @@ class AddTagTitleViewController: UIViewController {
         
         tagTitleTextField.delegate = self
         tagTitleTextField.text = viewModel.tagTitle
+        configureTagTitleTextField()
+    }
+    
+    private func configureTagTitleTextField() {
+        tagTitleTextField.font = UIFont.font(sized: 22, weight: .semibold, with: .body, fontName: .barlow)
+        
+        tagTitleTextField.placeholder = Strings.Tag.CreationScreen.tagTitlePlaceholder
     }
     
     @IBAction func didPressDoneButton(_ sender: UIButton) {

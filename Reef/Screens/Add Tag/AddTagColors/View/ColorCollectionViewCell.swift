@@ -48,10 +48,12 @@ class ColorCollectionViewCell: UICollectionViewCell {
     }
     
     func select() {
-        imageView.image = UIImage(named: "option")
+//        imageView.image = UIImage(named: "option")
+        gradientLayer.borderColor = UIColor.black.cgColor
     }
     
     func deselect() {
-        imageView.image = nil
+//        imageView.image = nil
+        gradientLayer.borderColor = UIColor.white.cgColor
     }
 }

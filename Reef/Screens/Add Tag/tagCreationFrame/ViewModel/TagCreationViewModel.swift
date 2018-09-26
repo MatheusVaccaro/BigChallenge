@@ -74,7 +74,7 @@ extension TagCreationViewModel: AddTagTitleViewModelDelegate {
 }
 
 extension TagCreationViewModel: AddTagColorsViewModelDelegate {
-    func addTagColorsViewModel(_ addTagColorsViewModel: AddTagColorsViewModel, didUpdateColorIndex colorIndex: Int?) {
+    func addTagColorsViewModel(_ addTagColorsViewModel: AddTagColorsViewModel, didUpdateColorIndex colorIndex: Int64) {
         attributes[.colorIndex] = colorIndex
     }
 }

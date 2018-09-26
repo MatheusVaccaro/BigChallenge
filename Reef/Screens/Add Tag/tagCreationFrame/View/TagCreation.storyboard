@@ -25,9 +25,17 @@
                                     <constraint firstAttribute="height" constant="45" id="q5E-Ki-Rvp"/>
                                 </constraints>
                             </view>
+<<<<<<< HEAD
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iTz-em-9Wn" userLabel="tagDetailsView">
                                 <rect key="frame" x="16" y="132" width="343" height="535"/>
+=======
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iTz-em-9Wn" userLabel="More Options View">
+                                <rect key="frame" x="16" y="132" width="343" height="160"/>
+>>>>>>> fix add tag colors and presentation improvements
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="HQx-Cs-ZY3"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8B2-RY-FrU" userLabel="Colors View">
                                 <rect key="frame" x="16" y="91" width="343" height="28"/>
@@ -41,7 +49,6 @@
                         <constraints>
                             <constraint firstItem="sdG-zM-EDT" firstAttribute="trailing" secondItem="YRc-aJ-9JT" secondAttribute="trailing" constant="16" id="464-2A-ISG"/>
                             <constraint firstItem="sdG-zM-EDT" firstAttribute="trailing" secondItem="iTz-em-9Wn" secondAttribute="trailing" constant="16" id="T05-sB-pWx"/>
-                            <constraint firstItem="sdG-zM-EDT" firstAttribute="bottom" secondItem="iTz-em-9Wn" secondAttribute="bottom" id="TMQ-jV-ZHU"/>
                             <constraint firstItem="8B2-RY-FrU" firstAttribute="leading" secondItem="sdG-zM-EDT" secondAttribute="leading" constant="16" id="Tz1-BM-Tub"/>
                             <constraint firstItem="iTz-em-9Wn" firstAttribute="top" secondItem="8B2-RY-FrU" secondAttribute="bottom" constant="13" id="nIo-Nw-5jy"/>
                             <constraint firstItem="8B2-RY-FrU" firstAttribute="top" secondItem="YRc-aJ-9JT" secondAttribute="bottom" constant="13" id="nwS-m9-AKq"/>
