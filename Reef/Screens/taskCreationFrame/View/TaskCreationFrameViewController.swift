@@ -118,10 +118,6 @@ class TaskCreationFrameViewController: UIViewController {
         configureShadows(in: taskDetailView)
         configureShadows(in: taskTitleView)
         
-        whiteBackgroundView.layer.zPosition = 10
-        tagCollectionView.layer.zPosition = 10
-        taskContainerView.layer.zPosition = 5
-        
         let blur = blurView
         blur.frame = view.frame
         view.insertSubview(blur, at: 0)

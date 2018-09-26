@@ -115,11 +115,9 @@ class NewTaskCoordinator: NSObject, Coordinator {
     
     private func configureModalPresenter() {
         modalPresenter.transitioningDelegate = self
-        modalPresenter.navigationBar.setBackgroundImage(UIImage(), for: .default)
         modalPresenter.navigationBar.shadowImage = UIImage()
         modalPresenter.navigationBar.prefersLargeTitles = true
-        modalPresenter.navigationBar.isTranslucent = true
-        modalPresenter.view.backgroundColor = .clear
+        modalPresenter.navigationBar.isTranslucent = false
         modalPresenter.navigationBar.largeTitleTextAttributes =
             [ NSAttributedString.Key.font : UIFont.font(sized: 34, weight: .bold, with: .largeTitle, fontName: .barlow) ]
     }
