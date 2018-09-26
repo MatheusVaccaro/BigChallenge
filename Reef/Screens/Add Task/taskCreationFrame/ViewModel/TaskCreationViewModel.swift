@@ -87,16 +87,26 @@ extension TaskCreationViewModel: MoreOptionsViewModelDelegate {
     }
     
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
-                       didFind location: CLCircularRegion, arriving: Bool) {
-        attributes[.region] = location
-        attributes[.isArriving] = arriving
+                       didFind location: CLCircularRegion,
+                       named: String,
+                       arriving: Bool) {
+        
+        attributes[.location] = location
+        attributes[.isArrivingLocation] = arriving
+        attributes[.locationName] = named
     }
     
-    func moreOptionsViewModel(_ moreOptionsViewModel: MoreOptionsViewModel, dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: Date) {
+    func moreOptionsViewModel(_ moreOptionsViewModel: MoreOptionsViewModel,
+                              dateInputViewModel: DateInputViewModelProtocol,
+                              didSelectDate date: Date) {
+        
         attributes[.dueDate] = date
     }
     
-    func moreOptionsViewModel(_ moreOptionsViewModel: MoreOptionsViewModel, dateInputViewModel: DateInputViewModelProtocol, didSelectFrequency frequency: NotificationOptions.Frequency) {
+    func moreOptionsViewModel(_ moreOptionsViewModel: MoreOptionsViewModel,
+                              dateInputViewModel: DateInputViewModelProtocol,
+                              didSelectFrequency frequency: NotificationOptions.Frequency) {
+        
         //TODO: implement frequency
     }
     

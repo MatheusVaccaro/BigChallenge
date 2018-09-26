@@ -12,7 +12,9 @@ import ReefKit
 
 protocol MoreOptionsViewModelDelegate: class {
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
-                                didFind location: CLCircularRegion, arriving: Bool)
+                                didFind location: CLCircularRegion,
+                                named: String,
+                                arriving: Bool)
     
     func moreOptionsViewModel(_ moreOptionsViewModel: MoreOptionsViewModel,
                               dateInputViewModel: DateInputViewModelProtocol,
@@ -39,9 +41,9 @@ class MoreOptionsViewModel {
         notesInputViewModel.delegate = self
     }
     
-    func edit(task: Task?) {
-        locationInputViewModel.task = task
-        dateInputViewModel.configure(with: task)
+    func edit(task: Task) {
+        locationInputViewModel.edit(task)
+        dateInputViewModel.edit(task)
     }
     
     weak var delegate: MoreOptionsViewModelDelegate?
@@ -78,9 +80,10 @@ extension MoreOptionsViewModel: MoreOptionsViewModelProtocol {
 
 extension MoreOptionsViewModel: LocationInputDelegate {
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
-                       didFind location: CLCircularRegion, arriving: Bool) {
-        delegate?.locationInput(locationInputViewModel,
-                                       didFind: location, arriving: arriving)
+                       didFind location: CLCircularRegion,
+                       named: String,
+                       arriving: Bool) {
+        delegate?.locationInput(locationInputViewModel, didFind: location, named: named, arriving: arriving)
     }
 }
 
@@ -100,9 +103,28 @@ extension MoreOptionsViewModel: DateInputViewModelDelegate {
 }
 
 extension MoreOptionsViewModel: NotesInputViewModelDelegate {
-    
     func notesInput(_ notesInputViewModel: NotesInputViewModel, didUpdateNotes notes: String) {
         delegate?.notesInput(notesInputViewModel, didUpdateNotes: notes)
     }
-    
+}
+
+private extension LocationInputViewModel {
+    func edit(_ task: Task) {
+        guard task.location != nil else { return }
+        
+        location = task.location
+        isArriving = task.isArrivingLocation
+        placeName = task.locationName!
+    }
+}
+
+private extension DateInputViewModelProtocol {
+    func edit(_ task: Task) {
+        guard let dueDate = task.dueDate else { return }
+        
+        let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: dueDate)
+        
+        self.calendarDate.onNext(calendarDate)
+        self.timeOfDay.onNext(timeOfDay)
+    }
 }

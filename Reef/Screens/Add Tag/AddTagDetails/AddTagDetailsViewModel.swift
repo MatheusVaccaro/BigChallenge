@@ -11,7 +11,9 @@ import RxSwift
 
 protocol AddTagDetailsViewModelDelegate: class {
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
-                       didFind location: CLCircularRegion, arriving: Bool)
+                       didFind location: CLCircularRegion,
+                       named: String,
+                       arriving: Bool)
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
                             didSelectDate date: Date)
@@ -46,6 +48,7 @@ class AddTagDetailsViewModel {
     }
     
     func edit(_ tag: Tag?) {
+        guard let tag = tag else { return }
         locationInputViewModel.edit(tag)
         dateInputViewModel.edit(tag)
     }
@@ -70,8 +73,8 @@ extension AddTagDetailsViewModel: MoreOptionsViewModelProtocol {
 }
 
 extension AddTagDetailsViewModel: LocationInputDelegate {
-    func locationInput(_ locationInputViewModel: LocationInputViewModel, didFind location: CLCircularRegion, arriving: Bool) {
-        delegate?.locationInput(locationInputViewModel, didFind: location, arriving: arriving)
+    func locationInput(_ locationInputViewModel: LocationInputViewModel, didFind location: CLCircularRegion, named: String, arriving: Bool) {
+        delegate?.locationInput(locationInputViewModel, didFind: location, named: named, arriving: arriving)
     }
 }
 
@@ -86,8 +89,8 @@ extension AddTagDetailsViewModel: DateInputViewModelDelegate {
 }
 
 private extension DateInputViewModel {
-    func edit(_ tag: Tag?) {
-        guard let tag = tag, let dueDate = tag.dueDate else { return }
+    func edit(_ tag: Tag) {
+        guard let dueDate = tag.dueDate else { return }
         
         let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: dueDate)
         
@@ -97,8 +100,10 @@ private extension DateInputViewModel {
 }
 
 private extension LocationInputViewModel {
-    func edit(_ tag: Tag?) {
-        location = tag?.region
-        isArriving = tag?.arriving ?? false
+    func edit(_ tag: Tag) {
+        guard tag.location != nil else { return }
+        location = tag.location
+        isArriving = tag.isArrivingLocation ?? false
+        placeName = tag.locationName!
     }
 }

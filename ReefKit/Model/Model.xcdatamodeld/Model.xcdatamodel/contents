@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14296.2" systemVersion="18A377a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="18A384a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ChecklistItem" representedClassName="ChecklistItem" syncable="YES" codeGenerationType="class">
         <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -16,12 +16,13 @@
         <relationship name="importData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ImportData" inverseName="remindersImportData" inverseEntity="ImportData" syncable="YES"/>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
-        <attribute name="arriving" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="colorIndex" optional="YES" attributeType="Integer 64" minValueString="0" maxValueString="4" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="dueDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="frequency" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="regionData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="isArrivingLocation" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="locationData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="locationName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="requiresAuthentication" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
         <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="tags" inverseEntity="Task" syncable="YES"/>
@@ -32,11 +33,12 @@
         <attribute name="dueDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="frequency" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="isArriving" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isArrivingLocation" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="isCompleted" attributeType="Boolean" minValueString="0" maxValueString="1" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="isPinned" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="locationData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="locationName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="regionData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" minValueString="0" syncable="YES"/>
         <relationship name="checklistItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChecklistItem" inverseName="task" inverseEntity="ChecklistItem" syncable="YES"/>
         <relationship name="importData" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ImportData" inverseName="task" inverseEntity="ImportData" syncable="YES"/>
@@ -46,7 +48,7 @@
         <element name="ChecklistItem" positionX="-261" positionY="-360" width="128" height="90"/>
         <element name="ImportData" positionX="-225" positionY="-351" width="128" height="90"/>
         <element name="RemindersImportData" positionX="-234" positionY="-360" width="128" height="90"/>
-        <element name="Tag" positionX="-436.5546875" positionY="-377.390625" width="128" height="180"/>
-        <element name="Task" positionX="-81.23828125" positionY="-452.66796875" width="128" height="255"/>
+        <element name="Tag" positionX="-436.5546875" positionY="-377.390625" width="128" height="195"/>
+        <element name="Task" positionX="-81.23828125" positionY="-452.66796875" width="128" height="270"/>
     </elements>
 </model>

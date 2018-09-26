@@ -19,8 +19,9 @@ public enum TaskAttributes {
     case notes
     case title
     case tags
-    case region
-    case isArriving
+    case location
+    case isArrivingLocation
+    case locationName
     case isPinned
 }
 
@@ -30,8 +31,9 @@ public enum TagAttributes {
     case id
     case title
     case tasks
-    case region
-    case arriving
+    case location
+    case isArrivingLocation
+    case locationName
 }
 
 class TaskCRUD {
@@ -56,7 +58,7 @@ class TaskCRUD {
         let creationDate = attributes[.creationDate] as? Date ?? Date()
         let isCompleted = attributes[.isCompleted] as? Bool ?? false
         let tags = attributes[.tags] as? [Tag] ?? []
-        let isArriving = attributes[.isArriving] as? Bool ?? true
+        let isArriving = attributes[.isArrivingLocation] as? Bool ?? true
         let isPinned = attributes[.isPinned] as? Bool ?? false
         
         task.id = id
@@ -73,11 +75,14 @@ class TaskCRUD {
         if let dueDate = attributes[.dueDate] as? Date {
             task.dueDate = dueDate
         }
-        if let region = attributes[.region] as? CLCircularRegion {
+        if let region = attributes[.location] as? CLCircularRegion {
             let regionData =
                 NSKeyedArchiver.archivedData(withRootObject: region)
-            task.regionData = regionData
-            task.isArriving = isArriving
+            let placeName = attributes[.locationName] as! String
+            
+            task.locationData = regionData
+            task.isArrivingLocation = isArriving
+            task.locationName = placeName
         }
         updateNotifications(for: task)
         NotificationManager.addAllTagsNotifications(from: task.allTags)
@@ -111,11 +116,13 @@ class TaskCRUD {
             NotificationManager.addAllTagsNotifications(from: task.allTags)
         }
         
-        if let region = attributes[.region] as? CLCircularRegion {
+        if let region = attributes[.location] as? CLCircularRegion {
             let regionData =
                 NSKeyedArchiver.archivedData(withRootObject: region)
-            task.regionData = regionData
-            task.isArriving = attributes[.isArriving] as? Bool ?? true
+            if let placeName = attributes[.locationName] as? String { task.locationName = placeName }
+            if let isArriving = attributes[.isArrivingLocation] as? Bool { task.isArrivingLocation = isArriving }
+            task.locationData = regionData
+            
         }
         
         if let isPinned = attributes[.isPinned] as? Bool {
@@ -174,7 +181,7 @@ public class TagCRUD {
         let colorIndex = attributes[.colorIndex] as? Int64 ?? nextColor()
         let id = attributes[.id] as? UUID ?? UUID()
         let tasks = attributes[.tasks] as? [Task] ?? []
-        let arriving = attributes[.arriving] as? Bool ?? false
+        let arriving = attributes[.isArrivingLocation] as? Bool ?? false
         
         tag.colorIndex = colorIndex
         tag.id = id
@@ -184,20 +191,20 @@ public class TagCRUD {
         if let dueDate = attributes[.dueDate] as? Date {
             tag.dueDate = dueDate
         }
-        if let region = attributes[.region] as? CLCircularRegion {
+        if let region = attributes[.location] as? CLCircularRegion {
             let regionData =
                 NSKeyedArchiver.archivedData(withRootObject: region)
-            tag.regionData = regionData
-            tag.arriving = arriving
+            let placeName = attributes[.locationName] as! String
+            
+            tag.locationName = placeName
+            tag.locationData = regionData
+            tag.isArrivingLocation = arriving
         }
         
         return tag
     }
     
     func update(_ tag: Tag, with attributes: [TagAttributes: Any]) {
-        if let color = attributes[.colorIndex] as? Int64 {
-            tag.colorIndex = color
-        }
         if let dueDate = attributes[.dueDate] as? Date {
             tag.dueDate = dueDate
         }
@@ -213,12 +220,15 @@ public class TagCRUD {
         if let colorIndex = attributes[.colorIndex] as? Int64 {
             tag.colorIndex = colorIndex
         }
-        if let arriving = attributes[.arriving] as? Bool {
-            tag.arriving = arriving
+        if let arriving = attributes[.isArrivingLocation] as? Bool {
+            tag.isArrivingLocation = arriving
         }
-        if let region = attributes[.region] as? CLCircularRegion {
+        if let region = attributes[.location] as? CLCircularRegion {
             let regionData = NSKeyedArchiver.archivedData(withRootObject: region)
-            tag.regionData = regionData
+            tag.locationData = regionData
+
+            if let placeName = attributes[.locationName] as? String { tag.locationName = placeName }
+            if let isArriving = attributes[.isArrivingLocation] as? Bool { tag.isArrivingLocation = isArriving }
         }
     }
     

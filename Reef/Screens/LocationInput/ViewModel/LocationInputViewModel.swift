@@ -13,29 +13,23 @@ import ReefKit
 protocol LocationInputDelegate: class {
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
                        didFind location: CLCircularRegion,
+                       named: String,
                        arriving: Bool)
 }
 
 class LocationInputViewModel {
     
-    var task: Task? {
-        didSet {
-            location = task?.region
-            isArriving = task?.isArriving ?? false
-        }
-    }
-    
     var location: CLCircularRegion? {
         didSet {
             guard location != nil else { return }
-            delegate?.locationInput(self, didFind: location!, arriving: isArriving)
+            delegate?.locationInput(self, didFind: location!, named: placeName, arriving: isArriving)
         }
     }
     
     var isArriving: Bool = false {
         didSet {
             guard location != nil else { return }
-            delegate?.locationInput(self, didFind: location!, arriving: isArriving)
+            delegate?.locationInput(self, didFind: location!, named: placeName, arriving: isArriving)
         }
     }
     

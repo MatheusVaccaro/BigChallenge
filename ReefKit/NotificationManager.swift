@@ -23,13 +23,13 @@ open class NotificationManager {
     
     /** Add a geofenced notification from a task */
     open class func addLocationNotification(for task: Task, repeats: Bool = false) {
-        guard let regionData = task.regionData else { return }
+        guard let regionData = task.locationData else { return }
         
         if let region = NSKeyedUnarchiver.unarchiveObject(with: regionData) as? CLCircularRegion {
             let identifier = "\(task.id!)-location"
             let title = task.title!
             let threadIdentifier = "task"
-            addLocationNotification(identifier, title, task.isArriving, region, threadIdentifier, task.uuid)
+            addLocationNotification(identifier, title, task.isArrivingLocation, region, threadIdentifier, task.uuid)
         }
     }
     
@@ -65,12 +65,12 @@ open class NotificationManager {
                 addDateNotification(identifier, title, repeats, date, threadIdentifier, task.uuid, subtitle)
             }
         }
-        if let regionData = tag.regionData {
+        if let regionData = tag.locationData {
             if let region = NSKeyedUnarchiver.unarchiveObject(with: regionData) as? CLCircularRegion {
                 for case let task as Task in tasks where !task.isCompleted {
                     let identifier = "\(task.id!)-\(tag.id!)-location"
                     let title = task.title!
-                    let arriving = tag.arriving
+                    let arriving = tag.isArrivingLocation
                     addLocationNotification(identifier, title, arriving, region, threadIdentifier, task.uuid, subtitle)
                 }
             }
