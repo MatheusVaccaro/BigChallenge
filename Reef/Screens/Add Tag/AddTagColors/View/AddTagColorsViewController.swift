@@ -18,7 +18,7 @@ class AddTagColorsViewController: UIViewController {
         super.viewDidLoad()
         
         configureColorsCollectionView()
-        tagColorsCollectionView.selectItem(at: IndexPath(row: viewModel.colorIndex, section: 0), animated: false, scrollPosition: .bottom)
+        tagColorsCollectionView.selectItem(at: IndexPath(row: Int(viewModel.colorIndex), section: 0), animated: false, scrollPosition: .bottom)
     }
     
     private func configureColorsCollectionView() {
@@ -30,7 +30,7 @@ class AddTagColorsViewController: UIViewController {
 extension AddTagColorsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let row = indexPath.row
-        viewModel?.colorIndex = row
+        viewModel?.colorIndex = Int64(row)
     }
 }
 

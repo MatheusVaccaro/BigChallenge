@@ -9,21 +9,21 @@
 import ReefKit
 
 protocol AddTagColorsViewModelDelegate: class {
-    func addTagColorsViewModel(_ addTagColorsViewModel: AddTagColorsViewModel, didUpdateColorIndex colorIndex: Int?)
+    func addTagColorsViewModel(_ addTagColorsViewModel: AddTagColorsViewModel, didUpdateColorIndex colorIndex: Int64)
 }
 
 class AddTagColorsViewModel {
     
     weak var delegate: AddTagColorsViewModelDelegate?
     
-    var colorIndex: Int = UIColor.tagColors.startIndex { //TODO: get next index
+    var colorIndex: Int64 = Int64(UIColor.tagColors.startIndex) { //TODO: get next index
         didSet {
             delegate?.addTagColorsViewModel(self, didUpdateColorIndex: colorIndex)
         }
     }
     
     func edit(_ tag: Tag) {
-        colorIndex = Int(tag.colorIndex)
+        colorIndex = tag.colorIndex
     }
     
     func numberOfColors() -> Int {

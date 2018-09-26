@@ -18,11 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e3o-zv-pzw">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e3o-zv-pzw">
+                                <rect key="frame" x="16" y="0.0" width="313" height="45"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Z1-ho-1LV">
                                 <rect key="frame" x="337" y="4.5" width="30" height="36"/>
@@ -35,14 +35,14 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="e3o-zv-pzw" firstAttribute="top" secondItem="H8r-tH-A7O" secondAttribute="top" id="4pb-Nt-oAQ"/>
                             <constraint firstItem="H8r-tH-A7O" firstAttribute="trailing" secondItem="9Z1-ho-1LV" secondAttribute="trailing" constant="8" id="B38-mt-y9G"/>
                             <constraint firstItem="H8r-tH-A7O" firstAttribute="bottom" secondItem="e3o-zv-pzw" secondAttribute="bottom" id="lGA-No-naP"/>
-                            <constraint firstItem="H8r-tH-A7O" firstAttribute="trailing" secondItem="e3o-zv-pzw" secondAttribute="trailing" id="mIX-bt-pDF"/>
+                            <constraint firstItem="H8r-tH-A7O" firstAttribute="trailing" secondItem="e3o-zv-pzw" secondAttribute="trailing" constant="46" id="mIX-bt-pDF"/>
                             <constraint firstItem="9Z1-ho-1LV" firstAttribute="centerY" secondItem="H2z-cY-E6t" secondAttribute="centerY" id="sMe-c7-nzx"/>
-                            <constraint firstItem="e3o-zv-pzw" firstAttribute="leading" secondItem="H8r-tH-A7O" secondAttribute="leading" id="sTX-l7-ZiU"/>
+                            <constraint firstItem="e3o-zv-pzw" firstAttribute="leading" secondItem="H8r-tH-A7O" secondAttribute="leading" constant="16" id="sTX-l7-ZiU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="H8r-tH-A7O"/>
                     </view>
@@ -54,6 +54,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XhF-0a-Idv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="53.600000000000001" y="26.53673163418291"/>
         </scene>
     </scenes>
 </document>

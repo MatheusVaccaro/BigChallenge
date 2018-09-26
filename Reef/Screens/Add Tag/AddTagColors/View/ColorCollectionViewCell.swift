@@ -27,6 +27,14 @@ class ColorCollectionViewCell: UICollectionViewCell {
         layer.endPoint = CGPoint(x: 1, y: 0)
         layer.frame = contentView.bounds
         layer.cornerRadius = layer.frame.height/3.5
+        layer.borderWidth = 1.5
+        layer.borderColor = UIColor.white.cgColor
+        // TODO
+//        layer.shadowRadius = layer.frame.height/3.5
+//        layer.shadowOffset = CGSize(width: 0, height: 3)
+//        layer.masksToBounds = false
+//        layer.shadowColor = CGColor.shadowColor
+//        layer.shadowOpacity = 0.2
         
         return layer
     }()
@@ -40,10 +48,12 @@ class ColorCollectionViewCell: UICollectionViewCell {
     }
     
     func select() {
-        imageView.image = UIImage(named: "option")
+//        imageView.image = UIImage(named: "option")
+        gradientLayer.borderColor = UIColor.black.cgColor
     }
     
     func deselect() {
-        imageView.image = nil
+//        imageView.image = nil
+        gradientLayer.borderColor = UIColor.white.cgColor
     }
 }

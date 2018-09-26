@@ -27,8 +27,22 @@ class AddTagTitleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.layer.cornerRadius = 6.3
+        view.layer.shadowRadius = 6.3
+        view.layer.shadowOffset = CGSize(width: 0, height: 5)
+        view.layer.masksToBounds = false
+        view.layer.shadowColor = CGColor.shadowColor
+        view.layer.shadowOpacity = 0.2
+        
         tagTitleTextField.delegate = self
         tagTitleTextField.text = viewModel.tagTitle
+        configureTagTitleTextField()
+    }
+    
+    private func configureTagTitleTextField() {
+        tagTitleTextField.font = UIFont.font(sized: 22, weight: .semibold, with: .body, fontName: .barlow)
+        
+        tagTitleTextField.placeholder = Strings.Tag.CreationScreen.tagTitlePlaceholder
     }
     
     @IBAction func didPressDoneButton(_ sender: UIButton) {

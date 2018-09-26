@@ -26,6 +26,17 @@ class AddDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+    
+        tableView.layer.masksToBounds = true
+        tableView.layer.cornerRadius = 6.3
+        
+        view.layer.cornerRadius = 6.3
+        view.layer.shadowRadius = 6.3
+        view.layer.shadowOffset = CGSize(width: 0, height: 0)
+        view.layer.masksToBounds = false
+        view.layer.shadowColor = CGColor.shadowColor
+        view.layer.shadowOpacity = 0.3
+
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
