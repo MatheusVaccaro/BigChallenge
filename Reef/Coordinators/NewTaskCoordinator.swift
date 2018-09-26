@@ -90,7 +90,7 @@ class NewTaskCoordinator: NSObject, Coordinator {
     
     fileprivate func showNewTag() {
         let newTagCoordinator = NewTagCoordinator(tag: nil,
-                                                  presenter: presenter,
+                                                  presenter: modalPresenter,
                                                   model: tagModel)
         newTagCoordinator.delegate = self
         addChild(coordinator: newTagCoordinator)
@@ -99,7 +99,7 @@ class NewTaskCoordinator: NSObject, Coordinator {
     
     fileprivate func showEditTag(_ tag: Tag) {
         let editTagCoordinator = NewTagCoordinator(tag: tag,
-                                                   presenter: presenter,
+                                                   presenter: modalPresenter,
                                                    model: tagModel)
         editTagCoordinator.delegate = self
         addChild(coordinator: editTagCoordinator)
