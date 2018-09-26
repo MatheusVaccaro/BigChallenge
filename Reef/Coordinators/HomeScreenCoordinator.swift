@@ -63,24 +63,26 @@ class HomeScreenCoordinator: Coordinator {
         
         presenter.pushViewController(homeScreenViewController, animated: false)
     }
-    
-    lazy var newTaskCoordinator: NewTaskCoordinator = {
-        let ans = NewTaskCoordinator(presenter: presenter,
-                                     taskModel: taskModel,
-                                     tagModel: tagModel,
-                                     selectedTags: selectedTags,
-                                     in: homeScreenViewController!)
-        ans.delegate = self
-        addChild(coordinator: ans)
-        return ans
-    }()
 
     fileprivate func showNewTask(selectedTags: [Tag]) {
+        let newTaskCoordinator = NewTaskCoordinator(presenter: presenter,
+                                                    taskModel: taskModel,
+                                                    tagModel: tagModel,
+                                                    selectedTags: selectedTags)
+        newTaskCoordinator.delegate = self
+        addChild(coordinator: newTaskCoordinator)
         newTaskCoordinator.start()
     }
     
     fileprivate func showEditTask(_ task: Task) {
-        newTaskCoordinator.edit(task)
+        let newTaskCoordinator = NewTaskCoordinator(task: task,
+                                                    presenter: presenter,
+                                                    taskModel: taskModel,
+                                                    tagModel: tagModel,
+                                                    selectedTags: selectedTags)
+        newTaskCoordinator.delegate = self
+        addChild(coordinator: newTaskCoordinator)
+        newTaskCoordinator.start()
     }
     
     fileprivate func showNewTag() {
@@ -112,7 +114,7 @@ extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
     }
     
     func homeScreenViewModelDidStartAddTask(_ homeScreenViewModel: HomeScreenViewModel) {
-        newTaskCoordinator.start()
+        showNewTask(selectedTags: selectedTags)
     }
     
     func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel, didChange selectedTags: [Tag]) {

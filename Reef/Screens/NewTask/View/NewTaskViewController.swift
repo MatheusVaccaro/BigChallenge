@@ -43,7 +43,9 @@ class NewTaskViewController: UIViewController {
         configureWithViewModel()
         configureTaskTitleTextView()
         configureViewDesign()
+        loadViewModel()
         doneButton.isHidden = true
+        
         
         userActivity = viewModel.userActivity
         userActivity?.becomeCurrent()
@@ -76,6 +78,11 @@ class NewTaskViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         taskTitleTextView.becomeFirstResponder()
+    }
+    
+    func loadViewModel() {
+        taskTitleTextView.text = viewModel.taskTitleText
+        gradientLayer.colors = viewModel.taskColors
     }
     
     func cancelAddTask() {
@@ -155,16 +162,6 @@ extension NewTaskViewController: UITextViewDelegate {
         } else {
             return true
         }
-    }
-}
-
-extension NewTaskViewController: NewTaskViewModelDelegate {
-    func updateTextViewWith(text: String) {
-        taskTitleTextView.text = text
-    }
-    
-    func didUpdateColors() {
-        gradientLayer.colors = viewModel.taskColors
     }
 }
 

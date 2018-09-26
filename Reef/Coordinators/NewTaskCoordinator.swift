@@ -25,21 +25,22 @@ class NewTaskCoordinator: NSObject, Coordinator {
     fileprivate let taskModel: TaskModel
     fileprivate let tagModel: TagModel
     
+    fileprivate var task: Task?
     fileprivate var selectedTags: [Tag]
     
     weak var delegate: CoordinatorDelegate?
     
-    init(presenter: UINavigationController,
+    init(task: Task? = nil,
+         presenter: UINavigationController,
          taskModel: TaskModel,
          tagModel: TagModel,
-         selectedTags: [Tag] = [],
-         in viewController: HomeScreenViewController) {
+         selectedTags: [Tag] = []) {
         
         self.taskModel = taskModel
         self.tagModel = tagModel
         self.presenter = presenter
         self.childrenCoordinators = []
-        
+        self.task = task
         self.selectedTags = selectedTags
         
         print("+++ INIT NewTaskCoordinator")
@@ -50,48 +51,40 @@ class NewTaskCoordinator: NSObject, Coordinator {
     }
     
     func start() {
-        // tagCollection
-        self.tagCollectionViewController = TagCollectionViewController.instantiate()
-        let tagCollectionViewModel = TagCollectionViewModelImpl(model: tagModel, filtering: false, selectedTags: [])
-        tagCollectionViewModel.delegate = self
-        tagCollectionViewController.viewModel = tagCollectionViewModel
-        
-        // new task (title)
-        self.newTaskViewController = NewTaskViewController.instantiate()
-        let newTaskViewModel = NewTaskViewModel()
-        newTaskViewModel.delegate = newTaskViewController
-        newTaskViewController.viewModel = newTaskViewModel
-        
-        // more options
+        tagCollectionViewController = TagCollectionViewController.instantiate()
+        newTaskViewController = NewTaskViewController.instantiate()
         moreOptionsViewController = MoreOptionsViewController.instantiate()
-        let moreOptionsViewModel = MoreOptionsViewModel()
-        moreOptionsViewModel.UIDelegate = moreOptionsViewController
-        moreOptionsViewController!.viewModel = moreOptionsViewModel
-        
-        moreOptionsViewModel.UIDelegate = moreOptionsViewController
-    
-        // Task Frame
         creationFrameViewController = TaskCreationFrameViewController.instantiate()
-        let creationFrameViewModel = TaskCreationViewModel(taskModel: taskModel,
-                                                           moreOptionsViewModel: moreOptionsViewModel,
-                                                           newTaskViewModel: newTaskViewController.viewModel)
-        creationFrameViewModel.delegate = self
-        creationFrameViewModel.uiDelegate = creationFrameViewController
+        
+        let tagCollectionViewModel =
+            TagCollectionViewModelImpl(model: tagModel,
+                                       filtering: false,
+                                       selectedTags: task?.allTags ?? [])
+        let newTaskViewModel = NewTaskViewModel()
+        let moreOptionsViewModel = MoreOptionsViewModel()
+        let creationFrameViewModel =
+            TaskCreationViewModel(taskModel: taskModel,
+                                  moreOptionsViewModel: moreOptionsViewModel,
+                                  newTaskViewModel: newTaskViewModel)
+        
+        creationFrameViewModel.edit(task)
+        
+        tagCollectionViewController.viewModel = tagCollectionViewModel
+        newTaskViewController.viewModel = newTaskViewModel
+        moreOptionsViewController!.viewModel = moreOptionsViewModel
         creationFrameViewController.viewModel = creationFrameViewModel
         
-        let modalPresenter = UINavigationController(rootViewController: creationFrameViewController)
-        self.modalPresenter = modalPresenter
+        tagCollectionViewModel.delegate = self
+        creationFrameViewModel.delegate = self
+        creationFrameViewModel.uiDelegate = creationFrameViewController
+        
+        
+        modalPresenter = UINavigationController(rootViewController: creationFrameViewController)
         configureModalPresenter()
         
         presenter.present(modalPresenter, animated: true) {
             UIAccessibility.post(notification: UIAccessibility.Notification.screenChanged, argument: nil)
         }
-    }
-    
-    func edit(_ task: Task) {
-        selectedTags = task.allTags
-        creationFrameViewController.viewModel.task = task
-        //        homeScreen.prepareToPresentAddTask()
     }
     
     func startAddTask() {

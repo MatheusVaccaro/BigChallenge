@@ -31,13 +31,7 @@ class TaskCreationViewModel {
     fileprivate var attributes: [TaskAttributes : Any] = [:]
     fileprivate let moreOptionsViewModel: MoreOptionsViewModel
     fileprivate let newTaskViewModel: NewTaskViewModel
-    
-    var task: Task? {
-        didSet {
-            moreOptionsViewModel.edit(task: task)
-            newTaskViewModel.edit(task)
-        }
-    }
+    fileprivate var task: Task?
     
     init(taskModel: TaskModel, moreOptionsViewModel: MoreOptionsViewModel, newTaskViewModel: NewTaskViewModel) {
         self.model = taskModel
@@ -46,6 +40,14 @@ class TaskCreationViewModel {
         
         moreOptionsViewModel.delegate = self
         newTaskViewModel.outputDelegate = self
+    }
+    
+    func edit(_ task: Task?) {
+        if let task = task {
+            self.task = task
+            moreOptionsViewModel.edit(task: task)
+            newTaskViewModel.edit(task)
+        }
     }
     
     func set(tags: [Tag]) {
