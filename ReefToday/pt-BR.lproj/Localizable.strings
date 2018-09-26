@@ -7,4 +7,4 @@
 */
 
 //widget string when there are no tasks to present
-"emptyState" = "Estado vazio placeholder";
+"emptyState" = "Nenhuma tarefa recomendada";
