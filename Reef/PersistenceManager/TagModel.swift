@@ -24,7 +24,7 @@ extension TagModelDelegate {
 public class TagModel {
     
     static func region(of tag: Tag) -> CLCircularRegion? {
-        guard let data = tag.regionData else { return nil }
+        guard let data = tag.locationData else { return nil }
         return NSKeyedUnarchiver.unarchiveObject(with: data) as? CLCircularRegion
     }
     
@@ -67,7 +67,7 @@ public class TagModel {
         if let tag = (tags.first { $0.title == title }) {
             return tag
         } else {
-            let tag = reefKit.createTag(with: attributes) // TODO:
+            let tag = reefKit.createTag(with: attributes)
             return tag
         }
     }

@@ -23,8 +23,8 @@ public extension Tag {
         return UIColor.tagColors[Int(colorIndex)]
     }
     
-    public var region: CLCircularRegion? {
-        if let data = regionData {
+    public var location: CLCircularRegion? {
+        if let data = locationData {
             return NSKeyedUnarchiver.unarchiveObject(with: data) as? CLCircularRegion
         } else {
             return nil
@@ -44,23 +44,23 @@ public extension Task {
         return tags!.allObjects as! [Tag] //swiftlint:disable:this force_cast
     }
     
-    public var region: CLCircularRegion? {
-        if let data = regionData {
+    public var location: CLCircularRegion? {
+        if let data = locationData {
             return NSKeyedUnarchiver.unarchiveObject(with: data) as? CLCircularRegion
         } else {
             return nil
         }
     }
     
-    public var regions: [CLCircularRegion] {
+    public var locations: [CLCircularRegion] {
         var ans: [CLCircularRegion] = []
         
         if let data =
-            self.regionData { ans.append(NSKeyedUnarchiver.unarchiveObject(with: data) as! CLCircularRegion) }
+            self.locationData { ans.append(NSKeyedUnarchiver.unarchiveObject(with: data) as! CLCircularRegion) }
         
         let tagsData = self
             .allTags
-            .map { $0.regionData }
+            .map { $0.locationData }
         
         for data in tagsData where data != nil {
             ans.append(NSKeyedUnarchiver.unarchiveObject(with: data!) as! CLCircularRegion)
@@ -85,7 +85,7 @@ public extension Task {
     }
     
     public func isInside(_ location: CLLocationCoordinate2D) -> Bool {
-        for region in regions where region.contains( location ) { return true }
+        for taskLocation in locations where taskLocation.contains( location ) { return true }
         return false
     }
     

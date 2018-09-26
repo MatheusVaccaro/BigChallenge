@@ -11,8 +11,8 @@ import ReefKit
 
 protocol NewTaskViewModelOutputDelegate: class {
     func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateTitle title: String?)
-    func shouldPresentMoreOptions()
-    func shouldHideMoreOptions()
+    func shouldPresentDetails()
+    func shouldHideDetails()
     func didPressCreateTask()
 }
 
@@ -43,11 +43,11 @@ class NewTaskViewModel {
         }
     }
     
-    func shouldPresentMoreOptions(_ bool: Bool) {
+    func shouldPresentDetails(_ bool: Bool) {
         if bool {
-            outputDelegate?.shouldPresentMoreOptions()
+            outputDelegate?.shouldPresentDetails()
         } else {
-            outputDelegate?.shouldHideMoreOptions()
+            outputDelegate?.shouldHideDetails()
         }
     }
     

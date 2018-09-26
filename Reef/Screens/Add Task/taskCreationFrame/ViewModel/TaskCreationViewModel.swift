@@ -18,8 +18,8 @@ protocol TaskCreationDelegate: class {
 }
 
 protocol TaskCreationUIDelegate: class {
-    func presentMoreOptions()
-    func hideMoreOptions()
+    func presentDetails()
+    func hideDetails()
 }
 
 class TaskCreationViewModel {
@@ -29,23 +29,23 @@ class TaskCreationViewModel {
     
     fileprivate var model: TaskModel
     fileprivate var attributes: [TaskAttributes : Any] = [:]
-    fileprivate let moreOptionsViewModel: MoreOptionsViewModel
+    fileprivate let taskDetails: AddTaskDetailsViewModel
     fileprivate let newTaskViewModel: NewTaskViewModel
     fileprivate var task: Task?
     
-    init(taskModel: TaskModel, moreOptionsViewModel: MoreOptionsViewModel, newTaskViewModel: NewTaskViewModel) {
+    init(taskModel: TaskModel, taskDetails: AddTaskDetailsViewModel, newTaskViewModel: NewTaskViewModel) {
         self.model = taskModel
-        self.moreOptionsViewModel = moreOptionsViewModel
+        self.taskDetails = taskDetails
         self.newTaskViewModel = newTaskViewModel
         
-        moreOptionsViewModel.delegate = self
+        taskDetails.delegate = self
         newTaskViewModel.outputDelegate = self
     }
     
     func edit(_ task: Task?) {
         if let task = task {
             self.task = task
-            moreOptionsViewModel.edit(task: task)
+            taskDetails.edit(task: task)
             newTaskViewModel.edit(task)
         }
     }
@@ -57,12 +57,12 @@ class TaskCreationViewModel {
 }
 
 extension TaskCreationViewModel: NewTaskViewModelOutputDelegate {
-    func shouldPresentMoreOptions() {
-        uiDelegate?.presentMoreOptions()
+    func shouldPresentDetails() {
+        uiDelegate?.presentDetails()
     }
     
-    func shouldHideMoreOptions() {
-        uiDelegate?.hideMoreOptions()
+    func shouldHideDetails() {
+        uiDelegate?.hideDetails()
     }
     
     func didPressCreateTask() {
@@ -81,22 +81,32 @@ extension TaskCreationViewModel: NewTaskViewModelOutputDelegate {
     }
 }
 
-extension TaskCreationViewModel: MoreOptionsViewModelDelegate {
+extension TaskCreationViewModel: AddTaskDetailsDelegate {
     func shouldPresent(viewModel: IconCellPresentable) {
         delegate?.shouldPresent(viewModel: viewModel)
     }
     
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
-                       didFind location: CLCircularRegion, arriving: Bool) {
-        attributes[.region] = location
-        attributes[.isArriving] = arriving
+                       didFind location: CLCircularRegion,
+                       named: String,
+                       arriving: Bool) {
+        
+        attributes[.location] = location
+        attributes[.isArrivingLocation] = arriving
+        attributes[.locationName] = named
     }
     
-    func moreOptionsViewModel(_ moreOptionsViewModel: MoreOptionsViewModel, dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: Date) {
+    func taskDetailsViewModel(_ taskDetailsViewModel: AddTaskDetailsViewModel,
+                              dateInputViewModel: DateInputViewModelProtocol,
+                              didSelectDate date: Date) {
+        
         attributes[.dueDate] = date
     }
     
-    func moreOptionsViewModel(_ moreOptionsViewModel: MoreOptionsViewModel, dateInputViewModel: DateInputViewModelProtocol, didSelectFrequency frequency: NotificationOptions.Frequency) {
+    func taskDetailsViewModel(_ taskDetailsViewModel: AddTaskDetailsViewModel,
+                              dateInputViewModel: DateInputViewModelProtocol,
+                              didSelectFrequency frequency: NotificationOptions.Frequency) {
+        
         //TODO: implement frequency
     }
     

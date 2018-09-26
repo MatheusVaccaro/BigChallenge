@@ -67,9 +67,9 @@ public class TaskCellViewModel {
     
     // MARK: - Accessibility
     lazy var locationDescription: String? = {
-        guard !task.regions.isEmpty else { return nil }
+        guard !task.locations.isEmpty else { return nil }
         
-        return "set to \(task.regions.count) locations" //TODO: localize
+        return "set to \(task.locations.count) locations" //TODO: localize
     }()
     
     let voiceOverHint: String = "dica" //TODO: tap to complete / uncomplete

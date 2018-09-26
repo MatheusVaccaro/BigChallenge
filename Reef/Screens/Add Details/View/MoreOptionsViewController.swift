@@ -8,19 +8,11 @@
 
 import UIKit
 
-protocol MoreOptionsViewModelProtocol {
-    var numberOfSections: Int { get }
-    var numberOfRows: Int { get }
-    func viewModelForCell(at row: Int) -> IconCellPresentable
-    func shouldPresentView(at row: Int)
-    
-}
-
-class MoreOptionsViewController: UIViewController {
+class AddDetailsViewController: UIViewController {
     
     // MARK: - Properties
     
-    var viewModel: MoreOptionsViewModelProtocol!
+    var viewModel: AddDetailsProtocol!
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -74,7 +66,7 @@ class MoreOptionsViewController: UIViewController {
 }
 
 // MARK: - UITableViewDataSourceDataSource
-extension MoreOptionsViewController: UITableViewDataSource {
+extension AddDetailsViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.numberOfSections
@@ -95,14 +87,14 @@ extension MoreOptionsViewController: UITableViewDataSource {
 }
 
 // MARK: - UITableViewDelegate
-extension MoreOptionsViewController: UITableViewDelegate {
+extension AddDetailsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.shouldPresentView(at: indexPath.row)
     }
 }
 
 // MARK: - StoryboardInstantiable
-extension MoreOptionsViewController: StoryboardInstantiable {
+extension AddDetailsViewController: StoryboardInstantiable {
     static var storyboardIdentifier: String {
         return "MoreOptions"
     }

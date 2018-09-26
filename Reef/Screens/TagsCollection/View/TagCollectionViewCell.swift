@@ -128,9 +128,10 @@ class TagCollectionViewCell: UICollectionViewCell {
         setNeedsLayout()
         layoutIfNeeded()
         var newFrame = layoutAttributes.frame
+        
         newFrame.size.width = tagUILabel.frame.size.width + 8*3
         layoutAttributes.frame = newFrame
-        
+
         return layoutAttributes
     }
     
@@ -144,16 +145,19 @@ class TagCollectionViewCell: UICollectionViewCell {
             frame.size.width = tagUILabel.frame.size.width + 8*3
             gradientLayer.frame = bounds
             maskLabel.frame = bounds
+            contentView.frame = bounds
         }
     }
     
     private func configureAccessibility() {
         isAccessibilityElement = true
-        accessibilityLabel = viewModel?.tagTitle ??
-            Strings.Tag.CollectionScreen.AddTag.accessibilityLabel
+        accessibilityLabel = viewModel?.tagTitle
+            ?? Strings.Tag.CollectionScreen.AddTag.accessibilityLabel
+        
         accessibilityHint = kind == .tag
             ? Strings.Tag.CollectionScreen.accessibilityHint
             : Strings.Tag.CollectionScreen.AddTag.accessibilityHint
+        
         accessibilityValue = isSelected
             ? Strings.Tag.CollectionScreen.accessibilityValueSelected
             : Strings.Tag.CollectionScreen.accessibilityValueDeselected

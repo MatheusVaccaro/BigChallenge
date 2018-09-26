@@ -25,7 +25,7 @@
                                     <constraint firstAttribute="height" constant="45" id="q5E-Ki-Rvp"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iTz-em-9Wn" userLabel="More Options View">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iTz-em-9Wn" userLabel="tagDetailsView">
                                 <rect key="frame" x="16" y="132" width="343" height="535"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -54,7 +54,7 @@
                     </view>
                     <connections>
                         <outlet property="tagColorsView" destination="8B2-RY-FrU" id="Ujx-z2-gdE"/>
-                        <outlet property="tagMoreOptionsView" destination="iTz-em-9Wn" id="3vq-KT-k82"/>
+                        <outlet property="tagDetailsView" destination="iTz-em-9Wn" id="GFy-GI-6ee"/>
                         <outlet property="tagTitleView" destination="YRc-aJ-9JT" id="SuV-bF-AYl"/>
                     </connections>
                 </viewController>

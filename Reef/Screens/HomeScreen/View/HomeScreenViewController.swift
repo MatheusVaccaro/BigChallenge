@@ -15,13 +15,10 @@ import UserNotifications
 class HomeScreenViewController: UIViewController {
     
     // MARK: - Properties
-    fileprivate var isPresentingMoreOptions: Bool = false
-    fileprivate var isPresentingAddTask: Bool = false
-    
     var viewModel: HomeScreenViewModel!
+    
     fileprivate var taskListViewController: TaskListViewController?
     fileprivate var tagCollectionViewController: TagCollectionViewController?
-    private var taskCreationFrameViewController: TaskCreationFrameViewController!
     
     private let disposeBag = DisposeBag()
     
@@ -67,7 +64,6 @@ class HomeScreenViewController: UIViewController {
         
         configureEmptyState()
         observeSelectedTags()
-        observeClickedAddTag()
         userActivity = viewModel.userActivity
         
         configurePullDownView()
@@ -77,11 +73,6 @@ class HomeScreenViewController: UIViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         configureEmptyState()
-        if isPresentingMoreOptions {
-//            animateMoreOptionsShowing()
-        } else {
-//            animateAddTaskShowing()
-        }
     }
     
     func setupTaskList(viewModel: TaskListViewModel, viewController: TaskListViewController) {
@@ -135,16 +126,7 @@ class HomeScreenViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    fileprivate func observeClickedAddTag() {
-        // TODO Refactor this to fit into the architecture
-        tagCollectionViewController?.addTagEvent?
-            .subscribe { _ in
-            	self.viewModel.delegate?.homeScreenViewModelWillAddTag(self.viewModel)
-        	}
-            .disposed(by: disposeBag)
-    }
-    
-    fileprivate func observeSelectedTags() {
+    fileprivate func observeSelectedTags() { //Move to homeScreen Coordinator (preferably on delegate)
         viewModel.tagCollectionViewModel.selectedTagsObservable
             .subscribe(onNext: { selectedTags in
                 self.viewModel.updateSelectedTagsIfNeeded(selectedTags)
@@ -273,20 +255,7 @@ extension HomeScreenViewController: StoryboardInstantiable {
 // MARK: - Accessibility
 extension HomeScreenViewController {
     override func accessibilityPerformMagicTap() -> Bool {
-        if !isPresentingAddTask {
-//            presentAddTask()
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    override func accessibilityPerformEscape() -> Bool {
-        if isPresentingAddTask {
-//            hideAddTask()
-            return true
-        } else {
-            return false
-        }
+        viewModel.startAddTask()
+        return true
     }
 }

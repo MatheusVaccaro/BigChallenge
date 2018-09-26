@@ -9,17 +9,6 @@
 import Foundation
 import ReefKit
 
-extension DateInputViewModelProtocol {
-    func configure(with task: Task?) {
-        guard let task = task, let dueDate = task.dueDate else { return }
-        
-        let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: dueDate)
-        
-        self.calendarDate.onNext(calendarDate)
-        self.timeOfDay.onNext(timeOfDay)
-    }
-}
-
 extension DateInputViewModel {
     convenience init(with tag: Tag?) {
         guard let tag = tag else {

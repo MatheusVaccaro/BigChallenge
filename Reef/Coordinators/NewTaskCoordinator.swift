@@ -20,7 +20,7 @@ class NewTaskCoordinator: NSObject, Coordinator {
     fileprivate var creationFrameViewController: TaskCreationFrameViewController!
     fileprivate var tagCollectionViewController: TagCollectionViewController!
     fileprivate var newTaskViewController: NewTaskViewController!
-    fileprivate var moreOptionsViewController: MoreOptionsViewController!
+    fileprivate var taskDetailsViewController: AddDetailsViewController!
     
     fileprivate let taskModel: TaskModel
     fileprivate let tagModel: TagModel
@@ -34,7 +34,7 @@ class NewTaskCoordinator: NSObject, Coordinator {
          presenter: UINavigationController,
          taskModel: TaskModel,
          tagModel: TagModel,
-         selectedTags: [Tag] = []) {
+         selectedTags: [Tag]) {
         
         self.taskModel = taskModel
         self.tagModel = tagModel
@@ -53,31 +53,28 @@ class NewTaskCoordinator: NSObject, Coordinator {
     func start() {
         tagCollectionViewController = TagCollectionViewController.instantiate()
         newTaskViewController = NewTaskViewController.instantiate()
-        moreOptionsViewController = MoreOptionsViewController.instantiate()
+        taskDetailsViewController = AddDetailsViewController.instantiate()
         creationFrameViewController = TaskCreationFrameViewController.instantiate()
         
         let tagCollectionViewModel =
-            TagCollectionViewModelImpl(model: tagModel,
-                                       filtering: false,
-                                       selectedTags: task?.allTags ?? [])
+            TagCollectionViewModel(model: tagModel, filtering: false, selectedTags: selectedTags)
         let newTaskViewModel = NewTaskViewModel()
-        let moreOptionsViewModel = MoreOptionsViewModel()
+        let taskDetailsViewModel = AddTaskDetailsViewModel()
         let creationFrameViewModel =
             TaskCreationViewModel(taskModel: taskModel,
-                                  moreOptionsViewModel: moreOptionsViewModel,
+                                  taskDetails: taskDetailsViewModel,
                                   newTaskViewModel: newTaskViewModel)
         
         creationFrameViewModel.edit(task)
         
         tagCollectionViewController.viewModel = tagCollectionViewModel
         newTaskViewController.viewModel = newTaskViewModel
-        moreOptionsViewController!.viewModel = moreOptionsViewModel
+        taskDetailsViewController!.viewModel = taskDetailsViewModel
         creationFrameViewController.viewModel = creationFrameViewModel
         
         tagCollectionViewModel.delegate = self
         creationFrameViewModel.delegate = self
         creationFrameViewModel.uiDelegate = creationFrameViewController
-        
         
         modalPresenter = UINavigationController(rootViewController: creationFrameViewController)
         configureModalPresenter()
@@ -93,7 +90,7 @@ class NewTaskCoordinator: NSObject, Coordinator {
     
     fileprivate func showNewTag() {
         let newTagCoordinator = NewTagCoordinator(tag: nil,
-                                                  presenter: presenter,
+                                                  presenter: modalPresenter,
                                                   model: tagModel)
         newTagCoordinator.delegate = self
         addChild(coordinator: newTagCoordinator)
@@ -102,7 +99,7 @@ class NewTaskCoordinator: NSObject, Coordinator {
     
     fileprivate func showEditTag(_ tag: Tag) {
         let editTagCoordinator = NewTagCoordinator(tag: tag,
-                                                   presenter: presenter,
+                                                   presenter: modalPresenter,
                                                    model: tagModel)
         editTagCoordinator.delegate = self
         addChild(coordinator: editTagCoordinator)
@@ -140,7 +137,7 @@ extension NewTaskCoordinator: TaskCreationDelegate {
     
     func viewDidLoad() {
         creationFrameViewController.present(newTaskViewController)
-        creationFrameViewController.present(moreOptionsViewController)
+        creationFrameViewController.present(taskDetailsViewController)
         creationFrameViewController.present(tagCollectionViewController)
     }
     
@@ -162,7 +159,8 @@ extension NewTaskCoordinator: UIViewControllerTransitioningDelegate {
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        guard let dismissedViewController = dismissed.children.first as? TaskCreationFrameViewController else { return nil }
+        guard let dismissedViewController =
+            dismissed.children.first as? TaskCreationFrameViewController else { return nil }
         return TaskCreationFrameDismissAnimationController()
     }
     
@@ -177,8 +175,17 @@ extension NewTaskCoordinator: UIViewControllerTransitioningDelegate {
 }
 
 extension NewTaskCoordinator: TagCollectionViewModelDelegate {
-    func willUpdate(tag: Tag) {
+    
+    func didUpdate(_ selectedTags: [Tag]) {
+        creationFrameViewController.viewModel.set(tags: selectedTags)
+    }
+    
+    func didClickUpdate(tag: Tag) {
         showEditTag(tag)
+    }
+    
+    func didclickAddTag() {
+        showNewTag()
     }
     
     func shouldPresent(viewModel: IconCellPresentable) {

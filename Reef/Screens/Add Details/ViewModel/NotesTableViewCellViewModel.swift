@@ -10,14 +10,14 @@ import Foundation
 
 extension NotesInputViewModel: IconCellPresentable {
     var title: String {
-        return Strings.MoreOptionsScreen.NotesCell.title
+        return Strings.Details.NotesCell.title
     }
     
     var subtitle: String {
         if notes != "" {
             return notes
         } else {
-            return Strings.MoreOptionsScreen.NotesCell.subtitle
+            return Strings.Details.NotesCell.subtitle
         }
     }
     
@@ -26,7 +26,7 @@ extension NotesInputViewModel: IconCellPresentable {
     }
     
     var voiceOverHint: String {
-        return Strings.MoreOptionsScreen.NotesCell.subtitle
+        return Strings.Details.NotesCell.subtitle
     }
     
     var voiceOverValue: String? {

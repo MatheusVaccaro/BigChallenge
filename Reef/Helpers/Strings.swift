@@ -148,7 +148,7 @@ struct Strings {
             NSLocalizedString("postponeOneDay", comment: "placeholder for postpone one day the notification from a task")
     }
     
-    struct MoreOptionsScreen {
+    struct Details {
         
         struct LocationCell {
             static let title = NSLocalizedString("locationHeaderTitle", comment: "title for location cell on task details menu")
