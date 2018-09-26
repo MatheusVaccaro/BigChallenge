@@ -10,9 +10,10 @@ import Foundation
 import UIKit
 import ReefKit
 
-class NewTagCoordinator: Coordinator {
+class NewTagCoordinator: NSObject, Coordinator {
     
     fileprivate let presenter: UINavigationController
+    fileprivate var modalPresenter: UINavigationController!
     var childrenCoordinators: [Coordinator]
     
     fileprivate var createTagFrameViewController: TagCreationFrameViewController!
@@ -20,23 +21,20 @@ class NewTagCoordinator: Coordinator {
     fileprivate var addTagColorsViewController: AddTagColorsViewController!
     fileprivate var moreOptionsViewController: MoreOptionsViewController!
     fileprivate let model: TagModel
-    fileprivate var tag: Tag? // ???
-    
-    fileprivate let homeScreen: HomeScreenViewController
+    fileprivate var tag: Tag?
     
     weak var delegate: CoordinatorDelegate?
     
-    init(tag: Tag? = nil, presenter: UINavigationController, model: TagModel, in viewController: HomeScreenViewController) {
+    init(tag: Tag? = nil, presenter: UINavigationController, model: TagModel) {
         self.model = model
         self.presenter = presenter
         self.childrenCoordinators = []
         self.tag = tag
-        self.homeScreen = viewController
     }
     
     func start() {
         createTagFrameViewController = TagCreationFrameViewController.instantiate()
-        homeScreen.setupAddTag(viewController: createTagFrameViewController)
+        
         //View Comtrollers
         addTagTitleViewController = AddTagTitleViewController.instantiate()
         addTagColorsViewController = AddTagColorsViewController.instantiate()
@@ -60,18 +58,29 @@ class NewTagCoordinator: Coordinator {
         moreOptionsViewController!.viewModel = addTagDetailsViewModel
         
         creationFrameViewModel.delegate = self
-        createTagFrameViewController.present(addTagTitleViewController, addTagColorsViewController, moreOptionsViewController)
+        
+        modalPresenter = UINavigationController(rootViewController: createTagFrameViewController)
+        configureModalPresenter()
+        
+        presenter.present(modalPresenter, animated: true) {
+            UIAccessibility.post(notification: UIAccessibility.Notification.screenChanged, argument: nil)
+            self.createTagFrameViewController.present(self.addTagTitleViewController,
+                                                 self.addTagColorsViewController,
+                                                 self.moreOptionsViewController)
+        }
     }
-}
-
-extension NewTagCoordinator {
     
-    func didTapCancelButton() {
-        dismissViewController()
-    }
-    
-    func didTapSaveButton() {
-        dismissViewController()
+    private func configureModalPresenter() {
+        modalPresenter.transitioningDelegate = self
+        modalPresenter.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        modalPresenter.navigationBar.shadowImage = UIImage()
+        modalPresenter.navigationBar.prefersLargeTitles = true
+        modalPresenter.navigationBar.isTranslucent = true
+        modalPresenter.view.backgroundColor = .clear
+        modalPresenter.navigationBar.largeTitleTextAttributes =
+            [ NSAttributedString.Key.font : UIFont.font(sized: 34, weight: .bold, with: .largeTitle, fontName: .barlow) ]
+        modalPresenter.modalPresentationStyle = .overCurrentContext
+        modalPresenter.modalTransitionStyle = .crossDissolve
     }
     
     private func dismissViewController() {
@@ -80,13 +89,13 @@ extension NewTagCoordinator {
     }
 }
 
-extension NewTagCoordinator: TagCreationDelegate {
-    func viewDidLoad() {
-        //TODO
-    }
+extension NewTagCoordinator: UIViewControllerTransitioningDelegate {
     
+}
+
+extension NewTagCoordinator: TagCreationDelegate {
     func didAddTag() {
-        homeScreen.dismissAddTag()
+        dismissViewController()
     }
     
     func shouldPresent(viewModel: IconCellPresentable) {

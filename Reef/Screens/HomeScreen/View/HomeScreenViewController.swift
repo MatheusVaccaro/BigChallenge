@@ -84,63 +84,6 @@ class HomeScreenViewController: UIViewController {
         }
     }
     
-    func dismissAddTag() {
-        addTagView.removeFromSuperview()
-    }
-    
-    //MARK: Add task
-    @IBOutlet weak var newTaskView: UIView!
-    @IBOutlet weak var addTaskViewTopConstraint: NSLayoutConstraint!
-    
-    private var taskCreationFrameViewController: TaskCreationFrameViewController!
-    
-    func setupAddTask(viewController: TaskCreationFrameViewController) {
-        
-        taskCreationFrameViewController = viewController
-        
-        addChild(viewController)
-        newTaskView.addSubview(viewController.view)
-        
-        viewController.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            viewController.view.rightAnchor.constraint(equalTo: newTaskView.rightAnchor),
-            viewController.view.topAnchor.constraint(equalTo: newTaskView.topAnchor),
-            viewController.view.leftAnchor.constraint(equalTo: newTaskView.leftAnchor),
-            viewController.view.bottomAnchor.constraint(equalTo: newTaskView.bottomAnchor)
-            ])
-    }
-    
-    // MARK: Add tag
-    
-    @IBOutlet weak var addTagView: UIView!
-    private var tagCreationFrameViewController: TagCreationFrameViewController!
-    func setupAddTag(viewController: TagCreationFrameViewController) {
-        tagCreationFrameViewController = viewController
-        
-        addTagView.backgroundColor = UIColor.clear
-        self.view.addSubview(addTagView!)
-        
-        NSLayoutConstraint.activate([
-            addTagView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-            addTagView.topAnchor.constraint(equalTo: tagContainerView.topAnchor),
-            addTagView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            addTagView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
-            ])
-        
-        addChild(viewController)
-        addTagView.addSubview(viewController.view)
-        
-        viewController.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            viewController.view.rightAnchor.constraint(equalTo: addTagView.rightAnchor),
-            viewController.view.topAnchor.constraint(equalTo: addTagView.topAnchor),
-            viewController.view.leftAnchor.constraint(equalTo: addTagView.leftAnchor),
-            viewController.view.bottomAnchor.constraint(equalTo: addTagView.bottomAnchor)
-            ])
-    }
-    
     func setupTaskList(viewModel: TaskListViewModel, viewController: TaskListViewController) {
         
         guard taskListViewController == nil else { return }

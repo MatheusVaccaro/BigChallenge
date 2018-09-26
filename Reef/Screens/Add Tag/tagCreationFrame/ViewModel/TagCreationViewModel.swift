@@ -12,7 +12,6 @@ import CoreLocation
 
 protocol TagCreationDelegate: class {
     func didAddTag()
-    func viewDidLoad()
     func shouldPresent(viewModel: IconCellPresentable)
 }
 

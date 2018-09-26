@@ -26,7 +26,6 @@ class NewTaskCoordinator: NSObject, Coordinator {
     fileprivate let tagModel: TagModel
     
     fileprivate var selectedTags: [Tag]
-    fileprivate let homeScreen: HomeScreenViewController
     
     weak var delegate: CoordinatorDelegate?
     
@@ -40,8 +39,6 @@ class NewTaskCoordinator: NSObject, Coordinator {
         self.tagModel = tagModel
         self.presenter = presenter
         self.childrenCoordinators = []
-        
-        self.homeScreen = viewController
         
         self.selectedTags = selectedTags
         
@@ -104,7 +101,7 @@ class NewTaskCoordinator: NSObject, Coordinator {
     fileprivate func showNewTag() {
         let newTagCoordinator = NewTagCoordinator(tag: nil,
                                                   presenter: presenter,
-                                                  model: tagModel, in: homeScreen)
+                                                  model: tagModel)
         newTagCoordinator.delegate = self
         addChild(coordinator: newTagCoordinator)
         newTagCoordinator.start()
@@ -113,7 +110,7 @@ class NewTaskCoordinator: NSObject, Coordinator {
     fileprivate func showEditTag(_ tag: Tag) {
         let editTagCoordinator = NewTagCoordinator(tag: tag,
                                                    presenter: presenter,
-                                                   model: tagModel, in: homeScreen)
+                                                   model: tagModel)
         editTagCoordinator.delegate = self
         addChild(coordinator: editTagCoordinator)
         editTagCoordinator.start()
