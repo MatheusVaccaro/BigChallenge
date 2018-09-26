@@ -27,14 +27,12 @@ class TagCollectionViewController: UIViewController {
     var viewModel: TagCollectionViewModel!
     
     var clickedTagEvent: BehaviorSubject<Tag>?
-    private(set) var addTagEvent: PublishSubject<Bool>?
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.translatesAutoresizingMaskIntoConstraints = false
         
-        addTagEvent = PublishSubject<Bool>()
         bindCollectionView()
         tagsCollectionView.allowsMultipleSelection = true
         if let layout = tagsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -64,8 +62,9 @@ class TagCollectionViewController: UIViewController {
             
             guard let item =
                 self.tagsCollectionView.cellForItem(at: indexPath) as? TagCollectionViewCell else { return }
+            
             guard item.kind == .tag, let tag = item.viewModel?.tag else {
-                    self.addTagEvent?.onNext(true); return
+                self.viewModel.delegate?.didclickAddTag(); return
             }
             
             if self.viewModel.shouldAskForAuthentication(with: tag) {

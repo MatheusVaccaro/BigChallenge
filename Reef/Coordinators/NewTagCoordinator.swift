@@ -78,7 +78,12 @@ class NewTagCoordinator: NSObject, Coordinator {
         modalPresenter.navigationBar.isTranslucent = true
         modalPresenter.view.backgroundColor = .clear
         modalPresenter.navigationBar.largeTitleTextAttributes =
-            [ NSAttributedString.Key.font : UIFont.font(sized: 34, weight: .bold, with: .largeTitle, fontName: .barlow) ]
+            [ NSAttributedString.Key.font : UIFont.font(sized: 34,
+                                                        weight: .bold,
+                                                        with: .largeTitle,
+                                                        fontName: .barlow),
+        NSAttributedString.Key.strokeColor : UIColor.largeTitleColor ]
+        
         modalPresenter.modalPresentationStyle = .overCurrentContext
         modalPresenter.modalTransitionStyle = .crossDissolve
     }

@@ -67,7 +67,6 @@ class HomeScreenViewController: UIViewController {
         
         configureEmptyState()
         observeSelectedTags()
-        observeClickedAddTag()
         userActivity = viewModel.userActivity
         
         configurePullDownView()
@@ -135,16 +134,7 @@ class HomeScreenViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    fileprivate func observeClickedAddTag() {
-        // TODO Refactor this to fit into the architecture
-        tagCollectionViewController?.addTagEvent?
-            .subscribe { _ in
-            	self.viewModel.delegate?.homeScreenViewModelWillAddTag(self.viewModel)
-        	}
-            .disposed(by: disposeBag)
-    }
-    
-    fileprivate func observeSelectedTags() {
+    fileprivate func observeSelectedTags() { //Move to homeScreen Coordinator (preferably on delegate)
         viewModel.tagCollectionViewModel.selectedTagsObservable
             .subscribe(onNext: { selectedTags in
                 self.viewModel.updateSelectedTagsIfNeeded(selectedTags)

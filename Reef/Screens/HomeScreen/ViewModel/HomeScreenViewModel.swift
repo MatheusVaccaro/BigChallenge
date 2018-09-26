@@ -10,23 +10,16 @@ import Foundation
 import ReefKit
 
 protocol HomeScreenViewModelDelegate: class {
+    func homeScreenViewModelDidStartAddTask(_ homeScreenViewModel: HomeScreenViewModel)
     func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel, willEdit task: Task)
     
-    func homeScreenViewModelDidStartAddTask(_ homeScreenViewModel: HomeScreenViewModel)
-    
     func homeScreenViewModelWillImportFromReminders(_ homeScreenViewModel: HomeScreenViewModel)
-    
     func homeScreenViewModelShouldShowImportFromRemindersOption(_ homeScreenViewModel: HomeScreenViewModel) -> Bool
-    
-    func homeScreenViewModelWillAddTag(_ homeScreenViewModel: HomeScreenViewModel)
     
     func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
                              didInstantiate taskListViewModel: TaskListViewModel)
     func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
                              didInstantiate tagCollectionViewModel: TagCollectionViewModel)
-    
-    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
-                             didChange selectedTags: [Tag])
 }
 
 class HomeScreenViewModel {
@@ -105,17 +98,15 @@ class HomeScreenViewModel {
             ["selectedTagIDs": selectedTags.map { $0.id!.description }]
         
         activity.isEligibleForHandoff = true
-        //TODO: uncomment when available
-        //        if #available(iOS 12.0, *) {
-        //            activity.isEligibleForPrediction = true
-        //        }
+        if #available(iOS 12.0, *) {
+            activity.isEligibleForPrediction = true
+        }
         
         return activity
     }()
     
     func updateSelectedTagsIfNeeded(_ tags: [Tag]?) {
         selectedTags = tags ?? []
-        delegate?.homeScreenViewModel(self, didChange: selectedTags)
         print("selected tags are: \(selectedTags.map { $0.title })")
     }
     

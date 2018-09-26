@@ -23,6 +23,7 @@ class TagCreationFrameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = Strings.Tag.CreationScreen.tagTitlePlaceholder
         applyBlur()
     }
     

@@ -57,7 +57,7 @@ class NewTaskCoordinator: NSObject, Coordinator {
         creationFrameViewController = TaskCreationFrameViewController.instantiate()
         
         let tagCollectionViewModel =
-            TagCollectionViewModelImpl(model: tagModel,
+            TagCollectionViewModel(model: tagModel,
                                        filtering: false,
                                        selectedTags: task?.allTags ?? [])
         let newTaskViewModel = NewTaskViewModel()
@@ -177,8 +177,17 @@ extension NewTaskCoordinator: UIViewControllerTransitioningDelegate {
 }
 
 extension NewTaskCoordinator: TagCollectionViewModelDelegate {
-    func willUpdate(tag: Tag) {
+    
+    func didUpdate(_ selectedTags: [Tag]) {
+        creationFrameViewController.viewModel.set(tags: selectedTags)
+    }
+    
+    func didClickUpdate(tag: Tag) {
         showEditTag(tag)
+    }
+    
+    func didclickAddTag() {
+        showNewTag()
     }
     
     func shouldPresent(viewModel: IconCellPresentable) {
