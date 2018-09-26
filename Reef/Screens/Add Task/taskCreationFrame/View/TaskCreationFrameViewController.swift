@@ -26,7 +26,7 @@ class TaskCreationFrameViewController: UIViewController {
     }
     
     var tagCollectionViewController: TagCollectionViewController!
-    var taskDetailViewController: MoreOptionsViewController!
+    var taskDetailViewController: AddDetailsViewController!
     var newTaskViewController: NewTaskViewController!
     
     var viewModel: TaskCreationViewModel!
@@ -50,7 +50,7 @@ class TaskCreationFrameViewController: UIViewController {
         }
     }
     
-    func present(_ taskDetailViewController: MoreOptionsViewController) {
+    func present(_ taskDetailViewController: AddDetailsViewController) {
         self.taskDetailViewController = taskDetailViewController
         
         addChild(taskDetailViewController)
@@ -293,13 +293,13 @@ extension TaskCreationFrameViewController {
 
 extension TaskCreationFrameViewController: TaskCreationUIDelegate {
     
-    func presentMoreOptions() {
+    func presentDetails() {
         guard state == .collapsed else { return }
         animateOrReverseRunningTransition(state: .expanded, duration: duration)
         taskDetailViewController.accessibilityElementsHidden = false
     }
     
-    func hideMoreOptions() {
+    func hideDetails() {
         guard state == .expanded else { return }
         animateOrReverseRunningTransition(state: .collapsed, duration: duration)
         taskDetailViewController.accessibilityElementsHidden = true

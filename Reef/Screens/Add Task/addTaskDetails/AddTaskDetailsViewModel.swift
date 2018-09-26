@@ -1,5 +1,5 @@
 //
-//  MoreOptionsViewModel.swift
+//  AddTaskDetailsViewModel.swift
 //  BigChallenge
 //
 //  Created by Matheus Vaccaro on 01/08/18.
@@ -10,17 +10,17 @@ import Foundation
 import CoreLocation
 import ReefKit
 
-protocol MoreOptionsViewModelDelegate: class {
+protocol AddTaskDetailsDelegate: class {
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
-                                didFind location: CLCircularRegion,
-                                named: String,
-                                arriving: Bool)
+                       didFind location: CLCircularRegion,
+                       named: String,
+                       arriving: Bool)
     
-    func moreOptionsViewModel(_ moreOptionsViewModel: MoreOptionsViewModel,
+    func taskDetailsViewModel(_ taskDetailsViewModel: AddTaskDetailsViewModel,
                               dateInputViewModel: DateInputViewModelProtocol,
                               didSelectDate date: Date)
     
-    func moreOptionsViewModel(_ moreOptionsViewModel: MoreOptionsViewModel,
+    func taskDetailsViewModel(_ taskDetailsViewModel: AddTaskDetailsViewModel,
                               dateInputViewModel: DateInputViewModelProtocol,
                               didSelectFrequency frequency: NotificationOptions.Frequency)
     
@@ -29,7 +29,7 @@ protocol MoreOptionsViewModelDelegate: class {
     func shouldPresent(viewModel: IconCellPresentable)
 }
 
-class MoreOptionsViewModel {
+class AddTaskDetailsViewModel {
     
     init() {
         locationInputViewModel = LocationInputViewModel()
@@ -46,7 +46,7 @@ class MoreOptionsViewModel {
         dateInputViewModel.edit(task)
     }
     
-    weak var delegate: MoreOptionsViewModelDelegate?
+    weak var delegate: AddTaskDetailsDelegate?
     
     let locationInputViewModel: LocationInputViewModel
     let dateInputViewModel: DateInputViewModel
@@ -60,7 +60,7 @@ class MoreOptionsViewModel {
     }
 }
 
-extension MoreOptionsViewModel: MoreOptionsViewModelProtocol {
+extension AddTaskDetailsViewModel: AddDetailsProtocol {
     var numberOfSections: Int {
         return _numberOfSections
     }
@@ -78,7 +78,7 @@ extension MoreOptionsViewModel: MoreOptionsViewModelProtocol {
     }
 }
 
-extension MoreOptionsViewModel: LocationInputDelegate {
+extension AddTaskDetailsViewModel: LocationInputDelegate {
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
                        didFind location: CLCircularRegion,
                        named: String,
@@ -87,22 +87,22 @@ extension MoreOptionsViewModel: LocationInputDelegate {
     }
 }
 
-extension MoreOptionsViewModel: DateInputViewModelDelegate {
+extension AddTaskDetailsViewModel: DateInputViewModelDelegate {
 
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
                             didSelectDate date: Date) {
-        delegate?.moreOptionsViewModel(self, dateInputViewModel: dateInputViewModel,
+        delegate?.taskDetailsViewModel(self, dateInputViewModel: dateInputViewModel,
                                        didSelectDate: date)
     }
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
                             didSelectFrequency frequency: NotificationOptions.Frequency) {
-        delegate?.moreOptionsViewModel(self, dateInputViewModel: dateInputViewModel,
+        delegate?.taskDetailsViewModel(self, dateInputViewModel: dateInputViewModel,
                                        didSelectFrequency: frequency)
     }
 }
 
-extension MoreOptionsViewModel: NotesInputViewModelDelegate {
+extension AddTaskDetailsViewModel: NotesInputViewModelDelegate {
     func notesInput(_ notesInputViewModel: NotesInputViewModel, didUpdateNotes notes: String) {
         delegate?.notesInput(notesInputViewModel, didUpdateNotes: notes)
     }

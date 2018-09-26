@@ -20,7 +20,7 @@ class NewTaskCoordinator: NSObject, Coordinator {
     fileprivate var creationFrameViewController: TaskCreationFrameViewController!
     fileprivate var tagCollectionViewController: TagCollectionViewController!
     fileprivate var newTaskViewController: NewTaskViewController!
-    fileprivate var moreOptionsViewController: MoreOptionsViewController!
+    fileprivate var taskDetailsViewController: AddDetailsViewController!
     
     fileprivate let taskModel: TaskModel
     fileprivate let tagModel: TagModel
@@ -53,23 +53,23 @@ class NewTaskCoordinator: NSObject, Coordinator {
     func start() {
         tagCollectionViewController = TagCollectionViewController.instantiate()
         newTaskViewController = NewTaskViewController.instantiate()
-        moreOptionsViewController = MoreOptionsViewController.instantiate()
+        taskDetailsViewController = AddDetailsViewController.instantiate()
         creationFrameViewController = TaskCreationFrameViewController.instantiate()
         
         let tagCollectionViewModel =
             TagCollectionViewModel(model: tagModel, filtering: false, selectedTags: selectedTags)
         let newTaskViewModel = NewTaskViewModel()
-        let moreOptionsViewModel = MoreOptionsViewModel()
+        let taskDetailsViewModel = AddTaskDetailsViewModel()
         let creationFrameViewModel =
             TaskCreationViewModel(taskModel: taskModel,
-                                  moreOptionsViewModel: moreOptionsViewModel,
+                                  taskDetails: taskDetailsViewModel,
                                   newTaskViewModel: newTaskViewModel)
         
         creationFrameViewModel.edit(task)
         
         tagCollectionViewController.viewModel = tagCollectionViewModel
         newTaskViewController.viewModel = newTaskViewModel
-        moreOptionsViewController!.viewModel = moreOptionsViewModel
+        taskDetailsViewController!.viewModel = taskDetailsViewModel
         creationFrameViewController.viewModel = creationFrameViewModel
         
         tagCollectionViewModel.delegate = self
@@ -137,7 +137,7 @@ extension NewTaskCoordinator: TaskCreationDelegate {
     
     func viewDidLoad() {
         creationFrameViewController.present(newTaskViewController)
-        creationFrameViewController.present(moreOptionsViewController)
+        creationFrameViewController.present(taskDetailsViewController)
         creationFrameViewController.present(tagCollectionViewController)
     }
     
@@ -159,7 +159,8 @@ extension NewTaskCoordinator: UIViewControllerTransitioningDelegate {
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        guard let dismissedViewController = dismissed.children.first as? TaskCreationFrameViewController else { return nil }
+        guard let dismissedViewController =
+            dismissed.children.first as? TaskCreationFrameViewController else { return nil }
         return TaskCreationFrameDismissAnimationController()
     }
     

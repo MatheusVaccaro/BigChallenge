@@ -13,13 +13,13 @@ class TagCreationFrameViewController: UIViewController {
     // MARK: IBOutlets
     @IBOutlet weak var tagTitleView: UIView!
     @IBOutlet weak var tagColorsView: UIView!
-    @IBOutlet weak var tagMoreOptionsView: UIView!
+    @IBOutlet weak var tagDetailsView: UIView!
     
     var viewModel: TagCreationViewModel!
     
     var addTagTitleViewController: AddTagTitleViewController!
     var addTagColorsViewController: AddTagColorsViewController!
-    var addTagDetailsViewController: MoreOptionsViewController?
+    var addTagDetailsViewController: AddDetailsViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,7 @@ class TagCreationFrameViewController: UIViewController {
     
     func present(_ addTagTitleViewController: AddTagTitleViewController,
                  _ addTagColorsViewController: AddTagColorsViewController,
-                 _ addTagDetailsViewController: MoreOptionsViewController) {
+                 _ addTagDetailsViewController: AddDetailsViewController) {
         self.addTagTitleViewController = addTagTitleViewController
         
         addChild(addTagTitleViewController)
@@ -61,15 +61,15 @@ class TagCreationFrameViewController: UIViewController {
         self.addTagDetailsViewController = addTagDetailsViewController
         
         addChild(addTagDetailsViewController)
-        tagMoreOptionsView.addSubview(addTagDetailsViewController.view)
+        tagDetailsView.addSubview(addTagDetailsViewController.view)
         
         addTagDetailsViewController.view.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            addTagDetailsViewController.view.rightAnchor.constraint(equalTo: tagMoreOptionsView.rightAnchor),
-            addTagDetailsViewController.view.topAnchor.constraint(equalTo: tagMoreOptionsView.topAnchor),
-            addTagDetailsViewController.view.leftAnchor.constraint(equalTo: tagMoreOptionsView.leftAnchor),
-            addTagDetailsViewController.view.bottomAnchor.constraint(equalTo: tagMoreOptionsView.bottomAnchor)
+            addTagDetailsViewController.view.rightAnchor.constraint(equalTo: tagDetailsView.rightAnchor),
+            addTagDetailsViewController.view.topAnchor.constraint(equalTo: tagDetailsView.topAnchor),
+            addTagDetailsViewController.view.leftAnchor.constraint(equalTo: tagDetailsView.leftAnchor),
+            addTagDetailsViewController.view.bottomAnchor.constraint(equalTo: tagDetailsView.bottomAnchor)
             ])
 
     }

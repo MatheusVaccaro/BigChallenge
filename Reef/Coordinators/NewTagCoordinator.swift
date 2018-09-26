@@ -19,7 +19,7 @@ class NewTagCoordinator: NSObject, Coordinator {
     fileprivate var createTagFrameViewController: TagCreationFrameViewController!
     fileprivate var addTagTitleViewController: AddTagTitleViewController!
     fileprivate var addTagColorsViewController: AddTagColorsViewController!
-    fileprivate var moreOptionsViewController: MoreOptionsViewController!
+    fileprivate var tagDetailsViewController: AddDetailsViewController!
     fileprivate let model: TagModel
     fileprivate var tag: Tag?
     
@@ -38,7 +38,7 @@ class NewTagCoordinator: NSObject, Coordinator {
         //View Comtrollers
         addTagTitleViewController = AddTagTitleViewController.instantiate()
         addTagColorsViewController = AddTagColorsViewController.instantiate()
-        moreOptionsViewController = MoreOptionsViewController.instantiate()
+        tagDetailsViewController = AddDetailsViewController.instantiate()
         
         //viewModels
         let addTagTitleViewModel = AddTagTitleViewModel()
@@ -55,7 +55,7 @@ class NewTagCoordinator: NSObject, Coordinator {
         createTagFrameViewController.viewModel = creationFrameViewModel
         addTagTitleViewController.viewModel = addTagTitleViewModel
         addTagColorsViewController.viewModel = addTagColorsViewModel
-        moreOptionsViewController!.viewModel = addTagDetailsViewModel
+        tagDetailsViewController!.viewModel = addTagDetailsViewModel
         
         creationFrameViewModel.delegate = self
         
@@ -66,7 +66,7 @@ class NewTagCoordinator: NSObject, Coordinator {
             UIAccessibility.post(notification: UIAccessibility.Notification.screenChanged, argument: nil)
             self.createTagFrameViewController.present(self.addTagTitleViewController,
                                                  self.addTagColorsViewController,
-                                                 self.moreOptionsViewController)
+                                                 self.tagDetailsViewController)
         }
     }
     

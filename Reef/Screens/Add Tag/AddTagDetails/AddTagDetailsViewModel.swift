@@ -54,7 +54,7 @@ class AddTagDetailsViewModel {
     }
 }
 
-extension AddTagDetailsViewModel: MoreOptionsViewModelProtocol {
+extension AddTagDetailsViewModel: AddDetailsProtocol {
     var numberOfSections: Int {
         return _numberOfSections
     }

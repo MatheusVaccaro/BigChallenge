@@ -66,7 +66,7 @@ class NewTaskViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func didClickDetailsButton(_ sender: Any) {
         taskTitleTextView.resignFirstResponder()
-        viewModel.shouldPresentMoreOptions(true)
+        viewModel.shouldPresentDetails(true)
         doneButton.isHidden = false
         taskDetailsButton.isHidden = true
     }
@@ -151,7 +151,7 @@ extension NewTaskViewController: UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        viewModel.shouldPresentMoreOptions(false)
+        viewModel.shouldPresentDetails(false)
         doneButton.isHidden = true
         taskDetailsButton.isHidden = false
     }

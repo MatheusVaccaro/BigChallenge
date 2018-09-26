@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--More Options View Controller-->
+        <!--Add Details View Controller-->
         <scene sceneID="lEs-7N-meS">
             <objects>
-                <viewController storyboardIdentifier="MoreOptionsViewController" id="tJO-TH-F9i" customClass="MoreOptionsViewController" customModule="Reef" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailsViewController" id="tJO-TH-F9i" customClass="AddDetailsViewController" customModule="Reef" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ard-7Y-5Mm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="549"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
