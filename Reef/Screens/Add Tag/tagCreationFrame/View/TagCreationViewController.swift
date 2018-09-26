@@ -24,6 +24,8 @@ class TagCreationFrameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = Strings.Tag.CreationScreen.tagTitlePlaceholder
+        
+        viewModel.delegate?.viewDidLoad()
         applyBlur()
         tagDetailsView.layer.cornerRadius = 6.3
         addTagDetailsViewController?.view.layer.cornerRadius = 6.3
