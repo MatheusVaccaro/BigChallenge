@@ -29,8 +29,7 @@ class NewTaskView: UIView {
     override var accessibilityCustomActions: [UIAccessibilityCustomAction]? {
         get {
             let detailsActionName = Strings.Task.CreationScreen.accessibilityShowDetailsAction
-            let doneActionName =
-                Strings.Task.CreationScreen.accessibilityDoneAction
+            let doneActionName = Strings.Task.CreationScreen.accessibilityCreateTaskAction
             
             let detailsAction = UIAccessibilityCustomAction(name: detailsActionName,
                                                             target: self,

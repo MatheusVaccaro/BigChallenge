@@ -10,20 +10,23 @@ import Foundation
 import RxSwift
 import ReefKit
 
+protocol TaskCellViewModelDelegate: class {
+    func shouldEdit(_ task: Task)
+}
+
 public class TaskCellViewModel {
-    var taskIsCompleted: Bool { return task.isCompleted }
-    public var taskObservable: PublishSubject<Task>
     
+    private let model: TaskModel
     private var task: Task
+    weak var delegate: TaskCellViewModelDelegate?
     
-    public init(task: Task) {
+    public init(task: Task, taskModel: TaskModel) {
         self.task = task
-        taskObservable = PublishSubject<Task>()
+        self.model = taskModel
     }
     
-    lazy var title: String = {
-        return task.title!
-    }()
+    lazy var title: String = { return task.title! }()
+    var taskIsCompleted: Bool { return task.isCompleted }
     
     lazy var tagsDescription: String? = {
         guard !task.tags!.allObjects.isEmpty else { return nil }
@@ -47,22 +50,24 @@ public class TaskCellViewModel {
         return date.string(with: format)
     }
     
-    lazy var accessibilityDateString: String? = {
-        guard let date = task.dates.min() else { return nil }
-        
-        return date.accessibilityDescription
-    }()
-    
     var checkButtonGradient: [CGColor] {
         return task.allTags.first?.colors
             ?? [UIColor.black.cgColor, UIColor.black.cgColor]
     }
     
+    func edit() {
+        delegate?.shouldEdit(task)
+    }
+    
+    func delete() {
+        model.delete(task)
+    }
+    
     func changedCheckButton(to bool: Bool) {
-        task.isCompleted = true //TODO: refactor
-        task.completionDate = Date()
+        var attributes: [TaskAttributes : Any] = [ .isCompleted : bool ]
+        if bool { attributes[.completionDate] = Date() }
         
-        taskObservable.onNext(task)
+        model.update(task, with: attributes)
     }
     
     // MARK: - Accessibility
@@ -72,7 +77,18 @@ public class TaskCellViewModel {
         return "set to \(task.locations.count) locations" //TODO: localize
     }()
     
-    let voiceOverHint: String = "dica" //TODO: tap to complete / uncomplete
-    let editActionTitle: String = "editar"
-    let deleteActionTitle: String = "deletar"
+    lazy var accessibilityDateString: String? = {
+        guard let date = task.dates.min() else { return nil }
+        
+        return date.accessibilityDescription
+    }()
+    
+    // MARK: - String
+    var voiceOverHint: String {
+        return task.isCompleted
+            ? Strings.Task.Cell.voiceOverHintCompleted
+            : Strings.Task.Cell.voiceOverHintIncomplete
+    }
+    let editActionTitle: String = Strings.General.editActionTitle
+    let deleteActionTitle: String = Strings.General.deleteActionTitle
 }

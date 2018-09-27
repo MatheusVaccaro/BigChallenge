@@ -48,6 +48,7 @@
                         </subviews>
                     </stackView>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="0D5-ij-Kb6" firstAttribute="leading" secondItem="PPe-BE-AFv" secondAttribute="trailing" id="JmH-tp-crd"/>
                     <constraint firstItem="0D5-ij-Kb6" firstAttribute="top" secondItem="uR2-n7-Ubs" secondAttribute="top" constant="8" id="Kzg-fd-aIy"/>
@@ -57,6 +58,7 @@
                     <constraint firstItem="0D5-ij-Kb6" firstAttribute="centerY" secondItem="PPe-BE-AFv" secondAttribute="centerY" id="sE2-yK-IRE"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <accessibility key="accessibilityConfiguration">
                 <bool key="isElement" value="YES"/>
             </accessibility>

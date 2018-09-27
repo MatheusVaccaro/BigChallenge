@@ -107,7 +107,7 @@
 		22FEEA7C2133419500D8B049 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22FEEA7A2133419500D8B049 /* MainInterface.storyboard */; };
 		22FEEA802133419500D8B049 /* ReefToday.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 22FEEA742133419500D8B049 /* ReefToday.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22FEEA842133429A00D8B049 /* ReefKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F23E6C212E3E7F0064EE05 /* ReefKit.framework */; };
-		293204312135EA4100E23E72 /* TaskListViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293204302135EA4100E23E72 /* TaskListViewModelImpl.swift */; };
+		293204312135EA4100E23E72 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293204302135EA4100E23E72 /* TaskListViewModel.swift */; };
 		293204332136329E00E23E72 /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293204322136329D00E23E72 /* HomeScreenViewModel.swift */; };
 		29320435213632E400E23E72 /* TagCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29320434213632E400E23E72 /* TagCollectionViewModel.swift */; };
 		2934BCCA21003E0700B6A05A /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2934BCC921003E0700B6A05A /* TaskTests.swift */; };
@@ -357,7 +357,7 @@
 		22FEEA7D2133419500D8B049 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22FEEA9A213345BA00D8B049 /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2766B305F29EF8BE8DDEADCA /* Pods-ReefUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReefUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReefUITests/Pods-ReefUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		293204302135EA4100E23E72 /* TaskListViewModelImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListViewModelImpl.swift; sourceTree = "<group>"; };
+		293204302135EA4100E23E72 /* TaskListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
 		293204322136329D00E23E72 /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
 		29320434213632E400E23E72 /* TagCollectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionViewModel.swift; sourceTree = "<group>"; };
 		2934BCC921003E0700B6A05A /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
@@ -1098,7 +1098,7 @@
 		C21EAD0C20B751D7005F0F85 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				293204302135EA4100E23E72 /* TaskListViewModelImpl.swift */,
+				293204302135EA4100E23E72 /* TaskListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1812,7 +1812,7 @@
 				29BA68A821211754009B4AB9 /* CalendarHeaderView.swift in Sources */,
 				29BEED5F2107E946008E2202 /* ImportDataPacket.swift in Sources */,
 				2246B09A215BD59200CAE7DA /* DetailsViewModelProtocol.swift in Sources */,
-				293204312135EA4100E23E72 /* TaskListViewModelImpl.swift in Sources */,
+				293204312135EA4100E23E72 /* TaskListViewModel.swift in Sources */,
 				22D14A1E212CBBF500B15B98 /* ArrayExtension.swift in Sources */,
 				C2DD9A3321114ADD00E9B89B /* AddDetailsViewController.swift in Sources */,
 				22F23E9D212E43B30064EE05 /* Tag+Extension.swift in Sources */,
