@@ -151,16 +151,15 @@ class TagCollectionViewCell: UICollectionViewCell {
     
     private func configureAccessibility() {
         isAccessibilityElement = true
-        accessibilityLabel = viewModel?.tagTitle
-            ?? Strings.Tag.CollectionScreen.AddTag.accessibilityLabel
+        accessibilityLabel = viewModel?.tagTitle ?? Strings.Tag.CollectionScreen.VoiceOver.AddTag.label
         
         accessibilityHint = kind == .tag
-            ? Strings.Tag.CollectionScreen.accessibilityHint
-            : Strings.Tag.CollectionScreen.AddTag.accessibilityHint
+            ? Strings.Tag.CollectionScreen.VoiceOver.Tag.hint
+            : Strings.Tag.CollectionScreen.VoiceOver.AddTag.hint
         
         accessibilityValue = isSelected
-            ? Strings.Tag.CollectionScreen.accessibilityValueSelected
-            : Strings.Tag.CollectionScreen.accessibilityValueDeselected
+            ? Strings.Tag.CollectionScreen.VoiceOver.Tag.valueSelected
+            : Strings.Tag.CollectionScreen.VoiceOver.Tag.valueDeselected
         
         accessibilityTraits = UIAccessibilityTraits.button
     }

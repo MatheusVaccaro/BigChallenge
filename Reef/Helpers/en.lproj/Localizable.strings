@@ -2,9 +2,6 @@
 /* header title for 'also tagged:' section  */
 "otherTasksHeader" = "Other tasks";
 
-/* screen title when on \"all tags\" screen */
-"collectionScreenTitle" = "Tags";
-
 /* placeholder title for a new tag */
 "newTagTitlePlaceHolder" = "New Tag";
 
@@ -117,55 +114,67 @@
 "importFromReminders" = "Import existing reminders";
 
 /* prompt when requesting faceID to unlock private tag */
-"faceIDPermisson" = "Unlock private tag";
+"faceIDPermisson" = "We'll use faceID to easily unlock your private tags";
 
 /* No comment provided by engineer. */
-"add tag accessibility hint" = "";
+"add tag accessibility hint" = "Double tap to add new tag";
 
 /* No comment provided by engineer. */
-"add tag accessibility label" = "";
+"add tag accessibility label" = "add new tag";
 
 /* (VoiceOver) hint for date cell on task details menu */
-"dateVoiceOverHint" = "";
+"dateCellVoiceOverHint" = "Double tap to be remembered on a date";
 
 /* header title for recommended by 'late' section */
-"lateHeader" = "";
+"lateHeader" = "Late";
 
 /* header title for recommended by 'location' section */
-"locationHeader" = "";
+"locationHeader" = "Location";
 
 /* accessibility value on map for voiceOver users when empty */
-"mapValueEmpty" = "";
+"mapValueEmpty" = "No location set";
 
 /* (VoiceOver) hint for notes cell on task details menu */
-"notesVoiceOverHint" = "";
+"notesVoiceOverHint" = "Double tap to add a note";
 
 /* header title for recommended by 'recent' section */
-"recentHeader" = "";
+"recentHeader" = "Added recently";
 
 /* No comment provided by engineer. */
-"showDetailsActionName" = "";
+"tag accessibility hint" = "Double tap to toggle selected";
 
 /* No comment provided by engineer. */
-"tag accessibility hint" = "";
+"tag accessibility value not selected" = "selected";
 
 /* No comment provided by engineer. */
-"tag accessibility value not selected" = "";
-
-/* No comment provided by engineer. */
-"tag accessibility value selected" = "";
+"tag accessibility value selected" = "not selected";
 
 /* header title for recommended by 'up next' section */
-"upNextHeader" = "";
+"upNextHeader" = "Up next";
 
 /* (VoiceOver) hint for task cell on task list ('double tap to set incomplete') */
-"taskCellCompletedVoiceOverHint" = "";
+"taskCellCompletedVoiceOverHint" = "double tap to set incomplete";
 
 /* (VoiceOver) hint for task cell on task list ('double tap to complete') */
-"taskCellIncompleteVoiceOverHint" = "";
+"taskCellIncompleteVoiceOverHint" = "double tap to set complete";
 
 /* (voice over) when clicked the user finished adding a new task */
-"create task action" = "";
+"create task action" = "finish creating task";
 
-/* hint of cell that displays a location to voiceOver users */
-"LocationInputViewAccessibilityHint" = "";
+/* hint when using the calendar date picker */
+"calendar VoiceOver Hint" = "swipe up and down to select a day";
+
+/* label of calendar date picker */
+"calendar VoiceOver Label" = "calendar";
+
+/* No comment provided by engineer. */
+"create task voice over hint" = "double tap to create task";
+
+/* No comment provided by engineer. */
+"create task voice over label" = "create task";
+
+/* 'double tap to select this location' */
+"select location cell hint" = "double tap to select this location";
+
+/* No comment provided by engineer. */
+"show details action" = "edit task details";

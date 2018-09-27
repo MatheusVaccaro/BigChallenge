@@ -169,7 +169,7 @@ extension MKMapItem: IconCellPresentable {
     }
     
     var voiceOverHint: String {
-        return Strings.LocationInputView.VoiceOver.locationCellHint
+        return Strings.LocationInputView.locationCellHint
     }
     
     var voiceOverValue: String? {

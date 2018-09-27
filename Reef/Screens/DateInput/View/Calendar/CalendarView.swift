@@ -19,14 +19,14 @@ class CalendarView: UIView {
     
     override var accessibilityLabel: String? {
         get {
-            return "accessibilityLabel"
+            return Strings.DateInputView.VoiceOver.label
         }
         set { }
     }
     
     override var accessibilityHint: String? {
         get {
-            return "accessibilityHint"
+            return Strings.DateInputView.VoiceOver.hint
         }
         set { }
     }

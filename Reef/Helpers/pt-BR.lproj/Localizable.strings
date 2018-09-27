@@ -2,9 +2,6 @@
 /* header title for 'also tagged:' section */
 "otherTasksHeader" = "Outras tarefas";
 
-/* screen title when on \"all tags\" screen */
-"collectionScreenTitle" = "Tags";
-
 /* placeholder title for a new tag */
 "newTagTitlePlaceHolder" = "Nova Etiqueta";
 
@@ -126,7 +123,7 @@
 "add tag accessibility label" = "Adicionar tarefa";
 
 /* (VoiceOver) hint for date cell on task details menu */
-"dateVoiceOverHint" = "Dê dois toques para adicionar data";
+"dateCellVoiceOverHint" = "Dê dois toques para adicionar data";
 
 /* header title for recommended by 'late' section */
 "lateHeader" = "Atrasadas";
@@ -142,9 +139,6 @@
 
 /* header title for recommended by 'recent' section */
 "recentHeader" = "Recentes";
-
-/* No comment provided by engineer. */
-"showDetailsActionName" = "Dê dois toques para mostrar mais detalhes";
 
 /* No comment provided by engineer. */
 "tag accessibility hint" = "Dê dois toques para selecionar";
@@ -167,5 +161,20 @@
 /* (voice over) when clicked the user finished adding a new task */
 "create task action" = "Criar";
 
-/* hint of cell that displays a location to voiceOver users */
-"LocationInputViewAccessibilityHint" = "Dê dois toques para ser lembrado em uma localização";
+/* hint when using the calendar date picker */
+"calendar VoiceOver Hint" = "deslize o dedo para cima ou para baixo para selecionar uma data";
+
+/* label of calendar date picker */
+"calendar VoiceOver Label" = "calendário";
+
+/* No comment provided by engineer. */
+"create task voice over hint" = "Dê dois toques para criar uma tarefa";
+
+/* No comment provided by engineer. */
+"create task voice over label" = "Criar tarefa";
+
+/* 'double tap to select this location' */
+"select location cell hint" = "Dê dois toques para selecionar esta localização";
+
+/* No comment provided by engineer. */
+"show details action" = "Mostrar mais detalhes";

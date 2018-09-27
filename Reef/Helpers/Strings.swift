@@ -34,8 +34,13 @@ struct Strings {
                 NSLocalizedString("newTaskTitle", comment: "placeholder title for a new task")
             static let taskDescriptionPlaceholder =
                 NSLocalizedString("newTaskDescriptionPlaceholder", comment: "placeholder title for a new task description")
-            static let accessibilityShowDetailsAction = NSLocalizedString("showDetailsActionName", comment: "")
-            static let accessibilityCreateTaskAction = NSLocalizedString("create task action", comment: "(voice over) when clicked the user finished adding a new task")
+            
+            struct VoiceOver {
+                static let label = NSLocalizedString("create task voice over label", comment: "")
+                static let hint = NSLocalizedString("create task voice over hint", comment: "")
+                static let ShowDetailsAction = NSLocalizedString("show details action", comment: "")
+                static let CreateTaskAction = NSLocalizedString("create task action", comment: "")
+            }
         }
         
         struct ListScreen {
@@ -74,14 +79,16 @@ struct Strings {
         }
         
         struct CollectionScreen {
-            static let title = NSLocalizedString("collectionScreenTitle", comment: "screen title when on \"all tags\" screen")
-            static let accessibilityHint = NSLocalizedString("tag accessibility hint", comment: "")
-            static let accessibilityValueSelected = NSLocalizedString("tag accessibility value selected", comment: "")
-            static let accessibilityValueDeselected = NSLocalizedString("tag accessibility value not selected", comment: "")
-            
-            struct AddTag {
-                static let accessibilityLabel = NSLocalizedString("add tag accessibility label", comment: "")
-                static let accessibilityHint = NSLocalizedString("add tag accessibility hint", comment: "")
+            struct VoiceOver {
+                struct AddTag {
+                    static let label = NSLocalizedString("add tag accessibility label", comment: "'add a new task'")
+                    static let hint = NSLocalizedString("add tag accessibility hint", comment: "'double tap to add task'")
+                }
+                struct Tag {
+                    static let hint = NSLocalizedString("tag accessibility hint", comment: "'double tap to select'")
+                    static let valueSelected = NSLocalizedString("tag accessibility value selected", comment: "'selected'")
+                    static let valueDeselected = NSLocalizedString("tag accessibility value not selected", comment: "'not selected'")
+                }
             }
         }
     }
@@ -116,7 +123,12 @@ struct Strings {
             
             static let subtitle = NSLocalizedString("timeHeaderSubtitle", comment: "subtitle for date cell on task details menu")
             
-            static let voiceOverHint = NSLocalizedString("dateVoiceOverHint", comment: "(VoiceOver) hint for date cell on task details menu")
+            static let voiceOverHint = NSLocalizedString("dateCellVoiceOverHint", comment: "(VoiceOver) hint for date cell on task details menu")
+        }
+        
+        struct VoiceOver {
+            static let hint = NSLocalizedString("calendar VoiceOver Hint", comment: "hint when using the calendar date picker")
+            static let label = NSLocalizedString("calendar VoiceOver Label", comment: "label of calendar date picker")
         }
     }
     
@@ -131,13 +143,12 @@ struct Strings {
         
         static let defaultPlaceName = NSLocalizedString("defaultPlaceName", comment: "default place when reading location name in voiceOver")
         
+        static let locationCellHint = NSLocalizedString("select location cell hint", comment: "'double tap to select this location'")
+        
         struct Cell {
             static let title = NSLocalizedString("locationHeaderTitle", comment: "title for location cell on task details menu")
             
             static let subtitle = NSLocalizedString("locationHeaderSubtitle", comment: "subtitle for location cell on task details menu")
-            
-            static let locationCellHint = NSLocalizedString("LocationInputViewAccessibilityHint",
-                                                            comment: "hint of cell that displays a location to voiceOver users")
         }
         
         struct VoiceOver {
