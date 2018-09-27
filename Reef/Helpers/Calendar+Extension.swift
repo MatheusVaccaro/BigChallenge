@@ -31,16 +31,16 @@ extension Calendar {
         return (calendarDate(from: date), timeOfDay(from: date))
     }
     
-    func combine(calendarDate dateComponents: DateComponents?,
-                 andTimeOfDay timeOfDayComponents: DateComponents?) -> Date? {
+    func combine(calendarDate calendarDateComponents: DateComponents,
+                 andTimeOfDay timeOfDayComponents: DateComponents) -> Date? {
         
-        let dateComponents = dateComponents ?? DateComponents()
-        let timeOfDayComponents = timeOfDayComponents ?? DateComponents()
+//        let dateComponents = dateComponents ?? DateComponents()
+//        let timeOfDayComponents = timeOfDayComponents ?? DateComponents()
         
         var mergedDateComponents = DateComponents()
-        mergedDateComponents.year = dateComponents.year
-        mergedDateComponents.month = dateComponents.month
-        mergedDateComponents.day = dateComponents.day
+        mergedDateComponents.year = calendarDateComponents.year
+        mergedDateComponents.month = calendarDateComponents.month
+        mergedDateComponents.day = calendarDateComponents.day
         
         mergedDateComponents.hour = timeOfDayComponents.hour
         mergedDateComponents.minute = timeOfDayComponents.minute
