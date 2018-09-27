@@ -71,11 +71,13 @@ class DateInputViewModel: DateInputViewModelProtocol {
         #endif
     }
     
-    convenience init() {
-        let now = Date.now()
-        let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: now)
+    convenience init(date: Date = Date.now(),
+                     frequency: NotificationOptions.Frequency? = nil,
+                     delegate: DateInputViewModelDelegate? = nil) {
         
-        self.init(calendarDate: calendarDate, timeOfDay: timeOfDay, frequency: .none)
+        let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: date)
+        
+        self.init(calendarDate: calendarDate, timeOfDay: timeOfDay, frequency: frequency, delegate: delegate)
     }
     
     #if DEBUG

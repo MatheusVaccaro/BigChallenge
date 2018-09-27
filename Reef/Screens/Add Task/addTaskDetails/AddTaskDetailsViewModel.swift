@@ -33,7 +33,7 @@ class AddTaskDetailsViewModel {
     
     init() {
         locationInputViewModel = LocationInputViewModel()
-        dateInputViewModel = DateInputViewModel()
+        dateInputViewModel = DateInputViewModel(calendarDate: nil, timeOfDay: nil)
         notesInputViewModel = NotesInputViewModel()
 
         locationInputViewModel.delegate = self

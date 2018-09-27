@@ -69,20 +69,18 @@ class DateInputViewController: UIViewController {
         super.traitCollectionDidChange(previousTraitCollection)
         
         view.setNeedsLayout()
-//        disposeBag = DisposeBag()
-//        loadSelectedTimeOfDayLabel()
-//        loadDateSelectorView()
-//        loadTimeOfDaySelectorView()
-//        loadShortcutButtons()
     }
     
     private func configureCalendarDateLabels() {
         let calendarDate = viewModel.calendarDate
             .map { calendarDateComponent -> Date in
-                guard let date = Calendar.current.date(from: calendarDateComponent) else {
-                    throw NSError(domain: "Invalid calendar date component", code: 0, userInfo: nil)
+                
+                if calendarDateComponent != nil, let calendarDate = Calendar.current.date(from: calendarDateComponent) {
+                    return calendarDate
+                    
+                } else {
+                    return Date.now()
                 }
-                return date
         	}
         
         // Day Label
