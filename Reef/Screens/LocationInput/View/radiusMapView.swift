@@ -35,9 +35,20 @@ class RadiusMapView: MKMapView {
         isAccessibilityElement = true
     }
     
+    var isEmpty: Bool = true
+    var placeName: String? {
+        didSet {
+            _accessibilityValue = nil
+        }
+    }
+    private var radius: Double = 100 {
+        didSet {
+            _accessibilityValue = nil
+        }
+    }
     public var arriving: Bool = true {
         didSet {
-            changeCircle(adding: 0)
+            changeCircle(to: radius)
         }
     }
     
@@ -66,7 +77,7 @@ class RadiusMapView: MKMapView {
             self.startLocation = currentLocation
             
             let multiplier = 150 * region.span.latitudeDelta
-            changeCircle(adding: Double(totalDistance * CGFloat(multiplier))) // raise multiplier based on distance
+            changeCircle(to: radius + Double(totalDistance * CGFloat(multiplier))) // raise multiplier based on distance
         }
     }
     
@@ -89,9 +100,8 @@ class RadiusMapView: MKMapView {
         super.addOverlay(overlay)
     }
     
-    fileprivate func changeCircle(adding radius: Double) {
+    fileprivate func changeCircle(to newRadius: Double) {
         guard let circleOverlay = overlays.first as? MKCircle else { return }
-        let newRadius = circleOverlay.radius + radius
         self.radius = newRadius
         
         guard viewModel.shouldReplaceOverlay(with: newRadius) else { return }
@@ -107,14 +117,6 @@ class RadiusMapView: MKMapView {
     }
     
     // MARK: - Accessibility
-    var isEmpty: Bool = true
-    var placeName: String? {
-        didSet { _accessibilityValue = nil }
-    }
-    private var radius: Double = 100 {
-        didSet { _accessibilityValue = nil }
-    }
-    
     private var _accessibilityValue: String?
     override var accessibilityValue: String? {
         get {
@@ -134,6 +136,21 @@ class RadiusMapView: MKMapView {
             return _accessibilityValue
         }
         set { _accessibilityValue = accessibilityValue }
+    }
+    
+    override func accessibilityDecrement() {
+        changeCircle(to: radius - 100)
+    }
+    
+    override func accessibilityIncrement() {
+        changeCircle(to: radius + 100)
+    }
+    
+    override var accessibilityTraits: UIAccessibilityTraits {
+        get {
+            return UIAccessibilityTraits.adjustable
+        }
+        set { }
     }
 }
 
