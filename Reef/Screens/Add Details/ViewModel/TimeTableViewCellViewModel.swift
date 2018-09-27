@@ -23,7 +23,8 @@ extension IconCellPresentable where Self: DateInputViewModelProtocol {
             
             let dateFormatter = DateFormatter()
             dateFormatter.locale = Locale.current
-            dateFormatter.dateFormat = "d MMM hh:mm"
+            dateFormatter.dateStyle = .medium
+            dateFormatter.timeStyle = .short
             let subtitle = dateFormatter.string(from: date)
             
             return subtitle
