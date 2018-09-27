@@ -25,6 +25,12 @@ class NewTaskViewModel {
     
     weak var outputDelegate: NewTaskViewModelOutputDelegate?
     
+    init(selectedTags: [Tag]) {
+        if !selectedTags.isEmpty {
+            taskColors = selectedTags.first!.colors
+        }
+    }
+    
     var taskTitleText: String? {
         didSet {
             outputDelegate?.newTask(self, didUpdateTitle: taskTitleText)

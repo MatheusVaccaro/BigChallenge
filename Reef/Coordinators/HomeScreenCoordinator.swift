@@ -44,7 +44,6 @@ class HomeScreenCoordinator: Coordinator {
         
         self.remindersImporter = RemindersImporter(taskModel: taskModel, tagModel: tagModel)
         
-        self.taskModel.delegate = self
         print("+++ INIT HomeScreenCoordinator")
     }
     

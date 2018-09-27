@@ -31,7 +31,7 @@ protocol AddTaskDetailsDelegate: class {
 
 class AddTaskDetailsViewModel {
     
-    init() {
+    init(selectedTags: [Tag]) {
         locationInputViewModel = LocationInputViewModel()
         dateInputViewModel = DateInputViewModel(calendarDate: nil, timeOfDay: nil)
         notesInputViewModel = NotesInputViewModel()
@@ -39,6 +39,8 @@ class AddTaskDetailsViewModel {
         locationInputViewModel.delegate = self
         dateInputViewModel.delegate = self
         notesInputViewModel.delegate = self
+        
+        //TODO: start cells with tag attributes
     }
     
     func edit(task: Task) {

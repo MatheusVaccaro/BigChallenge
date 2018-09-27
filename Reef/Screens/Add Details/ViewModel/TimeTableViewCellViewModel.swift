@@ -45,9 +45,9 @@ extension IconCellPresentable where Self: DateInputViewModelProtocol {
         
         if subtitle.isEmpty {
             return Strings.DateInputView.Cell.subtitle
-        } else {
-            return subtitle
         }
+        
+        return subtitle
     }
     
     var imageName: String {

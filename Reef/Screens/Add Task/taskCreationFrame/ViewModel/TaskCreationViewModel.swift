@@ -33,13 +33,15 @@ class TaskCreationViewModel {
     fileprivate let newTaskViewModel: NewTaskViewModel
     fileprivate var task: Task?
     
-    init(taskModel: TaskModel, taskDetails: AddTaskDetailsViewModel, newTaskViewModel: NewTaskViewModel) {
+    init(taskModel: TaskModel, taskDetails: AddTaskDetailsViewModel, newTaskViewModel: NewTaskViewModel, selectedTags: [Tag]) {
         self.model = taskModel
         self.taskDetails = taskDetails
         self.newTaskViewModel = newTaskViewModel
         
         taskDetails.delegate = self
         newTaskViewModel.outputDelegate = self
+        
+        set(tags: selectedTags)
     }
     
     func edit(_ task: Task?) {
