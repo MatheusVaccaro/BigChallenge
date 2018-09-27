@@ -35,15 +35,29 @@ struct Strings {
             static let taskDescriptionPlaceholder =
                 NSLocalizedString("newTaskDescriptionPlaceholder", comment: "placeholder title for a new task description")
             static let accessibilityShowDetailsAction = NSLocalizedString("showDetailsActionName", comment: "")
-            static let accessibilityDoneAction = NSLocalizedString("doneActionName", comment: "")
+            static let accessibilityCreateTaskAction = NSLocalizedString("create task action", comment: "(voice over) when clicked the user finished adding a new task")
         }
         
         struct ListScreen {
-            static let recommendedHeaderTitle =
-                NSLocalizedString("recommendedHeaderTitle", comment: "header title for 'recommended' section ")
+            static let locationHeader =
+                NSLocalizedString("locationHeader", comment: "header title for recommended by 'location' section")
             
-            static let section2HeaderTitle =
-                NSLocalizedString("section2HeaderTitle", comment: "header title for 'also tagged:' section ")
+            static let lateHeader =
+                NSLocalizedString("lateHeader", comment: "header title for recommended by 'late' section")
+            
+            static let upNextHeader =
+                NSLocalizedString("upNextHeader", comment: "header title for recommended by 'up next' section")
+            
+            static let recentHeader =
+                NSLocalizedString("recentHeader", comment: "header title for recommended by 'recent' section")
+            
+            static let otherTasksHeader =
+                NSLocalizedString("otherTasksHeader", comment: "header title for 'other tags' section ")
+        }
+        
+        struct Cell {
+            static let voiceOverHintCompleted = NSLocalizedString("taskCellCompletedVoiceOverHint", comment: "(VoiceOver) hint for task cell on task list ('double tap to set incomplete')")
+            static let voiceOverHintIncomplete = NSLocalizedString("taskCellIncompleteVoiceOverHint", comment: "(VoiceOver) hint for task cell on task list ('double tap to complete')")
         }
     }
     
@@ -61,9 +75,6 @@ struct Strings {
         
         struct CollectionScreen {
             static let title = NSLocalizedString("collectionScreenTitle", comment: "screen title when on \"all tags\" screen")
-            static let updateActionTitle = NSLocalizedString("updateActionTitle", comment: "update button title on edit action sheet")
-            static let deleteActionTitle = NSLocalizedString("deleteActionTitle", comment: "delete button title on edit action sheet")
-            static let cancelActionTitle = NSLocalizedString("cancelActionTitle", comment: "cancel button title on edit action sheet")
             static let accessibilityHint = NSLocalizedString("tag accessibility hint", comment: "")
             static let accessibilityValueSelected = NSLocalizedString("tag accessibility value selected", comment: "")
             static let accessibilityValueDeselected = NSLocalizedString("tag accessibility value not selected", comment: "")
@@ -99,6 +110,14 @@ struct Strings {
         
         static let nextMorningShortcut = NSLocalizedString("nextMorningShortcutDateInput",
                                                          comment: "text for next morning shortcut button")
+        
+        struct Cell {
+            static let title = NSLocalizedString("timeHeaderTitle", comment: "title for date cell on task details menu")
+            
+            static let subtitle = NSLocalizedString("timeHeaderSubtitle", comment: "subtitle for date cell on task details menu")
+            
+            static let voiceOverHint = NSLocalizedString("dateVoiceOverHint", comment: "(VoiceOver) hint for date cell on task details menu")
+        }
     }
     
     struct LocationInputView {
@@ -112,6 +131,15 @@ struct Strings {
         
         static let defaultPlaceName = NSLocalizedString("defaultPlaceName", comment: "default place when reading location name in voiceOver")
         
+        struct Cell {
+            static let title = NSLocalizedString("locationHeaderTitle", comment: "title for location cell on task details menu")
+            
+            static let subtitle = NSLocalizedString("locationHeaderSubtitle", comment: "subtitle for location cell on task details menu")
+            
+            static let locationCellHint = NSLocalizedString("LocationInputViewAccessibilityHint",
+                                                            comment: "hint of cell that displays a location to voiceOver users")
+        }
+        
         struct VoiceOver {
             static let mapLabel = NSLocalizedString("mapViewAccessibilitylabel",
                                                     comment: "description of map to voiceOver users")
@@ -124,17 +152,19 @@ struct Strings {
             
             static let searchbarHint = NSLocalizedString("searchBarHint",
                                                          comment: "accessibility hint on searchBar for voiceOver users")
-            
-            static let locationCellHint = NSLocalizedString("MapViewAccessibilityHint",
-                                                    comment: "hint of cell that displays a location to voiceOver users")
         }
     }
     
     struct NotesInputView {
-        
         static let textViewPlaceholder =
             NSLocalizedString("notesInputPlaceholder", comment: "placeholder for notes input text view")
         
+        struct Cell {
+            static let title = NSLocalizedString("notesHeaderTitle", comment: "title for notes header")
+            
+            static let subtitle = NSLocalizedString("notesHeaderSubtitle", comment: "subtitle for notes header")
+            static let voiceOverHint = NSLocalizedString("notesVoiceOverHint", comment: "(VoiceOver) hint for notes cell on task details menu")
+        }
     }
     
     struct Notification {
@@ -148,30 +178,9 @@ struct Strings {
             NSLocalizedString("postponeOneDay", comment: "placeholder for postpone one day the notification from a task")
     }
     
-    struct Details {
-        
-        struct LocationCell {
-            static let title = NSLocalizedString("locationHeaderTitle", comment: "title for location cell on task details menu")
-            
-            static let subtitle = NSLocalizedString("locationHeaderSubtitle", comment: "subtitle for location cell on task details menu")
-            
-            static let voiceOverHint = NSLocalizedString("locationVoiceOverHint", comment: "(VoiceOver) hint for location cell on task details menu")
-        }
-        
-        struct TimeCell {
-            static let title = NSLocalizedString("timeHeaderTitle", comment: "title for date cell on task details menu")
-            
-            static let subtitle = NSLocalizedString("timeHeaderSubtitle", comment: "subtitle for date cell on task details menu")
-            
-            static let voiceOverHint = NSLocalizedString("dateVoiceOverHint", comment: "(VoiceOver) hint for date cell on task details menu")
-        }
-        
-        struct NotesCell {
-            static let title = NSLocalizedString("notesHeaderTitle", comment: "title for notes header")
-            
-            static let subtitle = NSLocalizedString("notesHeaderSubtitle", comment: "subtitle for notes header")
-            static let voiceOverHint = NSLocalizedString("notesVoiceOverHint", comment: "(VoiceOver) hint for notes cell on task details menu")
-        }
-        
+    struct General {
+        static let editActionTitle = NSLocalizedString("updateActionTitle", comment: "edit button title")
+        static let deleteActionTitle = NSLocalizedString("deleteActionTitle", comment: "delete button title")
+        static let cancelActionTitle = NSLocalizedString("cancelActionTitle", comment: "cancel button title")
     }
 }

@@ -1,9 +1,6 @@
 
-/* header title for 'recommended' section */
-"recommendedHeaderTitle" = "Recomendado:";
-
 /* header title for 'also tagged:' section */
-"section2HeaderTitle" = "Também marcado com:";
+"otherTasksHeader" = "Outras tarefas";
 
 /* screen title when on \"all tags\" screen */
 "collectionScreenTitle" = "Tags";
@@ -122,5 +119,53 @@
 /* prompt when requesting faceID to unlock private tag */
 "faceIDPermisson" = "Desbloquear etiqueta privada";
 
-/* Preposition that connects calendar date to time of day. */
-"dateInputPreposition" = "às";
+/* No comment provided by engineer. */
+"add tag accessibility hint" = "Dê dois toques para editar";
+
+/* No comment provided by engineer. */
+"add tag accessibility label" = "Adicionar tarefa";
+
+/* (VoiceOver) hint for date cell on task details menu */
+"dateVoiceOverHint" = "Dê dois toques para adicionar data";
+
+/* header title for recommended by 'late' section */
+"lateHeader" = "Atrasadas";
+
+/* header title for recommended by 'location' section */
+"locationHeader" = "Por que você está ai";
+
+/* accessibility value on map for voiceOver users when empty */
+"mapValueEmpty" = "Nenhuma localização definida";
+
+/* (VoiceOver) hint for notes cell on task details menu */
+"notesVoiceOverHint" = "Dê dois toques para adicionar uma nota";
+
+/* header title for recommended by 'recent' section */
+"recentHeader" = "Recentes";
+
+/* No comment provided by engineer. */
+"showDetailsActionName" = "Dê dois toques para mostrar mais detalhes";
+
+/* No comment provided by engineer. */
+"tag accessibility hint" = "Dê dois toques para selecionar";
+
+/* No comment provided by engineer. */
+"tag accessibility value not selected" = "Não selecionado";
+
+/* No comment provided by engineer. */
+"tag accessibility value selected" = "selecionado";
+
+/* header title for recommended by 'up next' section */
+"upNextHeader" = "Próximas";
+
+/* (VoiceOver) hint for task cell on task list ('double tap to set incomplete') */
+"taskCellCompletedVoiceOverHint" = "Dê dois toques para descompletar";
+
+/* (VoiceOver) hint for task cell on task list ('double tap to complete') */
+"taskCellIncompleteVoiceOverHint" = "Dê dois toques para completar";
+
+/* (voice over) when clicked the user finished adding a new task */
+"create task action" = "Criar";
+
+/* hint of cell that displays a location to voiceOver users */
+"LocationInputViewAccessibilityHint" = "Dê dois toques para ser lembrado em uma localização";

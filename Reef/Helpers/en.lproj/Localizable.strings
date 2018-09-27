@@ -1,9 +1,6 @@
 
-/* header title for 'recommended' section  */
-"recommendedHeaderTitle" = "Recommended:";
-
 /* header title for 'also tagged:' section  */
-"section2HeaderTitle" = "Also tagged:";
+"otherTasksHeader" = "Other tasks";
 
 /* screen title when on \"all tags\" screen */
 "collectionScreenTitle" = "Tags";
@@ -122,5 +119,53 @@
 /* prompt when requesting faceID to unlock private tag */
 "faceIDPermisson" = "Unlock private tag";
 
-/* Preposition that connects calendar date to time of day. */
-"dateInputPreposition" = "at";
+/* No comment provided by engineer. */
+"add tag accessibility hint" = "";
+
+/* No comment provided by engineer. */
+"add tag accessibility label" = "";
+
+/* (VoiceOver) hint for date cell on task details menu */
+"dateVoiceOverHint" = "";
+
+/* header title for recommended by 'late' section */
+"lateHeader" = "";
+
+/* header title for recommended by 'location' section */
+"locationHeader" = "";
+
+/* accessibility value on map for voiceOver users when empty */
+"mapValueEmpty" = "";
+
+/* (VoiceOver) hint for notes cell on task details menu */
+"notesVoiceOverHint" = "";
+
+/* header title for recommended by 'recent' section */
+"recentHeader" = "";
+
+/* No comment provided by engineer. */
+"showDetailsActionName" = "";
+
+/* No comment provided by engineer. */
+"tag accessibility hint" = "";
+
+/* No comment provided by engineer. */
+"tag accessibility value not selected" = "";
+
+/* No comment provided by engineer. */
+"tag accessibility value selected" = "";
+
+/* header title for recommended by 'up next' section */
+"upNextHeader" = "";
+
+/* (VoiceOver) hint for task cell on task list ('double tap to set incomplete') */
+"taskCellCompletedVoiceOverHint" = "";
+
+/* (VoiceOver) hint for task cell on task list ('double tap to complete') */
+"taskCellIncompleteVoiceOverHint" = "";
+
+/* (voice over) when clicked the user finished adding a new task */
+"create task action" = "";
+
+/* hint of cell that displays a location to voiceOver users */
+"LocationInputViewAccessibilityHint" = "";

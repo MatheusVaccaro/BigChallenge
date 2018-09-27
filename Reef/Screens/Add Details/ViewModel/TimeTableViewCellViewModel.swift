@@ -12,7 +12,7 @@ import RxSwift
 extension IconCellPresentable where Self: DateInputViewModelProtocol {
     
     var title: String {
-        return Strings.Details.TimeCell.title
+        return Strings.DateInputView.Cell.title
     }
     
     var subtitle: String {
@@ -44,10 +44,10 @@ extension IconCellPresentable where Self: DateInputViewModelProtocol {
         subtitle = subtitle.trimmingCharacters(in: CharacterSet(charactersIn: " "))
         
         if subtitle.isEmpty {
-            subtitle = Strings.Details.TimeCell.subtitle
+            return Strings.DateInputView.Cell.subtitle
+        } else {
+            return subtitle
         }
-        
-        return subtitle
     }
     
     var imageName: String {
@@ -55,7 +55,7 @@ extension IconCellPresentable where Self: DateInputViewModelProtocol {
     }
     
     var voiceOverHint: String {
-        return Strings.Details.TimeCell.subtitle
+        return Strings.DateInputView.Cell.subtitle
     }
     
     var voiceOverValue: String? {

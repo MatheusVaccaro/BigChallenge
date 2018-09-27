@@ -127,7 +127,7 @@ class RadiusMapView: MKMapView {
                 let defaultPlaceName = Strings.LocationInputView.defaultPlaceName
                 
                 _accessibilityValue = String.localizedStringWithFormat(localizedString,
-                                                                       radius.description,
+                                                                       Int(radius).description,
                                                                        placeName ?? defaultPlaceName)
             }
             

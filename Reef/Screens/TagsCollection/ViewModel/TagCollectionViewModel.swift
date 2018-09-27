@@ -41,9 +41,9 @@ class TagCollectionViewModel {
     private let disposeBag = DisposeBag()
     private var model: TagModel
     
-    let updateActionTitle = Strings.Tag.CollectionScreen.updateActionTitle
-    let deleteActionTitle = Strings.Tag.CollectionScreen.deleteActionTitle
-    let cancelActionTitle = Strings.Tag.CollectionScreen.cancelActionTitle
+    let updateActionTitle = Strings.General.editActionTitle
+    let deleteActionTitle = Strings.General.deleteActionTitle
+    let cancelActionTitle = Strings.General.cancelActionTitle
     
     weak var delegate: TagCollectionViewModelDelegate?
     
