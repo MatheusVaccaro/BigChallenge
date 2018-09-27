@@ -115,6 +115,7 @@ class NewTaskCoordinator: NSObject, Coordinator {
         modalPresenter.navigationBar.shadowImage = UIImage()
         modalPresenter.navigationBar.prefersLargeTitles = true
         modalPresenter.navigationBar.isTranslucent = false
+        modalPresenter.modalPresentationStyle = .overCurrentContext
         modalPresenter.navigationBar.largeTitleTextAttributes =
             [ NSAttributedString.Key.font : UIFont.font(sized: 34, weight: .bold, with: .largeTitle, fontName: .barlow) ]
     }
@@ -163,15 +164,15 @@ extension NewTaskCoordinator: UIViewControllerTransitioningDelegate {
             dismissed.children.first as? TaskCreationFrameViewController else { return nil }
         return TaskCreationFrameDismissAnimationController()
     }
-    
-    // TODO: Fix interactive gesture
-    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        guard let animator = animator as? TaskCreationFramePresentAnimationController,
-            let interactionController = animator.interactionController,
-            interactionController.interactionInProgress
-            else { return nil }
-        return interactionController
-    }
+//
+//    // TODO: Fix interactive gesture
+//    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+//        guard let animator = animator as? TaskCreationFramePresentAnimationController,
+//            let interactionController = animator.interactionController,
+//            interactionController.interactionInProgress
+//            else { return nil }
+//        return interactionController
+//    }
 }
 
 extension NewTaskCoordinator: TagCollectionViewModelDelegate {

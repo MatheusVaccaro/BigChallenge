@@ -31,7 +31,6 @@ class TaskCreationFramePresentAnimationController: NSObject, UIViewControllerAni
         let containerView = transitionContext.containerView
         let duration = transitionDuration(using: transitionContext)
     
-        containerView.insertSubview(homeScreenViewController.view, at: 0)
         containerView.addSubview(toViewController.view)
         toViewController.view.isHidden = true
         
