@@ -43,9 +43,7 @@ class HomeScreenCoordinator: Coordinator {
         self.childrenCoordinators = []
         
         self.remindersImporter = RemindersImporter(taskModel: taskModel, tagModel: tagModel)
-        //        self.remindersImporter.importIfGranted() TODO: fix
         
-        self.taskModel.delegate = self
         print("+++ INIT HomeScreenCoordinator")
     }
     
@@ -158,11 +156,5 @@ extension HomeScreenCoordinator: TagCollectionViewModelDelegate {
     
     func didclickAddTag() {
         showNewTag()
-    }
-}
-
-extension HomeScreenCoordinator: TaskModelDelegate {
-    func taskModel(_ taskModel: TaskModel, didSave task: Task) {
-        remindersImporter.exportTaskToReminders(task)
     }
 }

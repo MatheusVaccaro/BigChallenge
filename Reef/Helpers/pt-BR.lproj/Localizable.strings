@@ -1,12 +1,6 @@
 
-/* header title for 'recommended' section */
-"recommendedHeaderTitle" = "Recomendado:";
-
 /* header title for 'also tagged:' section */
-"section2HeaderTitle" = "Também marcado com:";
-
-/* screen title when on \"all tags\" screen */
-"collectionScreenTitle" = "Tags";
+"otherTasksHeader" = "Outras tarefas";
 
 /* placeholder title for a new tag */
 "newTagTitlePlaceHolder" = "Nova Etiqueta";
@@ -122,5 +116,65 @@
 /* prompt when requesting faceID to unlock private tag */
 "faceIDPermisson" = "Desbloquear etiqueta privada";
 
-/* Preposition that connects calendar date to time of day. */
-"dateInputPreposition" = "às";
+/* No comment provided by engineer. */
+"add tag accessibility hint" = "Dê dois toques para editar";
+
+/* No comment provided by engineer. */
+"add tag accessibility label" = "Adicionar tarefa";
+
+/* (VoiceOver) hint for date cell on task details menu */
+"dateCellVoiceOverHint" = "Dê dois toques para adicionar data";
+
+/* header title for recommended by 'late' section */
+"lateHeader" = "Atrasadas";
+
+/* header title for recommended by 'location' section */
+"locationHeader" = "Por que você está ai";
+
+/* accessibility value on map for voiceOver users when empty */
+"mapValueEmpty" = "Nenhuma localização definida";
+
+/* (VoiceOver) hint for notes cell on task details menu */
+"notesVoiceOverHint" = "Dê dois toques para adicionar uma nota";
+
+/* header title for recommended by 'recent' section */
+"recentHeader" = "Recentes";
+
+/* No comment provided by engineer. */
+"tag accessibility hint" = "Dê dois toques para selecionar";
+
+/* No comment provided by engineer. */
+"tag accessibility value not selected" = "Não selecionado";
+
+/* No comment provided by engineer. */
+"tag accessibility value selected" = "selecionado";
+
+/* header title for recommended by 'up next' section */
+"upNextHeader" = "Próximas";
+
+/* (VoiceOver) hint for task cell on task list ('double tap to set incomplete') */
+"taskCellCompletedVoiceOverHint" = "Dê dois toques para descompletar";
+
+/* (VoiceOver) hint for task cell on task list ('double tap to complete') */
+"taskCellIncompleteVoiceOverHint" = "Dê dois toques para completar";
+
+/* (voice over) when clicked the user finished adding a new task */
+"create task action" = "Criar";
+
+/* hint when using the calendar date picker */
+"calendar VoiceOver Hint" = "deslize o dedo para cima ou para baixo para selecionar uma data";
+
+/* label of calendar date picker */
+"calendar VoiceOver Label" = "calendário";
+
+/* No comment provided by engineer. */
+"create task voice over hint" = "Dê dois toques para criar uma tarefa";
+
+/* No comment provided by engineer. */
+"create task voice over label" = "Criar tarefa";
+
+/* 'double tap to select this location' */
+"select location cell hint" = "Dê dois toques para selecionar esta localização";
+
+/* No comment provided by engineer. */
+"show details action" = "Mostrar mais detalhes";

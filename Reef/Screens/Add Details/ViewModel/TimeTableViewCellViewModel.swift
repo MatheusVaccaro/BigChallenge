@@ -12,15 +12,16 @@ import RxSwift
 extension IconCellPresentable where Self: DateInputViewModelProtocol {
     
     var title: String {
-        return Strings.Details.TimeCell.title
+        return Strings.DateInputView.Cell.title
     }
     
     var subtitle: String {
         
         var subtitle = ""
         
-        if let lastObservedCalendarDate = try? calendarDate.value(), let calendarDate = lastObservedCalendarDate,
-           let date = Calendar.current.date(from: calendarDate) {
+        if let lastObservedCalendarDate = try? calendarDate.value(),
+            let calendarDate = lastObservedCalendarDate,
+            let date = Calendar.current.date(from: calendarDate) {
             
             let dateFormatter = DateFormatter()
             dateFormatter.locale = Locale.current
@@ -44,7 +45,7 @@ extension IconCellPresentable where Self: DateInputViewModelProtocol {
         subtitle = subtitle.trimmingCharacters(in: CharacterSet(charactersIn: " "))
         
         if subtitle.isEmpty {
-            subtitle = Strings.Details.TimeCell.subtitle
+            return Strings.DateInputView.Cell.subtitle
         }
         
         return subtitle
@@ -55,7 +56,7 @@ extension IconCellPresentable where Self: DateInputViewModelProtocol {
     }
     
     var voiceOverHint: String {
-        return Strings.Details.TimeCell.subtitle
+        return Strings.DateInputView.Cell.subtitle
     }
     
     var voiceOverValue: String? {

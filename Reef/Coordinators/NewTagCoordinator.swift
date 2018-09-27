@@ -64,9 +64,6 @@ class NewTagCoordinator: NSObject, Coordinator {
         
         presenter.present(modalPresenter, animated: true) {
             UIAccessibility.post(notification: UIAccessibility.Notification.screenChanged, argument: nil)
-            self.createTagFrameViewController.present(self.addTagTitleViewController,
-                                                 self.addTagColorsViewController,
-                                                 self.tagDetailsViewController)
         }
     }
     
@@ -99,6 +96,11 @@ extension NewTagCoordinator: UIViewControllerTransitioningDelegate {
 }
 
 extension NewTagCoordinator: TagCreationDelegate {
+    func viewDidLoad() {
+        createTagFrameViewController
+            .present(addTagTitleViewController, addTagColorsViewController, tagDetailsViewController)
+    }
+    
     func didAddTag() {
         dismissViewController()
     }

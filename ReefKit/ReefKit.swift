@@ -24,10 +24,6 @@ public class ReefKit {
         persistence.delegate = self
     }
     
-    public static func recommendedTasks(from tasks: [Task]) -> [Task] {
-        return Recommender.recommended(from: tasks)
-    }
-    
     public func refresh() {
         persistence.refresh()
     }

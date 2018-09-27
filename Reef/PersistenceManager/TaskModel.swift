@@ -11,23 +11,26 @@ import CoreLocation
 import RxSwift
 import ReefKit
 
+protocol TaskModelDelegate: class {
+    func taskModel(_ taskModel: TaskModel, didInsert tasks: [Task])
+    func taskModel(_ taskModel: TaskModel, didDelete tasks: [Task])
+    func taskModel(_ taskModel: TaskModel, didUpdate tasks: [Task])
+}
+
 public class TaskModel {
     // MARK: - Properties
     
     weak var delegate: TaskModelDelegate?
-    private(set) var didUpdateTasks: BehaviorSubject<[Task]>
+    
     private(set) public var tasks: [Task]
-    private(set) public var recommended: [Task]
+    private(set) public var recommender: Recommender
     private let reefKit: ReefKit
 
-    // MARK: - TaskModel Lifecycle
-    
-    init(reefKit: ReefKit, delegate: TaskModelDelegate? = nil) {
+    init(reefKit: ReefKit) {
         self.reefKit = reefKit
-        self.delegate = delegate
         self.tasks = []
-        self.recommended = []
-        self.didUpdateTasks = BehaviorSubject<[Task]>(value: tasks)
+        recommender = Recommender(tasks: tasks)
+        
         reefKit.tasksDelegate = self
         
         loadTasks()
@@ -36,18 +39,13 @@ public class TaskModel {
     func loadTasks() {
         reefKit.fetchTasks {
             self.tasks = $0
-            self.recommended = ReefKit.recommendedTasks(from: $0)
-            self.didUpdateTasks.onNext(self.tasks)
+            self.recommender = Recommender(tasks: $0)
         }
     }
     
     // MARK: - CRUD Methods
     public func save(_ task: Task) {
         reefKit.save(task)
-        if recommended.contains(task) {
-            recommended = Recommender.recommended(from: self.tasks)
-            didUpdateTasks.onNext(self.tasks)
-        }
     }
     
     public func delete(_ task: Task) {
@@ -57,7 +55,6 @@ public class TaskModel {
     
     public func createTask(with attributes: [TaskAttributes : Any]) -> Task {
         let task = reefKit.createTask(with: attributes)
-        delegate?.taskModel(self, didCreate: task)
         return task
     }
     
@@ -70,18 +67,6 @@ public class TaskModel {
     }
 }
 
-protocol TaskModelDelegate: class {
-    func taskModel(_ taskModel: TaskModel, didSave task: Task)
-    func taskModel(_ taskModel: TaskModel, didDelete task: Task)
-    func taskModel(_ taskModel: TaskModel, didCreate task: Task)
-}
-
-extension TaskModelDelegate {
-    func taskModel(_ taskModel: TaskModel, didSave task: Task) { }
-    func taskModel(_ taskModel: TaskModel, didDelete task: Task) { }
-    func taskModel(_ taskModel: TaskModel, didCreate task: Task) { }
-}
-
 // MARK: - TaskPersistenceDelegate Extension
 
 extension TaskModel: ReefTaskDelegate {
@@ -90,25 +75,24 @@ extension TaskModel: ReefTaskDelegate {
             guard !self.tasks.contains(task) else { continue }
             self.tasks.append(task)
         }
-        self.recommended = ReefKit.recommendedTasks(from: self.tasks)
-        self.didUpdateTasks.onNext(self.tasks)
+        recommender = Recommender(tasks: self.tasks)
+        delegate?.taskModel(self, didInsert: tasks)
     }
     
     public func reef(_ reefKit: ReefKit, didUpdateTasks tasks: [Task]) {
 //        for task in tasks {
 //            if let index = self.tasks.index(of: task) { self.tasks[index] = task }
-//        }
-        self.recommended = ReefKit.recommendedTasks(from: self.tasks)
-        self.didUpdateTasks.onNext(self.tasks)
+//        } TODO: review this 
+        recommender = Recommender(tasks: self.tasks)
+        delegate?.taskModel(self, didUpdate: tasks)
     }
     
     public func reef(_ reefKit: ReefKit, didDeleteTasks tasks: [Task]) {
         for task in tasks {
             if let index = tasks.index(of: task) { self.tasks.remove(at: index) }
-            if let index = recommended.index(of: task) { recommended.remove(at: index) }
         }
-        self.recommended = ReefKit.recommendedTasks(from: self.tasks)
-        didUpdateTasks.onNext(tasks)
+        recommender = Recommender(tasks: self.tasks)
+        delegate?.taskModel(self, didDelete: tasks)
     }
 }
 

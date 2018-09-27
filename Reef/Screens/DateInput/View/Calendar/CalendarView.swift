@@ -11,7 +11,7 @@ import UIKit
 protocol CalendarViewAccessibilityProvider: class {
     func scrollDate(forwards: Bool)
     func scrollMonth(forwards: Bool)
-    func currentDate() -> String?
+    func accessibilityValue() -> String?
 }
 
 class CalendarView: UIView {
@@ -19,21 +19,21 @@ class CalendarView: UIView {
     
     override var accessibilityLabel: String? {
         get {
-            return "accessibilityLabel"
+            return Strings.DateInputView.VoiceOver.label
         }
         set { }
     }
     
     override var accessibilityHint: String? {
         get {
-            return "accessibilityHint"
+            return Strings.DateInputView.VoiceOver.hint
         }
         set { }
     }
     
     override var accessibilityValue: String? {
         get {
-            return accessibilityProvider?.currentDate()
+            return accessibilityProvider?.accessibilityValue()
         }
         set { }
     }

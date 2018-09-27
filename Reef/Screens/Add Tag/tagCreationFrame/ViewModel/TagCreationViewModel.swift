@@ -11,6 +11,7 @@ import ReefKit
 import CoreLocation
 
 protocol TagCreationDelegate: class {
+    func viewDidLoad()
     func didAddTag()
     func shouldPresent(viewModel: IconCellPresentable)
 }

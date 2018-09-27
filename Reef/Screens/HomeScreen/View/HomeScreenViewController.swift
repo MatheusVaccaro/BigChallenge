@@ -8,7 +8,7 @@
 
 import UIKit
 import Crashlytics
-import RxCocoa
+import ReefKit
 import RxSwift
 import UserNotifications
 
@@ -35,6 +35,7 @@ class HomeScreenViewController: UIViewController {
     }()
     
     // MARK: - IBOutlets
+    @IBOutlet weak var newTaskLabel: UILabel!
     @IBOutlet weak var whiteBackgroundView: UIView!
     @IBOutlet weak var taskListContainerView: UIView!
     @IBOutlet weak var tagContainerView: UIView!
@@ -64,6 +65,7 @@ class HomeScreenViewController: UIViewController {
         
         configureEmptyState()
         observeSelectedTags()
+        newTaskLabel.text = Strings.Task.CreationScreen.taskTitlePlaceholder
         userActivity = viewModel.userActivity
         
         configurePullDownView()
@@ -72,6 +74,9 @@ class HomeScreenViewController: UIViewController {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        newTaskLabel.font = UIFont.font(sized: 13,
+                                        weight: .medium,
+                                        with: .body)
         configureEmptyState()
     }
     
@@ -80,7 +85,7 @@ class HomeScreenViewController: UIViewController {
         guard taskListViewController == nil else { return }
         taskListViewController = viewController
         
-        subscribe(to: viewModel)
+        viewModel.delegate = self
         
         addChild(viewController)
         taskListContainerView.addSubview(viewController.view)
@@ -107,23 +112,6 @@ class HomeScreenViewController: UIViewController {
             viewController.view.leftAnchor.constraint(equalTo: tagContainerView.leftAnchor),
             viewController.view.bottomAnchor.constraint(equalTo: tagContainerView.bottomAnchor)
         ])
-    }
-    
-    fileprivate func subscribe(to taskListViewModel: TaskListViewModel) {
-        taskListViewModel.shouldEditTask
-            .subscribe(onNext: { task in
-                // TODO: Refactor this to fit into architecture
-            	self.viewModel.delegate?.homeScreenViewModel(self.viewModel, willEdit: task)
-        	})
-            .disposed(by: disposeBag)
-        
-        taskListViewModel.tasksObservable
-            .subscribe(onNext: { tasks in
-            	DispatchQueue.main.async {
-                    self.showEmptyState( tasks.flatMap { $0 }.isEmpty )
-            	}
-        	})
-            .disposed(by: disposeBag)
     }
     
     fileprivate func observeSelectedTags() { //Move to homeScreen Coordinator (preferably on delegate)
@@ -239,6 +227,16 @@ class HomeScreenViewController: UIViewController {
     
     @objc private func startAddTask() {
         viewModel.startAddTask()
+    }
+}
+
+extension HomeScreenViewController: TaskListDelegate {
+    func didBecomeEmpty(_ bool: Bool) {
+        self.showEmptyState(bool)
+    }
+    
+    func taskListViewModel(_ taskListViewModel: TaskListViewModel, shouldEdit task: Task) {
+        self.viewModel.delegate?.homeScreenViewModel(viewModel, willEdit: task)
     }
 }
 

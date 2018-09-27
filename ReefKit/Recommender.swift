@@ -11,14 +11,20 @@ import CoreLocation
 import RxSwift
 
 public class Recommender {
-    // MARK: - Recommendation
-    public static func recommended(from tasks: [Task]) -> [Task] {
-        var pinnedTasks: [Task] = []
-        var localTasks: [Task] = []; let localTasksLimit = 3
-        var nextTasks: [Task] = []; let nextTasksLimit = 2
-        var latestTasks: [Task] = []; let latestTasksLimit = 1
-        let locationManager = LocationManager()
-        
+    
+    private(set) var pinnedTasks: [Task] = []
+    private(set) public var lateTasks: [Task] = []; let lateTasksLimit = 3
+    private(set) public var localTasks: [Task] = []; let localTasksLimit = 3
+    private(set) public var nextTasks: [Task] = []; let nextTasksLimit = 2
+    private(set) public var recentTasks: [Task] = []; let recentTasksLimit = 1
+    
+    let locationManager = LocationManager()
+    
+    public var all: [Task] {
+        return pinnedTasks + lateTasks + localTasks + nextTasks + recentTasks
+    }
+    
+    public init(tasks: [Task]) {
         var toDo = tasks
             .filter { !$0.isCompleted && !$0.isPrivate }
         
@@ -39,6 +45,14 @@ public class Recommender {
             }
         }
         
+        lateTasks = Array(
+            toDo
+                .filter { $0.dueDate != nil }
+                .filter { $0.dueDate!.timeIntervalSinceNow < 0 }
+                .sorted { $1.isBefore($0) }
+                .prefix(lateTasksLimit)
+        )
+        
         nextTasks = Array(
             toDo
                 .filter { !$0.dates.isEmpty }
@@ -46,13 +60,11 @@ public class Recommender {
                 .prefix(nextTasksLimit)
         )
         
-        latestTasks = Array(
+        recentTasks = Array(
             toDo
                 .filter { return !nextTasks.contains($0) && $0.creationDate!.timeIntervalSinceNow > -129600 }
                 .sorted { $0.creationDate! > $1.creationDate! }
-                .prefix(latestTasksLimit)
+                .prefix(recentTasksLimit)
         )
-        
-        return latestTasks + nextTasks + localTasks
     }
 }

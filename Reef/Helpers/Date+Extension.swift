@@ -25,7 +25,8 @@ extension Date {
     var accessibilityDescription: String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale.current
-        dateFormatter.dateStyle = .full
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .medium
         let dateStr = dateFormatter.string(from: self)
         
         return dateStr

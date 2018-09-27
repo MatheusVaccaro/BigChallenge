@@ -17,20 +17,19 @@ class NewTaskView: UIView {
     weak var delegate: NewTaskViewDelegate?
     
     override var accessibilityLabel: String? {
-        get { return "accessibilityLabel" }
+        get { return Strings.Task.CreationScreen.VoiceOver.label }
         set { }
     }
     
     override var accessibilityHint: String? {
-        get { return "accessibilityHint" }
+        get { return Strings.Task.CreationScreen.VoiceOver.hint }
         set { }
     }
     
     override var accessibilityCustomActions: [UIAccessibilityCustomAction]? {
         get {
-            let detailsActionName = Strings.Task.CreationScreen.accessibilityShowDetailsAction
-            let doneActionName =
-                Strings.Task.CreationScreen.accessibilityDoneAction
+            let detailsActionName = Strings.Task.CreationScreen.VoiceOver.ShowDetailsAction
+            let doneActionName = Strings.Task.CreationScreen.VoiceOver.CreateTaskAction
             
             let detailsAction = UIAccessibilityCustomAction(name: detailsActionName,
                                                             target: self,

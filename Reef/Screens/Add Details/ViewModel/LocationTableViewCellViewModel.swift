@@ -10,14 +10,14 @@ import Foundation
 
 extension LocationInputViewModel: IconCellPresentable {
     var title: String {
-        return Strings.Details.LocationCell.title
+        return Strings.LocationInputView.Cell.title
     }
     
     var subtitle: String {
         if hasLocation {
             return placeName
         } else {
-            return Strings.Details.LocationCell.subtitle
+            return Strings.LocationInputView.Cell.subtitle
         }
     }
     
@@ -30,7 +30,7 @@ extension LocationInputViewModel: IconCellPresentable {
     }
     
     var voiceOverHint: String {
-        return Strings.Details.LocationCell.subtitle
+        return Strings.LocationInputView.Cell.subtitle
     }
     
     var voiceOverValue: String? {

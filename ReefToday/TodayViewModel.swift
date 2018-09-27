@@ -47,7 +47,7 @@ class TodayViewModel {
     
     func resetRecommendedTasks() {
         reef.fetchTasks() { tasks in
-            self.tasks = ReefKit.recommendedTasks(from: tasks)
+            self.tasks = Recommender(tasks: tasks).all
             self.delegate?.reloadedTasks()
         }
     }

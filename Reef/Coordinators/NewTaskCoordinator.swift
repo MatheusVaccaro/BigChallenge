@@ -58,12 +58,13 @@ class NewTaskCoordinator: NSObject, Coordinator {
         
         let tagCollectionViewModel =
             TagCollectionViewModel(model: tagModel, filtering: false, selectedTags: selectedTags)
-        let newTaskViewModel = NewTaskViewModel()
-        let taskDetailsViewModel = AddTaskDetailsViewModel()
+        let newTaskViewModel =
+            NewTaskViewModel(selectedTags: selectedTags)
+        let taskDetailsViewModel =
+            AddTaskDetailsViewModel(selectedTags: selectedTags)
         let creationFrameViewModel =
-            TaskCreationViewModel(taskModel: taskModel,
-                                  taskDetails: taskDetailsViewModel,
-                                  newTaskViewModel: newTaskViewModel)
+            TaskCreationViewModel(taskModel: taskModel, taskDetails: taskDetailsViewModel,
+                                  newTaskViewModel: newTaskViewModel, selectedTags: selectedTags)
         
         creationFrameViewModel.edit(task)
         

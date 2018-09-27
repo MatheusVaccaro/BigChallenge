@@ -22,7 +22,7 @@ class BigTagCollectionViewController: TagCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tagsLabel.text = Strings.Tag.CollectionScreen.title
+        tagsLabel.text = ""
         self.collectionViewHeightConstraint.constant =
             self.tagsCollectionView.collectionViewLayout.collectionViewContentSize.height
     }
