@@ -17,21 +17,37 @@ extension IconCellPresentable where Self: DateInputViewModelProtocol {
     
     var subtitle: String {
         
+        var subtitle = ""
+        
         if let lastObservedCalendarDate = try? calendarDate.value(), let calendarDate = lastObservedCalendarDate,
-           let lastObservedTimeOfDay = try? timeOfDay.value(), let timeOfDay = lastObservedTimeOfDay,
-    	   let date = Calendar.current.combine(calendarDate: calendarDate, andTimeOfDay: timeOfDay) {
+           let date = Calendar.current.date(from: calendarDate) {
             
             let dateFormatter = DateFormatter()
             dateFormatter.locale = Locale.current
             dateFormatter.dateStyle = .medium
-            dateFormatter.timeStyle = .short
-            let subtitle = dateFormatter.string(from: date)
-            
-            return subtitle
-            
-        } else {
-            return Strings.Details.TimeCell.subtitle
+            dateFormatter.timeStyle = .none
+            let calendarDateString = dateFormatter.string(from: date)
+            subtitle += calendarDateString
         }
+        
+        if let lastObservedTimeOfDay = try? timeOfDay.value(), let timeOfDay = lastObservedTimeOfDay,
+           let date = Calendar.current.date(from: timeOfDay) {
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale.current
+            dateFormatter.dateStyle = .none
+            dateFormatter.timeStyle = .short
+            let timeOfDayString = dateFormatter.string(from: date)
+            subtitle += " " + timeOfDayString
+        }
+        
+        subtitle = subtitle.trimmingCharacters(in: CharacterSet(charactersIn: " "))
+        
+        if subtitle.isEmpty {
+            subtitle = Strings.Details.TimeCell.subtitle
+        }
+        
+        return subtitle
     }
     
     var imageName: String {
