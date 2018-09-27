@@ -19,8 +19,9 @@ extension IconCellPresentable where Self: DateInputViewModelProtocol {
         
         var subtitle = ""
         
-        if let lastObservedCalendarDate = try? calendarDate.value(), let calendarDate = lastObservedCalendarDate,
-           let date = Calendar.current.date(from: calendarDate) {
+        if let lastObservedCalendarDate = try? calendarDate.value(),
+            let calendarDate = lastObservedCalendarDate,
+            let date = Calendar.current.date(from: calendarDate) {
             
             let dateFormatter = DateFormatter()
             dateFormatter.locale = Locale.current

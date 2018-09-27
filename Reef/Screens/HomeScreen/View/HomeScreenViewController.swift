@@ -35,6 +35,7 @@ class HomeScreenViewController: UIViewController {
     }()
     
     // MARK: - IBOutlets
+    @IBOutlet weak var newTaskLabel: UILabel!
     @IBOutlet weak var whiteBackgroundView: UIView!
     @IBOutlet weak var taskListContainerView: UIView!
     @IBOutlet weak var tagContainerView: UIView!
@@ -64,6 +65,7 @@ class HomeScreenViewController: UIViewController {
         
         configureEmptyState()
         observeSelectedTags()
+        newTaskLabel.text = Strings.Task.CreationScreen.taskTitlePlaceholder
         userActivity = viewModel.userActivity
         
         configurePullDownView()
@@ -72,6 +74,9 @@ class HomeScreenViewController: UIViewController {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        newTaskLabel.font = UIFont.font(sized: 13,
+                                        weight: .medium,
+                                        with: .body)
         configureEmptyState()
     }
     

@@ -204,14 +204,25 @@ protocol DateInputViewModelDelegate: class {
 }
 
 extension DateInputViewModel: CalendarViewAccessibilityProvider {
-    func currentDate() -> String? {
-        let current = try! Calendar.current.date(from: calendarDate.value())!
+    func accessibilityValue() -> String? {
         
-        return current.accessibilityDescription
+        if let lastObservedCalendarDate = try? calendarDate.value(),
+            let calendarDate = lastObservedCalendarDate,
+            let date = Calendar.current.date(from: calendarDate) {
+            
+            return date.accessibilityDescription
+        } else {
+            return ""
+        }
     }
     
     func scrollDate(forwards: Bool) {
-        let current = try! Calendar.current.date(from: calendarDate.value())!
+        if try! calendarDate.value() == nil {
+            selectCalendarDate(Calendar.current.dateComponents([.year, .month, .day], from: Date()))
+        }
+        
+        let current = Calendar.current.date(from: try! calendarDate.value()!)!
+            
         var next = DateComponents()
         
         if forwards {
@@ -228,7 +239,12 @@ extension DateInputViewModel: CalendarViewAccessibilityProvider {
     }
     
     func scrollMonth(forwards: Bool) {
-        let current = try! Calendar.current.date(from: calendarDate.value())!
+        if try! calendarDate.value() == nil {
+            selectCalendarDate(Calendar.current.dateComponents([.year, .month, .day], from: Date()))
+        }
+        
+        let current = Calendar.current.date(from: try! calendarDate.value()!)!
+        
         var next = DateComponents()
         
         if forwards {

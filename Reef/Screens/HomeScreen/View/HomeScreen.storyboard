@@ -148,6 +148,7 @@
                         <outlet property="emptyStateSubtitleLabel" destination="hi9-8n-jJk" id="C4P-wJ-g8q"/>
                         <outlet property="emptyStateTitleLabel" destination="qLG-Z8-bgi" id="jzK-Sb-ooc"/>
                         <outlet property="importFromRemindersButton" destination="vxw-1p-TGH" id="0fE-Yn-UcO"/>
+                        <outlet property="newTaskLabel" destination="fuF-D9-9c3" id="5KU-RM-8Yd"/>
                         <outlet property="newTaskView" destination="Cg0-Uy-cLM" id="h5V-cB-yTE"/>
                         <outlet property="pullDownView" destination="Yry-e8-Psj" id="PpT-Vl-IDf"/>
                         <outlet property="pullDownViewTopConstraint" destination="pde-MR-fK8" id="AS6-iO-QHx"/>
