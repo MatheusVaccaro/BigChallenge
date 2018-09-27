@@ -46,6 +46,11 @@ class HomeScreenCoordinator: Coordinator {
         //        self.remindersImporter.importIfGranted() TODO: fix
         
         self.taskModel.delegate = self
+        print("+++ INIT HomeScreenCoordinator")
+    }
+    
+    deinit {
+        print("--- DEINIT HomeScreenCoordinator")
     }
 
     func start() {

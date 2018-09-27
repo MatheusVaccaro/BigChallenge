@@ -28,12 +28,7 @@ class TaskCreationFrameDismissAnimationController: NSObject, UIViewControllerAni
             let taskCreationFrameViewController = fromViewController.children.first as? TaskCreationFrameViewController
             else { return }
         
-        let containerView = transitionContext.containerView
         let duration = transitionDuration(using: transitionContext)
-        
-        // REVIEW ALL ANIMAION LOGIC
-         
-        containerView.addSubview(toViewController.view)
         
         let animator = UIViewPropertyAnimator(duration: duration, curve: .linear)
         animator.addAnimations {
