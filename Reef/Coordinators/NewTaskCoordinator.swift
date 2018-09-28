@@ -118,7 +118,8 @@ class NewTaskCoordinator: NSObject, Coordinator {
         modalPresenter.navigationBar.isTranslucent = false
         modalPresenter.modalPresentationStyle = .overCurrentContext
         modalPresenter.navigationBar.largeTitleTextAttributes =
-            [ NSAttributedString.Key.font : UIFont.font(sized: 34, weight: .bold, with: .largeTitle, fontName: .barlow) ]
+            [ NSAttributedString.Key.font : UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow),
+              NSAttributedString.Key.foregroundColor : UIColor.largeTitleColor ]
     }
 }
 
