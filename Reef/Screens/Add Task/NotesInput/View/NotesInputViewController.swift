@@ -22,8 +22,8 @@ class NotesInputViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureBackground()
-        configureNavigationBarTitle()
+        view.backgroundColor = UIColor.backgroundColor
+        configureNavigationBar()
         configureNotesInputTextView()
         
         print("+++ INIT NotesInputViewController")
@@ -34,22 +34,17 @@ class NotesInputViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         viewModel.notes = notesInputTextView.text
+        navigationController?.navigationBar.barTintColor = UIColor.white
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.barTintColor = UIColor.backgroundColor
     }
     
     // MARK: - Functions
-    private func configureBackground() {
-        let layer = CAGradientLayer()
-        
-        layer.frame = view.frame
-        layer.startPoint = CGPoint(x: 0, y: 0.5)
-        layer.endPoint = CGPoint(x: 1, y: 0.5)
-        layer.colors = UIColor.backGroundGradient
-        layer.zPosition = -1
-        
-        view.layer.addSublayer(layer)
-    }
-    
     private func configureNotesInputTextView() {
         notesInputTextView.font = UIFont.font(sized: 22, weight: .semibold, with: .body, fontName: .barlow)
         notesInputTextView.placeholder = viewModel.textViewPlaceholder
@@ -57,8 +52,9 @@ class NotesInputViewController: UIViewController {
         notesInputTextView.text = viewModel.notes
     }
     
-    private func configureNavigationBarTitle() {
+    private func configureNavigationBar() {
         title = viewModel.title
+        navigationController?.navigationBar.barTintColor = UIColor.backgroundColor
     }
 }
 
