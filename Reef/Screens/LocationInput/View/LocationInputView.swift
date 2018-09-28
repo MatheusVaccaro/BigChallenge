@@ -70,6 +70,7 @@ class LocationInputView: UIViewController {
         let arrivingString = viewModel.arrivingString
         let leavingString = viewModel.leavingString
         
+        segmentedControl.tintColor = UIColor.largeTitleColor
         segmentedControl.setTitle(arrivingString, forSegmentAt: 0)
         segmentedControl.setTitle(leavingString, forSegmentAt: 1)
     }
