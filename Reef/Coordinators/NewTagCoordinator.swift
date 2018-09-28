@@ -118,7 +118,9 @@ extension NewTagCoordinator: TagCreationDelegate {
             inputView = dateInput
         }
         
-        modalPresenter.pushViewController(inputView!, animated: true)
+        if let inputView = inputView {
+            modalPresenter.pushViewController(inputView, animated: true)
+        }
     }
 }
 

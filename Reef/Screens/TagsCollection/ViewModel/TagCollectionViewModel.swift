@@ -49,9 +49,7 @@ class TagCollectionViewModel {
     
     required init(model: TagModel, filtering: Bool, selectedTags: [Tag]) {
         self.model = model
-        self.tags = model.tags.map {
-            if $0.title! == "Privado" { $0.requiresAuthentication = true; return $0 } else { return $0 }
-        } //TODO: remove
+        self.tags = model.tags
         self.selectedTags = selectedTags
         self.filteredTags = self.tags
         self.filtering = filtering

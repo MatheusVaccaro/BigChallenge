@@ -93,7 +93,6 @@ class TagCollectionViewController: UIViewController {
     
     func presentActionSheet(for tag: Tag) {
         guard !viewModel.presentingActionSheet else { return }
-        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         viewModel.presentingActionSheet = true
         let actionsheet = UIAlertController(title: tag.title!,
                                             message: nil,
@@ -150,8 +149,18 @@ class TagCollectionViewController: UIViewController {
         let tagViewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
         
         tagViewModel.longPressedTag.subscribe { event in
-            self.presentActionSheet(for: event.element!)
-            Answers.logCustomEvent(withName: "longpressed tag")
+            if tag.requiresAuthentication {
+                Authentication.authenticate { granted in
+                    if granted {
+                        self.presentActionSheet(for: event.element!)
+                        Answers.logCustomEvent(withName: "longpressed tag")
+                    }
+                }
+            } else {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                self.presentActionSheet(for: event.element!)
+                Answers.logCustomEvent(withName: "longpressed tag")
+            }
         }.disposed(by: self.disposeBag)
         
         let indexPath = IndexPath(row: row, section: 0)

@@ -14,7 +14,7 @@ class Authentication {
     static func authenticate(completion: @escaping ((Bool) -> Void)) {
         let context = LAContext()
         var error: NSError?
-        let reason = Strings.Tag.privateTagUnlockReason
+        let reason = Strings.Tag.Private.unlockReason
         
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,

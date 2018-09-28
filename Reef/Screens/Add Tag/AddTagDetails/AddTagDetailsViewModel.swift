@@ -22,6 +22,8 @@ protocol AddTagDetailsViewModelDelegate: class {
                             didSelectFrequency frequency: NotificationOptions.Frequency)
     
     func shouldPresent(viewModel: IconCellPresentable)
+    
+    func privateTagViewModel(_ privateTagViewModel: PrivateTagViewModel, didActivate: Bool)
 }
 
 class AddTagDetailsViewModel {
@@ -30,27 +32,31 @@ class AddTagDetailsViewModel {
     
     let locationInputViewModel: LocationInputViewModel
     let dateInputViewModel: DateInputViewModel
+    let privateTagViewModel: PrivateTagViewModel
     
     private let _numberOfSections = 1
-    private let _numberOfRows = 2
+    private let _numberOfRows = 3
     
     private var cells: [IconCellPresentable] {
-        return [ locationInputViewModel, dateInputViewModel ]
+        return [ locationInputViewModel, dateInputViewModel, privateTagViewModel ]
     }
     
     init() {
-        //TODO: Private
         locationInputViewModel = LocationInputViewModel()
         dateInputViewModel = DateInputViewModel()
+        privateTagViewModel = PrivateTagViewModel()
+        
         
         locationInputViewModel.delegate = self
         dateInputViewModel.delegate = self
+        privateTagViewModel.delegate = self
     }
     
     func edit(_ tag: Tag?) {
         guard let tag = tag else { return }
         locationInputViewModel.edit(tag)
         dateInputViewModel.edit(tag)
+        privateTagViewModel.edit(tag)
     }
 }
 
@@ -88,6 +94,12 @@ extension AddTagDetailsViewModel: DateInputViewModelDelegate {
     }
 }
 
+extension AddTagDetailsViewModel: PrivateTagViewModelDelegate {
+    func privateTagViewModel(_ privateTagViewModel: PrivateTagViewModel, didActivate: Bool) {
+        delegate?.privateTagViewModel(privateTagViewModel, didActivate: didActivate)
+    }
+}
+
 private extension DateInputViewModel {
     func edit(_ tag: Tag) {
         guard let dueDate = tag.dueDate else { return }
@@ -105,5 +117,11 @@ private extension LocationInputViewModel {
         location = tag.location
         isArriving = tag.isArrivingLocation ?? false
         placeName = tag.locationName!
+    }
+}
+
+private extension PrivateTagViewModel {
+    func edit(_ tag: Tag) {
+        isSwitchOn = tag.requiresAuthentication
     }
 }

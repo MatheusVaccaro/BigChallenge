@@ -74,11 +74,8 @@
 /* default place when reading location name in voiceOver */
 "defaultPlaceName" = "Your location";
 
-/* placeholder title for a new task description */
-"newTaskDescriptionPlaceholder" = "Notes";
-
 /* placeholder title for a new task */
-"newTaskTitle" = "Your Task";
+"newTaskTitle" = "New Task";
 
 /* subtitle of empty state on taskList */
 "emptyStateSubtitle" = "Swipe down to add your first task";
