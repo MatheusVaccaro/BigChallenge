@@ -48,5 +48,5 @@ extension UIColor {
 
 extension CGColor {
     static let shadowColor: CGColor =
-        UIColor(red: 132/255, green: 153/255, blue: 159/255, alpha: 1).cgColor
+        UIColor(red: 116/255, green: 133/255, blue: 138/255, alpha: 0.3).cgColor
 }
