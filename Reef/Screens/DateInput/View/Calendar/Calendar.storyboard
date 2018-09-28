@@ -67,7 +67,7 @@
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="S2d-H5-DNd" customClass="JTAppleCalendarView" customModule="JTAppleCalendar">
                                 <rect key="frame" x="0.0" y="36.5" width="375" height="263.5"/>
-                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HfV-bC-rCf">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="294" height="50"/>
@@ -168,7 +168,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="S2d-H5-DNd" firstAttribute="trailing" secondItem="Clb-B3-sqR" secondAttribute="trailing" id="0RP-LB-9ex"/>
                             <constraint firstItem="icc-pS-dcE" firstAttribute="leading" secondItem="Clb-B3-sqR" secondAttribute="leading" id="Kxk-oT-zPG"/>

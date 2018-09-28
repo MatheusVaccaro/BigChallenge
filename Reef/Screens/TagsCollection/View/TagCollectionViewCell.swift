@@ -74,7 +74,8 @@ class TagCollectionViewCell: UICollectionViewCell {
         layer.shadowOffset = CGSize(width: 0, height: 5)
         layer.masksToBounds = false
         layer.shadowColor = CGColor.shadowColor
-        layer.shadowOpacity = 0.2
+        layer.shadowOpacity = 1
+        layer.shadowRadius = 5
         
         tagUILabel.textColor = UIColor.white
         

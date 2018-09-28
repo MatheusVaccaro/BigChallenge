@@ -25,5 +25,4 @@ class NotesInputViewModel {
     var textViewPlaceholder: String {
         return Strings.NotesInputView.textViewPlaceholder
     }
-    
 }
