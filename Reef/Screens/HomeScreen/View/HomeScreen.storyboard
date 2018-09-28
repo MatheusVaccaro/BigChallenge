@@ -19,20 +19,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emptyState" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qdj-bK-Hkb">
-                                <rect key="frame" x="81.5" y="201" width="212" height="187"/>
+                                <rect key="frame" x="81.5" y="240.5" width="212" height="187"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="187" id="F72-MK-jpB"/>
                                     <constraint firstAttribute="width" secondItem="Qdj-bK-Hkb" secondAttribute="height" multiplier="187:165" id="uru-ZD-6xt"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lets get something Done" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qLG-Z8-bgi">
-                                <rect key="frame" x="8" y="400" width="359" height="20.5"/>
+                                <rect key="frame" x="8" y="439.5" width="359" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe down to add a new task" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hi9-8n-jJk">
-                                <rect key="frame" x="16" y="425.5" width="343" height="20.5"/>
+                                <rect key="frame" x="16" y="465" width="343" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -51,33 +51,39 @@
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cie-Gz-Vzx">
-                                <rect key="frame" x="8" y="175" width="359" height="492"/>
+                                <rect key="frame" x="8" y="168" width="359" height="499"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cg0-Uy-cLM" userLabel="addTaskView">
-                                <rect key="frame" x="8" y="-445" width="359" height="620"/>
+                                <rect key="frame" x="8" y="-452" width="359" height="620"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="620" id="mmK-4e-MAF"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yry-e8-Psj" userLabel="PullDownView">
-                                <rect key="frame" x="8" y="93" width="359" height="73"/>
+                                <rect key="frame" x="8" y="86" width="359" height="73"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rVB-LF-LaO">
-                                        <rect key="frame" x="121.5" y="38" width="116.5" height="23"/>
+                                        <rect key="frame" x="134" y="45" width="91.5" height="16"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pullDownArrow" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XCG-QJ-7v0">
                                                 <rect key="frame" x="0.0" y="0.0" width="17" height="23"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a new task" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuF-D9-9c3">
-                                                <rect key="frame" x="25" y="3.5" width="91.5" height="16"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="91.5" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                                 <color key="textColor" red="0.61568627450000002" green="0.6588235294" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="XCG-QJ-7v0"/>
+                                            </mask>
+                                        </variation>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -87,15 +93,15 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lah-lf-SBT" userLabel="whiteBackgroundView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="115"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUe-Ak-aYb">
-                                <rect key="frame" x="0.0" y="28" width="375" height="87"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="87" id="gJB-vw-5rX"/>
+                                    <constraint firstAttribute="height" constant="80" id="gJB-vw-5rX"/>
                                 </constraints>
                             </containerView>
                         </subviews>
@@ -134,12 +140,18 @@
                             <constraint firstItem="lah-lf-SBT" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" id="p0e-jG-Wqj"/>
                             <constraint firstItem="Yry-e8-Psj" firstAttribute="top" secondItem="lah-lf-SBT" secondAttribute="bottom" constant="-22" id="pde-MR-fK8"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="Fea-br-2cN" secondAttribute="trailing" constant="8" id="sWv-bs-slk"/>
-                            <constraint firstItem="Qdj-bK-Hkb" firstAttribute="centerY" secondItem="cie-Gz-Vzx" secondAttribute="centerY" multiplier="0.7" priority="750" id="wP2-1Q-T4J"/>
+                            <constraint firstItem="Qdj-bK-Hkb" firstAttribute="centerY" secondItem="cie-Gz-Vzx" secondAttribute="centerY" multiplier="0.8" priority="750" id="wP2-1Q-T4J"/>
                             <constraint firstItem="qLG-Z8-bgi" firstAttribute="centerX" secondItem="C6D-bh-Zj8" secondAttribute="centerX" id="yRu-Zp-dyC"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="cie-Gz-Vzx" secondAttribute="trailing" constant="8" id="yev-Sb-Zry"/>
                             <constraint firstItem="hi9-8n-jJk" firstAttribute="centerX" secondItem="C6D-bh-Zj8" secondAttribute="centerX" id="zrC-1P-1es"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QKa-yH-x6F"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Fea-br-2cN"/>
+                                <exclude reference="vxw-1p-TGH"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="addTaskViewTopConstraint" destination="mB8-Jc-8hI" id="54v-Di-QFt"/>
