@@ -89,7 +89,13 @@ extension AddDetailsViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension AddDetailsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.shouldPresentView(at: indexPath.row)
+        if let cell = tableView.cellForRow(at: indexPath) as? IconTableViewCell {
+            if cell.viewModel.isSwitchCell {
+                cell.switchToggled(cell.cellSwitch)
+            } else {
+                viewModel.shouldPresentView(at: indexPath.row)
+            }
+        }
     }
 }
 

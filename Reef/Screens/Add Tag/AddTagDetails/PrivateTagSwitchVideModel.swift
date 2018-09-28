@@ -19,7 +19,7 @@ class PrivateTagViewModel: IconCellPresentable {
     
     var title: String {
         get {
-            return "private tag"
+            return Strings.Tag.Private.Cell.title
         }
     }
     
@@ -40,7 +40,9 @@ class PrivateTagViewModel: IconCellPresentable {
     }
     
     var voiceOverValue: String? {
-        return "voiceOVerValue"
+        return isSwitchOn
+            ? Strings.General.on
+            : Strings.General.off
     }
     
     var isSwitchCell: Bool {
@@ -61,15 +63,10 @@ class PrivateTagViewModel: IconCellPresentable {
     func switchActivated(bool: Bool, completion: @escaping ((Bool) -> Void)) {
         Authentication.authenticate { granted in
             if granted {
-                self.isSwitchOn = true
-                self.delegate?.privateTagViewModel(self, didActivate: true)
-                completion(true)
-            } else {
-                self.isSwitchOn = false
-                self.delegate?.privateTagViewModel(self, didActivate: false)
-                completion(false)
+                self.isSwitchOn = !self.isSwitchOn
             }
-        }
-        
+            self.delegate?.privateTagViewModel(self, didActivate: self.isSwitchOn)
+            completion(self.isSwitchOn)
+            }
     }
 }

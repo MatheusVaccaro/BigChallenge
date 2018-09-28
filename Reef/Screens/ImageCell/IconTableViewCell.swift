@@ -65,7 +65,7 @@ class IconTableViewCell: UITableViewCell {
     }
     
     @IBAction func switchToggled(_ sender: UISwitch) {
-        viewModel.switchActivated(bool: sender.isOn) { granted in
+        viewModel.switchActivated(bool: !self.viewModel.isSwitchOn) { granted in
             DispatchQueue.main.sync {
                 self.cellSwitch.setOn(granted, animated: true)
             }
@@ -79,11 +79,11 @@ class IconTableViewCell: UITableViewCell {
     }
     
     // MARK: - Accessibility
-    
     private func configureAccessibility() {
         titleLabel.isAccessibilityElement = false
         subtitleLabel.isAccessibilityElement = false
         icon.isAccessibilityElement = false
+        cellSwitch.isAccessibilityElement = false
     }
     
     override var accessibilityValue: String? {
