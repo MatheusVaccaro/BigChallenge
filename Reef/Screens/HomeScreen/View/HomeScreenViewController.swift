@@ -165,6 +165,19 @@ class HomeScreenViewController: UIViewController {
         viewModel.delegate?.homeScreenViewModelWillImportFromReminders(viewModel)
     }
     
+    fileprivate func configureWhiteBackgroundView() {
+        whiteBackgroundView.layer.cornerRadius = 6.3
+        whiteBackgroundView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        whiteBackgroundView.tintColor = UIColor.white
+        
+        whiteBackgroundView.layer.shadowRadius = 6.3
+        whiteBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 10)
+        whiteBackgroundView.layer.masksToBounds = false
+        whiteBackgroundView.layer.shadowColor = CGColor.shadowColor
+        whiteBackgroundView.layer.shadowOpacity = 1
+        whiteBackgroundView.layer.shadowRadius = 10
+    }
+    
     fileprivate func configureEmptyState() {
         emptyStateTitleLabel.font = UIFont.font(sized: 18, weight: .bold, with: .title2)
         emptyStateSubtitleLabel.font = UIFont.font(sized: 14, weight: .light, with: .title3)
@@ -220,7 +233,8 @@ class HomeScreenViewController: UIViewController {
         pullDownView.layer.shadowOffset = CGSize(width: 0, height: 10)
         pullDownView.layer.masksToBounds = false
         pullDownView.layer.shadowColor = .shadowColor
-        pullDownView.layer.shadowOpacity = 0.2
+        pullDownView.layer.shadowOpacity = 1
+        pullDownView.layer.shadowRadius = 10
         
         pullDownView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(startAddTask)))
     }
