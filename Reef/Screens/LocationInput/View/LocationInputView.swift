@@ -24,8 +24,9 @@ class LocationInputView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = viewModel.title
+        view.backgroundColor = UIColor.backgroundColor
         
+        configureNavigationBar()
         setupSegmentedControl()
         setupLocationManager()
         setupSearchBar()
@@ -45,9 +46,24 @@ class LocationInputView: UIViewController {
         print("--- DEINIT LocationInputViewController")
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.barTintColor = UIColor.white
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.barTintColor = UIColor.backgroundColor
+    }
+    
     @IBAction func segmentedControlSelected(_ sender: Any) {
         viewModel.isArriving = segmentedControl.selectedSegmentIndex == 0
         mapView.arriving = viewModel.isArriving
+    }
+    
+    private func configureNavigationBar() {
+        title = viewModel.title
+        navigationController?.navigationBar.barTintColor = UIColor.backgroundColor
     }
     
     fileprivate func setupSegmentedControl() {
