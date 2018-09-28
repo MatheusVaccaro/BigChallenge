@@ -175,3 +175,18 @@
 
 /* No comment provided by engineer. */
 "show details action" = "Mostrar mais detalhes";
+
+/* meaning some switch is turned off */
+"off" = "Ativo";
+
+/* meaning some switch is turned on */
+"on" = "Inativo";
+
+/* No comment provided by engineer. */
+"private tag option cell subtitle" = "";
+
+/* No comment provided by engineer. */
+"private tag option cell title" = "";
+
+/* No comment provided by engineer. */
+"private tag option voice over hint" = "Dê dois toques para alternar a configuração";

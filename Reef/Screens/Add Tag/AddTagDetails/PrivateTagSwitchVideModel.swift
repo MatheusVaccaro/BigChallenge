@@ -25,7 +25,7 @@ class PrivateTagViewModel: IconCellPresentable {
     
     var subtitle: String {
         get {
-            return "subtitle"
+            return Strings.Tag.Private.Cell.subtitle
         }
     }
     
@@ -36,7 +36,7 @@ class PrivateTagViewModel: IconCellPresentable {
     }
     
     var voiceOverHint: String {
-        return "voiceOVerHint"
+        return Strings.Tag.Private.Cell.VoiceOver.hint
     }
     
     var voiceOverValue: String? {

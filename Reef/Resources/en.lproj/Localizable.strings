@@ -175,3 +175,18 @@
 
 /* No comment provided by engineer. */
 "show details action" = "edit task details";
+
+/* meaning some switch is turned off */
+"off" = "off";
+
+/* meaning some switch is turned on */
+"on" = "on";
+
+/* No comment provided by engineer. */
+"private tag option cell subtitle" = "";
+
+/* No comment provided by engineer. */
+"private tag option cell title" = "";
+
+/* No comment provided by engineer. */
+"private tag option voice over hint" = "Double tap to togle setting";
