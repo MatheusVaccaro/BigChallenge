@@ -68,7 +68,7 @@ struct Strings {
         
         struct Private {
             static let unlockReason =
-                NSLocalizedString("faceIDPermisson", comment: "prompt when requesting faceID to unlock private tag")
+                NSLocalizedString("touchIDPermisson", comment: "prompt when requesting touchID to unlock private tag")
             
             struct Cell {
                 static let title = NSLocalizedString("private tag option cell title", comment: "")

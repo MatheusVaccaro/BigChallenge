@@ -46,7 +46,6 @@ class NewTaskViewController: UIViewController {
         loadViewModel()
         doneButton.isHidden = true
         
-        
         userActivity = viewModel.userActivity
         userActivity?.becomeCurrent()
         
@@ -61,6 +60,14 @@ class NewTaskViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         view.endEditing(true)
         super.viewWillDisappear(animated)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        taskTitleTextView.font = UIFont.font(sized: 17, weight: .medium, with: .body)
+        taskTitleTextView.setNeedsLayout()
+        taskTitleTextView.layoutIfNeeded()
+        taskDetailsButton.setNeedsLayout()
+        taskDetailsButton.layoutIfNeeded()
     }
     
     // MARK: - IBActions
@@ -112,8 +119,6 @@ class NewTaskViewController: UIViewController {
     }
     
     private func configureTaskTitleTextView() {
-        taskTitleTextView.font = UIFont.font(sized: 17, weight: .medium, with: .body)
-        
         taskTitleTextView.placeholderColor = UIColor.lightGray.withAlphaComponent(0.5) //TODO set true color
         taskTitleTextView.placeholder = Strings.Task.CreationScreen.taskTitlePlaceholder
         

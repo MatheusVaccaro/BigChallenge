@@ -92,7 +92,7 @@ public class TaskListViewModel {
         }
         
         //TODO: filter isCompleted in model
-        let remainingTasks = model.tasks.filter { !$0.isCompleted && !flatTasks.contains($0) }
+        let remainingTasks = model.tasks.filter { !$0.isCompleted && !flatTasks.contains($0) && !$0.isPrivate }
         tasks.append((rows: remainingTasks, header: otherHeader))
         
         tasks = tasks

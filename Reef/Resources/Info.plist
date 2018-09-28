@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSFaceIDUsageDescription</key>
-	<string>faceIDPermission</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -21,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>7</string>
+	<string>8</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -42,6 +40,8 @@
 	<string>TODO</string>
 	<key>NSContactsUsageDescription</key>
 	<string>TODO</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>faceIDPermission</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>TODO</string>
 	<key>NSRemindersUsageDescription</key>

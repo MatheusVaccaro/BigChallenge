@@ -18,25 +18,19 @@ class PrivateTagViewModel: IconCellPresentable {
     weak var delegate: PrivateTagViewModelDelegate?
     
     var title: String {
-        get {
-            return Strings.Tag.Private.Cell.title
-        }
+        return Strings.Tag.Private.Cell.title
     }
     
     var subtitle: String {
-        get {
-            return "subtitle"
-        }
+        return Strings.Tag.Private.Cell.subtitle
     }
     
     var imageName: String {
-        get {
-            return "teteuzika"
-        }
+        return "lockIcon"
     }
     
     var voiceOverHint: String {
-        return "voiceOVerHint"
+        return Strings.Tag.Private.Cell.VoiceOver.hint
     }
     
     var voiceOverValue: String? {
