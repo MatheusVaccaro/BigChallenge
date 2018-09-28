@@ -29,12 +29,13 @@ class ColorCollectionViewCell: UICollectionViewCell {
         layer.cornerRadius = layer.frame.height/3.5
         layer.borderWidth = 1.5
         layer.borderColor = UIColor.white.cgColor
-        // TODO
+        // TODO: Should increase cell size so that the shadow have space in the view
 //        layer.shadowRadius = layer.frame.height/3.5
 //        layer.shadowOffset = CGSize(width: 0, height: 3)
 //        layer.masksToBounds = false
 //        layer.shadowColor = CGColor.shadowColor
-//        layer.shadowOpacity = 0.2
+//        layer.shadowOpacity = 1
+//        layer.shadowRadius = 4
         
         return layer
     }()
