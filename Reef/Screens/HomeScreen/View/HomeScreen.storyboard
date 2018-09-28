@@ -99,7 +99,7 @@
                                 </constraints>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="lah-lf-SBT" secondAttribute="trailing" id="0rK-tg-mpG"/>
                             <constraint firstItem="Fea-br-2cN" firstAttribute="centerX" secondItem="C6D-bh-Zj8" secondAttribute="centerX" id="3NN-37-izL"/>
