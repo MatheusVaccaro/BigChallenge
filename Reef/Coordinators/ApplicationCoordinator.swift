@@ -40,8 +40,8 @@ class ApplicationCoordinator: Coordinator {
         rootViewController.navigationBar.isTranslucent = true
         rootViewController.view.backgroundColor = .clear
         rootViewController.navigationBar.largeTitleTextAttributes =
-            [ NSAttributedString.Key.font : UIFont.font(sized: 34, weight: .bold, with: .largeTitle, fontName: .barlow),
-              NSAttributedString.Key.strokeColor : UIColor.largeTitleColor ]
+            [ NSAttributedString.Key.font : UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow),
+              NSAttributedString.Key.foregroundColor : UIColor.largeTitleColor ]
     }
     
     func refreshModel() { //TODO: find a better solution
