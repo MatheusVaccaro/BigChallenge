@@ -22,18 +22,6 @@ class HomeScreenViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
     
-    private lazy var gradientLayer: CAGradientLayer = {
-        let layer = CAGradientLayer()
-        
-        layer.frame = view.frame
-        layer.startPoint = CGPoint(x: 0, y: 0.5)
-        layer.endPoint = CGPoint(x: 1, y: 0.5)
-        layer.colors = UIColor.backGroundGradient
-        layer.zPosition = -1
-        
-        return layer
-    }()
-    
     // MARK: - IBOutlets
     @IBOutlet weak var newTaskLabel: UILabel!
     @IBOutlet weak var whiteBackgroundView: UIView!
@@ -50,19 +38,9 @@ class HomeScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = viewModel.bigTitleText
+        view.backgroundColor = UIColor.backgroundColor
         
-        whiteBackgroundView.layer.cornerRadius = 6.3
-        whiteBackgroundView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-        whiteBackgroundView.tintColor = UIColor.white
-        
-        whiteBackgroundView.layer.shadowRadius = 6.3
-        whiteBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 10)
-        whiteBackgroundView.layer.masksToBounds = false
-        whiteBackgroundView.layer.shadowColor = CGColor.shadowColor
-        whiteBackgroundView.layer.shadowOpacity = 0.2
-        
-        view.layer.addSublayer(gradientLayer)
-        
+        configureWhiteBackgroundView()
         configureEmptyState()
         observeSelectedTags()
         newTaskLabel.text = Strings.Task.CreationScreen.taskTitlePlaceholder
