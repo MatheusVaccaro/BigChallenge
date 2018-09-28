@@ -157,7 +157,6 @@ extension TaskCreationFrameViewController: StoryboardInstantiable {
     }
 }
 
-
 extension TaskCreationFrameViewController {
     // MARK: Animations
     func addGestureRecognizersForAnimations() {
