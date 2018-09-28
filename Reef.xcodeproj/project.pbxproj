@@ -1024,7 +1024,8 @@
 		C21EAD0120B745B6005F0F85 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				16E8DD8C2110F5B9004F66D6 /* Fonts */,
+				2253179C20D147AD0065C9F9 /* Localizable.strings */,
+				16EC4CCD2125207600B8256D /* InfoPlist.strings */,
 				C28DC92020B61CB9007F881A /* Assets.xcassets */,
 				C28DC92220B61CB9007F881A /* LaunchScreen.storyboard */,
 				C28DC92520B61CB9007F881A /* Info.plist */,
@@ -1084,9 +1085,8 @@
 			isa = PBXGroup;
 			children = (
 				222BFF9520EDB83B001B6BBF /* Importers */,
+				16E8DD8C2110F5B9004F66D6 /* Fonts */,
 				C21EAD0A20B74F01005F0F85 /* StoryboardInstantiable.swift */,
-				2253179C20D147AD0065C9F9 /* Localizable.strings */,
-				16EC4CCD2125207600B8256D /* InfoPlist.strings */,
 				22456D2820DC3BB000168894 /* Date+Extension.swift */,
 				29BA68A52120E147009B4AB9 /* Calendar+Extension.swift */,
 				22F23E9F212E452E0064EE05 /* Colors.swift */,
