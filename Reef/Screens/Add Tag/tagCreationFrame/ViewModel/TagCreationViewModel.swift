@@ -81,6 +81,10 @@ extension TagCreationViewModel: AddTagColorsViewModelDelegate {
 }
 
 extension TagCreationViewModel: AddTagDetailsViewModelDelegate {
+    func privateTagViewModel(_ privateTagViewModel: PrivateTagViewModel, didActivate: Bool) {
+        attributes[.requiresAuthentication] = didActivate
+    }
+    
     func shouldPresent(viewModel: IconCellPresentable) {
         delegate?.shouldPresent(viewModel: viewModel)
     }
@@ -102,6 +106,5 @@ extension TagCreationViewModel: AddTagDetailsViewModelDelegate {
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
                             didSelectFrequency frequency: NotificationOptions.Frequency) {
         
-//        attributes[.] TODO
     }
 }

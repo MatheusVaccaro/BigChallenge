@@ -17,6 +17,7 @@ class IconTableViewCell: UITableViewCell {
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var imageHeight: NSLayoutConstraint!
     @IBOutlet weak var arrowImage: UIImageView!
+    @IBOutlet weak var cellSwitch: UISwitch!
     
     var titleFontSize: CGFloat = 18 {
         didSet {
@@ -40,6 +41,12 @@ class IconTableViewCell: UITableViewCell {
             titleLabel.text = viewModel.title
             subtitleLabel.text = viewModel.subtitle
             icon.image = UIImage(named: viewModel.imageName)
+            if viewModel.isSwitchCell {
+                arrowImage.isHidden = true
+                cellSwitch.setOn(viewModel.isSwitchOn, animated: false)
+            } else {
+                cellSwitch.isHidden = true
+            }
         }
     }
     
@@ -55,6 +62,14 @@ class IconTableViewCell: UITableViewCell {
         titleLabel.textContainer.lineFragmentPadding = 0
         
         configureAccessibility()
+    }
+    
+    @IBAction func switchToggled(_ sender: UISwitch) {
+        viewModel.switchActivated(bool: sender.isOn) { granted in
+            DispatchQueue.main.sync {
+                self.cellSwitch.setOn(granted, animated: true)
+            }
+        }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

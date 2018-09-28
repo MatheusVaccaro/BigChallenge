@@ -34,6 +34,7 @@ public enum TagAttributes {
     case location
     case isArrivingLocation
     case locationName
+    case requiresAuthentication
 }
 
 class TaskCRUD {
@@ -182,7 +183,9 @@ public class TagCRUD {
         let id = attributes[.id] as? UUID ?? UUID()
         let tasks = attributes[.tasks] as? [Task] ?? []
         let arriving = attributes[.isArrivingLocation] as? Bool ?? false
+        let requiresAuthentication = attributes[.requiresAuthentication] as? Bool ?? false
         
+        tag.requiresAuthentication = requiresAuthentication
         tag.colorIndex = colorIndex
         tag.id = id
         tag.title = title
@@ -222,6 +225,9 @@ public class TagCRUD {
         }
         if let arriving = attributes[.isArrivingLocation] as? Bool {
             tag.isArrivingLocation = arriving
+        }
+        if let requiresAuthentication = attributes[.requiresAuthentication] as? Bool {
+            tag.requiresAuthentication = requiresAuthentication
         }
         if let region = attributes[.location] as? CLCircularRegion {
             let regionData = NSKeyedArchiver.archivedData(withRootObject: region)
