@@ -41,9 +41,10 @@ class DateInputViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = viewModel.title
         currentSelector = BehaviorSubject<DateSelector>(value: .date)
+        view.backgroundColor = UIColor.backgroundColor
         
+        configureNavigationBar()
         configureCalendarDateLabels()
         configurePrepositionLabel()
         loadSelectedTimeOfDayLabel()
@@ -61,14 +62,25 @@ class DateInputViewController: UIViewController {
     }
     #endif
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.barTintColor = UIColor.white
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.barTintColor = UIColor.backgroundColor
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
         view.setNeedsLayout()
+    }
+    
+    private func configureNavigationBar() {
+        title = viewModel.title
+        navigationController?.navigationBar.barTintColor = UIColor.backgroundColor
     }
     
     private func configureCalendarDateLabels() {
