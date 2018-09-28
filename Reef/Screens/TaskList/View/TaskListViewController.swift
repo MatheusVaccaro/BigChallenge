@@ -75,8 +75,7 @@ public class TaskListViewController: UIViewController {
     }
     
     public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        tableView.beginUpdates()
-        tableView.endUpdates()
+        tableView.reloadData()
     }
 }
 

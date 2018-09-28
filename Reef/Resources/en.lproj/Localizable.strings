@@ -78,7 +78,7 @@
 "newTaskTitle" = "New Task";
 
 /* subtitle of empty state on taskList */
-"emptyStateSubtitle" = "Swipe down to add your first task";
+"emptyStateSubtitle" = "Start adding some tasks";
 
 /* title of empty state on taskList */
 "emptyStateTitle" = "Let’s get something DONE!";
@@ -111,7 +111,7 @@
 "importFromReminders" = "Import existing reminders";
 
 /* prompt when requesting faceID to unlock private tag */
-"faceIDPermisson" = "We'll use faceID to easily unlock your private tags";
+"touchIDPermisson" = "Unlock private tag";
 
 /* No comment provided by engineer. */
 "add tag accessibility hint" = "Double tap to add new tag";
@@ -183,10 +183,10 @@
 "on" = "on";
 
 /* No comment provided by engineer. */
-"private tag option cell subtitle" = "";
+"private tag option cell subtitle" = "Hide tasks so only you can see then";
 
 /* No comment provided by engineer. */
-"private tag option cell title" = "";
+"private tag option cell title" = "Private";
 
 /* No comment provided by engineer. */
 "private tag option voice over hint" = "Double tap to togle setting";

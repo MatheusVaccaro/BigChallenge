@@ -78,7 +78,7 @@
 "newTaskTitle" = "Nova tarefa";
 
 /* subtitle of empty state on taskList */
-"emptyStateSubtitle" = "Deslize para baixo para adicionar sua primeira tarefa";
+"emptyStateSubtitle" = "Comece adicionando novas tarefas";
 
 /* title of empty state on taskList */
 "emptyStateTitle" = "Parece vazio por aqui!";
@@ -111,7 +111,7 @@
 "importFromReminders" = "Importe seus lembretes";
 
 /* prompt when requesting faceID to unlock private tag */
-"faceIDPermisson" = "Desbloquear etiqueta privada";
+"touchIDPermisson" = "Desbloquear etiqueta privada";
 
 /* No comment provided by engineer. */
 "add tag accessibility hint" = "Dê dois toques para editar";
@@ -183,10 +183,10 @@
 "on" = "Inativo";
 
 /* No comment provided by engineer. */
-"private tag option cell subtitle" = "";
+"private tag option cell subtitle" = "Esconda tarefas de outras pessoas";
 
 /* No comment provided by engineer. */
-"private tag option cell title" = "";
+"private tag option cell title" = "Privado";
 
 /* No comment provided by engineer. */
 "private tag option voice over hint" = "Dê dois toques para alternar a configuração";

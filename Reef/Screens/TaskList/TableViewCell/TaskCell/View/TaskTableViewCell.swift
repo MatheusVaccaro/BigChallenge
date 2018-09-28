@@ -80,6 +80,8 @@ extension TaskTableViewCell { // MARK: - Accessibility
     public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         taskTitleTextView.font = UIFont.font(sized: 19, weight: .medium, with: .body)
         tagsLabel.font = UIFont.font(sized: 14, weight: .regular, with: .footnote)
+        checkButton.setNeedsLayout()
+        checkButton.layoutIfNeeded()
     }
     
     public override var accessibilityLabel: String? {
