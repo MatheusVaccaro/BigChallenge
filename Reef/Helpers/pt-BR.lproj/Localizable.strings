@@ -74,9 +74,6 @@
 /* default place when reading location name in voiceOver */
 "defaultPlaceName" = "Sua licalização";
 
-/* placeholder title for a new task description */
-"newTaskDescriptionPlaceholder" = "Notas";
-
 /* placeholder title for a new task */
 "newTaskTitle" = "Nova tarefa";
 

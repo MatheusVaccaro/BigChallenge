@@ -113,7 +113,7 @@ class TaskCreationFrameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = Strings.Task.CreationScreen.taskDescriptionPlaceholder
+        title = Strings.Task.CreationScreen.taskTitlePlaceholder
         configureShadows(in: whiteBackgroundView)
         configureShadows(in: taskDetailView)
         configureShadows(in: taskTitleView)

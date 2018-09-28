@@ -32,8 +32,6 @@ struct Strings {
         struct CreationScreen {
             static let taskTitlePlaceholder =
                 NSLocalizedString("newTaskTitle", comment: "placeholder title for a new task")
-            static let taskDescriptionPlaceholder =
-                NSLocalizedString("newTaskDescriptionPlaceholder", comment: "placeholder title for a new task description")
             
             struct VoiceOver {
                 static let label = NSLocalizedString("create task voice over label", comment: "")
