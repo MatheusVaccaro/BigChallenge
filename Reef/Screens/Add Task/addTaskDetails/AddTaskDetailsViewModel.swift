@@ -46,6 +46,7 @@ class AddTaskDetailsViewModel {
     func edit(task: Task) {
         locationInputViewModel.edit(task)
         dateInputViewModel.edit(task)
+        notesInputViewModel.edit(task)
     }
     
     weak var delegate: AddTaskDetailsDelegate?
@@ -128,5 +129,12 @@ private extension DateInputViewModelProtocol {
         
         self.calendarDate.onNext(calendarDate)
         self.timeOfDay.onNext(timeOfDay)
+    }
+}
+
+private extension NotesInputViewModel {
+    func edit(_ task: Task) {
+        guard let taskNotes = task.notes else { return }
+        notes = taskNotes
     }
 }

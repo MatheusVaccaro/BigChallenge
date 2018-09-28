@@ -87,24 +87,23 @@ class TagCreationFrameViewController: UIViewController {
         let blurEffect = UIBlurEffect(style: .light)
         let view = UIVisualEffectView(effect: blurEffect)
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cancelAddTag))
-        view.addGestureRecognizer(tapGesture)
-        
         return view
     }()
     
     private func applyBlur() {
         //only apply the blur if the user hasn't disabled transparency effects
-        if !UIAccessibility.isReduceTransparencyEnabled {
-            blurView.frame = view.bounds
-            blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            
-            if !blurView.isDescendant(of: view) {
-                view.insertSubview(blurView, at: 0)
-            }
-        } else {
-            view.backgroundColor = .black
+        if UIAccessibility.isReduceTransparencyEnabled {
+            blurView.tintColor = .lightGray
         }
+
+        blurView.frame = view.bounds
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        if !blurView.isDescendant(of: view) {
+            view.insertSubview(blurView, at: 0)
+        }
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cancelAddTag))
+        blurView.addGestureRecognizer(tapGesture)
     }
     
     private func removeBlur() {
