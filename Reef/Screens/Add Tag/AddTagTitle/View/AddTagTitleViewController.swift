@@ -32,7 +32,8 @@ class AddTagTitleViewController: UIViewController {
         view.layer.shadowOffset = CGSize(width: 0, height: 5)
         view.layer.masksToBounds = false
         view.layer.shadowColor = CGColor.shadowColor
-        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOpacity = 1
+        view.layer.shadowRadius = 11
         
         tagTitleTextField.delegate = self
         tagTitleTextField.text = viewModel.tagTitle
