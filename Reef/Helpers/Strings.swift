@@ -66,8 +66,18 @@ struct Strings {
     
     struct Tag {
         
-        static let privateTagUnlockReason =
-            NSLocalizedString("faceIDPermisson", comment: "prompt when requesting faceID to unlock private tag")
+        struct Private {
+            static let unlockReason =
+                NSLocalizedString("faceIDPermisson", comment: "prompt when requesting faceID to unlock private tag")
+            
+            struct Cell {
+                static let title = NSLocalizedString("private tag option cell title", comment: "")
+                static let subtitle = NSLocalizedString("private tag option cell subtitle", comment: "")
+                struct VoiceOver {
+                    static let hint = NSLocalizedString("private tag option voice over hint", comment: "")
+                }
+            }
+        }
         
         struct CreationScreen {
             static let tagTitlePlaceholder =
@@ -191,5 +201,7 @@ struct Strings {
         static let editActionTitle = NSLocalizedString("updateActionTitle", comment: "edit button title")
         static let deleteActionTitle = NSLocalizedString("deleteActionTitle", comment: "delete button title")
         static let cancelActionTitle = NSLocalizedString("cancelActionTitle", comment: "cancel button title")
+        static let on = NSLocalizedString("on", comment: "meaning some switch is turned on")
+        static let off = NSLocalizedString("off", comment: "meaning some switch is turned off")
     }
 }
