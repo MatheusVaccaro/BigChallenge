@@ -16,10 +16,12 @@ class AddDetailsViewController: UIViewController {
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
-    var contentSize: CGFloat {
-        return tableViewHeight.constant
+    var contentHeight: CGFloat! {
+        guard tableView.contentSize.height != 0 else {
+            return tableView.estimatedRowHeight * CGFloat(viewModel.numberOfRows)
+        }
+        return tableView.contentSize.height
     }
     
     // MARK: - Lifecycle
@@ -30,10 +32,6 @@ class AddDetailsViewController: UIViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         tableView.reloadData()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        tableViewHeight.constant = tableView.contentSize.height
     }
     
     override func viewWillAppear(_ animated: Bool) {

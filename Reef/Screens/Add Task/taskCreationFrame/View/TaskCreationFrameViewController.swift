@@ -21,8 +21,8 @@ class TaskCreationFrameViewController: UIViewController {
         return taskTitleView.bounds.height
     }
     
-    var contentSize: CGFloat {
-        return taskDetailViewController!.contentSize + taskTitleView.bounds.height + 8
+    var contentHeight: CGFloat {
+        return taskDetailViewController.contentHeight + taskTitleView.bounds.height + 8
     }
     
     var tagCollectionViewController: TagCollectionViewController!
