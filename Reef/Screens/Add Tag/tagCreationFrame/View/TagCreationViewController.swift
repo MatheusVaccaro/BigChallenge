@@ -34,6 +34,13 @@ class TagCreationFrameViewController: UIViewController {
         addTagDetailsViewController.tableView.layer.cornerRadius = 6.3
         detailsTableHeightConstraint.constant =
             addTagDetailsViewController.contentHeight
+        print(detailsTableHeightConstraint.constant)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        detailsTableHeightConstraint.constant =
+            addTagDetailsViewController.contentHeight
+        print(detailsTableHeightConstraint.constant)
     }
     
     func present(_ addTagTitleViewController: AddTagTitleViewController,
