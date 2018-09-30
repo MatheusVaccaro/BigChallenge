@@ -55,6 +55,7 @@
                         <viewLayoutGuide key="safeArea" id="sdG-zM-EDT"/>
                     </view>
                     <connections>
+                        <outlet property="detailsTableHeightConstraint" destination="E7O-SG-K6y" id="hN7-30-Km0"/>
                         <outlet property="tagColorsView" destination="8B2-RY-FrU" id="Ujx-z2-gdE"/>
                         <outlet property="tagDetailsView" destination="iTz-em-9Wn" id="GFy-GI-6ee"/>
                         <outlet property="tagTitleView" destination="YRc-aJ-9JT" id="SuV-bF-AYl"/>

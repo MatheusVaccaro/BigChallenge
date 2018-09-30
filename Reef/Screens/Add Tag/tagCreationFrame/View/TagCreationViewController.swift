@@ -15,11 +15,12 @@ class TagCreationFrameViewController: UIViewController {
     @IBOutlet weak var tagColorsView: UIView!
     @IBOutlet weak var tagDetailsView: UIView!
     
+    @IBOutlet weak var detailsTableHeightConstraint: NSLayoutConstraint!
     var viewModel: TagCreationViewModel!
     
     var addTagTitleViewController: AddTagTitleViewController!
     var addTagColorsViewController: AddTagColorsViewController!
-    var addTagDetailsViewController: AddDetailsViewController?
+    var addTagDetailsViewController: AddDetailsViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +29,18 @@ class TagCreationFrameViewController: UIViewController {
         viewModel.delegate?.viewDidLoad()
         applyBlur()
         tagDetailsView.layer.cornerRadius = 6.3
-        addTagDetailsViewController?.view.layer.cornerRadius = 6.3
-        addTagDetailsViewController?.tableView.layer.cornerRadius = 6.3
+        
+        addTagDetailsViewController.view.layer.cornerRadius = 6.3
+        addTagDetailsViewController.tableView.layer.cornerRadius = 6.3
+        detailsTableHeightConstraint.constant =
+            addTagDetailsViewController.contentHeight
+        print(detailsTableHeightConstraint.constant)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        detailsTableHeightConstraint.constant =
+            addTagDetailsViewController.contentHeight
+        print(detailsTableHeightConstraint.constant)
     }
     
     func present(_ addTagTitleViewController: AddTagTitleViewController,
@@ -76,7 +87,6 @@ class TagCreationFrameViewController: UIViewController {
             addTagDetailsViewController.view.leftAnchor.constraint(equalTo: tagDetailsView.leftAnchor),
             addTagDetailsViewController.view.bottomAnchor.constraint(equalTo: tagDetailsView.bottomAnchor)
             ])
-
     }
     
     @objc func cancelAddTag() {

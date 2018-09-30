@@ -19,16 +19,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" axis="vertical" distribution="fillProportionally" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="vwT-xg-fCr">
-                        <rect key="frame" x="52" y="16" width="281" height="56.5"/>
+                        <rect key="frame" x="52" y="16" width="258" height="56.5"/>
                         <subviews>
                             <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" keyboardDismissMode="interactive" editable="NO" text="Title" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1w-aa-5F0">
-                                <rect key="frame" x="0.0" y="0.0" width="281" height="40"/>
+                                <rect key="frame" x="0.0" y="0.0" width="258" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" textContentType="name"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biZ-75-W1n">
-                                <rect key="frame" x="0.0" y="41" width="281" height="15.5"/>
+                                <rect key="frame" x="0.0" y="41" width="258" height="15.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -54,6 +54,9 @@
                     </imageView>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AHU-Kf-cju">
                         <rect key="frame" x="310" y="29" width="51" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="49" id="Lkx-D9-8Ei"/>
+                        </constraints>
                         <connections>
                             <action selector="switchToggled:" destination="lgp-ch-F7O" eventType="valueChanged" id="nH6-yh-ksD"/>
                         </connections>
@@ -63,8 +66,8 @@
                     <constraint firstAttribute="trailing" secondItem="qLR-R5-ohc" secondAttribute="trailing" constant="16" id="1LG-He-L3Y"/>
                     <constraint firstItem="vwT-xg-fCr" firstAttribute="centerY" secondItem="y4O-I7-yfu" secondAttribute="centerY" id="42b-8e-U2N"/>
                     <constraint firstItem="3QI-Uu-sy9" firstAttribute="centerY" secondItem="y4O-I7-yfu" secondAttribute="centerY" id="9hU-Cp-68B"/>
+                    <constraint firstItem="AHU-Kf-cju" firstAttribute="leading" secondItem="vwT-xg-fCr" secondAttribute="trailing" id="FVU-af-Xlu"/>
                     <constraint firstItem="qLR-R5-ohc" firstAttribute="centerY" secondItem="y4O-I7-yfu" secondAttribute="centerY" id="Qri-to-Yvj"/>
-                    <constraint firstItem="qLR-R5-ohc" firstAttribute="leading" secondItem="vwT-xg-fCr" secondAttribute="trailing" constant="16" id="SJa-vM-LSh"/>
                     <constraint firstAttribute="bottom" secondItem="vwT-xg-fCr" secondAttribute="bottom" constant="16" id="YDN-df-shT"/>
                     <constraint firstItem="3QI-Uu-sy9" firstAttribute="leading" secondItem="y4O-I7-yfu" secondAttribute="leading" constant="16" id="ZEm-Rm-YhD"/>
                     <constraint firstItem="AHU-Kf-cju" firstAttribute="trailing" secondItem="y4O-I7-yfu" secondAttribute="trailingMargin" id="jLG-KP-GiZ"/>
@@ -76,6 +79,7 @@
             <connections>
                 <outlet property="arrowImage" destination="qLR-R5-ohc" id="ECM-Uh-cT6"/>
                 <outlet property="cellSwitch" destination="AHU-Kf-cju" id="IeD-C7-B9b"/>
+                <outlet property="cellSwitchConstraint" destination="FVU-af-Xlu" id="C3D-kM-A44"/>
                 <outlet property="icon" destination="3QI-Uu-sy9" id="xY1-86-xWp"/>
                 <outlet property="imageHeight" destination="cOv-Ah-QPu" id="nhQ-8X-xqh"/>
                 <outlet property="subtitleLabel" destination="biZ-75-W1n" id="mOP-UN-VSi"/>

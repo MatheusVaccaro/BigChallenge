@@ -1196,10 +1196,10 @@
 		C29742C721123DFD00A1D213 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				2246B099215BD59200CAE7DA /* DetailsViewModelProtocol.swift */,
 				C29742D1211257A600A1D213 /* TimeTableViewCellViewModel.swift */,
 				C29742D3211257B600A1D213 /* LocationTableViewCellViewModel.swift */,
 				C26EC73821544D19000E9CB9 /* NotesTableViewCellViewModel.swift */,
-				2246B099215BD59200CAE7DA /* DetailsViewModelProtocol.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
