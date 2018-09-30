@@ -65,11 +65,29 @@ class TagCollectionViewModel {
     }
     
     func delete(tag: Tag) {
-        model.delete(object: tag)
+        if tag.requiresAuthentication {
+            Authentication.authenticate { granted in
+                if granted {
+                    self.model.delete(object: tag)
+                }
+                return
+            }
+        } else {
+            model.delete(object: tag)
+        }
     }
     
     func update(tag: Tag) {
-        delegate?.didClickUpdate(tag: tag)
+        if tag.requiresAuthentication {
+            Authentication.authenticate { granted in
+                if granted {
+                    self.delegate?.didClickUpdate(tag: tag)
+                }
+                return
+            }
+        } else {
+            delegate?.didClickUpdate(tag: tag)
+        }
     }
     
     func sortMostTasksIn(_ tags: [Tag]) -> [Tag] {
