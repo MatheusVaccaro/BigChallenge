@@ -123,9 +123,3 @@ extension NewTagCoordinator: TagCreationDelegate {
         }
     }
 }
-
-extension NewTagCoordinator {
-//    func viewDidLoad(in viewController: CreationFrameViewController) {
-//        viewController.setFrameContent(viewController: createTagViewController!)
-//    }
-}
