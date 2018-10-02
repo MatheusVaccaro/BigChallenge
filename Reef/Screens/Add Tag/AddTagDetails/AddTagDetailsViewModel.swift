@@ -43,7 +43,7 @@ class AddTagDetailsViewModel {
     
     init() {
         locationInputViewModel = LocationInputViewModel()
-        dateInputViewModel = DateInputViewModel()
+        dateInputViewModel = DateInputViewModel(calendarDate: nil, timeOfDay: nil)
         privateTagViewModel = PrivateTagViewModel()
         
         
