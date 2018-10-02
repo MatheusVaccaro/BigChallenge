@@ -9,7 +9,6 @@
 import Foundation
 import Crashlytics
 import UIKit
-import RxSwift
 import ReefKit
 
 protocol TaskListDelegate: class {
@@ -36,7 +35,6 @@ public class TaskListViewModel {
     }
     
     private let model: TaskModel
-    private let disposeBag = DisposeBag()
     
     required public init(model: TaskModel) {
         self.model = model
@@ -80,19 +78,20 @@ public class TaskListViewModel {
         self.relatedTags = relatedTags
         self.tasks = []
         
-        if selectedTags.isEmpty {
+        if selectedTags.isEmpty { //RECOMMENDED
             tasks.append((rows: model.recommender.recentTasks, header: recentHeader))
             tasks.append((rows: model.recommender.localTasks, header: locationHeader))
             tasks.append((rows: model.recommender.nextTasks, header: nextHeader))
             tasks.append((rows: model.recommender.lateTasks, header: lateHeader))
-        } else {
-            //TODO: filter isCompleted in model
+        } else { //TASKS FROM TAGS
             let mainTasks = model.tasks.filter { !$0.isCompleted && isMainTask($0) }
             tasks.append((rows: mainTasks, header: ""))
         }
         
-        //TODO: filter isCompleted in model
-        let remainingTasks = model.tasks.filter { !$0.isCompleted && !flatTasks.contains($0) && !$0.isPrivate }
+        //OTHER TASKS
+        let remainingTasks = model.tasks
+            .filter { !$0.isCompleted && $0.hasOneOf(selectedTags) && !flatTasks.contains($0) && !$0.isPrivate }
+        
         tasks.append((rows: remainingTasks, header: otherHeader))
         
         tasks = tasks
@@ -161,5 +160,16 @@ extension TaskListViewModel: TaskModelDelegate {
     
     func taskModel(_ taskModel: TaskModel, didUpdate tasks: [Task]) {
         filterTasks(with: selectedTags, relatedTags: relatedTags)
+    }
+}
+
+private extension Task {
+    func hasOneOf(_ tags: [Tag]) -> Bool {
+        guard !tags.isEmpty else { return true }
+        
+        for tag in tags {
+            if allTags.contains(tag) { return true }
+        }
+        return false
     }
 }
