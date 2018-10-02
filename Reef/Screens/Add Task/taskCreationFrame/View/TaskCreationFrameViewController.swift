@@ -130,7 +130,7 @@ class TaskCreationFrameViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-//        guard not maximum height supported (TODO)
+        super.viewDidLayoutSubviews()
         taskDetailsTableViewHeight.constant = taskDetailViewController.contentHeight
     }
     
