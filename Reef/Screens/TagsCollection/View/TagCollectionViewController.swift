@@ -58,7 +58,6 @@ class TagCollectionViewController: UIViewController {
         
         tagsCollectionView.rx.itemSelected.subscribe { event in
             let indexPath = event.element!
-            UISelectionFeedbackGenerator().selectionChanged()
             
             guard let item =
                 self.tagsCollectionView.cellForItem(at: indexPath) as? TagCollectionViewCell else { return }
@@ -67,26 +66,19 @@ class TagCollectionViewController: UIViewController {
                 self.viewModel.delegate?.didclickAddTag(); return
             }
             
-            if self.viewModel.shouldAskForAuthentication(with: tag) {
-                Authentication.authenticate { sucess in
-                    if sucess {
-                        self.viewModel.select(tag)
-                    } else {
-                        DispatchQueue.main.async {
-                            self.tagsCollectionView.deselectItem(at: indexPath, animated: true)
-                        }
-                    }
-                }
-            } else { self.viewModel.select(tag) }
+            if !self.viewModel.shouldAskForAuthentication(with: tag) {
+                UISelectionFeedbackGenerator().selectionChanged()
+            }
+            self.viewModel.select(tag)
             
         }.disposed(by: disposeBag)
         
         tagsCollectionView.rx.itemDeselected.subscribe { event in
-            UISelectionFeedbackGenerator().selectionChanged()
             guard let item =
                 self.tagsCollectionView.cellForItem(at: event.element!) as? TagCollectionViewCell,
                 let tag = item.viewModel?.tag else { return }
             
+            UISelectionFeedbackGenerator().selectionChanged()
             self.viewModel.select(tag)
         }.disposed(by: disposeBag)
     }

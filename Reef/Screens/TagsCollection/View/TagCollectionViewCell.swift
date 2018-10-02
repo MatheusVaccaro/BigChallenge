@@ -164,4 +164,18 @@ class TagCollectionViewCell: UICollectionViewCell {
         
         accessibilityTraits = UIAccessibilityTraits.button
     }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if !isSelected, let viewModel = viewModel, viewModel.tag.requiresAuthentication {
+            Authentication.authenticate { sucess in
+                if sucess {
+                    DispatchQueue.main.sync {
+                        super.touchesEnded(touches, with: event)
+                    }
+                }
+            }
+        } else {
+            super.touchesEnded(touches, with: event)
+        }
+    }
 }
