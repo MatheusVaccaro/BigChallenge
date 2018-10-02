@@ -9,7 +9,6 @@
 import Foundation
 import ReefKit
 import RxSwift
-import RxCocoa
 
 protocol TagCollectionViewModelDelegate: class {
     func didClickUpdate(tag: Tag)

@@ -9,7 +9,6 @@
 import Foundation
 import Crashlytics
 import UIKit
-import RxSwift
 import ReefKit
 
 protocol TaskListDelegate: class {
@@ -36,7 +35,6 @@ public class TaskListViewModel {
     }
     
     private let model: TaskModel
-    private let disposeBag = DisposeBag()
     
     required public init(model: TaskModel) {
         self.model = model
