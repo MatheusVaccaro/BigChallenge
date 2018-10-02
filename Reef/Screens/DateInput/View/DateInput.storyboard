@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,90 +15,92 @@
             <objects>
                 <viewController storyboardIdentifier="DateInputViewController" id="oKG-w4-TWy" customClass="DateInputViewController" customModule="Reef" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mM1-iF-aiS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="447"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qv3-lM-uBA" customClass="CalendarView" customModule="Reef" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="242" width="375" height="308"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="308" id="rBd-vH-428"/>
-                                </constraints>
+                            <containerView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="qv3-lM-uBA" customClass="CalendarView" customModule="Reef" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="182.5" width="320" height="264.5"/>
                             </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZf-fB-Mas">
-                                <rect key="frame" x="16" y="49.5" width="149.5" height="147"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <bool key="isElement" value="NO"/>
-                                </accessibility>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="149.5" id="rnc-8c-2xK"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="123"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SETEMBRO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odQ-yO-HSV">
-                                <rect key="frame" x="16" y="181.5" width="149.5" height="27.5"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <bool key="isElement" value="NO"/>
-                                </accessibility>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="at" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9wo-QD-7Qu">
-                                <rect key="frame" x="175.5" y="132.5" width="23.5" height="21"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <bool key="isElement" value="NO"/>
-                                </accessibility>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <datePicker contentMode="scaleToFill" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="YgX-4j-r0O">
-                                <rect key="frame" x="209" y="64" width="150" height="158"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="mdp-LF-uIC"/>
-                                </constraints>
-                                <date key="date" timeIntervalSinceReferenceDate="555793516.040452">
-                                    <!--2018-08-12 19:05:16 +0000-->
-                                </date>
-                            </datePicker>
+                            <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="250" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="qTu-pG-5Pd">
+                                <rect key="frame" x="16" y="0.0" width="288" height="174.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="cmY-wc-Ydr">
+                                        <rect key="frame" x="0.0" y="0.0" width="122" height="174.5"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="250" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="5lZ-2X-Jq4">
+                                                <rect key="frame" x="0.0" y="0.0" width="108.5" height="174.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="251" text="00" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZf-fB-Mas">
+                                                        <rect key="frame" x="0.0" y="0.0" width="108.5" height="147"/>
+                                                        <accessibility key="accessibilityConfiguration">
+                                                            <bool key="isElement" value="NO"/>
+                                                        </accessibility>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="123"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="250" text="SETEMBRO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odQ-yO-HSV">
+                                                        <rect key="frame" x="0.0" y="147" width="108.5" height="27.5"/>
+                                                        <accessibility key="accessibilityConfiguration">
+                                                            <bool key="isElement" value="NO"/>
+                                                        </accessibility>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="at" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9wo-QD-7Qu">
+                                                <rect key="frame" x="108.5" y="0.0" width="13.5" height="174.5"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <bool key="isElement" value="NO"/>
+                                                </accessibility>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <datePicker contentMode="scaleToFill" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="YgX-4j-r0O">
+                                        <rect key="frame" x="138" y="6.5" width="150" height="162"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="mdp-LF-uIC"/>
+                                        </constraints>
+                                        <date key="date" timeIntervalSinceReferenceDate="555793516.040452">
+                                            <!--2018-08-12 19:05:16 +0000-->
+                                        </date>
+                                    </datePicker>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="GZf-fB-Mas" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" constant="16" id="1aN-pr-kJQ"/>
-                            <constraint firstItem="9wo-QD-7Qu" firstAttribute="leading" secondItem="GZf-fB-Mas" secondAttribute="trailing" constant="10" id="2Dz-Ix-09R"/>
-                            <constraint firstItem="qv3-lM-uBA" firstAttribute="top" secondItem="YgX-4j-r0O" secondAttribute="bottom" constant="20" id="6gQ-w7-mlG"/>
-                            <constraint firstItem="9wo-QD-7Qu" firstAttribute="centerY" secondItem="YgX-4j-r0O" secondAttribute="centerY" id="8u1-vG-u4p"/>
-                            <constraint firstItem="Thx-CC-uDZ" firstAttribute="bottom" secondItem="qv3-lM-uBA" secondAttribute="bottom" constant="16" id="ITC-9q-vWr"/>
+                            <constraint firstItem="Thx-CC-uDZ" firstAttribute="bottom" secondItem="qv3-lM-uBA" secondAttribute="bottom" priority="250" id="ITC-9q-vWr"/>
+                            <constraint firstItem="qTu-pG-5Pd" firstAttribute="top" secondItem="Thx-CC-uDZ" secondAttribute="top" id="KEj-Y7-xXt"/>
                             <constraint firstItem="qv3-lM-uBA" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" id="LQa-NE-OIk"/>
-                            <constraint firstItem="odQ-yO-HSV" firstAttribute="width" secondItem="GZf-fB-Mas" secondAttribute="width" id="Mfs-Ot-JJ5"/>
-                            <constraint firstItem="odQ-yO-HSV" firstAttribute="centerX" secondItem="GZf-fB-Mas" secondAttribute="centerX" id="VC8-4u-5mR"/>
-                            <constraint firstItem="GZf-fB-Mas" firstAttribute="centerY" secondItem="9wo-QD-7Qu" secondAttribute="centerY" constant="-20" id="W3S-82-dkV"/>
                             <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="qv3-lM-uBA" secondAttribute="trailing" id="hxY-Ra-HUr"/>
-                            <constraint firstItem="YgX-4j-r0O" firstAttribute="leading" secondItem="9wo-QD-7Qu" secondAttribute="trailing" constant="10" id="lfK-3T-Bx0"/>
-                            <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="YgX-4j-r0O" secondAttribute="trailing" constant="16" id="mZ8-Ju-ZmO"/>
-                            <constraint firstItem="odQ-yO-HSV" firstAttribute="top" secondItem="GZf-fB-Mas" secondAttribute="bottom" constant="-15" id="xx6-na-imc"/>
-                            <constraint firstItem="YgX-4j-r0O" firstAttribute="top" secondItem="Thx-CC-uDZ" secondAttribute="top" constant="20" id="ze4-La-Alo"/>
+                            <constraint firstItem="qTu-pG-5Pd" firstAttribute="leading" secondItem="Thx-CC-uDZ" secondAttribute="leading" constant="16" id="n9b-ea-YMD"/>
+                            <constraint firstItem="Thx-CC-uDZ" firstAttribute="trailing" secondItem="qTu-pG-5Pd" secondAttribute="trailing" constant="16" id="p0K-j6-lSB"/>
+                            <constraint firstItem="qv3-lM-uBA" firstAttribute="top" secondItem="qTu-pG-5Pd" secondAttribute="bottom" priority="250" constant="8" id="xoD-5h-HlD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Thx-CC-uDZ"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Uuy-mX-CBb"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="600"/>
+                    <size key="freeformSize" width="320" height="447"/>
                     <connections>
                         <outlet property="calendarContainerView" destination="qv3-lM-uBA" id="4vH-bI-Pks"/>
                         <outlet property="prepositionLabel" destination="9wo-QD-7Qu" id="DJw-ah-SD0"/>
                         <outlet property="selectedCalendarDateDayLabel" destination="GZf-fB-Mas" id="8rw-bb-I6Y"/>
-                        <outlet property="selectedCalendarDateDayLabelWidth" destination="rnc-8c-2xK" id="KCn-nW-tF7"/>
                         <outlet property="selectedCalendarDateMonthLabel" destination="odQ-yO-HSV" id="Y2f-tA-AUQ"/>
                         <outlet property="timeOfDaySelector" destination="YgX-4j-r0O" id="gzN-GG-RpH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Zr-Nm-Ffb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="240.80000000000001" y="49.475262368815599"/>
+            <point key="canvasLocation" x="1236.5625" y="48.591549295774648"/>
         </scene>
     </scenes>
 </document>

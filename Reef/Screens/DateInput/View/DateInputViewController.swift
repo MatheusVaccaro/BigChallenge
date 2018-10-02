@@ -97,6 +97,7 @@ class DateInputViewController: UIViewController {
         
         // Day Label
         selectedCalendarDateDayLabel.textColor = UIColor.DateInput.defaultColor
+        selectedCalendarDateDayLabel.adjustsFontSizeToFitWidth = true
         let dayDateFormatter = DateFormatter()
         dayDateFormatter.locale = Locale.current
         dayDateFormatter.dateFormat = "dd"
@@ -107,6 +108,7 @@ class DateInputViewController: UIViewController {
         
         // Month Label
         selectedCalendarDateMonthLabel.textColor = UIColor.DateInput.defaultColor
+        selectedCalendarDateMonthLabel.adjustsFontSizeToFitWidth = true
         let monthDateFormatter = DateFormatter()
         monthDateFormatter.locale = Locale.current
         monthDateFormatter.dateFormat = "MMMM"
@@ -118,8 +120,7 @@ class DateInputViewController: UIViewController {
     
     private func configurePrepositionLabel() {
         prepositionLabel.textColor = UIColor.DateInput.defaultColor
-        prepositionLabel.text = NSLocalizedString("dateInputPreposition",
-                                                  comment: "Preposition that connects calendar date to time of day.")
+        prepositionLabel.text = Strings.DateInputView.preposition
     }
     
     private func loadDateSelectorView() {

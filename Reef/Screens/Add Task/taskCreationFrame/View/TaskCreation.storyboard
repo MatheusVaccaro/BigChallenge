@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsi-pl-HXe" userLabel="Task Container View">
-                                <rect key="frame" x="8" y="-119" width="359" height="293"/>
+                                <rect key="frame" x="8" y="-140" width="359" height="293"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGh-JP-lcF">
                                         <rect key="frame" x="0.0" y="220" width="359" height="73"/>
@@ -32,7 +32,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="359" height="210"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="210" id="htd-30-sjX"/>
+                                            <constraint firstAttribute="height" priority="250" constant="210" id="htd-30-sjX"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -70,9 +70,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="isU-bp-1Xt" firstAttribute="trailing" secondItem="dsi-pl-HXe" secondAttribute="trailing" constant="8" id="2bW-pu-SgF"/>
-                            <constraint firstItem="dsi-pl-HXe" firstAttribute="top" secondItem="L3c-CN-lzT" secondAttribute="bottom" constant="-242" id="MEt-SI-DDx"/>
+                            <constraint firstItem="dsi-pl-HXe" firstAttribute="bottom" secondItem="L3c-CN-lzT" secondAttribute="bottom" constant="30" id="MEt-SI-DDx"/>
                             <constraint firstItem="L3c-CN-lzT" firstAttribute="leading" secondItem="isU-bp-1Xt" secondAttribute="leading" id="PQW-5v-D4Y"/>
                             <constraint firstItem="L3c-CN-lzT" firstAttribute="top" secondItem="isU-bp-1Xt" secondAttribute="top" id="SVu-Fg-qn8"/>
+                            <constraint firstItem="isU-bp-1Xt" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="dsi-pl-HXe" secondAttribute="bottom" constant="16" id="YyA-UL-uMe"/>
                             <constraint firstItem="isU-bp-1Xt" firstAttribute="trailing" secondItem="L3c-CN-lzT" secondAttribute="trailing" id="eKp-y9-2u7"/>
                             <constraint firstItem="dsi-pl-HXe" firstAttribute="leading" secondItem="isU-bp-1Xt" secondAttribute="leading" constant="8" id="v40-mE-yNE"/>
                         </constraints>
@@ -88,6 +89,7 @@
                         <outlet property="taskContainerView" destination="dsi-pl-HXe" id="Nd5-zB-A61"/>
                         <outlet property="taskContainerViewTopConstraint" destination="MEt-SI-DDx" id="PXM-eq-euL"/>
                         <outlet property="taskDetailView" destination="oGT-TV-WCP" id="glE-Nc-56A"/>
+                        <outlet property="taskDetailsTableViewHeight" destination="htd-30-sjX" id="LfO-Tq-pp5"/>
                         <outlet property="taskTitleView" destination="WGh-JP-lcF" id="sIX-Al-NaH"/>
                         <outlet property="whiteBackgroundView" destination="L3c-CN-lzT" id="6r0-bg-nM3"/>
                     </connections>

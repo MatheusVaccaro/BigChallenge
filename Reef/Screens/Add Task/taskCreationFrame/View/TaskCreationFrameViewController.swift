@@ -10,6 +10,7 @@ import UIKit
 
 class TaskCreationFrameViewController: UIViewController {
     
+    @IBOutlet weak var taskDetailsTableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var taskContainerViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var whiteBackgroundView: UIView!
     @IBOutlet weak var tagCollectionView: UIView!
@@ -17,11 +18,11 @@ class TaskCreationFrameViewController: UIViewController {
     @IBOutlet weak var taskTitleView: UIView!
     @IBOutlet weak var taskContainerView: UIView!
     
-    var hiddenHeight: CGFloat {
+    var titleInputHeight: CGFloat {
         return taskTitleView.bounds.height
     }
     
-    var contentHeight: CGFloat {
+    var titleAndDetailsHeight: CGFloat {
         return taskDetailViewController.contentHeight + taskTitleView.bounds.height + 8
     }
     
@@ -126,6 +127,11 @@ class TaskCreationFrameViewController: UIViewController {
         
         viewModel.delegate?.viewDidLoad()
         taskDetailViewController.accessibilityElementsHidden = true
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        taskDetailsTableViewHeight.constant = taskDetailViewController.contentHeight
     }
     
     private func configureShadows(in view: UIView) {
@@ -237,9 +243,9 @@ extension TaskCreationFrameViewController {
         let animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) { [weak self] in
             switch state {
             case .collapsed:
-                self?.taskContainerViewTopConstraint.constant = -210
+                self?.taskContainerViewTopConstraint.constant = self!.titleInputHeight
             case .expanded:
-                self?.taskContainerViewTopConstraint.constant = 0
+                self?.taskContainerViewTopConstraint.constant = self!.titleAndDetailsHeight
                 
             }
             self?.view.layoutIfNeeded()

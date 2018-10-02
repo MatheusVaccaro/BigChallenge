@@ -35,7 +35,7 @@ class TaskCreationFrameDismissAnimationController: NSObject, UIViewControllerAni
             homeScreenViewController.pullDownViewTopConstraint.constant = -22
             homeScreenViewController.view.layoutIfNeeded()
             
-            taskCreationFrameViewController.taskContainerViewTopConstraint.constant = -242
+            taskCreationFrameViewController.taskContainerViewTopConstraint.constant = 30
             taskCreationFrameViewController.view.layoutIfNeeded()
         }
         animator.addCompletion { _ in

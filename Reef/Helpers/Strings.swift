@@ -108,6 +108,10 @@ struct Strings {
         static let selectedDateFormat = NSLocalizedString("selectedDateFormatStatusDateInput",
                                                           comment: "format for displaying the currently selected date")
         
+        static let preposition =
+            NSLocalizedString("dateInputPreposition",
+                              comment: "Preposition that connects calendar date to time of day.")
+        
         static let tomorrowShortcut = NSLocalizedString("tomorrowShortcutDateInput",
                                                         comment: "text for tomorrow shortcut button")
         

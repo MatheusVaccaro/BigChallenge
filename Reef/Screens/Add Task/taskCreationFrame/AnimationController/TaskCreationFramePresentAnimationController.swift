@@ -36,12 +36,15 @@ class TaskCreationFramePresentAnimationController: NSObject, UIViewControllerAni
         
         let animator = UIViewPropertyAnimator(duration: duration, curve: .linear)
         animator.addAnimations {
-            homeScreenViewController.pullDownViewTopConstraint.constant = 10
+            homeScreenViewController.pullDownViewTopConstraint.constant = 30
             homeScreenViewController.view.layoutIfNeeded()
             
-            taskCreationFrameViewController.taskContainerViewTopConstraint.constant = -210
-            taskCreationFrameViewController.view.layoutIfNeeded()
+            taskCreationFrameViewController.taskContainerViewTopConstraint.constant =
+                taskCreationFrameViewController.titleInputHeight
+            
+//            taskCreationFrameViewController.view.layoutIfNeeded()
         }
+        
         animator.addCompletion { _ in
             toViewController.view.isHidden = false
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
