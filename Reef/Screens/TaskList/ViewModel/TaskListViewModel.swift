@@ -8,7 +8,6 @@
 
 import Foundation
 import Crashlytics
-import UIKit
 import ReefKit
 
 protocol TaskListDelegate: class {
@@ -112,17 +111,26 @@ public class TaskListViewModel {
         delegate?.taskListViewModel(self, shouldEdit: task)
     }
     
-    func delete(_ task: Task) {
-        model.delete(task)
-    }
-    
     func completeTask(taskID: UUID) {
         guard let task = model.taskWith(id: taskID) else { return }
-        task.isCompleted = true
         var taskAttributes: [TaskAttributes : Any] = [:]
+        
         taskAttributes[.isCompleted] = true
         
         model.update(task, with: taskAttributes)
+    }
+    
+    func complete(taskAt indexPath: IndexPath) {
+        var taskAttributes: [TaskAttributes : Any] = [:]
+        taskAttributes[.isCompleted] = true
+        let task = tasks[indexPath.section].rows.remove(at: indexPath.row)
+        
+        model.update(task, with: taskAttributes)
+    }
+    
+    func delete(taskAt indexPath: IndexPath) {
+        let task = tasks[indexPath.section].rows.remove(at: indexPath.row)
+        model.delete(task)
     }
     
     // MARK: Helpers
