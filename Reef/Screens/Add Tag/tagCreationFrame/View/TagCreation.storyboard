@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRc-aJ-9JT" userLabel="Title View">
-                                <rect key="frame" x="16" y="33" width="343" height="45"/>
+                            <view contentMode="scaleToFill" horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YRc-aJ-9JT" userLabel="Title View">
+                                <rect key="frame" x="16" y="33" width="223" height="45"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="q5E-Ki-Rvp"/>
@@ -29,7 +29,7 @@
                                 <rect key="frame" x="16" y="132" width="343" height="335"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="335" id="E7O-SG-K6y"/>
+                                    <constraint firstAttribute="height" priority="750" constant="335" id="E7O-SG-K6y"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8B2-RY-FrU" userLabel="Colors View">
@@ -42,9 +42,11 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="sdG-zM-EDT" firstAttribute="trailing" secondItem="YRc-aJ-9JT" secondAttribute="trailing" constant="16" id="464-2A-ISG"/>
+                            <constraint firstItem="sdG-zM-EDT" firstAttribute="trailing" secondItem="YRc-aJ-9JT" secondAttribute="trailing" priority="250" constant="136" id="3Ma-wD-RXs"/>
                             <constraint firstItem="sdG-zM-EDT" firstAttribute="trailing" secondItem="iTz-em-9Wn" secondAttribute="trailing" constant="16" id="T05-sB-pWx"/>
                             <constraint firstItem="8B2-RY-FrU" firstAttribute="leading" secondItem="sdG-zM-EDT" secondAttribute="leading" constant="16" id="Tz1-BM-Tub"/>
+                            <constraint firstItem="sdG-zM-EDT" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YRc-aJ-9JT" secondAttribute="trailing" constant="16" id="Ub3-pF-K7l"/>
+                            <constraint firstItem="sdG-zM-EDT" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="iTz-em-9Wn" secondAttribute="bottom" constant="16" id="kAq-Xn-O6M"/>
                             <constraint firstItem="iTz-em-9Wn" firstAttribute="top" secondItem="8B2-RY-FrU" secondAttribute="bottom" constant="13" id="nIo-Nw-5jy"/>
                             <constraint firstItem="8B2-RY-FrU" firstAttribute="top" secondItem="YRc-aJ-9JT" secondAttribute="bottom" constant="13" id="nwS-m9-AKq"/>
                             <constraint firstItem="sdG-zM-EDT" firstAttribute="trailing" secondItem="8B2-RY-FrU" secondAttribute="trailing" constant="16" id="oSr-pr-5gU"/>
@@ -63,7 +65,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Us5-r1-ESm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-198" y="97"/>
+            <point key="canvasLocation" x="-199.19999999999999" y="96.7016491754123"/>
         </scene>
     </scenes>
 </document>

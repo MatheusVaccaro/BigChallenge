@@ -34,26 +34,37 @@ class AddTagTitleViewController: UIViewController {
         view.layer.shadowColor = CGColor.shadowColor
         view.layer.shadowOpacity = 1
         view.layer.shadowRadius = 11
-        
-        tagTitleTextField.delegate = self
-        tagTitleTextField.text = viewModel.tagTitle
+    
         configureTagTitleTextField()
     }
     
     private func configureTagTitleTextField() {
-        tagTitleTextField.font = UIFont.font(sized: 22, weight: .semibold, with: .body, fontName: .barlow)
-        
+        tagTitleTextField.text = viewModel.tagTitle
         tagTitleTextField.placeholder = Strings.Tag.CreationScreen.tagTitlePlaceholder
+        tagTitleTextField.delegate = self
     }
     
     @IBAction func didPressDoneButton(_ sender: UIButton) {
         _ = viewModel.createTagIfPossible(tagTitleTextField.text!)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        tagTitleTextField.font = UIFont.font(sized: 22, weight: .semibold, with: .body, fontName: .barlow)
     }
 }
 
 extension AddTagTitleViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return viewModel.createTagIfPossible(textField.text!)
+    }
+    
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        let currentString: NSString = textField.text! as NSString
+        let newString: NSString =
+            currentString.replacingCharacters(in: range, with: string) as NSString
+        return newString.length <= 15
     }
 }
 
