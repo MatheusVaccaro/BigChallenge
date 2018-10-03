@@ -70,7 +70,7 @@ class CalendarCell: JTAppleCell {
         }
         
         // Configure selection visuals
-        if isSelected {
+        if cellState.isSelected {
             select(basedOn: cellState, animated: false)
         } else {
             deselect(basedOn: cellState, animated: false)
