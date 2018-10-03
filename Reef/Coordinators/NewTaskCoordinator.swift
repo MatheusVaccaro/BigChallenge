@@ -27,7 +27,7 @@ class NewTaskCoordinator: NSObject, Coordinator {
     
     fileprivate var task: Task?
     fileprivate var selectedTags: [Tag]
-    
+
     weak var delegate: CoordinatorDelegate?
     
     init(task: Task? = nil,
@@ -159,24 +159,17 @@ extension NewTaskCoordinator: TaskCreationDelegate {
 
 extension NewTaskCoordinator: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        guard let homeScreenViewController = presenting.children.first else { return nil }
-        let swipeInteractionController = SwipeInteractionController(viewController: homeScreenViewController)
-        return TaskCreationFramePresentAnimationController(interactionController: swipeInteractionController)
+        guard let _ = presenting.children.first as? HomeScreenViewController else { return nil }
+        return TaskCreationFramePresentAnimationController()
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        guard let dismissedViewController =
-            dismissed.children.first as? TaskCreationFrameViewController else { return nil }
+        guard let _ = dismissed.children.first as? TaskCreationFrameViewController else { return nil }
         return TaskCreationFrameDismissAnimationController()
     }
-//
-//    // TODO: Fix interactive gesture
+
 //    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-//        guard let animator = animator as? TaskCreationFramePresentAnimationController,
-//            let interactionController = animator.interactionController,
-//            interactionController.interactionInProgress
-//            else { return nil }
-//        return interactionController
+//        return presentTaskInteractiveAnimation
 //    }
 }
 

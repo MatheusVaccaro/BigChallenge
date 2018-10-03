@@ -10,12 +10,6 @@ import UIKit
 
 class TaskCreationFrameDismissAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
     
-    let interactionController: SwipeInteractionController?
-    
-    init(interactionController: SwipeInteractionController? = nil) {
-        self.interactionController = interactionController
-    }
-    
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.1
     }

@@ -136,6 +136,7 @@
 		C22EF7DE215932CB00BFB255 /* TaskCreationFramePresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EF7DD215932CB00BFB255 /* TaskCreationFramePresentAnimationController.swift */; };
 		C23753AE20B6461E00C1CE15 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23753AD20B6461E00C1CE15 /* Coordinator.swift */; };
 		C23753B020B6463700C1CE15 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23753AF20B6463700C1CE15 /* ApplicationCoordinator.swift */; };
+		C24CB89821654C55007B2167 /* TaskCreationFramePresentInteractiveAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CB89721654C55007B2167 /* TaskCreationFramePresentInteractiveAnimationController.swift */; };
 		C25169952139BD6200999BD0 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25169942139BD6200999BD0 /* UIViewController+Extension.swift */; };
 		C25F5AA92108FEB3001E1561 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25F5AA82108FEB3001E1561 /* NewTaskViewController.swift */; };
 		C26EC73721544CFA000E9CB9 /* NotesInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26EC73621544CFA000E9CB9 /* NotesInputViewModel.swift */; };
@@ -403,6 +404,7 @@
 		C22EF7DD215932CB00BFB255 /* TaskCreationFramePresentAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreationFramePresentAnimationController.swift; sourceTree = "<group>"; };
 		C23753AD20B6461E00C1CE15 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		C23753AF20B6463700C1CE15 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
+		C24CB89721654C55007B2167 /* TaskCreationFramePresentInteractiveAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreationFramePresentInteractiveAnimationController.swift; sourceTree = "<group>"; };
 		C25169942139BD6200999BD0 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		C25F5AA82108FEB3001E1561 /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
 		C26EC73621544CFA000E9CB9 /* NotesInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesInputViewModel.swift; sourceTree = "<group>"; };
@@ -1104,10 +1106,27 @@
 		C22EF7DC2159327700BFB255 /* AnimationController */ = {
 			isa = PBXGroup;
 			children = (
-				C22EF7DD215932CB00BFB255 /* TaskCreationFramePresentAnimationController.swift */,
-				C2F722992159AD2100ED16DB /* TaskCreationFrameDismissAnimationController.swift */,
+				C24CB89921654C62007B2167 /* Present */,
+				C24CB89A21654C6B007B2167 /* Dismiss */,
 			);
 			path = AnimationController;
+			sourceTree = "<group>";
+		};
+		C24CB89921654C62007B2167 /* Present */ = {
+			isa = PBXGroup;
+			children = (
+				C22EF7DD215932CB00BFB255 /* TaskCreationFramePresentAnimationController.swift */,
+				C24CB89721654C55007B2167 /* TaskCreationFramePresentInteractiveAnimationController.swift */,
+			);
+			path = Present;
+			sourceTree = "<group>";
+		};
+		C24CB89A21654C6B007B2167 /* Dismiss */ = {
+			isa = PBXGroup;
+			children = (
+				C2F722992159AD2100ED16DB /* TaskCreationFrameDismissAnimationController.swift */,
+			);
+			path = Dismiss;
 			sourceTree = "<group>";
 		};
 		C26EC73321544C75000E9CB9 /* NotesInput */ = {
@@ -1779,6 +1798,7 @@
 				C2C231C520FD41AE002A2371 /* NewTagCoordinator.swift in Sources */,
 				22E3E306215525DC00D6EF32 /* TaskCellViewModel.swift in Sources */,
 				C2C79D2D2123E7D70058F228 /* DateInputViewModel+Extension.swift in Sources */,
+				C24CB89821654C55007B2167 /* TaskCreationFramePresentInteractiveAnimationController.swift in Sources */,
 				22DE27142145A64C00466187 /* IconCellPresentable.swift in Sources */,
 				C25169952139BD6200999BD0 /* UIViewController+Extension.swift in Sources */,
 				295BCDC721670E500032B67C /* StaticIconCellPresentable.swift in Sources */,
