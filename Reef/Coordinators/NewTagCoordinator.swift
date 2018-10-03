@@ -79,13 +79,16 @@ class NewTagCoordinator: NSObject, Coordinator {
                                                         weight: .bold,
                                                         with: .largeTitle,
                                                         fontName: .barlow),
-        NSAttributedString.Key.strokeColor : UIColor.largeTitleColor ]
+        NSAttributedString.Key.foregroundColor : UIColor.largeTitleColor ]
         
         modalPresenter.modalPresentationStyle = .overCurrentContext
         modalPresenter.modalTransitionStyle = .crossDissolve
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissViewController))
+        modalPresenter.navigationBar.addGestureRecognizer(tapGesture)
     }
     
-    private func dismissViewController() {
+    @objc private func dismissViewController() {
         presenter.dismiss(animated: true, completion: nil)
         delegate?.shouldDeinitCoordinator(self)
     }

@@ -88,6 +88,52 @@ extension TaskListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return viewModel.title(forHeaderInSection: section)
     }
+    
+    public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let completeAction = toggleCompleteAction(forRowAt: indexPath)
+        
+        let actions = [completeAction]
+        
+        return UISwipeActionsConfiguration(actions: actions)
+    }
+    
+    public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = deleteAction(forRowAt: indexPath)
+        
+        let actions = [delete]
+        
+        return UISwipeActionsConfiguration(actions: actions)
+    }
+    
+    func toggleCompleteAction(forRowAt indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal,
+                                        title: "complete") { (action: UIContextualAction,
+                                            view: UIView,
+                                            completion: (Bool) -> Void) in
+                                            
+                                            self.viewModel.complete(taskAt: indexPath)
+//                                            self.tableView.deleteRows(at: [indexPath], with: .fade)
+                                            completion(true)
+        }
+        
+        action.backgroundColor = UIColor.green
+        
+        return action
+    }
+    
+    func deleteAction(forRowAt indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .destructive,
+                                        title: "delete") { (action: UIContextualAction,
+                                            view: UIView,
+                                            completion: (Bool) -> Void) in
+                                            
+//                                            self.tableView.deleteRows(at: [indexPath], with: .none)
+                                            self.viewModel.delete(taskAt: indexPath)
+                                            completion(true)
+        }
+        
+        return action
+    }
 }
 
 extension TaskListViewController: UITableViewDataSource {

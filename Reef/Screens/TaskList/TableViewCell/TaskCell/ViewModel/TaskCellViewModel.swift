@@ -25,6 +25,14 @@ public class TaskCellViewModel {
         self.model = taskModel
     }
     
+    var shouldShowLocationIcon: Bool {
+        return !task.locations.isEmpty
+    }
+    
+    var shouldShowDateIcon: Bool {
+        return !task.dates.isEmpty
+    }
+    
     lazy var title: String = { return task.title! }()
     var taskIsCompleted: Bool { return task.isCompleted }
     
@@ -63,7 +71,7 @@ public class TaskCellViewModel {
         model.delete(task)
     }
     
-    func changedCheckButton(to bool: Bool) {
+    func completeTask(bool: Bool) {
         var attributes: [TaskAttributes : Any] = [ .isCompleted : bool ]
         if bool { attributes[.completionDate] = Date() }
         

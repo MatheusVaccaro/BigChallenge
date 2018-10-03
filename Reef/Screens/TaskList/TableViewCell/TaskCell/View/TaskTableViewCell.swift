@@ -18,31 +18,35 @@ public class TaskTableViewCell: UITableViewCell {
     private var previousRect = CGRect.zero
     private lazy var gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
-        
-        layer.frame = checkButton.imageView!.frame
-        layer.startPoint = CGPoint(x: 0, y: 1)
-        layer.endPoint = CGPoint(x: 1, y: 0)
-        layer.zPosition = -1
+
+        layer.frame = frame
+        layer.startPoint = CGPoint(x: 0, y: 0)
+        layer.endPoint = CGPoint(x: 1, y: 1)
         
         return layer
     }()
     
     // MARK: - IBOutlets
     @IBOutlet weak var taskTitleTextView: UITextView!
-    @IBOutlet weak var checkButton: UIButton!
+    @IBOutlet weak var gradientSideBar: UIView!
     @IBOutlet weak var tagsLabel: UILabel!
+    @IBOutlet weak var locationIconImageView: UIImageView!
+    @IBOutlet weak var dateStringView: UIView!
+    @IBOutlet weak var dateStringLabel: UILabel!
     
     // MARK: - TableViewCell Lifecycle
     override public func awakeFromNib() {
         super.awakeFromNib()
         
-        checkButton.isSelected = false
-        checkButton.layer.addSublayer(gradientLayer)
-        checkButton.mask = checkButton.imageView
+        gradientSideBar.layer.addSublayer(gradientLayer)
+        gradientSideBar.clipsToBounds = true
         
         taskTitleTextView.textContainerInset =
             UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         taskTitleTextView.textContainer.lineFragmentPadding = 0
+        
+        dateStringView.layer.cornerRadius = 2
+        dateStringLabel.textColor = UIColor.Cell.darkGray
         
         selectionStyle = .none
         configureAccessibility()
@@ -55,23 +59,33 @@ public class TaskTableViewCell: UITableViewCell {
         gradientLayer.colors = viewModel.checkButtonGradient
         taskTitleTextView.text = viewModel.title
         tagsLabel.text = viewModel.tagsDescription
-        checkButton.isSelected = viewModel.taskIsCompleted
-    }
-    
-    // MARK: - IBActions
-    
-    @IBAction func didPressCheckButton(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
-        UISelectionFeedbackGenerator().selectionChanged()
-        viewModel?.changedCheckButton(to: checkButton.isSelected)
-    }
-    
-    public override func layoutSubviews() {
-        gradientLayer.frame = checkButton.bounds
+        
+        if viewModel.shouldShowLocationIcon {
+            locationIconImageView.image = UIImage(named: "locationIcon")!
+                .withRenderingMode(.alwaysTemplate)
+            locationIconImageView.tintColor = UIColor.Cell.darkGray
+            locationIconImageView.isHidden = false
+        } else {
+            locationIconImageView.isHidden = true
+        }
+        
+        if viewModel.shouldShowDateIcon {
+            dateStringView.backgroundColor = UIColor.Cell.lightGray
+            dateStringLabel.text = viewModel.dateString(with: "dd MMM")
+        } else {
+            dateStringView.backgroundColor = .clear
+            dateStringLabel.text = ""
+        }
+        
+        if viewModel.taskIsCompleted {
+            taskTitleTextView.textColor = UIColor.Cell.darkGray
+        } else {
+            taskTitleTextView.textColor = UIColor.black
+        }
     }
     
     fileprivate func configureAccessibility() {
-        checkButton.accessibilityIgnoresInvertColors = true
+        gradientSideBar.accessibilityIgnoresInvertColors = true
     }
 }
 
@@ -79,9 +93,10 @@ extension TaskTableViewCell { // MARK: - Accessibility
     
     public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         taskTitleTextView.font = UIFont.font(sized: 19, weight: .medium, with: .body)
+        dateStringLabel.font = UIFont.font(sized: 14, weight: .regular, with: .footnote)
         tagsLabel.font = UIFont.font(sized: 14, weight: .regular, with: .footnote)
-        checkButton.setNeedsLayout()
-        checkButton.layoutIfNeeded()
+        gradientSideBar.setNeedsLayout()
+        gradientSideBar.layoutIfNeeded()
     }
     
     public override var accessibilityLabel: String? {
@@ -142,7 +157,7 @@ extension TaskTableViewCell { // MARK: - Accessibility
     }
     
     public override func accessibilityActivate() -> Bool {
-        didPressCheckButton(checkButton)
+        viewModel.completeTask(bool: !viewModel.taskIsCompleted)
         return true
     }
     

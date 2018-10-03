@@ -120,11 +120,13 @@ class NewTaskCoordinator: NSObject, Coordinator {
         modalPresenter.navigationBar.largeTitleTextAttributes =
             [ NSAttributedString.Key.font : UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow),
               NSAttributedString.Key.foregroundColor : UIColor.largeTitleColor ]
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissViewController))
+        modalPresenter.navigationBar.addGestureRecognizer(tapGesture)
     }
 }
 
 extension NewTaskCoordinator {
-    private func dismissViewController() {
+    @objc private func dismissViewController() {
         presenter.dismiss(animated: true, completion: nil)
         delegate?.shouldDeinitCoordinator(self)
     }

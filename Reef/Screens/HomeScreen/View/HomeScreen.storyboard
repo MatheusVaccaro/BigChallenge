@@ -51,7 +51,7 @@
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cie-Gz-Vzx">
-                                <rect key="frame" x="8" y="168" width="359" height="499"/>
+                                <rect key="frame" x="0.0" y="168" width="375" height="499"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </containerView>
@@ -116,7 +116,7 @@
                             <constraint firstItem="lah-lf-SBT" firstAttribute="top" secondItem="C6D-bh-Zj8" secondAttribute="top" id="7dv-UT-Mup"/>
                             <constraint firstItem="hi9-8n-jJk" firstAttribute="top" secondItem="qLG-Z8-bgi" secondAttribute="bottom" constant="5" id="7iD-TA-CcH"/>
                             <constraint firstItem="vxw-1p-TGH" firstAttribute="top" secondItem="Fea-br-2cN" secondAttribute="bottom" priority="250" constant="20" id="8xb-IZ-PNv"/>
-                            <constraint firstItem="cie-Gz-Vzx" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="8" id="BXC-pC-xol"/>
+                            <constraint firstItem="cie-Gz-Vzx" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" id="BXC-pC-xol"/>
                             <constraint firstItem="Cg0-Uy-cLM" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="8" id="CSJ-D2-Fdx"/>
                             <constraint firstItem="Fea-br-2cN" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="8" id="D66-7M-aEc"/>
                             <constraint firstItem="qLG-Z8-bgi" firstAttribute="top" secondItem="Qdj-bK-Hkb" secondAttribute="bottom" constant="12" id="Fuh-wr-9H2"/>
@@ -142,7 +142,7 @@
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="Fea-br-2cN" secondAttribute="trailing" constant="8" id="sWv-bs-slk"/>
                             <constraint firstItem="Qdj-bK-Hkb" firstAttribute="centerY" secondItem="cie-Gz-Vzx" secondAttribute="centerY" multiplier="0.8" priority="750" id="wP2-1Q-T4J"/>
                             <constraint firstItem="qLG-Z8-bgi" firstAttribute="centerX" secondItem="C6D-bh-Zj8" secondAttribute="centerX" id="yRu-Zp-dyC"/>
-                            <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="cie-Gz-Vzx" secondAttribute="trailing" constant="8" id="yev-Sb-Zry"/>
+                            <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="cie-Gz-Vzx" secondAttribute="trailing" id="yev-Sb-Zry"/>
                             <constraint firstItem="hi9-8n-jJk" firstAttribute="centerX" secondItem="C6D-bh-Zj8" secondAttribute="centerX" id="zrC-1P-1es"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QKa-yH-x6F"/>
