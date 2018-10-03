@@ -83,9 +83,12 @@ class NewTagCoordinator: NSObject, Coordinator {
         
         modalPresenter.modalPresentationStyle = .overCurrentContext
         modalPresenter.modalTransitionStyle = .crossDissolve
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissViewController))
+        modalPresenter.navigationBar.addGestureRecognizer(tapGesture)
     }
     
-    private func dismissViewController() {
+    @objc private func dismissViewController() {
         presenter.dismiss(animated: true, completion: nil)
         delegate?.shouldDeinitCoordinator(self)
     }
