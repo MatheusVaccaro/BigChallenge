@@ -71,7 +71,7 @@ public class TaskCellViewModel {
         model.delete(task)
     }
     
-    func changedCheckButton(to bool: Bool) {
+    func completeTask(bool: Bool) {
         var attributes: [TaskAttributes : Any] = [ .isCompleted : bool ]
         if bool { attributes[.completionDate] = Date() }
         
