@@ -79,7 +79,7 @@ class NewTagCoordinator: NSObject, Coordinator {
                                                         weight: .bold,
                                                         with: .largeTitle,
                                                         fontName: .barlow),
-        NSAttributedString.Key.strokeColor : UIColor.largeTitleColor ]
+        NSAttributedString.Key.foregroundColor : UIColor.largeTitleColor ]
         
         modalPresenter.modalPresentationStyle = .overCurrentContext
         modalPresenter.modalTransitionStyle = .crossDissolve
