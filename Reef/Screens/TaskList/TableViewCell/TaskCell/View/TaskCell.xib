@@ -43,36 +43,41 @@
                                 <rect key="frame" x="0.0" y="29.5" width="293" height="20"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fn8-Lx-bVj">
-                                        <rect key="frame" x="0.0" y="0.0" width="219" height="20"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="216" height="20"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="locationIcon" translatesAutoresizingMaskIntoConstraints="NO" id="MpC-GV-kct" userLabel="locationIconImageView">
-                                        <rect key="frame" x="220" y="0.0" width="12" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="12" id="PBu-Hz-Tiy"/>
-                                            <constraint firstAttribute="height" constant="20" id="f58-8o-vQf"/>
-                                        </constraints>
-                                    </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R0l-7J-x3W" userLabel="dateStringView">
-                                        <rect key="frame" x="233" y="0.0" width="60" height="20"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="mEL-Dy-SgL">
+                                        <rect key="frame" x="217" y="0.0" width="76" height="20"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hD9-vr-2pQ">
-                                                <rect key="frame" x="30" y="10" width="0.0" height="0.0"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="locationIcon" translatesAutoresizingMaskIntoConstraints="NO" id="MpC-GV-kct" userLabel="locationIconImageView">
+                                                <rect key="frame" x="0.0" y="0.0" width="12" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="12" id="PBu-Hz-Tiy"/>
+                                                    <constraint firstAttribute="height" constant="20" id="f58-8o-vQf"/>
+                                                </constraints>
+                                            </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R0l-7J-x3W" userLabel="dateStringView">
+                                                <rect key="frame" x="16" y="0.0" width="60" height="20"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hD9-vr-2pQ">
+                                                        <rect key="frame" x="30" y="10" width="0.0" height="0.0"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="4Wo-sh-Z7l"/>
+                                                    <constraint firstItem="hD9-vr-2pQ" firstAttribute="centerX" secondItem="R0l-7J-x3W" secondAttribute="centerX" id="beL-BV-Vw0"/>
+                                                    <constraint firstAttribute="width" constant="60" id="jyE-pe-XTH"/>
+                                                    <constraint firstItem="hD9-vr-2pQ" firstAttribute="centerY" secondItem="R0l-7J-x3W" secondAttribute="centerY" id="vOM-Ga-QaL"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="4Wo-sh-Z7l"/>
-                                            <constraint firstItem="hD9-vr-2pQ" firstAttribute="centerX" secondItem="R0l-7J-x3W" secondAttribute="centerX" id="beL-BV-Vw0"/>
-                                            <constraint firstAttribute="width" constant="60" id="jyE-pe-XTH"/>
-                                            <constraint firstItem="hD9-vr-2pQ" firstAttribute="centerY" secondItem="R0l-7J-x3W" secondAttribute="centerY" id="vOM-Ga-QaL"/>
-                                        </constraints>
-                                    </view>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>

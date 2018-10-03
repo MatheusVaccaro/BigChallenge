@@ -15,6 +15,13 @@ extension UIColor {
     static let backgroundColor: UIColor =
         UIColor(red: 248.0/255.0, green: 248.0/255.0, blue: 248.0/255.0, alpha: 1)
     
+    struct Cell {
+        static let darkGray: UIColor =
+            UIColor(red: 157/255.0, green: 168/255.0, blue: 169/255.0, alpha: 1)
+        static let lightGray: UIColor =
+            UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1)
+    }
+    
     struct DateInput {
         static let defaultColor: UIColor = UIColor.largeTitleColor
         

@@ -35,7 +35,6 @@ public class TaskTableViewCell: UITableViewCell {
     @IBOutlet weak var dateStringView: UIView!
     @IBOutlet weak var dateStringLabel: UILabel!
     
-    
     // MARK: - TableViewCell Lifecycle
     override public func awakeFromNib() {
         super.awakeFromNib()
@@ -47,6 +46,9 @@ public class TaskTableViewCell: UITableViewCell {
         taskTitleTextView.textContainerInset =
             UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         taskTitleTextView.textContainer.lineFragmentPadding = 0
+        
+        dateStringView.layer.cornerRadius = 2
+        dateStringLabel.textColor = UIColor.Cell.darkGray
         
         selectionStyle = .none
         configureAccessibility()
@@ -62,12 +64,16 @@ public class TaskTableViewCell: UITableViewCell {
         checkButton.isSelected = viewModel.taskIsCompleted
         
         if viewModel.shouldShowLocationIcon {
-            locationIconImageView.image = UIImage(named: "locationIcon")
+            locationIconImageView.image = UIImage(named: "locationIcon")!
+                .withRenderingMode(.alwaysTemplate)
+            locationIconImageView.tintColor = UIColor.Cell.darkGray
+            locationIconImageView.isHidden = false
+        } else {
+            locationIconImageView.isHidden = true
         }
         
         if viewModel.shouldShowDateIcon {
-            dateStringView.backgroundColor = .lightGray
-            dateStringView.layer.cornerRadius = 6.3
+            dateStringView.backgroundColor = UIColor.Cell.lightGray
             dateStringLabel.text = viewModel.dateString(with: "dd MMM")
         } else {
             dateStringView.backgroundColor = .clear
