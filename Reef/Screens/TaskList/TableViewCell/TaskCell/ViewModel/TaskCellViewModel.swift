@@ -25,6 +25,14 @@ public class TaskCellViewModel {
         self.model = taskModel
     }
     
+    var shouldShowLocationIcon: Bool {
+        return !task.locations.isEmpty
+    }
+    
+    var shouldShowDateIcon: Bool {
+        return !task.dates.isEmpty
+    }
+    
     lazy var title: String = { return task.title! }()
     var taskIsCompleted: Bool { return task.isCompleted }
     

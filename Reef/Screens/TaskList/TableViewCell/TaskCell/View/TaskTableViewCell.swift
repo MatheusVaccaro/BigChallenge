@@ -31,6 +31,10 @@ public class TaskTableViewCell: UITableViewCell {
     @IBOutlet weak var taskTitleTextView: UITextView!
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var tagsLabel: UILabel!
+    @IBOutlet weak var locationIconImageView: UIImageView!
+    @IBOutlet weak var dateStringView: UIView!
+    @IBOutlet weak var dateStringLabel: UILabel!
+    
     
     // MARK: - TableViewCell Lifecycle
     override public func awakeFromNib() {
@@ -56,10 +60,22 @@ public class TaskTableViewCell: UITableViewCell {
         taskTitleTextView.text = viewModel.title
         tagsLabel.text = viewModel.tagsDescription
         checkButton.isSelected = viewModel.taskIsCompleted
+        
+        if viewModel.shouldShowLocationIcon {
+            locationIconImageView.image = UIImage(named: "locationIcon")
+        }
+        
+        if viewModel.shouldShowDateIcon {
+            dateStringView.backgroundColor = .lightGray
+            dateStringView.layer.cornerRadius = 6.3
+            dateStringLabel.text = viewModel.dateString(with: "dd MMM")
+        } else {
+            dateStringView.backgroundColor = .clear
+            dateStringLabel.text = ""
+        }
     }
     
     // MARK: - IBActions
-    
     @IBAction func didPressCheckButton(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         UISelectionFeedbackGenerator().selectionChanged()
@@ -79,6 +95,7 @@ extension TaskTableViewCell { // MARK: - Accessibility
     
     public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         taskTitleTextView.font = UIFont.font(sized: 19, weight: .medium, with: .body)
+        dateStringLabel.font = UIFont.font(sized: 14, weight: .regular, with: .footnote)
         tagsLabel.font = UIFont.font(sized: 14, weight: .regular, with: .footnote)
         checkButton.setNeedsLayout()
         checkButton.layoutIfNeeded()
