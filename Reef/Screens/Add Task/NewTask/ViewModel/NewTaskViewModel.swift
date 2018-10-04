@@ -17,13 +17,13 @@ protocol NewTaskViewModelOutputDelegate: class {
 }
 
 protocol NewTaskViewModelDelegate: class {
-    func updateTextViewWith(text: String)
     func didUpdateColors()
 }
 
 class NewTaskViewModel {
     
     weak var outputDelegate: NewTaskViewModelOutputDelegate?
+    weak var uiDelegate: NewTaskViewModelDelegate?
     
     init(selectedTags: [Tag]) {
         if !selectedTags.isEmpty {
@@ -45,8 +45,13 @@ class NewTaskViewModel {
         if let colors = task?.allTags.first?.colors {
             taskColors = colors
         } else {
-            taskColors = [UIColor.black.cgColor, UIColor.black.cgColor]
+            taskColors = [UIColor.largeTitleColor.cgColor, UIColor.largeTitleColor.cgColor]
         }
+    }
+    
+    func set(_ tags: [Tag]) {
+        taskColors = tags.first?.colors ?? [UIColor.black.cgColor, UIColor.black.cgColor]
+        uiDelegate?.didUpdateColors()
     }
     
     func shouldPresentDetails(_ bool: Bool) {

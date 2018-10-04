@@ -180,3 +180,9 @@ extension NewTaskViewController: NewTaskViewDelegate {
         self.didClickDoneButton(doneButton)
     }
 }
+
+extension NewTaskViewController: NewTaskViewModelDelegate {
+    func didUpdateColors() {
+        gradientLayer.colors = viewModel.taskColors
+    }
+}
