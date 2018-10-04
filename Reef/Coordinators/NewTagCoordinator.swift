@@ -68,18 +68,12 @@ class NewTagCoordinator: NSObject, Coordinator {
     }
     
     private func configureModalPresenter() {
-        modalPresenter.transitioningDelegate = self
         modalPresenter.navigationBar.setBackgroundImage(UIImage(), for: .default)
         modalPresenter.navigationBar.shadowImage = UIImage()
+        modalPresenter.transitioningDelegate = self
         modalPresenter.navigationBar.prefersLargeTitles = true
         modalPresenter.navigationBar.isTranslucent = true
         modalPresenter.view.backgroundColor = .clear
-        modalPresenter.navigationBar.largeTitleTextAttributes =
-            [ NSAttributedString.Key.font : UIFont.font(sized: 34,
-                                                        weight: .bold,
-                                                        with: .largeTitle,
-                                                        fontName: .barlow),
-        NSAttributedString.Key.foregroundColor : UIColor.largeTitleColor ]
         
         modalPresenter.modalPresentationStyle = .overCurrentContext
         modalPresenter.modalTransitionStyle = .crossDissolve

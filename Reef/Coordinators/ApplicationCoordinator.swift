@@ -39,9 +39,7 @@ class ApplicationCoordinator: Coordinator {
         rootViewController.navigationBar.prefersLargeTitles = true
         rootViewController.navigationBar.isTranslucent = true
         rootViewController.view.backgroundColor = .clear
-        rootViewController.navigationBar.largeTitleTextAttributes =
-            [ NSAttributedString.Key.font : UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow),
-              NSAttributedString.Key.foregroundColor : UIColor.largeTitleColor ]
+        rootViewController.navigationBar.largeTitleTextAttributes = largeTitleAttributes
     }
     
     func refreshModel() { //TODO: find a better solution

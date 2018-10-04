@@ -14,6 +14,15 @@ import Foundation
 
 struct Strings {
     
+    static var bigTitleText: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateFormat = "d MMM"
+        let title = dateFormatter.string(from: Date())
+        
+        return title
+    }
+    
     struct HomeScreen {
         struct EmptyState {
             static let title =
