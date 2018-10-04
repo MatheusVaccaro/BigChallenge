@@ -27,7 +27,11 @@ class DismissTaskAnimationController: NSObject, UIViewControllerAnimatedTransiti
         UIView.animate(withDuration: duration, animations: {
             taskCreationFrameViewController.view.layoutIfNeeded()
         }) { _ in
-            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            let transitionCanceled = transitionContext.transitionWasCancelled
+            transitionContext.completeTransition(!transitionCanceled)
+            if transitionCanceled {
+                taskCreationFrameViewController.taskContainerViewTopConstraint.constant = 73
+            }
         }
     }
     
