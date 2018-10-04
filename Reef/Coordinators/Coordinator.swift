@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol Coordinator: class {
     var childrenCoordinators: [Coordinator] { get set }
@@ -20,6 +21,13 @@ protocol CoordinatorDelegate: class {
 }
 
 extension Coordinator {
+    
+    var largeTitleAttributes: [NSAttributedString.Key : Any] {
+        return [
+            NSAttributedString.Key.font : UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow),
+            NSAttributedString.Key.foregroundColor : UIColor.largeTitleColor
+        ]
+    }
     
     func addChild(coordinator: Coordinator) {
         childrenCoordinators.append(coordinator)

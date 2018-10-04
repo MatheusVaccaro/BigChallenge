@@ -112,14 +112,14 @@ class NewTaskCoordinator: NSObject, Coordinator {
     }
     
     private func configureModalPresenter() {
-        modalPresenter.transitioningDelegate = self
         modalPresenter.navigationBar.shadowImage = UIImage()
+        modalPresenter.transitioningDelegate = self
         modalPresenter.navigationBar.prefersLargeTitles = true
         modalPresenter.navigationBar.isTranslucent = false
+        modalPresenter.navigationBar.largeTitleTextAttributes = largeTitleAttributes
+        
         modalPresenter.modalPresentationStyle = .overCurrentContext
-        modalPresenter.navigationBar.largeTitleTextAttributes =
-            [ NSAttributedString.Key.font : UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow),
-              NSAttributedString.Key.foregroundColor : UIColor.largeTitleColor ]
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissViewController))
         modalPresenter.navigationBar.addGestureRecognizer(tapGesture)
     }

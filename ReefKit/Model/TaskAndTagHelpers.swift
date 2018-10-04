@@ -55,8 +55,9 @@ public extension Task {
     public var locations: [CLCircularRegion] {
         var ans: [CLCircularRegion] = []
         
-        if let data =
-            self.locationData { ans.append(NSKeyedUnarchiver.unarchiveObject(with: data) as! CLCircularRegion) }
+        if let data = self.locationData {
+            ans.append(NSKeyedUnarchiver.unarchiveObject(with: data) as! CLCircularRegion)
+        }
         
         let tagsData = self
             .allTags

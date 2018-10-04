@@ -11,12 +11,12 @@ import RxSwift
 
 protocol AddTagDetailsViewModelDelegate: class {
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
-                       didFind location: CLCircularRegion,
+                       didFind location: CLCircularRegion?,
                        named: String,
                        arriving: Bool)
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
-                            didSelectDate date: Date)
+                            didSelectDate date: Date?)
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
                             didSelectFrequency frequency: NotificationOptions.Frequency)
@@ -79,13 +79,13 @@ extension AddTagDetailsViewModel: AddDetailsProtocol {
 }
 
 extension AddTagDetailsViewModel: LocationInputDelegate {
-    func locationInput(_ locationInputViewModel: LocationInputViewModel, didFind location: CLCircularRegion, named: String, arriving: Bool) {
+    func locationInput(_ locationInputViewModel: LocationInputViewModel, didFind location: CLCircularRegion?, named: String, arriving: Bool) {
         delegate?.locationInput(locationInputViewModel, didFind: location, named: named, arriving: arriving)
     }
 }
 
 extension AddTagDetailsViewModel: DateInputViewModelDelegate {
-    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: Date) {
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: Date?) {
         delegate?.dateInputViewModel(dateInputViewModel, didSelectDate: date)
     }
     

@@ -24,7 +24,6 @@ class TagCreationFrameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = Strings.Tag.CreationScreen.tagTitlePlaceholder
         
         viewModel.delegate?.viewDidLoad()
         applyBlur()
@@ -94,7 +93,7 @@ class TagCreationFrameViewController: UIViewController {
     }
     
     lazy var blurView: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: .light)
+        let blurEffect = UIBlurEffect(style: .regular)
         let view = UIVisualEffectView(effect: blurEffect)
         
         return view

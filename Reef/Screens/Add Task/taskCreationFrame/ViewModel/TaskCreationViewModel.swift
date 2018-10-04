@@ -89,7 +89,7 @@ extension TaskCreationViewModel: AddTaskDetailsDelegate {
     }
     
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
-                       didFind location: CLCircularRegion,
+                       didFind location: CLCircularRegion?,
                        named: String,
                        arriving: Bool) {
         
@@ -100,7 +100,7 @@ extension TaskCreationViewModel: AddTaskDetailsDelegate {
     
     func taskDetailsViewModel(_ taskDetailsViewModel: AddTaskDetailsViewModel,
                               dateInputViewModel: DateInputViewModelProtocol,
-                              didSelectDate date: Date) {
+                              didSelectDate date: Date?) {
         
         attributes[.dueDate] = date
     }

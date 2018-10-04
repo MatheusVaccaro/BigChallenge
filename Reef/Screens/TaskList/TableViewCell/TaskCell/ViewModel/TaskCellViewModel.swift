@@ -82,20 +82,26 @@ public class TaskCellViewModel {
     lazy var locationDescription: String? = {
         guard !task.locations.isEmpty else { return nil }
         
-        return "set to \(task.locations.count) locations" //TODO: localize
+        let localizedString = Strings.Task.Cell.VoiceOver.locationDescription
+        
+        return String.localizedStringWithFormat(localizedString,
+                                                String(describing: task.locations.count))
     }()
     
     lazy var accessibilityDateString: String? = {
         guard let date = task.dates.min() else { return nil }
         
-        return date.accessibilityDescription
+        let localizedString = Strings.Task.Cell.VoiceOver.dateDescription
+        
+        return String.localizedStringWithFormat(localizedString,
+                                                date.accessibilityDescription)
     }()
     
     // MARK: - String
     var voiceOverHint: String {
         return task.isCompleted
-            ? Strings.Task.Cell.voiceOverHintCompleted
-            : Strings.Task.Cell.voiceOverHintIncomplete
+            ? Strings.Task.Cell.VoiceOver.hintCompleted
+            : Strings.Task.Cell.VoiceOver.hintIncomplete
     }
     let editActionTitle: String = Strings.General.editActionTitle
     let deleteActionTitle: String = Strings.General.deleteActionTitle

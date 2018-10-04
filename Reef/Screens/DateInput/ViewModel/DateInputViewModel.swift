@@ -88,23 +88,27 @@ class DateInputViewModel: DateInputViewModelProtocol {
     
     private func setupDateDelegate() {
         date.subscribe(onNext: { date in
-                if let date = date {
-                    self.delegate?.dateInputViewModel(self, didSelectDate: date)
-                }
+                self.delegate?.dateInputViewModel(self, didSelectDate: date)
             })
             .disposed(by: disposeBag)
     }
     
-    func selectCalendarDate(_ calendarDate: DateComponents) {
-        guard let day = calendarDate.day, let month = calendarDate.month, let year = calendarDate.year else { return }
+    func selectCalendarDate(_ calendarDate: DateComponents?) {
+        guard let day = calendarDate?.day, let month = calendarDate?.month, let year = calendarDate?.year else {
+                self.calendarDate.onNext(nil)
+                return
+        }
         
         let calendarDateComponent = DateComponents(year: year, month: month, day: day)
         
         self.calendarDate.onNext(calendarDateComponent)
     }
     
-    func selectTimeOfDay(_ timeOfDay: DateComponents) {
-        guard let hour = timeOfDay.hour, let minute = timeOfDay.minute else { return }
+    func selectTimeOfDay(_ timeOfDay: DateComponents?) {
+        guard let hour = timeOfDay?.hour, let minute = timeOfDay?.minute else {
+            self.timeOfDay.onNext(nil)
+            return
+        }
         
         let timeOfDayComponent = DateComponents(hour: hour, minute: minute)
         
@@ -199,7 +203,7 @@ class DateInputViewModel: DateInputViewModelProtocol {
 
 protocol DateInputViewModelDelegate: class {
     //swiftlint:disable next line_length
-    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: Date)
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: Date?)
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectFrequency frequency: NotificationOptions.Frequency)
 }
 

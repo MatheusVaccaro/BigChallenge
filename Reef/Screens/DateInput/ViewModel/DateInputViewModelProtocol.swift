@@ -31,8 +31,8 @@ protocol DateInputViewModelProtocol: IconCellPresentable {
     /** Convenience property to bypass RX. */
     var wasLastDateNonnil: Bool { get }
     
-    func selectCalendarDate(_ calendarDate: DateComponents)
-    func selectTimeOfDay(_ timeOfDay: DateComponents)
+    func selectCalendarDate(_ calendarDate: DateComponents?)
+    func selectTimeOfDay(_ timeOfDay: DateComponents?)
     func select(frequency: NotificationOptions.Frequency)
     
     // MARK: - Date shortcuts

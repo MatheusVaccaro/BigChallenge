@@ -88,8 +88,12 @@ public class TaskListViewModel {
         }
         
         //OTHER TASKS
-        let remainingTasks = model.tasks
-            .filter { !$0.isCompleted && $0.hasOneOf(selectedTags) && !flatTasks.contains($0) && !$0.isPrivate }
+        var remainingTasks = model.tasks
+            .filter { !$0.isCompleted && $0.hasOneOf(selectedTags) && !flatTasks.contains($0) }
+        
+        if !selectedTags.contains { $0.requiresAuthentication } {
+            remainingTasks = remainingTasks.filter { !$0.isPrivate }
+        }
         
         tasks.append((rows: remainingTasks, header: otherHeader))
         

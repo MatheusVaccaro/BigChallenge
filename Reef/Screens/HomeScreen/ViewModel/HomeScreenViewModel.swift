@@ -63,15 +63,6 @@ class HomeScreenViewModel {
         return tagCollectionViewModel
     }()
     
-    var bigTitleText: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale.current
-        dateFormatter.dateFormat = "d MMM"
-        let title = dateFormatter.string(from: Date())
-        
-        return title
-    }
-    
     func startAddTask() {
         delegate?.homeScreenViewModelDidStartAddTask(self)
     }

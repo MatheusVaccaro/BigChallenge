@@ -25,6 +25,18 @@ extension NotesInputViewModel: IconCellPresentable {
         return "notesIcon"
     }
     
+    var rightImageName: String {
+        if !hasNotes {
+            return "rightArrow"
+        } else {
+            return "removeButton"
+        }
+    }
+    
+    func rightImageClickHandler() {
+        notes = ""
+    }
+    
     var voiceOverHint: String {
         return Strings.NotesInputView.Cell.subtitle
     }
@@ -35,5 +47,9 @@ extension NotesInputViewModel: IconCellPresentable {
         } else {
             return nil
         }
+    }
+    
+    private var hasNotes: Bool {
+        return !(notes == "")
     }
 }
