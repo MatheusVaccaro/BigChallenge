@@ -53,6 +53,7 @@ class TaskCreationViewModel {
     }
     
     func set(tags: [Tag]) {
+        newTaskViewModel.set(tags)
         attributes[.tags] = tags
     }
 

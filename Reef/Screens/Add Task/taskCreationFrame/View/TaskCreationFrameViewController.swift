@@ -123,8 +123,6 @@ class TaskCreationFrameViewController: UIViewController {
         blur.frame = view.frame
         view.insertSubview(blur, at: 0)
         
-//        addGestureRecognizersForAnimations()
-        
         viewModel.delegate?.viewDidLoad()
         taskDetailViewController.accessibilityElementsHidden = true
     }

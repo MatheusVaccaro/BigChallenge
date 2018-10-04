@@ -76,6 +76,7 @@ class NewTaskCoordinator: NSObject, Coordinator {
         tagCollectionViewModel.delegate = self
         creationFrameViewModel.delegate = self
         creationFrameViewModel.uiDelegate = creationFrameViewController
+        newTaskViewModel.uiDelegate = newTaskViewController
         
         modalPresenter = UINavigationController(rootViewController: creationFrameViewController)
         configureModalPresenter()
