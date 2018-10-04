@@ -11,7 +11,7 @@ import UIKit
 class PresentTaskAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.1
+        return 1.0
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -28,16 +28,15 @@ class PresentTaskAnimationController: NSObject, UIViewControllerAnimatedTransiti
         containerView.addSubview(toViewController.view)
         toViewController.view.isHidden = true
         
+        homeScreenViewController.pullDownViewTopConstraint.constant = 30
+        taskCreationFrameViewController.taskContainerViewTopConstraint.constant =
+            taskCreationFrameViewController.titleInputHeight
+        
         UIView.animate(withDuration: duration, animations: {
-            homeScreenViewController.pullDownViewTopConstraint.constant = 30
-            homeScreenViewController.view.layoutIfNeeded()
-            
-            taskCreationFrameViewController.view.layoutIfNeeded()
-            taskCreationFrameViewController.taskContainerViewTopConstraint.constant =
-                taskCreationFrameViewController.titleInputHeight
-            taskCreationFrameViewController.view.layoutIfNeeded()
+            fromViewController.view.layoutIfNeeded()
         }) { _ in
             toViewController.view.isHidden = false
+            homeScreenViewController.pullDownViewTopConstraint.constant = -22
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
     }

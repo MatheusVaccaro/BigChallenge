@@ -46,7 +46,6 @@ class PresentTaskInteractiveAnimationController: UIPercentDrivenInteractiveTrans
         case .cancelled:
             interactionInProgress = false
             cancel()
-            view.setNeedsLayout()
         case .ended:
             interactionInProgress = false
             if shouldCompleteTransition {
@@ -56,7 +55,6 @@ class PresentTaskInteractiveAnimationController: UIPercentDrivenInteractiveTrans
             } else {
                 cancel()
             }
-            view.setNeedsLayout()
         default:
             break
         }
