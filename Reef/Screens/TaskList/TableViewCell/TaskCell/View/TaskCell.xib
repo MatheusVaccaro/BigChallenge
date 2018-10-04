@@ -22,37 +22,37 @@
                         <rect key="frame" x="20" y="8" width="339" height="49.5"/>
                         <subviews>
                             <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" keyboardDismissMode="interactive" editable="NO" text="i am a task" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OW8-xT-sLf">
-                                <rect key="frame" x="0.0" y="0.0" width="339" height="38"/>
+                                <rect key="frame" x="0.0" y="0.0" width="339" height="29.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" textContentType="name"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="jMK-pG-tgE">
-                                <rect key="frame" x="0.0" y="38" width="339" height="11.5"/>
+                                <rect key="frame" x="0.0" y="29.5" width="339" height="20"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fn8-Lx-bVj">
-                                        <rect key="frame" x="0.0" y="0.0" width="285" height="11.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="245.5" height="20"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="11" id="wD8-jE-D54"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="wD8-jE-D54"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="mEL-Dy-SgL">
-                                        <rect key="frame" x="286" y="0.0" width="53" height="11.5"/>
+                                        <rect key="frame" x="246.5" y="0.0" width="92.5" height="20"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" image="locationIcon" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MpC-GV-kct" userLabel="locationIconImageView">
-                                                <rect key="frame" x="0.0" y="0.0" width="14" height="11.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="25" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="MpC-GV-kct" secondAttribute="height" multiplier="15:12" id="F7E-Wl-8Ym"/>
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="R0l-7J-x3W" userLabel="dateStringView">
-                                                <rect key="frame" x="18" y="0.0" width="35" height="11.5"/>
+                                                <rect key="frame" x="29" y="0.0" width="63.5" height="20"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13 oct" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hD9-vr-2pQ">
-                                                        <rect key="frame" x="7" y="2" width="21" height="7.5"/>
+                                                        <rect key="frame" x="7" y="2" width="49.5" height="16"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -61,6 +61,7 @@
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="hD9-vr-2pQ" secondAttribute="trailing" constant="7" id="0pk-xj-wMj"/>
+                                                    <constraint firstAttribute="width" secondItem="R0l-7J-x3W" secondAttribute="height" multiplier="35:11" id="EKn-cy-wnH"/>
                                                     <constraint firstItem="hD9-vr-2pQ" firstAttribute="centerX" secondItem="R0l-7J-x3W" secondAttribute="centerX" id="beL-BV-Vw0"/>
                                                     <constraint firstItem="hD9-vr-2pQ" firstAttribute="top" secondItem="R0l-7J-x3W" secondAttribute="top" constant="2" id="ccc-b7-Reu"/>
                                                     <constraint firstAttribute="bottom" secondItem="hD9-vr-2pQ" secondAttribute="bottom" constant="2" id="gPs-PA-T9s"/>
