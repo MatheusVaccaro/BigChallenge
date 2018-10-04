@@ -107,7 +107,7 @@ extension TaskListViewController: UITableViewDelegate {
     
     func toggleCompleteAction(forRowAt indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .normal,
-                                        title: "complete") { (action: UIContextualAction,
+                                        title: "complete") { (action: UIContextualAction, //TODO: localize
                                             view: UIView,
                                             completion: (Bool) -> Void) in
                                             
@@ -123,7 +123,7 @@ extension TaskListViewController: UITableViewDelegate {
     
     func deleteAction(forRowAt indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .destructive,
-                                        title: "delete") { (action: UIContextualAction,
+                                        title: "delete") { (action: UIContextualAction, //TODO: localize
                                             view: UIView,
                                             completion: (Bool) -> Void) in
                                             
