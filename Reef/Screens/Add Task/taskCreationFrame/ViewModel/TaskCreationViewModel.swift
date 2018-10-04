@@ -56,7 +56,6 @@ class TaskCreationViewModel {
         newTaskViewModel.set(tags)
         attributes[.tags] = tags
     }
-
 }
 
 extension TaskCreationViewModel: NewTaskViewModelOutputDelegate {
