@@ -44,6 +44,10 @@ protocol DateInputViewModelProtocol: IconCellPresentable {
     var thisEveningShortcutText: BehaviorSubject<String> { get }
     var nextMorningShortcutText: BehaviorSubject<String> { get }
     
+    init(calendarDate: DateComponents?, timeOfDay: DateComponents?,
+    frequency: NotificationOptions.Frequency?,
+    delegate: DateInputViewModelDelegate?)
+    
     func selectTomorrow()
     func selectNextWeek()
     func selectNextMonth()

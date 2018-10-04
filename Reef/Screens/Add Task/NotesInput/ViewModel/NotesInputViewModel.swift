@@ -25,4 +25,6 @@ class NotesInputViewModel {
     var textViewPlaceholder: String {
         return Strings.NotesInputView.textViewPlaceholder
     }
+    
+    required init() { }
 }

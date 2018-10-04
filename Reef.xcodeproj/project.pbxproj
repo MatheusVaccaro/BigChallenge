@@ -113,6 +113,9 @@
 		29320435213632E400E23E72 /* TagCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29320434213632E400E23E72 /* TagCollectionViewModel.swift */; };
 		2934BCCA21003E0700B6A05A /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2934BCC921003E0700B6A05A /* TaskTests.swift */; };
 		294490EE20FD297200333F11 /* TaskViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294490ED20FD297200333F11 /* TaskViewModelTests.swift */; };
+		295BCDC1216696A90032B67C /* DefaultDateInputIconCellPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295BCDC0216696A90032B67C /* DefaultDateInputIconCellPresentable.swift */; };
+		295BCDC321669E270032B67C /* DefaultLocationInputIconCellPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295BCDC221669E270032B67C /* DefaultLocationInputIconCellPresentable.swift */; };
+		295BCDC521669ECC0032B67C /* DefaultNotesInputIconCellPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295BCDC421669ECC0032B67C /* DefaultNotesInputIconCellPresentable.swift */; };
 		296424BB21559A7400480CB4 /* CoreAnimation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296424BA21559A7400480CB4 /* CoreAnimation+Extension.swift */; };
 		2972201F211CCD8F00CF80CE /* DateInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2972201E211CCD8F00CF80CE /* DateInputViewController.swift */; };
 		29722022211CD1AE00CF80CE /* DateInput.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29722021211CD1AE00CF80CE /* DateInput.storyboard */; };
@@ -364,6 +367,9 @@
 		29320434213632E400E23E72 /* TagCollectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionViewModel.swift; sourceTree = "<group>"; };
 		2934BCC921003E0700B6A05A /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		294490ED20FD297200333F11 /* TaskViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModelTests.swift; sourceTree = "<group>"; };
+		295BCDC0216696A90032B67C /* DefaultDateInputIconCellPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDateInputIconCellPresentable.swift; sourceTree = "<group>"; };
+		295BCDC221669E270032B67C /* DefaultLocationInputIconCellPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocationInputIconCellPresentable.swift; sourceTree = "<group>"; };
+		295BCDC421669ECC0032B67C /* DefaultNotesInputIconCellPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNotesInputIconCellPresentable.swift; sourceTree = "<group>"; };
 		296424BA21559A7400480CB4 /* CoreAnimation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreAnimation+Extension.swift"; sourceTree = "<group>"; };
 		2972201E211CCD8F00CF80CE /* DateInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputViewController.swift; sourceTree = "<group>"; };
 		29722021211CD1AE00CF80CE /* DateInput.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DateInput.storyboard; sourceTree = "<group>"; };
@@ -929,6 +935,33 @@
 			path = ReefToday;
 			sourceTree = "<group>";
 		};
+		295BCDBD216696770032B67C /* DateInputCell */ = {
+			isa = PBXGroup;
+			children = (
+				C29742D1211257A600A1D213 /* TimeTableViewCellViewModel.swift */,
+				295BCDC0216696A90032B67C /* DefaultDateInputIconCellPresentable.swift */,
+			);
+			path = DateInputCell;
+			sourceTree = "<group>";
+		};
+		295BCDBE216696860032B67C /* LocationInputCell */ = {
+			isa = PBXGroup;
+			children = (
+				C29742D3211257B600A1D213 /* LocationTableViewCellViewModel.swift */,
+				295BCDC221669E270032B67C /* DefaultLocationInputIconCellPresentable.swift */,
+			);
+			path = LocationInputCell;
+			sourceTree = "<group>";
+		};
+		295BCDBF2166968F0032B67C /* NotesInputCell */ = {
+			isa = PBXGroup;
+			children = (
+				C26EC73821544D19000E9CB9 /* NotesTableViewCellViewModel.swift */,
+				295BCDC421669ECC0032B67C /* DefaultNotesInputIconCellPresentable.swift */,
+			);
+			path = NotesInputCell;
+			sourceTree = "<group>";
+		};
 		2965C40F20F6A81D001C988E /* Reminders */ = {
 			isa = PBXGroup;
 			children = (
@@ -1197,9 +1230,9 @@
 			isa = PBXGroup;
 			children = (
 				2246B099215BD59200CAE7DA /* DetailsViewModelProtocol.swift */,
-				C29742D1211257A600A1D213 /* TimeTableViewCellViewModel.swift */,
-				C29742D3211257B600A1D213 /* LocationTableViewCellViewModel.swift */,
-				C26EC73821544D19000E9CB9 /* NotesTableViewCellViewModel.swift */,
+				295BCDBD216696770032B67C /* DateInputCell */,
+				295BCDBE216696860032B67C /* LocationInputCell */,
+				295BCDBF2166968F0032B67C /* NotesInputCell */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1784,6 +1817,7 @@
 				C2C231C520FD41AE002A2371 /* NewTagCoordinator.swift in Sources */,
 				22E3E306215525DC00D6EF32 /* TaskCellViewModel.swift in Sources */,
 				C2C79D2D2123E7D70058F228 /* DateInputViewModel+Extension.swift in Sources */,
+				295BCDC321669E270032B67C /* DefaultLocationInputIconCellPresentable.swift in Sources */,
 				22DE27142145A64C00466187 /* IconCellPresentable.swift in Sources */,
 				C25169952139BD6200999BD0 /* UIViewController+Extension.swift in Sources */,
 				160E62812155A129001F3D01 /* TagCreationViewController.swift in Sources */,
@@ -1826,8 +1860,10 @@
 				29A4F8852110F04600AE4FA1 /* DateInputViewModel.swift in Sources */,
 				29BA68A42120CC2F009B4AB9 /* CalendarCell.swift in Sources */,
 				2972201F211CCD8F00CF80CE /* DateInputViewController.swift in Sources */,
+				295BCDC1216696A90032B67C /* DefaultDateInputIconCellPresentable.swift in Sources */,
 				C21EAD0020B741BC005F0F85 /* HomeScreenCoordinator.swift in Sources */,
 				296424BB21559A7400480CB4 /* CoreAnimation+Extension.swift in Sources */,
+				295BCDC521669ECC0032B67C /* DefaultNotesInputIconCellPresentable.swift in Sources */,
 				C2901059211E4492008F2807 /* ColorCollectionViewCell.swift in Sources */,
 				C23753B020B6463700C1CE15 /* ApplicationCoordinator.swift in Sources */,
 				160E628D215923DD001F3D01 /* AddTagTitleViewModel.swift in Sources */,
