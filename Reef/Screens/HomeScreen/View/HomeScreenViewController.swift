@@ -37,7 +37,7 @@ class HomeScreenViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = viewModel.bigTitleText
+        title = Strings.bigTitleText
         view.backgroundColor = UIColor.backgroundColor
         
         configureWhiteBackgroundView()

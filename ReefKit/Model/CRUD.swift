@@ -97,7 +97,7 @@ class TaskCRUD {
         if let creationDate = attributes[.creationDate] as? Date {
             task.creationDate = creationDate
         }
-        if let dueDate = attributes[.dueDate] as? Date {
+        if let dueDate = attributes[.dueDate] as? Date? {
             task.dueDate = dueDate
         }
         if let id = attributes[.id] as? UUID {
@@ -123,7 +123,8 @@ class TaskCRUD {
             if let placeName = attributes[.locationName] as? String { task.locationName = placeName }
             if let isArriving = attributes[.isArrivingLocation] as? Bool { task.isArrivingLocation = isArriving }
             task.locationData = regionData
-            
+        } else {
+            task.locationData = nil
         }
         
         if let isPinned = attributes[.isPinned] as? Bool {
@@ -208,9 +209,10 @@ public class TagCRUD {
     }
     
     func update(_ tag: Tag, with attributes: [TagAttributes: Any]) {
-        if let dueDate = attributes[.dueDate] as? Date {
+        if let dueDate = attributes[.dueDate] as? Date? {
             tag.dueDate = dueDate
         }
+        
         if let id = attributes[.id] as? UUID {
             tag.id = id
         }
@@ -235,6 +237,8 @@ public class TagCRUD {
 
             if let placeName = attributes[.locationName] as? String { tag.locationName = placeName }
             if let isArriving = attributes[.isArrivingLocation] as? Bool { tag.isArrivingLocation = isArriving }
+        } else {
+            tag.locationData = nil
         }
     }
     

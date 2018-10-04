@@ -55,6 +55,19 @@ extension IconCellPresentable where Self: DateInputViewModelProtocol {
         return "dateIcon"
     }
     
+    var rightImageName: String {
+        if !wasLastDateNonnil {
+           return "rightArrow"
+        } else {
+            return "removeButton"
+        }
+    }
+    
+    func rightImageClickHandler() {
+        selectCalendarDate(nil)
+        selectTimeOfDay(nil)
+    }
+    
     var voiceOverHint: String {
         return Strings.DateInputView.Cell.subtitle
     }

@@ -12,13 +12,13 @@ import ReefKit
 
 protocol AddTaskDetailsDelegate: class {
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
-                       didFind location: CLCircularRegion,
+                       didFind location: CLCircularRegion?,
                        named: String,
                        arriving: Bool)
     
     func taskDetailsViewModel(_ taskDetailsViewModel: AddTaskDetailsViewModel,
                               dateInputViewModel: DateInputViewModelProtocol,
-                              didSelectDate date: Date)
+                              didSelectDate date: Date?)
     
     func taskDetailsViewModel(_ taskDetailsViewModel: AddTaskDetailsViewModel,
                               dateInputViewModel: DateInputViewModelProtocol,
@@ -83,7 +83,7 @@ extension AddTaskDetailsViewModel: AddDetailsProtocol {
 
 extension AddTaskDetailsViewModel: LocationInputDelegate {
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
-                       didFind location: CLCircularRegion,
+                       didFind location: CLCircularRegion?,
                        named: String,
                        arriving: Bool) {
         delegate?.locationInput(locationInputViewModel, didFind: location, named: named, arriving: arriving)
@@ -93,7 +93,7 @@ extension AddTaskDetailsViewModel: LocationInputDelegate {
 extension AddTaskDetailsViewModel: DateInputViewModelDelegate {
 
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
-                            didSelectDate date: Date) {
+                            didSelectDate date: Date?) {
         delegate?.taskDetailsViewModel(self, dateInputViewModel: dateInputViewModel,
                                        didSelectDate: date)
     }

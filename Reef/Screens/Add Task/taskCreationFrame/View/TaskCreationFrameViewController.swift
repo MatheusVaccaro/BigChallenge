@@ -33,7 +33,7 @@ class TaskCreationFrameViewController: UIViewController {
     var viewModel: TaskCreationViewModel!
     
     lazy var blurView: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: .light)
+        let blurEffect = UIBlurEffect(style: .regular)
         let view = UIVisualEffectView(effect: blurEffect)
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissViewController)))
         return view
@@ -113,8 +113,8 @@ class TaskCreationFrameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = Strings.bigTitleText
         
-        title = Strings.Task.CreationScreen.taskTitlePlaceholder
         configureShadows(in: whiteBackgroundView)
         configureShadows(in: taskDetailView)
         configureShadows(in: taskTitleView)

@@ -16,8 +16,8 @@ class IconTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UITextView!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var imageHeight: NSLayoutConstraint!
-    @IBOutlet weak var arrowImage: UIImageView!
     @IBOutlet weak var cellSwitch: UISwitch!
+    @IBOutlet weak var rightButton: UIButton!
     
     var titleFontSize: CGFloat = 18 {
         didSet {
@@ -38,15 +38,7 @@ class IconTableViewCell: UITableViewCell {
     
     var viewModel: IconCellPresentable! {
         didSet {
-            titleLabel.text = viewModel.title
-            subtitleLabel.text = viewModel.subtitle
-            icon.image = UIImage(named: viewModel.imageName)
-            if viewModel.isSwitchCell {
-                arrowImage.isHidden = true
-                cellSwitch.setOn(viewModel.isSwitchOn, animated: false)
-            } else {
-                cellSwitch.isHidden = true
-            }
+            reloadData()
         }
     }
     
@@ -54,9 +46,6 @@ class IconTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         selectionStyle = .none
-        
-        titleLabel.font = UIFont.font(sized: titleFontSize, weight: .medium, with: .title1, fontName: .barlow)
-        subtitleLabel.font = UIFont.font(sized: subtitleFontSize, weight: .regular, with: .title3)
         
         titleLabel.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         titleLabel.textContainer.lineFragmentPadding = 0
@@ -72,10 +61,31 @@ class IconTableViewCell: UITableViewCell {
         }
     }
     
+    @IBAction func righImageDidClick(_ sender: Any) {
+        viewModel.rightImageClickHandler()
+        reloadData()
+    }
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         titleLabel.font = UIFont.font(sized: titleFontSize, weight: .medium, with: .title1, fontName: .barlow)
         subtitleLabel.font = UIFont.font(sized: subtitleFontSize, weight: .regular, with: .title3)
+    }
+    
+    private func reloadData() {
+        titleLabel.text = viewModel.title
+        subtitleLabel.text = viewModel.subtitle
+        icon.image = UIImage(named: viewModel.imageName)
+        
+        rightButton.setImage(UIImage(named: viewModel.rightImageName),
+                             for: .normal)
+        
+        if viewModel.isSwitchCell {
+            rightButton.isHidden = true
+            cellSwitch.setOn(viewModel.isSwitchOn, animated: false)
+        } else {
+            cellSwitch.isHidden = true
+        }
     }
     
     // MARK: - Accessibility

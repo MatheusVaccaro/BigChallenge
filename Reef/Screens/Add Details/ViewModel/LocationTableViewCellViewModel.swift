@@ -25,8 +25,17 @@ extension LocationInputViewModel: IconCellPresentable {
         return "locationIcon"
     }
     
-    var hasLocation: Bool {
-        return location != nil
+    var rightImageName: String {
+        if !hasLocation {
+            return "rightArrow"
+        } else {
+            return "removeButton"
+        }
+    }
+    
+    func rightImageClickHandler() {
+        location = nil
+        isArriving = true
     }
     
     var voiceOverHint: String {
@@ -39,5 +48,9 @@ extension LocationInputViewModel: IconCellPresentable {
         } else {
             return nil
         }
+    }
+    
+    private var hasLocation: Bool {
+        return location != nil
     }
 }

@@ -14,13 +14,20 @@ protocol IconCellPresentable {
     var imageName: String { get }
     var voiceOverHint: String { get }
     var voiceOverValue: String? { get }
+    
     var isSwitchCell: Bool { get }
     var isSwitchOn: Bool { get set }
     func switchActivated(bool: Bool, completion: @escaping ((Bool) -> Void))
+    
+    var rightImageName: String { get }
+    func rightImageClickHandler()
 }
 
 extension IconCellPresentable {
     var isSwitchCell: Bool { return false }
     var isSwitchOn: Bool { get { return false } set { } }
     func switchActivated(bool: Bool, completion: @escaping ((Bool) -> Void)) {}
+    
+    var rightImageName: String { return "rightArrow" }
+    func rightImageClickHandler() { }
 }
