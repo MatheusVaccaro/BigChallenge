@@ -35,7 +35,8 @@ class TaskCreationFrameViewController: UIViewController {
     lazy var blurView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .regular)
         let view = UIVisualEffectView(effect: blurEffect)
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissViewController)))
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(dismissViewController))
+        view.addGestureRecognizer(gesture)
         return view
     }()
     

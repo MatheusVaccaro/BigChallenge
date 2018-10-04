@@ -1,5 +1,5 @@
 //
-//  TaskCreationFramePresentAnimationController.swift
+//  PresentTaskAnimationController.swift
 //  Reef
 //
 //  Created by Matheus Vaccaro on 24/09/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TaskCreationFramePresentAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
+class PresentTaskAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.1
@@ -28,22 +28,18 @@ class TaskCreationFramePresentAnimationController: NSObject, UIViewControllerAni
         containerView.addSubview(toViewController.view)
         toViewController.view.isHidden = true
         
-        let animator = UIViewPropertyAnimator(duration: duration, curve: .linear)
-        animator.addAnimations {
+        UIView.animate(withDuration: duration, animations: {
             homeScreenViewController.pullDownViewTopConstraint.constant = 30
             homeScreenViewController.view.layoutIfNeeded()
             
+            taskCreationFrameViewController.view.layoutIfNeeded()
             taskCreationFrameViewController.taskContainerViewTopConstraint.constant =
                 taskCreationFrameViewController.titleInputHeight
-            
-//            taskCreationFrameViewController.view.layoutIfNeeded()
-        }
-        
-        animator.addCompletion { _ in
+            taskCreationFrameViewController.view.layoutIfNeeded()
+        }) { _ in
             toViewController.view.isHidden = false
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
-        animator.startAnimation()
     }
     
 }

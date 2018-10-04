@@ -1,5 +1,5 @@
 //
-//  TaskCreationFrameDismissAnimationController.swift
+//  DismissTaskAnimationController.swift
 //  Reef
 //
 //  Created by Matheus Vaccaro on 24/09/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TaskCreationFrameDismissAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
+class DismissTaskAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.1
@@ -24,18 +24,16 @@ class TaskCreationFrameDismissAnimationController: NSObject, UIViewControllerAni
         
         let duration = transitionDuration(using: transitionContext)
         
-        let animator = UIViewPropertyAnimator(duration: duration, curve: .linear)
-        animator.addAnimations {
-            homeScreenViewController.pullDownViewTopConstraint.constant = -22
-            homeScreenViewController.view.layoutIfNeeded()
-            
-            taskCreationFrameViewController.taskContainerViewTopConstraint.constant = 30
-            taskCreationFrameViewController.view.layoutIfNeeded()
-        }
-        animator.addCompletion { _ in
+        UIView.animate(withDuration: duration,
+                       animations: {
+                            homeScreenViewController.pullDownViewTopConstraint.constant = -22
+                            homeScreenViewController.view.layoutIfNeeded()
+                        
+                            taskCreationFrameViewController.taskContainerViewTopConstraint.constant = 30
+                            taskCreationFrameViewController.view.layoutIfNeeded()
+        }) { _ in
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
-        animator.startAnimation()
     }
     
 }
