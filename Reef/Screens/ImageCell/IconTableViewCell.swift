@@ -18,7 +18,6 @@ class IconTableViewCell: UITableViewCell {
     @IBOutlet weak var imageHeight: NSLayoutConstraint!
     @IBOutlet weak var arrowImage: UIImageView!
     @IBOutlet weak var cellSwitch: UISwitch!
-    @IBOutlet weak var cellSwitchConstraint: NSLayoutConstraint!
     
     var titleFontSize: CGFloat = 18 {
         didSet {
