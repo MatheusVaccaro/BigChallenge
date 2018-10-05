@@ -50,6 +50,15 @@ public extension UIFont {
         }
     }
     
+    public func monospaced() -> UIFont {
+        let fontDescriptorFeatureSettings = [UIFontDescriptor.FeatureKey.featureIdentifier: kNumberSpacingType,
+                                             UIFontDescriptor.FeatureKey.typeIdentifier: kMonospacedNumbersSelector]
+        let fontDescriptorAttributes = [UIFontDescriptor.AttributeName.featureSettings: [fontDescriptorFeatureSettings]]
+        let monospacedFontDescriptor = fontDescriptor.addingAttributes(fontDescriptorAttributes)
+        
+        return UIFont.init(descriptor: monospacedFontDescriptor, size: 0)
+    }
+    
     private func withTraits(traits: UIFontDescriptor.SymbolicTraits) -> UIFont {
         let descriptor = fontDescriptor.withSymbolicTraits(traits)
         return UIFont(descriptor: descriptor!, size: 0) //size 0 means keep the size as it is
