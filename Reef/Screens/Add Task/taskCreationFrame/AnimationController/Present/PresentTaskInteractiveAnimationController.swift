@@ -35,14 +35,8 @@ class PresentTaskInteractiveAnimationController: UIPercentDrivenInteractiveTrans
         
     }
     
-//    func attach(presenter: UIViewController, presented: UIViewController, completionHandler: CompletionHandler? = nil) {
-//        self.presenter = presenter
-//        self.presented = presented
-//        self.completionHandler = completionHandler
-//        self.attached = true
-//    }
-//    
     @objc func handleGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
+        guard let taskCoordinator = taskCoordinator else { return }
         let translation = gestureRecognizer.translation(in: gestureRecognizer.view!.superview!)
         var progress = (translation.y / 38)
         progress = min(max(progress, 0.0), 1.0)
@@ -50,7 +44,7 @@ class PresentTaskInteractiveAnimationController: UIPercentDrivenInteractiveTrans
         switch state {
         case .began:
             interactionInProgress = true
-            taskCoordinator?.start()
+            taskCoordinator.start()
         case .changed:
             shouldCompleteTransition = progress > 0.5
             update(progress)
@@ -62,9 +56,9 @@ class PresentTaskInteractiveAnimationController: UIPercentDrivenInteractiveTrans
             if shouldCompleteTransition {
                 finish()
                 completionHandler?()
-                view?.removeGestureRecognizer(gestureRecognizer)
             } else {
                 cancel()
+                taskCoordinator.delegate?.shouldDeinitCoordinator(taskCoordinator)
             }
         default:
             break

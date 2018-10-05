@@ -41,6 +41,11 @@ class HomeScreenViewController: UIViewController {
     @IBOutlet weak var pullDownViewTopConstraint: NSLayoutConstraint!
     
     // MARK: - Lifecycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("===============")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = Strings.bigTitleText

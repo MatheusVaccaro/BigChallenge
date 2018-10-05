@@ -27,6 +27,8 @@ class HomeScreenCoordinator: Coordinator {
     private let tagCollectionViewModelType: TagCollectionViewModel.Type
     private var tagCollectionViewController: TagCollectionViewController?
     
+    private var presentTaskInteractiveAnimationController: PresentTaskInteractiveAnimationController?
+    
     init(presenter: UINavigationController,
          taskModel: TaskModel,
          tagModel: TagModel,
@@ -177,18 +179,9 @@ extension HomeScreenCoordinator: TagCollectionViewModelDelegate {
 
 extension HomeScreenCoordinator: HomeScreenViewControllerDelegate {
     func viewDidLoad() {
-        let newTaskCoordinator =
-            NewTaskCoordinator(presenter: presenter,
-                               taskModel: taskModel,
-                               tagModel: tagModel,
-                               selectedTags: selectedTags)
-        
-        newTaskCoordinator.delegate = self
-        addChild(coordinator: newTaskCoordinator)
-        
         let interactiveAnimation = PresentTaskInteractiveAnimationController(view: homeScreenViewController!.pullDownView,
                                                                              taskCoordinator: newTaskCoordinator)
-        
+        self.presentTaskInteractiveAnimationController = interactiveAnimation
         newTaskCoordinator.presentTaskInteractiveAnimationController = interactiveAnimation
     }
 }
