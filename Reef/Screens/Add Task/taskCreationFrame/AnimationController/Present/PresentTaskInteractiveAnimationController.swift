@@ -13,24 +13,35 @@ class PresentTaskInteractiveAnimationController: UIPercentDrivenInteractiveTrans
     
     typealias CompletionHandler = () -> Void
     
+    private weak var taskCoordinator: NewTaskCoordinator?
+    private weak var view: UIView?
+    
     private(set) var interactionInProgress = false
     
     private var shouldCompleteTransition = false
-    private var presenter: UIViewController
+    private var presenter: UIViewController!
+    private var presented: UIViewController!
     private var completionHandler: CompletionHandler?
     private var gestureRecognizer: UIPanGestureRecognizer!
-    private var view: UIView
+    private var attached: Bool = false
     
-    init(presenter: UIViewController, view: UIView, completionHandler: CompletionHandler? = nil) {
+    init(view: UIView, taskCoordinator: NewTaskCoordinator) {
         self.view = view
-        self.presenter = presenter
+        self.taskCoordinator = taskCoordinator
         super.init()
         let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleGesture(_:)))
         self.gestureRecognizer = gestureRecognizer
-        self.completionHandler = completionHandler
         view.addGestureRecognizer(gestureRecognizer)
+        
     }
     
+//    func attach(presenter: UIViewController, presented: UIViewController, completionHandler: CompletionHandler? = nil) {
+//        self.presenter = presenter
+//        self.presented = presented
+//        self.completionHandler = completionHandler
+//        self.attached = true
+//    }
+//    
     @objc func handleGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
         let translation = gestureRecognizer.translation(in: gestureRecognizer.view!.superview!)
         var progress = (translation.y / 38)
@@ -39,7 +50,7 @@ class PresentTaskInteractiveAnimationController: UIPercentDrivenInteractiveTrans
         switch state {
         case .began:
             interactionInProgress = true
-            presenter.dismiss(animated: true)
+            taskCoordinator?.start()
         case .changed:
             shouldCompleteTransition = progress > 0.5
             update(progress)
@@ -51,7 +62,7 @@ class PresentTaskInteractiveAnimationController: UIPercentDrivenInteractiveTrans
             if shouldCompleteTransition {
                 finish()
                 completionHandler?()
-                view.removeGestureRecognizer(gestureRecognizer)
+                view?.removeGestureRecognizer(gestureRecognizer)
             } else {
                 cancel()
             }

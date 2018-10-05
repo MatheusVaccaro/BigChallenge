@@ -37,7 +37,11 @@ class PresentTaskAnimationController: NSObject, UIViewControllerAnimatedTransiti
         }) { _ in
             toViewController.view.isHidden = false
             homeScreenViewController.pullDownViewTopConstraint.constant = -22
-            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            let transitionCanceled = transitionContext.transitionWasCancelled
+            transitionContext.completeTransition(!transitionCanceled)
+            if transitionCanceled {
+                taskCreationFrameViewController.taskContainerViewTopConstraint.constant = 30
+            }
         }
     }
     

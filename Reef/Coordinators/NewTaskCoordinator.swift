@@ -28,8 +28,8 @@ class NewTaskCoordinator: NSObject, Coordinator {
     fileprivate var task: Task?
     fileprivate var selectedTags: [Tag]
     
-    fileprivate var presentTaskInteractiveAnimationController: PresentTaskInteractiveAnimationController!
-    fileprivate var dismissTaskInteractiveAnimationController: DismissTaskInteractiveAnimationController!
+    var presentTaskInteractiveAnimationController: PresentTaskInteractiveAnimationController?
+    fileprivate var dismissTaskInteractiveAnimationController: DismissTaskInteractiveAnimationController?
 
     weak var delegate: CoordinatorDelegate?
     
@@ -45,7 +45,7 @@ class NewTaskCoordinator: NSObject, Coordinator {
         self.childrenCoordinators = []
         self.task = task
         self.selectedTags = selectedTags
-    
+
         print("+++ INIT NewTaskCoordinator")
     }
     
@@ -179,11 +179,13 @@ extension NewTaskCoordinator: UIViewControllerTransitioningDelegate {
     }
 
     func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return presentTaskInteractiveAnimationController
+        guard let animator = presentTaskInteractiveAnimationController else { return nil }
+        return animator.interactionInProgress ? animator : nil
     }
     
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return dismissTaskInteractiveAnimationController.interactionInProgress ? dismissTaskInteractiveAnimationController : nil
+        guard let animator = dismissTaskInteractiveAnimationController else { return nil }
+        return animator.interactionInProgress ? animator : nil
     }
 }
 

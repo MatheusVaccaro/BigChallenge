@@ -12,6 +12,10 @@ import ReefKit
 import RxSwift
 import UserNotifications
 
+protocol HomeScreenViewControllerDelegate: class {
+    func viewDidLoad()
+}
+
 class HomeScreenViewController: UIViewController {
     
     // MARK: - Properties
@@ -21,6 +25,8 @@ class HomeScreenViewController: UIViewController {
     fileprivate var tagCollectionViewController: TagCollectionViewController?
     
     private let disposeBag = DisposeBag()
+    
+    weak var delegate: HomeScreenViewControllerDelegate?
     
     // MARK: - IBOutlets
     @IBOutlet weak var newTaskLabel: UILabel!
@@ -50,6 +56,8 @@ class HomeScreenViewController: UIViewController {
         configurePullDownView()
         
         newTaskView.alpha = 0
+        
+        delegate?.viewDidLoad()
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
