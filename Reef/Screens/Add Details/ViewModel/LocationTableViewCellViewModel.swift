@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension LocationInputViewModel: IconCellPresentable {
     var title: String {
@@ -25,17 +26,13 @@ extension LocationInputViewModel: IconCellPresentable {
         return "locationIcon"
     }
     
-    var rightImageName: String {
-        if !hasLocation {
-            return "rightArrow"
-        } else {
-            return "removeButton"
-        }
+    var shouldShowDeleteIcon: Bool {
+        return hasLocation
     }
     
     func rightImageClickHandler() {
-        location = nil
-        isArriving = true
+        guard hasLocation else { return }
+        removeLocation()
     }
     
     var voiceOverHint: String {
@@ -48,6 +45,10 @@ extension LocationInputViewModel: IconCellPresentable {
         } else {
             return nil
         }
+    }
+    
+    private func removeLocation() {
+        location = nil
     }
     
     private var hasLocation: Bool {

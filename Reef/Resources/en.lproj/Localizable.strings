@@ -191,4 +191,11 @@
 /* No comment provided by engineer. */
 "private tag option voice over hint" = "Double tap to togle setting";
 
+/* Preposition that connects calendar date to time of day. */
 "dateInputPreposition" = "at";
+
+/* (VoiceOver) description when task in cell contains a date reminder (says the next date set) */
+"next reminder set to %@" = "next reminder is set top %@";
+
+/* (voiceOver) description when task in cell contains a location (says the number of locations it is set to) */
+"locations active" = "location reminder active";

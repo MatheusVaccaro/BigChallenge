@@ -11,10 +11,12 @@ import UIKit
 protocol NewTaskViewDelegate: class {
     func presentDetails()
     func doneEditing()
+    var canCreateTask: Bool { get }
+    var isPresentingMoreDetails: Bool { get }
 }
 
 class NewTaskView: UIView {
-    weak var delegate: NewTaskViewDelegate?
+    weak var delegate: NewTaskViewDelegate!
     
     override var accessibilityLabel: String? {
         get { return Strings.Task.CreationScreen.VoiceOver.label }
@@ -37,7 +39,12 @@ class NewTaskView: UIView {
             let doneAction = UIAccessibilityCustomAction(name: doneActionName,
                                                          target: self,
                                                          selector: #selector(activateDoneButton))
-            return [detailsAction, doneAction]
+            var ans: [UIAccessibilityCustomAction] = []
+            
+            if delegate.canCreateTask { ans.append(doneAction) }
+            if !delegate.isPresentingMoreDetails { ans.append(detailsAction) }
+            
+            return ans
         }
         
         set { }

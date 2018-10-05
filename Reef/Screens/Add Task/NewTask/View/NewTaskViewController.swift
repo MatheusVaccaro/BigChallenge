@@ -172,6 +172,15 @@ extension NewTaskViewController: UITextViewDelegate {
 }
 
 extension NewTaskViewController: NewTaskViewDelegate {
+    var canCreateTask: Bool {
+        guard let text = viewModel.taskTitleText else { return false }
+        return text != ""
+    }
+    
+    var isPresentingMoreDetails: Bool {
+        return taskDetailsButton.isHidden
+    }
+    
     func presentDetails() {
         self.didClickDetailsButton(taskDetailsButton)
     }

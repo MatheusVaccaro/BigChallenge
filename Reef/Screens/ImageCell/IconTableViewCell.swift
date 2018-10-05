@@ -62,8 +62,7 @@ class IconTableViewCell: UITableViewCell {
     }
     
     @IBAction func righImageDidClick(_ sender: Any) {
-        viewModel.rightImageClickHandler()
-        reloadData()
+        deleteActionHandler()
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -77,8 +76,11 @@ class IconTableViewCell: UITableViewCell {
         subtitleLabel.text = viewModel.subtitle
         icon.image = UIImage(named: viewModel.imageName)
         
-        rightButton.setImage(UIImage(named: viewModel.rightImageName),
-                             for: .normal)
+        if viewModel.shouldShowDeleteIcon {
+            rightButton.setImage(UIImage(named: "removeButton"), for: .normal)
+        } else {
+            rightButton.setImage(UIImage(named: "rightArrow"), for: .normal)
+        }
         
         if viewModel.isSwitchCell {
             rightButton.isHidden = true
@@ -122,5 +124,24 @@ class IconTableViewCell: UITableViewCell {
             return UIAccessibilityTraits.allowsDirectInteraction
         }
         set { }
+    }
+    
+    override var accessibilityCustomActions: [UIAccessibilityCustomAction]? {
+        get {
+            guard viewModel.shouldShowDeleteIcon else { return nil }
+            return [
+                UIAccessibilityCustomAction(name: Strings.General.deleteActionTitle,
+                                            target: self,
+                                            selector: #selector(deleteActionHandler))
+            ]
+        }
+        
+        set { }
+    }
+    
+    @objc private func deleteActionHandler() {
+        viewModel.rightImageClickHandler()
+        reloadData()
+        UIAccessibility.post(notification: UIAccessibility.Notification.layoutChanged, argument: nil)
     }
 }

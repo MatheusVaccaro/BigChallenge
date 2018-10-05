@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct StaticIconCellPresentable: IconCellPresentable {
     var title: String
@@ -14,6 +15,7 @@ struct StaticIconCellPresentable: IconCellPresentable {
     var imageName: String
     var voiceOverHint: String
     var voiceOverValue: String?
+    var accessibilityCustomActions: [UIAccessibilityCustomAction]?
     
     init(title: String, subtitle: String, imageName: String, voiceOverHint: String, voiceOverValue: String?) {
         self.title = title

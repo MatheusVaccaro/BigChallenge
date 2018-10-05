@@ -39,6 +39,10 @@ class PrivateTagViewModel: IconCellPresentable {
             : Strings.General.off
     }
     
+    var accessibilityCustomActions: [UIAccessibilityCustomAction]? {
+        return nil
+    }
+    
     var isSwitchCell: Bool {
         return true
     }

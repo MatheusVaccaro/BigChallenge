@@ -95,10 +95,18 @@ public class TaskCellViewModel {
     lazy var accessibilityDateString: String? = {
         guard let date = task.dates.min() else { return nil }
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .medium
+        
+        let dateDescription = dateFormatter.string(from: date)
+        
         let localizedString = Strings.Task.Cell.VoiceOver.dateDescription
         
         return String.localizedStringWithFormat(localizedString,
-                                                date.accessibilityDescription)
+                                                dateDescription)
     }()
     
     // MARK: - String

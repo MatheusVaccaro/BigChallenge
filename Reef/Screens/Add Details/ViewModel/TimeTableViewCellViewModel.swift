@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-extension IconCellPresentable where Self: DateInputViewModelProtocol {
+extension DateInputViewModel: IconCellPresentable {
     
     var title: String {
         return Strings.DateInputView.Cell.title
@@ -55,17 +55,13 @@ extension IconCellPresentable where Self: DateInputViewModelProtocol {
         return "dateIcon"
     }
     
-    var rightImageName: String {
-        if !wasLastDateNonnil {
-           return "rightArrow"
-        } else {
-            return "removeButton"
-        }
+    var shouldShowDeleteIcon: Bool {
+        return wasLastDateNonnil
     }
     
     func rightImageClickHandler() {
-        selectCalendarDate(nil)
-        selectTimeOfDay(nil)
+        guard wasLastDateNonnil else { return }
+        removeDate()
     }
     
     var voiceOverHint: String {
@@ -74,10 +70,15 @@ extension IconCellPresentable where Self: DateInputViewModelProtocol {
     
     var voiceOverValue: String? {
         if wasLastDateNonnil {
-            return subtitle
+            return subtitle // TODO
         } else {
             return nil
         }
+    }
+    
+    private func removeDate() {
+        selectCalendarDate(nil)
+        selectTimeOfDay(nil)
     }
 }
 

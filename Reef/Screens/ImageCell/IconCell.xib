@@ -56,6 +56,9 @@
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKi-6D-WjM">
                                 <rect key="frame" x="284" y="0.5" width="31" height="56"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="ORK-m3-RsH"/>
                                     <constraint firstAttribute="width" constant="31" id="rWI-jw-Pak"/>
