@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension NotesInputViewModel: IconCellPresentable {
     var title: String {
@@ -25,16 +26,13 @@ extension NotesInputViewModel: IconCellPresentable {
         return "notesIcon"
     }
     
-    var rightImageName: String {
-        if !hasNotes {
-            return "rightArrow"
-        } else {
-            return "removeButton"
-        }
+    var shouldShowDeleteIcon: Bool {
+        return hasNotes
     }
     
     func rightImageClickHandler() {
-        notes = ""
+        guard hasNotes else { return }
+        removeNotes()
     }
     
     var voiceOverHint: String {
@@ -47,6 +45,10 @@ extension NotesInputViewModel: IconCellPresentable {
         } else {
             return nil
         }
+    }
+    
+    private func removeNotes() {
+        notes = ""
     }
     
     private var hasNotes: Bool {

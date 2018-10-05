@@ -46,7 +46,7 @@
                                 </connections>
                             </searchBar>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RVD-cG-cTQ">
-                                <rect key="frame" x="24" y="128" width="327" height="359"/>
+                                <rect key="frame" x="24" y="128" width="327" height="489"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="searchResultCell" id="YNV-tf-UP3" customClass="LocationTableViewCell" customModule="Reef" customModuleProvider="target">
@@ -100,7 +100,7 @@
                             <constraint firstItem="nhI-q9-g2L" firstAttribute="leading" secondItem="3HN-rQ-WpB" secondAttribute="leading" constant="8" id="Wch-pW-5qT"/>
                             <constraint firstItem="zBP-90-CYB" firstAttribute="top" secondItem="csW-O8-Nof" secondAttribute="bottom" constant="8" id="fFV-Rl-fHc"/>
                             <constraint firstItem="RVD-cG-cTQ" firstAttribute="leading" secondItem="nhI-q9-g2L" secondAttribute="leading" constant="16" id="ilC-wh-QzY"/>
-                            <constraint firstItem="RVD-cG-cTQ" firstAttribute="bottom" secondItem="nhI-q9-g2L" secondAttribute="bottom" constant="-180" id="pUo-md-9ON"/>
+                            <constraint firstItem="RVD-cG-cTQ" firstAttribute="bottom" secondItem="nhI-q9-g2L" secondAttribute="bottom" constant="-50" id="pUo-md-9ON"/>
                             <constraint firstItem="RVD-cG-cTQ" firstAttribute="top" secondItem="nhI-q9-g2L" secondAttribute="top" constant="-20" id="rPk-Uw-Skb"/>
                             <constraint firstItem="csW-O8-Nof" firstAttribute="top" secondItem="3HN-rQ-WpB" secondAttribute="top" constant="8" id="sPd-Hb-aLN"/>
                             <constraint firstItem="3HN-rQ-WpB" firstAttribute="bottom" secondItem="nhI-q9-g2L" secondAttribute="bottom" id="wyr-Ir-PwT"/>

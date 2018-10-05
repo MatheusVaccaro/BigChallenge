@@ -828,14 +828,6 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		22E3E2FB215525DC00D6EF32 /* TableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				22E3E2FD215525DC00D6EF32 /* TaskCell */,
-			);
-			path = TableViewCell;
-			sourceTree = "<group>";
-		};
 		22E3E2FD215525DC00D6EF32 /* TaskCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1068,7 +1060,7 @@
 		C21EAD0420B74710005F0F85 /* TaskList */ = {
 			isa = PBXGroup;
 			children = (
-				22E3E2FB215525DC00D6EF32 /* TableViewCell */,
+				22E3E2FD215525DC00D6EF32 /* TaskCell */,
 				C21EAD0520B74722005F0F85 /* View */,
 				C21EAD0C20B751D7005F0F85 /* ViewModel */,
 			);

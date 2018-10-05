@@ -7,20 +7,22 @@
 //
 
 import Foundation
+import UIKit
 
 protocol IconCellPresentable {
     var title: String { get }
     var subtitle: String { get }
     var imageName: String { get }
-    var voiceOverHint: String { get }
-    var voiceOverValue: String? { get }
     
     var isSwitchCell: Bool { get }
     var isSwitchOn: Bool { get set }
     func switchActivated(bool: Bool, completion: @escaping ((Bool) -> Void))
     
-    var rightImageName: String { get }
+    var shouldShowDeleteIcon: Bool { get }
     func rightImageClickHandler()
+    
+    var voiceOverHint: String { get }
+    var voiceOverValue: String? { get }
 }
 
 extension IconCellPresentable {
@@ -28,6 +30,6 @@ extension IconCellPresentable {
     var isSwitchOn: Bool { get { return false } set { } }
     func switchActivated(bool: Bool, completion: @escaping ((Bool) -> Void)) {}
     
-    var rightImageName: String { return "rightArrow" }
+    var shouldShowDeleteIcon: Bool { return false }
     func rightImageClickHandler() { }
 }

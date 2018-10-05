@@ -93,7 +93,7 @@ public class TaskListViewModel {
         
         if !selectedTags.contains { $0.requiresAuthentication } {
             remainingTasks = remainingTasks.filter { !$0.isPrivate }
-        }
+        } //TODO: review
         
         tasks.append((rows: remainingTasks, header: otherHeader))
         

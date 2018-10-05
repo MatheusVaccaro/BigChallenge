@@ -71,7 +71,7 @@ struct Strings {
             struct VoiceOver {
                 static let hintCompleted = NSLocalizedString("taskCellCompletedVoiceOverHint", comment: "(VoiceOver) hint for task cell on task list ('double tap to set incomplete')")
                 static let hintIncomplete = NSLocalizedString("taskCellIncompleteVoiceOverHint", comment: "(VoiceOver) hint for task cell on task list ('double tap to complete')")
-                static let locationDescription = NSLocalizedString("set to %@ locations", comment: "(voiceOver) description when task in cell contains a location (says the number of locations it is set to)")
+                static let locationDescription = NSLocalizedString("locations active", comment: "(voiceOver) description when task in cell contains a location")
                 static let dateDescription = NSLocalizedString("next reminder set to %@", comment: "(VoiceOver) description when task in cell contains a date reminder (says the next date set)")
             }
         }

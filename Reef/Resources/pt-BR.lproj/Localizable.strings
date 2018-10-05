@@ -126,7 +126,7 @@
 "lateHeader" = "Atrasadas";
 
 /* header title for recommended by 'location' section */
-"locationHeader" = "Por que você está ai";
+"locationHeader" = "Porque você está ai";
 
 /* accessibility value on map for voiceOver users when empty */
 "mapValueEmpty" = "Nenhuma localização definida";
@@ -191,4 +191,11 @@
 /* No comment provided by engineer. */
 "private tag option voice over hint" = "Dê dois toques para alternar a configuração";
 
+/* Preposition that connects calendar date to time of day. */
 "dateInputPreposition" = "as";
+
+/* (VoiceOver) description when task in cell contains a date reminder (says the next date set) */
+"next reminder set to %@" = "Próximo lembrete está marcado para %@";
+
+/* (voiceOver) description when task in cell contains a location (says the number of locations it is set to) */
+"locations active" = "Notificação por localização ativa";

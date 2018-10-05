@@ -118,7 +118,7 @@ class TagCollectionViewCell: UICollectionViewCell {
         tagUILabel.text = "+"
         maskLabel.text = "+"
         
-        gradientLayer.colors = UIColor.Tags.redGradient
+        gradientLayer.colors = [UIColor.largeTitleColor.cgColor, UIColor.largeTitleColor.cgColor]
         contentView.mask = maskLabel
         tagUILabel.isHidden = true
         kind = .add

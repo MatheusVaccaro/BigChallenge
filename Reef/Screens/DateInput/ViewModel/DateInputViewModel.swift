@@ -209,12 +209,17 @@ protocol DateInputViewModelDelegate: class {
 
 extension DateInputViewModel: CalendarViewAccessibilityProvider {
     func accessibilityValue() -> String? {
-        
         if let lastObservedCalendarDate = try? calendarDate.value(),
             let calendarDate = lastObservedCalendarDate,
             let date = Calendar.current.date(from: calendarDate) {
             
-            return date.accessibilityDescription
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale.current
+            dateFormatter.dateStyle = .long
+            dateFormatter.timeStyle = .none
+            let dateDescription = dateFormatter.string(from: date)
+            
+            return dateDescription
         } else {
             return ""
         }

@@ -157,6 +157,13 @@ extension TaskListViewController: UITableViewDataSource {
         
         cell.configure(with: taskCellViewModel)
         
+//        if !viewModel.selectedTags.contains { $0.requiresAuthentication }, taskCellViewModel.taskIsPrivate {
+//            let blurEffect = UIBlurEffect(style: .regular)
+//            let blurView = UIVisualEffectView(effect: blurEffect)
+//            blurView.frame = cell.contentView.bounds
+//            cell.contentView.addSubview(blurView)
+        //        } TODO: review
+        
         return cell
     }
 }

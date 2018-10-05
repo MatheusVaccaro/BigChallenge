@@ -46,7 +46,6 @@ class TagCollectionViewController: UIViewController {
     
     func bindCollectionView() {
         viewModel.tagsObservable
-            .map { return self.viewModel.sortMostTasksIn($0) }
             .map { return $0.map { Item(tag: $0) } + [Item(tag: nil)] } // map add button
             .bind(to: tagsCollectionView.rx
             .items(cellIdentifier: TagCollectionViewCell.identifier,

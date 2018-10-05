@@ -38,6 +38,7 @@ class HomeScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = Strings.bigTitleText
+        
         view.backgroundColor = UIColor.backgroundColor
         
         configureWhiteBackgroundView()
@@ -214,6 +215,9 @@ class HomeScreenViewController: UIViewController {
         pullDownView.layer.shadowOpacity = 1
         pullDownView.layer.shadowRadius = 10
         
+        pullDownView.accessibilityValue = Strings.Task.CreationScreen.taskTitlePlaceholder
+        pullDownView.accessibilityTraits = UIAccessibilityTraits.button
+        
         pullDownView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(startAddTask)))
     }
     
@@ -247,5 +251,14 @@ extension HomeScreenViewController {
     override func accessibilityPerformMagicTap() -> Bool {
         viewModel.startAddTask()
         return true
+    }
+    
+    override var accessibilityCustomRotors: [UIAccessibilityCustomRotor]? {
+        get {
+            return nil //TODO
+        }
+        set {
+            
+        }
     }
 }
