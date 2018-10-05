@@ -61,6 +61,8 @@ class PrivateTagViewModel: IconCellPresentable {
             }
             self.delegate?.privateTagViewModel(self, didActivate: self.isSwitchOn)
             completion(self.isSwitchOn)
-            }
+        }
     }
+    
+    required init() { }
 }

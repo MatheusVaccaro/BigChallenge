@@ -53,3 +53,14 @@ extension NotesInputViewModel: IconCellPresentable {
         return !(notes == "")
     }
 }
+
+extension StaticIconCellPresentable {
+    static func defaultNotesInputIconCellPresentable() -> StaticIconCellPresentable {
+        let staticIconCellPresentable = StaticIconCellPresentable(title: Strings.NotesInputView.Cell.title,
+                                                                  subtitle: Strings.NotesInputView.Cell.subtitle,
+                                                                  imageName: "notesIcon",
+                                                                  voiceOverHint: Strings.NotesInputView.Cell.subtitle,
+                                                                  voiceOverValue: nil)
+        return staticIconCellPresentable
+    }
+}

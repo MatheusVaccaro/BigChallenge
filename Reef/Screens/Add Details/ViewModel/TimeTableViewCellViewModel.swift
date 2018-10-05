@@ -80,3 +80,14 @@ extension IconCellPresentable where Self: DateInputViewModelProtocol {
         }
     }
 }
+
+extension StaticIconCellPresentable {
+    static func defaultDateInputIconCellPresentable() -> StaticIconCellPresentable {
+        let staticIconCellPresentable = StaticIconCellPresentable(title: Strings.DateInputView.Cell.title,
+                                                                  subtitle: Strings.DateInputView.Cell.subtitle,
+                                                                  imageName: "dateIcon",
+                                                                  voiceOverHint: Strings.DateInputView.Cell.subtitle,
+                                                                  voiceOverValue: nil)
+        return staticIconCellPresentable
+    }
+}

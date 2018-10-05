@@ -31,6 +31,8 @@ class LocationInputViewModel {
         }
     }
     
+    required init() { }
+    
     public weak var delegate: LocationInputDelegate?
     
     var placeName = Strings.LocationInputView.defaultPlaceName

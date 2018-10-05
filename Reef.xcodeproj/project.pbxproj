@@ -113,6 +113,7 @@
 		29320435213632E400E23E72 /* TagCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29320434213632E400E23E72 /* TagCollectionViewModel.swift */; };
 		2934BCCA21003E0700B6A05A /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2934BCC921003E0700B6A05A /* TaskTests.swift */; };
 		294490EE20FD297200333F11 /* TaskViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294490ED20FD297200333F11 /* TaskViewModelTests.swift */; };
+		295BCDC721670E500032B67C /* StaticIconCellPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295BCDC621670E500032B67C /* StaticIconCellPresentable.swift */; };
 		296424BB21559A7400480CB4 /* CoreAnimation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296424BA21559A7400480CB4 /* CoreAnimation+Extension.swift */; };
 		2972201F211CCD8F00CF80CE /* DateInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2972201E211CCD8F00CF80CE /* DateInputViewController.swift */; };
 		29722022211CD1AE00CF80CE /* DateInput.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29722021211CD1AE00CF80CE /* DateInput.storyboard */; };
@@ -364,6 +365,7 @@
 		29320434213632E400E23E72 /* TagCollectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionViewModel.swift; sourceTree = "<group>"; };
 		2934BCC921003E0700B6A05A /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		294490ED20FD297200333F11 /* TaskViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModelTests.swift; sourceTree = "<group>"; };
+		295BCDC621670E500032B67C /* StaticIconCellPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticIconCellPresentable.swift; sourceTree = "<group>"; };
 		296424BA21559A7400480CB4 /* CoreAnimation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreAnimation+Extension.swift"; sourceTree = "<group>"; };
 		2972201E211CCD8F00CF80CE /* DateInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputViewController.swift; sourceTree = "<group>"; };
 		29722021211CD1AE00CF80CE /* DateInput.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DateInput.storyboard; sourceTree = "<group>"; };
@@ -794,6 +796,7 @@
 				22DE270F2141BC6700466187 /* IconCell.xib */,
 				22DE27112141BFF300466187 /* IconTableViewCell.swift */,
 				22DE27132145A64C00466187 /* IconCellPresentable.swift */,
+				295BCDC621670E500032B67C /* StaticIconCellPresentable.swift */,
 			);
 			path = ImageCell;
 			sourceTree = "<group>";
@@ -1786,6 +1789,7 @@
 				C2C79D2D2123E7D70058F228 /* DateInputViewModel+Extension.swift in Sources */,
 				22DE27142145A64C00466187 /* IconCellPresentable.swift in Sources */,
 				C25169952139BD6200999BD0 /* UIViewController+Extension.swift in Sources */,
+				295BCDC721670E500032B67C /* StaticIconCellPresentable.swift in Sources */,
 				160E62812155A129001F3D01 /* TagCreationViewController.swift in Sources */,
 				222BFF9420ED92C7001B6BBF /* RemindersCommunicator.swift in Sources */,
 				16F9D93A21596C8D00304ECE /* AddTagDetailsViewModel.swift in Sources */,

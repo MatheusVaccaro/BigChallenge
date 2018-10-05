@@ -29,37 +29,58 @@ protocol AddTaskDetailsDelegate: class {
     func shouldPresent(viewModel: IconCellPresentable)
 }
 
-class AddTaskDetailsViewModel {
-    
-    init(selectedTags: [Tag]) {
-        locationInputViewModel = LocationInputViewModel()
-        dateInputViewModel = DateInputViewModel(calendarDate: nil, timeOfDay: nil)
-        notesInputViewModel = NotesInputViewModel()
+private enum TaskDetailsCellType: Int {
+    case notesCell
+    case locationCell
+    case dateCell
+}
 
-        locationInputViewModel.delegate = self
-        dateInputViewModel.delegate = self
-        notesInputViewModel.delegate = self
-        
-        //TODO: start cells with tag attributes
-    }
-    
-    func edit(task: Task) {
-        locationInputViewModel.edit(task)
-        dateInputViewModel.edit(task)
-        notesInputViewModel.edit(task)
-    }
+class AddTaskDetailsViewModel {
     
     weak var delegate: AddTaskDetailsDelegate?
     
-    let locationInputViewModel: LocationInputViewModel
-    let dateInputViewModel: DateInputViewModel
-    let notesInputViewModel: NotesInputViewModel
+    let notesInputViewModelType: NotesInputViewModel.Type
+    var notesInputViewModel: NotesInputViewModel?
+    
+    let locationInputViewModelType: LocationInputViewModel.Type
+    var locationInputViewModel: LocationInputViewModel?
+    
+    let dateInputViewModelType: DateInputViewModelProtocol.Type
+    var dateInputViewModel: DateInputViewModelProtocol?
     
     private let _numberOfSections = 1
     private let _numberOfRows = 3
     
-    private var cells: [IconCellPresentable] {
-        return [ notesInputViewModel, locationInputViewModel, dateInputViewModel ]
+    private var cells: [TaskDetailsCellType: IconCellPresentable?]
+    private var placeholderCells: [TaskDetailsCellType: IconCellPresentable]
+    
+    init(selectedTags: [Tag]) {
+        locationInputViewModelType = LocationInputViewModel.self
+        dateInputViewModelType = DateInputViewModel.self
+        notesInputViewModelType = NotesInputViewModel.self
+
+        // Cell view models are only instantiated when they are needed
+        cells = [:]
+        placeholderCells = [.notesCell: StaticIconCellPresentable.defaultNotesInputIconCellPresentable(),
+                            .locationCell: StaticIconCellPresentable.defaultLocationInputIconCellPresentable(),
+                            .dateCell: StaticIconCellPresentable.defaultDateInputIconCellPresentable()]
+    }
+    
+    func edit(task: Task) {
+        if task.notes != nil {
+            instantiateCell(ofType: .notesCell)
+            notesInputViewModel?.edit(task)
+        }
+        
+        if task.location != nil {
+            instantiateCell(ofType: .locationCell)
+            locationInputViewModel?.edit(task)
+        }
+        
+        if task.dueDate != nil {
+            instantiateCell(ofType: .dateCell)
+            dateInputViewModel?.edit(task)
+        }
     }
 }
 
@@ -73,19 +94,54 @@ extension AddTaskDetailsViewModel: AddDetailsProtocol {
     }
     
     func viewModelForCell(at row: Int) -> IconCellPresentable {
-        return cells[row]
+        if let taskDetailsCellType = TaskDetailsCellType.init(rawValue: row),
+            let cellViewModel = cells[taskDetailsCellType] ?? placeholderCells[taskDetailsCellType] {
+            return cellViewModel
+            
+        } else {
+            return placeholderCells.values.first!
+        }
     }
     
     func shouldPresentView(at row: Int) {
-        delegate?.shouldPresent(viewModel: cells[row])
+        if let taskDetailsCellType = TaskDetailsCellType.init(rawValue: row),
+            let cellViewModel = cells[taskDetailsCellType] ?? instantiateCell(ofType: taskDetailsCellType) {
+            delegate?.shouldPresent(viewModel: cellViewModel)
+        }
+    }
+    
+    @discardableResult
+    private func instantiateCell(ofType cellType: TaskDetailsCellType) -> IconCellPresentable? {
+        let iconCellPresentable: IconCellPresentable?
+        
+        switch cellType {
+        case .notesCell:
+            notesInputViewModel = notesInputViewModelType.init()
+            notesInputViewModel?.delegate = self
+            iconCellPresentable = notesInputViewModel
+            
+        case .locationCell:
+            locationInputViewModel = locationInputViewModelType.init()
+            locationInputViewModel?.delegate = self
+            iconCellPresentable = locationInputViewModel
+            
+        case .dateCell:
+            let nextHour = Date.now().snappedToNextHour()
+            let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: nextHour)
+            dateInputViewModel = dateInputViewModelType.init(calendarDate: calendarDate, timeOfDay: timeOfDay,
+                                                             frequency: .none, delegate: self)
+            iconCellPresentable = dateInputViewModel
+        }
+        
+        cells[cellType] = iconCellPresentable
+        
+        return iconCellPresentable
     }
 }
 
 extension AddTaskDetailsViewModel: LocationInputDelegate {
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
-                       didFind location: CLCircularRegion?,
-                       named: String,
-                       arriving: Bool) {
+                       didFind location: CLCircularRegion?, named: String, arriving: Bool) {
         delegate?.locationInput(locationInputViewModel, didFind: location, named: named, arriving: arriving)
     }
 }
