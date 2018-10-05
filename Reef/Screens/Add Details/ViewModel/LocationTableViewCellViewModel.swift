@@ -54,3 +54,14 @@ extension LocationInputViewModel: IconCellPresentable {
         return location != nil
     }
 }
+
+extension StaticIconCellPresentable {
+    static func defaultLocationInputIconCellPresentable() -> StaticIconCellPresentable {
+        let staticIconCellPresentable = StaticIconCellPresentable(title: Strings.LocationInputView.Cell.title,
+                                                                  subtitle: Strings.LocationInputView.Cell.subtitle,
+                                                                  imageName: "locationIcon",
+                                                                  voiceOverHint: Strings.LocationInputView.Cell.subtitle,
+                                                                  voiceOverValue: nil)
+        return staticIconCellPresentable
+    }
+}

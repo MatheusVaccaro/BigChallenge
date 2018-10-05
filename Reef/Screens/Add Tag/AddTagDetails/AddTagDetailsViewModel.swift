@@ -57,9 +57,10 @@ class AddTagDetailsViewModel {
         self.privateTagViewModelType = PrivateTagViewModel.self
         
         self.privateTagViewModel = privateTagViewModelType.init()
+        // Cell view models are only instantiated when they are needed
         self.cells = [.privateTagCell: privateTagViewModel!]
-        self.placeholderCells = [.locationCell: DefaultLocationInputIconCellPresentable(),
-                                 .dateCell: DefaultDateInputIconCellPresentable()]
+        self.placeholderCells = [.locationCell: StaticIconCellPresentable.defaultLocationInputIconCellPresentable(),
+                                 .dateCell: StaticIconCellPresentable.defaultDateInputIconCellPresentable()]
     }
     
     func edit(_ tag: Tag?) {
