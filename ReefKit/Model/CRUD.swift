@@ -105,6 +105,11 @@ class TaskCRUD {
         }
         if let isCompleted = attributes[.isCompleted] as? Bool {
             task.isCompleted = isCompleted
+            if isCompleted {
+                NotificationManager.removeLocationNotification(for: task)
+                NotificationManager.removeDateNotification(for: task)
+                NotificationManager.removeAllTagsNotifications(for: task)
+            }
         }
         if let notes = attributes[.notes] as? String {
             task.notes = notes
