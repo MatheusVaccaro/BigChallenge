@@ -139,14 +139,14 @@ open class NotificationManager {
         addAllTagNotifications(from: tag)
     }
     
-    /** Update all notifications from a tag */
+    /** Update all notifications from multiple tags */
     open class func updateTagsNotifications(for tags: [Tag]) {
         for tag in tags {
             updateTagNotifications(for: tag)
         }
     }
     
-    /** Update all notifications from a tag */
+    /** Remove all notifications from a tag */
     open class func removeAllTagsNotifications(for task: Task) {
         for tag in task.allTags {
             removeSpecificDateNotification(from: tag, task: task)
