@@ -34,6 +34,12 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource {
         setupWeekdays()
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        calendar.reloadData()
+        view.setNeedsLayout()
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
     }
