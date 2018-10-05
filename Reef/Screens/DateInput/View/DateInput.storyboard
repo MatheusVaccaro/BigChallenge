@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Barlow-SemiBold.ttf">
+            <string>Barlow-SemiBold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Date Input View Controller-->
         <scene sceneID="lu7-cs-EQv">
@@ -19,58 +24,55 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="qv3-lM-uBA" customClass="CalendarView" customModule="Reef" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="182.5" width="320" height="264.5"/>
+                                <rect key="frame" x="0.0" y="176.5" width="320" height="270.5"/>
                             </containerView>
-                            <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="250" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="qTu-pG-5Pd">
-                                <rect key="frame" x="16" y="0.0" width="288" height="174.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="250" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qTu-pG-5Pd">
+                                <rect key="frame" x="16" y="0.0" width="288" height="168.5"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="cmY-wc-Ydr">
-                                        <rect key="frame" x="0.0" y="0.0" width="122" height="174.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="300" verticalCompressionResistancePriority="250" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="5lZ-2X-Jq4">
+                                        <rect key="frame" x="0.0" y="0.0" width="115" height="168.5"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="250" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="5lZ-2X-Jq4">
-                                                <rect key="frame" x="0.0" y="0.0" width="108.5" height="174.5"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="251" text="00" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZf-fB-Mas">
-                                                        <rect key="frame" x="0.0" y="0.0" width="108.5" height="147"/>
-                                                        <accessibility key="accessibilityConfiguration">
-                                                            <bool key="isElement" value="NO"/>
-                                                        </accessibility>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="123"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="250" text="SETEMBRO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odQ-yO-HSV">
-                                                        <rect key="frame" x="0.0" y="147" width="108.5" height="27.5"/>
-                                                        <accessibility key="accessibilityConfiguration">
-                                                            <bool key="isElement" value="NO"/>
-                                                        </accessibility>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="at" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9wo-QD-7Qu">
-                                                <rect key="frame" x="108.5" y="0.0" width="13.5" height="174.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="251" text="00" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZf-fB-Mas">
+                                                <rect key="frame" x="0.0" y="0.0" width="115" height="148"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <bool key="isElement" value="NO"/>
                                                 </accessibility>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Barlow-SemiBold" family="Barlow" pointSize="123"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="250" text="SETEMBRO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odQ-yO-HSV">
+                                                <rect key="frame" x="0.0" y="148" width="115" height="20.5"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <bool key="isElement" value="NO"/>
+                                                </accessibility>
+                                                <fontDescription key="fontDescription" name="Barlow-SemiBold" family="Barlow" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="at" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9wo-QD-7Qu">
+                                        <rect key="frame" x="115" y="74" width="29" height="20.5"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <bool key="isElement" value="NO"/>
+                                        </accessibility>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <datePicker contentMode="scaleToFill" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="YgX-4j-r0O">
-                                        <rect key="frame" x="138" y="6.5" width="150" height="162"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="mdp-LF-uIC"/>
-                                        </constraints>
+                                        <rect key="frame" x="144" y="3.5" width="144" height="162"/>
                                         <date key="date" timeIntervalSinceReferenceDate="555793516.040452">
                                             <!--2018-08-12 19:05:16 +0000-->
                                         </date>
                                     </datePicker>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="YgX-4j-r0O" firstAttribute="width" relation="greaterThanOrEqual" secondItem="qTu-pG-5Pd" secondAttribute="width" multiplier="0.4" id="1G9-7u-PhY"/>
+                                    <constraint firstItem="9wo-QD-7Qu" firstAttribute="width" relation="greaterThanOrEqual" secondItem="qTu-pG-5Pd" secondAttribute="width" multiplier="0.1" id="LD4-pq-lR1"/>
+                                    <constraint firstItem="5lZ-2X-Jq4" firstAttribute="width" secondItem="qTu-pG-5Pd" secondAttribute="width" multiplier="0.4" id="Qxk-Jg-tHR"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

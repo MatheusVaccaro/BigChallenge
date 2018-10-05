@@ -36,6 +36,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
+        CalendarCell.reloadFonts()
         calendar.reloadData()
         view.setNeedsLayout()
     }

@@ -11,12 +11,20 @@ import JTAppleCalendar
 
 class CalendarCell: JTAppleCell {
     
+    private static var todayFont = UIFont.font(sized: 18, weight: .bold, with: .body)
+    private static var defaultFont = UIFont.font(sized: 18, weight: .regular, with: .body)
+    
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var roundedView: UIView!
     private(set) var backgroundCircleLayer: CAShapeLayer!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.layer.masksToBounds = false
+        dayLabel.layer.masksToBounds = false
+        dayLabel.font = CalendarCell.defaultFont
+        dayLabel.adjustsFontSizeToFitWidth = true
         
         backgroundCircleLayer = CAShapeLayer()
         contentView.layer.addSublayer(backgroundCircleLayer)
@@ -50,14 +58,15 @@ class CalendarCell: JTAppleCell {
         guard isSelectable else {
             deselect(basedOn: cellState, animated: false)
             dayLabel.textColor = UIColor.DateInput.Calendar.unselectableDate
+            dayLabel.font = CalendarCell.defaultFont
             return
         }
         
         // Configure "today" visuals
         if Calendar.current.isDateInToday(cellState.date) {
-            dayLabel.font = UIFont.font(sized: 18, weight: .bold, with: .body)
+            dayLabel.font = CalendarCell.todayFont
         } else {
-            dayLabel.font = UIFont.font(sized: 18, weight: .regular, with: .body)
+            dayLabel.font = CalendarCell.defaultFont
         }
         
         // Configure selection visuals
@@ -100,5 +109,10 @@ class CalendarCell: JTAppleCell {
     
     private func setBackgroundColor(to color: UIColor) {
         backgroundCircleLayer.fillColor = color.cgColor
+    }
+    
+    static func reloadFonts() {
+        CalendarCell.todayFont = UIFont.font(sized: 18, weight: .bold, with: .body).monospaced()
+        CalendarCell.defaultFont = UIFont.font(sized: 18, weight: .regular, with: .body).monospaced()
     }
 }

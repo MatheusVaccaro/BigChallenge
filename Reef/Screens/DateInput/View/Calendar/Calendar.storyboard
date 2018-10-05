@@ -82,8 +82,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHJ-zL-m95">
-                                                    <rect key="frame" x="8" y="8" width="34" height="34"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="clip" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHJ-zL-m95">
+                                                    <rect key="frame" x="21" y="14.5" width="8" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -91,10 +91,8 @@
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="nHJ-zL-m95" firstAttribute="top" secondItem="mIH-Y8-8rF" secondAttribute="topMargin" id="PRr-ze-09C"/>
-                                            <constraint firstItem="nHJ-zL-m95" firstAttribute="leading" secondItem="mIH-Y8-8rF" secondAttribute="leadingMargin" id="QmF-1K-Idf"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="nHJ-zL-m95" secondAttribute="trailing" id="dzD-ba-fC7"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="nHJ-zL-m95" secondAttribute="bottom" id="zkJ-yi-Aly"/>
+                                            <constraint firstItem="nHJ-zL-m95" firstAttribute="centerX" secondItem="mIH-Y8-8rF" secondAttribute="centerX" id="6cV-ne-GIC"/>
+                                            <constraint firstItem="nHJ-zL-m95" firstAttribute="centerY" secondItem="mIH-Y8-8rF" secondAttribute="centerY" id="f32-2n-7Wx"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="dayLabel" destination="nHJ-zL-m95" id="JR8-oV-hYN"/>
