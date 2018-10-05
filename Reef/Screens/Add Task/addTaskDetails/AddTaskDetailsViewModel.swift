@@ -63,10 +63,6 @@ class AddTaskDetailsViewModel {
         placeholderCells = [DefaultNotesInputIconCellPresentable(),
                             DefaultLocationInputIconCellPresentable(),
                             DefaultDateInputIconCellPresentable()]
-    
-//        locationInputViewModel.delegate = self
-//        dateInputViewModel.delegate = self
-//        notesInputViewModel.delegate = self
         
         //TODO: start cells with tag attributes
     }

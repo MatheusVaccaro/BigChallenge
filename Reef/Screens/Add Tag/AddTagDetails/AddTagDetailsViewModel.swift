@@ -26,37 +26,58 @@ protocol AddTagDetailsViewModelDelegate: class {
     func privateTagViewModel(_ privateTagViewModel: PrivateTagViewModel, didActivate: Bool)
 }
 
+private enum TagDetailsCellType: Int {
+    case locationCell
+    case dateCell
+    case privateTagCell
+}
+
 class AddTagDetailsViewModel {
     
     weak var delegate: AddTagDetailsViewModelDelegate?
     
-    let locationInputViewModel: LocationInputViewModel
-    let dateInputViewModel: DateInputViewModel
-    let privateTagViewModel: PrivateTagViewModel
+    let locationInputViewModelType: LocationInputViewModel.Type
+    var locationInputViewModel: LocationInputViewModel?
+    
+    let dateInputViewModelType: DateInputViewModelProtocol.Type
+    var dateInputViewModel: DateInputViewModelProtocol?
+    
+    let privateTagViewModelType: PrivateTagViewModel.Type
+    var privateTagViewModel: PrivateTagViewModel?
     
     private let _numberOfSections = 1
     private let _numberOfRows = 3
     
-    private var cells: [IconCellPresentable] {
-        return [ locationInputViewModel, dateInputViewModel, privateTagViewModel ]
-    }
+    private var cells: [TagDetailsCellType : IconCellPresentable]
+    private var placeholderCells: [TagDetailsCellType : IconCellPresentable]
     
     init() {
-        locationInputViewModel = LocationInputViewModel()
-        dateInputViewModel = DateInputViewModel(calendarDate: nil, timeOfDay: nil)
-        privateTagViewModel = PrivateTagViewModel()
+        self.locationInputViewModelType = LocationInputViewModel.self
+        self.dateInputViewModelType = DateInputViewModel.self
+        self.privateTagViewModelType = PrivateTagViewModel.self
         
-        
-        locationInputViewModel.delegate = self
-        dateInputViewModel.delegate = self
-        privateTagViewModel.delegate = self
+        self.privateTagViewModel = privateTagViewModelType.init()
+        self.cells = [.privateTagCell: privateTagViewModel!]
+        self.placeholderCells = [.locationCell: DefaultLocationInputIconCellPresentable(),
+                                 .dateCell: DefaultDateInputIconCellPresentable()]
     }
     
     func edit(_ tag: Tag?) {
         guard let tag = tag else { return }
-        locationInputViewModel.edit(tag)
-        dateInputViewModel.edit(tag)
-        privateTagViewModel.edit(tag)
+        
+        if tag.location != nil {
+            instantiateCell(ofType: .locationCell)
+            locationInputViewModel?.edit(tag)
+        }
+        
+        if tag.dueDate != nil {
+            instantiateCell(ofType: .dateCell)
+            dateInputViewModel?.edit(tag)
+        }
+        
+        if tag.requiresAuthentication {
+            privateTagViewModel?.edit(tag)
+        }
     }
 }
 
@@ -70,16 +91,54 @@ extension AddTagDetailsViewModel: AddDetailsProtocol {
     }
     
     func viewModelForCell(at row: Int) -> IconCellPresentable {
-        return cells[row]
+        if let tagDetailsCellType = TagDetailsCellType.init(rawValue: row),
+           let cellViewModel = cells[tagDetailsCellType] ?? placeholderCells[tagDetailsCellType] {
+            return cellViewModel
+            
+        } else {
+            return placeholderCells.values.first!
+        }
     }
     
     func shouldPresentView(at row: Int) {
-        delegate?.shouldPresent(viewModel: cells[row])
+        if let tagDetailsCellType = TagDetailsCellType.init(rawValue: row),
+           let cellViewModel = cells[tagDetailsCellType] ?? instantiateCell(ofType: tagDetailsCellType) {
+            delegate?.shouldPresent(viewModel: cellViewModel)
+        }
+    }
+    
+    @discardableResult
+    private func instantiateCell(ofType cellType: TagDetailsCellType) -> IconCellPresentable? {
+        let iconCellPresentable: IconCellPresentable?
+        
+        switch cellType {
+        case .privateTagCell:
+            privateTagViewModel = privateTagViewModelType.init()
+            privateTagViewModel?.delegate = self
+            iconCellPresentable = privateTagViewModel
+            
+        case .locationCell:
+            locationInputViewModel = locationInputViewModelType.init()
+            locationInputViewModel?.delegate = self
+            iconCellPresentable = locationInputViewModel
+            
+        case .dateCell:
+            let nextHour = Date.now().snappedToNextHour()
+            let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: nextHour)
+            dateInputViewModel = dateInputViewModelType.init(calendarDate: calendarDate, timeOfDay: timeOfDay,
+                                                             frequency: .none, delegate: self)
+            iconCellPresentable = dateInputViewModel
+        }
+        
+        cells[cellType] = iconCellPresentable
+        
+        return iconCellPresentable
     }
 }
 
 extension AddTagDetailsViewModel: LocationInputDelegate {
-    func locationInput(_ locationInputViewModel: LocationInputViewModel, didFind location: CLCircularRegion?, named: String, arriving: Bool) {
+    func locationInput(_ locationInputViewModel: LocationInputViewModel,
+                       didFind location: CLCircularRegion?, named: String, arriving: Bool) {
         delegate?.locationInput(locationInputViewModel, didFind: location, named: named, arriving: arriving)
     }
 }
@@ -89,7 +148,8 @@ extension AddTagDetailsViewModel: DateInputViewModelDelegate {
         delegate?.dateInputViewModel(dateInputViewModel, didSelectDate: date)
     }
     
-    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectFrequency frequency: NotificationOptions.Frequency) {
+    func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
+                            didSelectFrequency frequency: NotificationOptions.Frequency) {
         delegate?.dateInputViewModel(dateInputViewModel, didSelectFrequency: frequency)
     }
 }
@@ -100,7 +160,7 @@ extension AddTagDetailsViewModel: PrivateTagViewModelDelegate {
     }
 }
 
-private extension DateInputViewModel {
+private extension DateInputViewModelProtocol {
     func edit(_ tag: Tag) {
         guard let dueDate = tag.dueDate else { return }
         
@@ -115,7 +175,7 @@ private extension LocationInputViewModel {
     func edit(_ tag: Tag) {
         guard tag.location != nil else { return }
         location = tag.location
-        isArriving = tag.isArrivingLocation ?? false
+        isArriving = tag.isArrivingLocation
         placeName = tag.locationName!
     }
 }
