@@ -52,6 +52,10 @@ public class TaskTableViewCell: UITableViewCell {
         configureAccessibility()
     }
     
+    public override func layoutSubviews() {
+        gradientLayer.frame = bounds
+    }
+    
     // MARK: - Functions
     public func configure(with viewModel: TaskCellViewModel) {
         self.viewModel = viewModel

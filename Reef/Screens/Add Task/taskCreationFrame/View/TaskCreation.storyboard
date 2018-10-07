@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsi-pl-HXe" userLabel="Task Container View">
-                                <rect key="frame" x="8" y="-140" width="359" height="293"/>
+                                <rect key="frame" x="8" y="-175" width="359" height="293"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGh-JP-lcF">
                                         <rect key="frame" x="0.0" y="220" width="359" height="73"/>
@@ -49,22 +49,22 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L3c-CN-lzT" userLabel="whiteBackgroundView">
-                                <rect key="frame" x="0.0" y="20" width="375" height="103"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BY2-pz-7Ub" userLabel="Tag Collection View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="87"/>
+                                        <rect key="frame" x="0.0" y="8" width="375" height="80"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="87" id="YVd-UW-yoD"/>
+                                            <constraint firstAttribute="height" constant="80" id="YVd-UW-yoD"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="BY2-pz-7Ub" firstAttribute="leading" secondItem="L3c-CN-lzT" secondAttribute="leading" id="8Mu-eB-bb0"/>
-                                    <constraint firstAttribute="height" constant="103" id="9IJ-aP-bqv"/>
+                                    <constraint firstAttribute="bottom" secondItem="BY2-pz-7Ub" secondAttribute="bottom" id="gBJ-3x-N7H"/>
                                     <constraint firstAttribute="trailing" secondItem="BY2-pz-7Ub" secondAttribute="trailing" id="mhz-xg-96V"/>
-                                    <constraint firstItem="BY2-pz-7Ub" firstAttribute="top" secondItem="L3c-CN-lzT" secondAttribute="top" id="vdG-0e-2eg"/>
+                                    <constraint firstItem="BY2-pz-7Ub" firstAttribute="top" secondItem="L3c-CN-lzT" secondAttribute="top" constant="8" id="vdG-0e-2eg"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -73,7 +73,7 @@
                             <constraint firstItem="isU-bp-1Xt" firstAttribute="trailing" secondItem="dsi-pl-HXe" secondAttribute="trailing" constant="8" id="2bW-pu-SgF"/>
                             <constraint firstItem="dsi-pl-HXe" firstAttribute="bottom" secondItem="L3c-CN-lzT" secondAttribute="bottom" constant="30" id="MEt-SI-DDx"/>
                             <constraint firstItem="L3c-CN-lzT" firstAttribute="leading" secondItem="isU-bp-1Xt" secondAttribute="leading" id="PQW-5v-D4Y"/>
-                            <constraint firstItem="L3c-CN-lzT" firstAttribute="top" secondItem="isU-bp-1Xt" secondAttribute="top" id="SVu-Fg-qn8"/>
+                            <constraint firstItem="L3c-CN-lzT" firstAttribute="top" secondItem="FUJ-f1-wVI" secondAttribute="top" id="SVu-Fg-qn8"/>
                             <constraint firstItem="isU-bp-1Xt" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="dsi-pl-HXe" secondAttribute="bottom" constant="16" id="YyA-UL-uMe"/>
                             <constraint firstItem="isU-bp-1Xt" firstAttribute="trailing" secondItem="L3c-CN-lzT" secondAttribute="trailing" id="eKp-y9-2u7"/>
                             <constraint firstItem="dsi-pl-HXe" firstAttribute="leading" secondItem="isU-bp-1Xt" secondAttribute="leading" constant="8" id="v40-mE-yNE"/>
