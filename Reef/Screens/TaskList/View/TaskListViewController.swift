@@ -106,28 +106,31 @@ extension TaskListViewController: UITableViewDelegate {
     }
     
     func toggleCompleteAction(forRowAt indexPath: IndexPath) -> UIContextualAction {
-        let action = UIContextualAction(style: .normal,
-                                        title: "complete") { (action: UIContextualAction, //TODO: localize
+        let action = UIContextualAction(style: .normal, title: nil) { (action: UIContextualAction,
                                             view: UIView,
                                             completion: (Bool) -> Void) in
                                             
-                                            self.viewModel.complete(taskAt: indexPath)
-//                                            self.tableView.deleteRows(at: [indexPath], with: .fade)
-                                            completion(true)
+            self.viewModel.toggleComplete(taskAt: indexPath)
+            completion(true)
         }
         
-        action.backgroundColor = UIColor.green
+        let task = viewModel.task(for: indexPath)
         
+        action.title = task.isCompleted //TODO: localize
+            ? "uncomplete"
+            : "coplete"
+        action.backgroundColor = task.isCompleted //TODO: designn
+            ? UIColor.yellow
+            : UIColor.green
         return action
     }
     
     func deleteAction(forRowAt indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .destructive,
-                                        title: "delete") { (action: UIContextualAction, //TODO: localize
+                                        title: Strings.General.deleteActionTitle) { (action: UIContextualAction,
                                             view: UIView,
                                             completion: (Bool) -> Void) in
                                             
-//                                            self.tableView.deleteRows(at: [indexPath], with: .none)
                                             self.viewModel.delete(taskAt: indexPath)
                                             completion(true)
         }
