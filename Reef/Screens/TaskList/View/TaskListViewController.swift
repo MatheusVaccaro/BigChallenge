@@ -98,6 +98,10 @@ extension TaskListViewController: UITableViewDelegate {
         headerLabel.sizeToFit()
         headerView.addSubview(headerLabel)
         
+        headerLabel.frame.origin.x += 10
+        headerLabel.frame.origin.y =
+            self.tableView(tableView, heightForHeaderInSection: section) - headerLabel.bounds.height - 5
+        
         if viewModel.isCompleted(section) {
             let tapGesture =
                 UITapGestureRecognizer(target: self, action: #selector(toggleCollapseInCompleteSection))
@@ -111,8 +115,12 @@ extension TaskListViewController: UITableViewDelegate {
         let completedSection = viewModel.tasks.count-1
         
         viewModel.isCompleteSectionCollapsed.toggle()
-        tableView.reloadSections([completedSection], with: .automatic)
         
+        if UIAccessibility.isReduceMotionEnabled {
+            tableView.reloadSections([completedSection], with: .fade)
+        } else {
+            tableView.reloadSections([completedSection], with: .automatic)
+        }
         if !viewModel.isCompleteSectionCollapsed {
             tableView.scrollToRow(at: IndexPath(row: 0, section: completedSection), at: .middle, animated: true)
         }
