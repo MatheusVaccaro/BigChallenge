@@ -91,17 +91,17 @@ public class TaskListViewModel {
         var remainingTasks = model.tasks
             .filter { $0.hasOneOf(selectedTags) && !flatTasks.contains($0) }
         
-        //completed
-        var completedTasks = remainingTasks
-            .filter { $0.isCompleted }
-        
-        // remove completed
-        remainingTasks.removeAll { $0.isCompleted }
-        
         //filter private
         if !selectedTags.contains { $0.requiresAuthentication } {
             remainingTasks = remainingTasks.filter { !$0.isPrivate }
         }
+        
+        //completed
+        let completedTasks = remainingTasks
+            .filter { $0.isCompleted }
+        
+        // remove completed
+        remainingTasks.removeAll { $0.isCompleted }
         
         tasks.append((rows: remainingTasks, header: otherHeader))
         tasks.append((rows: completedTasks, header: completedHeader))
