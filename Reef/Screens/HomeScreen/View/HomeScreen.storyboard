@@ -26,27 +26,21 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yry-e8-Psj" userLabel="PullDownView">
-                                <rect key="frame" x="8" y="86" width="359" height="73"/>
+                                <rect key="frame" x="8" y="35" width="359" height="124"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rVB-LF-LaO">
-                                        <rect key="frame" x="134" y="45" width="91.5" height="16"/>
+                                        <rect key="frame" x="84" y="89" width="191.5" height="23"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pullDownArrow" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XCG-QJ-7v0">
                                                 <rect key="frame" x="0.0" y="0.0" width="17" height="23"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a new task" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuF-D9-9c3">
-                                                <rect key="frame" x="0.0" y="0.0" width="91.5" height="16"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pull down to add a new task" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuF-D9-9c3">
+                                                <rect key="frame" x="25" y="3.5" width="166.5" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                                 <color key="textColor" red="0.61568627450000002" green="0.6588235294" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <variation key="default">
-                                            <mask key="subviews">
-                                                <exclude reference="XCG-QJ-7v0"/>
-                                            </mask>
-                                        </variation>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -56,6 +50,7 @@
                                 <constraints>
                                     <constraint firstItem="rVB-LF-LaO" firstAttribute="centerX" secondItem="Yry-e8-Psj" secondAttribute="centerX" id="MGk-tL-zGe"/>
                                     <constraint firstAttribute="bottom" secondItem="rVB-LF-LaO" secondAttribute="bottom" constant="12" id="gPF-wP-moi"/>
+                                    <constraint firstAttribute="height" constant="124" id="xfj-mj-WEQ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lah-lf-SBT" userLabel="whiteBackgroundView">
@@ -133,14 +128,13 @@
                             <constraint firstItem="fUe-Ak-aYb" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" id="SKh-ZC-I5v"/>
                             <constraint firstItem="cie-Gz-Vzx" firstAttribute="top" secondItem="Cg0-Uy-cLM" secondAttribute="bottom" id="UyP-Do-N1s"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="Cg0-Uy-cLM" secondAttribute="trailing" constant="8" id="XCn-8J-8KI"/>
-                            <constraint firstItem="Yry-e8-Psj" firstAttribute="height" secondItem="QKa-yH-x6F" secondAttribute="height" multiplier="73/647" id="aSj-cX-VrQ"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="Yry-e8-Psj" secondAttribute="trailing" constant="8" id="dnI-ee-PcK"/>
                             <constraint firstItem="tNy-DE-xKt" firstAttribute="centerX" secondItem="cie-Gz-Vzx" secondAttribute="centerX" id="eum-Ff-z5p"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="fUe-Ak-aYb" secondAttribute="trailing" id="l9d-qe-b2V"/>
                             <constraint firstItem="vxw-1p-TGH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="8" id="mAO-h2-klz"/>
                             <constraint firstItem="Cg0-Uy-cLM" firstAttribute="top" secondItem="lah-lf-SBT" secondAttribute="bottom" constant="-560" id="mB8-Jc-8hI"/>
                             <constraint firstItem="lah-lf-SBT" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" id="p0e-jG-Wqj"/>
-                            <constraint firstItem="Yry-e8-Psj" firstAttribute="top" secondItem="lah-lf-SBT" secondAttribute="bottom" constant="-22" id="pde-MR-fK8"/>
+                            <constraint firstItem="Yry-e8-Psj" firstAttribute="top" secondItem="lah-lf-SBT" secondAttribute="bottom" constant="-73" id="pde-MR-fK8"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="Fea-br-2cN" secondAttribute="trailing" constant="8" id="sWv-bs-slk"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="cie-Gz-Vzx" secondAttribute="trailing" id="yev-Sb-Zry"/>
                         </constraints>

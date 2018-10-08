@@ -15,24 +15,25 @@ class DismissTaskAnimationController: NSObject, UIViewControllerAnimatedTransiti
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        
         guard let fromViewController = transitionContext.viewController(forKey: .from),
             let taskCreationFrameViewController = fromViewController.children.first as? TaskCreationFrameViewController
             else { return }
         
         let duration = transitionDuration(using: transitionContext)
         
-        taskCreationFrameViewController.taskContainerViewTopConstraint.constant = 30
+        taskCreationFrameViewController.taskContainerViewTopConstraint.constant =
+            -taskCreationFrameViewController.taskContainerViewHeight
         
         UIView.animate(withDuration: duration, animations: {
             taskCreationFrameViewController.view.layoutIfNeeded()
-        }) { _ in
+        }, completion: { _ in
             let transitionCanceled = transitionContext.transitionWasCancelled
             transitionContext.completeTransition(!transitionCanceled)
             if transitionCanceled {
-                taskCreationFrameViewController.taskContainerViewTopConstraint.constant = 73
+                taskCreationFrameViewController.taskContainerViewTopConstraint.constant =
+                    -taskCreationFrameViewController.taskDetailViewHeight
             }
-        }
+        })
     }
     
 }

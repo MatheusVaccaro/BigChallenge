@@ -172,7 +172,7 @@ extension NewTaskCoordinator: UIViewControllerTransitioningDelegate {
         guard let _ = presenting.children.first as? HomeScreenViewController else { return nil }
         return PresentTaskAnimationController()
     }
-    
+
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         guard let _ = dismissed.children.first as? TaskCreationFrameViewController else { return nil }
         return DismissTaskAnimationController()
@@ -182,7 +182,7 @@ extension NewTaskCoordinator: UIViewControllerTransitioningDelegate {
         guard let animator = presentTaskInteractiveAnimationController else { return nil }
         return animator.interactionInProgress ? animator : nil
     }
-    
+
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         guard let animator = dismissTaskInteractiveAnimationController else { return nil }
         return animator.interactionInProgress ? animator : nil

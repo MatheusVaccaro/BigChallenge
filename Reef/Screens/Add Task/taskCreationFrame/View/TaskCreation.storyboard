@@ -19,25 +19,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsi-pl-HXe" userLabel="Task Container View">
-                                <rect key="frame" x="8" y="-175" width="359" height="293"/>
+                                <rect key="frame" x="8" y="108" width="359" height="350"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGh-JP-lcF">
-                                        <rect key="frame" x="0.0" y="220" width="359" height="73"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="0.0" y="277" width="359" height="73"/>
+                                        <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="120" id="Azh-lv-k0z"/>
                                             <constraint firstAttribute="height" priority="750" constant="73" id="Vpy-yl-EIx"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGT-TV-WCP">
-                                        <rect key="frame" x="0.0" y="0.0" width="359" height="210"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="359" height="267"/>
+                                        <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" priority="250" constant="210" id="htd-30-sjX"/>
+                                            <constraint firstAttribute="height" priority="250" constant="267" id="htd-30-sjX"/>
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="WGh-JP-lcF" firstAttribute="leading" secondItem="dsi-pl-HXe" secondAttribute="leading" id="1gQ-c9-NT8"/>
                                     <constraint firstItem="oGT-TV-WCP" firstAttribute="leading" secondItem="dsi-pl-HXe" secondAttribute="leading" id="4zT-Yx-Ra4"/>
@@ -49,33 +49,28 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L3c-CN-lzT" userLabel="whiteBackgroundView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BY2-pz-7Ub" userLabel="Tag Collection View">
-                                        <rect key="frame" x="0.0" y="8" width="375" height="80"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="YVd-UW-yoD"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BY2-pz-7Ub" userLabel="Tag Collection View">
+                                <rect key="frame" x="0.0" y="28" width="375" height="80"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="BY2-pz-7Ub" firstAttribute="leading" secondItem="L3c-CN-lzT" secondAttribute="leading" id="8Mu-eB-bb0"/>
-                                    <constraint firstAttribute="bottom" secondItem="BY2-pz-7Ub" secondAttribute="bottom" id="gBJ-3x-N7H"/>
-                                    <constraint firstAttribute="trailing" secondItem="BY2-pz-7Ub" secondAttribute="trailing" id="mhz-xg-96V"/>
-                                    <constraint firstItem="BY2-pz-7Ub" firstAttribute="top" secondItem="L3c-CN-lzT" secondAttribute="top" constant="8" id="vdG-0e-2eg"/>
+                                    <constraint firstAttribute="height" constant="80" id="YVd-UW-yoD"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="isU-bp-1Xt" firstAttribute="trailing" secondItem="dsi-pl-HXe" secondAttribute="trailing" constant="8" id="2bW-pu-SgF"/>
-                            <constraint firstItem="dsi-pl-HXe" firstAttribute="bottom" secondItem="L3c-CN-lzT" secondAttribute="bottom" constant="30" id="MEt-SI-DDx"/>
-                            <constraint firstItem="L3c-CN-lzT" firstAttribute="leading" secondItem="isU-bp-1Xt" secondAttribute="leading" id="PQW-5v-D4Y"/>
-                            <constraint firstItem="L3c-CN-lzT" firstAttribute="top" secondItem="FUJ-f1-wVI" secondAttribute="top" id="SVu-Fg-qn8"/>
-                            <constraint firstItem="isU-bp-1Xt" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="dsi-pl-HXe" secondAttribute="bottom" constant="16" id="YyA-UL-uMe"/>
-                            <constraint firstItem="isU-bp-1Xt" firstAttribute="trailing" secondItem="L3c-CN-lzT" secondAttribute="trailing" id="eKp-y9-2u7"/>
+                            <constraint firstItem="L3c-CN-lzT" firstAttribute="top" secondItem="FUJ-f1-wVI" secondAttribute="top" id="Dyj-Ln-Jhi"/>
+                            <constraint firstItem="BY2-pz-7Ub" firstAttribute="trailing" secondItem="isU-bp-1Xt" secondAttribute="trailing" id="Njs-fb-Y16"/>
+                            <constraint firstItem="dsi-pl-HXe" firstAttribute="top" secondItem="L3c-CN-lzT" secondAttribute="bottom" id="Pod-qA-bF4"/>
+                            <constraint firstItem="L3c-CN-lzT" firstAttribute="leading" secondItem="isU-bp-1Xt" secondAttribute="leading" id="YCd-9Y-7WS"/>
+                            <constraint firstItem="BY2-pz-7Ub" firstAttribute="leading" secondItem="isU-bp-1Xt" secondAttribute="leading" id="ecc-GT-Rv2"/>
+                            <constraint firstItem="BY2-pz-7Ub" firstAttribute="top" secondItem="isU-bp-1Xt" secondAttribute="top" constant="8" id="f1X-up-LUa"/>
+                            <constraint firstItem="L3c-CN-lzT" firstAttribute="trailing" secondItem="isU-bp-1Xt" secondAttribute="trailing" id="jnt-0M-rUa"/>
+                            <constraint firstItem="BY2-pz-7Ub" firstAttribute="bottom" secondItem="L3c-CN-lzT" secondAttribute="bottom" id="qzh-VK-XIX"/>
                             <constraint firstItem="dsi-pl-HXe" firstAttribute="leading" secondItem="isU-bp-1Xt" secondAttribute="leading" constant="8" id="v40-mE-yNE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="isU-bp-1Xt"/>
@@ -88,9 +83,10 @@
                     <connections>
                         <outlet property="tagCollectionView" destination="BY2-pz-7Ub" id="sy1-Yd-sm6"/>
                         <outlet property="taskContainerView" destination="dsi-pl-HXe" id="Nd5-zB-A61"/>
-                        <outlet property="taskContainerViewTopConstraint" destination="MEt-SI-DDx" id="PXM-eq-euL"/>
+                        <outlet property="taskContainerViewTopConstraint" destination="Pod-qA-bF4" id="Qe3-ZS-6ej"/>
                         <outlet property="taskDetailView" destination="oGT-TV-WCP" id="glE-Nc-56A"/>
                         <outlet property="taskDetailsTableViewHeight" destination="htd-30-sjX" id="LfO-Tq-pp5"/>
+                        <outlet property="taskTitleAndDetailSeparatorConstraint" destination="b8U-pK-oMo" id="wbu-7Y-9BL"/>
                         <outlet property="taskTitleView" destination="WGh-JP-lcF" id="sIX-Al-NaH"/>
                         <outlet property="whiteBackgroundView" destination="L3c-CN-lzT" id="6r0-bg-nM3"/>
                     </connections>

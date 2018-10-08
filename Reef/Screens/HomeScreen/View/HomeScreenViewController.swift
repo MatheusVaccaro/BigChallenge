@@ -28,6 +28,14 @@ class HomeScreenViewController: UIViewController {
     
     weak var delegate: HomeScreenViewControllerDelegate?
     
+    var pullDownViewCollapsedConstraint: CGFloat {
+        return -73
+    }
+    
+    var pullDownViewExpandedConstraint: CGFloat {
+        return 10
+    }
+    
     // MARK: - IBOutlets
     @IBOutlet weak var newTaskLabel: UILabel!
     @IBOutlet weak var whiteBackgroundView: UIView!
@@ -41,11 +49,6 @@ class HomeScreenViewController: UIViewController {
     @IBOutlet weak var pullDownViewTopConstraint: NSLayoutConstraint!
     
     // MARK: - Lifecycle
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("===============")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = Strings.bigTitleText

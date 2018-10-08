@@ -24,25 +24,59 @@ class PresentTaskAnimationController: NSObject, UIViewControllerAnimatedTransiti
         
         let containerView = transitionContext.containerView
         let duration = transitionDuration(using: transitionContext)
-    
+        
         containerView.addSubview(toViewController.view)
         toViewController.view.isHidden = true
         
-        homeScreenViewController.pullDownViewTopConstraint.constant = 30
+        homeScreenViewController.pullDownViewTopConstraint.constant =
+            homeScreenViewController.pullDownViewExpandedConstraint
         taskCreationFrameViewController.taskContainerViewTopConstraint.constant =
-            taskCreationFrameViewController.titleInputHeight
+            -taskCreationFrameViewController.taskDetailViewHeight
         
-        UIView.animate(withDuration: duration, animations: {
+        UIView.animate(withDuration: duration,
+                       delay: 0, usingSpringWithDamping: 0.5,
+                       initialSpringVelocity: 0.5,
+                       options: [],
+                       animations: {
             fromViewController.view.layoutIfNeeded()
-        }) { _ in
+        }, completion: { _ in
             toViewController.view.isHidden = false
-            homeScreenViewController.pullDownViewTopConstraint.constant = -22
+            homeScreenViewController.pullDownViewTopConstraint.constant =
+                homeScreenViewController.pullDownViewCollapsedConstraint
             let transitionCanceled = transitionContext.transitionWasCancelled
             transitionContext.completeTransition(!transitionCanceled)
             if transitionCanceled {
-                taskCreationFrameViewController.taskContainerViewTopConstraint.constant = 30
+                taskCreationFrameViewController.taskContainerViewTopConstraint.constant =
+                    -taskCreationFrameViewController.taskContainerViewHeight
             }
-        }
+            
+        })
+        
+        
+//        
+//        UIView.animateKeyframes(withDuration: duration,
+//                                delay: 0,
+//                                options: [],
+//                                animations: {
+//                                    UIView.addKeyframe(withRelativeStartTime: <#T##Double#>, relativeDuration: <#T##Double#>) {
+//
+//                                    }
+//        }, completion: { _ in
+//            
+//        })
+//        
+//        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
     
 }
