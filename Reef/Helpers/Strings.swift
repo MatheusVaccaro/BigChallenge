@@ -64,7 +64,10 @@ struct Strings {
                 NSLocalizedString("recentHeader", comment: "header title for recommended by 'recent' section")
             
             static let otherTasksHeader =
-                NSLocalizedString("otherTasksHeader", comment: "header title for 'other tags' section ")
+                NSLocalizedString("otherTasksHeader", comment: "header title for 'other tags' section")
+            
+            static let completedHeader =
+                NSLocalizedString("completedTasksHeader", comment: "header title for 'completed' section")
         }
         
         struct Cell {

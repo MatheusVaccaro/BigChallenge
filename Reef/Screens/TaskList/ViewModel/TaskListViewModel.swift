@@ -59,6 +59,10 @@ public class TaskListViewModel {
     }
     
     func numberOfRows(in section: Int) -> Int {
+        if isCompleted(section), isCompleteSectionCollapsed {
+            return 0
+        }
+        
         return tasks[section].rows.count
     }
     
@@ -66,8 +70,14 @@ public class TaskListViewModel {
         return tasks.count
     }
     
+    var isCompleteSectionCollapsed: Bool = true
+    
     func title(forHeaderInSection section: Int) -> String {
         return tasks[section].header
+    }
+    
+    func isCompleted(_ section: Int) -> Bool {
+        return tasks[section].header == completedHeader
     }
     
     /** filters the taskList with selected tags */
@@ -89,13 +99,22 @@ public class TaskListViewModel {
         
         //OTHER TASKS
         var remainingTasks = model.tasks
-            .filter { !$0.isCompleted && $0.hasOneOf(selectedTags) && !flatTasks.contains($0) }
+            .filter { $0.hasOneOf(selectedTags) && !flatTasks.contains($0) }
         
+        //filter private
         if !selectedTags.contains { $0.requiresAuthentication } {
             remainingTasks = remainingTasks.filter { !$0.isPrivate }
-        } //TODO: review
+        }
+        
+        //completed
+        let completedTasks = remainingTasks
+            .filter { $0.isCompleted }
+        
+        // remove completed
+        remainingTasks.removeAll { $0.isCompleted }
         
         tasks.append((rows: remainingTasks, header: otherHeader))
+        tasks.append((rows: completedTasks, header: completedHeader))
         
         tasks = tasks
             .filter { !$0.rows.isEmpty }
@@ -124,11 +143,11 @@ public class TaskListViewModel {
         model.update(task, with: taskAttributes)
     }
     
-    func complete(taskAt indexPath: IndexPath) {
+    func toggleComplete(taskAt indexPath: IndexPath) {
         var taskAttributes: [TaskAttributes : Any] = [:]
-        taskAttributes[.isCompleted] = true
         let task = tasks[indexPath.section].rows.remove(at: indexPath.row)
         
+        taskAttributes[.isCompleted] = !task.isCompleted
         model.update(task, with: taskAttributes)
     }
     
@@ -153,6 +172,7 @@ public class TaskListViewModel {
     let nextHeader = Strings.Task.ListScreen.upNextHeader
     let recentHeader = Strings.Task.ListScreen.recentHeader
     let otherHeader = Strings.Task.ListScreen.otherTasksHeader
+    let completedHeader = Strings.Task.ListScreen.completedHeader
 }
 
 extension TaskListViewModel: TaskCellViewModelDelegate {

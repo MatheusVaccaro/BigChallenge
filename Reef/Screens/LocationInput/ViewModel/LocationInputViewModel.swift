@@ -25,7 +25,7 @@ class LocationInputViewModel {
         }
     }
     
-    var isArriving: Bool = false {
+    var isArriving: Bool = true {
         didSet {
             delegate?.locationInput(self, didFind: location, named: placeName, arriving: isArriving)
         }

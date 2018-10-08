@@ -57,9 +57,13 @@ public class TaskCellViewModel {
     }()
     
     func dateString(with format: String) -> String? {
-        guard let date = task.dates.min() else { return nil }
-    
-        return date.string(with: format)
+        if let date = task.nextDate {
+            return date.string(with: format)
+        } else if let date = task.firstLateDate {
+            return date.string(with: format)
+        } else {
+            return nil
+        }
     }
     
     var checkButtonGradient: [CGColor] {

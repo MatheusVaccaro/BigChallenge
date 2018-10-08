@@ -85,8 +85,45 @@ extension TaskListViewController: UITableViewDelegate {
         viewModel.shouldGoToEdit(task)
     }
     
-    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return viewModel.title(forHeaderInSection: section)
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.frame = view.frame
+        
+        let headerLabel = UILabel()
+        headerLabel.text = viewModel.title(forHeaderInSection: section)
+        headerLabel.sizeToFit()
+        headerView.addSubview(headerLabel)
+        
+        headerLabel.frame.origin.x += 10
+        headerLabel.frame.origin.y =
+            self.tableView(tableView, heightForHeaderInSection: section) - headerLabel.bounds.height - 5
+        
+        if viewModel.isCompleted(section) {
+            let tapGesture =
+                UITapGestureRecognizer(target: self, action: #selector(toggleCollapseInCompleteSection))
+            headerView.addGestureRecognizer(tapGesture)
+        }
+        
+        return headerView
+    }
+    
+    @objc func toggleCollapseInCompleteSection() {
+        let completedSection = viewModel.tasks.count-1
+        
+        viewModel.isCompleteSectionCollapsed.toggle()
+        
+        if UIAccessibility.isReduceMotionEnabled {
+            tableView.reloadSections([completedSection], with: .fade)
+        } else {
+            tableView.reloadSections([completedSection], with: .automatic)
+        }
+        if !viewModel.isCompleteSectionCollapsed {
+            tableView.scrollToRow(at: IndexPath(row: 0, section: completedSection), at: .middle, animated: true)
+        }
     }
     
     public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -106,28 +143,31 @@ extension TaskListViewController: UITableViewDelegate {
     }
     
     func toggleCompleteAction(forRowAt indexPath: IndexPath) -> UIContextualAction {
-        let action = UIContextualAction(style: .normal,
-                                        title: "complete") { (action: UIContextualAction, //TODO: localize
+        let action = UIContextualAction(style: .normal, title: nil) { (action: UIContextualAction,
                                             view: UIView,
                                             completion: (Bool) -> Void) in
                                             
-                                            self.viewModel.complete(taskAt: indexPath)
-//                                            self.tableView.deleteRows(at: [indexPath], with: .fade)
-                                            completion(true)
+            self.viewModel.toggleComplete(taskAt: indexPath)
+            completion(true)
         }
         
-        action.backgroundColor = UIColor.green
+        let task = viewModel.task(for: indexPath)
         
+        action.title = task.isCompleted //TODO: localize
+            ? "uncomplete"
+            : "coplete"
+        action.backgroundColor = task.isCompleted //TODO: designn
+            ? UIColor.yellow
+            : UIColor.green
         return action
     }
     
     func deleteAction(forRowAt indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .destructive,
-                                        title: "delete") { (action: UIContextualAction, //TODO: localize
+                                        title: Strings.General.deleteActionTitle) { (action: UIContextualAction,
                                             view: UIView,
                                             completion: (Bool) -> Void) in
                                             
-//                                            self.tableView.deleteRows(at: [indexPath], with: .none)
                                             self.viewModel.delete(taskAt: indexPath)
                                             completion(true)
         }
