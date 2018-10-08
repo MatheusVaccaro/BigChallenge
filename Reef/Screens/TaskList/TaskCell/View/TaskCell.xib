@@ -40,21 +40,19 @@
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="jMK-pG-tgE">
-                        <rect key="frame" x="277.5" y="37" width="81.5" height="20.5"/>
+                        <rect key="frame" x="276.5" y="37" width="82.5" height="20.5"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" image="locationIcon" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MpC-GV-kct" userLabel="locationIconImageView">
-                                <rect key="frame" x="0.0" y="0.0" width="20.5" height="20.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="20" height="20.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="MpC-GV-kct" secondAttribute="height" multiplier="1:1" id="bCh-SM-Ieg"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="ekl-2m-4uZ"/>
-                                    <constraint firstAttribute="height" priority="750" constant="20" id="oWE-Nd-dv8"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="ekl-2m-4uZ"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="R0l-7J-x3W" userLabel="dateStringView">
-                                <rect key="frame" x="24.5" y="0.0" width="57" height="20.5"/>
+                                <rect key="frame" x="24" y="0.0" width="58.5" height="20.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="750" text="13 oct" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hD9-vr-2pQ">
-                                        <rect key="frame" x="5" y="0.0" width="47" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" text="13 oct" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hD9-vr-2pQ">
+                                        <rect key="frame" x="5" y="0.0" width="48.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -65,21 +63,22 @@
                                     <constraint firstAttribute="bottom" secondItem="hD9-vr-2pQ" secondAttribute="bottom" id="2pk-Re-1IJ"/>
                                     <constraint firstItem="hD9-vr-2pQ" firstAttribute="leading" secondItem="R0l-7J-x3W" secondAttribute="leading" constant="5" id="DDI-Gl-fmo"/>
                                     <constraint firstItem="hD9-vr-2pQ" firstAttribute="top" secondItem="R0l-7J-x3W" secondAttribute="top" id="TtN-jh-dX8"/>
+                                    <constraint firstItem="hD9-vr-2pQ" firstAttribute="top" secondItem="R0l-7J-x3W" secondAttribute="top" id="cLb-Zz-JaZ"/>
+                                    <constraint firstAttribute="width" secondItem="R0l-7J-x3W" secondAttribute="height" multiplier="57:20" id="gsY-rq-qEE"/>
+                                    <constraint firstAttribute="bottom" secondItem="hD9-vr-2pQ" secondAttribute="bottom" id="h4G-1m-PU0"/>
                                     <constraint firstAttribute="trailing" secondItem="hD9-vr-2pQ" secondAttribute="trailing" constant="5" id="hv4-Tg-Okj"/>
-                                    <constraint firstItem="hD9-vr-2pQ" firstAttribute="centerY" secondItem="R0l-7J-x3W" secondAttribute="centerY" id="kY3-jO-7ue"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="jAD-AG-gK3"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="height" priority="250" constant="20" id="MAp-u0-6P5"/>
-                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="qG5-gb-2Pd"/>
+                            <constraint firstItem="hD9-vr-2pQ" firstAttribute="height" secondItem="MpC-GV-kct" secondAttribute="height" id="YDt-s1-kKm"/>
                         </constraints>
                     </stackView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="Fn8-Lx-bVj" firstAttribute="top" secondItem="OW8-xT-sLf" secondAttribute="bottom" id="0m3-Di-eDp"/>
-                    <constraint firstItem="OW8-xT-sLf" firstAttribute="centerY" secondItem="uR2-n7-Ubs" secondAttribute="centerY" priority="750" id="6NI-bC-ybg"/>
                     <constraint firstItem="IZr-Pd-eTx" firstAttribute="leading" secondItem="uR2-n7-Ubs" secondAttribute="leading" constant="8" id="78X-QA-hg0"/>
                     <constraint firstAttribute="bottom" secondItem="IZr-Pd-eTx" secondAttribute="bottom" constant="8" id="8Ym-cA-aaU"/>
                     <constraint firstItem="Fn8-Lx-bVj" firstAttribute="leading" secondItem="IZr-Pd-eTx" secondAttribute="trailing" constant="8" id="HNC-to-8Ex"/>
