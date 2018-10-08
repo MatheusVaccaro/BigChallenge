@@ -75,6 +75,8 @@ extension TaskCreationViewModel: NewTaskViewModelOutputDelegate {
         }
         
         task = nil
+        attributes = [:]
+        
         delegate?.didCreateTask()
     }
     
