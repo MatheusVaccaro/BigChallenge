@@ -70,6 +70,24 @@ public extension Task {
         return ans
     }
     
+    /// returns the first upcoming date on dates array
+    public var nextDate: Date? {
+        guard !dates.isEmpty else { return nil }
+        
+        var nextDates = dates.filter { $0.timeIntervalSinceNow > 0 }
+        
+        return nextDates.min()
+    }
+    
+    /// returns the late date closest to today on dates array
+    public var firstLateDate: Date? {
+        guard !dates.isEmpty else { return nil }
+        
+        var nextDates = dates.filter { $0.timeIntervalSinceNow < 0 }
+        
+        return nextDates.max()
+    }
+    
     public var dates: [Date] {
         var dates: [Date] = []
         
@@ -88,10 +106,5 @@ public extension Task {
     public func isInside(_ location: CLLocationCoordinate2D) -> Bool {
         for taskLocation in locations where taskLocation.contains( location ) { return true }
         return false
-    }
-    
-    public func isBefore(_ task: Task) -> Bool {
-        guard !dates.isEmpty, !task.dates.isEmpty else { return false }
-        return dates.min()! < task.dates.min()!
     }
 }

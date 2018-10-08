@@ -47,15 +47,15 @@ public class Recommender {
         
         lateTasks = Array(
             toDo
-                .filter { $0.dueDate != nil }
-                .filter { $0.dueDate!.timeIntervalSinceNow < 0 }
+                .filter { !$0.dates.isEmpty }
+                .filter { $0.nextDate == nil }
                 .sorted { $1.isBefore($0) }
                 .prefix(lateTasksLimit)
         )
         
         nextTasks = Array(
             toDo
-                .filter { !$0.dates.isEmpty }
+                .filter { $0.nextDate != nil }
                 .sorted { $0.isBefore($1) }
                 .prefix(nextTasksLimit)
         )
@@ -66,5 +66,12 @@ public class Recommender {
                 .sorted { $0.creationDate! > $1.creationDate! }
                 .prefix(recentTasksLimit)
         )
+    }
+}
+
+private extension Task {
+    func isBefore(_ task: Task) -> Bool {
+        guard let nextDate1 = nextDate, let nextDate2 = task.nextDate else { return false }
+        return nextDate1 < nextDate2
     }
 }
