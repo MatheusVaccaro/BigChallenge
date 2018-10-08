@@ -59,6 +59,10 @@ public class TaskListViewModel {
     }
     
     func numberOfRows(in section: Int) -> Int {
+        if isCompleted(section), isCompleteSectionCollapsed {
+            return 0
+        }
+        
         return tasks[section].rows.count
     }
     
@@ -66,8 +70,14 @@ public class TaskListViewModel {
         return tasks.count
     }
     
+    var isCompleteSectionCollapsed: Bool = true
+    
     func title(forHeaderInSection section: Int) -> String {
         return tasks[section].header
+    }
+    
+    func isCompleted(_ section: Int) -> Bool {
+        return tasks[section].header == completedHeader
     }
     
     /** filters the taskList with selected tags */

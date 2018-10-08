@@ -85,8 +85,37 @@ extension TaskListViewController: UITableViewDelegate {
         viewModel.shouldGoToEdit(task)
     }
     
-    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return viewModel.title(forHeaderInSection: section)
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.frame = view.frame
+        
+        let headerLabel = UILabel()
+        headerLabel.text = viewModel.title(forHeaderInSection: section)
+        headerLabel.sizeToFit()
+        headerView.addSubview(headerLabel)
+        
+        if viewModel.isCompleted(section) {
+            let tapGesture =
+                UITapGestureRecognizer(target: self, action: #selector(toggleCollapseInCompleteSection))
+            headerView.addGestureRecognizer(tapGesture)
+        }
+        
+        return headerView
+    }
+    
+    @objc func toggleCollapseInCompleteSection() {
+        let completedSection = viewModel.tasks.count-1
+        
+        viewModel.isCompleteSectionCollapsed.toggle()
+        tableView.reloadSections([completedSection], with: .automatic)
+        
+        if !viewModel.isCompleteSectionCollapsed {
+            tableView.scrollToRow(at: IndexPath(row: 0, section: completedSection), at: .middle, animated: true)
+        }
     }
     
     public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

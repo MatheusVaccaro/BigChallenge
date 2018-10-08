@@ -85,6 +85,7 @@ class TagCollectionViewController: UIViewController {
     func presentActionSheet(for tag: Tag) {
         guard !viewModel.presentingActionSheet else { return }
         viewModel.presentingActionSheet = true
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         let actionsheet = UIAlertController(title: tag.title!,
                                             message: nil,
                                             preferredStyle: .actionSheet)
@@ -140,7 +141,6 @@ class TagCollectionViewController: UIViewController {
         let tagViewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
         
         tagViewModel.longPressedTag.subscribe { event in
-            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             self.presentActionSheet(for: event.element!)
             Answers.logCustomEvent(withName: "longpressed tag")
         }.disposed(by: self.disposeBag)
