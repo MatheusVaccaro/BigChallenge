@@ -39,7 +39,7 @@ public class TaskListViewController: UIViewController {
         tableView.estimatedRowHeight = 60
         tableView.estimatedSectionHeaderHeight = 18.5
         tableView.estimatedSectionFooterHeight = 46
-        tableView.contentInset.top = 40
+        tableView.contentInset.top = 20
      
         tableView.delegate = self
         tableView.dataSource = self

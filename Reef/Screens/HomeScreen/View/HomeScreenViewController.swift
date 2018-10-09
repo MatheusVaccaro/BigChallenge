@@ -28,25 +28,16 @@ class HomeScreenViewController: UIViewController {
     
     weak var delegate: HomeScreenViewControllerDelegate?
     
-    var pullDownViewCollapsedConstraint: CGFloat {
-        return -73
-    }
-    
-    var pullDownViewExpandedConstraint: CGFloat {
-        return 10
-    }
-    
     // MARK: - IBOutlets
     @IBOutlet weak var newTaskLabel: UILabel!
     @IBOutlet weak var whiteBackgroundView: UIView!
     @IBOutlet weak var taskListContainerView: UIView!
     @IBOutlet weak var tagContainerView: UIView!
-    @IBOutlet weak var newTaskView: UIView!
-    @IBOutlet weak var addTaskViewTopConstraint: NSLayoutConstraint!
     
     // MARK: - Animation IBOutlets
     @IBOutlet weak var pullDownView: UIView!
     @IBOutlet weak var pullDownViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var pullDownViewHeight: NSLayoutConstraint!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -62,9 +53,6 @@ class HomeScreenViewController: UIViewController {
         userActivity = viewModel.userActivity
         
         configurePullDownView()
-        
-        newTaskView.alpha = 0
-        
         delegate?.viewDidLoad()
     }
     
@@ -191,41 +179,13 @@ class HomeScreenViewController: UIViewController {
         viewModel.updateUserActivity(activity)
     }
     
-    lazy var blurView: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: .light)
-        let view = UIVisualEffectView(effect: blurEffect)
-        
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideAddTask))
-//        view.addGestureRecognizer(tapGesture)
-        
-        return view
-    }()
-    
-    private func applyBlur() {
-        //only apply the blur if the user hasn't disabled transparency effects
-        if !UIAccessibility.isReduceTransparencyEnabled {
-            blurView.frame = view.bounds
-            blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            
-            if !blurView.isDescendant(of: view) {            
-                view.insertSubview(blurView, belowSubview: newTaskView)
-            }
-        } else {
-            view.backgroundColor = .black
-        }
-    }
-    
-    private func removeBlur() {
-        blurView.removeFromSuperview()
-    }
-    
     private func configurePullDownView() {
         pullDownView.backgroundColor = .white
         pullDownView.layer.cornerRadius = 6.3
         pullDownView.tintColor = .white
         
         pullDownView.layer.shadowRadius = 6.3
-        pullDownView.layer.shadowOffset = CGSize(width: 0, height: 10)
+        pullDownView.layer.shadowOffset = CGSize(width: 0, height: 0)
         pullDownView.layer.masksToBounds = false
         pullDownView.layer.shadowColor = .shadowColor
         pullDownView.layer.shadowOpacity = 1
