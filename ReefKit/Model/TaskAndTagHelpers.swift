@@ -74,7 +74,7 @@ public extension Task {
     public var nextDate: Date? {
         guard !dates.isEmpty else { return nil }
         
-        var nextDates = dates.filter { $0.timeIntervalSinceNow > 0 }
+        let nextDates = dates.filter { $0.timeIntervalSinceNow > 0 }
         
         return nextDates.min()
     }
@@ -83,7 +83,7 @@ public extension Task {
     public var firstLateDate: Date? {
         guard !dates.isEmpty else { return nil }
         
-        var nextDates = dates.filter { $0.timeIntervalSinceNow < 0 }
+        let nextDates = dates.filter { $0.timeIntervalSinceNow < 0 }
         
         return nextDates.max()
     }
