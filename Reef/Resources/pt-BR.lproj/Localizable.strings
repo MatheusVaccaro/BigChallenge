@@ -75,7 +75,7 @@
 "defaultPlaceName" = "Sua licalização";
 
 /* placeholder title for a new task */
-"newTaskTitle" = "Adicionar nova tarefa";
+"newTaskTitle" = "Nova tarefa";
 
 /* subtitle of empty state on taskList */
 "emptyStateSubtitle" = "Comece adicionando novas tarefas";
