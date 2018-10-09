@@ -11,15 +11,20 @@ import UIKit
 class DismissTaskAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 1.0
+        return 0.25
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard let fromViewController = transitionContext.viewController(forKey: .from),
-            let taskCreationFrameViewController = fromViewController.children.first as? TaskCreationFrameViewController
+            let toViewController = transitionContext.viewController(forKey: .to),
+            let taskCreationFrameViewController = fromViewController.children.first as? TaskCreationFrameViewController,
+            let homeScreenViewController = toViewController.children.first as? HomeScreenViewController
             else { return }
         
         let duration = transitionDuration(using: transitionContext)
+        
+        let pullDownViewCollapsedConstraint: CGFloat =
+            8
         
         taskCreationFrameViewController.taskContainerViewTopConstraint.constant =
             -taskCreationFrameViewController.taskContainerViewHeight
@@ -29,6 +34,13 @@ class DismissTaskAnimationController: NSObject, UIViewControllerAnimatedTransiti
         }, completion: { _ in
             let transitionCanceled = transitionContext.transitionWasCancelled
             transitionContext.completeTransition(!transitionCanceled)
+            
+            UIView.animate(withDuration: duration) {
+                homeScreenViewController.pullDownViewTopConstraint.constant =
+                pullDownViewCollapsedConstraint
+                homeScreenViewController.view.layoutIfNeeded()
+            }
+            
             if transitionCanceled {
                 taskCreationFrameViewController.taskContainerViewTopConstraint.constant =
                     -taskCreationFrameViewController.taskDetailViewHeight
