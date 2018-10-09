@@ -41,14 +41,18 @@ class TaskCreationFrameViewController: UIViewController {
     
     var viewModel: TaskCreationViewModel!
     
-    lazy var blurView: UIVisualEffectView = {
+    private(set) lazy var blurView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .regular)
-        let view = UIVisualEffectView(effect: blurEffect)
-        return view
+        
+        let blur = UIVisualEffectView(effect: blurEffect)
+        blur.frame = view.bounds
+        blur.alpha = 0
+        
+        return blur
     }()
     
     // MARK: - Animations Properties
-    private let duration: TimeInterval = 0.5
+    private let duration: TimeInterval = 0.25
     private let animationDistance: CGFloat = 38
     private var runningAnimators = [UIViewPropertyAnimator]()
     private var progressWhenInterrupted: CGFloat = 0
@@ -104,7 +108,6 @@ class TaskCreationFrameViewController: UIViewController {
             blurView.tintColor = .lightGray
         }
         
-        blurView.frame = view.bounds
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         if !blurView.isDescendant(of: view) {
             view.insertSubview(blurView, at: 0)
@@ -128,21 +131,13 @@ class TaskCreationFrameViewController: UIViewController {
         
         configureShadows(in: whiteBackgroundView)
         configureShadows(in: taskDetailView)
+        configureShadows(in: taskTitleView)
+        taskTitleView.layer.shadowOpacity = 0
+        
+        applyBlur()
         
         viewModel.delegate?.viewDidLoad()
         taskDetailViewController.accessibilityElementsHidden = true
-        
-        taskContainerViewTopConstraint.constant = -taskContainerViewHeight
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        configureShadows(in: taskTitleView)
-        applyBlur()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        taskDetailsTableViewHeight.constant = taskDetailViewController.contentHeight
     }
     
     private func configureShadows(in view: UIView) {
