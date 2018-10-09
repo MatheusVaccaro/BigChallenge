@@ -128,14 +128,16 @@ class TaskCreationFrameViewController: UIViewController {
         
         configureShadows(in: whiteBackgroundView)
         configureShadows(in: taskDetailView)
-        configureShadows(in: taskTitleView)
-        
-        applyBlur()
         
         viewModel.delegate?.viewDidLoad()
         taskDetailViewController.accessibilityElementsHidden = true
         
         taskContainerViewTopConstraint.constant = -taskContainerViewHeight
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        configureShadows(in: taskTitleView)
+        applyBlur()
     }
     
     override func viewDidLayoutSubviews() {
@@ -176,8 +178,11 @@ extension TaskCreationFrameViewController: StoryboardInstantiable {
 extension TaskCreationFrameViewController {
     // MARK: Animations
     func addGestureRecognizersForAnimations() {
-        taskContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:))))
-        taskContainerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:))))
+        taskContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                                      action: #selector(handleTapGesture(_:))))
+        
+        taskContainerView.addGestureRecognizer(UIPanGestureRecognizer(target: self,
+                                                                      action: #selector(handlePanGesture(_:))))
     }
     
     @objc private func handleTapGesture(_ recognizer: UITapGestureRecognizer) {

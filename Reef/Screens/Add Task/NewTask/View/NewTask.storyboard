@@ -51,7 +51,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="WYf-bH-Bnh" firstAttribute="top" secondItem="S5p-sX-wPS" secondAttribute="top" id="3ba-gw-bft"/>
                             <constraint firstItem="wme-eo-wSe" firstAttribute="leading" secondItem="S5p-sX-wPS" secondAttribute="leading" constant="8" id="4CH-LM-Pyx"/>

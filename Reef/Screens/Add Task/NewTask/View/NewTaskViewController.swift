@@ -53,7 +53,10 @@ class NewTaskViewController: UIViewController {
         
         view.isAccessibilityElement = true
         (view as! NewTaskView).delegate = self
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         taskTitleTextView.becomeFirstResponder()
     }
     
@@ -128,14 +131,7 @@ class NewTaskViewController: UIViewController {
     
     private func configureViewDesign() {
         view.layer.cornerRadius = 6.3
-        view.tintColor = UIColor.white
-        
-        view.layer.shadowRadius = 6.3
-        view.layer.shadowOffset = CGSize(width: 0, height: 0)
-        view.layer.masksToBounds = false
-        view.layer.shadowColor = CGColor.shadowColor
-        view.layer.shadowOpacity = 1
-        view.layer.shadowRadius = 10
+        view.tintColor = .white
     }
 }
 
