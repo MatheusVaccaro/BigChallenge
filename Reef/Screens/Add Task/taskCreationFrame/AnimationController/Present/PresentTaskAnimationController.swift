@@ -33,11 +33,7 @@ class PresentTaskAnimationController: NSObject, UIViewControllerAnimatedTransiti
         taskCreationFrameViewController.taskContainerViewTopConstraint.constant =
             -taskCreationFrameViewController.taskDetailViewHeight
         
-        UIView.animate(withDuration: duration,
-                       delay: 0, usingSpringWithDamping: 0.5,
-                       initialSpringVelocity: 0.5,
-                       options: [],
-                       animations: {
+        UIView.animate(withDuration: duration, animations: {
             fromViewController.view.layoutIfNeeded()
         }, completion: { _ in
             toViewController.view.isHidden = false

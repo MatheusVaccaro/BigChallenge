@@ -23,7 +23,7 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGh-JP-lcF">
                                         <rect key="frame" x="0.0" y="277" width="359" height="73"/>
-                                        <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="120" id="Azh-lv-k0z"/>
                                             <constraint firstAttribute="height" priority="750" constant="73" id="Vpy-yl-EIx"/>
@@ -31,13 +31,13 @@
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGT-TV-WCP">
                                         <rect key="frame" x="0.0" y="0.0" width="359" height="267"/>
-                                        <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" priority="250" constant="267" id="htd-30-sjX"/>
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="WGh-JP-lcF" firstAttribute="leading" secondItem="dsi-pl-HXe" secondAttribute="leading" id="1gQ-c9-NT8"/>
                                     <constraint firstItem="oGT-TV-WCP" firstAttribute="leading" secondItem="dsi-pl-HXe" secondAttribute="leading" id="4zT-Yx-Ra4"/>

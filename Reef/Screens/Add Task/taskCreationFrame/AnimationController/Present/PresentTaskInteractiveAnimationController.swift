@@ -38,7 +38,7 @@ class PresentTaskInteractiveAnimationController: UIPercentDrivenInteractiveTrans
     @objc func handleGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
         guard let taskCoordinator = taskCoordinator else { return }
         let translation = gestureRecognizer.translation(in: gestureRecognizer.view!.superview!)
-        var progress = (translation.y / 38)
+        var progress = (translation.y / view!.bounds.height)
         progress = min(max(progress, 0.0), 1.0)
         let state = gestureRecognizer.state
         switch state {

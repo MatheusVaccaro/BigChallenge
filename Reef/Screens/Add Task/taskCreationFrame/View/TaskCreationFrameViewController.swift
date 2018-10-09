@@ -44,8 +44,6 @@ class TaskCreationFrameViewController: UIViewController {
     lazy var blurView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .regular)
         let view = UIVisualEffectView(effect: blurEffect)
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(dismissViewController))
-        view.addGestureRecognizer(gesture)
         return view
     }()
     
@@ -100,6 +98,26 @@ class TaskCreationFrameViewController: UIViewController {
         tagCollectionViewController.didMove(toParent: self)
     }
     
+    private func applyBlur() {
+        //only apply the blur if the user hasn't disabled transparency effects
+        if UIAccessibility.isReduceTransparencyEnabled {
+            blurView.tintColor = .lightGray
+        }
+        
+        blurView.frame = view.bounds
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        if !blurView.isDescendant(of: view) {
+            view.insertSubview(blurView, at: 0)
+        }
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(dismissViewController))
+        blurView.addGestureRecognizer(gesture)
+    }
+    
+    private func removeBlur() {
+        blurView.removeFromSuperview()
+    }
+    
     @objc func dismissViewController() {
         viewModel.delegate?.dismiss()
     }
@@ -112,9 +130,7 @@ class TaskCreationFrameViewController: UIViewController {
         configureShadows(in: taskDetailView)
         configureShadows(in: taskTitleView)
         
-        let blur = blurView
-        blur.frame = view.frame
-        view.insertSubview(blur, at: 0)
+        applyBlur()
         
         viewModel.delegate?.viewDidLoad()
         taskDetailViewController.accessibilityElementsHidden = true
@@ -236,9 +252,9 @@ extension TaskCreationFrameViewController {
         let animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) { [unowned self] in
             switch state {
             case .collapsed:
-                self.taskContainerViewTopConstraint.constant = self.taskTitleViewHeight
+                self.taskContainerViewTopConstraint.constant = -self.taskDetailViewHeight
             case .expanded:
-                self.taskContainerViewTopConstraint.constant = self.taskDetailViewHeight
+                self.taskContainerViewTopConstraint.constant = 0
                 
             }
             self.view.layoutIfNeeded()
