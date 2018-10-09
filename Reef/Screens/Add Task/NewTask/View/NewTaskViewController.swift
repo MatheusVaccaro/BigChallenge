@@ -19,7 +19,7 @@ class NewTaskViewController: UIViewController {
     // MARK: - IBOutlets
     
     @IBOutlet weak var gradientView: UIView!
-    @IBOutlet weak var taskTitleTextView: UITextView!
+    @IBOutlet weak var taskTitleTextView: VerticallyCenteredTextView!
     @IBOutlet weak var taskDetailsButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
     private lazy var gradientLayer: CAGradientLayer = {
@@ -53,7 +53,10 @@ class NewTaskViewController: UIViewController {
         
         view.isAccessibilityElement = true
         (view as! NewTaskView).delegate = self
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         taskTitleTextView.becomeFirstResponder()
     }
     
@@ -119,27 +122,29 @@ class NewTaskViewController: UIViewController {
     }
     
     private func configureTaskTitleTextView() {
-        taskTitleTextView.placeholderColor = UIColor.lightGray.withAlphaComponent(0.5) //TODO set true color
+        taskTitleTextView.placeholderColor = UIColor.lightGray.withAlphaComponent(0.5)
         taskTitleTextView.placeholder = Strings.Task.CreationScreen.taskTitlePlaceholder
         
-        taskTitleTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         taskTitleTextView.textContainer.lineFragmentPadding = 0
     }
     
     private func configureViewDesign() {
         view.layer.cornerRadius = 6.3
-        view.tintColor = UIColor.white
-        
-        view.layer.shadowRadius = 6.3
-        view.layer.shadowOffset = CGSize(width: 0, height: 0)
-        view.layer.masksToBounds = false
-        view.layer.shadowColor = CGColor.shadowColor
-        view.layer.shadowOpacity = 1
-        view.layer.shadowRadius = 10
+        view.tintColor = .white
     }
 }
 
 // MARK: - StoryboardInstantiable
+
+class VerticallyCenteredTextView: UITextView {
+    override var contentSize: CGSize {
+        didSet {
+            var topCorrection = (bounds.size.height - contentSize.height * zoomScale) / 2.0
+            topCorrection = max(0, topCorrection)
+            contentInset = UIEdgeInsets(top: topCorrection, left: 0, bottom: 0, right: 0)
+        }
+    }
+}
 
 extension NewTaskViewController: StoryboardInstantiable {
     static var storyboardIdentifier: String {

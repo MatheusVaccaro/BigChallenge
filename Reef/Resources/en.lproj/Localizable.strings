@@ -75,7 +75,7 @@
 "defaultPlaceName" = "Your location";
 
 /* placeholder title for a new task */
-"newTaskTitle" = "New Task";
+"newTaskTitle" = "New task";
 
 /* subtitle of empty state on taskList */
 "emptyStateSubtitle" = "Start adding some tasks";

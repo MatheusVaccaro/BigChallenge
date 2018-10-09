@@ -124,7 +124,7 @@ public class RemindersImporter {
         let tag = tagModel.createTag(with: tagAttributes)
         
         let taskAttributes: [TaskAttributes : Any] =
-            [.title : reminder.title,
+            [.title : reminder.title as Any,
              .isCompleted : reminder.isCompleted,
              .completionDate : reminder.completionDate as Any,
              .dueDate : reminder.completionDate as Any,

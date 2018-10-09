@@ -10,6 +10,7 @@ import UIKit
 
 class TaskCreationFrameViewController: UIViewController {
     
+    @IBOutlet weak var taskTitleAndDetailSeparatorConstraint: NSLayoutConstraint!
     @IBOutlet weak var taskDetailsTableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var taskContainerViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var whiteBackgroundView: UIView!
@@ -18,12 +19,20 @@ class TaskCreationFrameViewController: UIViewController {
     @IBOutlet weak var taskTitleView: UIView!
     @IBOutlet weak var taskContainerView: UIView!
     
-    var titleInputHeight: CGFloat {
+    var taskTitleViewHeight: CGFloat {
         return taskTitleView.bounds.height
     }
     
-    var titleAndDetailsHeight: CGFloat {
-        return taskDetailViewController.contentHeight + taskTitleView.bounds.height + 8
+    var taskDetailViewHeight: CGFloat {
+        return taskDetailViewController.contentHeight
+    }
+    
+    var taskTitleAndDetailSeparatorHeight: CGFloat {
+        return taskTitleAndDetailSeparatorConstraint.constant
+    }
+    
+    var taskContainerViewHeight: CGFloat {
+        return taskDetailViewHeight + taskTitleAndDetailSeparatorHeight + taskTitleViewHeight
     }
     
     var tagCollectionViewController: TagCollectionViewController!
@@ -32,15 +41,18 @@ class TaskCreationFrameViewController: UIViewController {
     
     var viewModel: TaskCreationViewModel!
     
-    lazy var blurView: UIVisualEffectView = {
+    private(set) lazy var blurView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .regular)
-        let view = UIVisualEffectView(effect: blurEffect)
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissViewController)))
-        return view
+        
+        let blur = UIVisualEffectView(effect: blurEffect)
+        blur.frame = view.bounds
+        blur.alpha = 0
+        
+        return blur
     }()
     
     // MARK: - Animations Properties
-    private let duration: TimeInterval = 0.5
+    private let duration: TimeInterval = 0.25
     private let animationDistance: CGFloat = 38
     private var runningAnimators = [UIViewPropertyAnimator]()
     private var progressWhenInterrupted: CGFloat = 0
@@ -57,16 +69,11 @@ class TaskCreationFrameViewController: UIViewController {
         addChild(taskDetailViewController)
         taskDetailView.addSubview(taskDetailViewController.view)
         
+        taskDetailViewController.view.frame = taskDetailView.bounds
+        taskDetailViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
         taskDetailViewController.view.layer.cornerRadius = 6.3
         taskDetailViewController.view.layer.masksToBounds = true
-        taskDetailViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            taskDetailViewController.view.rightAnchor.constraint(equalTo: taskDetailView.rightAnchor),
-            taskDetailViewController.view.topAnchor.constraint(equalTo: taskDetailView.topAnchor),
-            taskDetailViewController.view.leftAnchor.constraint(equalTo: taskDetailView.leftAnchor),
-            taskDetailViewController.view.bottomAnchor.constraint(equalTo: taskDetailView.bottomAnchor)
-            ])
         
         taskDetailViewController.didMove(toParent: self)
     }
@@ -77,14 +84,8 @@ class TaskCreationFrameViewController: UIViewController {
         addChild(taskTitleViewController)
         taskTitleView.addSubview(taskTitleViewController.view)
         
-        taskTitleViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            taskTitleViewController.view.rightAnchor.constraint(equalTo: taskTitleView.rightAnchor),
-            taskTitleViewController.view.topAnchor.constraint(equalTo: taskTitleView.topAnchor),
-            taskTitleViewController.view.leftAnchor.constraint(equalTo: taskTitleView.leftAnchor),
-            taskTitleViewController.view.bottomAnchor.constraint(equalTo: taskTitleView.bottomAnchor)
-            ])
+        taskTitleViewController.view.frame = taskTitleView.bounds
+        taskTitleViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         newTaskViewController.didMove(toParent: self)
     }
@@ -95,16 +96,29 @@ class TaskCreationFrameViewController: UIViewController {
         addChild(tagCollectionViewController)
         tagCollectionView.addSubview(tagCollectionViewController.view)
         
-        tagCollectionViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            tagCollectionViewController.view.rightAnchor.constraint(equalTo: tagCollectionView.rightAnchor),
-            tagCollectionViewController.view.topAnchor.constraint(equalTo: tagCollectionView.topAnchor),
-            tagCollectionViewController.view.leftAnchor.constraint(equalTo: tagCollectionView.leftAnchor),
-            tagCollectionViewController.view.bottomAnchor.constraint(equalTo: tagCollectionView.bottomAnchor)
-            ])
+        tagCollectionViewController.view.frame = taskDetailView.bounds
+        tagCollectionViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         tagCollectionViewController.didMove(toParent: self)
+    }
+    
+    private func applyBlur() {
+        //only apply the blur if the user hasn't disabled transparency effects
+        if UIAccessibility.isReduceTransparencyEnabled {
+            blurView.tintColor = .lightGray
+        }
+        
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        if !blurView.isDescendant(of: view) {
+            view.insertSubview(blurView, at: 0)
+        }
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(dismissViewController))
+        blurView.addGestureRecognizer(gesture)
+    }
+    
+    private func removeBlur() {
+        blurView.removeFromSuperview()
     }
     
     @objc func dismissViewController() {
@@ -118,18 +132,12 @@ class TaskCreationFrameViewController: UIViewController {
         configureShadows(in: whiteBackgroundView)
         configureShadows(in: taskDetailView)
         configureShadows(in: taskTitleView)
+        taskTitleView.layer.shadowOpacity = 0
         
-        let blur = blurView
-        blur.frame = view.frame
-        view.insertSubview(blur, at: 0)
+        applyBlur()
         
         viewModel.delegate?.viewDidLoad()
         taskDetailViewController.accessibilityElementsHidden = true
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        taskDetailsTableViewHeight.constant = taskDetailViewController.contentHeight
     }
     
     private func configureShadows(in view: UIView) {
@@ -165,8 +173,11 @@ extension TaskCreationFrameViewController: StoryboardInstantiable {
 extension TaskCreationFrameViewController {
     // MARK: Animations
     func addGestureRecognizersForAnimations() {
-        taskContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:))))
-        taskContainerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:))))
+        taskContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                                      action: #selector(handleTapGesture(_:))))
+        
+        taskContainerView.addGestureRecognizer(UIPanGestureRecognizer(target: self,
+                                                                      action: #selector(handlePanGesture(_:))))
     }
     
     @objc private func handleTapGesture(_ recognizer: UITapGestureRecognizer) {
@@ -238,24 +249,24 @@ extension TaskCreationFrameViewController {
     }
     
     private func addTaskContainerAnimation(for state: State, with duration: TimeInterval) {
-        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) { [weak self] in
+        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) { [unowned self] in
             switch state {
             case .collapsed:
-                self?.taskContainerViewTopConstraint.constant = self!.titleInputHeight
+                self.taskContainerViewTopConstraint.constant = -self.taskDetailViewHeight
             case .expanded:
-                self?.taskContainerViewTopConstraint.constant = self!.titleAndDetailsHeight
+                self.taskContainerViewTopConstraint.constant = 0
                 
             }
-            self?.view.layoutIfNeeded()
+            self.view.layoutIfNeeded()
         }
-        animator.addCompletion { [weak self] status in
+        animator.addCompletion { [unowned self] status in
             switch status {
             case .end:
-                self?.state = state
+                self.state = state
             default:
                 break
             }
-            self?.runningAnimators.removeAll()
+            self.runningAnimators.removeAll()
         }
         runningAnimators.append(animator)
     }

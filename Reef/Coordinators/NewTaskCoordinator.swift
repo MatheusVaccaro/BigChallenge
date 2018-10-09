@@ -28,6 +28,9 @@ class NewTaskCoordinator: NSObject, Coordinator {
     fileprivate var task: Task?
     fileprivate var selectedTags: [Tag]
     
+    var presentTaskInteractiveAnimationController: PresentTaskInteractiveAnimationController?
+    fileprivate var dismissTaskInteractiveAnimationController: DismissTaskInteractiveAnimationController?
+
     weak var delegate: CoordinatorDelegate?
     
     init(task: Task? = nil,
@@ -42,7 +45,7 @@ class NewTaskCoordinator: NSObject, Coordinator {
         self.childrenCoordinators = []
         self.task = task
         self.selectedTags = selectedTags
-        
+
         print("+++ INIT NewTaskCoordinator")
     }
     
@@ -113,14 +116,13 @@ class NewTaskCoordinator: NSObject, Coordinator {
     }
     
     private func configureModalPresenter() {
+        modalPresenter.transitioningDelegate = self
         modalPresenter.navigationBar.shadowImage = UIImage()
         modalPresenter.transitioningDelegate = self
         modalPresenter.navigationBar.prefersLargeTitles = true
         modalPresenter.navigationBar.isTranslucent = false
         modalPresenter.navigationBar.largeTitleTextAttributes = largeTitleAttributes
-        
         modalPresenter.modalPresentationStyle = .overCurrentContext
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissViewController))
         modalPresenter.navigationBar.addGestureRecognizer(tapGesture)
     }
@@ -145,6 +147,14 @@ extension NewTaskCoordinator: TaskCreationDelegate {
         creationFrameViewController.present(newTaskViewController)
         creationFrameViewController.present(taskDetailsViewController)
         creationFrameViewController.present(tagCollectionViewController)
+        
+        self.dismissTaskInteractiveAnimationController =
+            DismissTaskInteractiveAnimationController(presenter: modalPresenter,
+                                                      view: creationFrameViewController.blurView,
+                                                      completionHandler: { [unowned self] in
+                                                        self.delegate?.shouldDeinitCoordinator(self)
+                                                    }
+            )
     }
     
     func dismiss() {
@@ -159,25 +169,24 @@ extension NewTaskCoordinator: TaskCreationDelegate {
 
 extension NewTaskCoordinator: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        guard let homeScreenViewController = presenting.children.first else { return nil }
-        let swipeInteractionController = SwipeInteractionController(viewController: homeScreenViewController)
-        return TaskCreationFramePresentAnimationController(interactionController: swipeInteractionController)
+        guard let _ = presenting.children.first as? HomeScreenViewController else { return nil }
+        return PresentTaskAnimationController()
     }
-    
+
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        guard let dismissedViewController =
-            dismissed.children.first as? TaskCreationFrameViewController else { return nil }
-        return TaskCreationFrameDismissAnimationController()
+        guard let _ = dismissed.children.first as? TaskCreationFrameViewController else { return nil }
+        return DismissTaskAnimationController()
     }
-//
-//    // TODO: Fix interactive gesture
-//    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-//        guard let animator = animator as? TaskCreationFramePresentAnimationController,
-//            let interactionController = animator.interactionController,
-//            interactionController.interactionInProgress
-//            else { return nil }
-//        return interactionController
-//    }
+
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        guard let animator = presentTaskInteractiveAnimationController else { return nil }
+        return animator.interactionInProgress ? animator : nil
+    }
+
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        guard let animator = dismissTaskInteractiveAnimationController else { return nil }
+        return animator.interactionInProgress ? animator : nil
+    }
 }
 
 extension NewTaskCoordinator: TagCollectionViewModelDelegate {
