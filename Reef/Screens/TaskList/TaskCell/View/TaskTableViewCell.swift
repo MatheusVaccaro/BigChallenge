@@ -45,7 +45,7 @@ public class TaskTableViewCell: UITableViewCell {
             UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         taskTitleTextView.textContainer.lineFragmentPadding = 0
         
-        dateStringView.layer.cornerRadius = 2
+        dateStringView.layer.cornerRadius = dateStringView.frame.height * 0.1
         dateStringLabel.textColor = UIColor.Cell.darkGray
         
         selectionStyle = .none
@@ -76,7 +76,9 @@ public class TaskTableViewCell: UITableViewCell {
         if viewModel.shouldShowDateIcon {
             dateStringView.backgroundColor = UIColor.Cell.lightGray
             dateStringLabel.text = viewModel.dateString(with: "dd MMM")
+            dateStringView.isHidden = false
         } else {
+            dateStringView.isHidden = true
             dateStringView.backgroundColor = .clear
             dateStringLabel.text = ""
         }
@@ -99,6 +101,7 @@ extension TaskTableViewCell { // MARK: - Accessibility
         taskTitleTextView.font = UIFont.font(sized: 19, weight: .medium, with: .body)
         dateStringLabel.font = UIFont.font(sized: 14, weight: .regular, with: .footnote)
         tagsLabel.font = UIFont.font(sized: 14, weight: .regular, with: .footnote)
+        dateStringView.layer.cornerRadius = dateStringView.frame.height * 0.1
         gradientSideBar.setNeedsLayout()
         gradientSideBar.layoutIfNeeded()
     }
