@@ -24,6 +24,8 @@ extension UIColor {
             UIColor(red: 255/255.0, green: 36/255.0, blue: 80/255.0, alpha: 1)
         static let completeGreen: UIColor =
             UIColor(red: 68/255.0, green: 252/255.0, blue: 202/255.0, alpha: 1)
+        static let uncompleteYellow: UIColor =
+            UIColor(red: 255/255.0, green: 200/255.0, blue: 50/255.0, alpha: 1)
     }
     
     struct DateInput {
