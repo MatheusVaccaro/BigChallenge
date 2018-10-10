@@ -18,6 +18,7 @@ class TaskCreationFrameViewController: UIViewController {
     @IBOutlet weak var taskDetailView: UIView!
     @IBOutlet weak var taskTitleView: UIView!
     @IBOutlet weak var taskContainerView: UIView!
+    @IBOutlet weak var taskTitleViewHeightConstraint: NSLayoutConstraint!
     
     var taskTitleViewHeight: CGFloat {
         return taskTitleView.bounds.height
@@ -65,55 +66,46 @@ class TaskCreationFrameViewController: UIViewController {
     
     func present(_ taskDetailViewController: AddDetailsViewController) {
         self.taskDetailViewController = taskDetailViewController
-        
         addChild(taskDetailViewController)
         taskDetailView.addSubview(taskDetailViewController.view)
-        
-        taskDetailViewController.view.frame = taskDetailView.bounds
-        taskDetailViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
+        taskDetailViewController.view.translatesAutoresizingMaskIntoConstraints = false
         taskDetailViewController.view.layer.cornerRadius = 6.3
         taskDetailViewController.view.layer.masksToBounds = true
-        
         NSLayoutConstraint.activate([
             taskDetailViewController.view.rightAnchor.constraint(equalTo: taskDetailView.rightAnchor),
             taskDetailViewController.view.topAnchor.constraint(equalTo: taskDetailView.topAnchor),
             taskDetailViewController.view.leftAnchor.constraint(equalTo: taskDetailView.leftAnchor),
             taskDetailViewController.view.bottomAnchor.constraint(equalTo: taskDetailView.bottomAnchor)
             ])
-        
         taskDetailViewController.didMove(toParent: self)
     }
     
     func present(_ taskTitleViewController: NewTaskViewController) {
         self.newTaskViewController = taskTitleViewController
-        
         addChild(taskTitleViewController)
         taskTitleView.addSubview(taskTitleViewController.view)
-        
-        taskTitleViewController.view.frame = taskTitleView.bounds
-        taskTitleViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
+        newTaskViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            newTaskViewController.view.rightAnchor.constraint(equalTo: taskTitleView.rightAnchor),
+            newTaskViewController.view.topAnchor.constraint(equalTo: taskTitleView.topAnchor),
+            newTaskViewController.view.leftAnchor.constraint(equalTo: taskTitleView.leftAnchor),
+            newTaskViewController.view.bottomAnchor.constraint(equalTo: taskTitleView.bottomAnchor)
+            ])
         newTaskViewController.didMove(toParent: self)
     }
     
     func present(_ tagCollectionViewController: TagCollectionViewController) {
         self.tagCollectionViewController = tagCollectionViewController
-        
         addChild(tagCollectionViewController)
         tagCollectionView.addSubview(tagCollectionViewController.view)
-        
-        tagCollectionViewController.view.frame = taskDetailView.bounds
-        tagCollectionViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        tagCollectionViewController.didMove(toParent: self)
-        
+        tagCollectionViewController.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tagCollectionViewController.view.rightAnchor.constraint(equalTo: tagCollectionView.rightAnchor),
             tagCollectionViewController.view.topAnchor.constraint(equalTo: tagCollectionView.topAnchor),
             tagCollectionViewController.view.leftAnchor.constraint(equalTo: tagCollectionView.leftAnchor),
             tagCollectionViewController.view.bottomAnchor.constraint(equalTo: tagCollectionView.bottomAnchor)
             ])
+        tagCollectionViewController.didMove(toParent: self)
     }
     
     private func applyBlur() {
