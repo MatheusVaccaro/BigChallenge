@@ -15,7 +15,6 @@ class IconTableViewCell: UITableViewCell {
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var titleLabel: UITextView!
     @IBOutlet weak var subtitleLabel: UILabel!
-    @IBOutlet weak var imageHeight: NSLayoutConstraint!
     @IBOutlet weak var cellSwitch: UISwitch!
     @IBOutlet weak var rightButton: UIButton!
     
@@ -27,12 +26,6 @@ class IconTableViewCell: UITableViewCell {
     var subtitleFontSize: CGFloat = 13 {
         didSet {
             subtitleLabel.font = UIFont.font(sized: subtitleFontSize, weight: .regular, with: .title3)
-        }
-    }
-    
-    var iconSize: CGFloat = 20 {
-        didSet {
-            imageHeight.constant = iconSize
         }
     }
     
@@ -69,6 +62,11 @@ class IconTableViewCell: UITableViewCell {
         super.traitCollectionDidChange(previousTraitCollection)
         titleLabel.font = UIFont.font(sized: titleFontSize, weight: .medium, with: .title1, fontName: .barlow)
         subtitleLabel.font = UIFont.font(sized: subtitleFontSize, weight: .regular, with: .title3)
+        
+        icon.setNeedsLayout()
+        rightButton.setNeedsLayout()
+        icon.layoutIfNeeded()
+        rightButton.layoutIfNeeded()
     }
     
     private func reloadData() {
