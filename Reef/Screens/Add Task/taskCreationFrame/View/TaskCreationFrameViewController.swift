@@ -47,7 +47,6 @@ class TaskCreationFrameViewController: UIViewController {
         
         let blur = UIVisualEffectView(effect: blurEffect)
         blur.frame = view.bounds
-        blur.alpha = 0
         
         return blur
     }()
@@ -138,12 +137,12 @@ class TaskCreationFrameViewController: UIViewController {
         configureShadows(in: whiteBackgroundView)
         configureShadows(in: taskDetailView)
         configureShadows(in: taskTitleView)
-        taskTitleView.layer.shadowOpacity = 0
         
         applyBlur()
         
         viewModel.delegate?.viewDidLoad()
         taskDetailViewController.accessibilityElementsHidden = true
+        taskContainerViewTopConstraint.constant = -taskDetailViewHeight
     }
     
     private func configureShadows(in view: UIView) {

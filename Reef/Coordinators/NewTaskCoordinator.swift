@@ -116,9 +116,14 @@ class NewTaskCoordinator: NSObject, Coordinator {
     }
     
     private func configureModalPresenter() {
-        modalPresenter.transitioningDelegate = self
         modalPresenter.navigationBar.shadowImage = UIImage()
-        modalPresenter.transitioningDelegate = self
+        
+        if UIAccessibility.isReduceMotionEnabled {
+            modalPresenter.modalTransitionStyle = .crossDissolve
+        } else {
+            modalPresenter.transitioningDelegate = self
+        }
+        
         modalPresenter.navigationBar.prefersLargeTitles = true
         modalPresenter.navigationBar.isTranslucent = false
         modalPresenter.navigationBar.largeTitleTextAttributes = largeTitleAttributes
