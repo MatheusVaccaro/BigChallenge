@@ -33,6 +33,8 @@ class HomeScreenViewController: UIViewController {
     @IBOutlet weak var whiteBackgroundView: UIView!
     @IBOutlet weak var taskListContainerView: UIView!
     @IBOutlet weak var tagContainerView: UIView!
+    @IBOutlet weak var taskListContainerTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var pullDownStackView: UIStackView!
     
     // MARK: - Animation IBOutlets
     @IBOutlet weak var pullDownView: UIView!
@@ -57,10 +59,11 @@ class HomeScreenViewController: UIViewController {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        newTaskLabel.font = UIFont.font(sized: 13,
-                                        weight: .medium,
-                                        with: .body)
+        newTaskLabel.font = UIFont.font(sized: 13, weight: .medium, with: .body)
+        
         configureEmptyState()
+        
+        taskListContainerTopConstraint.constant = pullDownStackView.frame.height + 12 + 16
     }
     
     func setupTaskList(viewModel: TaskListViewModel, viewController: TaskListViewController) {
