@@ -75,6 +75,13 @@ class TaskCreationFrameViewController: UIViewController {
         taskDetailViewController.view.layer.cornerRadius = 6.3
         taskDetailViewController.view.layer.masksToBounds = true
         
+        NSLayoutConstraint.activate([
+            taskDetailViewController.view.rightAnchor.constraint(equalTo: taskDetailView.rightAnchor),
+            taskDetailViewController.view.topAnchor.constraint(equalTo: taskDetailView.topAnchor),
+            taskDetailViewController.view.leftAnchor.constraint(equalTo: taskDetailView.leftAnchor),
+            taskDetailViewController.view.bottomAnchor.constraint(equalTo: taskDetailView.bottomAnchor)
+            ])
+        
         taskDetailViewController.didMove(toParent: self)
     }
     
@@ -100,6 +107,13 @@ class TaskCreationFrameViewController: UIViewController {
         tagCollectionViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         tagCollectionViewController.didMove(toParent: self)
+        
+        NSLayoutConstraint.activate([
+            tagCollectionViewController.view.rightAnchor.constraint(equalTo: tagCollectionView.rightAnchor),
+            tagCollectionViewController.view.topAnchor.constraint(equalTo: tagCollectionView.topAnchor),
+            tagCollectionViewController.view.leftAnchor.constraint(equalTo: tagCollectionView.leftAnchor),
+            tagCollectionViewController.view.bottomAnchor.constraint(equalTo: tagCollectionView.bottomAnchor)
+            ])
     }
     
     private func applyBlur() {
