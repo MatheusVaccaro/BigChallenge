@@ -13,6 +13,7 @@ protocol NewTaskViewDelegate: class {
     func doneEditing()
     var canCreateTask: Bool { get }
     var isPresentingMoreDetails: Bool { get }
+    var taskTitle: String? { get }
 }
 
 class NewTaskView: UIView {
@@ -23,8 +24,18 @@ class NewTaskView: UIView {
         set { }
     }
     
+    override var accessibilityValue: String? {
+        get {
+            return delegate.taskTitle
+        }
+        set { }
+    }
+    
     override var accessibilityHint: String? {
-        get { return Strings.Task.CreationScreen.VoiceOver.hint }
+        get {
+            guard delegate.isPresentingMoreDetails else { return nil }
+            return Strings.Task.CreationScreen.VoiceOver.hint
+        }
         set { }
     }
     

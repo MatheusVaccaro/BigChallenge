@@ -72,8 +72,7 @@ struct Strings {
         
         struct Cell {
             struct VoiceOver {
-                static let hintCompleted = NSLocalizedString("taskCellCompletedVoiceOverHint", comment: "(VoiceOver) hint for task cell on task list ('double tap to set incomplete')")
-                static let hintIncomplete = NSLocalizedString("taskCellIncompleteVoiceOverHint", comment: "(VoiceOver) hint for task cell on task list ('double tap to complete')")
+                static let hint = NSLocalizedString("task cell voiceOver hint", comment: "(VoiceOver) edits cell content")
                 static let locationDescription = NSLocalizedString("locations active", comment: "(voiceOver) description when task in cell contains a location")
                 static let dateDescription = NSLocalizedString("next reminder set to %@", comment: "(VoiceOver) description when task in cell contains a date reminder (says the next date set)")
             }
@@ -221,6 +220,10 @@ struct Strings {
         static let editActionTitle = NSLocalizedString("updateActionTitle", comment: "edit button title")
         static let deleteActionTitle = NSLocalizedString("deleteActionTitle", comment: "delete button title")
         static let cancelActionTitle = NSLocalizedString("cancelActionTitle", comment: "cancel button title")
+        
+        static let completeActionTitle = NSLocalizedString("complete action title", comment: "marks task as completed")
+        static let notCompletedActionTitle = NSLocalizedString("not completed action title", comment: "marks task as not completed")
+        
         static let on = NSLocalizedString("on", comment: "meaning some switch is turned on")
         static let off = NSLocalizedString("off", comment: "meaning some switch is turned off")
     }

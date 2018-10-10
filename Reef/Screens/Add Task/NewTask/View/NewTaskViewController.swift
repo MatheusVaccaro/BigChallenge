@@ -177,6 +177,10 @@ extension NewTaskViewController: UITextViewDelegate {
 }
 
 extension NewTaskViewController: NewTaskViewDelegate {
+    var taskTitle: String? {
+        return viewModel.taskTitleText
+    }
+    
     var canCreateTask: Bool {
         guard let text = viewModel.taskTitleText else { return false }
         return text != ""
