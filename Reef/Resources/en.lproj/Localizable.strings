@@ -149,12 +149,6 @@
 /* header title for recommended by 'up next' section */
 "upNextHeader" = "Up next";
 
-/* (VoiceOver) hint for task cell on task list ('double tap to set incomplete') */
-"taskCellCompletedVoiceOverHint" = "double tap to set incomplete";
-
-/* (VoiceOver) hint for task cell on task list ('double tap to complete') */
-"taskCellIncompleteVoiceOverHint" = "double tap to set complete";
-
 /* (voice over) when clicked the user finished adding a new task */
 "create task action" = "finish creating task";
 
@@ -199,3 +193,15 @@
 
 /* (voiceOver) description when task in cell contains a location (says the number of locations it is set to) */
 "locations active" = "location reminder active";
+
+/* marks task as completed */
+"complete action title" = "Complete";
+
+/* header title for 'completed' section */
+"completedTasksHeader" = "Complete Tasks";
+
+/* marks task as not completed */
+"not completed action title" = "Mark not completed";
+
+/* (VoiceOver) edits cell content */
+"task cell voiceOver hint" = "Double tap to edit";

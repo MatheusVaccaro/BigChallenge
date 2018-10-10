@@ -144,14 +144,11 @@ extension TaskTableViewCell { // MARK: - Accessibility
     
     public override var accessibilityCustomActions: [UIAccessibilityCustomAction]? {
         get {
-            let editAction = UIAccessibilityCustomAction(name: viewModel!.editActionTitle,
+            let completeAction = UIAccessibilityCustomAction(name: viewModel!.completeActionTitle,
                                                          target: self,
-                                                         selector: #selector(performEditAction))
-            let deleteAction = UIAccessibilityCustomAction(name: viewModel!.deleteActionTitle,
-                                                           target: self,
-                                                           selector: #selector(performDeleteAction))
+                                                         selector: #selector(toggleCompleteAction))
             
-            return [editAction, deleteAction]
+            return [completeAction]
         }
         set { }
     }
@@ -163,16 +160,7 @@ extension TaskTableViewCell { // MARK: - Accessibility
         set { }
     }
     
-    public override func accessibilityActivate() -> Bool {
+    @objc private func toggleCompleteAction() {
         viewModel.completeTask(bool: !viewModel.taskIsCompleted)
-        return true
-    }
-    
-    @objc private func performEditAction() {
-        viewModel.edit()
-    }
-    
-    @objc private func performDeleteAction() {
-        viewModel.delete()
     }
 }

@@ -117,7 +117,7 @@
 "add tag accessibility hint" = "Dê dois toques para editar";
 
 /* No comment provided by engineer. */
-"add tag accessibility label" = "Adicionar tarefa";
+"add tag accessibility label" = "Adicionar Etiqueta";
 
 /* (VoiceOver) hint for date cell on task details menu */
 "dateCellVoiceOverHint" = "Dê dois toques para adicionar data";
@@ -148,12 +148,6 @@
 
 /* header title for recommended by 'up next' section */
 "upNextHeader" = "Próximas";
-
-/* (VoiceOver) hint for task cell on task list ('double tap to set incomplete') */
-"taskCellCompletedVoiceOverHint" = "Dê dois toques para descompletar";
-
-/* (VoiceOver) hint for task cell on task list ('double tap to complete') */
-"taskCellIncompleteVoiceOverHint" = "Dê dois toques para completar";
 
 /* (voice over) when clicked the user finished adding a new task */
 "create task action" = "Criar";
@@ -199,3 +193,15 @@
 
 /* (voiceOver) description when task in cell contains a location (says the number of locations it is set to) */
 "locations active" = "Notificação por localização ativa";
+
+/* marks task as completed */
+"complete action title" = "Completar";
+
+/* header title for 'completed' section */
+"completedTasksHeader" = "Completas";
+
+/* marks task as not completed */
+"not completed action title" = "Marcar não completa";
+
+/* (VoiceOver) edits cell content */
+"task cell voiceOver hint" = "Dê dois toques para editar";

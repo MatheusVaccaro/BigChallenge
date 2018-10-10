@@ -114,11 +114,11 @@ public class TaskCellViewModel {
     }()
     
     // MARK: - String
-    var voiceOverHint: String {
-        return task.isCompleted
-            ? Strings.Task.Cell.VoiceOver.hintCompleted
-            : Strings.Task.Cell.VoiceOver.hintIncomplete
+    var voiceOverHint: String = Strings.Task.Cell.VoiceOver.hint
+    var completeActionTitle: String {
+        return !task.isCompleted
+            ? Strings.General.completeActionTitle
+            : Strings.General.notCompletedActionTitle
     }
-    let editActionTitle: String = Strings.General.editActionTitle
     let deleteActionTitle: String = Strings.General.deleteActionTitle
 }
