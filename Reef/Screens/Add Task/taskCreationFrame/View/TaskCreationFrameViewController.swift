@@ -24,7 +24,7 @@ class TaskCreationFrameViewController: UIViewController {
     }
     
     var taskDetailViewHeight: CGFloat {
-        return taskDetailViewController.contentHeight
+        return taskDetailsTableViewHeight.constant
     }
     
     var taskTitleAndDetailSeparatorHeight: CGFloat {
