@@ -20,6 +20,10 @@ extension UIColor {
             UIColor(red: 157/255.0, green: 168/255.0, blue: 169/255.0, alpha: 1)
         static let lightGray: UIColor =
             UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1)
+        static let deleteRed: UIColor =
+            UIColor(red: 255/255.0, green: 36/255.0, blue: 80/255.0, alpha: 1)
+        static let completeGreen: UIColor =
+            UIColor(red: 68/255.0, green: 252/255.0, blue: 202/255.0, alpha: 1)
     }
     
     struct DateInput {
