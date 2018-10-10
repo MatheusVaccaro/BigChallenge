@@ -226,5 +226,8 @@ struct Strings {
         
         static let on = NSLocalizedString("on", comment: "meaning some switch is turned on")
         static let off = NSLocalizedString("off", comment: "meaning some switch is turned off")
+        
+        static let show = NSLocalizedString("show", comment: "meaning to show something")
+        static let hide = NSLocalizedString("hide", comment: "meaning to hide something")
     }
 }

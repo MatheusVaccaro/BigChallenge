@@ -205,3 +205,9 @@
 
 /* (VoiceOver) edits cell content */
 "task cell voiceOver hint" = "Double tap to edit";
+
+/* meaning to hide something */
+"hide" = "Hide";
+
+/* meaning to show something */
+"show" = "Show";

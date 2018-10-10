@@ -106,6 +106,16 @@ extension TaskListViewController: UITableViewDelegate {
             let tapGesture =
                 UITapGestureRecognizer(target: self, action: #selector(toggleCollapseInCompleteSection))
             headerView.addGestureRecognizer(tapGesture)
+            
+            let headerLabel = UILabel()
+            headerLabel.text = viewModel.showHideHeader
+            headerLabel.sizeToFit()
+            headerView.addSubview(headerLabel)
+            
+            headerLabel.frame.origin.x =
+                view.frame.width - headerLabel.bounds.width - 8
+            headerLabel.frame.origin.y =
+                self.tableView(tableView, heightForHeaderInSection: section) - headerLabel.bounds.height - 5
         }
         
         return headerView
@@ -115,6 +125,7 @@ extension TaskListViewController: UITableViewDelegate {
         let completedSection = viewModel.tasks.count-1
         
         viewModel.isCompleteSectionCollapsed.toggle()
+        tableView.reloadSectionIndexTitles()
         
         if UIAccessibility.isReduceMotionEnabled {
             tableView.reloadSections([completedSection], with: .fade)
@@ -169,9 +180,9 @@ extension TaskListViewController: UITableViewDelegate {
                                         title: nil) { (action: UIContextualAction,
                                             view: UIView,
                                             completion: (Bool) -> Void) in
-                            
                                             view.backgroundColor = UIColor.Cell.deleteRed
                                             self.viewModel.delete(taskAt: indexPath)
+//                                            self.tableView.deleteRows(at: [indexPath], with: .automatic)
                                             completion(true)
         }
         action.image = UIImage.init(named: "trash")
@@ -205,7 +216,7 @@ extension TaskListViewController: UITableViewDataSource {
 //            let blurView = UIVisualEffectView(effect: blurEffect)
 //            blurView.frame = cell.contentView.bounds
 //            cell.contentView.addSubview(blurView)
-        //        } TODO: review
+//        } TODO: review
         
         return cell
     }
