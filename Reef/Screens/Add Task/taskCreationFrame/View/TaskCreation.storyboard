@@ -88,6 +88,7 @@
                         <outlet property="taskDetailsTableViewHeight" destination="htd-30-sjX" id="LfO-Tq-pp5"/>
                         <outlet property="taskTitleAndDetailSeparatorConstraint" destination="b8U-pK-oMo" id="wbu-7Y-9BL"/>
                         <outlet property="taskTitleView" destination="WGh-JP-lcF" id="sIX-Al-NaH"/>
+                        <outlet property="taskTitleViewHeightConstraint" destination="Vpy-yl-EIx" id="43E-UW-ELX"/>
                         <outlet property="whiteBackgroundView" destination="L3c-CN-lzT" id="6r0-bg-nM3"/>
                     </connections>
                 </viewController>
