@@ -154,7 +154,7 @@ extension TaskListViewController: UITableViewDelegate {
         let task = viewModel.task(for: indexPath)
         
         action.backgroundColor = task.isCompleted
-            ? UIColor.yellow
+            ? UIColor.yellow //TODO: add the right yellow to the colors
             : UIColor.Cell.completeGreen
         action.image = UIImage.init(named: "complete")
         
