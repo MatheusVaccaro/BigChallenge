@@ -64,37 +64,41 @@ class PresentTaskAnimationController: NSObject, UIViewControllerAnimatedTransiti
             let transitionCanceled = transitionContext.transitionWasCancelled
             transitionContext.completeTransition(!transitionCanceled)
             
-            UIView.animateKeyframes(withDuration: 0.2,
-                                    delay: 0,
-                                    options: .calculationModeCubic,
-                                    animations: {
-                                        
-                                        UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1) {
-                                            homeScreenViewController.pullDownViewHeight.constant = 0
-                                            homeScreenViewController.pullDownViewTopConstraint.constant =
-                                                -100
-                                            
-                                            homeScreenViewController.view.layoutIfNeeded()
-                                            taskCreationFrameViewController.blurView.alpha = 1
-                                        }
-            }, completion: { completed in
-                if completed {
-                    let animation = CABasicAnimation(keyPath: "shadowOpacity")
-                    
-                    animation.fromValue = 0.0
-                    animation.toValue = 1.0
-                    
-                    animation.duration = 0.2
-                    taskCreationFrameViewController.taskTitleView.layer.add(animation, forKey: animation.keyPath)
-                    taskCreationFrameViewController.taskTitleView.layer.shadowOpacity = 1
-                    
-                    homeScreenViewController.pullDownViewHeight.constant = 100
-                }
-            })
-            
             if transitionCanceled {
+                homeScreenViewController.pullDownViewTopConstraint.constant =
+                    pullDownViewCollapsedConstraint
                 taskCreationFrameViewController.taskContainerViewTopConstraint.constant =
                     -taskCreationFrameViewController.taskContainerViewHeight
+            } else {
+                UIView.animateKeyframes(withDuration: 0.2,
+                                        delay: 0,
+                                        options: .calculationModeCubic,
+                                        animations: {
+                                            
+                                            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1) {
+                                                homeScreenViewController.pullDownViewHeight.constant = 0
+                                                homeScreenViewController.pullDownViewTopConstraint.constant =
+                                                    -50
+                                                
+                                                homeScreenViewController.view.layoutIfNeeded()
+                                                taskCreationFrameViewController.blurView.alpha = 1
+                                            }
+                                            
+                }, completion: { completed in
+                    if completed {
+                        let animation = CABasicAnimation(keyPath: "shadowOpacity")
+                        
+                        animation.fromValue = 0.0
+                        animation.toValue = 1.0
+                        
+                        animation.duration = 0.2
+                        taskCreationFrameViewController.taskTitleView.layer.add(animation, forKey: animation.keyPath)
+                        taskCreationFrameViewController.taskTitleView.layer.shadowOpacity = 1
+                    }
+                    
+                    homeScreenViewController.pullDownViewHeight.constant = 100
+                    homeScreenViewController.view.layoutIfNeeded()
+                })
             }
         })
     }
