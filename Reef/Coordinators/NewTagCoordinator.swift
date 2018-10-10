@@ -70,7 +70,6 @@ class NewTagCoordinator: NSObject, Coordinator {
     private func configureModalPresenter() {
         modalPresenter.navigationBar.setBackgroundImage(UIImage(), for: .default)
         modalPresenter.navigationBar.shadowImage = UIImage()
-        modalPresenter.transitioningDelegate = self
         modalPresenter.navigationBar.prefersLargeTitles = true
         modalPresenter.navigationBar.isTranslucent = true
         modalPresenter.view.backgroundColor = .clear
@@ -78,18 +77,19 @@ class NewTagCoordinator: NSObject, Coordinator {
         modalPresenter.modalPresentationStyle = .overCurrentContext
         modalPresenter.modalTransitionStyle = .crossDissolve
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissViewController))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleNavigationTap))
         modalPresenter.navigationBar.addGestureRecognizer(tapGesture)
     }
     
-    @objc private func dismissViewController() {
+    @objc private func handleNavigationTap() {
+        guard modalPresenter.children.count == 1 else { return }
+        dismissViewController()
+    }
+    
+    private func dismissViewController() {
         presenter.dismiss(animated: true, completion: nil)
         delegate?.shouldDeinitCoordinator(self)
     }
-}
-
-extension NewTagCoordinator: UIViewControllerTransitioningDelegate {
-    
 }
 
 extension NewTagCoordinator: TagCreationDelegate {

@@ -72,12 +72,17 @@ public class TaskListViewModel {
     
     var isCompleteSectionCollapsed: Bool = true
     
+    var hasCompletedTasks: Bool {
+        return tasks.last?.rows.first?.isCompleted ?? false
+    }
+    
     func title(forHeaderInSection section: Int) -> String {
         return tasks[section].header
     }
     
     func isCompleted(_ section: Int) -> Bool {
-        return tasks[section].header == completedHeader
+        guard hasCompletedTasks else { return false }
+        return tasks.count-1 == section
     }
     
     /** filters the taskList with selected tags */
@@ -114,7 +119,7 @@ public class TaskListViewModel {
         remainingTasks.removeAll { $0.isCompleted }
         
         tasks.append((rows: remainingTasks, header: otherHeader))
-        tasks.append((rows: completedTasks, header: completedHeader))
+        tasks.append((rows: completedTasks, header: completeHeader))
         
         tasks = tasks
             .filter { !$0.rows.isEmpty }
@@ -153,7 +158,7 @@ public class TaskListViewModel {
     
     func delete(taskAt indexPath: IndexPath) {
         let task = tasks[indexPath.section].rows.remove(at: indexPath.row)
-        model.delete(task)
+        model.save(task)
     }
     
     // MARK: Helpers
@@ -172,7 +177,13 @@ public class TaskListViewModel {
     let nextHeader = Strings.Task.ListScreen.upNextHeader
     let recentHeader = Strings.Task.ListScreen.recentHeader
     let otherHeader = Strings.Task.ListScreen.otherTasksHeader
-    let completedHeader = Strings.Task.ListScreen.completedHeader
+    let completeHeader = Strings.Task.ListScreen.completedHeader
+    
+    var showHideHeader: String {
+        return isCompleteSectionCollapsed
+                ? Strings.General.show
+                : Strings.General.hide
+    }
 }
 
 extension TaskListViewModel: TaskCellViewModelDelegate {

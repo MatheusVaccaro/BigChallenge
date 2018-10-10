@@ -116,20 +116,31 @@ class NewTaskCoordinator: NSObject, Coordinator {
     }
     
     private func configureModalPresenter() {
-        modalPresenter.transitioningDelegate = self
         modalPresenter.navigationBar.shadowImage = UIImage()
-        modalPresenter.transitioningDelegate = self
+        
+        if UIAccessibility.isReduceMotionEnabled {
+            modalPresenter.modalTransitionStyle = .crossDissolve
+        } else {
+            modalPresenter.transitioningDelegate = self
+        }
+        
         modalPresenter.navigationBar.prefersLargeTitles = true
         modalPresenter.navigationBar.isTranslucent = false
         modalPresenter.navigationBar.largeTitleTextAttributes = largeTitleAttributes
         modalPresenter.modalPresentationStyle = .overCurrentContext
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissViewController))
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleNavigationTap))
         modalPresenter.navigationBar.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func handleNavigationTap() {
+        guard modalPresenter.children.count == 1 else { return }
+        dismissViewController()
     }
 }
 
 extension NewTaskCoordinator {
-    @objc private func dismissViewController() {
+    private func dismissViewController() {
         presenter.dismiss(animated: true, completion: nil)
         delegate?.shouldDeinitCoordinator(self)
     }

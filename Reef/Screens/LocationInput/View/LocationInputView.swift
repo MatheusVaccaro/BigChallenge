@@ -160,7 +160,6 @@ extension LocationInputView: UITableViewDataSource {
         
         cell.titleFontSize = 17
         cell.subtitleFontSize = 12
-        cell.iconSize = 20
         cell.rightButton.isHidden = true
         cell.viewModel = tableViewData[indexPath.row]
         

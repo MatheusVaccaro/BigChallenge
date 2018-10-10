@@ -34,6 +34,8 @@ class PresentTaskAnimationController: NSObject, UIViewControllerAnimatedTransiti
         containerView.addSubview(toViewController.view)
         
         toViewController.view.alpha = 0
+        taskCreationFrameViewController.taskTitleView.layer.shadowOpacity = 0
+        taskCreationFrameViewController.blurView.alpha = 0
         
         taskCreationFrameViewController.taskContainerViewTopConstraint.constant =
             -taskCreationFrameViewController.taskContainerViewHeight
@@ -70,34 +72,40 @@ class PresentTaskAnimationController: NSObject, UIViewControllerAnimatedTransiti
                 taskCreationFrameViewController.taskContainerViewTopConstraint.constant =
                     -taskCreationFrameViewController.taskContainerViewHeight
             } else {
-                UIView.animateKeyframes(withDuration: 0.2,
+                UIView.animateKeyframes(withDuration: 0.25,
                                         delay: 0,
-                                        options: .calculationModeCubic,
+                                        options: .calculationModePaced,
                                         animations: {
                                             
-                                            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1) {
+                                            UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.0) {
                                                 homeScreenViewController.pullDownViewHeight.constant = 0
-                                                homeScreenViewController.pullDownViewTopConstraint.constant =
-                                                    -50
+                                                homeScreenViewController.pullDownStackView.alpha = 0
+                                                
+                                                homeScreenViewController.view.layoutIfNeeded()
+                                                
+                                                let animation = CABasicAnimation(keyPath: "shadowOpacity")
+                                                
+                                                animation.fromValue = 0.0
+                                                animation.toValue = 1.0
+                                                animation.duration = 0.2
+                                                
+                                                taskCreationFrameViewController
+                                                    .taskTitleView
+                                                    .layer.add(animation, forKey: animation.keyPath)
+                                                taskCreationFrameViewController.taskTitleView.layer.shadowOpacity = 1
+                                            }
+                                            
+                                            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1) {
+                                                homeScreenViewController.pullDownViewTopConstraint.constant = -50
                                                 
                                                 homeScreenViewController.view.layoutIfNeeded()
                                                 taskCreationFrameViewController.blurView.alpha = 1
                                             }
                                             
                 }, completion: { completed in
-                    if completed {
-                        let animation = CABasicAnimation(keyPath: "shadowOpacity")
-                        
-                        animation.fromValue = 0.0
-                        animation.toValue = 1.0
-                        
-                        animation.duration = 0.2
-                        taskCreationFrameViewController.taskTitleView.layer.add(animation, forKey: animation.keyPath)
-                        taskCreationFrameViewController.taskTitleView.layer.shadowOpacity = 1
-                    }
-                    
                     homeScreenViewController.pullDownViewHeight.constant = 100
                     homeScreenViewController.view.layoutIfNeeded()
+                    homeScreenViewController.pullDownStackView.alpha = 1
                 })
             }
         })
