@@ -153,25 +153,25 @@ extension TaskListViewController: UITableViewDelegate {
         
         let task = viewModel.task(for: indexPath)
         
-        action.title = task.isCompleted //TODO: localize
-            ? "uncomplete"
-            : "coplete"
-        action.backgroundColor = task.isCompleted //TODO: designn
+        action.backgroundColor = task.isCompleted
             ? UIColor.yellow
-            : UIColor.green
+            : UIColor.Cell.completeGreen
+        action.image = UIImage.init(named: "complete")
+        
         return action
     }
     
     func deleteAction(forRowAt indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .destructive,
-                                        title: Strings.General.deleteActionTitle) { (action: UIContextualAction,
+                                        title: nil) { (action: UIContextualAction,
                                             view: UIView,
                                             completion: (Bool) -> Void) in
-                                            
+                            
+                                            view.backgroundColor = UIColor.Cell.deleteRed
                                             self.viewModel.delete(taskAt: indexPath)
                                             completion(true)
         }
-        
+        action.image = UIImage.init(named: "trash")
         return action
     }
 }
