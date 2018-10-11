@@ -192,10 +192,10 @@ extension TaskListViewController: UITableViewDelegate {
     
     private func deleteItem(at indexPath: IndexPath) {
         if viewModel.deleteSectionIfNeeded(indexPath.section) {
-            tableView.deleteSections([indexPath.section], with: .automatic)
+            tableView.deleteSections([indexPath.section], with: .left)
         } else {
             viewModel.delete(taskAt: indexPath)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.deleteRows(at: [indexPath], with: .left)
         }
     }
 }
@@ -226,7 +226,7 @@ extension TaskListViewController: UITableViewDataSource {
 //            let blurView = UIVisualEffectView(effect: blurEffect)
 //            blurView.frame = cell.contentView.bounds
 //            cell.contentView.addSubview(blurView)
-//        } TODO: review
+//        } TODO: review (this code blurs private task cells)
         
         return cell
     }
