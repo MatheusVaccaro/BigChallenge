@@ -33,36 +33,30 @@ class ColorCollectionViewCell: UICollectionViewCell {
         
         layer.startPoint = CGPoint(x: 0, y: 1)
         layer.endPoint = CGPoint(x: 1, y: 0)
-        layer.frame = contentView.bounds
-        layer.cornerRadius = layer.frame.height/3.5
+        layer.frame = gradientView.bounds
+        layer.cornerRadius = layer.frame.height/3
         layer.borderWidth = 1.5
         layer.borderColor = UIColor.white.cgColor
-        // TODO: Should increase cell size so that the shadow have space in the view
-//        layer.shadowRadius = layer.frame.height/3.5
-//        layer.shadowOffset = CGSize(width: 0, height: 3)
-//        layer.masksToBounds = false
-//        layer.shadowColor = CGColor.shadowColor
-//        layer.shadowOpacity = 1
-//        layer.shadowRadius = 4
+        layer.shadowRadius = layer.frame.height/3
+        layer.shadowOffset = CGSize(width: 0, height: 3)
+        layer.masksToBounds = false
+        layer.shadowColor = CGColor.shadowColor
+        layer.shadowOpacity = 1
+        layer.shadowRadius = 2
         
         return layer
     }()
     
     func configure(with colorIndex: Int) {
-        imageView.layer.zPosition = 1
-        imageView.layer.cornerRadius = imageView.layer.frame.height / 3.5
-        imageView.layer.masksToBounds = true
         gradientLayer.colors = UIColor.tagColors[colorIndex]
-        contentView.layer.addSublayer(gradientLayer)
+        gradientView.layer.addSublayer(gradientLayer)
     }
     
     func select() {
-//        imageView.image = UIImage(named: "option")
-        gradientLayer.borderColor = UIColor.black.cgColor
+        gradientViewHeight.constant = 32
     }
     
     func deselect() {
-//        imageView.image = nil
-        gradientLayer.borderColor = UIColor.white.cgColor
+        gradientViewHeight.constant = 28
     }
 }
