@@ -31,6 +31,9 @@ public class TagModel {
     // MARK: - Properties
     
     weak var delegate: TagModelDelegate?
+    var nextColor: Int64 {
+        return reefKit.nextColor
+    }
     
     private(set) var didUpdateTags: BehaviorSubject<[Tag]>
     private(set) public var tags: [Tag]
@@ -43,7 +46,6 @@ public class TagModel {
 //        self.persistance = reefKit.persistence
         self.tags = []
         self.didUpdateTags = BehaviorSubject<[Tag]>(value: tags)
-        
         reefKit.tagsDelegate = self
         reefKit.fetchTags {
             self.tags = $0

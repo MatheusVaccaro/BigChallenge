@@ -16,7 +16,7 @@ class AddTagColorsViewModel {
     
     weak var delegate: AddTagColorsViewModelDelegate?
     
-    var colorIndex: Int64 = Int64(UIColor.tagColors.startIndex) { //TODO: get next index
+    var colorIndex: Int64 = Int64(UIColor.tagColors.startIndex) {
         didSet {
             delegate?.addTagColorsViewModel(self, didUpdateColorIndex: colorIndex)
         }
