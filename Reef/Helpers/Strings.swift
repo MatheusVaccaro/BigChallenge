@@ -99,6 +99,11 @@ struct Strings {
                 NSLocalizedString("newTagTitlePlaceHolder", comment: "placeholder title for a new tag")
             static let tagDescriptionPlaceholder =
                 NSLocalizedString("newTagDescriptionPlaceholder", comment: "placeholder title for a new tag description")
+            struct VoiceOver {
+                static let label = NSLocalizedString("create tag voice over label", comment: "")
+                static let hint = NSLocalizedString("create tag voice over hint", comment: "")
+                static let CreateAction = NSLocalizedString("create  action", comment: "creates a tag in tag screen (voiceOver)")
+            }
         }
         
         struct CollectionScreen {
