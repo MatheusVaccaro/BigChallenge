@@ -122,7 +122,7 @@ extension TaskListViewController: UITableViewDelegate {
     }
     
     @objc func toggleCollapseInCompleteSection() {
-        let completedSection = viewModel.tasks.count-1
+        let completedSection = viewModel.taskListData.count-1
         
         viewModel.isCompleteSectionCollapsed.toggle()
         tableView.reloadSectionIndexTitles()
@@ -181,12 +181,22 @@ extension TaskListViewController: UITableViewDelegate {
                                             view: UIView,
                                             completion: (Bool) -> Void) in
                                             view.backgroundColor = UIColor.Cell.deleteRed
-                                            self.viewModel.delete(taskAt: indexPath)
-//                                            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                                            
+                                            self.deleteItem(at: indexPath)
+                                            
                                             completion(true)
         }
         action.image = UIImage.init(named: "trash")
         return action
+    }
+    
+    private func deleteItem(at indexPath: IndexPath) {
+        if viewModel.deleteSectionIfNeeded(indexPath.section) {
+            tableView.deleteSections([indexPath.section], with: .automatic)
+        } else {
+            viewModel.delete(taskAt: indexPath)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
 }
 
