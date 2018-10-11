@@ -38,5 +38,10 @@ public extension UIColor {
             UIColor(red: 11/255, green: 179/255, blue: 83/255, alpha: 1).cgColor
         ]
         
+        public static let yellowGradient: [CGColor] = [
+            UIColor(red: 255/255, green: 189/255, blue: 66/255, alpha: 1).cgColor,
+            UIColor(red: 255/255, green: 224/255, blue: 40/255, alpha: 1).cgColor
+        ]
+        
     }
 }
