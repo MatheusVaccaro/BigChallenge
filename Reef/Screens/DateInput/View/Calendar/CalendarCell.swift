@@ -11,8 +11,8 @@ import JTAppleCalendar
 
 class CalendarCell: JTAppleCell {
     
-    private static var todayFont = UIFont.font(sized: 18, weight: .bold, with: .body)
-    private static var defaultFont = UIFont.font(sized: 18, weight: .regular, with: .body)
+    private static var todayFont = UIFont.font(sized: 18, weight: .bold, with: .body).monospaced()
+    private static var defaultFont = UIFont.font(sized: 18, weight: .regular, with: .body).monospaced()
     
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var roundedView: UIView!
@@ -45,6 +45,7 @@ class CalendarCell: JTAppleCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        // TODO: Figure out how to scale down single-digit days on large DynamicType
         setupBackgroundCircleLayer()
     }
     
