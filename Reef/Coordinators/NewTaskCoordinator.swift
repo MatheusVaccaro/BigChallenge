@@ -26,7 +26,7 @@ class NewTaskCoordinator: NSObject, Coordinator {
     fileprivate let tagModel: TagModel
     
     fileprivate var task: Task?
-    fileprivate var selectedTags: [Tag]
+    var selectedTags: [Tag]
     
     var presentTaskInteractiveAnimationController: PresentTaskInteractiveAnimationController?
     fileprivate var dismissTaskInteractiveAnimationController: DismissTaskInteractiveAnimationController?

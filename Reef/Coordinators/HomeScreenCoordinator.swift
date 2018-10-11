@@ -101,6 +101,7 @@ class HomeScreenCoordinator: Coordinator {
                                taskModel: taskModel,
                                tagModel: tagModel,
                                selectedTags: task.allTags)
+        
         newTaskCoordinator.delegate = self
         addChild(coordinator: newTaskCoordinator)
         newTaskCoordinator.start()
@@ -166,6 +167,7 @@ extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
 extension HomeScreenCoordinator: TagCollectionViewModelDelegate {
     func didUpdate(_ selectedTags: [Tag]) {
         self.selectedTags = selectedTags
+        presentTaskInteractiveAnimationController?.taskCoordinator?.selectedTags = selectedTags
     }
     
     func didClickUpdate(tag: Tag) {
@@ -179,8 +181,10 @@ extension HomeScreenCoordinator: TagCollectionViewModelDelegate {
 
 extension HomeScreenCoordinator: HomeScreenViewControllerDelegate {
     func viewDidLoad() {
-        let interactiveAnimation = PresentTaskInteractiveAnimationController(view: homeScreenViewController!.pullDownView,
-                                                                             taskCoordinator: newTaskCoordinator)
+        let interactiveAnimation =
+            PresentTaskInteractiveAnimationController(view: homeScreenViewController!.pullDownView,
+                                                      taskCoordinator: newTaskCoordinator)
+        
         self.presentTaskInteractiveAnimationController = interactiveAnimation
         newTaskCoordinator.presentTaskInteractiveAnimationController = interactiveAnimation
     }

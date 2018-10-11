@@ -22,7 +22,7 @@ protocol taskListViewModelUIDelegate: class {
 public class TaskListViewModel {
     //    here i declare multiple arrays for completed and uncomplete tasks
     //    so that you dont need to filer the array everytime you complete a task
-    private(set) var tasks: [(rows: [Task], header: String)]
+    private(set) var taskListData: [(rows: [Task], header: String)]
     private(set) var selectedTags: [Tag]
     private(set) var relatedTags: [Tag]
     
@@ -37,7 +37,7 @@ public class TaskListViewModel {
     
     required public init(model: TaskModel) {
         self.model = model
-        self.tasks = []
+        self.taskListData = []
         self.selectedTags = []
         self.relatedTags = []
         
@@ -51,11 +51,11 @@ public class TaskListViewModel {
     }
     
     private var flatTasks: [Task] {
-        return tasks.flatMap { $0.rows }
+        return taskListData.flatMap { $0.rows }
     }
     
     func task(for indexPath: IndexPath) -> Task {
-        return tasks[indexPath.section].rows[indexPath.row]
+        return taskListData[indexPath.section].rows[indexPath.row]
     }
     
     func numberOfRows(in section: Int) -> Int {
@@ -63,26 +63,26 @@ public class TaskListViewModel {
             return 0
         }
         
-        return tasks[section].rows.count
+        return taskListData[section].rows.count
     }
     
     var numberOfSections: Int {
-        return tasks.count
+        return taskListData.count
     }
     
     var isCompleteSectionCollapsed: Bool = true
     
     var hasCompletedTasks: Bool {
-        return tasks.last?.rows.first?.isCompleted ?? false
+        return taskListData.last?.rows.first?.isCompleted ?? false
     }
     
     func title(forHeaderInSection section: Int) -> String {
-        return tasks[section].header
+        return taskListData[section].header
     }
     
     func isCompleted(_ section: Int) -> Bool {
         guard hasCompletedTasks else { return false }
-        return tasks.count-1 == section
+        return taskListData.count-1 == section
     }
     
     /** filters the taskList with selected tags */
@@ -90,16 +90,16 @@ public class TaskListViewModel {
         //swiftlint:disable statement_postition
         self.selectedTags = selectedTags
         self.relatedTags = relatedTags
-        self.tasks = []
+        self.taskListData = []
         
         if selectedTags.isEmpty { //RECOMMENDED
-            tasks.append((rows: model.recommender.recentTasks, header: recentHeader))
-            tasks.append((rows: model.recommender.localTasks, header: locationHeader))
-            tasks.append((rows: model.recommender.nextTasks, header: nextHeader))
-            tasks.append((rows: model.recommender.lateTasks, header: lateHeader))
+            taskListData.append((rows: model.recommender.recentTasks, header: recentHeader))
+            taskListData.append((rows: model.recommender.localTasks, header: locationHeader))
+            taskListData.append((rows: model.recommender.nextTasks, header: nextHeader))
+            taskListData.append((rows: model.recommender.lateTasks, header: lateHeader))
         } else { //TASKS FROM TAGS
             let mainTasks = model.tasks.filter { !$0.isCompleted && isMainTask($0) }
-            tasks.append((rows: mainTasks, header: ""))
+            taskListData.append((rows: mainTasks, header: ""))
         }
         
         //OTHER TASKS
@@ -118,18 +118,18 @@ public class TaskListViewModel {
         // remove completed
         remainingTasks.removeAll { $0.isCompleted }
         
-        tasks.append((rows: remainingTasks, header: otherHeader))
-        tasks.append((rows: completedTasks, header: completeHeader))
+        taskListData.append((rows: remainingTasks, header: otherHeader))
+        taskListData.append((rows: completedTasks, header: completeHeader))
         
-        tasks = tasks
+        taskListData = taskListData
             .filter { !$0.rows.isEmpty }
         
         UIDelegate?.taskListViewModelDidUpdate(self)
-        delegate?.didBecomeEmpty(tasks.isEmpty)
+        delegate?.didBecomeEmpty(taskListData.isEmpty)
     }
     
     func taskCellViewModel(for indexPath: IndexPath) -> TaskCellViewModel {
-        let task = tasks[indexPath.section].rows[indexPath.row]
+        let task = taskListData[indexPath.section].rows[indexPath.row]
         let viewModel = TaskCellViewModel(task: task, taskModel: model)
         viewModel.delegate = self
         return viewModel
@@ -150,15 +150,10 @@ public class TaskListViewModel {
     
     func toggleComplete(taskAt indexPath: IndexPath) {
         var taskAttributes: [TaskAttributes : Any] = [:]
-        let task = tasks[indexPath.section].rows.remove(at: indexPath.row)
+        let task = taskListData[indexPath.section].rows.remove(at: indexPath.row)
         
         taskAttributes[.isCompleted] = !task.isCompleted
         model.update(task, with: taskAttributes)
-    }
-    
-    func delete(taskAt indexPath: IndexPath) {
-        let task = tasks[indexPath.section].rows.remove(at: indexPath.row)
-        model.save(task)
     }
     
     // MARK: Helpers
@@ -193,16 +188,36 @@ extension TaskListViewModel: TaskCellViewModelDelegate {
 }
 
 extension TaskListViewModel: TaskModelDelegate {
+    //TODO: rename taskListData
+    
     func taskModel(_ taskModel: TaskModel, didInsert tasks: [Task]) {
         filterTasks(with: selectedTags, relatedTags: relatedTags)
     }
     
+    func delete(taskAt indexPath: IndexPath) {
+        let task = taskListData[indexPath.section].rows[indexPath.row]
+        model.delete(task)
+    }
+    
     func taskModel(_ taskModel: TaskModel, didDelete tasks: [Task]) {
-        filterTasks(with: selectedTags, relatedTags: relatedTags)
+        for task in tasks {
+            for section in 0...taskListData.count-1 {
+                if let index = taskListData[section].rows.index(of: task) {
+                    taskListData[section].rows.remove(at: index)
+                }
+            }
+        }
     }
     
     func taskModel(_ taskModel: TaskModel, didUpdate tasks: [Task]) {
         filterTasks(with: selectedTags, relatedTags: relatedTags)
+    }
+    
+    func deleteSectionIfNeeded(_ section: Int) -> Bool {
+        guard taskListData[section].rows.count == 1 else { return false }
+        
+        taskListData.remove(at: section)
+        return true
     }
 }
 

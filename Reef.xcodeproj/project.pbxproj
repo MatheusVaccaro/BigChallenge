@@ -1479,11 +1479,11 @@
 			projectRoot = "";
 			targets = (
 				C28DC91520B61CB6007F881A /* Reef */,
+				22FA284F212F7E6D00FC74D3 /* ReefIndexExtension */,
+				22FEEA732133419500D8B049 /* ReefToday */,
 				1627170C20C8793900AA0024 /* ReefTests */,
 				22F23E6B212E3E7F0064EE05 /* ReefKit */,
 				22656929212F718F009714BC /* Persistence */,
-				22FA284F212F7E6D00FC74D3 /* ReefIndexExtension */,
-				22FEEA732133419500D8B049 /* ReefToday */,
 			);
 		};
 /* End PBXProject section */

@@ -196,6 +196,7 @@ class HomeScreenViewController: UIViewController {
         
         pullDownView.accessibilityValue = Strings.Task.CreationScreen.taskTitlePlaceholder
         pullDownView.accessibilityTraits = UIAccessibilityTraits.button
+        pullDownView.isAccessibilityElement = true
         
         pullDownView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(startAddTask)))
     }

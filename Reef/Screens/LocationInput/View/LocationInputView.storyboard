@@ -40,7 +40,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="WfN-2U-2mu"/>
                                 </constraints>
-                                <textInputTraits key="textInputTraits" returnKeyType="search" textContentType="location"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="yes" returnKeyType="search" textContentType="location"/>
                                 <connections>
                                     <outlet property="delegate" destination="VTM-Bh-5nV" id="jdH-aq-yHr"/>
                                 </connections>

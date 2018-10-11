@@ -28,9 +28,13 @@ class AddTagTitleViewController: UIViewController {
         super.viewDidLoad()
         
         configureViewDesign()
-        tagTitleTextField.becomeFirstResponder()
-        
         configureTagTitleTextField()
+        
+        if let tagTitleView = view as? TagTitleView {
+            tagTitleView.delegate = self
+            tagTitleView.isAccessibilityElement = true
+            tagTitleDoneButton.isAccessibilityElement = false
+        }
     }
     
     private func configureViewDesign() {
@@ -41,6 +45,12 @@ class AddTagTitleViewController: UIViewController {
         view.layer.shadowOpacity = 1
         view.layer.shadowRadius = 11
         view.layer.shadowRadius = 6.3
+    }
+    
+    private func configureAccessibility() {
+        tagTitleDoneButton.isAccessibilityElement = false
+        tagTitleDoneButton.accessibilityHint = Strings.Tag.CollectionScreen.VoiceOver.AddTag.hint
+        tagTitleDoneButton.accessibilityLabel = Strings.Tag.CollectionScreen.VoiceOver.AddTag.label
     }
     
     private func configureTagTitleTextField() {
@@ -73,6 +83,16 @@ extension AddTagTitleViewController: UITextFieldDelegate {
     }
 }
 
+extension AddTagTitleViewController: TagTitleViewAccessibilityDelegate {
+    var shouldEnableCreateTask: Bool {
+        return !(tagTitleTextField.text ?? "").isEmpty
+    }
+    
+    func createTag() {
+        didPressDoneButton(tagTitleDoneButton)
+    }
+}
+
 extension AddTagTitleViewController: StoryboardInstantiable {
     static var viewControllerID: String {
         return "addTagTitle"
@@ -80,5 +100,38 @@ extension AddTagTitleViewController: StoryboardInstantiable {
     
     static var storyboardIdentifier: String {
         return "AddTagTitle"
+    }
+}
+
+protocol TagTitleViewAccessibilityDelegate: class {
+    var shouldEnableCreateTask: Bool { get }
+    func createTag()
+}
+
+class TagTitleView: UIView {
+    weak var delegate: TagTitleViewAccessibilityDelegate!
+    
+    override var accessibilityLabel: String? {
+        get {
+            return Strings.Tag.CreationScreen.VoiceOver.label
+        }
+        set { }
+    }
+    
+    override var accessibilityCustomActions: [UIAccessibilityCustomAction]? {
+        get {
+            guard delegate.shouldEnableCreateTask else { return nil  }
+            
+            let createAction = UIAccessibilityCustomAction(name: Strings.Task.CreationScreen.VoiceOver.CreateTaskAction,
+                                                           target: self,
+                                                           selector: #selector(handleCreateAction))
+            
+            return [createAction]
+        }
+        set { }
+    }
+    
+    @objc func handleCreateAction() {
+        delegate.createTag()
     }
 }

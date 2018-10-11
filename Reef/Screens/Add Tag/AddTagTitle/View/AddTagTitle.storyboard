@@ -14,7 +14,7 @@
         <scene sceneID="mEj-cg-hon">
             <objects>
                 <viewController storyboardIdentifier="addTagTitle" id="5bj-Mj-8qe" customClass="AddTagTitleViewController" customModule="Reef" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="H2z-cY-E6t">
+                    <view key="view" contentMode="scaleToFill" id="H2z-cY-E6t" customClass="TagTitleView" customModule="Reef" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
