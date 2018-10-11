@@ -200,6 +200,8 @@ extension TaskListViewModel: TaskModelDelegate {
     }
     
     func taskModel(_ taskModel: TaskModel, didDelete tasks: [Task]) {
+        guard !taskListData.isEmpty else { return }
+        
         for task in tasks {
             for section in 0...taskListData.count-1 {
                 if let index = taskListData[section].rows.index(of: task) {
@@ -216,7 +218,9 @@ extension TaskListViewModel: TaskModelDelegate {
     func deleteSectionIfNeeded(_ section: Int) -> Bool {
         guard taskListData[section].rows.count == 1 else { return false }
         
+        let task = taskListData[section].rows.first!
         taskListData.remove(at: section)
+        model.delete(task)
         return true
     }
 }
