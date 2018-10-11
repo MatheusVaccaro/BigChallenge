@@ -10,13 +10,21 @@ import UIKit
 
 class ColorCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var imageView: UIImageView!
-    
     static let identifier = "colorCell"
+    
+    @IBOutlet weak var gradientView: UIView!
+    @IBOutlet weak var gradientViewHeight: NSLayoutConstraint!
     
     override var isSelected: Bool {
         didSet {
             isSelected ? select() : deselect()
+            CATransaction.disableAnimations {
+                self.layoutIfNeeded()
+            }
+            
+            UIView.animate(withDuration: 0.3, animations: {
+                self.gradientLayer.frame = self.gradientView.bounds
+                })
         }
     }
     
