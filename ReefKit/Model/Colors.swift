@@ -11,10 +11,11 @@ import UIKit
 
 public extension UIColor {
     
-    public static let tagColors = [ UIColor.Tags.purpleGradient,
+    public static let tagColors = [ UIColor.Tags.peachGradient,
                              UIColor.Tags.redGradient,
-                             UIColor.Tags.peachGradient,
-                             UIColor.Tags.greenGradient ]
+                             UIColor.Tags.purpleGradient,
+                             UIColor.Tags.greenGradient,
+                             UIColor.Tags.yellowGradient]
     
     public struct Tags {
         
