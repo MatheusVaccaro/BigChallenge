@@ -43,6 +43,7 @@ class NewTagCoordinator: NSObject, Coordinator {
         //viewModels
         let addTagTitleViewModel = AddTagTitleViewModel()
         let addTagColorsViewModel = AddTagColorsViewModel()
+        addTagColorsViewModel.colorIndex = model.nextColor
         let addTagDetailsViewModel = AddTagDetailsViewModel()
         
         let creationFrameViewModel = TagCreationViewModel(tagModel: model,

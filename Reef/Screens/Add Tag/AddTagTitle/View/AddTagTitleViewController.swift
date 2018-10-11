@@ -27,15 +27,20 @@ class AddTagTitleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.layer.cornerRadius = 6.3
-        view.layer.shadowRadius = 6.3
-        view.layer.shadowOffset = CGSize(width: 0, height: 5)
+        configureViewDesign()
+        tagTitleTextField.becomeFirstResponder()
+        
+        configureTagTitleTextField()
+    }
+    
+    private func configureViewDesign() {
         view.layer.masksToBounds = false
+        view.layer.cornerRadius = 6.3
+        view.layer.shadowOffset = CGSize(width: 0, height: 5)
         view.layer.shadowColor = CGColor.shadowColor
         view.layer.shadowOpacity = 1
         view.layer.shadowRadius = 11
-    
-        configureTagTitleTextField()
+        view.layer.shadowRadius = 6.3
     }
     
     private func configureTagTitleTextField() {

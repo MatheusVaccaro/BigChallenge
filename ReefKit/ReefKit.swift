@@ -12,6 +12,9 @@ import Persistence
 public class ReefKit {
     public weak var tasksDelegate: ReefTaskDelegate?
     public weak var tagsDelegate: ReefTagDelegate?
+    public var nextColor: Int64 {
+        return tagCRUD.nextColor
+    }
     
     private let taskCRUD: TaskCRUD
     private let tagCRUD: TagCRUD

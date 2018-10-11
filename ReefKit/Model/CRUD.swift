@@ -162,10 +162,15 @@ class TaskCRUD {
 }
 
 public class TagCRUD {
-    private var currentColor: Int = 0 //TODO: save to user defaults
-
-    private func nextColor() -> Int64 {
+    private var currentColor: Int = -1 //TODO: save to user defaults
+    
+    private var numberOfColors = UIColor.tagColors.count
+    
+    var nextColor: Int64 {
         currentColor += 1
+        if currentColor >= numberOfColors {
+            currentColor = 0
+        }
         return Int64( currentColor % UIColor.tagColors.count )
     }
     
@@ -185,7 +190,7 @@ public class TagCRUD {
         
         let title = attributes[.title] as? String
         let tag = persistence.create(Tag.self)
-        let colorIndex = attributes[.colorIndex] as? Int64 ?? nextColor()
+        let colorIndex = attributes[.colorIndex] as? Int64 ?? abs(Int64(currentColor))
         let id = attributes[.id] as? UUID ?? UUID()
         let tasks = attributes[.tasks] as? [Task] ?? []
         let arriving = attributes[.isArrivingLocation] as? Bool ?? false
