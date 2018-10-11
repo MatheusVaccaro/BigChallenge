@@ -28,7 +28,6 @@ class AddTagTitleViewController: UIViewController {
         super.viewDidLoad()
         
         configureViewDesign()
-        tagTitleTextField.becomeFirstResponder()
         
         configureTagTitleTextField()
     }
