@@ -13,7 +13,7 @@ class PresentTaskInteractiveAnimationController: UIPercentDrivenInteractiveTrans
     
     typealias CompletionHandler = () -> Void
     
-    private weak var taskCoordinator: NewTaskCoordinator?
+    private(set) weak var taskCoordinator: NewTaskCoordinator?
     private weak var view: UIView?
     
     private(set) var interactionInProgress = false
