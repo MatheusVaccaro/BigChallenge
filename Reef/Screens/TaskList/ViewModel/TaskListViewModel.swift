@@ -17,6 +17,8 @@ protocol TaskListDelegate: class {
 
 protocol taskListViewModelUIDelegate: class {
     func taskListViewModelDidUpdate(_ taskListViewModel: TaskListViewModel)
+    
+    func taskListViewModel(_ taskListViewModel: TaskListViewModel, didUpdateAt indexPaths: [IndexPath])
 }
 
 public class TaskListViewModel {
@@ -148,14 +150,6 @@ public class TaskListViewModel {
         model.update(task, with: taskAttributes)
     }
     
-    func toggleComplete(taskAt indexPath: IndexPath) {
-        var taskAttributes: [TaskAttributes : Any] = [:]
-        let task = taskListData[indexPath.section].rows.remove(at: indexPath.row)
-        
-        taskAttributes[.isCompleted] = !task.isCompleted
-        model.update(task, with: taskAttributes)
-    }
-    
     // MARK: Helpers
     /**
      verifies that task contains the same amount of tags, which are the selected tags
@@ -187,9 +181,7 @@ extension TaskListViewModel: TaskCellViewModelDelegate {
     }
 }
 
-extension TaskListViewModel: TaskModelDelegate {
-    //TODO: rename taskListData
-    
+extension TaskListViewModel: TaskModelDelegate {    
     func taskModel(_ taskModel: TaskModel, didInsert tasks: [Task]) {
         filterTasks(with: selectedTags, relatedTags: relatedTags)
     }
@@ -211,8 +203,27 @@ extension TaskListViewModel: TaskModelDelegate {
         }
     }
     
+    func toggleComplete(taskAt indexPath: IndexPath) {
+        let task = taskListData[indexPath.section].rows[indexPath.row]
+        let taskAttributes: [TaskAttributes : Any] = [.isCompleted:!task.isCompleted]
+        
+        model.update(task, with: taskAttributes)
+    }
+    
     func taskModel(_ taskModel: TaskModel, didUpdate tasks: [Task]) {
-        filterTasks(with: selectedTags, relatedTags: relatedTags)
+        guard !taskListData.isEmpty else { return }
+        
+        var ans: [IndexPath] = []
+        
+        for task in tasks {
+            for section in 0...taskListData.count-1 {
+                if let row = taskListData[section].rows.index(of: task) {
+                    ans.append(IndexPath(row: row, section: section))
+                }
+            }
+        }
+        
+        UIDelegate?.taskListViewModel(self, didUpdateAt: ans)
     }
     
     func deleteSectionIfNeeded(_ section: Int) -> Bool {
