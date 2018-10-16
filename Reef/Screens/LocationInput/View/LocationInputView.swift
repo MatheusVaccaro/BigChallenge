@@ -103,6 +103,9 @@ class LocationInputView: UIViewController {
         mapView.layer.cornerRadius = 6.3
         
         mapView.accessibilityLabel = viewModel.mapViewAccessibilityLabel
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(stopSearching))
+        mapView.addGestureRecognizer(tapGesture)
     }
     
     fileprivate func setupTableView() {
@@ -124,27 +127,34 @@ class LocationInputView: UIViewController {
         let circle = MKCircle(center: location.center, radius: location.radius)
         mapView.addOverlay(circle)
     }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        stopSearching()
+    }
+    
+    @objc private func stopSearching() {
+        searchBar.resignFirstResponder()
+    }
 }
 
 extension LocationInputView: UISearchBarDelegate {
     // This method updates filteredData based on the text in the Search Box
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
         let request = MKLocalSearch.Request()
+        
         request.naturalLanguageQuery = searchText
         request.region = mapView.region
+        
         let search = MKLocalSearch(request: request)
         
         search.start { response, _ in
             guard let response = response else { return }
             
+            self.searchResultsTableView.isHidden = false
             self.tableViewData = response.mapItems
             self.searchResultsTableView.reloadData()
         }
-    }
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchResultsTableView.isHidden = false
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
