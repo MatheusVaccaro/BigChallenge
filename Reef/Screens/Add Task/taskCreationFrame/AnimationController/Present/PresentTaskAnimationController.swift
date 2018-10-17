@@ -106,6 +106,7 @@ class PresentTaskAnimationController: NSObject, UIViewControllerAnimatedTransiti
                     homeScreenViewController.pullDownViewHeight.constant = 100
                     homeScreenViewController.view.layoutIfNeeded()
                     homeScreenViewController.pullDownStackView.alpha = 1
+                    taskCreationFrameViewController.newTaskViewController.start()
                 })
             }
         })

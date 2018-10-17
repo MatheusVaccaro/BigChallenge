@@ -190,10 +190,13 @@ extension TaskCreationFrameViewController {
     }
     
     @objc private func handleTapGesture(_ recognizer: UITapGestureRecognizer) {
+        newTaskViewController.taskTitleTextView.resignFirstResponder()
         animateOrReverseRunningTransition(state: !state, duration: duration)
     }
     
     @objc private func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
+        newTaskViewController.taskTitleTextView.resignFirstResponder()
+        
         let translation = recognizer.translation(in: taskContainerView)
         let fraction = fractionComplete(state: !state, translation: translation)
         

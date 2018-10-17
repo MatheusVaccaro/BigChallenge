@@ -55,11 +55,6 @@ class NewTaskViewController: UIViewController {
         (view as! NewTaskView).delegate = self
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        taskTitleTextView.becomeFirstResponder()
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         view.endEditing(true)
         super.viewWillDisappear(animated)
