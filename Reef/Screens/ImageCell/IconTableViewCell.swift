@@ -106,12 +106,17 @@ class IconTableViewCell: UITableViewCell {
             cellSwitch.isHidden = true
         }
         
-        for index in 0..<viewModel.tagInfo.count {            
-            tagIcons[index].isHidden = false
-            tagLabels[index].isHidden = false
-            
-            tagIcons[index].image = UIImage(named: viewModel.imageName)
-            tagLabels[index].text = viewModel.tagInfo[index]
+        for index in 0...1 {
+            if viewModel.tagInfo.indices.contains(index) {
+                tagIcons[index].isHidden = false
+                tagLabels[index].isHidden = false
+                
+                tagIcons[index].image = UIImage(named: viewModel.imageName)
+                tagLabels[index].text = viewModel.tagInfo[index]
+            } else {
+                tagIcons[index].isHidden = true
+                tagLabels[index].isHidden = true
+            }
         }
     }
     

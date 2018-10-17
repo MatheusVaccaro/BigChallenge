@@ -56,9 +56,8 @@ class TaskCreationViewModel {
     func set(tags: [Tag]) {
         newTaskViewModel.set(tags)
         attributes[.tags] = tags
-        if taskDetails.set(tags) {
-            uiDelegate?.taskCreationViewModelDidChangeTaskInfo(self)
-        }
+        taskDetails.set(tags)
+        uiDelegate?.taskCreationViewModelDidChangeTaskInfo(self)
     }
 }
 

@@ -27,7 +27,7 @@
                                     <constraint firstAttribute="width" secondItem="3QI-Uu-sy9" secondAttribute="height" multiplier="1:1" id="Hyl-tI-1DJ"/>
                                 </constraints>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vwT-xg-fCr">
+                            <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vwT-xg-fCr">
                                 <rect key="frame" x="36" y="17.5" width="203" height="104.5"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" keyboardDismissMode="interactive" editable="NO" text="Title" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1w-aa-5F0">
@@ -43,17 +43,17 @@
                                         <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xam-gR-78R">
-                                        <rect key="frame" x="159" y="68.5" width="44" height="14"/>
+                                        <rect key="frame" x="0.0" y="68.5" width="203" height="14"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" image="dateIcon" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pJ2-r9-z9r">
-                                                <rect key="frame" x="0.0" y="0.0" width="14" height="14"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="750" image="dateIcon" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pJ2-r9-z9r">
+                                                <rect key="frame" x="8" y="0.0" width="14" height="14"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="width" constant="14" id="FTp-p3-MVF"/>
                                                     <constraint firstAttribute="width" secondItem="pJ2-r9-z9r" secondAttribute="height" multiplier="1:1" id="n6q-LD-TLE"/>
-                                                    <constraint firstAttribute="height" constant="14" id="yMJ-ms-b2W"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" text="text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZs-3s-FMM">
-                                                <rect key="frame" x="22" y="0.0" width="22" height="14"/>
+                                                <rect key="frame" x="30" y="0.0" width="173" height="14"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -64,14 +64,14 @@
                                         <rect key="frame" x="0.0" y="90.5" width="203" height="14"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" image="dateIcon" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iil-xn-p3C">
-                                                <rect key="frame" x="8" y="0.0" width="14" height="14"/>
+                                                <rect key="frame" x="159" y="0.0" width="14" height="14"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="14" id="jGX-JX-P6j"/>
+                                                    <constraint firstAttribute="width" constant="14" id="bUh-Gz-e26"/>
                                                     <constraint firstAttribute="width" secondItem="iil-xn-p3C" secondAttribute="height" multiplier="1:1" id="qHc-Ea-cO5"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" text="text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kOK-B6-yPn">
-                                                <rect key="frame" x="30" y="0.0" width="173" height="14"/>
+                                                <rect key="frame" x="181" y="0.0" width="22" height="14"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -81,7 +81,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="iil-xn-p3C" firstAttribute="leading" secondItem="rCi-Dx-kpE" secondAttribute="leading" constant="8" id="M88-1J-nj2"/>
-                                    <constraint firstItem="pJ2-r9-z9r" firstAttribute="leading" secondItem="vwT-xg-fCr" secondAttribute="leading" constant="8" id="lYF-pC-uoM"/>
+                                    <constraint firstItem="pJ2-r9-z9r" firstAttribute="leading" secondItem="xam-gR-78R" secondAttribute="leading" constant="8" id="lYF-pC-uoM"/>
                                 </constraints>
                             </stackView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AHU-Kf-cju">

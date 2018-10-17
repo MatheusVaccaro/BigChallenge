@@ -83,11 +83,17 @@ class AddTaskDetailsViewModel {
         }
     }
     
-    func set(_ tags: [Tag]) -> Bool {
-        instantiateCell(ofType: .dateCell)
-        instantiateCell(ofType: .locationCell)
+    func set(_ tags: [Tag]) {
+        if dateInputViewModel == nil {
+            instantiateCell(ofType: .dateCell)
+        }
         
-        return dateInputViewModel!.add(tags) || locationInputViewModel!.add(tags)
+        if locationInputViewModel == nil {
+            instantiateCell(ofType: .locationCell)
+        }
+        
+        dateInputViewModel!.add(tags)
+        locationInputViewModel!.add(tags)
     }
 }
 
@@ -100,16 +106,11 @@ private extension LocationInputViewModel {
         placeName = task.locationName!
     }
     
-    func add(_ tags: [Tag]) -> Bool {
-        var ans = false
-        for tag in tags {
-            guard tagInfo.count < 2 else { return ans }
-            if let locationString = tag.locationName {
-                tagInfo.append( locationString )
-                ans = true
-            }
-        }
-        return ans
+    func add(_ tags: [Tag]) {
+        tagInfo = Array( tags
+            .filter { $0.location != nil }
+            .map { $0.locationName! }
+            .prefix(2) )
     }
 }
 
@@ -123,16 +124,11 @@ private extension DateInputViewModel { //AQUI
         self.timeOfDay.onNext(timeOfDay)
     }
     
-    func add(_ tags: [Tag]) -> Bool {
-        var ans = false
-        for tag in tags {
-            guard tagInfo.count < 2 else { return ans }
-            if let dateString = tag.dueDate?.string(with: "dd MMM") {
-                tagInfo.append(dateString)
-                ans = true
-            }
-        }
-        return ans
+    func add(_ tags: [Tag]) {
+        tagInfo = Array( tags
+            .filter { $0.dueDate != nil }
+            .map { $0.dueDate!.string(with: "dd MMM")! }
+            .prefix(2) )
     }
 }
 
