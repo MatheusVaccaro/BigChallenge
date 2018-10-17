@@ -45,8 +45,8 @@ class AddTaskDetailsViewModel {
     let locationInputViewModelType: LocationInputViewModel.Type
     var locationInputViewModel: LocationInputViewModel?
     
-    let dateInputViewModelType: DateInputViewModel.Type
-    var dateInputViewModel: DateInputViewModel?
+    let dateInputViewModelType: DateInputViewModelProtocol.Type
+    var dateInputViewModel: DateInputViewModelProtocol?
     
     private let _numberOfSections = 1
     private let _numberOfRows = 3
@@ -114,7 +114,7 @@ private extension LocationInputViewModel {
     }
 }
 
-private extension DateInputViewModel { //AQUI
+private extension DateInputViewModelProtocol {
     func edit(_ task: Task) {
         guard let dueDate = task.dueDate else { return }
         
@@ -124,7 +124,7 @@ private extension DateInputViewModel { //AQUI
         self.timeOfDay.onNext(timeOfDay)
     }
     
-    func add(_ tags: [Tag]) {
+    mutating func add(_ tags: [Tag]) {
         tagInfo = Array( tags
             .filter { $0.dueDate != nil }
             .map { (text: $0.dueDate!.string(with: "dd MMM")!, colorIndex: Int($0.colorIndex)) }
@@ -162,6 +162,13 @@ extension AddTaskDetailsViewModel: AddDetailsProtocol {
         if let taskDetailsCellType = TaskDetailsCellType.init(rawValue: row),
             let cellViewModel = cells[taskDetailsCellType] ?? instantiateCell(ofType: taskDetailsCellType) {
             delegate?.shouldPresent(viewModel: cellViewModel)
+            
+            if taskDetailsCellType == .dateCell {
+                let nextHour = Date.now().snappedToNextHour()
+                let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: nextHour)
+                dateInputViewModel?.selectCalendarDate(calendarDate)
+                dateInputViewModel?.selectTimeOfDay(timeOfDay)
+            }
         }
     }
     
@@ -181,9 +188,7 @@ extension AddTaskDetailsViewModel: AddDetailsProtocol {
             iconCellPresentable = locationInputViewModel
             
         case .dateCell:
-            let nextHour = Date.now().snappedToNextHour()
-            let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: nextHour)
-            dateInputViewModel = dateInputViewModelType.init(calendarDate: calendarDate, timeOfDay: timeOfDay,
+            dateInputViewModel = dateInputViewModelType.init(calendarDate: nil, timeOfDay: nil,
                                                              frequency: .none, delegate: self)
             iconCellPresentable = dateInputViewModel
         }
