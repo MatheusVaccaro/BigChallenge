@@ -75,6 +75,7 @@ class AddTaskDetailsViewModel {
         instantiateCell(ofType: .locationCell)
         locationInputViewModel?.edit(task)
         
+        //AQUI
         instantiateCell(ofType: .dateCell)
         dateInputViewModel?.edit(task)
     }
@@ -186,7 +187,7 @@ private extension LocationInputViewModel {
     }
 }
 
-private extension DateInputViewModel {
+private extension DateInputViewModel { //AQUI
     func edit(_ task: Task) {
         for tag in task.allTags {
             add(tag)
