@@ -53,9 +53,10 @@ class TaskCreationFrameViewController: UIViewController {
     
     // MARK: - Animations Properties
     private let duration: TimeInterval = 0.25
-    private let animationDistance: CGFloat = 38
+    private var animationDistance: CGFloat!
     private var runningAnimators = [UIViewPropertyAnimator]()
     private var progressWhenInterrupted: CGFloat = 0
+    private let minimunProgressToCompleteAnimation: CGFloat = 0.2
     
     private var state: State = .collapsed {
         didSet {
@@ -143,6 +144,9 @@ class TaskCreationFrameViewController: UIViewController {
         viewModel.delegate?.viewDidLoad()
         taskDetailViewController.accessibilityElementsHidden = true
         taskContainerViewTopConstraint.constant = -taskDetailViewHeight
+        
+        animationDistance = taskContainerViewHeight
+        addGestureRecognizersForAnimations()
     }
     
     private func configureShadows(in view: UIView) {
@@ -178,18 +182,21 @@ extension TaskCreationFrameViewController: StoryboardInstantiable {
 extension TaskCreationFrameViewController {
     // MARK: Animations
     func addGestureRecognizersForAnimations() {
-        taskContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self,
-                                                                      action: #selector(handleTapGesture(_:))))
+//        taskContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self,
+//                                                                      action: #selector(handleTapGesture(_:))))
         
         taskContainerView.addGestureRecognizer(UIPanGestureRecognizer(target: self,
                                                                       action: #selector(handlePanGesture(_:))))
     }
     
     @objc private func handleTapGesture(_ recognizer: UITapGestureRecognizer) {
+        newTaskViewController.taskTitleTextView.resignFirstResponder()
         animateOrReverseRunningTransition(state: !state, duration: duration)
     }
     
     @objc private func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
+        newTaskViewController.taskTitleTextView.resignFirstResponder()
+        
         let translation = recognizer.translation(in: taskContainerView)
         let fraction = fractionComplete(state: !state, translation: translation)
         
@@ -237,7 +244,7 @@ extension TaskCreationFrameViewController {
     
     // Continues or reverse transition on pan .ended
     private func continueInteractiveTransition(fractionComplete: CGFloat) {
-        let cancel: Bool = fractionComplete < 0.35
+        let cancel: Bool = fractionComplete < minimunProgressToCompleteAnimation
         
         if cancel {
             runningAnimators.forEach {
