@@ -109,7 +109,7 @@ private extension LocationInputViewModel {
     func add(_ tags: [Tag]) {
         tagInfo = Array( tags
             .filter { $0.location != nil }
-            .map { $0.locationName! }
+            .map { (text: $0.locationName!, colorIndex: Int($0.colorIndex)) }
             .prefix(2) )
     }
 }
@@ -127,7 +127,7 @@ private extension DateInputViewModel { //AQUI
     func add(_ tags: [Tag]) {
         tagInfo = Array( tags
             .filter { $0.dueDate != nil }
-            .map { $0.dueDate!.string(with: "dd MMM")! }
+            .map { (text: $0.dueDate!.string(with: "dd MMM")!, colorIndex: Int($0.colorIndex)) }
             .prefix(2) )
     }
 }
@@ -138,7 +138,6 @@ private extension NotesInputViewModel {
         notes = taskNotes
     }
 }
-
 
 extension AddTaskDetailsViewModel: AddDetailsProtocol {
     var numberOfSections: Int {

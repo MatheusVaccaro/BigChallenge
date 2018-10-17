@@ -111,8 +111,14 @@ class IconTableViewCell: UITableViewCell {
                 tagIcons[index].isHidden = false
                 tagLabels[index].isHidden = false
                 
-                tagIcons[index].image = UIImage(named: viewModel.imageName)
-                tagLabels[index].text = viewModel.tagInfo[index]
+                let info = viewModel.tagInfo[index]
+                
+                tagIcons[index].image =
+                    UIImage(named: viewModel.imageName)!
+                        .withRenderingMode(.alwaysTemplate)
+                tagIcons[index].tintColor =
+                    UIColor(cgColor:UIColor.tagColors[info.colorIndex].first!)
+                tagLabels[index].text = info.text
             } else {
                 tagIcons[index].isHidden = true
                 tagLabels[index].isHidden = true

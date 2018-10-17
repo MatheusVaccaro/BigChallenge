@@ -31,7 +31,7 @@ class LocationInputViewModel {
         }
     }
     
-    var tagInfo: [String] = []
+    var tagInfo: [(text: String, colorIndex: Int)] = []
     
     required init() { }
     

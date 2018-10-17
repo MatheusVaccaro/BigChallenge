@@ -29,7 +29,7 @@ class DateInputViewModel: DateInputViewModelProtocol {
     private(set) var thisEveningShortcutText: BehaviorSubject<String>
     private(set) var nextMorningShortcutText: BehaviorSubject<String>
     
-    var tagInfo: [String] = []
+    var tagInfo: [(text: String, colorIndex: Int)] = []
     
     required init(calendarDate: DateComponents? = nil, timeOfDay: DateComponents? = nil,
          frequency: NotificationOptions.Frequency? = nil,

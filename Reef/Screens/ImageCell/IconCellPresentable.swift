@@ -22,7 +22,7 @@ protocol IconCellPresentable {
     func rightImageClickHandler()
     
     ///Can't have count > 2
-    var tagInfo: [String] { get set }
+    var tagInfo: [(text: String, colorIndex: Int)] { get set }
     
     var voiceOverHint: String { get }
     var voiceOverValue: String? { get }
@@ -36,7 +36,7 @@ extension IconCellPresentable {
     var shouldShowDeleteIcon: Bool { return false }
     func rightImageClickHandler() { }
     
-    var tagInfo: [String] {
+    var tagInfo: [(text: String, colorIndex: Int)] {
         get { return [] }
         set { }
     }
