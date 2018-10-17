@@ -20,6 +20,7 @@ protocol TaskCreationDelegate: class {
 protocol TaskCreationUIDelegate: class {
     func presentDetails()
     func hideDetails()
+    func taskCreationViewModelDidChangeTaskInfo(_ taskCreationViewModel: TaskCreationViewModel)
 }
 
 class TaskCreationViewModel {
@@ -54,14 +55,10 @@ class TaskCreationViewModel {
     
     func set(tags: [Tag]) {
         newTaskViewModel.set(tags)
-        taskDetails.set(tags)
         attributes[.tags] = tags
-    }
-}
-
-extension AddTaskDetailsViewModel {
-    func set(_ tags: [Tag]) {
-        
+        if taskDetails.set(tags) {
+            uiDelegate?.taskCreationViewModelDidChangeTaskInfo(self)
+        }
     }
 }
 

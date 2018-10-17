@@ -72,14 +72,77 @@ class AddTaskDetailsViewModel {
             notesInputViewModel?.edit(task)
         }
         
-        instantiateCell(ofType: .locationCell)
-        locationInputViewModel?.edit(task)
+        if task.location != nil {
+            instantiateCell(ofType: .locationCell)
+            locationInputViewModel?.edit(task)
+        }
         
-        //AQUI
+        if task.dueDate != nil {
+            instantiateCell(ofType: .dateCell)
+            dateInputViewModel?.edit(task)
+        }
+    }
+    
+    func set(_ tags: [Tag]) -> Bool {
         instantiateCell(ofType: .dateCell)
-        dateInputViewModel?.edit(task)
+        instantiateCell(ofType: .locationCell)
+        
+        return dateInputViewModel!.add(tags) || locationInputViewModel!.add(tags)
     }
 }
+
+private extension LocationInputViewModel {
+    func edit(_ task: Task) {
+        guard task.location != nil else { return }
+        
+        location = task.location
+        isArriving = task.isArrivingLocation
+        placeName = task.locationName!
+    }
+    
+    func add(_ tags: [Tag]) -> Bool {
+        var ans = false
+        for tag in tags {
+            guard tagInfo.count < 2 else { return ans }
+            if let locationString = tag.locationName {
+                tagInfo.append( locationString )
+                ans = true
+            }
+        }
+        return ans
+    }
+}
+
+private extension DateInputViewModel { //AQUI
+    func edit(_ task: Task) {
+        guard let dueDate = task.dueDate else { return }
+        
+        let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: dueDate)
+        
+        self.calendarDate.onNext(calendarDate)
+        self.timeOfDay.onNext(timeOfDay)
+    }
+    
+    func add(_ tags: [Tag]) -> Bool {
+        var ans = false
+        for tag in tags {
+            guard tagInfo.count < 2 else { return ans }
+            if let dateString = tag.dueDate?.string(with: "dd MMM") {
+                tagInfo.append(dateString)
+                ans = true
+            }
+        }
+        return ans
+    }
+}
+
+private extension NotesInputViewModel {
+    func edit(_ task: Task) {
+        guard let taskNotes = task.notes else { return }
+        notes = taskNotes
+    }
+}
+
 
 extension AddTaskDetailsViewModel: AddDetailsProtocol {
     var numberOfSections: Int {
@@ -161,58 +224,5 @@ extension AddTaskDetailsViewModel: DateInputViewModelDelegate {
 extension AddTaskDetailsViewModel: NotesInputViewModelDelegate {
     func notesInput(_ notesInputViewModel: NotesInputViewModel, didUpdateNotes notes: String) {
         delegate?.notesInput(notesInputViewModel, didUpdateNotes: notes)
-    }
-}
-
-private extension LocationInputViewModel {
-    func edit(_ task: Task) {
-        
-        for tag in task.allTags {
-            add(tag)
-        }
-        
-        guard task.location != nil else { return }
-        
-        location = task.location
-        isArriving = task.isArrivingLocation
-        placeName = task.locationName!
-    }
-    
-    func add(_ tag: Tag) {
-        guard tagInfo.count < 2 else { return }
-        
-        if let locationString = tag.locationName {
-            tagInfo.append( locationString )
-        }
-    }
-}
-
-private extension DateInputViewModel { //AQUI
-    func edit(_ task: Task) {
-        for tag in task.allTags {
-            add(tag)
-        }
-        
-        guard let dueDate = task.dueDate else { return }
-        
-        let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: dueDate)
-        
-        self.calendarDate.onNext(calendarDate)
-        self.timeOfDay.onNext(timeOfDay)
-    }
-    
-    func add(_ tag: Tag) {
-        guard tagInfo.count < 2 else { return }
-        
-        if let dateString = tag.dueDate?.string(with: "dd MMM") {
-            tagInfo.append(dateString)
-        }
-    }
-}
-
-private extension NotesInputViewModel {
-    func edit(_ task: Task) {
-        guard let taskNotes = task.notes else { return }
-        notes = taskNotes
     }
 }

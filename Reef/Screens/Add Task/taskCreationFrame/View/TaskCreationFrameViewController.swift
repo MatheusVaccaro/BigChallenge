@@ -312,6 +312,9 @@ extension TaskCreationFrameViewController {
 }
 
 extension TaskCreationFrameViewController: TaskCreationUIDelegate {
+    func taskCreationViewModelDidChangeTaskInfo(_ taskCreationViewModel: TaskCreationViewModel) {
+        taskDetailViewController.tableView.reloadData()
+    }
     
     func presentDetails() {
         guard state == .collapsed else { return }
