@@ -232,6 +232,10 @@ extension TaskListViewController: UITableViewDataSource {
 }
 
 extension TaskListViewController: taskListViewModelUIDelegate {
+    func taskListViewModel(_ taskListViewModel: TaskListViewModel, didUpdateAt indexPaths: [IndexPath]) {
+        tableView.reloadRows(at: indexPaths, with: .none)
+    }
+    
     func taskListViewModelDidUpdate(_ taskListViewModel: TaskListViewModel) {
         tableView.reloadData()
     }
