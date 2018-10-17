@@ -61,8 +61,6 @@ public class TaskTableViewCell: UITableViewCell {
     // MARK: - Functions
     public func configure(with viewModel: TaskCellViewModel) {
         self.viewModel = viewModel
-        
-        taskTitleTextView.text = viewModel.title
         tagsLabel.text = viewModel.tagsDescription
         
         if viewModel.shouldShowLocationIcon {
@@ -87,17 +85,29 @@ public class TaskTableViewCell: UITableViewCell {
         if viewModel.taskIsCompleted {
             gradientLayer.colors = [UIColor.Cell.darkGray.cgColor, UIColor.Cell.darkGray.cgColor]
             
-            let str = NSAttributedString(string: viewModel.title,
-                                         attributes: [
-                                            NSAttributedString.Key.strikethroughStyle : NSUnderlineStyle.thick.rawValue,
-                                            NSAttributedString.Key.strikethroughColor : UIColor.Cell.darkGray,
-                                            NSAttributedString.Key.foregroundColor : UIColor.Cell.darkGray
-                ])
+            let textAttributes: [NSAttributedString.Key : Any] = [
+                NSAttributedString.Key.strikethroughStyle : NSUnderlineStyle.thick.rawValue,
+                NSAttributedString.Key.strikethroughColor : UIColor.Cell.darkGray,
+                NSAttributedString.Key.foregroundColor : UIColor.Cell.darkGray,
+                NSAttributedString.Key.font : UIFont.font(sized: 19, weight: .medium, with: .body)
+                ]
+            
+            let str = NSAttributedString(string: viewModel.title, attributes: textAttributes)
+            
             taskTitleTextView.attributedText = str
             
         } else {
             taskTitleTextView.textColor = UIColor.black
             gradientLayer.colors = viewModel.checkButtonGradient
+            
+            let textAttributes: [NSAttributedString.Key : Any] = [
+                NSAttributedString.Key.foregroundColor : UIColor.black,
+                NSAttributedString.Key.font : UIFont.font(sized: 19, weight: .medium, with: .body)
+            ]
+            
+            let str = NSAttributedString(string: viewModel.title, attributes: textAttributes)
+            
+            taskTitleTextView.attributedText = str
         }
     }
     
