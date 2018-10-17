@@ -54,7 +54,14 @@ class TaskCreationViewModel {
     
     func set(tags: [Tag]) {
         newTaskViewModel.set(tags)
+        taskDetails.set(tags)
         attributes[.tags] = tags
+    }
+}
+
+extension AddTaskDetailsViewModel {
+    func set(_ tags: [Tag]) {
+        
     }
 }
 

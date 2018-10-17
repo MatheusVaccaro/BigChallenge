@@ -18,6 +18,20 @@ class IconTableViewCell: UITableViewCell {
     @IBOutlet weak var cellSwitch: UISwitch!
     @IBOutlet weak var rightButton: UIButton!
     
+    @IBOutlet weak var firstTagIcon: UIImageView!
+    @IBOutlet weak var firstTagLabel: UILabel!
+    @IBOutlet weak var secondTagIcon: UIImageView!
+    @IBOutlet weak var secondTagLabel: UILabel!
+    
+    var tagIcons: [UIImageView] {
+        return [firstTagIcon, secondTagIcon]
+    }
+    
+    var tagLabels: [UILabel] {
+        return [firstTagLabel, secondTagLabel]
+    }
+    
+    
     var titleFontSize: CGFloat = 18 {
         didSet {
             titleLabel.font = UIFont.font(sized: titleFontSize, weight: .medium, with: .title1, fontName: .barlow)
@@ -42,6 +56,11 @@ class IconTableViewCell: UITableViewCell {
         
         titleLabel.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         titleLabel.textContainer.lineFragmentPadding = 0
+        
+        firstTagIcon.isHidden = true
+        firstTagLabel.isHidden = true
+        secondTagIcon.isHidden = true
+        secondTagLabel.isHidden = true
         
         configureAccessibility()
     }
@@ -85,6 +104,14 @@ class IconTableViewCell: UITableViewCell {
             cellSwitch.setOn(viewModel.isSwitchOn, animated: false)
         } else {
             cellSwitch.isHidden = true
+        }
+        
+        for index in 0..<viewModel.tagInfo.count {            
+            tagIcons[index].isHidden = false
+            tagLabels[index].isHidden = false
+            
+            tagIcons[index].image = UIImage(named: viewModel.imageName)
+            tagLabels[index].text = viewModel.tagInfo[index]
         }
     }
     
