@@ -13,7 +13,7 @@ import ReefKit
 protocol LocationInputDelegate: class {
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
                        didFind location: CLCircularRegion?,
-                       named: String,
+                       named: String?,
                        arriving: Bool)
 }
 
@@ -31,11 +31,13 @@ class LocationInputViewModel {
         }
     }
     
+    var tagInfo: [String] = []
+    
     required init() { }
     
     public weak var delegate: LocationInputDelegate?
     
-    var placeName = Strings.LocationInputView.defaultPlaceName
+    var placeName: String? = nil
     let arrivingString = Strings.LocationInputView.arrivingString
     let leavingString = Strings.LocationInputView.leavingString
     let searchBarPlaceholder = Strings.LocationInputView.searchBarPlaceholder

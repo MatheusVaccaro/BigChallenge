@@ -749,6 +749,7 @@
 			isa = PBXGroup;
 			children = (
 				C29742CD211249B000A1D213 /* AddTaskDetailsViewModel.swift */,
+				C26EC73821544D19000E9CB9 /* NotesTableViewCellViewModel.swift */,
 			);
 			path = addTaskDetails;
 			sourceTree = "<group>";
@@ -1214,9 +1215,8 @@
 			isa = PBXGroup;
 			children = (
 				2246B099215BD59200CAE7DA /* DetailsViewModelProtocol.swift */,
-				C29742D1211257A600A1D213 /* TimeTableViewCellViewModel.swift */,
 				C29742D3211257B600A1D213 /* LocationTableViewCellViewModel.swift */,
-				C26EC73821544D19000E9CB9 /* NotesTableViewCellViewModel.swift */,
+				C29742D1211257A600A1D213 /* TimeTableViewCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

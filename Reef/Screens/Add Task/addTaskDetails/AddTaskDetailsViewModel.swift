@@ -13,7 +13,7 @@ import ReefKit
 protocol AddTaskDetailsDelegate: class {
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
                        didFind location: CLCircularRegion?,
-                       named: String,
+                       named: String?,
                        arriving: Bool)
     
     func taskDetailsViewModel(_ taskDetailsViewModel: AddTaskDetailsViewModel,
@@ -45,8 +45,8 @@ class AddTaskDetailsViewModel {
     let locationInputViewModelType: LocationInputViewModel.Type
     var locationInputViewModel: LocationInputViewModel?
     
-    let dateInputViewModelType: DateInputViewModelProtocol.Type
-    var dateInputViewModel: DateInputViewModelProtocol?
+    let dateInputViewModelType: DateInputViewModel.Type
+    var dateInputViewModel: DateInputViewModel?
     
     private let _numberOfSections = 1
     private let _numberOfRows = 3
@@ -72,15 +72,11 @@ class AddTaskDetailsViewModel {
             notesInputViewModel?.edit(task)
         }
         
-        if task.location != nil {
-            instantiateCell(ofType: .locationCell)
-            locationInputViewModel?.edit(task)
-        }
+        instantiateCell(ofType: .locationCell)
+        locationInputViewModel?.edit(task)
         
-        if task.dueDate != nil {
-            instantiateCell(ofType: .dateCell)
-            dateInputViewModel?.edit(task)
-        }
+        instantiateCell(ofType: .dateCell)
+        dateInputViewModel?.edit(task)
     }
 }
 
@@ -141,7 +137,7 @@ extension AddTaskDetailsViewModel: AddDetailsProtocol {
 
 extension AddTaskDetailsViewModel: LocationInputDelegate {
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
-                       didFind location: CLCircularRegion?, named: String, arriving: Bool) {
+                       didFind location: CLCircularRegion?, named: String?, arriving: Bool) {
         delegate?.locationInput(locationInputViewModel, didFind: location, named: named, arriving: arriving)
     }
 }
@@ -169,22 +165,47 @@ extension AddTaskDetailsViewModel: NotesInputViewModelDelegate {
 
 private extension LocationInputViewModel {
     func edit(_ task: Task) {
+        
+        for tag in task.allTags {
+            add(tag)
+        }
+        
         guard task.location != nil else { return }
         
         location = task.location
         isArriving = task.isArrivingLocation
         placeName = task.locationName!
     }
+    
+    func add(_ tag: Tag) {
+        guard tagInfo.count < 2 else { return }
+        
+        if let locationString = tag.locationName {
+            tagInfo.append( locationString )
+        }
+    }
 }
 
-private extension DateInputViewModelProtocol {
+private extension DateInputViewModel {
     func edit(_ task: Task) {
+        for tag in task.allTags {
+            add(tag)
+        }
+        
         guard let dueDate = task.dueDate else { return }
         
         let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: dueDate)
         
         self.calendarDate.onNext(calendarDate)
         self.timeOfDay.onNext(timeOfDay)
+    }
+    
+    func add(_ tag: Tag) {
+        guard tagInfo.count < 2 else { return }
+        
+        if let dateString = tag.dueDate?.string(with: "dd MMM") {
+            tagInfo.append(dateString)
+        }
     }
 }
 

@@ -91,12 +91,14 @@ extension TagCreationViewModel: AddTagDetailsViewModelDelegate {
     
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
                        didFind location: CLCircularRegion?,
-                       named: String,
+                       named: String?,
                        arriving: Bool) {
         
         attributes[.location] = location
         attributes[.isArrivingLocation] = arriving
-        attributes[.locationName] = named
+        if let name = named {
+            attributes[.locationName] = name
+        }
     }
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: Date?) {

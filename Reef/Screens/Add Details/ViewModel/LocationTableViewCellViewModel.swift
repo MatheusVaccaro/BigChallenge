@@ -16,7 +16,7 @@ extension LocationInputViewModel: IconCellPresentable {
     
     var subtitle: String {
         if hasLocation {
-            return placeName
+            return placeName ?? Strings.LocationInputView.defaultPlaceName
         } else {
             return Strings.LocationInputView.Cell.subtitle
         }
