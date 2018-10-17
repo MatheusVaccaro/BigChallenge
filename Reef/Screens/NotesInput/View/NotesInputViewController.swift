@@ -42,6 +42,7 @@ class NotesInputViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barTintColor = UIColor.backgroundColor
+        notesInputTextView.becomeFirstResponder()
     }
     
     // MARK: - Functions
