@@ -20,6 +20,7 @@ protocol TaskCreationDelegate: class {
 protocol TaskCreationUIDelegate: class {
     func presentDetails()
     func hideDetails()
+    func taskCreationViewModelDidChangeTaskInfo(_ taskCreationViewModel: TaskCreationViewModel)
 }
 
 class TaskCreationViewModel {
@@ -55,6 +56,8 @@ class TaskCreationViewModel {
     func set(tags: [Tag]) {
         newTaskViewModel.set(tags)
         attributes[.tags] = tags
+        taskDetails.set(tags)
+        uiDelegate?.taskCreationViewModelDidChangeTaskInfo(self)
     }
 }
 
@@ -92,12 +95,14 @@ extension TaskCreationViewModel: AddTaskDetailsDelegate {
     
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
                        didFind location: CLCircularRegion?,
-                       named: String,
+                       named: String?,
                        arriving: Bool) {
         
         attributes[.location] = location
         attributes[.isArrivingLocation] = arriving
-        attributes[.locationName] = named
+        if let name = named {
+            attributes[.locationName] = name
+        }
     }
     
     func taskDetailsViewModel(_ taskDetailsViewModel: AddTaskDetailsViewModel,

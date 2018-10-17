@@ -48,6 +48,8 @@ public class TaskTableViewCell: UITableViewCell {
         dateStringView.layer.cornerRadius = dateStringView.frame.height * 0.1
         dateStringLabel.textColor = UIColor.Cell.darkGray
         
+        tagsLabel.textColor = UIColor.Cell.darkGray
+        
         selectionStyle = .none
         configureAccessibility()
     }
@@ -60,7 +62,6 @@ public class TaskTableViewCell: UITableViewCell {
     public func configure(with viewModel: TaskCellViewModel) {
         self.viewModel = viewModel
         
-        gradientLayer.colors = viewModel.checkButtonGradient
         taskTitleTextView.text = viewModel.title
         tagsLabel.text = viewModel.tagsDescription
         
@@ -84,9 +85,19 @@ public class TaskTableViewCell: UITableViewCell {
         }
         
         if viewModel.taskIsCompleted {
-            taskTitleTextView.textColor = UIColor.Cell.darkGray
+            gradientLayer.colors = [UIColor.Cell.darkGray.cgColor, UIColor.Cell.darkGray.cgColor]
+            
+            let str = NSAttributedString(string: viewModel.title,
+                                         attributes: [
+                                            NSAttributedString.Key.strikethroughStyle : NSUnderlineStyle.thick.rawValue,
+                                            NSAttributedString.Key.strikethroughColor : UIColor.Cell.darkGray,
+                                            NSAttributedString.Key.foregroundColor : UIColor.Cell.darkGray
+                ])
+            taskTitleTextView.attributedText = str
+            
         } else {
             taskTitleTextView.textColor = UIColor.black
+            gradientLayer.colors = viewModel.checkButtonGradient
         }
     }
     

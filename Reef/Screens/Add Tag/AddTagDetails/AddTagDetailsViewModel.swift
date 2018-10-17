@@ -12,7 +12,7 @@ import RxSwift
 protocol AddTagDetailsViewModelDelegate: class {
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
                        didFind location: CLCircularRegion?,
-                       named: String,
+                       named: String?,
                        arriving: Bool)
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
@@ -139,7 +139,7 @@ extension AddTagDetailsViewModel: AddDetailsProtocol {
 
 extension AddTagDetailsViewModel: LocationInputDelegate {
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
-                       didFind location: CLCircularRegion?, named: String, arriving: Bool) {
+                       didFind location: CLCircularRegion?, named: String?, arriving: Bool) {
         delegate?.locationInput(locationInputViewModel, didFind: location, named: named, arriving: arriving)
     }
 }

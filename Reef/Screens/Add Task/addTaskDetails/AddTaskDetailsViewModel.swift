@@ -13,7 +13,7 @@ import ReefKit
 protocol AddTaskDetailsDelegate: class {
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
                        didFind location: CLCircularRegion?,
-                       named: String,
+                       named: String?,
                        arriving: Bool)
     
     func taskDetailsViewModel(_ taskDetailsViewModel: AddTaskDetailsViewModel,
@@ -45,8 +45,8 @@ class AddTaskDetailsViewModel {
     let locationInputViewModelType: LocationInputViewModel.Type
     var locationInputViewModel: LocationInputViewModel?
     
-    let dateInputViewModelType: DateInputViewModelProtocol.Type
-    var dateInputViewModel: DateInputViewModelProtocol?
+    let dateInputViewModelType: DateInputViewModel.Type
+    var dateInputViewModel: DateInputViewModel?
     
     private let _numberOfSections = 1
     private let _numberOfRows = 3
@@ -81,6 +81,61 @@ class AddTaskDetailsViewModel {
             instantiateCell(ofType: .dateCell)
             dateInputViewModel?.edit(task)
         }
+    }
+    
+    func set(_ tags: [Tag]) {
+        if dateInputViewModel == nil {
+            instantiateCell(ofType: .dateCell)
+        }
+        
+        if locationInputViewModel == nil {
+            instantiateCell(ofType: .locationCell)
+        }
+        
+        dateInputViewModel!.add(tags)
+        locationInputViewModel!.add(tags)
+    }
+}
+
+private extension LocationInputViewModel {
+    func edit(_ task: Task) {
+        guard task.location != nil else { return }
+        
+        location = task.location
+        isArriving = task.isArrivingLocation
+        placeName = task.locationName!
+    }
+    
+    func add(_ tags: [Tag]) {
+        tagInfo = Array( tags
+            .filter { $0.location != nil }
+            .map { (text: $0.locationName!, colorIndex: Int($0.colorIndex)) }
+            .prefix(2) )
+    }
+}
+
+private extension DateInputViewModel { //AQUI
+    func edit(_ task: Task) {
+        guard let dueDate = task.dueDate else { return }
+        
+        let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: dueDate)
+        
+        self.calendarDate.onNext(calendarDate)
+        self.timeOfDay.onNext(timeOfDay)
+    }
+    
+    func add(_ tags: [Tag]) {
+        tagInfo = Array( tags
+            .filter { $0.dueDate != nil }
+            .map { (text: $0.dueDate!.string(with: "dd MMM")!, colorIndex: Int($0.colorIndex)) }
+            .prefix(2) )
+    }
+}
+
+private extension NotesInputViewModel {
+    func edit(_ task: Task) {
+        guard let taskNotes = task.notes else { return }
+        notes = taskNotes
     }
 }
 
@@ -141,7 +196,7 @@ extension AddTaskDetailsViewModel: AddDetailsProtocol {
 
 extension AddTaskDetailsViewModel: LocationInputDelegate {
     func locationInput(_ locationInputViewModel: LocationInputViewModel,
-                       didFind location: CLCircularRegion?, named: String, arriving: Bool) {
+                       didFind location: CLCircularRegion?, named: String?, arriving: Bool) {
         delegate?.locationInput(locationInputViewModel, didFind: location, named: named, arriving: arriving)
     }
 }
@@ -164,33 +219,5 @@ extension AddTaskDetailsViewModel: DateInputViewModelDelegate {
 extension AddTaskDetailsViewModel: NotesInputViewModelDelegate {
     func notesInput(_ notesInputViewModel: NotesInputViewModel, didUpdateNotes notes: String) {
         delegate?.notesInput(notesInputViewModel, didUpdateNotes: notes)
-    }
-}
-
-private extension LocationInputViewModel {
-    func edit(_ task: Task) {
-        guard task.location != nil else { return }
-        
-        location = task.location
-        isArriving = task.isArrivingLocation
-        placeName = task.locationName!
-    }
-}
-
-private extension DateInputViewModelProtocol {
-    func edit(_ task: Task) {
-        guard let dueDate = task.dueDate else { return }
-        
-        let (calendarDate, timeOfDay) = Calendar.current.splitCalendarDateAndTimeOfDay(from: dueDate)
-        
-        self.calendarDate.onNext(calendarDate)
-        self.timeOfDay.onNext(timeOfDay)
-    }
-}
-
-private extension NotesInputViewModel {
-    func edit(_ task: Task) {
-        guard let taskNotes = task.notes else { return }
-        notes = taskNotes
     }
 }
