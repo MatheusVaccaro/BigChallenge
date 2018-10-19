@@ -154,7 +154,6 @@ class TaskCreationFrameViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        taskDetailsTableViewHeight.constant = taskDetailViewController.contentHeight
         animationDistance = taskContainerViewHeight
         
         if !didSetInitialContainerViewPosition {
@@ -178,7 +177,26 @@ class TaskCreationFrameViewController: UIViewController {
 
 extension TaskCreationFrameViewController: ContentSizeObservableTableViewDelegate {
     func tableView(_ tableView: ContentSizeObservableTableView, didUpdateContentSize contentSize: CGSize) {
-        taskDetailsTableViewHeight.constant = contentSize.height
+        
+        let taskContainerExpectedSize = taskTitleAndDetailSeparatorHeight + taskTitleViewHeight + contentSize.height
+        if taskContainerExpectedSize > 400 {
+            tableView.isScrollEnabled = true
+            let maxTaskDetailsTableViewHeight = 400 - taskTitleAndDetailSeparatorHeight - taskTitleViewHeight
+            taskDetailsTableViewHeight.constant = maxTaskDetailsTableViewHeight
+        } else {
+            tableView.isScrollEnabled = false
+            taskDetailsTableViewHeight.constant = contentSize.height
+        }
+        
+      
+        
+//        taskDetailsTableViewHeight.constant = contentSize.height
+        
+        // Adjusts position of container view when its collapsed
+        // This line is needed in case the user taps a tag when the container is collapsed
+        if state == .collapsed {
+            taskContainerViewTopConstraint.constant = -taskDetailViewHeight
+        }
     }
 }
 
