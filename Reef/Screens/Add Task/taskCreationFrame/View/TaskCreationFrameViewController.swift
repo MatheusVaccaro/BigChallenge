@@ -78,6 +78,9 @@ class TaskCreationFrameViewController: UIViewController {
             taskDetailViewController.view.bottomAnchor.constraint(equalTo: taskDetailView.bottomAnchor)
             ])
         taskDetailViewController.didMove(toParent: self)
+        
+        let taskDetailTableView = taskDetailViewController.tableView as? ContentSizeObservableTableView
+        taskDetailTableView?.contentSizeDelegate = self
     }
     
     func present(_ taskTitleViewController: NewTaskViewController) {
@@ -143,10 +146,21 @@ class TaskCreationFrameViewController: UIViewController {
         
         viewModel.delegate?.viewDidLoad()
         taskDetailViewController.accessibilityElementsHidden = true
-        taskContainerViewTopConstraint.constant = -taskDetailViewHeight
         
-        animationDistance = taskContainerViewHeight
         addGestureRecognizersForAnimations()
+    }
+    
+    private var didSetInitialContainerViewPosition: Bool = false
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        taskDetailsTableViewHeight.constant = taskDetailViewController.contentHeight
+        animationDistance = taskContainerViewHeight
+        
+        if !didSetInitialContainerViewPosition {
+            taskContainerViewTopConstraint.constant = -taskDetailViewHeight
+            didSetInitialContainerViewPosition = true
+        }
     }
     
     private func configureShadows(in view: UIView) {
@@ -159,6 +173,12 @@ class TaskCreationFrameViewController: UIViewController {
         view.layer.shadowColor = CGColor.shadowColor
         view.layer.shadowOpacity = 1
         view.layer.shadowRadius = 10
+    }
+}
+
+extension TaskCreationFrameViewController: ContentSizeObservableTableViewDelegate {
+    func tableView(_ tableView: ContentSizeObservableTableView, didUpdateContentSize contentSize: CGSize) {
+        taskDetailsTableViewHeight.constant = contentSize.height
     }
 }
 
