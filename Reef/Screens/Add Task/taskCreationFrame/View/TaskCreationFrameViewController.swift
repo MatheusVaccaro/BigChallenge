@@ -78,6 +78,9 @@ class TaskCreationFrameViewController: UIViewController {
             taskDetailViewController.view.bottomAnchor.constraint(equalTo: taskDetailView.bottomAnchor)
             ])
         taskDetailViewController.didMove(toParent: self)
+        
+        let taskDetailTableView = taskDetailViewController.tableView as? ContentSizeObservableTableView
+        taskDetailTableView?.contentSizeDelegate = self
     }
     
     func present(_ taskTitleViewController: NewTaskViewController) {
@@ -143,10 +146,20 @@ class TaskCreationFrameViewController: UIViewController {
         
         viewModel.delegate?.viewDidLoad()
         taskDetailViewController.accessibilityElementsHidden = true
-        taskContainerViewTopConstraint.constant = -taskDetailViewHeight
         
-        animationDistance = taskContainerViewHeight
         addGestureRecognizersForAnimations()
+    }
+    
+    private var didSetInitialContainerViewPosition: Bool = false
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        animationDistance = taskContainerViewHeight
+        
+        if !didSetInitialContainerViewPosition {
+            taskContainerViewTopConstraint.constant = -taskDetailViewHeight
+            didSetInitialContainerViewPosition = true
+        }
     }
     
     private func configureShadows(in view: UIView) {
@@ -159,6 +172,32 @@ class TaskCreationFrameViewController: UIViewController {
         view.layer.shadowColor = CGColor.shadowColor
         view.layer.shadowOpacity = 1
         view.layer.shadowRadius = 10
+    }
+}
+
+extension TaskCreationFrameViewController: ContentSizeObservableTableViewDelegate {
+    func tableView(_ tableView: ContentSizeObservableTableView, didUpdateContentSize contentSize: CGSize) {
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+        let navigationControllerHeight = navigationController!.navigationBar.frame.height
+        let offset: CGFloat = 40.0
+        
+        let interactableArea = view.frame.height - statusBarHeight - navigationControllerHeight - offset
+        
+        let taskContainerExpectedSize = taskTitleAndDetailSeparatorHeight + taskTitleViewHeight + contentSize.height
+        if taskContainerExpectedSize > interactableArea {
+            tableView.isScrollEnabled = true
+            let maxTaskDetailsTableViewHeight = interactableArea - taskTitleAndDetailSeparatorHeight - taskTitleViewHeight
+            taskDetailsTableViewHeight.constant = maxTaskDetailsTableViewHeight
+        } else {
+            tableView.isScrollEnabled = false
+            taskDetailsTableViewHeight.constant = contentSize.height
+        }
+        
+        // Adjusts position of container view when its collapsed
+        // This line is needed in case the user taps a tag when the container is collapsed
+        if state == .collapsed {
+            taskContainerViewTopConstraint.constant = -taskDetailViewHeight
+        }
     }
 }
 
