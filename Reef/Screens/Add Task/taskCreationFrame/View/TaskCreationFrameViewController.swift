@@ -177,20 +177,21 @@ class TaskCreationFrameViewController: UIViewController {
 
 extension TaskCreationFrameViewController: ContentSizeObservableTableViewDelegate {
     func tableView(_ tableView: ContentSizeObservableTableView, didUpdateContentSize contentSize: CGSize) {
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+        let navigationControllerHeight = navigationController!.navigationBar.frame.height
+        let offset: CGFloat = 40.0
+        
+        let interactableArea = view.frame.height - statusBarHeight - navigationControllerHeight - offset
         
         let taskContainerExpectedSize = taskTitleAndDetailSeparatorHeight + taskTitleViewHeight + contentSize.height
-        if taskContainerExpectedSize > 400 {
+        if taskContainerExpectedSize > interactableArea {
             tableView.isScrollEnabled = true
-            let maxTaskDetailsTableViewHeight = 400 - taskTitleAndDetailSeparatorHeight - taskTitleViewHeight
+            let maxTaskDetailsTableViewHeight = interactableArea - taskTitleAndDetailSeparatorHeight - taskTitleViewHeight
             taskDetailsTableViewHeight.constant = maxTaskDetailsTableViewHeight
         } else {
             tableView.isScrollEnabled = false
             taskDetailsTableViewHeight.constant = contentSize.height
         }
-        
-      
-        
-//        taskDetailsTableViewHeight.constant = contentSize.height
         
         // Adjusts position of container view when its collapsed
         // This line is needed in case the user taps a tag when the container is collapsed
