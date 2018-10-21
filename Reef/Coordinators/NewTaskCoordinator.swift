@@ -201,8 +201,7 @@ extension NewTaskCoordinator: UIViewControllerTransitioningDelegate {
 }
 
 extension NewTaskCoordinator: TagCollectionViewModelDelegate {
-    
-    func didUpdate(_ selectedTags: [Tag]) {
+    func didUpdateSelectedTags(_ selectedTags: [Tag]) {
         creationFrameViewController.viewModel.set(tags: selectedTags)
     }
     

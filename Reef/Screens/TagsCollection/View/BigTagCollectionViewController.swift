@@ -31,9 +31,9 @@ class BigTagCollectionViewController: TagCollectionViewController {
         viewModel.filtering = false
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
         viewModel.filtering = true
-        viewModel.tagsObservable.onNext(viewModel.tags)
         viewModel.presentingActionSheet = false
         dismiss(animated: true)
     }

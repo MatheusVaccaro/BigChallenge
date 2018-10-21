@@ -29,6 +29,7 @@ public class TaskListViewModel {
     private(set) var relatedTags: [Tag]
     
     weak var delegate: TaskListDelegate?
+    
     weak var UIDelegate: taskListViewModelUIDelegate?
     
     var isShowingRecommendedSection: Bool {
@@ -46,6 +47,8 @@ public class TaskListViewModel {
         model.delegate = self
         
         print("+++ INIT TaskListViewModel")
+        
+        filterTasks(with: selectedTags, relatedTags: relatedTags)
     }
     
     deinit {
@@ -201,6 +204,8 @@ extension TaskListViewModel: TaskModelDelegate {
                 }
             }
         }
+        
+        delegate?.didBecomeEmpty(taskListData.isEmpty)
     }
     
     func toggleComplete(taskAt indexPath: IndexPath) {
@@ -230,8 +235,8 @@ extension TaskListViewModel: TaskModelDelegate {
         guard taskListData[section].rows.count == 1 else { return false }
         
         let task = taskListData[section].rows.first!
-        taskListData.remove(at: section)
         model.delete(task)
+        taskListData.remove(at: section)
         return true
     }
 }

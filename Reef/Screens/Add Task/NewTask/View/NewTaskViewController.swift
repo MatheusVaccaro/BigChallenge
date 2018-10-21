@@ -22,6 +22,7 @@ class NewTaskViewController: UIViewController {
     @IBOutlet weak var taskTitleTextView: VerticallyCenteredTextView!
     @IBOutlet weak var taskDetailsButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
+    
     private lazy var gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
         
