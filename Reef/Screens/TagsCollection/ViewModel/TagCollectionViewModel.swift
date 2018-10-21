@@ -15,6 +15,10 @@ protocol TagCollectionViewModelDelegate: class {
     func didUpdateSelectedTags(_ selectedTags: [Tag])
 }
 
+protocol TagCollectionViewModelUIDelegate: class {
+    func shouldUpdate()
+}
+
 struct Item {
     var tag: Tag?
 }
@@ -39,6 +43,8 @@ class TagCollectionViewModel {
     let cancelActionTitle = Strings.General.cancelActionTitle
     
     weak var delegate: TagCollectionViewModelDelegate?
+    weak var uiDelegate: TagCollectionViewModelUIDelegate?
+    
     
     required init(model: TagModel, filtering: Bool, selectedTags: [Tag]) {
         self.model = model
@@ -140,6 +146,7 @@ fileprivate extension Tag {
 extension TagCollectionViewModel: TagModelDelegate {
     func tagModel(_ tagModel: TagModel, didInsert tags: [Tag]) {
         filterTags(with: selectedTags)
+        uiDelegate?.shouldUpdate()
     }
     
     func tagModel(_ tagModel: TagModel, didDelete tags: [Tag]) {

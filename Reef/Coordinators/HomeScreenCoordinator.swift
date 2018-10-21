@@ -73,6 +73,7 @@ class HomeScreenCoordinator: Coordinator {
         homeScreenViewController.delegate = self
         homeScreenViewModel.delegate = self
         tagCollectionViewModel.delegate = self
+        tagCollectionViewModel.uiDelegate = tagCollectionViewController
 
         homeScreenViewController.viewModel = homeScreenViewModel
         tagCollectionViewController.viewModel = tagCollectionViewModel
