@@ -135,6 +135,7 @@ class TagCollectionViewController: UIViewController {
     fileprivate func configureCell(row: Int, item: Item, cell: TagCollectionViewCell) {
         guard let tag = item.tag else {
             cell.configure()
+            cell.layoutIfNeeded()
             return
         }
         
@@ -148,6 +149,8 @@ class TagCollectionViewController: UIViewController {
         let indexPath = IndexPath(row: row, section: 0)
         cell.configure(with: tagViewModel)
         self.loadSelection(for: cell, tag: tag, at: indexPath)
+
+        cell.layoutIfNeeded()
     }
     
     fileprivate func presentBigCollection() {
