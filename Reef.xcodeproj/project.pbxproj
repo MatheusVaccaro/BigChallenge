@@ -673,6 +673,7 @@
 		221BA8B420F6A16300BE2AC1 /* TagsCollection */ = {
 			isa = PBXGroup;
 			children = (
+				229780A6217D0E3400CDB484 /* cell */,
 				22325A7520FBBA4900E5F8C6 /* View */,
 				221BA8BB20F6A2B500BE2AC1 /* ViewModel */,
 				2252216D21552F7800E8BD5E /* AccessibilityElements.swift */,
@@ -684,7 +685,6 @@
 			isa = PBXGroup;
 			children = (
 				29320434213632E400E23E72 /* TagCollectionViewModel.swift */,
-				22325A7820FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -730,7 +730,6 @@
 				221BA8B520F6A18500BE2AC1 /* TagCollection.storyboard */,
 				221BA8B720F6A1DF00BE2AC1 /* TagCollectionViewController.swift */,
 				22205ADC20FF7ADF007689D7 /* BigTagCollectionViewController.swift */,
-				22325A7620FBC3F100E5F8C6 /* TagCollectionViewCell.swift */,
 				225852812100C5BE0011F4B0 /* TagsCollectionView.swift */,
 			);
 			path = View;
@@ -763,6 +762,15 @@
 				2265692D212F718F009714BC /* Info.plist */,
 			);
 			path = Persistence;
+			sourceTree = "<group>";
+		};
+		229780A6217D0E3400CDB484 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				22325A7620FBC3F100E5F8C6 /* TagCollectionViewCell.swift */,
+				22325A7820FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift */,
+			);
+			path = cell;
 			sourceTree = "<group>";
 		};
 		22D84C5E210BEFE4004B8969 /* LocationInput */ = {

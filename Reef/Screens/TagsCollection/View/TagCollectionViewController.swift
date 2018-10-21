@@ -8,7 +8,6 @@
 
 import UIKit
 import Crashlytics
-import RxSwift
 import ReefKit
 
 class TagCollectionViewController: UIViewController {
@@ -20,9 +19,6 @@ class TagCollectionViewController: UIViewController {
     @IBOutlet weak var tagsCollectionView: UICollectionView!
     
     var viewModel: TagCollectionViewModel!
-    
-    var clickedTagEvent: BehaviorSubject<Tag>?
-    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,10 +94,7 @@ class TagCollectionViewController: UIViewController {
         
         let tagViewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
         
-        tagViewModel.longPressedTag.subscribe { event in
-            self.presentActionSheet(for: event.element!)
-            Answers.logCustomEvent(withName: "longpressed tag")
-        }.disposed(by: self.disposeBag)
+        tagViewModel.delegate = self
         
         let indexPath = IndexPath(row: row, section: 0)
         cell.configure(with: tagViewModel)
@@ -176,5 +169,12 @@ extension TagCollectionViewController: UICollectionViewDataSource {
         configureCell(row: indexPath.row, tag: tag, cell: cell)
         
         return cell
+    }
+}
+
+extension TagCollectionViewController: TagCollectionViewCellDelegate {
+    func didLongPress(_ tagCollectionViewCellViewModel: TagCollectionViewCellViewModel) {
+        self.presentActionSheet(for: tagCollectionViewCellViewModel.tag)
+        Answers.logCustomEvent(withName: "longpressed tag")
     }
 }
