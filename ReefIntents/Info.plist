@@ -27,7 +27,10 @@
 			<key>IntentsRestrictedWhileLocked</key>
 			<array/>
 			<key>IntentsSupported</key>
-			<array/>
+			<array>
+				<string>INCreateTaskListIntent</string>
+				<string>INCreateNoteIntent</string>
+			</array>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.intents-service</string>

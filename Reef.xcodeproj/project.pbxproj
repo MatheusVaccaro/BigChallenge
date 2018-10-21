@@ -51,6 +51,7 @@
 		222EC9542178FBF4000798AB /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 222EC9522178FBF4000798AB /* MainInterface.storyboard */; };
 		222EC9582178FBF4000798AB /* ReefIntentsUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 222EC94C2178FBF3000798AB /* ReefIntentsUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		222EC95B2178FBF4000798AB /* ReefIntents.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 222EC9432178FBF3000798AB /* ReefIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		222EC965217A6694000798AB /* CreateTaskListIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222EC964217A6694000798AB /* CreateTaskListIntentHandler.swift */; };
 		22325A7720FBC3F100E5F8C6 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22325A7620FBC3F100E5F8C6 /* TagCollectionViewCell.swift */; };
 		22325A7920FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22325A7820FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift */; };
 		2241C39B213615AE001AAC28 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2241C39A213615AE001AAC28 /* CloudKit.framework */; };
@@ -215,6 +216,13 @@
 			remoteGlobalIDString = 22656929212F718F009714BC;
 			remoteInfo = Persistence;
 		};
+		229780A4217B83A100CDB484 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C28DC90E20B61CB6007F881A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22F23E6B212E3E7F0064EE05;
+			remoteInfo = ReefKit;
+		};
 		22F23E7F212E3E800064EE05 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C28DC90E20B61CB6007F881A /* Project object */;
@@ -332,6 +340,7 @@
 		222EC9502178FBF4000798AB /* IntentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentViewController.swift; sourceTree = "<group>"; };
 		222EC9532178FBF4000798AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		222EC9552178FBF4000798AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		222EC964217A6694000798AB /* CreateTaskListIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateTaskListIntentHandler.swift; path = "/Users/BWide/Dropbox (DeveloperAcademy-BR)/Programming/Swift/BigChallenge/ReefIntents/CreateTaskListIntentHandler.swift"; sourceTree = "<absolute>"; };
 		22325A7620FBC3F100E5F8C6 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
 		22325A7820FBC56B00E5F8C6 /* TagCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		223C0BE020E4449C00CF39ED /* LocalPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPersistence.swift; sourceTree = "<group>"; };
@@ -361,6 +370,7 @@
 		228BAD432108C22400E74AA9 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		229780A9217EA0B700CDB484 /* Classic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classic.swift; sourceTree = "<group>"; };
 		229780AC217EA0E900CDB484 /* Dark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dark.swift; sourceTree = "<group>"; };
+		229780A3217A7D3B00CDB484 /* ReefIntents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReefIntents.entitlements; sourceTree = "<group>"; };
 		2299F07820F628A70074A834 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		22AA87E9217FAD9700046800 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		22CC1864210511CC00486B27 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -780,7 +790,9 @@
 		222EC9442178FBF3000798AB /* ReefIntents */ = {
 			isa = PBXGroup;
 			children = (
+				229780A3217A7D3B00CDB484 /* ReefIntents.entitlements */,
 				222EC9452178FBF3000798AB /* IntentHandler.swift */,
+				222EC964217A6694000798AB /* CreateTaskListIntentHandler.swift */,
 				222EC9472178FBF3000798AB /* Info.plist */,
 			);
 			path = ReefIntents;
@@ -1431,6 +1443,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				229780A5217B83A100CDB484 /* PBXTargetDependency */,
 			);
 			name = ReefIntents;
 			productName = ReefIntents;
@@ -1572,6 +1585,11 @@
 					};
 					222EC9422178FBF3000798AB = {
 						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					222EC94B2178FBF3000798AB = {
 						CreatedOnToolsVersion = 10.0;
@@ -1598,6 +1616,9 @@
 						CreatedOnToolsVersion = 9.3;
 						SystemCapabilities = {
 							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.Siri = {
 								enabled = 1;
 							};
 							com.apple.iCloud = {
@@ -1929,6 +1950,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				222EC9462178FBF3000798AB /* IntentHandler.swift in Sources */,
+				222EC965217A6694000798AB /* CreateTaskListIntentHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2103,6 +2125,11 @@
 			target = 22656929212F718F009714BC /* Persistence */;
 			targetProxy = 2265692F212F718F009714BC /* PBXContainerItemProxy */;
 		};
+		229780A5217B83A100CDB484 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22F23E6B212E3E7F0064EE05 /* ReefKit */;
+			targetProxy = 229780A4217B83A100CDB484 /* PBXContainerItemProxy */;
+		};
 		22F23E80212E3E800064EE05 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 22F23E6B212E3E7F0064EE05 /* ReefKit */;
@@ -2234,6 +2261,7 @@
 		222EC95C2178FBF4000798AB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ReefIntents/ReefIntents.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = D9KU92KK65;
@@ -2257,6 +2285,7 @@
 		222EC95D2178FBF4000798AB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ReefIntents/ReefIntents.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D9KU92KK65;

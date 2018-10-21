@@ -9,6 +9,7 @@
 import UIKit
 import CoreSpotlight
 import UserNotifications
+import Intents
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,8 +28,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // MARK: Application Coordinator
         startApplicationCoordinator(with: window, selectedTagIDs: [])
         setNotificationCategories()
+        requestIntents()
         
         return true
+    }
+    
+    func requestIntents() {
+        INPreferences.requestSiriAuthorization { status in
+            if status == .authorized {
+                print("aham")
+            }
+        }
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {

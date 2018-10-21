@@ -81,5 +81,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>NSSiriUsageDescription</key>
+	<string>siriUsageDescription</string>
 </dict>
 </plist>
