@@ -29,7 +29,7 @@
 			<key>IntentsSupported</key>
 			<array>
 				<string>INCreateTaskListIntent</string>
-				<string>INCreateNoteIntent</string>
+				<string>INAddTasksIntent</string>
 			</array>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>

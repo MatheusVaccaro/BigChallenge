@@ -16,6 +16,9 @@ class IntentHandler: INExtension {
         if intent is INCreateTaskListIntent {
             return CreateTaskListIntentHandler()
         }
+        if intent is INAddTasksIntent {
+            return CreateTaskIntent()
+        }
         
         return self
     }

@@ -76,6 +76,7 @@
 		2280820A2136D486003FD3DE /* MockPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113A20B8791E00ABB161 /* MockPersistence.swift */; };
 		2280820B2136D489003FD3DE /* LocalPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0BE020E4449C00CF39ED /* LocalPersistence.swift */; };
 		228946392113F1A4009D05CB /* InvertedCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228946382113F1A4009D05CB /* InvertedCircle.swift */; };
+		229780A8217E4A8D00CDB484 /* CreateTaskIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229780A7217E4A8D00CDB484 /* CreateTaskIntent.swift */; };
 		229780AA217EA0B700CDB484 /* Classic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229780A9217EA0B700CDB484 /* Classic.swift */; };
 		229780AD217EA0E900CDB484 /* Dark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229780AC217EA0E900CDB484 /* Dark.swift */; };
 		22AA87EA217FAD9700046800 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 22AA87E9217FAD9700046800 /* Settings.bundle */; };
@@ -371,6 +372,7 @@
 		229780A9217EA0B700CDB484 /* Classic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classic.swift; sourceTree = "<group>"; };
 		229780AC217EA0E900CDB484 /* Dark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dark.swift; sourceTree = "<group>"; };
 		229780A3217A7D3B00CDB484 /* ReefIntents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReefIntents.entitlements; sourceTree = "<group>"; };
+		229780A7217E4A8D00CDB484 /* CreateTaskIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskIntent.swift; sourceTree = "<group>"; };
 		2299F07820F628A70074A834 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		22AA87E9217FAD9700046800 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		22CC1864210511CC00486B27 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -793,6 +795,7 @@
 				229780A3217A7D3B00CDB484 /* ReefIntents.entitlements */,
 				222EC9452178FBF3000798AB /* IntentHandler.swift */,
 				222EC964217A6694000798AB /* CreateTaskListIntentHandler.swift */,
+				229780A7217E4A8D00CDB484 /* CreateTaskIntent.swift */,
 				222EC9472178FBF3000798AB /* Info.plist */,
 			);
 			path = ReefIntents;
@@ -1951,6 +1954,7 @@
 			files = (
 				222EC9462178FBF3000798AB /* IntentHandler.swift in Sources */,
 				222EC965217A6694000798AB /* CreateTaskListIntentHandler.swift in Sources */,
+				229780A8217E4A8D00CDB484 /* CreateTaskIntent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
