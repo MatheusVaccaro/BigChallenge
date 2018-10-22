@@ -16,6 +16,8 @@ protocol TagCollectionViewModelDelegate: class {
 }
 
 protocol TagCollectionViewModelUIDelegate: class {
+    func shouldDelete(at indexPath: [IndexPath])
+    func shouldUpdate(at indexPath: [IndexPath])
     func shouldUpdate()
 }
 
@@ -115,7 +117,10 @@ class TagCollectionViewModel {
     }
     
     fileprivate func updateAfterTagSelected() {
-        if filtering { filterTags(with: selectedTags) }
+        if filtering {
+            filterTags(with: selectedTags)
+            uiDelegate?.shouldUpdate()
+        }
         delegate?.didUpdateSelectedTags(selectedTags)
     }
     
@@ -131,6 +136,8 @@ class TagCollectionViewModel {
                 model.tags
                     .filter { tags.contains($0) || $0.hasTagsInCommonWith(tags) }
         }
+        
+        uiDelegate?.shouldUpdate()
     }
 }
 
@@ -146,24 +153,33 @@ fileprivate extension Tag {
 extension TagCollectionViewModel: TagModelDelegate {
     func tagModel(_ tagModel: TagModel, didInsert tags: [Tag]) {
         filterTags(with: selectedTags)
-        uiDelegate?.shouldUpdate()
     }
     
     func tagModel(_ tagModel: TagModel, didDelete tags: [Tag]) {
-        guard !tags.isEmpty else { return }
-        
-        for tag in filteredTags {
-            if let index = filteredTags.index(of: tag) {
-                filteredTags.remove(at: index)
-            }
+        for tag in tags {
             if let index = selectedTags.index(of: tag) {
                 selectedTags.remove(at: index)
+                delegate?.didUpdateSelectedTags(selectedTags)
+            }
+            if let index = filteredTags.index(of: tag) {
+                filteredTags.remove(at: index)
+
+                let indexPath = IndexPath(row: index, section: 0)
+                uiDelegate?.shouldDelete(at: [indexPath])
             }
         }
     }
     
     func tagModel(_ tagModel: TagModel, didUpdate tags: [Tag]) {
-        //code
+        var indexes: [IndexPath] = []
+        
+        for tag in tags {
+            if let row = filteredTags.index(of: tag) {
+                indexes.append(IndexPath(row: row, section: 0))
+            }
+        }
+        
+        uiDelegate?.shouldUpdate(at: indexes)
     }
 }
 

@@ -62,6 +62,7 @@ class TagCollectionViewController: UIViewController {
         actionsheet.addAction(deleteAction)
         actionsheet.addAction(cancelAction)
         
+        
         present(actionsheet, animated: true, completion: nil)
     }
     
@@ -85,8 +86,8 @@ class TagCollectionViewController: UIViewController {
         }
     }
     
-    fileprivate func configureCell(row: Int, tag: Tag?, cell: TagCollectionViewCell) {
-        guard let tag = tag else {
+    fileprivate func configureCell(indexPath: IndexPath, cell: TagCollectionViewCell) {
+        guard let tag = viewModel.tag(for: indexPath) else {
             cell.configure()
             cell.layoutIfNeeded()
             return
@@ -95,9 +96,8 @@ class TagCollectionViewController: UIViewController {
         let tagViewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
         
         tagViewModel.delegate = self
-        
-        let indexPath = IndexPath(row: row, section: 0)
         cell.configure(with: tagViewModel)
+        
         self.loadSelection(for: cell, tag: tag, at: indexPath)
 
         cell.layoutIfNeeded()
@@ -139,7 +139,6 @@ extension TagCollectionViewController: UICollectionViewDelegate {
         }
         
         viewModel.select(tag)
-        tagsCollectionView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -149,7 +148,6 @@ extension TagCollectionViewController: UICollectionViewDelegate {
         
         UISelectionFeedbackGenerator().selectionChanged()
         viewModel.select(tag)
-        tagsCollectionView.reloadData()
     }
 }
 
@@ -164,9 +162,7 @@ extension TagCollectionViewController: UICollectionViewDataSource {
             .dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier,
                                  for: indexPath) as! TagCollectionViewCell
         
-        let tag = viewModel.tag(for: indexPath)
-        
-        configureCell(row: indexPath.row, tag: tag, cell: cell)
+        configureCell(indexPath: indexPath, cell: cell)
         
         return cell
     }
@@ -176,5 +172,19 @@ extension TagCollectionViewController: TagCollectionViewCellDelegate {
     func didLongPress(_ tagCollectionViewCellViewModel: TagCollectionViewCellViewModel) {
         self.presentActionSheet(for: tagCollectionViewCellViewModel.tag)
         Answers.logCustomEvent(withName: "longpressed tag")
+    }
+}
+
+extension TagCollectionViewController: TagCollectionViewModelUIDelegate {
+    func shouldDelete(at indexPath: [IndexPath]) {
+        tagsCollectionView.deleteItems(at: indexPath)
+    }
+    
+    func shouldUpdate(at indexPath: [IndexPath]) {
+        tagsCollectionView.reloadItems(at: indexPath)
+    }
+    
+    func shouldUpdate() {
+        tagsCollectionView.reloadData()
     }
 }
