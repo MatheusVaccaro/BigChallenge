@@ -181,21 +181,12 @@ extension TaskListViewController: UITableViewDelegate {
                                             completion: (Bool) -> Void) in
                                             view.backgroundColor = UIColor.Cell.deleteRed
                                             
-                                            self.deleteItem(at: indexPath)
+                                            self.viewModel.delete(taskAt: indexPath)
                                             
                                             completion(true)
         }
         action.image = UIImage.init(named: "trash")
         return action
-    }
-    
-    private func deleteItem(at indexPath: IndexPath) {
-        if viewModel.deleteSectionIfNeeded(indexPath.section) {
-            tableView.deleteSections([indexPath.section], with: .left)
-        } else {
-            viewModel.delete(taskAt: indexPath)
-            tableView.deleteRows(at: [indexPath], with: .left)
-        }
     }
 }
 
@@ -233,7 +224,19 @@ extension TaskListViewController: UITableViewDataSource {
 
 extension TaskListViewController: taskListViewModelUIDelegate {
     func taskListViewModel(_ taskListViewModel: TaskListViewModel, didUpdateAt indexPaths: [IndexPath]) {
-        tableView.reloadRows(at: indexPaths, with: .none)
+        tableView.reloadRows(at: indexPaths, with: .automatic)
+    }
+    
+    func taskListViewModel(_ taskListViewModel: TaskListViewModel, didInsertAt indexPaths: [IndexPath]) {
+        tableView.insertRows(at: indexPaths, with: .automatic)
+    }
+    
+    func taskListViewModel(_ taskListViewModel: TaskListViewModel, didDeleteRowsAt indexPaths: [IndexPath]) {
+        tableView.deleteRows(at: indexPaths, with: .automatic)
+    }
+    
+    func taskListViewModel(_ taskListViewModel: TaskListViewModel, didDeleteSection section: Int) {
+        tableView.deleteSections([section], with: .automatic)
     }
     
     func taskListViewModelDidUpdate(_ taskListViewModel: TaskListViewModel) {
