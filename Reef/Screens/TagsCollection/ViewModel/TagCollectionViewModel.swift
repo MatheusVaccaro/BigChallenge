@@ -59,6 +59,10 @@ class TagCollectionViewModel {
         model.delegate = self
     }
     
+    func reload() {
+        updateAfterTagSelected()
+    }
+    
     func tag(for indexPath: IndexPath) -> Tag? {
         if filteredTags.indices.contains(indexPath.row) {
             return filteredTags[indexPath.row]
@@ -120,7 +124,6 @@ class TagCollectionViewModel {
     fileprivate func updateAfterTagSelected() {
         if filtering {
             filterTags(with: selectedTags)
-            uiDelegate?.shouldUpdate()
         }
         delegate?.didUpdateSelectedTags(selectedTags)
     }
