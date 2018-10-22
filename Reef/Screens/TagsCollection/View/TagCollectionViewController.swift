@@ -176,6 +176,10 @@ extension TagCollectionViewController: TagCollectionViewCellDelegate {
 }
 
 extension TagCollectionViewController: TagCollectionViewModelUIDelegate {
+    func shouldInsert(at indexPath: [IndexPath]) {
+        tagsCollectionView.insertItems(at: indexPath)
+    }
+    
     func shouldDelete(at indexPath: [IndexPath]) {
         tagsCollectionView.deleteItems(at: indexPath)
     }

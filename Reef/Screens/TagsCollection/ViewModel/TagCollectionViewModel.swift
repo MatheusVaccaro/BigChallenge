@@ -18,6 +18,7 @@ protocol TagCollectionViewModelDelegate: class {
 protocol TagCollectionViewModelUIDelegate: class {
     func shouldDelete(at indexPath: [IndexPath])
     func shouldUpdate(at indexPath: [IndexPath])
+    func shouldInsert(at indexPath: [IndexPath])
     func shouldUpdate()
 }
 
@@ -152,7 +153,12 @@ fileprivate extension Tag {
 
 extension TagCollectionViewModel: TagModelDelegate {
     func tagModel(_ tagModel: TagModel, didInsert tags: [Tag]) {
-        filterTags(with: selectedTags)
+        for tag in tags {
+            filteredTags.append(tag)
+            selectedTags.append(tag)
+            let indexPath = IndexPath(row: filteredTags.count-1, section: 0)
+            uiDelegate?.shouldInsert(at: [indexPath])
+        }
     }
     
     func tagModel(_ tagModel: TagModel, didDelete tags: [Tag]) {
