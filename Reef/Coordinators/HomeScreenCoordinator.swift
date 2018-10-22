@@ -70,13 +70,13 @@ class HomeScreenCoordinator: Coordinator {
                                                   taskListViewModel: taskListViewModel,
                                                   tagCollectionViewModel: tagCollectionViewModel)
         
+        homeScreenViewController.viewModel = homeScreenViewModel
+        tagCollectionViewController.viewModel = tagCollectionViewModel
+        
         homeScreenViewController.delegate = self
         homeScreenViewModel.delegate = self
         tagCollectionViewModel.delegate = self
         tagCollectionViewModel.uiDelegate = tagCollectionViewController
-
-        homeScreenViewController.viewModel = homeScreenViewModel
-        tagCollectionViewController.viewModel = tagCollectionViewModel
         
         presenter.pushViewController(homeScreenViewController!, animated: false)
     }
@@ -86,7 +86,8 @@ class HomeScreenCoordinator: Coordinator {
             NewTaskCoordinator(presenter: presenter,
                                taskModel: taskModel,
                                tagModel: tagModel,
-                               selectedTags: selectedTags)
+                               selectedTags: selectedTags,
+                               tagCollectionViewModel: tagCollectionViewModel)
         
         newTaskCoordinator.delegate = self
         addChild(coordinator: newTaskCoordinator)
@@ -98,7 +99,8 @@ class HomeScreenCoordinator: Coordinator {
             NewTaskCoordinator(presenter: presenter,
                                taskModel: taskModel,
                                tagModel: tagModel,
-                               selectedTags: selectedTags)
+                               selectedTags: selectedTags,
+                               tagCollectionViewModel: tagCollectionViewModel)
                                                     
         newTaskCoordinator.delegate = self
         addChild(coordinator: newTaskCoordinator)
@@ -111,7 +113,8 @@ class HomeScreenCoordinator: Coordinator {
                                presenter: presenter,
                                taskModel: taskModel,
                                tagModel: tagModel,
-                               selectedTags: task.allTags)
+                               selectedTags: task.allTags,
+                               tagCollectionViewModel: tagCollectionViewModel)
         
         newTaskCoordinator.delegate = self
         addChild(coordinator: newTaskCoordinator)
@@ -138,6 +141,11 @@ class HomeScreenCoordinator: Coordinator {
 extension HomeScreenCoordinator: CoordinatorDelegate {
     func shouldDeinitCoordinator(_ coordinator: Coordinator) {
         releaseChild(coordinator: coordinator)
+        if tagCollectionViewModel.delegate !== self {
+            tagCollectionViewModel.delegate = self
+            tagCollectionViewModel.uiDelegate = tagCollectionViewController
+            tagCollectionViewController.tagsCollectionView.reloadData()
+        }
     }
 }
 

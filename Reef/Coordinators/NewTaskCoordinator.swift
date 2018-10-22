@@ -22,6 +22,8 @@ class NewTaskCoordinator: NSObject, Coordinator {
     fileprivate var newTaskViewController: NewTaskViewController!
     fileprivate var taskDetailsViewController: AddDetailsViewController!
     
+    fileprivate var tagCollectionViewModel: TagCollectionViewModel
+    
     fileprivate let taskModel: TaskModel
     fileprivate let tagModel: TagModel
     
@@ -37,7 +39,8 @@ class NewTaskCoordinator: NSObject, Coordinator {
          presenter: UINavigationController,
          taskModel: TaskModel,
          tagModel: TagModel,
-         selectedTags: [Tag]) {
+         selectedTags: [Tag],
+         tagCollectionViewModel: TagCollectionViewModel) {
         
         self.taskModel = taskModel
         self.tagModel = tagModel
@@ -45,6 +48,9 @@ class NewTaskCoordinator: NSObject, Coordinator {
         self.childrenCoordinators = []
         self.task = task
         self.selectedTags = selectedTags
+        self.tagCollectionViewModel = tagCollectionViewModel
+        
+        tagCollectionViewModel.selectedTags = selectedTags
 
         print("+++ INIT NewTaskCoordinator")
     }
@@ -59,8 +65,6 @@ class NewTaskCoordinator: NSObject, Coordinator {
         taskDetailsViewController = AddDetailsViewController.instantiate()
         creationFrameViewController = TaskCreationFrameViewController.instantiate()
         
-        let tagCollectionViewModel =
-            TagCollectionViewModel(model: tagModel, filtering: false, selectedTags: selectedTags)
         let newTaskViewModel =
             NewTaskViewModel(selectedTags: selectedTags)
         let taskDetailsViewModel =
@@ -78,6 +82,8 @@ class NewTaskCoordinator: NSObject, Coordinator {
         
         tagCollectionViewModel.delegate = self
         creationFrameViewModel.delegate = self
+        
+        tagCollectionViewModel.uiDelegate = tagCollectionViewController
         creationFrameViewModel.uiDelegate = creationFrameViewController
         newTaskViewModel.uiDelegate = newTaskViewController
         

@@ -49,7 +49,7 @@ class HomeScreenViewModel {
         var ans = ""
         guard !selectedTags.isEmpty else { return ans }
         
-        var tags = (selectedTags.map { $0.title! })
+        var tags = (selectedTags.map { $0.title }.filter { $0 != nil }) as! [String]
         
         while tags.count > 1 {
             ans += "\(tags.removeFirst()), "
@@ -81,8 +81,8 @@ class HomeScreenViewModel {
     
     func updateUserActivity(_ activity: NSUserActivity) {
         guard !selectedTags.isEmpty else { return }
-        activity.addUserInfoEntries(from: ["selectedTagIDs" : selectedTags.map { $0.id!.description }])
         
+        activity.addUserInfoEntries(from: ["selectedTagIDs" : selectedTags.map { $0.id?.description }])
         activity.title = userActivityTitle
         
         activity.becomeCurrent()

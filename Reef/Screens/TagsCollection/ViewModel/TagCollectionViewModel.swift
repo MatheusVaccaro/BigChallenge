@@ -31,7 +31,7 @@ class TagCollectionViewModel {
     var presentingActionSheet: Bool = false
     
     private(set) var filteredTags: [Tag]
-    private(set) var selectedTags: [Tag]
+    var selectedTags: [Tag]
     
     var filtering: Bool {
         didSet {
@@ -157,6 +157,7 @@ extension TagCollectionViewModel: TagModelDelegate {
             filteredTags.append(tag)
             selectedTags.append(tag)
             let indexPath = IndexPath(row: filteredTags.count-1, section: 0)
+            delegate?.didUpdateSelectedTags(selectedTags)
             uiDelegate?.shouldInsert(at: [indexPath])
         }
     }
@@ -165,12 +166,12 @@ extension TagCollectionViewModel: TagModelDelegate {
         for tag in tags {
             if let index = selectedTags.index(of: tag) {
                 selectedTags.remove(at: index)
-                delegate?.didUpdateSelectedTags(selectedTags)
             }
             if let index = filteredTags.index(of: tag) {
                 filteredTags.remove(at: index)
 
                 let indexPath = IndexPath(row: index, section: 0)
+                delegate?.didUpdateSelectedTags(selectedTags)
                 uiDelegate?.shouldDelete(at: [indexPath])
             }
         }
