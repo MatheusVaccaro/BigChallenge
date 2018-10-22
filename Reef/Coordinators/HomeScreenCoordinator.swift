@@ -144,7 +144,8 @@ extension HomeScreenCoordinator: CoordinatorDelegate {
         if tagCollectionViewModel.delegate !== self {
             tagCollectionViewModel.delegate = self
             tagCollectionViewModel.uiDelegate = tagCollectionViewController
-            tagCollectionViewController.tagsCollectionView.reloadData()
+            
+            tagCollectionViewModel.reload()
         }
     }
 }
