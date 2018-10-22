@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Crashlytics
 import ReefKit
 
 class HomeScreenCoordinator: Coordinator {
@@ -15,17 +16,18 @@ class HomeScreenCoordinator: Coordinator {
     var childrenCoordinators: [Coordinator]
     private let presenter: UINavigationController
     
-    private var homeScreenViewController: HomeScreenViewController?
     private let remindersImporter: RemindersImporter
     private var taskModel: TaskModel
     private var tagModel: TagModel
     private var selectedTags: [Tag]
     
-    private let taskListViewModelType: TaskListViewModel.Type
-    private var taskListViewController: TaskListViewController?
+    private var homeScreenViewController: HomeScreenViewController!
+    private var taskListViewController: TaskListViewController!
+    private var tagCollectionViewController: TagCollectionViewController!
     
-    private let tagCollectionViewModelType: TagCollectionViewModel.Type
-    private var tagCollectionViewController: TagCollectionViewController?
+    private var homeScreenViewModel: HomeScreenViewModel!
+    private var taskListViewModel: TaskListViewModel!
+    private var tagCollectionViewModel: TagCollectionViewModel!
     
     private var presentTaskInteractiveAnimationController: PresentTaskInteractiveAnimationController?
     
@@ -39,9 +41,6 @@ class HomeScreenCoordinator: Coordinator {
         self.tagModel = tagModel
         self.selectedTags = selectedTags
         
-        self.tagCollectionViewModelType = TagCollectionViewModel.self
-        self.taskListViewModelType = TaskListViewModel.self
-        
         self.childrenCoordinators = []
         
         self.remindersImporter = RemindersImporter(taskModel: taskModel, tagModel: tagModel)
@@ -54,20 +53,32 @@ class HomeScreenCoordinator: Coordinator {
     }
 
     func start() {
-        let homeScreenViewController = HomeScreenViewController.instantiate()
-        let homeScreenViewModel = HomeScreenViewModel(taskModel: taskModel,
-                                                      tagModel: tagModel,
-                                                      selectedTags: selectedTags,
-                                                      taskListViewModelType: taskListViewModelType,
-                                                      tagCollectionViewModelType: tagCollectionViewModelType)
+        homeScreenViewController = HomeScreenViewController.instantiate()
+        
+        taskListViewController = TaskListViewController.instantiate()
+        taskListViewModel = TaskListViewModel(model: taskModel)
+        taskListViewController.viewModel = taskListViewModel
+        
+        tagCollectionViewController = TagCollectionViewController.instantiate()
+        tagCollectionViewModel = TagCollectionViewModel(model: tagModel,
+                                                        filtering: true,
+                                                        selectedTags: selectedTags)
+        
+        homeScreenViewModel = HomeScreenViewModel(taskModel: taskModel,
+                                                  tagModel: tagModel,
+                                                  selectedTags: selectedTags,
+                                                  taskListViewModel: taskListViewModel,
+                                                  tagCollectionViewModel: tagCollectionViewModel)
+        
+        homeScreenViewController.viewModel = homeScreenViewModel
+        tagCollectionViewController.viewModel = tagCollectionViewModel
         
         homeScreenViewController.delegate = self
-        homeScreenViewController.viewModel = homeScreenViewModel
-
         homeScreenViewModel.delegate = self
-        self.homeScreenViewController = homeScreenViewController
+        tagCollectionViewModel.delegate = self
+        tagCollectionViewModel.uiDelegate = tagCollectionViewController
         
-        presenter.pushViewController(homeScreenViewController, animated: false)
+        presenter.pushViewController(homeScreenViewController!, animated: false)
     }
     
     lazy var newTaskCoordinator: NewTaskCoordinator = {
@@ -75,7 +86,8 @@ class HomeScreenCoordinator: Coordinator {
             NewTaskCoordinator(presenter: presenter,
                                taskModel: taskModel,
                                tagModel: tagModel,
-                               selectedTags: selectedTags)
+                               selectedTags: selectedTags,
+                               tagCollectionViewModel: tagCollectionViewModel)
         
         newTaskCoordinator.delegate = self
         addChild(coordinator: newTaskCoordinator)
@@ -87,7 +99,8 @@ class HomeScreenCoordinator: Coordinator {
             NewTaskCoordinator(presenter: presenter,
                                taskModel: taskModel,
                                tagModel: tagModel,
-                               selectedTags: selectedTags)
+                               selectedTags: selectedTags,
+                               tagCollectionViewModel: tagCollectionViewModel)
                                                     
         newTaskCoordinator.delegate = self
         addChild(coordinator: newTaskCoordinator)
@@ -100,7 +113,8 @@ class HomeScreenCoordinator: Coordinator {
                                presenter: presenter,
                                taskModel: taskModel,
                                tagModel: tagModel,
-                               selectedTags: task.allTags)
+                               selectedTags: task.allTags,
+                               tagCollectionViewModel: tagCollectionViewModel)
         
         newTaskCoordinator.delegate = self
         addChild(coordinator: newTaskCoordinator)
@@ -127,6 +141,11 @@ class HomeScreenCoordinator: Coordinator {
 extension HomeScreenCoordinator: CoordinatorDelegate {
     func shouldDeinitCoordinator(_ coordinator: Coordinator) {
         releaseChild(coordinator: coordinator)
+        if tagCollectionViewModel.delegate !== self {
+            tagCollectionViewModel.delegate = self
+            tagCollectionViewModel.uiDelegate = tagCollectionViewController
+            tagCollectionViewController.tagsCollectionView.reloadData()
+        }
     }
 }
 
@@ -146,28 +165,29 @@ extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
     func homeScreenViewModelShouldShowImportFromRemindersOption(_ homeScreenViewModel: HomeScreenViewModel) -> Bool {
         return !RemindersImporter.isImportingDefined
     }
-    
-    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
-                             didInstantiate taskListViewModel: TaskListViewModel) {
-        let taskListVC = TaskListViewController.instantiate()
-        taskListVC.viewModel = taskListViewModel
-        homeScreenViewController?.setupTaskList(viewModel: taskListViewModel, viewController: taskListVC)
-    }
-    
-    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
-                             didInstantiate tagCollectionViewModel: TagCollectionViewModel) {
-        tagCollectionViewModel.delegate = self
-        
-        let tagCollectionVC = TagCollectionViewController.instantiate()
-        tagCollectionVC.viewModel = tagCollectionViewModel
-		homeScreenViewController?.setupTagCollection(viewModel: tagCollectionViewModel, viewController: tagCollectionVC)
-    }
 }
 
 extension HomeScreenCoordinator: TagCollectionViewModelDelegate {
-    func didUpdate(_ selectedTags: [Tag]) {
+    func didUpdateSelectedTags(_ selectedTags: [Tag]) {
         self.selectedTags = selectedTags
         presentTaskInteractiveAnimationController?.taskCoordinator?.selectedTags = selectedTags
+        
+        homeScreenViewModel.updateSelectedTagsIfNeeded(selectedTags)
+        
+        let relatedTags = tagCollectionViewModel
+            .filteredTags.filter { !selectedTags.contains($0) }
+        
+        taskListViewModel
+            .filterTasks(with: selectedTags, relatedTags: relatedTags)
+        
+        if let activity = homeScreenViewController.userActivity {
+            homeScreenViewController.updateUserActivityState(activity)
+        }
+        
+        if !selectedTags.isEmpty {
+            Answers.logCustomEvent(withName: "filtered with tag",
+                                   customAttributes: ["numberOfFilteredTags" : selectedTags.count])
+        }
     }
     
     func didClickUpdate(tag: Tag) {
@@ -187,5 +207,10 @@ extension HomeScreenCoordinator: HomeScreenViewControllerDelegate {
         
         self.presentTaskInteractiveAnimationController = interactiveAnimation
         newTaskCoordinator.presentTaskInteractiveAnimationController = interactiveAnimation
+        
+        homeScreenViewController!
+            .setupTaskList(viewModel: taskListViewModel, viewController: taskListViewController!)
+        homeScreenViewController!
+            .setupTagCollection(viewModel: tagCollectionViewModel, viewController: tagCollectionViewController!)
     }
 }

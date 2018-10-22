@@ -8,12 +8,18 @@
 
 import Foundation
 import ReefKit
-import RxSwift
 
 protocol TagCollectionViewModelDelegate: class {
     func didClickUpdate(tag: Tag)
     func didclickAddTag()
-    func didUpdate(_ selectedTags: [Tag])
+    func didUpdateSelectedTags(_ selectedTags: [Tag])
+}
+
+protocol TagCollectionViewModelUIDelegate: class {
+    func shouldDelete(at indexPath: [IndexPath])
+    func shouldUpdate(at indexPath: [IndexPath])
+    func shouldInsert(at indexPath: [IndexPath])
+    func shouldUpdate()
 }
 
 struct Item {
@@ -22,14 +28,10 @@ struct Item {
 
 class TagCollectionViewModel {
     
-    var tagsObservable: BehaviorSubject<[Tag]>
-    var selectedTagsObservable: BehaviorSubject<[Tag]>
-    
     var presentingActionSheet: Bool = false
     
-    private(set) var tags: [Tag]
     private(set) var filteredTags: [Tag]
-    private(set) var selectedTags: [Tag]
+    var selectedTags: [Tag]
     
     var filtering: Bool {
         didSet {
@@ -37,7 +39,6 @@ class TagCollectionViewModel {
         }
     }
     
-    private let disposeBag = DisposeBag()
     private var model: TagModel
     
     let updateActionTitle = Strings.General.editActionTitle
@@ -45,18 +46,25 @@ class TagCollectionViewModel {
     let cancelActionTitle = Strings.General.cancelActionTitle
     
     weak var delegate: TagCollectionViewModelDelegate?
+    weak var uiDelegate: TagCollectionViewModelUIDelegate?
+    
     
     required init(model: TagModel, filtering: Bool, selectedTags: [Tag]) {
         self.model = model
-        self.tags = model.tags
         self.selectedTags = selectedTags
-        self.filteredTags = self.tags
+        self.filteredTags = model.tags
         self.filtering = filtering
+
         
-        tagsObservable = BehaviorSubject<[Tag]>(value: tags)
-        selectedTagsObservable = BehaviorSubject<[Tag]>(value: selectedTags)
-        
-        subscribeToModel()
+        model.delegate = self
+    }
+    
+    func tag(for indexPath: IndexPath) -> Tag? {
+        if filteredTags.indices.contains(indexPath.row) {
+            return filteredTags[indexPath.row]
+        } else {
+            return nil
+        }
     }
     
     func tagCollectionCellViewModel(for tag: Tag) -> TagCollectionViewCellViewModel {
@@ -110,29 +118,11 @@ class TagCollectionViewModel {
     }
     
     fileprivate func updateAfterTagSelected() {
-        if filtering { filterTags(with: selectedTags) }
-        selectedTagsObservable.onNext(selectedTags)
-        delegate?.didUpdate(selectedTags)
-    }
-    
-    fileprivate func subscribeToModel() {
-        model.didUpdateTags
-            .subscribe {
-                self.tags = $0.element!
-                self.filteredTags = self.tags
-                
-                // remove selected tags from array
-                for tag in self.selectedTags where !self.tags.contains(tag) {
-                    let index = self.selectedTags.index(of: tag)!
-                    self.selectedTags.remove(at: index)
-                }
-                
-                print("updated tags: \(self.tags.map {$0.title!})")
-                
-                if self.filtering { self.filterTags(with: self.selectedTags) }
-                self.selectedTagsObservable.onNext(self.selectedTags)
-                self.tagsObservable.onNext(self.filteredTags)
-            }.disposed(by: disposeBag)
+        if filtering {
+            filterTags(with: selectedTags)
+            uiDelegate?.shouldUpdate()
+        }
+        delegate?.didUpdateSelectedTags(selectedTags)
     }
     
     fileprivate func filterTags(with tags: [Tag]) {
@@ -141,14 +131,14 @@ class TagCollectionViewModel {
         //tag has uncompleted tasks in common
         
         if tags.isEmpty {
-            filteredTags = self.tags
+            filteredTags = model.tags
         } else {
             filteredTags =
                 model.tags
                     .filter { tags.contains($0) || $0.hasTagsInCommonWith(tags) }
         }
         
-        tagsObservable.onNext(filteredTags)
+        uiDelegate?.shouldUpdate()
     }
 }
 
@@ -160,3 +150,61 @@ fileprivate extension Tag {
             .isEmpty)
     }
 }
+
+extension TagCollectionViewModel: TagModelDelegate {
+    func tagModel(_ tagModel: TagModel, didInsert tags: [Tag]) {
+        for tag in tags {
+            filteredTags.append(tag)
+            selectedTags.append(tag)
+            let indexPath = IndexPath(row: filteredTags.count-1, section: 0)
+            delegate?.didUpdateSelectedTags(selectedTags)
+            uiDelegate?.shouldInsert(at: [indexPath])
+        }
+    }
+    
+    func tagModel(_ tagModel: TagModel, didDelete tags: [Tag]) {
+        for tag in tags {
+            if let index = selectedTags.index(of: tag) {
+                selectedTags.remove(at: index)
+            }
+            if let index = filteredTags.index(of: tag) {
+                filteredTags.remove(at: index)
+
+                let indexPath = IndexPath(row: index, section: 0)
+                delegate?.didUpdateSelectedTags(selectedTags)
+                uiDelegate?.shouldDelete(at: [indexPath])
+            }
+        }
+    }
+    
+    func tagModel(_ tagModel: TagModel, didUpdate tags: [Tag]) {
+        var indexes: [IndexPath] = []
+        
+        for tag in tags {
+            if let row = filteredTags.index(of: tag) {
+                indexes.append(IndexPath(row: row, section: 0))
+            }
+        }
+        
+        uiDelegate?.shouldUpdate(at: indexes)
+    }
+}
+
+//fileprivate func subscribeToModel() {
+//    self.tags = $0.element!
+//    self.filteredTags = self.tags
+//
+//    // remove selected tags from array
+//    for tag in self.selectedTags where !self.tags.contains(tag) {
+//        let index = self.selectedTags.index(of: tag)!
+//        self.selectedTags.remove(at: index)
+//    }
+//    
+//    print("updated tags: \(self.tags.map {$0.title!})")
+//
+//    if self.filtering { self.filterTags(with: self.selectedTags) }
+//
+//    self.delegate?.didUpdate(self.selectedTags)
+//    self.tagsObservable.onNext(self.filteredTags)
+//}
+

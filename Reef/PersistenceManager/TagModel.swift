@@ -8,17 +8,12 @@
 
 import Foundation
 import CoreLocation
-import RxSwift
 import ReefKit
 
 protocol TagModelDelegate: class {
-    func tagModel(_ tagModel: TagModel, didCreate tag: Tag)
-    func tagModel(_ tagModel: TagModel, didUpdate tag: Tag, with attributes: [TagAttributes: Any])
-}
-
-extension TagModelDelegate {
-    func tagModel(_ tagModel: TagModel, didCreate tag: Tag) { }
-    func tagModel(_ tagModel: TagModel, didUpdate tag: Tag, with attributes: [TagAttributes: Any]) { }
+    func tagModel(_ tagModel: TagModel, didInsert tags: [Tag])
+    func tagModel(_ tagModel: TagModel, didDelete tags: [Tag])
+    func tagModel(_ tagModel: TagModel, didUpdate tags: [Tag])
 }
 
 public class TagModel {
@@ -35,7 +30,6 @@ public class TagModel {
         return reefKit.nextColor
     }
     
-    private(set) var didUpdateTags: BehaviorSubject<[Tag]>
     private(set) public var tags: [Tag]
 //    private let persistance: Persistence
     private let reefKit: ReefKit
@@ -45,11 +39,11 @@ public class TagModel {
         self.reefKit = reefKit
 //        self.persistance = reefKit.persistence
         self.tags = []
-        self.didUpdateTags = BehaviorSubject<[Tag]>(value: tags)
+        
         reefKit.tagsDelegate = self
         reefKit.fetchTags {
             self.tags = $0
-            self.didUpdateTags.onNext(self.tags)
+            self.delegate?.tagModel(self, didInsert: self.tags)
         }
     }
     
@@ -76,7 +70,6 @@ public class TagModel {
     
     public func update(_ tag: Tag, with attributes: [TagAttributes : Any]) {
         reefKit.update(tag, with: attributes)
-        delegate?.tagModel(self, didUpdate: tag, with: attributes)
     }
 }
 
@@ -88,7 +81,7 @@ extension TagModel: ReefTagDelegate {
             guard !self.tags.contains(tag) else { continue }
             self.tags.append(tag)
         }
-        self.didUpdateTags.onNext(self.tags)
+        delegate?.tagModel(self, didInsert: tags)
     }
     
     public func reef(_ reefKit: ReefKit, didUpdateTags tags: [Tag]) {
@@ -96,7 +89,7 @@ extension TagModel: ReefTagDelegate {
             guard let index = self.tags.index(of: tag) else { continue }
             self.tags[index] = tag
         }
-        self.didUpdateTags.onNext(self.tags)
+        delegate?.tagModel(self, didUpdate: tags)
     }
     
     public func reef(_ reefKit: ReefKit, didDeleteTags tags: [Tag]) {
@@ -104,6 +97,6 @@ extension TagModel: ReefTagDelegate {
             guard let index = self.tags.index(of: tag) else { continue }
             self.tags.remove(at: index)
         }
-        self.didUpdateTags.onNext(self.tags)
+        delegate?.tagModel(self, didDelete: tags)
     }
 }

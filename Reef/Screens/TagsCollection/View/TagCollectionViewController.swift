@@ -8,8 +8,6 @@
 
 import UIKit
 import Crashlytics
-import RxCocoa
-import RxSwift
 import ReefKit
 
 class TagCollectionViewController: UIViewController {
@@ -17,69 +15,24 @@ class TagCollectionViewController: UIViewController {
     class var tagViewControllerID: String {
         return "TagCollectionViewController"
     }
-
-    public var tagsObservable: BehaviorSubject<[Tag]> {
-        return viewModel!.tagsObservable
-    }
     
     @IBOutlet weak var tagsCollectionView: UICollectionView!
     
     var viewModel: TagCollectionViewModel!
     
-    var clickedTagEvent: BehaviorSubject<Tag>?
-    private let disposeBag = DisposeBag()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.translatesAutoresizingMaskIntoConstraints = false
         
-        bindCollectionView()
         tagsCollectionView.allowsMultipleSelection = true
         if let layout = tagsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.estimatedItemSize = CGSize(width: 150, height: 40)
         }
         
-//        accessibleView.viewModel = viewModel
-//        accessibleView.collection = tagsCollectionView as! TagCollectionView
+        tagsCollectionView.dataSource = self
+        tagsCollectionView.delegate = self
+        
         tagsCollectionView.isAccessibilityElement = true
-    }
-    
-    func bindCollectionView() {
-        viewModel.tagsObservable
-            .map { return $0.map { Item(tag: $0) } + [Item(tag: nil)] } // map add button
-            .bind(to: tagsCollectionView.rx
-            .items(cellIdentifier: TagCollectionViewCell.identifier,
-               cellType: TagCollectionViewCell.self)) { (row, item, cell) in
-                
-                self.configureCell(row: row, item: item, cell: cell)
-                
-        }.disposed(by: disposeBag)
-        
-        tagsCollectionView.rx.itemSelected.subscribe { event in
-            let indexPath = event.element!
-            
-            guard let item =
-                self.tagsCollectionView.cellForItem(at: indexPath) as? TagCollectionViewCell else { return }
-            
-            guard item.kind == .tag, let tag = item.viewModel?.tag else {
-                self.viewModel.delegate?.didclickAddTag(); return
-            }
-            
-            if !self.viewModel.shouldAskForAuthentication(with: tag) {
-                UISelectionFeedbackGenerator().selectionChanged()
-            }
-            self.viewModel.select(tag)
-            
-        }.disposed(by: disposeBag)
-        
-        tagsCollectionView.rx.itemDeselected.subscribe { event in
-            guard let item =
-                self.tagsCollectionView.cellForItem(at: event.element!) as? TagCollectionViewCell,
-                let tag = item.viewModel?.tag else { return }
-            
-            UISelectionFeedbackGenerator().selectionChanged()
-            self.viewModel.select(tag)
-        }.disposed(by: disposeBag)
     }
     
     func presentActionSheet(for tag: Tag) {
@@ -109,6 +62,7 @@ class TagCollectionViewController: UIViewController {
         actionsheet.addAction(deleteAction)
         actionsheet.addAction(cancelAction)
         
+        
         present(actionsheet, animated: true, completion: nil)
     }
     
@@ -132,8 +86,8 @@ class TagCollectionViewController: UIViewController {
         }
     }
     
-    fileprivate func configureCell(row: Int, item: Item, cell: TagCollectionViewCell) {
-        guard let tag = item.tag else {
+    fileprivate func configureCell(indexPath: IndexPath, cell: TagCollectionViewCell) {
+        guard let tag = viewModel.tag(for: indexPath) else {
             cell.configure()
             cell.layoutIfNeeded()
             return
@@ -141,13 +95,9 @@ class TagCollectionViewController: UIViewController {
         
         let tagViewModel = self.viewModel.tagCollectionCellViewModel(for: tag)
         
-        tagViewModel.longPressedTag.subscribe { event in
-            self.presentActionSheet(for: event.element!)
-            Answers.logCustomEvent(withName: "longpressed tag")
-        }.disposed(by: self.disposeBag)
-        
-        let indexPath = IndexPath(row: row, section: 0)
+        tagViewModel.delegate = self
         cell.configure(with: tagViewModel)
+        
         self.loadSelection(for: cell, tag: tag, at: indexPath)
 
         cell.layoutIfNeeded()
@@ -172,5 +122,73 @@ extension TagCollectionViewController: StoryboardInstantiable {
     
     static var storyboardIdentifier: String {
         return "TagCollection"
+    }
+}
+
+extension TagCollectionViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let item =
+            tagsCollectionView.cellForItem(at: indexPath) as? TagCollectionViewCell else { return }
+        
+        guard item.kind == .tag, let tag = item.viewModel?.tag else {
+            viewModel.delegate?.didclickAddTag(); return
+        }
+        
+        if !viewModel.shouldAskForAuthentication(with: tag) {
+            UISelectionFeedbackGenerator().selectionChanged()
+        }
+        
+        viewModel.select(tag)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let item =
+            tagsCollectionView.cellForItem(at: indexPath) as? TagCollectionViewCell,
+            let tag = item.viewModel?.tag else { return }
+        
+        UISelectionFeedbackGenerator().selectionChanged()
+        viewModel.select(tag)
+    }
+}
+
+extension TagCollectionViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.filteredTags.count + 1 // tags + add button
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView
+            .dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier,
+                                 for: indexPath) as! TagCollectionViewCell
+        
+        configureCell(indexPath: indexPath, cell: cell)
+        
+        return cell
+    }
+}
+
+extension TagCollectionViewController: TagCollectionViewCellDelegate {
+    func didLongPress(_ tagCollectionViewCellViewModel: TagCollectionViewCellViewModel) {
+        self.presentActionSheet(for: tagCollectionViewCellViewModel.tag)
+        Answers.logCustomEvent(withName: "longpressed tag")
+    }
+}
+
+extension TagCollectionViewController: TagCollectionViewModelUIDelegate {
+    func shouldInsert(at indexPath: [IndexPath]) {
+        tagsCollectionView.insertItems(at: indexPath)
+    }
+    
+    func shouldDelete(at indexPath: [IndexPath]) {
+        tagsCollectionView.deleteItems(at: indexPath)
+    }
+    
+    func shouldUpdate(at indexPath: [IndexPath]) {
+        tagsCollectionView.reloadItems(at: indexPath)
+    }
+    
+    func shouldUpdate() {
+        tagsCollectionView.reloadData()
     }
 }

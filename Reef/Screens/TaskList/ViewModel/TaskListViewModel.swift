@@ -17,8 +17,10 @@ protocol TaskListDelegate: class {
 
 protocol taskListViewModelUIDelegate: class {
     func taskListViewModelDidUpdate(_ taskListViewModel: TaskListViewModel)
-    
     func taskListViewModel(_ taskListViewModel: TaskListViewModel, didUpdateAt indexPaths: [IndexPath])
+    func taskListViewModel(_ taskListViewModel: TaskListViewModel, didInsertAt indexPaths: [IndexPath])
+    func taskListViewModel(_ taskListViewModel: TaskListViewModel, didDeleteRowsAt indexPaths: [IndexPath])
+    func taskListViewModel(_ taskListViewModel: TaskListViewModel, didDeleteSection section: Int)
 }
 
 public class TaskListViewModel {
@@ -29,6 +31,7 @@ public class TaskListViewModel {
     private(set) var relatedTags: [Tag]
     
     weak var delegate: TaskListDelegate?
+    
     weak var UIDelegate: taskListViewModelUIDelegate?
     
     var isShowingRecommendedSection: Bool {
@@ -46,6 +49,8 @@ public class TaskListViewModel {
         model.delegate = self
         
         print("+++ INIT TaskListViewModel")
+        
+        filterTasks(with: selectedTags, relatedTags: relatedTags)
     }
     
     deinit {
@@ -195,12 +200,25 @@ extension TaskListViewModel: TaskModelDelegate {
         guard !taskListData.isEmpty else { return }
         
         for task in tasks {
-            for section in 0...taskListData.count-1 {
+            var section = 0
+            while section < taskListData.count {
                 if let index = taskListData[section].rows.index(of: task) {
-                    taskListData[section].rows.remove(at: index)
+                    if taskListData[section].rows.count == 1 {
+                        taskListData.remove(at: section)
+                        UIDelegate?.taskListViewModel(self,
+                                                      didDeleteSection: section)
+                    } else {
+                        taskListData[section].rows.remove(at: index)
+                        UIDelegate?.taskListViewModel(self,
+                                                      didDeleteRowsAt: [IndexPath(row: index,
+                                                                                  section: section)])
+                    }
                 }
+                section += 1
             }
         }
+        
+        delegate?.didBecomeEmpty(taskListData.isEmpty)
     }
     
     func toggleComplete(taskAt indexPath: IndexPath) {
@@ -224,15 +242,6 @@ extension TaskListViewModel: TaskModelDelegate {
         }
         
         UIDelegate?.taskListViewModel(self, didUpdateAt: ans)
-    }
-    
-    func deleteSectionIfNeeded(_ section: Int) -> Bool {
-        guard taskListData[section].rows.count == 1 else { return false }
-        
-        let task = taskListData[section].rows.first!
-        taskListData.remove(at: section)
-        model.delete(task)
-        return true
     }
 }
 

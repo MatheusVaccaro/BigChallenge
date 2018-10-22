@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import RxCocoa
-import RxSwift
 
 class TagCollectionViewCell: UICollectionViewCell {
 
@@ -94,7 +92,7 @@ class TagCollectionViewCell: UICollectionViewCell {
     
     @objc private func handleLongPress() {
         guard let viewModel = viewModel else { return }
-        viewModel.longPressedTag.onNext(viewModel.tag)
+        viewModel.performLongPress()
     }
     
     func configure(with viewModel: TagCollectionViewCellViewModel? = nil) {

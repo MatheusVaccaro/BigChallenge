@@ -15,11 +15,6 @@ protocol HomeScreenViewModelDelegate: class {
     
     func homeScreenViewModelWillImportFromReminders(_ homeScreenViewModel: HomeScreenViewModel)
     func homeScreenViewModelShouldShowImportFromRemindersOption(_ homeScreenViewModel: HomeScreenViewModel) -> Bool
-    
-    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
-                             didInstantiate taskListViewModel: TaskListViewModel)
-    func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel,
-                             didInstantiate tagCollectionViewModel: TagCollectionViewModel)
 }
 
 class HomeScreenViewModel {
@@ -35,34 +30,17 @@ class HomeScreenViewModel {
     
     weak var delegate: HomeScreenViewModelDelegate?
     
-    required init(taskModel: TaskModel, tagModel: TagModel, selectedTags: [Tag],
-                  taskListViewModelType: TaskListViewModel.Type,
-                  tagCollectionViewModelType: TagCollectionViewModel.Type) {
+    required init(taskModel: TaskModel,
+                  tagModel: TagModel,
+                  selectedTags: [Tag],
+                  taskListViewModel: TaskListViewModel,
+                  tagCollectionViewModel: TagCollectionViewModel) {
+        
         self.taskModel = taskModel
         self.tagModel = tagModel
         self.selectedTags = selectedTags
-        self.taskListViewModelType = taskListViewModelType
-        self.tagCollectionViewModelType = tagCollectionViewModelType
     }
-    
-    private let taskListViewModelType: TaskListViewModel.Type
-    lazy var taskListViewModel: TaskListViewModel = {
-        let taskListViewModel = taskListViewModelType.init(model: taskModel)
-        delegate?.homeScreenViewModel(self, didInstantiate: taskListViewModel)
         
-        return taskListViewModel
-    }()
-    
-    private let tagCollectionViewModelType: TagCollectionViewModel.Type
-    lazy var tagCollectionViewModel: TagCollectionViewModel = {
-        let tagCollectionViewModel = tagCollectionViewModelType.init(model: tagModel,
-                                                                     filtering: true,
-                                                                     selectedTags: selectedTags)
-        delegate?.homeScreenViewModel(self, didInstantiate: tagCollectionViewModel)
-        
-        return tagCollectionViewModel
-    }()
-    
     func startAddTask() {
         delegate?.homeScreenViewModelDidStartAddTask(self)
     }
@@ -71,7 +49,7 @@ class HomeScreenViewModel {
         var ans = ""
         guard !selectedTags.isEmpty else { return ans }
         
-        var tags = (selectedTags.map { $0.title! })
+        var tags = (selectedTags.map { $0.title }.filter { $0 != nil }) as! [String]
         
         while tags.count > 1 {
             ans += "\(tags.removeFirst()), "
@@ -103,8 +81,8 @@ class HomeScreenViewModel {
     
     func updateUserActivity(_ activity: NSUserActivity) {
         guard !selectedTags.isEmpty else { return }
-        activity.addUserInfoEntries(from: ["selectedTagIDs" : selectedTags.map { $0.id!.description }])
         
+        activity.addUserInfoEntries(from: ["selectedTagIDs" : selectedTags.map { $0.id?.description }])
         activity.title = userActivityTitle
         
         activity.becomeCurrent()

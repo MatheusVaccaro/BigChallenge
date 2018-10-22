@@ -9,7 +9,6 @@
 import UIKit
 import Crashlytics
 import ReefKit
-import RxSwift
 import UserNotifications
 
 protocol HomeScreenViewControllerDelegate: class {
@@ -23,8 +22,6 @@ class HomeScreenViewController: UIViewController {
     
     fileprivate var taskListViewController: TaskListViewController?
     fileprivate var tagCollectionViewController: TagCollectionViewController?
-    
-    private let disposeBag = DisposeBag()
     
     weak var delegate: HomeScreenViewControllerDelegate?
     
@@ -50,7 +47,6 @@ class HomeScreenViewController: UIViewController {
         
         configureWhiteBackgroundView()
         configureEmptyState()
-        observeSelectedTags()
         newTaskLabel.text = Strings.Task.CreationScreen.taskTitlePlaceholder
         userActivity = viewModel.userActivity
         
@@ -72,6 +68,7 @@ class HomeScreenViewController: UIViewController {
         taskListViewController = viewController
         
         viewModel.delegate = self
+        showEmptyState(viewModel.taskListData.isEmpty)
         
         addChild(viewController)
         taskListContainerView.addSubview(viewController.view)
@@ -98,29 +95,6 @@ class HomeScreenViewController: UIViewController {
             viewController.view.leftAnchor.constraint(equalTo: tagContainerView.leftAnchor),
             viewController.view.bottomAnchor.constraint(equalTo: tagContainerView.bottomAnchor)
         ])
-    }
-    
-    fileprivate func observeSelectedTags() { //Move to homeScreen Coordinator (preferably on delegate)
-        viewModel.tagCollectionViewModel.selectedTagsObservable
-            .subscribe(onNext: { selectedTags in
-                self.viewModel.updateSelectedTagsIfNeeded(selectedTags)
-                
-                let relatedTags = self.viewModel.tagCollectionViewModel.filteredTags.filter {
-                    !selectedTags.contains($0)
-                }
-                
-                self.viewModel.taskListViewModel.filterTasks(with: selectedTags, relatedTags: relatedTags)
-                
-                if let activity = self.userActivity {
-                    self.updateUserActivityState(activity)
-                }
-                
-                if !selectedTags.isEmpty {
-                    Answers.logCustomEvent(withName: "filtered with tag",
-                                           customAttributes: ["numberOfFilteredTags" : selectedTags.count])
-                }
-            })
-            .disposed(by: disposeBag)
     }
     
     // MARK: - Empty State
@@ -208,11 +182,11 @@ class HomeScreenViewController: UIViewController {
 
 extension HomeScreenViewController: TaskListDelegate {
     func didBecomeEmpty(_ bool: Bool) {
-        self.showEmptyState(bool)
+        showEmptyState(bool)
     }
     
     func taskListViewModel(_ taskListViewModel: TaskListViewModel, shouldEdit task: Task) {
-        self.viewModel.delegate?.homeScreenViewModel(viewModel, willEdit: task)
+        viewModel.delegate?.homeScreenViewModel(viewModel, willEdit: task)
     }
 }
 
