@@ -169,7 +169,7 @@ class TaskCreationFrameViewController: UIViewController {
         view.layer.shadowRadius = 6.3
         view.layer.shadowOffset = CGSize(width: 0, height: 0)
         view.layer.masksToBounds = false
-        view.layer.shadowColor = CGColor.shadowColor
+        view.layer.shadowColor = UIColor.shadow
         view.layer.shadowOpacity = 1
         view.layer.shadowRadius = 10
     }

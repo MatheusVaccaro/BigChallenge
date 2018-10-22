@@ -45,7 +45,7 @@ class NewTaskViewModel {
         if let colors = task?.allTags.first?.colors {
             taskColors = colors
         } else {
-            taskColors = [UIColor.largeTitleColor.cgColor, UIColor.largeTitleColor.cgColor]
+            taskColors = [UIColor.largeTitle.cgColor, UIColor.largeTitle.cgColor]
         }
     }
     

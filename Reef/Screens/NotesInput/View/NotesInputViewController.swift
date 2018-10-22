@@ -22,7 +22,7 @@ class NotesInputViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.backgroundColor
+        view.backgroundColor = .background
         configureNavigationBar()
         configureNotesInputTextView()
         
@@ -41,7 +41,7 @@ class NotesInputViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor.backgroundColor
+        navigationController?.navigationBar.barTintColor = .background
         notesInputTextView.becomeFirstResponder()
     }
     
@@ -55,7 +55,7 @@ class NotesInputViewController: UIViewController {
     
     private func configureNavigationBar() {
         title = viewModel.title
-        navigationController?.navigationBar.barTintColor = UIColor.backgroundColor
+        navigationController?.navigationBar.barTintColor = .background
     }
 }
 

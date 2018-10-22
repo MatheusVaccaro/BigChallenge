@@ -46,9 +46,9 @@ public class TaskTableViewCell: UITableViewCell {
         taskTitleTextView.textContainer.lineFragmentPadding = 0
         
         dateStringView.layer.cornerRadius = dateStringView.frame.height * 0.1
-        dateStringLabel.textColor = UIColor.Cell.darkGray
+        dateStringLabel.textColor = .darkGray
         
-        tagsLabel.textColor = UIColor.Cell.darkGray
+        tagsLabel.textColor = .darkGray
         
         selectionStyle = .none
         configureAccessibility()
@@ -66,14 +66,14 @@ public class TaskTableViewCell: UITableViewCell {
         if viewModel.shouldShowLocationIcon {
             locationIconImageView.image = UIImage(named: "locationIcon")!
                 .withRenderingMode(.alwaysTemplate)
-            locationIconImageView.tintColor = UIColor.Cell.darkGray
+            locationIconImageView.tintColor = .darkGray
             locationIconImageView.isHidden = false
         } else {
             locationIconImageView.isHidden = true
         }
         
         if viewModel.shouldShowDateIcon {
-            dateStringView.backgroundColor = UIColor.Cell.lightGray
+            dateStringView.backgroundColor = .lightGray
             dateStringLabel.text = viewModel.dateString(with: "dd MMM")
             dateStringView.isHidden = false
         } else {
@@ -83,12 +83,12 @@ public class TaskTableViewCell: UITableViewCell {
         }
         
         if viewModel.taskIsCompleted {
-            gradientLayer.colors = [UIColor.Cell.darkGray.cgColor, UIColor.Cell.darkGray.cgColor]
+            gradientLayer.colors = [UIColor.darkGray.cgColor, UIColor.darkGray.cgColor]
             
             let textAttributes: [NSAttributedString.Key : Any] = [
                 NSAttributedString.Key.strikethroughStyle : NSUnderlineStyle.thick.rawValue,
-                NSAttributedString.Key.strikethroughColor : UIColor.Cell.darkGray,
-                NSAttributedString.Key.foregroundColor : UIColor.Cell.darkGray,
+                NSAttributedString.Key.strikethroughColor : UIColor.darkGray,
+                NSAttributedString.Key.foregroundColor : UIColor.darkGray,
                 NSAttributedString.Key.font : UIFont.font(sized: 19, weight: .medium, with: .body)
                 ]
             

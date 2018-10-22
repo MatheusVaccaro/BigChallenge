@@ -41,7 +41,7 @@ class AddTagTitleViewController: UIViewController {
         view.layer.masksToBounds = false
         view.layer.cornerRadius = 6.3
         view.layer.shadowOffset = CGSize(width: 0, height: 5)
-        view.layer.shadowColor = CGColor.shadowColor
+        view.layer.shadowColor = UIColor.shadow
         view.layer.shadowOpacity = 1
         view.layer.shadowRadius = 11
         view.layer.shadowRadius = 6.3
