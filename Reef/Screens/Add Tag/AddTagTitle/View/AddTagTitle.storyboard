@@ -24,6 +24,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                             </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="esW-61-F0A">
+                                <rect key="frame" x="340" y="10" width="25" height="25"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Z1-ho-1LV">
                                 <rect key="frame" x="336" y="6" width="33" height="33"/>
                                 <state key="normal" image="AddIcon">
@@ -39,7 +43,11 @@
                             <constraint firstItem="e3o-zv-pzw" firstAttribute="top" secondItem="H8r-tH-A7O" secondAttribute="top" id="4pb-Nt-oAQ"/>
                             <constraint firstItem="H8r-tH-A7O" firstAttribute="trailing" secondItem="9Z1-ho-1LV" secondAttribute="trailing" constant="6" id="B38-mt-y9G"/>
                             <constraint firstItem="9Z1-ho-1LV" firstAttribute="leading" secondItem="e3o-zv-pzw" secondAttribute="trailing" constant="6" id="KUi-Sa-7P5"/>
+                            <constraint firstItem="esW-61-F0A" firstAttribute="top" secondItem="H8r-tH-A7O" secondAttribute="top" constant="10" id="PHc-tg-MVI"/>
+                            <constraint firstItem="H8r-tH-A7O" firstAttribute="trailing" secondItem="esW-61-F0A" secondAttribute="trailing" constant="10" id="TDD-JH-22T"/>
+                            <constraint firstItem="esW-61-F0A" firstAttribute="leading" secondItem="e3o-zv-pzw" secondAttribute="trailing" constant="10" id="fkE-E7-A5O"/>
                             <constraint firstItem="H8r-tH-A7O" firstAttribute="bottom" secondItem="e3o-zv-pzw" secondAttribute="bottom" id="lGA-No-naP"/>
+                            <constraint firstItem="H8r-tH-A7O" firstAttribute="bottom" secondItem="esW-61-F0A" secondAttribute="bottom" constant="10" id="qQI-Mg-PJL"/>
                             <constraint firstItem="9Z1-ho-1LV" firstAttribute="centerY" secondItem="H2z-cY-E6t" secondAttribute="centerY" id="sMe-c7-nzx"/>
                             <constraint firstItem="e3o-zv-pzw" firstAttribute="leading" secondItem="H8r-tH-A7O" secondAttribute="leading" constant="16" id="sTX-l7-ZiU"/>
                         </constraints>

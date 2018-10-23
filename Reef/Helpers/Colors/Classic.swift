@@ -26,6 +26,8 @@ class Classic: Theme {
     static let placeholder: UIColor =
         UIColor(red: 63/255, green: 69/255, blue: 79/255, alpha: 0.3)
     
+    static let doneButtonBackground: UIColor = .placeholder
+    
     static let defaultGradient: [CGColor] =
         [UIColor.black.cgColor, UIColor.black.cgColor]
     

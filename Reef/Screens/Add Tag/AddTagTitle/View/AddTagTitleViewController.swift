@@ -45,6 +45,11 @@ class AddTagTitleViewController: UIViewController {
         view.layer.shadowOpacity = 1
         view.layer.shadowRadius = 11
         view.layer.shadowRadius = 6.3
+        
+        view.backgroundColor = .tagsBackground
+        let image = UIImage(named: "AddIcon")?.withRenderingMode(.alwaysTemplate)
+        tagTitleDoneButton.setImage(image, for: .normal)
+        tagTitleDoneButton.tintColor = .doneButtonBackground
     }
     
     private func configureAccessibility() {
@@ -56,6 +61,10 @@ class AddTagTitleViewController: UIViewController {
     private func configureTagTitleTextField() {
         tagTitleTextField.text = viewModel.tagTitle
         tagTitleTextField.placeholder = Strings.Tag.CreationScreen.tagTitlePlaceholder
+        
+        tagTitleTextField.textColor = .largeTitle
+        tagTitleTextField.tintColor = .placeholder
+        
         tagTitleTextField.delegate = self
     }
     

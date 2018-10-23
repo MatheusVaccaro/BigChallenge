@@ -86,8 +86,13 @@ class LocationInputView: UIViewController {
         searchBar.delegate = self
         searchBar.barStyle = .default
         searchBar.searchBarStyle = .minimal
+        
         searchBar.placeholder = viewModel.searchBarPlaceholder
         searchBar.accessibilityHint = viewModel.searchBarHint
+        
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = .taskTitleLabel
+        
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font =
             UIFont.font(sized: 17, weight: .regular, with: .body)
     }
@@ -116,6 +121,8 @@ class LocationInputView: UIViewController {
         searchResultsTableView.register(UINib(nibName: "IconCell",
                                               bundle: nil),
                                         forCellReuseIdentifier: IconTableViewCell.reuseIdentifier!)
+        
+        searchResultsTableView.backgroundColor = .clear
         
         searchResultsTableView.estimatedRowHeight = 50
         searchResultsTableView.rowHeight = UITableView.automaticDimension

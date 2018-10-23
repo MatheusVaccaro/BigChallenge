@@ -19,9 +19,10 @@ protocol Theme {
     static var placeholder: UIColor { get }
     static var shadow: CGColor { get }
     
+    static var doneButtonBackground: UIColor { get }
+    
     // MARK: - Cell
     static var iconCellIcon: UIColor { get }
-    
     static var taskTitleLabel: UIColor { get }
     static var cellTagLabel: UIColor { get }
     static var cellIcons: UIColor { get }
@@ -62,6 +63,8 @@ extension UIColor: Theme {
     static let background: UIColor = theme.background
     static let placeholder: UIColor = theme.placeholder
     static let shadow: CGColor = theme.shadow
+    
+    static let doneButtonBackground: UIColor = theme.doneButtonBackground
     
     // MARK: - Cell
     static let iconCellIcon: UIColor = theme.iconCellIcon
