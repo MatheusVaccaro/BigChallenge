@@ -54,6 +54,8 @@ class IconTableViewCell: UITableViewCell {
         // Initialization code
         selectionStyle = .none
         
+        configureLayout()
+        
         titleLabel.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         titleLabel.textContainer.lineFragmentPadding = 0
         
@@ -63,6 +65,14 @@ class IconTableViewCell: UITableViewCell {
         secondTagLabel.isHidden = true
         
         configureAccessibility()
+    }
+    
+    func configureLayout() {
+        backgroundColor = .tagsBackground
+        icon.tintColor = .iconCellIcon
+        subtitleLabel.textColor = .cellTagLabel
+        titleLabel.textColor = .taskTitleLabel
+//        rightButton.tintColor = . TODO
     }
     
     @IBAction func switchToggled(_ sender: UISwitch) {
@@ -91,7 +101,8 @@ class IconTableViewCell: UITableViewCell {
     private func reloadData() {
         titleLabel.text = viewModel.title
         subtitleLabel.text = viewModel.subtitle
-        icon.image = UIImage(named: viewModel.imageName)
+        icon.image = UIImage(named: viewModel.imageName)!
+            .withRenderingMode(.alwaysTemplate)
         
         if viewModel.shouldShowDeleteIcon {
             rightButton.setImage(UIImage(named: "removeButton"), for: .normal)

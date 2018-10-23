@@ -131,8 +131,12 @@ class NewTaskCoordinator: NSObject, Coordinator {
             modalPresenter.transitioningDelegate = self
         }
         
+        modalPresenter.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        modalPresenter.navigationBar.shadowImage = UIImage()
+        modalPresenter.view.backgroundColor = .clear
+        
         modalPresenter.navigationBar.prefersLargeTitles = true
-        modalPresenter.navigationBar.isTranslucent = false
+        modalPresenter.navigationBar.isTranslucent = true
         modalPresenter.navigationBar.largeTitleTextAttributes = largeTitleAttributes
         modalPresenter.modalPresentationStyle = .overCurrentContext
         

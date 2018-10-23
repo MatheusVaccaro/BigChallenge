@@ -48,6 +48,7 @@ class NotesInputViewController: UIViewController {
     // MARK: - Functions
     private func configureNotesInputTextView() {
         notesInputTextView.font = UIFont.font(sized: 22, weight: .semibold, with: .body, fontName: .barlow)
+        notesInputTextView.keyboardAppearance = UIColor.keyboardAppearance
         notesInputTextView.placeholder = viewModel.textViewPlaceholder
         notesInputTextView.placeholderColor = UIColor.placeholder
         notesInputTextView.text = viewModel.notes

@@ -80,7 +80,8 @@ class CalendarCell: JTAppleCell {
     
     func select(basedOn cellState: CellState? = nil, animated: Bool = true) {
         // Change background visuals
-        let selectedBackgroundColor = UIColor.largeTitle
+        let selectedBackgroundColor = UIColor.selectedDateBackground
+        
         if animated {
             setBackgroundColor(to: selectedBackgroundColor)
         } else {

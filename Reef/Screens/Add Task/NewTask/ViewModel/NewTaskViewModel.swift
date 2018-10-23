@@ -37,7 +37,7 @@ class NewTaskViewModel {
         }
     }
     
-    var taskColors: [CGColor] = [UIColor.black.cgColor, UIColor.black.cgColor]
+    var taskColors: [CGColor] = UIColor.defaultGradient
     
     func edit(_ task: Task?) {
         taskTitleText = task?.title

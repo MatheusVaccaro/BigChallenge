@@ -12,6 +12,7 @@ protocol Theme {
     static var keyboardAppearance: UIKeyboardAppearance { get }
     static var blurStyle: UIBlurEffect.Style { get }
     
+    static var defaultGradient: [CGColor] { get }
     static var largeTitle: UIColor { get }
     static var tagsBackground: UIColor { get }
     static var background: UIColor { get }
@@ -19,6 +20,8 @@ protocol Theme {
     static var shadow: CGColor { get }
     
     // MARK: - Cell
+    static var iconCellIcon: UIColor { get }
+    
     static var taskTitleLabel: UIColor { get }
     static var cellTagLabel: UIColor { get }
     static var cellIcons: UIColor { get }
@@ -28,6 +31,7 @@ protocol Theme {
     
     // MARK: - Calendar
     static var deselectedDateBackground: UIColor { get }
+    static var selectedDateBackground: UIColor { get }
     static var selectedDate: UIColor { get }
     
     static var weekday: UIColor { get }
@@ -37,6 +41,7 @@ protocol Theme {
 
 extension Theme {
     static var deselectedDateBackground: UIColor { return UIColor.clear }
+    
     static var selectedDate: UIColor { return UIColor.white }
     
     static var weekday: UIColor { return largeTitle.adjusted(alpha: 0.5) }
@@ -51,6 +56,7 @@ extension UIColor: Theme {
     static let keyboardAppearance: UIKeyboardAppearance = theme.keyboardAppearance
     static let blurStyle: UIBlurEffect.Style = theme.blurStyle
     
+    static let defaultGradient: [CGColor] = theme.defaultGradient
     static let largeTitle: UIColor = theme.largeTitle
     static let tagsBackground: UIColor = theme.tagsBackground
     static let background: UIColor = theme.background
@@ -58,6 +64,7 @@ extension UIColor: Theme {
     static let shadow: CGColor = theme.shadow
     
     // MARK: - Cell
+    static let iconCellIcon: UIColor = theme.iconCellIcon
     static let taskTitleLabel: UIColor = theme.taskTitleLabel
     static let cellTagLabel: UIColor = theme.cellTagLabel
     static let cellIcons: UIColor = theme.cellIcons
@@ -67,6 +74,7 @@ extension UIColor: Theme {
     
     // MARK: - Calendar
     static let deselectedDateBackground: UIColor = theme.deselectedDateBackground
+    static let selectedDateBackground: UIColor = theme.selectedDateBackground
     static let selectedDate: UIColor = theme.selectedDate
     
     static let weekday: UIColor = theme.weekday

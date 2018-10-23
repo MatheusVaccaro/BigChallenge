@@ -142,6 +142,8 @@ class TaskCreationFrameViewController: UIViewController {
         configureShadows(in: taskDetailView)
         configureShadows(in: taskTitleView)
         
+        whiteBackgroundView.backgroundColor = .tagsBackground
+        
         applyBlur()
         
         viewModel.delegate?.viewDidLoad()

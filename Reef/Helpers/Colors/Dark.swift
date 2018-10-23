@@ -26,7 +26,11 @@ class Dark: Theme {
     static let placeholder: UIColor =
         UIColor(red: 132.0/255, green: 132.0/255, blue: 133.0/255, alpha: 0.3)
     
+    static let defaultGradient: [CGColor] =
+        [UIColor.placeholder.cgColor, UIColor.placeholder.cgColor]
+    
     // MARK: - Cell
+    static let iconCellIcon: UIColor = .placeholder
     static let taskTitleLabel: UIColor = .white
     
     static let cellTagLabel: UIColor =
@@ -43,4 +47,6 @@ class Dark: Theme {
     
     static let uncompleteYellow: UIColor =
         UIColor(red: 255/255.0, green: 200/255.0, blue: 50/255.0, alpha: 1)
+    
+    static let selectedDateBackground: UIColor = .tagsBackground
 }

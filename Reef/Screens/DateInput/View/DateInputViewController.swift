@@ -161,6 +161,8 @@ class DateInputViewController: UIViewController {
     private func loadTimeOfDaySelectorView() {
         timeOfDaySelector.addTarget(self, action: #selector(handleTimeOfDaySelectorChange(_:)), for: .valueChanged)
         
+        timeOfDaySelector.setValue(UIColor.taskTitleLabel, forKey: "textColor")
+        
         viewModel?.timeOfDay.asObservable()
             .map { dateComponent in
             	Calendar.current.date(from: dateComponent)
