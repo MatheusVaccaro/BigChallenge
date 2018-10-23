@@ -76,6 +76,7 @@ class NewTaskCoordinator: NSObject, Coordinator {
         creationFrameViewModel.edit(task)
         
         tagCollectionViewController.viewModel = tagCollectionViewModel
+        tagCollectionViewModel.filtering = false
         newTaskViewController.viewModel = newTaskViewModel
         taskDetailsViewController!.viewModel = taskDetailsViewModel
         creationFrameViewController.viewModel = creationFrameViewModel

@@ -144,6 +144,7 @@ extension HomeScreenCoordinator: CoordinatorDelegate {
         if tagCollectionViewModel.delegate !== self {
             tagCollectionViewModel.delegate = self
             tagCollectionViewModel.uiDelegate = tagCollectionViewController
+            tagCollectionViewModel.filtering = true
             
             tagCollectionViewModel.reload()
         }
