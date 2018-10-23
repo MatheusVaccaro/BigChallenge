@@ -21,7 +21,9 @@ class NewTaskViewController: UIViewController {
     @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var taskTitleTextView: VerticallyCenteredTextView!
     @IBOutlet weak var taskDetailsButton: UIButton!
-    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var doneButton: UIView!
+    @IBOutlet weak var doneButtonLabel: UILabel!
+    @IBOutlet weak var rightButtonView: UIView!
     
     private lazy var gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
@@ -43,6 +45,7 @@ class NewTaskViewController: UIViewController {
         
         view.backgroundColor = .tagsBackground
         
+        configureDoneButton()
         configureWithViewModel()
         configureTaskTitleTextView()
         configureViewDesign()
@@ -65,6 +68,9 @@ class NewTaskViewController: UIViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         taskTitleTextView.font = UIFont.font(sized: 17, weight: .medium, with: .body)
+        doneButtonLabel.font = UIFont.font(sized: 14, weight: .medium, with: .caption2)
+        doneButtonLabel.sizeToFit()
+        
         taskTitleTextView.setNeedsLayout()
         taskTitleTextView.layoutIfNeeded()
         taskDetailsButton.setNeedsLayout()
@@ -114,6 +120,18 @@ class NewTaskViewController: UIViewController {
     }
     
     // MARK: - Functions
+    private func configureDoneButton() {
+        doneButtonLabel.text = Strings.General.done
+        doneButtonLabel.textColor = .white
+        doneButtonLabel.adjustsFontSizeToFitWidth = true
+        
+        doneButton.backgroundColor = .doneButtonBackground
+        doneButton.layer.cornerRadius = 6.3
+        
+        taskDetailsButton.setImage(UIImage(named: "option")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        taskDetailsButton.tintColor = .placeholder
+    }
+    
     private func configureWithViewModel() {
         taskTitleTextView.text = viewModel.taskTitleText
         gradientLayer.colors = viewModel.taskColors

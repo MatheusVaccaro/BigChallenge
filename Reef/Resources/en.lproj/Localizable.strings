@@ -211,3 +211,15 @@
 
 /* meaning to show something */
 "show" = "Show";
+
+/* creates a tag in tag screen (voiceOver) */
+"create  action" = "Create";
+
+/* No comment provided by engineer. */
+"create tag voice over hint" = "Double tap to create tag";
+
+/* No comment provided by engineer. */
+"create tag voice over label" = "Create tag";
+
+/* meaning to complete an action (done creating task) */
+"done" = "Done";
