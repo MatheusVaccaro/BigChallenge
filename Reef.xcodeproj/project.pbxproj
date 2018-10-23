@@ -138,6 +138,7 @@
 		C21EAD0B20B74F01005F0F85 /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21EAD0A20B74F01005F0F85 /* StoryboardInstantiable.swift */; };
 		C22EF7DE215932CB00BFB255 /* PresentTaskAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EF7DD215932CB00BFB255 /* PresentTaskAnimationController.swift */; };
 		C22F6FD4217A5E17007F0309 /* UITableView+ContentSizeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22F6FD3217A5E17007F0309 /* UITableView+ContentSizeDelegate.swift */; };
+		C22F6FD6217FA396007F0309 /* VerticallyCenteredTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22F6FD5217FA396007F0309 /* VerticallyCenteredTextView.swift */; };
 		C23753AE20B6461E00C1CE15 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23753AD20B6461E00C1CE15 /* Coordinator.swift */; };
 		C23753B020B6463700C1CE15 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23753AF20B6463700C1CE15 /* ApplicationCoordinator.swift */; };
 		C24CB89821654C55007B2167 /* PresentTaskInteractiveAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CB89721654C55007B2167 /* PresentTaskInteractiveAnimationController.swift */; };
@@ -411,6 +412,7 @@
 		C21EAD0A20B74F01005F0F85 /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
 		C22EF7DD215932CB00BFB255 /* PresentTaskAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentTaskAnimationController.swift; sourceTree = "<group>"; };
 		C22F6FD3217A5E17007F0309 /* UITableView+ContentSizeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+ContentSizeDelegate.swift"; sourceTree = "<group>"; };
+		C22F6FD5217FA396007F0309 /* VerticallyCenteredTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticallyCenteredTextView.swift; sourceTree = "<group>"; };
 		C23753AD20B6461E00C1CE15 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		C23753AF20B6463700C1CE15 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
 		C24CB89721654C55007B2167 /* PresentTaskInteractiveAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentTaskInteractiveAnimationController.swift; sourceTree = "<group>"; };
@@ -1122,6 +1124,7 @@
 				226CEA0420E17E87008CEB97 /* Strings.swift */,
 				C25169942139BD6200999BD0 /* UIViewController+Extension.swift */,
 				C22F6FD3217A5E17007F0309 /* UITableView+ContentSizeDelegate.swift */,
+				C22F6FD5217FA396007F0309 /* VerticallyCenteredTextView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1843,6 +1846,7 @@
 				160E62862155B30A001F3D01 /* TagCreationViewModel.swift in Sources */,
 				160E6292215929FD001F3D01 /* AddTagColorsViewController.swift in Sources */,
 				22ED5957211B346F008EAD7D /* MKPlaceMarkExtension.swift in Sources */,
+				C22F6FD6217FA396007F0309 /* VerticallyCenteredTextView.swift in Sources */,
 				C28DC91A20B61CB6007F881A /* AppDelegate.swift in Sources */,
 				228946392113F1A4009D05CB /* InvertedCircle.swift in Sources */,
 				22F23E9E212E43B30064EE05 /* Task+Extension.swift in Sources */,
