@@ -69,6 +69,8 @@
 		2280820A2136D486003FD3DE /* MockPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113A20B8791E00ABB161 /* MockPersistence.swift */; };
 		2280820B2136D489003FD3DE /* LocalPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0BE020E4449C00CF39ED /* LocalPersistence.swift */; };
 		228946392113F1A4009D05CB /* InvertedCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228946382113F1A4009D05CB /* InvertedCircle.swift */; };
+		229780AA217EA0B700CDB484 /* Classic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229780A9217EA0B700CDB484 /* Classic.swift */; };
+		229780AD217EA0E900CDB484 /* Dark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229780AC217EA0E900CDB484 /* Dark.swift */; };
 		22D14A1E212CBBF500B15B98 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D14A1D212CBBF500B15B98 /* ArrayExtension.swift */; };
 		22D84C63210BF1E3004B8969 /* LocationInputView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22D84C62210BF1E3004B8969 /* LocationInputView.storyboard */; };
 		22D84C65210BF4D1004B8969 /* LocationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D84C64210BF4D1004B8969 /* LocationInputView.swift */; };
@@ -325,6 +327,8 @@
 		2286A71520E3DF2100BE92AA /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		228946382113F1A4009D05CB /* InvertedCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertedCircle.swift; sourceTree = "<group>"; };
 		228BAD432108C22400E74AA9 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		229780A9217EA0B700CDB484 /* Classic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classic.swift; sourceTree = "<group>"; };
+		229780AC217EA0E900CDB484 /* Dark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dark.swift; sourceTree = "<group>"; };
 		2299F07820F628A70074A834 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		22CC1864210511CC00486B27 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		22D14A1D212CBBF500B15B98 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
@@ -773,6 +777,16 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
+		229780AB217EA0C800CDB484 /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				22F23E9F212E452E0064EE05 /* Colors.swift */,
+				229780A9217EA0B700CDB484 /* Classic.swift */,
+				229780AC217EA0E900CDB484 /* Dark.swift */,
+			);
+			path = Colors;
+			sourceTree = "<group>";
+		};
 		22D84C5E210BEFE4004B8969 /* LocationInput */ = {
 			isa = PBXGroup;
 			children = (
@@ -1096,10 +1110,10 @@
 			children = (
 				222BFF9520EDB83B001B6BBF /* Importers */,
 				16E8DD8C2110F5B9004F66D6 /* Fonts */,
+				229780AB217EA0C800CDB484 /* Colors */,
 				C21EAD0A20B74F01005F0F85 /* StoryboardInstantiable.swift */,
 				22456D2820DC3BB000168894 /* Date+Extension.swift */,
 				29BA68A52120E147009B4AB9 /* Calendar+Extension.swift */,
-				22F23E9F212E452E0064EE05 /* Colors.swift */,
 				296424BA21559A7400480CB4 /* CoreAnimation+Extension.swift */,
 				22D14A1D212CBBF500B15B98 /* ArrayExtension.swift */,
 				226CEA0420E17E87008CEB97 /* Strings.swift */,
@@ -1875,6 +1889,7 @@
 				29BA68A02120C37D009B4AB9 /* CalendarViewController.swift in Sources */,
 				C2A1115120B9FCDB00ABB161 /* NewTaskViewModel.swift in Sources */,
 				22456D2920DC3BB000168894 /* Date+Extension.swift in Sources */,
+				229780AA217EA0B700CDB484 /* Classic.swift in Sources */,
 				C21EAD0B20B74F01005F0F85 /* StoryboardInstantiable.swift in Sources */,
 				222888D82117E5D90093EEF7 /* RadiusMapViewModel.swift in Sources */,
 				C24CB89C2165895E007B2167 /* DismissTaskInteractiveAnimationController.swift in Sources */,
@@ -1889,6 +1904,7 @@
 				22DE27122141BFF300466187 /* IconTableViewCell.swift in Sources */,
 				29722024211E36CF00CF80CE /* ToggleableLabel.swift in Sources */,
 				226D8609215E529C00DC6E92 /* PrivateTagSwitchVideModel.swift in Sources */,
+				229780AD217EA0E900CDB484 /* Dark.swift in Sources */,
 				160E629721592A30001F3D01 /* AddTagColorsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

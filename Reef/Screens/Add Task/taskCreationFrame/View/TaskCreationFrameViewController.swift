@@ -43,7 +43,7 @@ class TaskCreationFrameViewController: UIViewController {
     var viewModel: TaskCreationViewModel!
     
     private(set) lazy var blurView: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: .regular)
+        let blurEffect = UIBlurEffect(style: UIColor.blurStyle)
         
         let blur = UIVisualEffectView(effect: blurEffect)
         blur.frame = view.bounds
@@ -114,7 +114,7 @@ class TaskCreationFrameViewController: UIViewController {
     private func applyBlur() {
         //only apply the blur if the user hasn't disabled transparency effects
         if UIAccessibility.isReduceTransparencyEnabled {
-            blurView.tintColor = .lightGray
+            blurView.tintColor = .cellIcons
         }
         
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

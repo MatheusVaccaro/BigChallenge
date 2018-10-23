@@ -108,6 +108,7 @@ extension TaskListViewController: UITableViewDelegate {
             
             let headerLabel = UILabel()
             headerLabel.text = viewModel.showHideHeader
+            headerLabel.textColor = .taskTitleLabel //TODO: fix (this header has its own color)
             headerLabel.sizeToFit()
             headerView.addSubview(headerLabel)
             

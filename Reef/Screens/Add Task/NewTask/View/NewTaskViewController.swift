@@ -118,7 +118,7 @@ class NewTaskViewController: UIViewController {
     }
     
     private func configureTaskTitleTextView() {
-        taskTitleTextView.placeholderColor = UIColor.lightGray.withAlphaComponent(0.5)
+        taskTitleTextView.placeholderColor = UIColor.cellIcons.withAlphaComponent(0.5)
         taskTitleTextView.placeholder = Strings.Task.CreationScreen.taskTitlePlaceholder
         
         taskTitleTextView.textContainer.lineFragmentPadding = 0

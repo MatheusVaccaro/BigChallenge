@@ -10,20 +10,23 @@ import UIKit
 
 protocol Theme {
     static var keyboardAppearance: UIKeyboardAppearance { get }
+    static var blurStyle: UIBlurEffect.Style { get }
     
     static var largeTitle: UIColor { get }
+    static var tagsBackground: UIColor { get }
     static var background: UIColor { get }
     static var placeholder: UIColor { get }
     static var shadow: CGColor { get }
     
-    //MARK: - Cell
-    static var darkGray: UIColor { get }
-    static var lightGray: UIColor { get }
+    // MARK: - Cell
+    static var taskTitleLabel: UIColor { get }
+    static var cellTagLabel: UIColor { get }
+    static var cellIcons: UIColor { get }
     static var deleteRed: UIColor { get }
     static var completeGreen: UIColor { get }
     static var uncompleteYellow: UIColor { get }
     
-    //MARK: - Calendar
+    // MARK: - Calendar
     static var deselectedDateBackground: UIColor { get }
     static var selectedDate: UIColor { get }
     
@@ -32,61 +35,37 @@ protocol Theme {
     static var unselectableDate: UIColor { get }
 }
 
-class Classic: Theme {
-    static var keyboardAppearance: UIKeyboardAppearance = .light
+extension Theme {
+    static var deselectedDateBackground: UIColor { return UIColor.clear }
+    static var selectedDate: UIColor { return UIColor.white }
     
-    static var largeTitle: UIColor =
-        UIColor(red: 63/255.0, green: 69/255.0, blue: 79/255.0, alpha: 1)
-    
-    static let background: UIColor =
-        UIColor(red: 248.0/255.0, green: 248.0/255.0, blue: 248.0/255.0, alpha: 1)
-    
-    static let shadow: CGColor =
-        UIColor(red: 116/255, green: 133/255, blue: 138/255, alpha: 0.3).cgColor
-    
-    static let placeholder: UIColor =
-         UIColor(red: 63/255, green: 69/255, blue: 79/255, alpha: 0.3)
-    
-    //MARK: - Cell
-    static let darkGray: UIColor =
-        UIColor(red: 157/255.0, green: 168/255.0, blue: 169/255.0, alpha: 1)
-    static let lightGray: UIColor =
-        UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1)
-    static let deleteRed: UIColor =
-        UIColor(red: 255/255.0, green: 36/255.0, blue: 80/255.0, alpha: 1)
-    static let completeGreen: UIColor =
-        UIColor(red: 68/255.0, green: 252/255.0, blue: 202/255.0, alpha: 1)
-    static let uncompleteYellow: UIColor =
-        UIColor(red: 255/255.0, green: 200/255.0, blue: 50/255.0, alpha: 1)
-    
-    //MARK: - Calendar
-    static let deselectedDateBackground = UIColor.clear
-    static let selectedDate = UIColor.white
-    
-    static let weekday: UIColor = { return largeTitle.adjusted(alpha: 0.5) }()
-    static let dateOffCurrentMonth: UIColor = { return largeTitle.adjusted(alpha: 0.4) }()
-    static let unselectableDate: UIColor = { return largeTitle.adjusted(alpha: 0.2) }()
+    static var weekday: UIColor { return largeTitle.adjusted(alpha: 0.5) }
+    static var dateOffCurrentMonth: UIColor { return largeTitle.adjusted(alpha: 0.4) }
+    static var unselectableDate: UIColor { return largeTitle.adjusted(alpha: 0.2) }
 }
 
 extension UIColor: Theme {
     
-    static let theme: Theme.Type = Classic.self
+    static let theme: Theme.Type = Dark.self
 
     static let keyboardAppearance: UIKeyboardAppearance = theme.keyboardAppearance
+    static let blurStyle: UIBlurEffect.Style = theme.blurStyle
     
     static let largeTitle: UIColor = theme.largeTitle
+    static let tagsBackground: UIColor = theme.tagsBackground
     static let background: UIColor = theme.background
     static let placeholder: UIColor = theme.placeholder
     static let shadow: CGColor = theme.shadow
     
-    //MARK: - Cell
-    static let darkGray: UIColor = theme.darkGray
-    static let lightGray: UIColor = theme.lightGray
+    // MARK: - Cell
+    static let taskTitleLabel: UIColor = theme.taskTitleLabel
+    static let cellTagLabel: UIColor = theme.cellTagLabel
+    static let cellIcons: UIColor = theme.cellIcons
     static let deleteRed: UIColor = theme.deleteRed
     static let completeGreen: UIColor = theme.completeGreen
     static let uncompleteYellow: UIColor = theme.uncompleteYellow
     
-    //MARK: - Calendar
+    // MARK: - Calendar
     static let deselectedDateBackground: UIColor = theme.deselectedDateBackground
     static let selectedDate: UIColor = theme.selectedDate
     

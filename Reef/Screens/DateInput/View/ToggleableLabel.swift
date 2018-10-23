@@ -67,7 +67,7 @@ class ToggleableLabel: UILabel {
         newShadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: 4.3).cgPath
         newShadowLayer.fillColor = UIColor.white.cgColor
         
-        newShadowLayer.shadowColor = UIColor.darkGray.cgColor
+        newShadowLayer.shadowColor = UIColor.cellTagLabel.cgColor
         newShadowLayer.shadowPath = newShadowLayer.path
         newShadowLayer.shadowOffset = CGSize(width: 2.0, height: 2.0)
         newShadowLayer.shadowOpacity = 0.8

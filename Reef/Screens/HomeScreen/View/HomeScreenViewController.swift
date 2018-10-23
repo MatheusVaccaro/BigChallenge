@@ -128,7 +128,7 @@ class HomeScreenViewController: UIViewController {
     fileprivate func configureWhiteBackgroundView() {
         whiteBackgroundView.layer.cornerRadius = 6.3
         whiteBackgroundView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-        whiteBackgroundView.tintColor = UIColor.white
+        whiteBackgroundView.backgroundColor = .tagsBackground
         
         whiteBackgroundView.layer.shadowRadius = 6.3
         whiteBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 10)
@@ -159,7 +159,8 @@ class HomeScreenViewController: UIViewController {
     private func configurePullDownView() {
         pullDownView.backgroundColor = .white
         pullDownView.layer.cornerRadius = 6.3
-        pullDownView.tintColor = .white
+        pullDownView.backgroundColor = .tagsBackground
+        //TODO: pullDown arrow color
         
         pullDownView.layer.shadowRadius = 6.3
         pullDownView.layer.shadowOffset = CGSize(width: 0, height: 0)
