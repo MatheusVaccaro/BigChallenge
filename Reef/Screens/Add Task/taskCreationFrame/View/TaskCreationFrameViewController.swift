@@ -180,9 +180,9 @@ extension TaskCreationFrameViewController: ContentSizeObservableTableViewDelegat
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
         let navigationControllerHeight = navigationController!.navigationBar.frame.height
         let offset: CGFloat = 40.0
-        
+
         let interactableArea = view.frame.height - statusBarHeight - navigationControllerHeight - offset
-        
+
         let taskContainerExpectedSize = taskTitleAndDetailSeparatorHeight + taskTitleViewHeight + contentSize.height
         if taskContainerExpectedSize > interactableArea {
             tableView.isScrollEnabled = true
@@ -192,7 +192,7 @@ extension TaskCreationFrameViewController: ContentSizeObservableTableViewDelegat
             tableView.isScrollEnabled = false
             taskDetailsTableViewHeight.constant = contentSize.height
         }
-        
+
         // Adjusts position of container view when its collapsed
         // This line is needed in case the user taps a tag when the container is collapsed
         if state == .collapsed {
@@ -355,11 +355,36 @@ extension TaskCreationFrameViewController {
         let fractionComplete = translationY / animationDistance + progressWhenInterrupted
         return fractionComplete
     }
+    
+    private func animateDetailsBump(completionHandler: @escaping () -> Void) {
+        let duration = 0.3
+        let options: UIView.KeyframeAnimationOptions = [.calculationModeCubic]
+        UIView.animateKeyframes(withDuration: duration,
+                                delay: 0.0,
+                                options: options,
+                                animations: { [unowned self] in
+                                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5, animations: { [unowned self] in
+                                        self.taskContainerView.frame.origin.y += self.taskTitleAndDetailSeparatorHeight
+                                    })
+
+                                    UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5, animations: { [unowned self] in
+                                        self.taskContainerView.frame.origin.y -= self.taskTitleAndDetailSeparatorHeight
+                                    })
+            }, completion: { _ in
+                completionHandler()
+        })
+    }
 }
 
 extension TaskCreationFrameViewController: TaskCreationUIDelegate {
     func taskCreationViewModelDidChangeTaskInfo(_ taskCreationViewModel: TaskCreationViewModel) {
-        taskDetailViewController.tableView.reloadData()
+        if state == .collapsed {
+            animateDetailsBump { [unowned self] in
+                self.taskDetailViewController.tableView.reloadData()
+            }
+        } else {
+            taskDetailViewController.tableView.reloadData()
+        }
     }
     
     func presentDetails() {
