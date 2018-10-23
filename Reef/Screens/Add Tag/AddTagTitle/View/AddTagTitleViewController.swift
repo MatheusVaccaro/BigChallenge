@@ -59,11 +59,15 @@ class AddTagTitleViewController: UIViewController {
     }
     
     private func configureTagTitleTextField() {
-        tagTitleTextField.text = viewModel.tagTitle
-        tagTitleTextField.placeholder = Strings.Tag.CreationScreen.tagTitlePlaceholder
+        let placeholder = NSAttributedString(string: Strings.Tag.CreationScreen.tagTitlePlaceholder,
+                                             attributes: [NSAttributedString.Key.foregroundColor : UIColor.placeholder])
         
+        tagTitleTextField.text = viewModel.tagTitle
         tagTitleTextField.textColor = .largeTitle
-        tagTitleTextField.tintColor = .placeholder
+        
+        tagTitleTextField.attributedPlaceholder = placeholder
+        tagTitleTextField.tintColor = .taskTitleLabel
+        
         
         tagTitleTextField.delegate = self
     }

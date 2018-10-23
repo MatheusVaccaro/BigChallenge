@@ -45,12 +45,12 @@ class NewTaskViewModel {
         if let colors = task?.allTags.first?.colors {
             taskColors = colors
         } else {
-            taskColors = [UIColor.largeTitle.cgColor, UIColor.largeTitle.cgColor]
+            taskColors = UIColor.defaultGradient
         }
     }
     
     func set(_ tags: [Tag]) {
-        taskColors = tags.first?.colors ?? [UIColor.black.cgColor, UIColor.black.cgColor]
+        taskColors = tags.first?.colors ?? UIColor.defaultGradient
         uiDelegate?.didUpdateColors()
     }
     

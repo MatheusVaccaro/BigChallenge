@@ -142,7 +142,7 @@ class NewTaskViewController: UIViewController {
         taskTitleTextView.textColor = .taskTitleLabel
         taskTitleTextView.keyboardAppearance = UIColor.keyboardAppearance
         taskTitleTextView.placeholder = Strings.Task.CreationScreen.taskTitlePlaceholder
-        
+        taskTitleTextView.tintColor = .taskTitleLabel
         taskTitleTextView.textContainer.lineFragmentPadding = 0
     }
     
