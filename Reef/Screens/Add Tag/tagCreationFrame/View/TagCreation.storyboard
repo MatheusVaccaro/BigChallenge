@@ -56,6 +56,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sdG-zM-EDT"/>
                     </view>
+                    <navigationItem key="navigationItem" id="2k2-wk-bae">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Yf5-yG-j1s">
+                            <color key="tintColor" red="0.2470588235" green="0.27058823529999998" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="detailsTableHeightConstraint" destination="E7O-SG-K6y" id="hN7-30-Km0"/>
                         <outlet property="tagColorsView" destination="8B2-RY-FrU" id="Ujx-z2-gdE"/>
