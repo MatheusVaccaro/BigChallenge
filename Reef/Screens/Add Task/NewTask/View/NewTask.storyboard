@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" contentMode="center" horizontalHuggingPriority="750" verticalCompressionResistancePriority="1000" layoutMarginsFollowReadableWidth="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" keyboardDismissMode="interactive" text="i am a task with some ver" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w2W-Sr-tak" customClass="VerticallyCenteredTextView" customModule="Reef" customModuleProvider="target">
-                                <rect key="frame" x="21" y="16" width="290" height="41"/>
+                                <rect key="frame" x="21" y="16" width="283" height="41"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -33,20 +33,20 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" horizontalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="OWg-JH-zfC">
-                                <rect key="frame" x="304" y="0.0" width="71" height="73"/>
+                                <rect key="frame" x="312" y="0.0" width="63" height="73"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5oG-Zr-dS9">
-                                        <rect key="frame" x="0.0" y="0.0" width="71" height="73"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="63" height="73"/>
                                         <state key="normal" image="option"/>
                                         <connections>
                                             <action selector="didClickDetailsButton:" destination="ArF-0o-Orl" eventType="touchUpInside" id="5VE-NB-4uJ"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qcy-xg-RVW" userLabel="doneButton2">
-                                        <rect key="frame" x="0.0" y="16" width="63" height="41"/>
+                                        <rect key="frame" x="0.0" y="16" width="55" height="41"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="Pronto" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRf-9M-CqB">
-                                                <rect key="frame" x="10" y="12" width="43" height="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="Done" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRf-9M-CqB">
+                                                <rect key="frame" x="10" y="12" width="35" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -87,7 +87,7 @@
                             <constraint firstItem="OWg-JH-zfC" firstAttribute="top" secondItem="S5p-sX-wPS" secondAttribute="top" id="MPS-fL-ALO"/>
                             <constraint firstItem="OWg-JH-zfC" firstAttribute="trailing" secondItem="TDj-t3-yHD" secondAttribute="trailing" id="OAK-pa-TrC"/>
                             <constraint firstItem="wme-eo-wSe" firstAttribute="top" secondItem="S5p-sX-wPS" secondAttribute="top" constant="14" id="OdW-PN-eUt"/>
-                            <constraint firstItem="OWg-JH-zfC" firstAttribute="leading" secondItem="w2W-Sr-tak" secondAttribute="trailing" id="Qc8-CN-zRI"/>
+                            <constraint firstItem="OWg-JH-zfC" firstAttribute="leading" secondItem="w2W-Sr-tak" secondAttribute="trailing" constant="8" id="Qc8-CN-zRI"/>
                             <constraint firstItem="S5p-sX-wPS" firstAttribute="bottom" secondItem="wme-eo-wSe" secondAttribute="bottom" constant="14" id="ThR-oS-Eec"/>
                             <constraint firstItem="S5p-sX-wPS" firstAttribute="bottom" secondItem="w2W-Sr-tak" secondAttribute="bottom" constant="16" id="YWy-hQ-ZEL"/>
                             <constraint firstItem="w2W-Sr-tak" firstAttribute="top" secondItem="S5p-sX-wPS" secondAttribute="top" constant="16" id="dFH-bN-Tf6"/>
