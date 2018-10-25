@@ -61,10 +61,10 @@
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yry-e8-Psj" userLabel="PullDownView">
-                                <rect key="frame" x="8" y="59" width="359" height="100"/>
+                                <rect key="frame" x="8" y="108" width="359" height="47"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rVB-LF-LaO">
-                                        <rect key="frame" x="84" y="65" width="191.5" height="23"/>
+                                        <rect key="frame" x="84" y="12" width="191.5" height="23"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pullDownArrow" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XCG-QJ-7v0">
                                                 <rect key="frame" x="0.0" y="0.0" width="17" height="23"/>
@@ -83,11 +83,11 @@
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
                                 <constraints>
+                                    <constraint firstItem="rVB-LF-LaO" firstAttribute="top" secondItem="Yry-e8-Psj" secondAttribute="top" constant="12" id="6xv-bY-xWU"/>
                                     <constraint firstItem="rVB-LF-LaO" firstAttribute="centerX" secondItem="Yry-e8-Psj" secondAttribute="centerX" id="MGk-tL-zGe"/>
                                     <constraint firstItem="rVB-LF-LaO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Yry-e8-Psj" secondAttribute="leading" constant="8" id="Sbv-D7-GuI"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rVB-LF-LaO" secondAttribute="trailing" constant="8" id="Vgf-4Q-XFs"/>
                                     <constraint firstAttribute="bottom" secondItem="rVB-LF-LaO" secondAttribute="bottom" constant="12" id="gPF-wP-moi"/>
-                                    <constraint firstAttribute="height" constant="100" id="xfj-mj-WEQ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lah-lf-SBT" userLabel="whiteBackgroundView">
@@ -113,6 +113,7 @@
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vxw-1p-TGH" secondAttribute="bottom" constant="8" id="5xk-ep-37g"/>
                             <constraint firstItem="lah-lf-SBT" firstAttribute="top" secondItem="C6D-bh-Zj8" secondAttribute="top" id="7dv-UT-Mup"/>
                             <constraint firstItem="vxw-1p-TGH" firstAttribute="top" secondItem="Fea-br-2cN" secondAttribute="bottom" priority="250" constant="20" id="8xb-IZ-PNv"/>
+                            <constraint firstItem="Yry-e8-Psj" firstAttribute="top" secondItem="lah-lf-SBT" secondAttribute="bottom" id="BTb-Jr-etz"/>
                             <constraint firstItem="cie-Gz-Vzx" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" id="BXC-pC-xol"/>
                             <constraint firstItem="Fea-br-2cN" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="8" id="D66-7M-aEc"/>
                             <constraint firstItem="fUe-Ak-aYb" firstAttribute="top" secondItem="QKa-yH-x6F" secondAttribute="top" constant="8" id="GRb-98-EBA"/>
@@ -126,7 +127,6 @@
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="fUe-Ak-aYb" secondAttribute="trailing" id="l9d-qe-b2V"/>
                             <constraint firstItem="vxw-1p-TGH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QKa-yH-x6F" secondAttribute="leading" constant="8" id="mAO-h2-klz"/>
                             <constraint firstItem="lah-lf-SBT" firstAttribute="leading" secondItem="QKa-yH-x6F" secondAttribute="leading" id="p0e-jG-Wqj"/>
-                            <constraint firstItem="rVB-LF-LaO" firstAttribute="top" secondItem="lah-lf-SBT" secondAttribute="bottom" constant="16" id="pJI-g8-LLM"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="Fea-br-2cN" secondAttribute="trailing" constant="8" id="sWv-bs-slk"/>
                             <constraint firstItem="QKa-yH-x6F" firstAttribute="trailing" secondItem="cie-Gz-Vzx" secondAttribute="trailing" id="yev-Sb-Zry"/>
                         </constraints>
@@ -147,8 +147,7 @@
                         <outlet property="newTaskLabel" destination="fuF-D9-9c3" id="5KU-RM-8Yd"/>
                         <outlet property="pullDownStackView" destination="rVB-LF-LaO" id="396-ns-jAL"/>
                         <outlet property="pullDownView" destination="Yry-e8-Psj" id="PpT-Vl-IDf"/>
-                        <outlet property="pullDownViewHeight" destination="xfj-mj-WEQ" id="s9S-Y6-Bbe"/>
-                        <outlet property="pullDownViewTopConstraint" destination="pJI-g8-LLM" id="J1A-tA-TpL"/>
+                        <outlet property="pullDownViewTopConstraint" destination="BTb-Jr-etz" id="IeG-7s-TgW"/>
                         <outlet property="tagContainerView" destination="fUe-Ak-aYb" id="qwP-ET-avs"/>
                         <outlet property="taskListContainerTopConstraint" destination="YxH-D4-ma1" id="36X-G6-E1y"/>
                         <outlet property="taskListContainerView" destination="cie-Gz-Vzx" id="ktk-MH-6by"/>

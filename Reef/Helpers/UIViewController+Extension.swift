@@ -26,3 +26,9 @@ extension UIViewController {
         view.removeFromSuperview()
     }
 }
+
+extension UINavigationController {
+    @objc open override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIColor.statusBarStyle
+    }
+}

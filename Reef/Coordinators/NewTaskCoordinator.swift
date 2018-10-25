@@ -205,10 +205,10 @@ extension NewTaskCoordinator: UIViewControllerTransitioningDelegate {
         return animator.interactionInProgress ? animator : nil
     }
 
-    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        guard let animator = dismissTaskInteractiveAnimationController else { return nil }
-        return animator.interactionInProgress ? animator : nil
-    }
+//    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+//        guard let animator = dismissTaskInteractiveAnimationController else { return nil }
+//        return animator.interactionInProgress ? animator : nil
+//    }
 }
 
 extension NewTaskCoordinator: TagCollectionViewModelDelegate {

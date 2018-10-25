@@ -24,7 +24,7 @@ class DismissTaskAnimationController: NSObject, UIViewControllerAnimatedTransiti
         let duration = transitionDuration(using: transitionContext)
         
         let pullDownViewCollapsedConstraint: CGFloat =
-            8
+            0
         
         taskCreationFrameViewController.taskContainerViewTopConstraint.constant =
             -taskCreationFrameViewController.taskContainerViewHeight

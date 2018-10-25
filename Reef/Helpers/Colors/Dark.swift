@@ -9,10 +9,11 @@
 import UIKit
 
 class Dark: Theme {
-    static var keyboardAppearance: UIKeyboardAppearance = .dark
-    static var blurStyle: UIBlurEffect.Style = .dark
+    static let statusBarStyle: UIStatusBarStyle = .lightContent
+    static let keyboardAppearance: UIKeyboardAppearance = .dark
+    static let blurStyle: UIBlurEffect.Style = .dark
     
-    static var largeTitle: UIColor = .white
+    static let largeTitle: UIColor = .white
     
     static let tagsBackground: UIColor =
         UIColor(red: 50.0/255.0, green: 51.0/255.0, blue: 52.0/255.0, alpha: 1)

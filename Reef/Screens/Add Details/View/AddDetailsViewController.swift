@@ -18,9 +18,9 @@ class AddDetailsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var contentHeight: CGFloat! {
-        guard tableView.contentSize.height != 0 else {
-            return tableView.estimatedRowHeight * CGFloat(viewModel.numberOfRows)
-        }
+//        guard tableView.contentSize.height != 0 else {
+//            return tableView.estimatedRowHeight * CGFloat(viewModel.numberOfRows)
+//        }
         return tableView.contentSize.height
     }
     
