@@ -11,7 +11,7 @@ import UIKit
 
 class VerticallyCenteredTextView: UITextView {
     
-    var contentSizeDelegate: UITextViewContentSizeDelegate?
+    weak var contentSizeDelegate: UITextViewContentSizeDelegate?
     
     override var contentSize: CGSize {
         didSet {
@@ -24,7 +24,7 @@ class VerticallyCenteredTextView: UITextView {
     }
 }
 
-protocol UITextViewContentSizeDelegate {
+protocol UITextViewContentSizeDelegate: class {
     func textView(_ textView: UITextView, didChangeContentSize contentSize: CGSize)
 }
 
