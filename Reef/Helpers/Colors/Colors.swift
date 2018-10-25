@@ -52,7 +52,7 @@ extension Theme {
 
 extension UIColor: Theme {
     
-    static let theme: Theme.Type = Dark.self
+    static var theme: Theme.Type = Dark.self
 
     static let keyboardAppearance: UIKeyboardAppearance = theme.keyboardAppearance
     static let blurStyle: UIBlurEffect.Style = theme.blurStyle

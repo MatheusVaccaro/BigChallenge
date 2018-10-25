@@ -129,7 +129,7 @@ class NewTaskViewController: UIViewController {
         doneButton.layer.cornerRadius = 6.3
         
         taskDetailsButton.setImage(UIImage(named: "option")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        taskDetailsButton.tintColor = .placeholder
+        taskDetailsButton.tintColor = .doneButtonBackground
     }
     
     private func configureWithViewModel() {

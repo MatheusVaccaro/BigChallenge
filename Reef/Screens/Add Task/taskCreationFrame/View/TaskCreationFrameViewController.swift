@@ -188,7 +188,8 @@ extension TaskCreationFrameViewController: ContentSizeObservableTableViewDelegat
         let taskContainerExpectedSize = taskTitleAndDetailSeparatorHeight + taskTitleViewHeight + contentSize.height
         if taskContainerExpectedSize > interactableArea {
             tableView.isScrollEnabled = true
-            let maxTaskDetailsTableViewHeight = interactableArea - taskTitleAndDetailSeparatorHeight - taskTitleViewHeight
+            let maxTaskDetailsTableViewHeight =
+                interactableArea - taskTitleAndDetailSeparatorHeight - taskTitleViewHeight
             taskDetailsTableViewHeight.constant = maxTaskDetailsTableViewHeight
         } else {
             tableView.isScrollEnabled = false
