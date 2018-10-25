@@ -33,9 +33,9 @@ class NewTagCoordinator: NSObject, Coordinator {
     }
     
     func start() {
+        //View Controllers
         createTagFrameViewController = TagCreationFrameViewController.instantiate()
         
-        //View Comtrollers
         addTagTitleViewController = AddTagTitleViewController.instantiate()
         addTagColorsViewController = AddTagColorsViewController.instantiate()
         tagDetailsViewController = AddDetailsViewController.instantiate()
