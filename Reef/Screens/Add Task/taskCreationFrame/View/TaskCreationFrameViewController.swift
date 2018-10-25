@@ -95,6 +95,8 @@ class TaskCreationFrameViewController: UIViewController {
             newTaskViewController.view.bottomAnchor.constraint(equalTo: taskTitleView.bottomAnchor)
             ])
         newTaskViewController.didMove(toParent: self)
+        
+        taskTitleViewController.taskTitleTextView.contentSizeDelegate = self
     }
     
     func present(_ tagCollectionViewController: TagCollectionViewController) {
@@ -200,6 +202,22 @@ extension TaskCreationFrameViewController: ContentSizeObservableTableViewDelegat
         // This line is needed in case the user taps a tag when the container is collapsed
         if state == .collapsed {
             taskContainerViewTopConstraint.constant = -taskDetailViewHeight
+        }
+    }
+}
+
+extension TaskCreationFrameViewController: UITextViewContentSizeDelegate {
+    func textView(_ textView: UITextView, didChangeContentSize contentSize: CGSize) {
+        let maxTaskTitleHeight: CGFloat = 75
+        let taskTitleTopAndBottomConstraints: CGFloat = 16 + 16
+        let taskTitleExpectedHeight = contentSize.height + taskTitleTopAndBottomConstraints
+        
+        if taskTitleExpectedHeight > maxTaskTitleHeight {
+            textView.isScrollEnabled = true
+            taskTitleViewHeightConstraint.constant = maxTaskTitleHeight
+        } else {
+            textView.isScrollEnabled = false
+            taskTitleViewHeightConstraint.constant = taskTitleExpectedHeight
         }
     }
 }

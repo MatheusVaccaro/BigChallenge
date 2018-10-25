@@ -25,7 +25,6 @@
                                         <rect key="frame" x="0.0" y="277" width="359" height="73"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="120" id="Azh-lv-k0z"/>
                                             <constraint firstAttribute="height" priority="750" constant="73" id="Vpy-yl-EIx"/>
                                         </constraints>
                                     </view>

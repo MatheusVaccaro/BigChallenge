@@ -17,10 +17,10 @@ class ContentSizeObservableTableView: UITableView {
         }
     }
     
-    var contentSizeDelegate: ContentSizeObservableTableViewDelegate?
+    weak var contentSizeDelegate: ContentSizeObservableTableViewDelegate?
 }
 
-protocol ContentSizeObservableTableViewDelegate {
+protocol ContentSizeObservableTableViewDelegate: class {
     func tableView(_ tableView: ContentSizeObservableTableView, didUpdateContentSize contentSize: CGSize)
 }
 

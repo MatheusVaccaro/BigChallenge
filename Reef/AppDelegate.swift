@@ -68,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func loadTheme() {
-        let theme = UserDefaults.standard.value(forKey: "ThemeMultiValue") as! Int
+        let theme = UserDefaults.standard.value(forKey: "ThemeMultiValue") as? Int ?? 0
         
         switch theme {
         case 1:
