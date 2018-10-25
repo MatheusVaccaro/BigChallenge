@@ -10,6 +10,7 @@ import Foundation
 import CoreLocation
 import RxSwift
 import ReefKit
+import StoreKit
 
 protocol TaskModelDelegate: class {
     func taskModel(_ taskModel: TaskModel, didInsert tasks: [Task])
@@ -60,6 +61,23 @@ public class TaskModel {
     
     public func update(_ task: Task, with attributes: [TaskAttributes : Any]) {
         reefKit.update(task, with: attributes)
+        
+        if shouldPromptReview(attributes) {
+            promptUserReview()
+        }
+    }
+    
+    private func promptUserReview() {
+        SKStoreReviewController.requestReview()
+        UserDefaults.standard.setValue(true, forKey: "hasPrompedReview")
+    }
+    
+    private func shouldPromptReview(_ taskAttributes: [TaskAttributes : Any]) -> Bool {
+        let hasPrompedReview = UserDefaults.standard.value(forKey: "hasPrompedReview") as? Bool ?? false
+        let isTaskBeingCompleted = taskAttributes[.isCompleted] as? Bool ?? false
+        let hasSomeCompletedTasks = tasks.filter { $0.isCompleted }.count > 10
+        
+        return !hasPrompedReview && isTaskBeingCompleted && hasSomeCompletedTasks
     }
     
     func taskWith(id: UUID) -> Task? {
@@ -82,7 +100,7 @@ extension TaskModel: ReefTaskDelegate {
     public func reef(_ reefKit: ReefKit, didUpdateTasks tasks: [Task]) {
 //        for task in tasks {
 //            if let index = self.tasks.index(of: task) { self.tasks[index] = task }
-//        } TODO: review this 
+//        } TODO: review this
         recommender = Recommender(tasks: self.tasks)
         delegate?.taskModel(self, didUpdate: tasks)
     }
