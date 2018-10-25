@@ -43,7 +43,7 @@ class TaskCreationFrameViewController: UIViewController {
     var viewModel: TaskCreationViewModel!
     
     private(set) lazy var blurView: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: .regular)
+        let blurEffect = UIBlurEffect(style: UIColor.blurStyle)
         
         let blur = UIVisualEffectView(effect: blurEffect)
         blur.frame = view.bounds
@@ -114,7 +114,7 @@ class TaskCreationFrameViewController: UIViewController {
     private func applyBlur() {
         //only apply the blur if the user hasn't disabled transparency effects
         if UIAccessibility.isReduceTransparencyEnabled {
-            blurView.tintColor = .lightGray
+            blurView.tintColor = .cellIcons
         }
         
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -141,6 +141,8 @@ class TaskCreationFrameViewController: UIViewController {
         configureShadows(in: whiteBackgroundView)
         configureShadows(in: taskDetailView)
         configureShadows(in: taskTitleView)
+        
+        whiteBackgroundView.backgroundColor = .tagsBackground
         
         applyBlur()
         
@@ -169,7 +171,7 @@ class TaskCreationFrameViewController: UIViewController {
         view.layer.shadowRadius = 6.3
         view.layer.shadowOffset = CGSize(width: 0, height: 0)
         view.layer.masksToBounds = false
-        view.layer.shadowColor = CGColor.shadowColor
+        view.layer.shadowColor = UIColor.shadow
         view.layer.shadowOpacity = 1
         view.layer.shadowRadius = 10
     }
@@ -186,7 +188,8 @@ extension TaskCreationFrameViewController: ContentSizeObservableTableViewDelegat
         let taskContainerExpectedSize = taskTitleAndDetailSeparatorHeight + taskTitleViewHeight + contentSize.height
         if taskContainerExpectedSize > interactableArea {
             tableView.isScrollEnabled = true
-            let maxTaskDetailsTableViewHeight = interactableArea - taskTitleAndDetailSeparatorHeight - taskTitleViewHeight
+            let maxTaskDetailsTableViewHeight =
+                interactableArea - taskTitleAndDetailSeparatorHeight - taskTitleViewHeight
             taskDetailsTableViewHeight.constant = maxTaskDetailsTableViewHeight
         } else {
             tableView.isScrollEnabled = false

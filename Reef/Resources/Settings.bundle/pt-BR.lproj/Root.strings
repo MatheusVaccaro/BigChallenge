@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  BigChallenge
+
+  Created by Gabriel Paul on 16/08/18.
+  Copyright © 2018 Matheus Vaccaro. All rights reserved.
+*/
+
+"Classic" = "Clássico";
+"Dark" = "Escuro";
+"Theme" = "Tema";

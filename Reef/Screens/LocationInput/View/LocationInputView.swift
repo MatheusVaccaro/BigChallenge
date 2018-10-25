@@ -24,7 +24,7 @@ class LocationInputView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.backgroundColor
+        view.backgroundColor = .background
         
         configureNavigationBar()
         setupSegmentedControl()
@@ -53,7 +53,7 @@ class LocationInputView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor.backgroundColor
+        navigationController?.navigationBar.barTintColor = .background
     }
     
     @IBAction func segmentedControlSelected(_ sender: Any) {
@@ -63,14 +63,14 @@ class LocationInputView: UIViewController {
     
     private func configureNavigationBar() {
         title = viewModel.title
-        navigationController?.navigationBar.barTintColor = UIColor.backgroundColor
+        navigationController?.navigationBar.barTintColor = .background
     }
     
     fileprivate func setupSegmentedControl() {
         let arrivingString = viewModel.arrivingString
         let leavingString = viewModel.leavingString
         
-        segmentedControl.tintColor = UIColor.largeTitleColor
+        segmentedControl.tintColor = .largeTitle
         segmentedControl.setTitle(arrivingString, forSegmentAt: 0)
         segmentedControl.setTitle(leavingString, forSegmentAt: 1)
     }
@@ -86,8 +86,13 @@ class LocationInputView: UIViewController {
         searchBar.delegate = self
         searchBar.barStyle = .default
         searchBar.searchBarStyle = .minimal
+        
         searchBar.placeholder = viewModel.searchBarPlaceholder
         searchBar.accessibilityHint = viewModel.searchBarHint
+        
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = .taskTitleLabel
+        
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font =
             UIFont.font(sized: 17, weight: .regular, with: .body)
     }
@@ -116,6 +121,8 @@ class LocationInputView: UIViewController {
         searchResultsTableView.register(UINib(nibName: "IconCell",
                                               bundle: nil),
                                         forCellReuseIdentifier: IconTableViewCell.reuseIdentifier!)
+        
+        searchResultsTableView.backgroundColor = .clear
         
         searchResultsTableView.estimatedRowHeight = 50
         searchResultsTableView.rowHeight = UITableView.automaticDimension

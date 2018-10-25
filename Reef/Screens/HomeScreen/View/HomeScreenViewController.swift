@@ -43,7 +43,7 @@ class HomeScreenViewController: UIViewController {
         super.viewDidLoad()
         title = Strings.bigTitleText
         
-        view.backgroundColor = UIColor.backgroundColor
+        view.backgroundColor = .background
         
         configureWhiteBackgroundView()
         configureEmptyState()
@@ -128,12 +128,12 @@ class HomeScreenViewController: UIViewController {
     fileprivate func configureWhiteBackgroundView() {
         whiteBackgroundView.layer.cornerRadius = 6.3
         whiteBackgroundView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-        whiteBackgroundView.tintColor = UIColor.white
+        whiteBackgroundView.backgroundColor = .tagsBackground
         
         whiteBackgroundView.layer.shadowRadius = 6.3
         whiteBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 10)
         whiteBackgroundView.layer.masksToBounds = false
-        whiteBackgroundView.layer.shadowColor = CGColor.shadowColor
+        whiteBackgroundView.layer.shadowColor = UIColor.shadow
         whiteBackgroundView.layer.shadowOpacity = 1
         whiteBackgroundView.layer.shadowRadius = 10
     }
@@ -159,12 +159,13 @@ class HomeScreenViewController: UIViewController {
     private func configurePullDownView() {
         pullDownView.backgroundColor = .white
         pullDownView.layer.cornerRadius = 6.3
-        pullDownView.tintColor = .white
+        pullDownView.backgroundColor = .tagsBackground
+        //TODO: pullDown arrow color
         
         pullDownView.layer.shadowRadius = 6.3
         pullDownView.layer.shadowOffset = CGSize(width: 0, height: 0)
         pullDownView.layer.masksToBounds = false
-        pullDownView.layer.shadowColor = .shadowColor
+        pullDownView.layer.shadowColor = UIColor.shadow
         pullDownView.layer.shadowOpacity = 1
         pullDownView.layer.shadowRadius = 10
         

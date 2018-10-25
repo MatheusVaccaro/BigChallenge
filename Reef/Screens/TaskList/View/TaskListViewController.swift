@@ -94,6 +94,7 @@ extension TaskListViewController: UITableViewDelegate {
         
         let headerLabel = UILabel()
         headerLabel.text = viewModel.title(forHeaderInSection: section)
+        headerLabel.textColor = .taskTitleLabel
         headerLabel.sizeToFit()
         headerView.addSubview(headerLabel)
         
@@ -108,6 +109,7 @@ extension TaskListViewController: UITableViewDelegate {
             
             let headerLabel = UILabel()
             headerLabel.text = viewModel.showHideHeader
+            headerLabel.textColor = .taskTitleLabel //TODO: fix (this header has its own color)
             headerLabel.sizeToFit()
             headerView.addSubview(headerLabel)
             
@@ -164,8 +166,8 @@ extension TaskListViewController: UITableViewDelegate {
         let task = viewModel.task(for: indexPath)
         
         action.backgroundColor = task.isCompleted
-            ? UIColor.Cell.uncompleteYellow
-            : UIColor.Cell.completeGreen
+            ? .uncompleteYellow
+            : .completeGreen
         
         action.image = task.isCompleted
             ? UIImage(named: "uncomplete")
@@ -179,7 +181,7 @@ extension TaskListViewController: UITableViewDelegate {
                                         title: nil) { (action: UIContextualAction,
                                             view: UIView,
                                             completion: (Bool) -> Void) in
-                                            view.backgroundColor = UIColor.Cell.deleteRed
+                                            view.backgroundColor = .deleteRed
                                             
                                             self.viewModel.delete(taskAt: indexPath)
                                             

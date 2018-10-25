@@ -42,7 +42,7 @@ class DateInputViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         currentSelector = BehaviorSubject<DateSelector>(value: .date)
-        view.backgroundColor = UIColor.backgroundColor
+        view.backgroundColor = .background
         
         configureNavigationBar()
         configureCalendarDateLabels()
@@ -69,7 +69,7 @@ class DateInputViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor.backgroundColor
+        navigationController?.navigationBar.barTintColor = .background
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -80,7 +80,7 @@ class DateInputViewController: UIViewController {
     
     private func configureNavigationBar() {
         title = viewModel.title
-        navigationController?.navigationBar.barTintColor = UIColor.backgroundColor
+        navigationController?.navigationBar.barTintColor = .background
     }
     
     private func configureCalendarDateLabels() {
@@ -96,7 +96,7 @@ class DateInputViewController: UIViewController {
         	}
         
         // Day Label
-        selectedCalendarDateDayLabel.textColor = UIColor.DateInput.defaultColor
+        selectedCalendarDateDayLabel.textColor = .largeTitle
         selectedCalendarDateDayLabel.adjustsFontSizeToFitWidth = true
         let dayDateFormatter = DateFormatter()
         dayDateFormatter.locale = Locale.current
@@ -107,7 +107,7 @@ class DateInputViewController: UIViewController {
             .disposed(by: disposeBag)
         
         // Month Label
-        selectedCalendarDateMonthLabel.textColor = UIColor.DateInput.defaultColor
+        selectedCalendarDateMonthLabel.textColor = .largeTitle
         selectedCalendarDateMonthLabel.adjustsFontSizeToFitWidth = true
         let monthDateFormatter = DateFormatter()
         monthDateFormatter.locale = Locale.current
@@ -119,7 +119,7 @@ class DateInputViewController: UIViewController {
     }
     
     private func configurePrepositionLabel() {
-        prepositionLabel.textColor = UIColor.DateInput.defaultColor
+        prepositionLabel.textColor = .largeTitle
         prepositionLabel.text = Strings.DateInputView.preposition
     }
     
@@ -160,6 +160,10 @@ class DateInputViewController: UIViewController {
     
     private func loadTimeOfDaySelectorView() {
         timeOfDaySelector.addTarget(self, action: #selector(handleTimeOfDaySelectorChange(_:)), for: .valueChanged)
+        
+        timeOfDaySelector.setValuesForKeys([
+            "textColor" : UIColor.taskTitleLabel
+            ])
         
         viewModel?.timeOfDay.asObservable()
             .map { dateComponent in
@@ -219,7 +223,7 @@ class DateInputViewController: UIViewController {
     private func configure(_ shortcutButton: UIButton) {
         let shortcutButtonFont = UIFont.font(sized: 18, weight: .medium, with: .body)
         shortcutButton.titleLabel?.font = shortcutButtonFont
-        shortcutButton.tintColor = UIColor.DateInput.shortcutButtonsColor
+        shortcutButton.tintColor = .largeTitle
     }
     
     @IBAction func touchUpInsideTomorrowShortcutButton(_ sender: UIButton) {

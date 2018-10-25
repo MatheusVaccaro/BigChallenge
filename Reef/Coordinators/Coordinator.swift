@@ -25,7 +25,7 @@ extension Coordinator {
     var largeTitleAttributes: [NSAttributedString.Key : Any] {
         return [
             NSAttributedString.Key.font : UIFont.font(sized: 41, weight: .bold, with: .largeTitle, fontName: .barlow),
-            NSAttributedString.Key.foregroundColor : UIColor.largeTitleColor
+            NSAttributedString.Key.foregroundColor : UIColor.largeTitle
         ]
     }
     

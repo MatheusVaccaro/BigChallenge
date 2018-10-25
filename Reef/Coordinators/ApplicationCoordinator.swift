@@ -65,7 +65,6 @@ class ApplicationCoordinator: Coordinator {
         #if RELEASE
         startFabric()
         #endif
-        UITextField.appearance().keyboardAppearance = .light
     }
     
     private func startFabric() {

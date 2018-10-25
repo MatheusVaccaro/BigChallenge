@@ -61,7 +61,7 @@ class TagCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         tagUILabel.font = UIFont.font(sized: 19, weight: .medium, with: .title3)
         
-        layer.backgroundColor = UIColor.white.cgColor
+        layer.backgroundColor = UIColor.tagsBackground.cgColor
         layer.borderColor = UIColor.clear.cgColor
         
         layer.cornerRadius = 6.3
@@ -71,7 +71,7 @@ class TagCollectionViewCell: UICollectionViewCell {
         layer.shadowRadius = 6.3
         layer.shadowOffset = CGSize(width: 0, height: 5)
         layer.masksToBounds = false
-        layer.shadowColor = CGColor.shadowColor
+        layer.shadowColor = UIColor.shadow
         layer.shadowOpacity = 1
         layer.shadowRadius = 5
         
@@ -116,7 +116,7 @@ class TagCollectionViewCell: UICollectionViewCell {
         tagUILabel.text = "+"
         maskLabel.text = "+"
         
-        gradientLayer.colors = [UIColor.largeTitleColor.cgColor, UIColor.largeTitleColor.cgColor]
+        gradientLayer.colors = [UIColor.largeTitle.cgColor, UIColor.largeTitle.cgColor]
         contentView.mask = maskLabel
         tagUILabel.isHidden = true
         kind = .add

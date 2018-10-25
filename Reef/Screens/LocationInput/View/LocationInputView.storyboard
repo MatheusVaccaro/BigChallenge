@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhI-q9-g2L" customClass="RadiusMapView" customModule="Reef" customModuleProvider="target">
-                                <rect key="frame" x="8" y="148" width="359" height="519"/>
+                                <rect key="frame" x="0.0" y="148" width="375" height="519"/>
                             </mapView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="csW-O8-Nof">
                                 <rect key="frame" x="8" y="28" width="359" height="29"/>
@@ -36,7 +36,7 @@
                                 </connections>
                             </segmentedControl>
                             <searchBar clipsSubviews="YES" contentMode="redraw" searchBarStyle="minimal" text="" translatesAutoresizingMaskIntoConstraints="NO" id="zBP-90-CYB">
-                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <rect key="frame" x="0.0" y="74" width="375" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="WfN-2U-2mu"/>
                                 </constraints>
@@ -46,14 +46,15 @@
                                 </connections>
                             </searchBar>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RVD-cG-cTQ">
-                                <rect key="frame" x="24" y="128" width="327" height="489"/>
+                                <rect key="frame" x="16" y="128" width="343" height="489"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="searchResultCell" id="YNV-tf-UP3" customClass="LocationTableViewCell" customModule="Reef" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="327" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YNV-tf-UP3" id="GqI-UG-RP0">
-                                            <rect key="frame" x="0.0" y="0.0" width="327" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="09Z-L6-AXr">
@@ -93,17 +94,17 @@
                         <constraints>
                             <constraint firstItem="csW-O8-Nof" firstAttribute="leading" secondItem="3HN-rQ-WpB" secondAttribute="leading" constant="8" id="4xZ-9U-ZUU"/>
                             <constraint firstItem="3HN-rQ-WpB" firstAttribute="trailing" secondItem="csW-O8-Nof" secondAttribute="trailing" constant="8" id="8m0-hZ-xV7"/>
-                            <constraint firstItem="nhI-q9-g2L" firstAttribute="top" secondItem="zBP-90-CYB" secondAttribute="bottom" constant="28" id="GMu-tF-4Ll"/>
+                            <constraint firstItem="nhI-q9-g2L" firstAttribute="top" secondItem="zBP-90-CYB" secondAttribute="bottom" constant="18" id="GMu-tF-4Ll"/>
                             <constraint firstItem="RVD-cG-cTQ" firstAttribute="trailing" secondItem="nhI-q9-g2L" secondAttribute="trailing" constant="-16" id="HBa-eR-maK"/>
                             <constraint firstItem="zBP-90-CYB" firstAttribute="leading" secondItem="3HN-rQ-WpB" secondAttribute="leading" id="Imx-Xq-xNJ"/>
-                            <constraint firstItem="3HN-rQ-WpB" firstAttribute="trailing" secondItem="nhI-q9-g2L" secondAttribute="trailing" constant="8" id="MwN-ZR-TUX"/>
-                            <constraint firstItem="nhI-q9-g2L" firstAttribute="leading" secondItem="3HN-rQ-WpB" secondAttribute="leading" constant="8" id="Wch-pW-5qT"/>
-                            <constraint firstItem="zBP-90-CYB" firstAttribute="top" secondItem="csW-O8-Nof" secondAttribute="bottom" constant="8" id="fFV-Rl-fHc"/>
+                            <constraint firstItem="3HN-rQ-WpB" firstAttribute="trailing" secondItem="nhI-q9-g2L" secondAttribute="trailing" id="MwN-ZR-TUX"/>
+                            <constraint firstItem="nhI-q9-g2L" firstAttribute="leading" secondItem="3HN-rQ-WpB" secondAttribute="leading" id="Wch-pW-5qT"/>
+                            <constraint firstItem="zBP-90-CYB" firstAttribute="top" secondItem="csW-O8-Nof" secondAttribute="bottom" constant="18" id="fFV-Rl-fHc"/>
                             <constraint firstItem="RVD-cG-cTQ" firstAttribute="leading" secondItem="nhI-q9-g2L" secondAttribute="leading" constant="16" id="ilC-wh-QzY"/>
                             <constraint firstItem="RVD-cG-cTQ" firstAttribute="bottom" secondItem="nhI-q9-g2L" secondAttribute="bottom" constant="-50" id="pUo-md-9ON"/>
                             <constraint firstItem="RVD-cG-cTQ" firstAttribute="top" secondItem="nhI-q9-g2L" secondAttribute="top" constant="-20" id="rPk-Uw-Skb"/>
                             <constraint firstItem="csW-O8-Nof" firstAttribute="top" secondItem="3HN-rQ-WpB" secondAttribute="top" constant="8" id="sPd-Hb-aLN"/>
-                            <constraint firstItem="3HN-rQ-WpB" firstAttribute="bottom" secondItem="nhI-q9-g2L" secondAttribute="bottom" id="wyr-Ir-PwT"/>
+                            <constraint firstAttribute="bottom" secondItem="nhI-q9-g2L" secondAttribute="bottom" id="wyr-Ir-PwT"/>
                             <constraint firstItem="zBP-90-CYB" firstAttribute="trailing" secondItem="3HN-rQ-WpB" secondAttribute="trailing" id="x81-id-ihR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3HN-rQ-WpB"/>

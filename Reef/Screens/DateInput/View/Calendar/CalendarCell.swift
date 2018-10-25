@@ -29,7 +29,7 @@ class CalendarCell: JTAppleCell {
         backgroundCircleLayer = CAShapeLayer()
         contentView.layer.addSublayer(backgroundCircleLayer)
         
-        backgroundCircleLayer.fillColor = UIColor.DateInput.Calendar.deselectedDateBackground.cgColor
+        backgroundCircleLayer.fillColor = UIColor.deselectedDateBackground.cgColor
     }
     
     func setupBackgroundCircleLayer() {
@@ -58,7 +58,7 @@ class CalendarCell: JTAppleCell {
                                                                cell: self, cellState: cellState) ?? true
         guard isSelectable else {
             deselect(basedOn: cellState, animated: false)
-            dayLabel.textColor = UIColor.DateInput.Calendar.unselectableDate
+            dayLabel.textColor = .unselectableDate
             dayLabel.font = CalendarCell.defaultFont
             return
         }
@@ -80,7 +80,8 @@ class CalendarCell: JTAppleCell {
     
     func select(basedOn cellState: CellState? = nil, animated: Bool = true) {
         // Change background visuals
-        let selectedBackgroundColor = UIColor.DateInput.Calendar.selectedDateBackground
+        let selectedBackgroundColor = UIColor.selectedDateBackground
+        
         if animated {
             setBackgroundColor(to: selectedBackgroundColor)
         } else {
@@ -88,12 +89,12 @@ class CalendarCell: JTAppleCell {
         }
         
         // Change label visuals
-        dayLabel.textColor = UIColor.DateInput.Calendar.selectedDate
+        dayLabel.textColor = .selectedDate
     }
     
     func deselect(basedOn cellState: CellState? = nil, animated: Bool = true) {
         // Change background visuals
-        let deselectedBackgroundColor = UIColor.DateInput.Calendar.deselectedDateBackground
+        let deselectedBackgroundColor = UIColor.deselectedDateBackground
         if animated {
             setBackgroundColor(to: deselectedBackgroundColor)
         } else {
@@ -102,9 +103,9 @@ class CalendarCell: JTAppleCell {
         
         // Change label visuals
         if let cellState = cellState, cellState.dateBelongsTo != .thisMonth {
-            dayLabel.textColor = UIColor.DateInput.Calendar.dateOffCurrentMonth
+            dayLabel.textColor = .dateOffCurrentMonth
         } else {
-            dayLabel.textColor = UIColor.DateInput.Calendar.deselectedDate
+            dayLabel.textColor = .largeTitle
         }
     }
     

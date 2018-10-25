@@ -26,7 +26,7 @@ class ToggleableLabel: UILabel {
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 4.3
         self.font = ToggleableLabel.toggledOffFont
-        self.textColor = UIColor.DateInput.defaultColor // TODO Figure out how to remove this dependency
+        self.textColor = .largeTitle
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,15 +35,15 @@ class ToggleableLabel: UILabel {
 
     private func toggleBackground(on bool: Bool) {
         if bool {
-            colorLayer?.fillColor = UIColor.DateInput.defaultColor.cgColor
-            backgroundColor = UIColor.DateInput.defaultColor
+            colorLayer?.fillColor = UIColor.largeTitle.cgColor
+            backgroundColor = .largeTitle
             textColor = .white
             font = ToggleableLabel.toggledOnFont
             
         } else {
             colorLayer?.fillColor = UIColor.clear.cgColor
             backgroundColor = .clear
-            textColor = UIColor.DateInput.defaultColor
+            textColor = .largeTitle
             font = ToggleableLabel.toggledOffFont
         }
     }
@@ -52,7 +52,7 @@ class ToggleableLabel: UILabel {
     private func configureColor() {
         let newColorLayer = CAShapeLayer()
         newColorLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: 4.3).cgPath
-        newColorLayer.fillColor = isHighlighted ? UIColor.DateInput.defaultColor.cgColor : UIColor.clear.cgColor
+        newColorLayer.fillColor = isHighlighted ? UIColor.largeTitle.cgColor : UIColor.clear.cgColor
         
         if let colorLayer = colorLayer {
             layer.replaceSublayer(colorLayer, with: newColorLayer)
@@ -67,7 +67,7 @@ class ToggleableLabel: UILabel {
         newShadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: 4.3).cgPath
         newShadowLayer.fillColor = UIColor.white.cgColor
         
-        newShadowLayer.shadowColor = UIColor.darkGray.cgColor
+        newShadowLayer.shadowColor = UIColor.cellTagLabel.cgColor
         newShadowLayer.shadowPath = newShadowLayer.path
         newShadowLayer.shadowOffset = CGSize(width: 2.0, height: 2.0)
         newShadowLayer.shadowOpacity = 0.8

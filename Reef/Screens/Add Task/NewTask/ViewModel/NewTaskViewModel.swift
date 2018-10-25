@@ -37,7 +37,7 @@ class NewTaskViewModel {
         }
     }
     
-    var taskColors: [CGColor] = [UIColor.black.cgColor, UIColor.black.cgColor]
+    var taskColors: [CGColor] = UIColor.defaultGradient
     
     func edit(_ task: Task?) {
         taskTitleText = task?.title
@@ -45,12 +45,12 @@ class NewTaskViewModel {
         if let colors = task?.allTags.first?.colors {
             taskColors = colors
         } else {
-            taskColors = [UIColor.largeTitleColor.cgColor, UIColor.largeTitleColor.cgColor]
+            taskColors = UIColor.defaultGradient
         }
     }
     
     func set(_ tags: [Tag]) {
-        taskColors = tags.first?.colors ?? [UIColor.black.cgColor, UIColor.black.cgColor]
+        taskColors = tags.first?.colors ?? UIColor.defaultGradient
         uiDelegate?.didUpdateColors()
     }
     

@@ -229,6 +229,8 @@ struct Strings {
         static let completeActionTitle = NSLocalizedString("complete action title", comment: "marks task as completed")
         static let notCompletedActionTitle = NSLocalizedString("not completed action title", comment: "marks task as not completed")
         
+        static let done = NSLocalizedString("done", comment: "meaning to complete an action (done creating task)")
+        
         static let on = NSLocalizedString("on", comment: "meaning some switch is turned on")
         static let off = NSLocalizedString("off", comment: "meaning some switch is turned off")
         

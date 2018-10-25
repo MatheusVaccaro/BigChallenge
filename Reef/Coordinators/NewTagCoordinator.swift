@@ -74,6 +74,7 @@ class NewTagCoordinator: NSObject, Coordinator {
         modalPresenter.navigationBar.prefersLargeTitles = true
         modalPresenter.navigationBar.isTranslucent = true
         modalPresenter.view.backgroundColor = .clear
+        modalPresenter.navigationBar.largeTitleTextAttributes = largeTitleAttributes
         
         modalPresenter.modalPresentationStyle = .overCurrentContext
         modalPresenter.modalTransitionStyle = .crossDissolve

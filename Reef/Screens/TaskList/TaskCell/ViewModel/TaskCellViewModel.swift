@@ -67,8 +67,7 @@ public class TaskCellViewModel {
     }
     
     var checkButtonGradient: [CGColor] {
-        return task.allTags.first?.colors
-            ?? [UIColor.black.cgColor, UIColor.black.cgColor]
+        return task.allTags.first?.colors ?? UIColor.defaultGradient
     }
     
     func edit() {

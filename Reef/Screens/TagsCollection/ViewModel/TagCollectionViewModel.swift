@@ -35,7 +35,9 @@ class TagCollectionViewModel {
     
     var filtering: Bool {
         didSet {
-            filterTags(with: [])
+            if filteredTags.count < model.tags.count {
+                filterTags(with: [])
+            }
         }
     }
     
