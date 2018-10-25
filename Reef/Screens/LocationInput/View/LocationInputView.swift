@@ -122,7 +122,7 @@ class LocationInputView: UIViewController {
                                               bundle: nil),
                                         forCellReuseIdentifier: IconTableViewCell.reuseIdentifier!)
         
-        searchResultsTableView.backgroundColor = .clear
+        searchResultsTableView.backgroundColor = .tagsBackground
         
         searchResultsTableView.estimatedRowHeight = 50
         searchResultsTableView.rowHeight = UITableView.automaticDimension
@@ -179,6 +179,7 @@ extension LocationInputView: UITableViewDataSource {
         cell.subtitleFontSize = 12
         cell.rightButton.isHidden = true
         cell.viewModel = tableViewData[indexPath.row]
+        cell.icon.image = UIImage(named: "mapPinRound")
         
         return cell
     }
