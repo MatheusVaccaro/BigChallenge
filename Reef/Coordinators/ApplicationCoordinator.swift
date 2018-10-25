@@ -30,8 +30,6 @@ class ApplicationCoordinator: Coordinator {
         self.taskModel = TaskModel(reefKit: reefKit)
         self.selectedTags = []
         
-        UITextField.appearance().keyboardAppearance = UIColor.theme.keyboardAppearance
-        
         configureNavigationController()
     }
     

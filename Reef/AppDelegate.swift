@@ -25,8 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // MARK: Application Coordinator
+        loadTheme()
         startApplicationCoordinator(with: window, selectedTagIDs: [])
-        
         setNotificationCategories()
         
         return true
@@ -65,6 +65,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func requestAuthorizationForNotifications() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in })
+    }
+    
+    private func loadTheme() {
+        let theme = UserDefaults.standard.value(forKey: "ThemeMultiValue") as! Int
+        
+        switch theme {
+        case 1:
+            UIColor.theme = Dark.self
+        default:
+            UIColor.theme = Classic.self
+        }
+        
+        UITextField.appearance().keyboardAppearance = UIColor.theme.keyboardAppearance
     }
     
     private func setNotificationCategories() {
