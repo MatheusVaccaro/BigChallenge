@@ -61,6 +61,11 @@ class TaskCreationFrameViewController: UIViewController {
     private var state: State = .collapsed {
         didSet {
             print("Current State: \(state)")
+            if state == .expanded {
+                newTaskViewController.prepareViewToShowDetails(true)
+            } else {
+                newTaskViewController.prepareViewToShowDetails(false)
+            }
         }
     }
     
@@ -249,10 +254,10 @@ extension TaskCreationFrameViewController {
                                                                       action: #selector(handlePanGesture(_:))))
     }
     
-    @objc private func handleTapGesture(_ recognizer: UITapGestureRecognizer) {
-        newTaskViewController.taskTitleTextView.resignFirstResponder()
-        animateOrReverseRunningTransition(state: !state, duration: duration)
-    }
+//    @objc private func handleTapGesture(_ recognizer: UITapGestureRecognizer) {
+//        newTaskViewController.taskTitleTextView.resignFirstResponder()
+//        animateOrReverseRunningTransition(state: !state, duration: duration)
+//    }
     
     @objc private func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
         newTaskViewController.taskTitleTextView.resignFirstResponder()
