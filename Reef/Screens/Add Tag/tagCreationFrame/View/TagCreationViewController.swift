@@ -33,7 +33,9 @@ class TagCreationFrameViewController: UIViewController {
         addTagDetailsViewController.tableView.layer.cornerRadius = 6.3
         detailsTableHeightConstraint.constant =
             addTagDetailsViewController.contentHeight
-        print(detailsTableHeightConstraint.constant)
+        
+        addTagColorsViewController.delegate = self
+//        addTagDetailsViewController.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -119,6 +121,12 @@ class TagCreationFrameViewController: UIViewController {
         blurView.removeFromSuperview()
     }
 
+}
+
+extension TagCreationFrameViewController: AddTagColorsDelegate {
+    func addTagColorsDidSelectColor() {
+        addTagTitleViewController.tagTitleTextField.resignFirstResponder()
+    }
 }
 
 extension TagCreationFrameViewController: StoryboardInstantiable {

@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol AddTagColorsDelegate: class {
+    func addTagColorsDidSelectColor()
+}
+
 class AddTagColorsViewController: UIViewController {
 
     @IBOutlet weak var tagColorsCollectionView: UICollectionView!
     // MARK: - Properties
     var viewModel: AddTagColorsViewModel!
+    
+    weak var delegate: AddTagColorsDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +37,7 @@ extension AddTagColorsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let row = indexPath.row
         viewModel?.colorIndex = Int64(row)
+        delegate?.addTagColorsDidSelectColor()
     }
 }
 
