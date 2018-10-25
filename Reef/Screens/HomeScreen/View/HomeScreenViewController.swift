@@ -32,6 +32,7 @@ class HomeScreenViewController: UIViewController {
     @IBOutlet weak var tagContainerView: UIView!
     @IBOutlet weak var taskListContainerTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var pullDownStackView: UIStackView!
+    @IBOutlet weak var pullDownArrowImage: UIImageView!
     
     // MARK: - Animation IBOutlets
     @IBOutlet weak var pullDownView: UIView!
@@ -55,8 +56,10 @@ class HomeScreenViewController: UIViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         newTaskLabel.font = UIFont.font(sized: 13, weight: .medium, with: .body)
-        
-        configureEmptyState()
+        emptyStateTitleLabel.font = UIFont.font(sized: 18, weight: .bold, with: .title2)
+        emptyStateSubtitleLabel.font = UIFont.font(sized: 14, weight: .light, with: .title3)
+        emptyStateOrLabel.font = UIFont.font(sized: 14, weight: .light, with: .caption2)
+        importFromRemindersButton.titleLabel?.font = UIFont.font(sized: 14, weight: .light, with: .caption2)
         
         taskListContainerTopConstraint.constant = pullDownStackView.frame.height + 12 + 16
     }
@@ -138,10 +141,6 @@ class HomeScreenViewController: UIViewController {
     }
     
     fileprivate func configureEmptyState() {
-        emptyStateTitleLabel.font = UIFont.font(sized: 18, weight: .bold, with: .title2)
-        emptyStateSubtitleLabel.font = UIFont.font(sized: 14, weight: .light, with: .title3)
-        emptyStateOrLabel.font = UIFont.font(sized: 14, weight: .light, with: .caption2)
-        importFromRemindersButton.titleLabel?.font = UIFont.font(sized: 14, weight: .light, with: .caption2)
         importFromRemindersButton.titleLabel?.numberOfLines = 1
         
         emptyStateTitleLabel.text = viewModel.emptyStateTitleText
@@ -149,6 +148,12 @@ class HomeScreenViewController: UIViewController {
         emptyStateOrLabel.text = viewModel.emptyStateOrText
         importFromRemindersButton.setTitle(viewModel.importFromRemindersText,
                                            for: .normal)
+        
+        emptyStateImage.image = UIImage(named: "emptyState")?.withRenderingMode(.alwaysTemplate)
+        
+        emptyStateImage.tintColor = .largeTitle
+        emptyStateTitleLabel.textColor = .largeTitle
+        emptyStateSubtitleLabel.textColor = .largeTitle
     }
     
     override func updateUserActivityState(_ activity: NSUserActivity) {
@@ -160,7 +165,9 @@ class HomeScreenViewController: UIViewController {
         pullDownView.layer.cornerRadius = 6.3
         pullDownView.layer.maskedCorners = [ .layerMaxXMaxYCorner, .layerMinXMaxYCorner ]
         pullDownView.backgroundColor = .tagsBackground
-        //TODO: pullDown arrow color
+        pullDownArrowImage.tintColor = .placeholder
+        newTaskLabel.textColor = .placeholder
+        pullDownArrowImage.image = UIImage(named: "pullDownArrow")?.withRenderingMode(.alwaysTemplate)
         
         pullDownView.layer.shadowRadius = 6.3
         pullDownView.layer.shadowOffset = CGSize(width: 0, height: 0)

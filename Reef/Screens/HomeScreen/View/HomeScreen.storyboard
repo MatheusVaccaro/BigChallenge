@@ -145,6 +145,7 @@
                         <outlet property="emptyStateTitleLabel" destination="qLG-Z8-bgi" id="jzK-Sb-ooc"/>
                         <outlet property="importFromRemindersButton" destination="vxw-1p-TGH" id="0fE-Yn-UcO"/>
                         <outlet property="newTaskLabel" destination="fuF-D9-9c3" id="5KU-RM-8Yd"/>
+                        <outlet property="pullDownArrowImage" destination="XCG-QJ-7v0" id="PCW-92-KP2"/>
                         <outlet property="pullDownStackView" destination="rVB-LF-LaO" id="396-ns-jAL"/>
                         <outlet property="pullDownView" destination="Yry-e8-Psj" id="PpT-Vl-IDf"/>
                         <outlet property="pullDownViewTopConstraint" destination="BTb-Jr-etz" id="IeG-7s-TgW"/>
