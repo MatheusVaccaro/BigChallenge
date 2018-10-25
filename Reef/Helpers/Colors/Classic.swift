@@ -9,10 +9,12 @@
 import UIKit
 
 class Classic: Theme {
-    static var keyboardAppearance: UIKeyboardAppearance = .light
-    static var blurStyle: UIBlurEffect.Style = .light
     
-    static var largeTitle: UIColor =
+    static let statusBarStyle: UIStatusBarStyle = .default
+    static let keyboardAppearance: UIKeyboardAppearance = .light
+    static let blurStyle: UIBlurEffect.Style = .light
+    
+    static let largeTitle: UIColor =
         UIColor(red: 63/255.0, green: 69/255.0, blue: 79/255.0, alpha: 1)
     
     static let tagsBackground: UIColor = .white

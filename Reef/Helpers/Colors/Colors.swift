@@ -9,6 +9,7 @@
 import UIKit
 
 protocol Theme {
+    static var statusBarStyle: UIStatusBarStyle { get }
     static var keyboardAppearance: UIKeyboardAppearance { get }
     static var blurStyle: UIBlurEffect.Style { get }
     
@@ -54,6 +55,7 @@ extension UIColor: Theme {
     
     static var theme: Theme.Type = Dark.self
 
+    static let statusBarStyle: UIStatusBarStyle = theme.statusBarStyle
     static let keyboardAppearance: UIKeyboardAppearance = theme.keyboardAppearance
     static let blurStyle: UIBlurEffect.Style = theme.blurStyle
     

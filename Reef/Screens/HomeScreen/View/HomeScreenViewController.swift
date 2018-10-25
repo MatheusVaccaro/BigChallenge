@@ -36,7 +36,6 @@ class HomeScreenViewController: UIViewController {
     // MARK: - Animation IBOutlets
     @IBOutlet weak var pullDownView: UIView!
     @IBOutlet weak var pullDownViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var pullDownViewHeight: NSLayoutConstraint!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -159,6 +158,7 @@ class HomeScreenViewController: UIViewController {
     private func configurePullDownView() {
         pullDownView.backgroundColor = .white
         pullDownView.layer.cornerRadius = 6.3
+        pullDownView.layer.maskedCorners = [ .layerMaxXMaxYCorner, .layerMinXMaxYCorner ]
         pullDownView.backgroundColor = .tagsBackground
         //TODO: pullDown arrow color
         

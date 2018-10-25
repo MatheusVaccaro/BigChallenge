@@ -25,46 +25,45 @@ class PresentTaskAnimationController: NSObject, UIViewControllerAnimatedTransiti
         let containerView = transitionContext.containerView
         let duration = transitionDuration(using: transitionContext)
         
-        let pullDownViewCollapsedConstraint: CGFloat =
-            8
+        let pullDownViewCollapsedConstraint: CGFloat = 0
         
         let pullDownViewExpandedConstraint: CGFloat =
             taskCreationFrameViewController.taskTitleViewHeight + pullDownViewCollapsedConstraint
         
         containerView.addSubview(toViewController.view)
+        toViewController.view.layoutIfNeeded()
         
-        toViewController.view.alpha = 0
+        toViewController.view.alpha = 1
         taskCreationFrameViewController.taskTitleView.layer.shadowOpacity = 0
         taskCreationFrameViewController.blurView.alpha = 0
-        
         taskCreationFrameViewController.taskContainerViewTopConstraint.constant =
             -taskCreationFrameViewController.taskContainerViewHeight
-        taskCreationFrameViewController.view.layoutIfNeeded()
         
-        let options: UIView.KeyframeAnimationOptions = [ .allowUserInteraction,
-                                                         .calculationModeCubic ]
+        taskCreationFrameViewController.newTaskViewController.view.layer.maskedCorners = [ .layerMaxXMinYCorner, .layerMinXMinYCorner ]
+        taskCreationFrameViewController.view.layoutIfNeeded()
+
+        print(taskCreationFrameViewController.taskContainerViewHeight)
+        
+        let options: UIView.KeyframeAnimationOptions = [ .allowUserInteraction, .calculationModeLinear ]
         
         UIView.animateKeyframes(withDuration: duration,
                                 delay: 0,
                                 options: options,
                                 animations: {
-                                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1) {
+                                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1.0) {
                                         homeScreenViewController.pullDownViewTopConstraint.constant =
                                             pullDownViewExpandedConstraint
                                         homeScreenViewController.view.layoutIfNeeded()
                                         
-                                        taskCreationFrameViewController.taskContainerViewTopConstraint.constant =
-                                            -taskCreationFrameViewController.taskDetailViewHeight
-                                        taskCreationFrameViewController.view.layoutIfNeeded()
+                                        taskCreationFrameViewController.taskContainerView.frame.origin.y +=
+                                            taskCreationFrameViewController.taskTitleViewHeight + taskCreationFrameViewController.taskTitleAndDetailSeparatorHeight
                                     }
-                                    
-                                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5) {
-                                        toViewController.view.alpha = 1
-                                    }
-                                    
         }, completion: { _ in
             let transitionCanceled = transitionContext.transitionWasCancelled
             transitionContext.completeTransition(!transitionCanceled)
+            
+            taskCreationFrameViewController.taskContainerViewTopConstraint.constant =
+                -taskCreationFrameViewController.taskDetailViewHeight
             
             if transitionCanceled {
                 homeScreenViewController.pullDownViewTopConstraint.constant =
@@ -78,7 +77,6 @@ class PresentTaskAnimationController: NSObject, UIViewControllerAnimatedTransiti
                                         animations: {
                                             
                                             UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.0) {
-                                                homeScreenViewController.pullDownViewHeight.constant = 0
                                                 homeScreenViewController.pullDownStackView.alpha = 0
                                                 
                                                 homeScreenViewController.view.layoutIfNeeded()
@@ -96,14 +94,15 @@ class PresentTaskAnimationController: NSObject, UIViewControllerAnimatedTransiti
                                             }
                                             
                                             UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1) {
-                                                homeScreenViewController.pullDownViewTopConstraint.constant = -50
-                                                
-                                                homeScreenViewController.view.layoutIfNeeded()
+                                                taskCreationFrameViewController.newTaskViewController.view.layer
+                                                    .maskedCorners = [ .layerMaxXMinYCorner, .layerMinXMaxYCorner,
+                                                                       .layerMaxXMaxYCorner, .layerMinXMinYCorner ]
+                                                homeScreenViewController.pullDownViewTopConstraint.constant = 0
                                                 taskCreationFrameViewController.blurView.alpha = 1
+                                                homeScreenViewController.view.layoutIfNeeded()
                                             }
                                             
                 }, completion: { completed in
-                    homeScreenViewController.pullDownViewHeight.constant = 100
                     homeScreenViewController.view.layoutIfNeeded()
                     homeScreenViewController.pullDownStackView.alpha = 1
                     taskCreationFrameViewController.newTaskViewController.start()
