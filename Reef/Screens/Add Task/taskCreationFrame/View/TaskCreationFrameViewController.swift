@@ -213,16 +213,16 @@ extension TaskCreationFrameViewController: ContentSizeObservableTableViewDelegat
 
 extension TaskCreationFrameViewController: UITextViewContentSizeDelegate {
     func textView(_ textView: UITextView, didChangeContentSize contentSize: CGSize) {
-        let maxTaskTitleHeight: CGFloat = 75
+        let maxTaskTitleHeight: CGFloat = 100
         let taskTitleTopAndBottomConstraints: CGFloat = 16 + 16
         let taskTitleExpectedHeight = contentSize.height + taskTitleTopAndBottomConstraints
         
         if taskTitleExpectedHeight > maxTaskTitleHeight {
-            textView.isScrollEnabled = true
             taskTitleViewHeightConstraint.constant = maxTaskTitleHeight
+            taskTitleView.layoutIfNeeded()
         } else {
-            textView.isScrollEnabled = false
             taskTitleViewHeightConstraint.constant = taskTitleExpectedHeight
+            taskTitleView.layoutIfNeeded()
         }
     }
 }
