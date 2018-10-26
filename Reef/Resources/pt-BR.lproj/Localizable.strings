@@ -78,7 +78,7 @@
 "newTaskTitle" = "Nova tarefa";
 
 /* subtitle of empty state on taskList */
-"emptyStateSubtitle" = "Comece adicionando novas tarefas";
+"emptyStateSubtitle" = "Arraste para baixo para adicionar uma nova tarefa";
 
 /* title of empty state on taskList */
 "emptyStateTitle" = "Parece vazio por aqui!";

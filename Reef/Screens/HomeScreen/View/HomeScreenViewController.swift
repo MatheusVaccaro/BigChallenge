@@ -46,7 +46,7 @@ class HomeScreenViewController: UIViewController {
         view.backgroundColor = ReefColors.background
         
         configureWhiteBackgroundView()
-        configureEmptyState()
+        configureEmptyState(streak: viewModel.emptyStateStreak)
         newTaskLabel.text = Strings.Task.CreationScreen.taskTitlePlaceholder
         userActivity = viewModel.userActivity
         
@@ -122,6 +122,30 @@ class HomeScreenViewController: UIViewController {
         }
     }
     
+    fileprivate func configureEmptyState(streak: Int) {
+        
+        let on = streak > 2
+        
+        emptyStateImage.tintColor = ReefColors.largeTitle
+        emptyStateTitleLabel.textColor = ReefColors.largeTitle
+        emptyStateSubtitleLabel.textColor = ReefColors.largeTitle
+        
+        [emptyStateTitleLabel,
+         emptyStateSubtitleLabel,
+         emptyStateOrLabel].forEach {
+            $0?.adjustsFontSizeToFitWidth = true
+        }
+        
+        emptyStateOrLabel.text = viewModel.emptyStateOrText
+        importFromRemindersButton.titleLabel?.numberOfLines = 1
+        importFromRemindersButton.setTitle(viewModel.importFromRemindersText, for: .normal)
+        
+        
+        emptyStateImage.image = viewModel.emptyStateImage(on: on)
+        emptyStateTitleLabel.text = viewModel.emptyStateTitle(on: on)
+        emptyStateSubtitleLabel.text = viewModel.emptyStateSubtitle(on: on)
+    }
+    
     @IBAction func didClickImportFromRemindersButton(_ sender: Any) {
         // TODO: Refactor this to fit into architecture
         viewModel.delegate?.homeScreenViewModelWillImportFromReminders(viewModel)
@@ -138,22 +162,6 @@ class HomeScreenViewController: UIViewController {
         whiteBackgroundView.layer.shadowColor = ReefColors.shadow
         whiteBackgroundView.layer.shadowOpacity = 1
         whiteBackgroundView.layer.shadowRadius = 10
-    }
-    
-    fileprivate func configureEmptyState() {
-        importFromRemindersButton.titleLabel?.numberOfLines = 1
-        
-        emptyStateTitleLabel.text = viewModel.emptyStateTitleText
-        emptyStateSubtitleLabel.text = viewModel.emptyStateSubtitleText
-        emptyStateOrLabel.text = viewModel.emptyStateOrText
-        importFromRemindersButton.setTitle(viewModel.importFromRemindersText,
-                                           for: .normal)
-        
-        emptyStateImage.image = UIImage(named: "emptyState")?.withRenderingMode(.alwaysTemplate)
-        
-        emptyStateImage.tintColor = ReefColors.largeTitle
-        emptyStateTitleLabel.textColor = ReefColors.largeTitle
-        emptyStateSubtitleLabel.textColor = ReefColors.largeTitle
     }
     
     override func updateUserActivityState(_ activity: NSUserActivity) {

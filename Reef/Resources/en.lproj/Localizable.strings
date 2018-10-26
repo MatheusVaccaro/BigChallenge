@@ -78,10 +78,10 @@
 "newTaskTitle" = "New task";
 
 /* subtitle of empty state on taskList */
-"emptyStateSubtitle" = "Start adding some tasks";
+"emptyStateSubtitle" = "pull down to add a new task!";
 
 /* title of empty state on taskList */
-"emptyStateTitle" = "Let’s get something DONE!";
+"emptyStateTitle" = "Looking a little empty";
 
 /* title for location header */
 "locationHeaderTitle" = "Location";
