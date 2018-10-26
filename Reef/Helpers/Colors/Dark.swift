@@ -9,6 +9,10 @@
 import UIKit
 
 class Dark: Theme {
+    
+    static let emptyStateOn: UIImage = UIImage(named: "emptyStateOnClassic")!
+    static let emptyStateOff: UIImage = UIImage(named: "emptyStateOffClassic")!
+    
     static let statusBarStyle: UIStatusBarStyle = .lightContent
     static let keyboardAppearance: UIKeyboardAppearance = .dark
     static let blurStyle: UIBlurEffect.Style = .dark
@@ -27,13 +31,13 @@ class Dark: Theme {
     static let placeholder: UIColor =
         UIColor(red: 132.0/255, green: 132.0/255, blue: 133.0/255, alpha: 0.3)
     
-    static let doneButtonBackground: UIColor = .background
+    static let doneButtonBackground: UIColor = Dark.background
     
     static let defaultGradient: [CGColor] =
-        [UIColor.placeholder.cgColor, UIColor.placeholder.cgColor]
+        [Dark.placeholder.cgColor, Dark.placeholder.cgColor]
     
     // MARK: - Cell
-    static let iconCellIcon: UIColor = .placeholder
+    static let iconCellIcon: UIColor = Dark.placeholder
     static let taskTitleLabel: UIColor = .white
     
     static let cellTagLabel: UIColor =
@@ -51,5 +55,5 @@ class Dark: Theme {
     static let uncompleteYellow: UIColor =
         UIColor(red: 255/255.0, green: 200/255.0, blue: 50/255.0, alpha: 1)
     
-    static let selectedDateBackground: UIColor = .tagsBackground
+    static let selectedDateBackground: UIColor = Dark.tagsBackground
 }

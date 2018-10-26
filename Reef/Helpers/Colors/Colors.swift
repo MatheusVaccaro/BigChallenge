@@ -39,6 +39,10 @@ protocol Theme {
     static var weekday: UIColor { get }
     static var dateOffCurrentMonth: UIColor { get }
     static var unselectableDate: UIColor { get }
+    
+    // MARK - Empty State
+    static var emptyStateOff: UIImage { get }
+    static var emptyStateOn: UIImage { get }
 }
 
 extension Theme {
@@ -51,9 +55,13 @@ extension Theme {
     static var unselectableDate: UIColor { return largeTitle.adjusted(alpha: 0.2) }
 }
 
-extension UIColor: Theme {
+class ReefColors: Theme {
     
     static var theme: Theme.Type = Dark.self
+    
+    // MARK: - Assets
+    static let emptyStateOn: UIImage = theme.emptyStateOn
+    static let emptyStateOff: UIImage = theme.emptyStateOff
 
     static let statusBarStyle: UIStatusBarStyle = theme.statusBarStyle
     static let keyboardAppearance: UIKeyboardAppearance = theme.keyboardAppearance

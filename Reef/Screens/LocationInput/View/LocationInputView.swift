@@ -24,7 +24,7 @@ class LocationInputView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .background
+        view.backgroundColor = ReefColors.background
         
         configureNavigationBar()
         setupSegmentedControl()
@@ -53,7 +53,7 @@ class LocationInputView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = .background
+        navigationController?.navigationBar.barTintColor = ReefColors.background
     }
     
     @IBAction func segmentedControlSelected(_ sender: Any) {
@@ -63,14 +63,14 @@ class LocationInputView: UIViewController {
     
     private func configureNavigationBar() {
         title = viewModel.title
-        navigationController?.navigationBar.barTintColor = .background
+        navigationController?.navigationBar.barTintColor = ReefColors.background
     }
     
     fileprivate func setupSegmentedControl() {
         let arrivingString = viewModel.arrivingString
         let leavingString = viewModel.leavingString
         
-        segmentedControl.tintColor = .largeTitle
+        segmentedControl.tintColor = ReefColors.largeTitle
         segmentedControl.setTitle(arrivingString, forSegmentAt: 0)
         segmentedControl.setTitle(leavingString, forSegmentAt: 1)
     }
@@ -91,7 +91,7 @@ class LocationInputView: UIViewController {
         searchBar.accessibilityHint = viewModel.searchBarHint
         
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
-        textFieldInsideSearchBar?.textColor = .taskTitleLabel
+        textFieldInsideSearchBar?.textColor = ReefColors.taskTitleLabel
         
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font =
             UIFont.font(sized: 17, weight: .regular, with: .body)
@@ -122,7 +122,7 @@ class LocationInputView: UIViewController {
                                               bundle: nil),
                                         forCellReuseIdentifier: IconTableViewCell.reuseIdentifier!)
         
-        searchResultsTableView.backgroundColor = .tagsBackground
+        searchResultsTableView.backgroundColor = ReefColors.tagsBackground
         
         searchResultsTableView.estimatedRowHeight = 50
         searchResultsTableView.rowHeight = UITableView.automaticDimension

@@ -99,7 +99,7 @@ class TagCreationFrameViewController: UIViewController {
     }
     
     lazy var blurView: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: UIColor.blurStyle)
+        let blurEffect = UIBlurEffect(style: ReefColors.blurStyle)
         let view = UIVisualEffectView(effect: blurEffect)
         
         return view
@@ -108,7 +108,7 @@ class TagCreationFrameViewController: UIViewController {
     private func applyBlur() {
         //only apply the blur if the user hasn't disabled transparency effects
         if UIAccessibility.isReduceTransparencyEnabled {
-            blurView.tintColor = .cellIcons
+            blurView.tintColor = ReefColors.cellIcons
         }
 
         blurView.frame = view.bounds

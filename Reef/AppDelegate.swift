@@ -72,12 +72,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         switch theme {
         case 1:
-            UIColor.theme = Dark.self
+            ReefColors.theme = Dark.self
         default:
-            UIColor.theme = Classic.self
+            ReefColors.theme = Classic.self
         }
         
-        UITextField.appearance().keyboardAppearance = UIColor.theme.keyboardAppearance
+        UITextField.appearance().keyboardAppearance = ReefColors.theme.keyboardAppearance
     }
     
     private func setNotificationCategories() {

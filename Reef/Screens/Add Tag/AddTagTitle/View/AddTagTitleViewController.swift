@@ -47,15 +47,15 @@ class AddTagTitleViewController: UIViewController {
         view.layer.masksToBounds = false
         view.layer.cornerRadius = 6.3
         view.layer.shadowOffset = CGSize(width: 0, height: 5)
-        view.layer.shadowColor = UIColor.shadow
+        view.layer.shadowColor = ReefColors.shadow
         view.layer.shadowOpacity = 1
         view.layer.shadowRadius = 11
         view.layer.shadowRadius = 6.3
         
-        view.backgroundColor = .tagsBackground
+        view.backgroundColor = ReefColors.tagsBackground
         let image = UIImage(named: "AddIcon")?.withRenderingMode(.alwaysTemplate)
         tagTitleDoneButton.setImage(image, for: .normal)
-        tagTitleDoneButton.tintColor = .doneButtonBackground
+        tagTitleDoneButton.tintColor = ReefColors.doneButtonBackground
     }
     
     private func configureAccessibility() {
@@ -66,13 +66,13 @@ class AddTagTitleViewController: UIViewController {
     
     private func configureTagTitleTextField() {
         let placeholder = NSAttributedString(string: Strings.Tag.CreationScreen.tagTitlePlaceholder,
-                                             attributes: [NSAttributedString.Key.foregroundColor : UIColor.placeholder])
+                                             attributes: [NSAttributedString.Key.foregroundColor : ReefColors.placeholder])
         
         tagTitleTextField.text = viewModel.tagTitle
-        tagTitleTextField.textColor = .largeTitle
+        tagTitleTextField.textColor = ReefColors.largeTitle
         
         tagTitleTextField.attributedPlaceholder = placeholder
-        tagTitleTextField.tintColor = .taskTitleLabel
+        tagTitleTextField.tintColor = ReefColors.taskTitleLabel
         
         tagTitleTextField.delegate = self
         
