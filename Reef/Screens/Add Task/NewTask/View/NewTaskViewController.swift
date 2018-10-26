@@ -81,8 +81,7 @@ class NewTaskViewController: UIViewController {
     @IBAction func didClickDetailsButton(_ sender: Any) {
         taskTitleTextView.resignFirstResponder()
         viewModel.shouldPresentDetails(true)
-        doneButton.isHidden = false
-        taskDetailsButton.isHidden = true
+        prepareViewToShowDetails(true)
     }
     
     @IBAction func didClickDoneButton(_ sender: Any) {
@@ -102,8 +101,7 @@ class NewTaskViewController: UIViewController {
     func cancelAddTask() {
         taskTitleTextView.resignFirstResponder()
         viewModel.edit(nil)
-        doneButton.isHidden = true
-        taskDetailsButton.isHidden = false
+        prepareViewToShowDetails(false)
     }
     
     func start() {
@@ -114,8 +112,7 @@ class NewTaskViewController: UIViewController {
         guard taskTitleTextView.text != "" else { return false }
         taskTitleTextView.resignFirstResponder()
         viewModel.shouldCreateTask()
-        doneButton.isHidden = true
-        taskDetailsButton.isHidden = false
+        prepareViewToShowDetails(false)
         return true
     }
     
@@ -150,6 +147,12 @@ class NewTaskViewController: UIViewController {
         view.layer.cornerRadius = 6.3
         view.tintColor = .white
     }
+    
+    func prepareViewToShowDetails(_ value: Bool) {
+        doneButton.isHidden = !value
+        taskDetailsButton.isHidden = value
+    }
+    
 }
 
 // MARK: - StoryboardInstantiable
@@ -171,8 +174,7 @@ extension NewTaskViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         viewModel.shouldPresentDetails(false)
-        doneButton.isHidden = true
-        taskDetailsButton.isHidden = false
+        prepareViewToShowDetails(false)
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

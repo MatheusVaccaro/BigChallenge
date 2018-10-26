@@ -61,6 +61,11 @@ class TaskCreationFrameViewController: UIViewController {
     private var state: State = .collapsed {
         didSet {
             print("Current State: \(state)")
+            if state == .expanded {
+                newTaskViewController.prepareViewToShowDetails(true)
+            } else {
+                newTaskViewController.prepareViewToShowDetails(false)
+            }
         }
     }
     
@@ -208,16 +213,16 @@ extension TaskCreationFrameViewController: ContentSizeObservableTableViewDelegat
 
 extension TaskCreationFrameViewController: UITextViewContentSizeDelegate {
     func textView(_ textView: UITextView, didChangeContentSize contentSize: CGSize) {
-        let maxTaskTitleHeight: CGFloat = 75
+        let maxTaskTitleHeight: CGFloat = 100
         let taskTitleTopAndBottomConstraints: CGFloat = 16 + 16
         let taskTitleExpectedHeight = contentSize.height + taskTitleTopAndBottomConstraints
         
         if taskTitleExpectedHeight > maxTaskTitleHeight {
-            textView.isScrollEnabled = true
             taskTitleViewHeightConstraint.constant = maxTaskTitleHeight
+            taskTitleView.layoutIfNeeded()
         } else {
-            textView.isScrollEnabled = false
             taskTitleViewHeightConstraint.constant = taskTitleExpectedHeight
+            taskTitleView.layoutIfNeeded()
         }
     }
 }
@@ -249,10 +254,10 @@ extension TaskCreationFrameViewController {
                                                                       action: #selector(handlePanGesture(_:))))
     }
     
-    @objc private func handleTapGesture(_ recognizer: UITapGestureRecognizer) {
-        newTaskViewController.taskTitleTextView.resignFirstResponder()
-        animateOrReverseRunningTransition(state: !state, duration: duration)
-    }
+//    @objc private func handleTapGesture(_ recognizer: UITapGestureRecognizer) {
+//        newTaskViewController.taskTitleTextView.resignFirstResponder()
+//        animateOrReverseRunningTransition(state: !state, duration: duration)
+//    }
     
     @objc private func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
         newTaskViewController.taskTitleTextView.resignFirstResponder()
