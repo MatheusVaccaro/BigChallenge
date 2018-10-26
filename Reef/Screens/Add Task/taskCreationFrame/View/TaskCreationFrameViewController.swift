@@ -17,8 +17,12 @@ class TaskCreationFrameViewController: UIViewController {
     @IBOutlet weak var tagCollectionView: UIView!
     @IBOutlet weak var taskDetailView: UIView!
     @IBOutlet weak var taskTitleView: UIView!
+    @IBOutlet weak var taskContainerViewMaxArea: UIView!
     @IBOutlet weak var taskContainerView: UIView!
     @IBOutlet weak var taskTitleViewHeightConstraint: NSLayoutConstraint!
+    
+    private let maxTaskTitleAllowedPercentage: CGFloat = 0.20
+    private let maxTaskDetailsAllowedPercentage: CGFloat = 0.70
     
     var taskTitleViewHeight: CGFloat {
         return taskTitleView.bounds.height
@@ -186,18 +190,14 @@ class TaskCreationFrameViewController: UIViewController {
 
 extension TaskCreationFrameViewController: ContentSizeObservableTableViewDelegate {
     func tableView(_ tableView: ContentSizeObservableTableView, didUpdateContentSize contentSize: CGSize) {
-        let statusBarHeight = UIApplication.shared.statusBarFrame.height
-        let navigationControllerHeight = navigationController!.navigationBar.frame.height
-        let offset: CGFloat = 40.0
+        let taskContainerMaxHeight = taskContainerViewMaxArea.frame.height
+        let maxDetailsHeight = taskContainerMaxHeight * maxTaskDetailsAllowedPercentage
 
-        let interactableArea = view.frame.height - statusBarHeight - navigationControllerHeight - offset
-
-        let taskContainerExpectedSize = taskTitleAndDetailSeparatorHeight + taskTitleViewHeight + contentSize.height
-        if taskContainerExpectedSize > interactableArea {
+//        let taskContainerExpectedSize = taskTitleAndDetailSeparatorHeight + taskTitleViewHeight + contentSize.height
+        let taskContainerExpectedSize = contentSize.height
+        if taskContainerExpectedSize > maxDetailsHeight {
             tableView.isScrollEnabled = true
-            let maxTaskDetailsTableViewHeight =
-                interactableArea - taskTitleAndDetailSeparatorHeight - taskTitleViewHeight
-            taskDetailsTableViewHeight.constant = maxTaskDetailsTableViewHeight
+            taskDetailsTableViewHeight.constant = maxDetailsHeight
         } else {
             tableView.isScrollEnabled = false
             taskDetailsTableViewHeight.constant = contentSize.height
@@ -213,17 +213,16 @@ extension TaskCreationFrameViewController: ContentSizeObservableTableViewDelegat
 
 extension TaskCreationFrameViewController: UITextViewContentSizeDelegate {
     func textView(_ textView: UITextView, didChangeContentSize contentSize: CGSize) {
-        let maxTaskTitleHeight: CGFloat = 100
+        let maxTaskTitleHeight = taskContainerViewMaxArea.frame.height * maxTaskTitleAllowedPercentage
         let taskTitleTopAndBottomConstraints: CGFloat = 16 + 16
         let taskTitleExpectedHeight = contentSize.height + taskTitleTopAndBottomConstraints
         
         if taskTitleExpectedHeight > maxTaskTitleHeight {
             taskTitleViewHeightConstraint.constant = maxTaskTitleHeight
-            taskTitleView.layoutIfNeeded()
         } else {
             taskTitleViewHeightConstraint.constant = taskTitleExpectedHeight
-            taskTitleView.layoutIfNeeded()
         }
+        taskTitleView.layoutIfNeeded()
     }
 }
 

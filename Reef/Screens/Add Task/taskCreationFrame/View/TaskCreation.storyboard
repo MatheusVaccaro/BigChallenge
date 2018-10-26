@@ -18,6 +18,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T3Y-OZ-XZY" userLabel="Task Container View Max Area">
+                                <rect key="frame" x="0.0" y="132" width="375" height="646"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsi-pl-HXe" userLabel="Task Container View">
                                 <rect key="frame" x="8" y="132" width="359" height="350"/>
                                 <subviews>
@@ -62,7 +66,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="isU-bp-1Xt" firstAttribute="trailing" secondItem="dsi-pl-HXe" secondAttribute="trailing" constant="8" id="2bW-pu-SgF"/>
+                            <constraint firstItem="T3Y-OZ-XZY" firstAttribute="leading" secondItem="isU-bp-1Xt" secondAttribute="leading" id="DCS-5O-Ug3"/>
                             <constraint firstItem="L3c-CN-lzT" firstAttribute="top" secondItem="FUJ-f1-wVI" secondAttribute="top" id="Dyj-Ln-Jhi"/>
+                            <constraint firstItem="isU-bp-1Xt" firstAttribute="bottom" secondItem="T3Y-OZ-XZY" secondAttribute="bottom" id="FlJ-pV-80Q"/>
                             <constraint firstItem="BY2-pz-7Ub" firstAttribute="trailing" secondItem="isU-bp-1Xt" secondAttribute="trailing" id="Njs-fb-Y16"/>
                             <constraint firstItem="dsi-pl-HXe" firstAttribute="top" secondItem="L3c-CN-lzT" secondAttribute="bottom" id="Pod-qA-bF4"/>
                             <constraint firstItem="L3c-CN-lzT" firstAttribute="leading" secondItem="isU-bp-1Xt" secondAttribute="leading" id="YCd-9Y-7WS"/>
@@ -71,6 +77,8 @@
                             <constraint firstItem="L3c-CN-lzT" firstAttribute="trailing" secondItem="isU-bp-1Xt" secondAttribute="trailing" id="jnt-0M-rUa"/>
                             <constraint firstItem="BY2-pz-7Ub" firstAttribute="bottom" secondItem="L3c-CN-lzT" secondAttribute="bottom" id="qzh-VK-XIX"/>
                             <constraint firstItem="dsi-pl-HXe" firstAttribute="leading" secondItem="isU-bp-1Xt" secondAttribute="leading" constant="8" id="v40-mE-yNE"/>
+                            <constraint firstItem="isU-bp-1Xt" firstAttribute="trailing" secondItem="T3Y-OZ-XZY" secondAttribute="trailing" id="yMX-gK-KF0"/>
+                            <constraint firstItem="T3Y-OZ-XZY" firstAttribute="top" secondItem="L3c-CN-lzT" secondAttribute="bottom" id="ymc-Yk-Bx4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="isU-bp-1Xt"/>
                     </view>
@@ -82,6 +90,7 @@
                     <connections>
                         <outlet property="tagCollectionView" destination="BY2-pz-7Ub" id="sy1-Yd-sm6"/>
                         <outlet property="taskContainerView" destination="dsi-pl-HXe" id="Nd5-zB-A61"/>
+                        <outlet property="taskContainerViewMaxArea" destination="T3Y-OZ-XZY" id="G0z-yS-TyO"/>
                         <outlet property="taskContainerViewTopConstraint" destination="Pod-qA-bF4" id="Qe3-ZS-6ej"/>
                         <outlet property="taskDetailView" destination="oGT-TV-WCP" id="glE-Nc-56A"/>
                         <outlet property="taskDetailsTableViewHeight" destination="htd-30-sjX" id="LfO-Tq-pp5"/>
@@ -103,7 +112,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="53.600000000000001" y="-69.715142428785612"/>
+            <point key="canvasLocation" x="53.600000000000001" y="-70.197044334975374"/>
         </scene>
     </scenes>
 </document>
