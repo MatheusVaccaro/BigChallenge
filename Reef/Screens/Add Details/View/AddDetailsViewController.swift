@@ -34,6 +34,24 @@ class AddDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(_:)))
+        tableView.addGestureRecognizer(tap)
+        tableView.addGestureRecognizer(pan)
+    }
+    
+    @objc func handleTap(_ sender: UISwipeGestureRecognizer) {
+        let tapLocation = sender.location(in: tableView)
+        if let indexPath = tableView.indexPathForRow(at: tapLocation) {
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+            tableView(tableView, didSelectRowAt: indexPath)
+        }
+        delegate?.addTagDetailsDidBecomeFirstResponder()
+    }
+    
+    @objc func handlePan(_ sender: UISwipeGestureRecognizer) {
+        delegate?.addTagDetailsDidBecomeFirstResponder()
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -42,7 +60,6 @@ class AddDetailsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //TODO: reload only cells that have been edited
         tableView.reloadData()
     }
     
