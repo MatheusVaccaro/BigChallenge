@@ -35,6 +35,12 @@ class AddTagTitleViewController: UIViewController {
             tagTitleView.isAccessibilityElement = true
             tagTitleDoneButton.isAccessibilityElement = false
         }
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(panGesture)
+    }
+    
+    @objc func dismissKeyboard() {
+        tagTitleTextField.resignFirstResponder()
     }
     
     private func configureViewDesign() {
