@@ -33,7 +33,9 @@ class TagCreationFrameViewController: UIViewController {
         addTagDetailsViewController.tableView.layer.cornerRadius = 6.3
         detailsTableHeightConstraint.constant =
             addTagDetailsViewController.contentHeight
-        print(detailsTableHeightConstraint.constant)
+        
+        addTagColorsViewController.delegate = self
+        addTagDetailsViewController.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -92,6 +94,10 @@ class TagCreationFrameViewController: UIViewController {
         viewModel.cancelAddTag()
     }
     
+    @objc func dismissKeyboard() {
+        addTagTitleViewController.tagTitleTextField.resignFirstResponder()
+    }
+    
     lazy var blurView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: UIColor.blurStyle)
         let view = UIVisualEffectView(effect: blurEffect)
@@ -113,12 +119,26 @@ class TagCreationFrameViewController: UIViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cancelAddTag))
         blurView.addGestureRecognizer(tapGesture)
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        blurView.addGestureRecognizer(panGesture)
     }
     
     private func removeBlur() {
         blurView.removeFromSuperview()
     }
 
+}
+
+extension TagCreationFrameViewController: AddTagColorsDelegate {
+    func addTagColorsDidSelectColor() {
+        addTagTitleViewController.tagTitleTextField.resignFirstResponder()
+    }
+}
+
+extension TagCreationFrameViewController: AddTagDetailsDelegate {
+    func addTagDetailsDidBecomeFirstResponder() {
+        addTagTitleViewController.tagTitleTextField.resignFirstResponder()
+    }
 }
 
 extension TagCreationFrameViewController: StoryboardInstantiable {

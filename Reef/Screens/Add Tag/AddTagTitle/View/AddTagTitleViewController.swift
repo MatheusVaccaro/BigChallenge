@@ -35,6 +35,12 @@ class AddTagTitleViewController: UIViewController {
             tagTitleView.isAccessibilityElement = true
             tagTitleDoneButton.isAccessibilityElement = false
         }
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(panGesture)
+    }
+    
+    @objc func dismissKeyboard() {
+        tagTitleTextField.resignFirstResponder()
     }
     
     private func configureViewDesign() {
@@ -68,8 +74,11 @@ class AddTagTitleViewController: UIViewController {
         tagTitleTextField.attributedPlaceholder = placeholder
         tagTitleTextField.tintColor = .taskTitleLabel
         
-        
         tagTitleTextField.delegate = self
+        
+        if tagTitleTextField.text == "" {
+            tagTitleTextField.becomeFirstResponder()
+        }
     }
     
     @IBAction func didPressDoneButton(_ sender: UIButton) {
