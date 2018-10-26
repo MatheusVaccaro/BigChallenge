@@ -37,8 +37,6 @@ public class ReefKit {
     
     public func createTask(with attributes: [TaskAttributes : Any]) -> Task {
         let task = taskCRUD.createTask(with:attributes)
-        ReefSpotlight.index(task: task)
-        save(task)
         return task
     }
     public func update(_ task: Task, with attributes: [TaskAttributes : Any]) {
@@ -47,6 +45,7 @@ public class ReefKit {
         save(task)
     }
     public func save(_ task: Task) {
+        ReefSpotlight.index(task: task)
         taskCRUD.save(task)
     }
     public func delete(_ task: Task) {
@@ -60,7 +59,6 @@ public class ReefKit {
     
     public func createTag(with attributes: [TagAttributes : Any]) -> Tag {
         let tag = tagCRUD.createTag(with: attributes)
-        ReefSpotlight.index(tag: tag)
         return tag
     }
     public func update(_ tag: Tag, with attributes: [TagAttributes : Any]) {
@@ -69,6 +67,7 @@ public class ReefKit {
         save(tag)
     }
     public func save(_ tag: Tag) {
+        ReefSpotlight.index(tag: tag)
         tagCRUD.save(tag)
     }
     public func delete(_ tag: Tag) {
