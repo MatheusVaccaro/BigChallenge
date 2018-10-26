@@ -68,11 +68,10 @@ class IconTableViewCell: UITableViewCell {
     }
     
     func configureLayout() {
-        backgroundColor = .tagsBackground
-        icon.tintColor = .iconCellIcon
-        subtitleLabel.textColor = .cellTagLabel
-        titleLabel.textColor = .taskTitleLabel
-//        rightButton.tintColor = . TODO
+        backgroundColor = ReefColors.tagsBackground
+        icon.tintColor = ReefColors.iconCellIcon
+        subtitleLabel.textColor = ReefColors.cellTagLabel
+        titleLabel.textColor = ReefColors.taskTitleLabel
     }
     
     @IBAction func switchToggled(_ sender: UISwitch) {

@@ -43,10 +43,10 @@ class HomeScreenViewController: UIViewController {
         super.viewDidLoad()
         title = Strings.bigTitleText
         
-        view.backgroundColor = .background
+        view.backgroundColor = ReefColors.background
         
         configureWhiteBackgroundView()
-        configureEmptyState()
+        configureEmptyState(streak: viewModel.emptyStateStreak)
         newTaskLabel.text = Strings.Task.CreationScreen.taskTitlePlaceholder
         userActivity = viewModel.userActivity
         
@@ -122,6 +122,30 @@ class HomeScreenViewController: UIViewController {
         }
     }
     
+    fileprivate func configureEmptyState(streak: Int) {
+        
+        let on = streak > 2
+        
+        emptyStateImage.tintColor = ReefColors.largeTitle
+        emptyStateTitleLabel.textColor = ReefColors.largeTitle
+        emptyStateSubtitleLabel.textColor = ReefColors.largeTitle
+        
+        [emptyStateTitleLabel,
+         emptyStateSubtitleLabel,
+         emptyStateOrLabel].forEach {
+            $0?.adjustsFontSizeToFitWidth = true
+        }
+        
+        emptyStateOrLabel.text = viewModel.emptyStateOrText
+        importFromRemindersButton.titleLabel?.numberOfLines = 1
+        importFromRemindersButton.setTitle(viewModel.importFromRemindersText, for: .normal)
+        
+        
+        emptyStateImage.image = viewModel.emptyStateImage(on: on)
+        emptyStateTitleLabel.text = viewModel.emptyStateTitle(on: on)
+        emptyStateSubtitleLabel.text = viewModel.emptyStateSubtitle(on: on)
+    }
+    
     @IBAction func didClickImportFromRemindersButton(_ sender: Any) {
         // TODO: Refactor this to fit into architecture
         viewModel.delegate?.homeScreenViewModelWillImportFromReminders(viewModel)
@@ -130,30 +154,14 @@ class HomeScreenViewController: UIViewController {
     fileprivate func configureWhiteBackgroundView() {
         whiteBackgroundView.layer.cornerRadius = 6.3
         whiteBackgroundView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-        whiteBackgroundView.backgroundColor = .tagsBackground
+        whiteBackgroundView.backgroundColor = ReefColors.tagsBackground
         
         whiteBackgroundView.layer.shadowRadius = 6.3
         whiteBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 10)
         whiteBackgroundView.layer.masksToBounds = false
-        whiteBackgroundView.layer.shadowColor = UIColor.shadow
+        whiteBackgroundView.layer.shadowColor = ReefColors.shadow
         whiteBackgroundView.layer.shadowOpacity = 1
         whiteBackgroundView.layer.shadowRadius = 10
-    }
-    
-    fileprivate func configureEmptyState() {
-        importFromRemindersButton.titleLabel?.numberOfLines = 1
-        
-        emptyStateTitleLabel.text = viewModel.emptyStateTitleText
-        emptyStateSubtitleLabel.text = viewModel.emptyStateSubtitleText
-        emptyStateOrLabel.text = viewModel.emptyStateOrText
-        importFromRemindersButton.setTitle(viewModel.importFromRemindersText,
-                                           for: .normal)
-        
-        emptyStateImage.image = UIImage(named: "emptyState")?.withRenderingMode(.alwaysTemplate)
-        
-        emptyStateImage.tintColor = .largeTitle
-        emptyStateTitleLabel.textColor = .largeTitle
-        emptyStateSubtitleLabel.textColor = .largeTitle
     }
     
     override func updateUserActivityState(_ activity: NSUserActivity) {
@@ -164,15 +172,15 @@ class HomeScreenViewController: UIViewController {
         pullDownView.backgroundColor = .white
         pullDownView.layer.cornerRadius = 6.3
         pullDownView.layer.maskedCorners = [ .layerMaxXMaxYCorner, .layerMinXMaxYCorner ]
-        pullDownView.backgroundColor = .tagsBackground
-        pullDownArrowImage.tintColor = .placeholder
-        newTaskLabel.textColor = .placeholder
+        pullDownView.backgroundColor = ReefColors.tagsBackground
+        pullDownArrowImage.tintColor = ReefColors.placeholder
+        newTaskLabel.textColor = ReefColors.placeholder
         pullDownArrowImage.image = UIImage(named: "pullDownArrow")?.withRenderingMode(.alwaysTemplate)
         
         pullDownView.layer.shadowRadius = 6.3
         pullDownView.layer.shadowOffset = CGSize(width: 0, height: 0)
         pullDownView.layer.masksToBounds = false
-        pullDownView.layer.shadowColor = UIColor.shadow
+        pullDownView.layer.shadowColor = ReefColors.shadow
         pullDownView.layer.shadowOpacity = 1
         pullDownView.layer.shadowRadius = 10
         

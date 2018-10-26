@@ -37,7 +37,7 @@ class NewTaskViewModel {
         }
     }
     
-    var taskColors: [CGColor] = UIColor.defaultGradient
+    var taskColors: [CGColor] = ReefColors.defaultGradient
     
     func edit(_ task: Task?) {
         taskTitleText = task?.title
@@ -45,12 +45,12 @@ class NewTaskViewModel {
         if let colors = task?.allTags.first?.colors {
             taskColors = colors
         } else {
-            taskColors = UIColor.defaultGradient
+            taskColors = ReefColors.defaultGradient
         }
     }
     
     func set(_ tags: [Tag]) {
-        taskColors = tags.first?.colors ?? UIColor.defaultGradient
+        taskColors = tags.first?.colors ?? ReefColors.defaultGradient
         uiDelegate?.didUpdateColors()
     }
     

@@ -29,6 +29,6 @@ extension UIViewController {
 
 extension UINavigationController {
     @objc open override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIColor.statusBarStyle
+        return ReefColors.statusBarStyle
     }
 }

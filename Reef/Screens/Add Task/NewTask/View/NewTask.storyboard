@@ -37,6 +37,9 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5oG-Zr-dS9">
                                         <rect key="frame" x="0.0" y="0.0" width="63" height="73"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="ToU-Jl-2gy"/>
+                                        </constraints>
                                         <state key="normal" image="option"/>
                                         <connections>
                                             <action selector="didClickDetailsButton:" destination="ArF-0o-Orl" eventType="touchUpInside" id="5VE-NB-4uJ"/>

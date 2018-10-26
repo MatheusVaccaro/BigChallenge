@@ -23,8 +23,6 @@ class HomeScreenViewModel {
     private(set) var taskModel: TaskModel
     private(set) var tagModel: TagModel
     
-    let emptyStateTitleText = Strings.HomeScreen.EmptyState.title
-    let emptyStateSubtitleText = Strings.HomeScreen.EmptyState.subtitle
     let emptyStateOrText = Strings.HomeScreen.EmptyState.or
     let importFromRemindersText = Strings.HomeScreen.EmptyState.importFromReminders
     
@@ -86,5 +84,27 @@ class HomeScreenViewModel {
         activity.title = userActivityTitle
         
         activity.becomeCurrent()
+    }
+    
+    var emptyStateStreak: Int {
+        return 0
+    }
+    
+    func emptyStateTitle(on: Bool) -> String {
+        return on
+            ? Strings.HomeScreen.EmptyState.titleStreak
+            : Strings.HomeScreen.EmptyState.title
+    }
+    
+    func emptyStateSubtitle(on: Bool) -> String {
+        return on
+            ? Strings.HomeScreen.EmptyState.subtitleStreak
+            : Strings.HomeScreen.EmptyState.subtitle
+    }
+    
+    func emptyStateImage(on: Bool) -> UIImage {
+        return on
+            ? ReefColors.emptyStateOn
+            : ReefColors.emptyStateOff
     }
 }

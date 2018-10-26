@@ -43,7 +43,7 @@ class NewTaskViewController: UIViewController {
         gradientView.layer.addSublayer(gradientLayer)
         gradientView.clipsToBounds = true
         
-        view.backgroundColor = .tagsBackground
+        view.backgroundColor = ReefColors.tagsBackground
         
         configureDoneButton()
         configureWithViewModel()
@@ -125,11 +125,11 @@ class NewTaskViewController: UIViewController {
         doneButtonLabel.textColor = .white
         doneButtonLabel.adjustsFontSizeToFitWidth = true
         
-        doneButton.backgroundColor = .doneButtonBackground
+        doneButton.backgroundColor = ReefColors.doneButtonBackground
         doneButton.layer.cornerRadius = 6.3
         
         taskDetailsButton.setImage(UIImage(named: "option")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        taskDetailsButton.tintColor = .doneButtonBackground
+        taskDetailsButton.tintColor = ReefColors.doneButtonBackground
     }
     
     private func configureWithViewModel() {
@@ -138,11 +138,11 @@ class NewTaskViewController: UIViewController {
     }
     
     private func configureTaskTitleTextView() {
-        taskTitleTextView.placeholderColor = UIColor.cellIcons.withAlphaComponent(0.5)
-        taskTitleTextView.textColor = .taskTitleLabel
-        taskTitleTextView.keyboardAppearance = UIColor.keyboardAppearance
+        taskTitleTextView.placeholderColor = ReefColors.cellIcons.withAlphaComponent(0.5)
+        taskTitleTextView.textColor = ReefColors.taskTitleLabel
+        taskTitleTextView.keyboardAppearance = ReefColors.keyboardAppearance
         taskTitleTextView.placeholder = Strings.Task.CreationScreen.taskTitlePlaceholder
-        taskTitleTextView.tintColor = .taskTitleLabel
+        taskTitleTextView.tintColor = ReefColors.taskTitleLabel
         taskTitleTextView.textContainer.lineFragmentPadding = 0
     }
     

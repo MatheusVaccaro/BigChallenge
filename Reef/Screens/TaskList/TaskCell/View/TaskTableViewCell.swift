@@ -46,9 +46,9 @@ public class TaskTableViewCell: UITableViewCell {
         taskTitleTextView.textContainer.lineFragmentPadding = 0
         
         dateStringView.layer.cornerRadius = dateStringView.frame.height * 0.1
-        dateStringLabel.textColor = .cellTagLabel
+        dateStringLabel.textColor = ReefColors.cellTagLabel
         
-        tagsLabel.textColor = .cellTagLabel
+        tagsLabel.textColor = ReefColors.cellTagLabel
         
         selectionStyle = .none
         configureAccessibility()
@@ -66,14 +66,14 @@ public class TaskTableViewCell: UITableViewCell {
         if viewModel.shouldShowLocationIcon {
             locationIconImageView.image = UIImage(named: "locationIcon")!
                 .withRenderingMode(.alwaysTemplate)
-            locationIconImageView.tintColor = .cellTagLabel
+            locationIconImageView.tintColor = ReefColors.cellTagLabel
             locationIconImageView.isHidden = false
         } else {
             locationIconImageView.isHidden = true
         }
         
         if viewModel.shouldShowDateIcon {
-            dateStringView.backgroundColor = .cellIcons
+            dateStringView.backgroundColor = ReefColors.cellIcons
             dateStringLabel.text = viewModel.dateString(with: "dd MMM")
             dateStringView.isHidden = false
         } else {
@@ -83,12 +83,12 @@ public class TaskTableViewCell: UITableViewCell {
         }
         
         if viewModel.taskIsCompleted {
-            gradientLayer.colors = [UIColor.cellTagLabel.cgColor, UIColor.cellTagLabel.cgColor]
+            gradientLayer.colors = [ReefColors.cellTagLabel.cgColor, ReefColors.cellTagLabel.cgColor]
             
             let textAttributes: [NSAttributedString.Key : Any] = [
                 NSAttributedString.Key.strikethroughStyle : NSUnderlineStyle.thick.rawValue,
-                NSAttributedString.Key.strikethroughColor : UIColor.cellTagLabel,
-                NSAttributedString.Key.foregroundColor : UIColor.cellTagLabel,
+                NSAttributedString.Key.strikethroughColor : ReefColors.cellTagLabel,
+                NSAttributedString.Key.foregroundColor : ReefColors.cellTagLabel,
                 NSAttributedString.Key.font : UIFont.font(sized: 19, weight: .medium, with: .body)
                 ]
             
@@ -101,7 +101,7 @@ public class TaskTableViewCell: UITableViewCell {
             gradientLayer.colors = viewModel.checkButtonGradient
             
             let textAttributes: [NSAttributedString.Key : Any] = [
-                NSAttributedString.Key.foregroundColor : UIColor.taskTitleLabel,
+                NSAttributedString.Key.foregroundColor : ReefColors.taskTitleLabel,
                 NSAttributedString.Key.font : UIFont.font(sized: 19, weight: .medium, with: .body)
             ]
             

@@ -42,7 +42,7 @@ class DateInputViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         currentSelector = BehaviorSubject<DateSelector>(value: .date)
-        view.backgroundColor = .background
+        view.backgroundColor = ReefColors.background
         
         configureNavigationBar()
         configureCalendarDateLabels()
@@ -69,7 +69,7 @@ class DateInputViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = .background
+        navigationController?.navigationBar.barTintColor = ReefColors.background
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -80,7 +80,7 @@ class DateInputViewController: UIViewController {
     
     private func configureNavigationBar() {
         title = viewModel.title
-        navigationController?.navigationBar.barTintColor = .background
+        navigationController?.navigationBar.barTintColor = ReefColors.background
     }
     
     private func configureCalendarDateLabels() {
@@ -96,7 +96,7 @@ class DateInputViewController: UIViewController {
         	}
         
         // Day Label
-        selectedCalendarDateDayLabel.textColor = .largeTitle
+        selectedCalendarDateDayLabel.textColor = ReefColors.largeTitle
         selectedCalendarDateDayLabel.adjustsFontSizeToFitWidth = true
         let dayDateFormatter = DateFormatter()
         dayDateFormatter.locale = Locale.current
@@ -107,7 +107,7 @@ class DateInputViewController: UIViewController {
             .disposed(by: disposeBag)
         
         // Month Label
-        selectedCalendarDateMonthLabel.textColor = .largeTitle
+        selectedCalendarDateMonthLabel.textColor = ReefColors.largeTitle
         selectedCalendarDateMonthLabel.adjustsFontSizeToFitWidth = true
         let monthDateFormatter = DateFormatter()
         monthDateFormatter.locale = Locale.current
@@ -119,7 +119,7 @@ class DateInputViewController: UIViewController {
     }
     
     private func configurePrepositionLabel() {
-        prepositionLabel.textColor = .largeTitle
+        prepositionLabel.textColor = ReefColors.largeTitle
         prepositionLabel.text = Strings.DateInputView.preposition
     }
     
@@ -162,7 +162,7 @@ class DateInputViewController: UIViewController {
         timeOfDaySelector.addTarget(self, action: #selector(handleTimeOfDaySelectorChange(_:)), for: .valueChanged)
         
         timeOfDaySelector.setValuesForKeys([
-            "textColor" : UIColor.taskTitleLabel
+            "textColor" : ReefColors.taskTitleLabel
             ])
         
         viewModel?.timeOfDay.asObservable()
@@ -223,7 +223,7 @@ class DateInputViewController: UIViewController {
     private func configure(_ shortcutButton: UIButton) {
         let shortcutButtonFont = UIFont.font(sized: 18, weight: .medium, with: .body)
         shortcutButton.titleLabel?.font = shortcutButtonFont
-        shortcutButton.tintColor = .largeTitle
+        shortcutButton.tintColor = ReefColors.largeTitle
     }
     
     @IBAction func touchUpInsideTomorrowShortcutButton(_ sender: UIButton) {

@@ -29,7 +29,7 @@ class CalendarCell: JTAppleCell {
         backgroundCircleLayer = CAShapeLayer()
         contentView.layer.addSublayer(backgroundCircleLayer)
         
-        backgroundCircleLayer.fillColor = UIColor.deselectedDateBackground.cgColor
+        backgroundCircleLayer.fillColor = ReefColors.deselectedDateBackground.cgColor
     }
     
     func setupBackgroundCircleLayer() {
@@ -58,7 +58,7 @@ class CalendarCell: JTAppleCell {
                                                                cell: self, cellState: cellState) ?? true
         guard isSelectable else {
             deselect(basedOn: cellState, animated: false)
-            dayLabel.textColor = .unselectableDate
+            dayLabel.textColor = ReefColors.unselectableDate
             dayLabel.font = CalendarCell.defaultFont
             return
         }
@@ -80,7 +80,7 @@ class CalendarCell: JTAppleCell {
     
     func select(basedOn cellState: CellState? = nil, animated: Bool = true) {
         // Change background visuals
-        let selectedBackgroundColor = UIColor.selectedDateBackground
+        let selectedBackgroundColor = ReefColors.selectedDateBackground
         
         if animated {
             setBackgroundColor(to: selectedBackgroundColor)
@@ -89,12 +89,12 @@ class CalendarCell: JTAppleCell {
         }
         
         // Change label visuals
-        dayLabel.textColor = .selectedDate
+        dayLabel.textColor = ReefColors.selectedDate
     }
     
     func deselect(basedOn cellState: CellState? = nil, animated: Bool = true) {
         // Change background visuals
-        let deselectedBackgroundColor = UIColor.deselectedDateBackground
+        let deselectedBackgroundColor = ReefColors.deselectedDateBackground
         if animated {
             setBackgroundColor(to: deselectedBackgroundColor)
         } else {
@@ -103,9 +103,9 @@ class CalendarCell: JTAppleCell {
         
         // Change label visuals
         if let cellState = cellState, cellState.dateBelongsTo != .thisMonth {
-            dayLabel.textColor = .dateOffCurrentMonth
+            dayLabel.textColor = ReefColors.dateOffCurrentMonth
         } else {
-            dayLabel.textColor = .largeTitle
+            dayLabel.textColor = ReefColors.largeTitle
         }
     }
     

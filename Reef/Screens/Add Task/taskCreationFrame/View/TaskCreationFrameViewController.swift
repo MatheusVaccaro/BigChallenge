@@ -43,7 +43,7 @@ class TaskCreationFrameViewController: UIViewController {
     var viewModel: TaskCreationViewModel!
     
     private(set) lazy var blurView: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: UIColor.blurStyle)
+        let blurEffect = UIBlurEffect(style: ReefColors.blurStyle)
         
         let blur = UIVisualEffectView(effect: blurEffect)
         blur.frame = view.bounds
@@ -116,7 +116,7 @@ class TaskCreationFrameViewController: UIViewController {
     private func applyBlur() {
         //only apply the blur if the user hasn't disabled transparency effects
         if UIAccessibility.isReduceTransparencyEnabled {
-            blurView.tintColor = .cellIcons
+            blurView.tintColor = ReefColors.cellIcons
         }
         
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -144,7 +144,7 @@ class TaskCreationFrameViewController: UIViewController {
         configureShadows(in: taskDetailView)
         configureShadows(in: taskTitleView)
         
-        whiteBackgroundView.backgroundColor = .tagsBackground
+        whiteBackgroundView.backgroundColor = ReefColors.tagsBackground
         
         applyBlur()
         
@@ -173,7 +173,7 @@ class TaskCreationFrameViewController: UIViewController {
         view.layer.shadowRadius = 6.3
         view.layer.shadowOffset = CGSize(width: 0, height: 0)
         view.layer.masksToBounds = false
-        view.layer.shadowColor = UIColor.shadow
+        view.layer.shadowColor = ReefColors.shadow
         view.layer.shadowOpacity = 1
         view.layer.shadowRadius = 10
     }

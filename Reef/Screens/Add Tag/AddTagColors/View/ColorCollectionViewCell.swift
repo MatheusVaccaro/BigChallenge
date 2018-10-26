@@ -40,7 +40,7 @@ class ColorCollectionViewCell: UICollectionViewCell {
         layer.shadowRadius = layer.frame.height/3
         layer.shadowOffset = CGSize(width: 0, height: 3)
         layer.masksToBounds = false
-        layer.shadowColor = UIColor.shadow
+        layer.shadowColor = ReefColors.shadow
         layer.shadowOpacity = 1
         layer.shadowRadius = 2
         

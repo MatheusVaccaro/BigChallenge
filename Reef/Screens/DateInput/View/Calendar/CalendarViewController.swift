@@ -56,7 +56,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource {
         
         for (index, weekdayLabel) in weekdays.enumerated() {
             weekdayLabel.text = Calendar.current.veryShortWeekdaySymbols[index]
-            weekdayLabel.textColor = .largeTitle
+            weekdayLabel.textColor = ReefColors.largeTitle
         }
     }
     
