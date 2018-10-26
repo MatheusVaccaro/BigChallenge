@@ -8,11 +8,17 @@
 
 import UIKit
 
+
+protocol AddTagDetailsDelegate: class {
+    func addTagDetailsDidBecomeFirstResponder()
+}
+
 class AddDetailsViewController: UIViewController {
     
     // MARK: - Properties
     
     var viewModel: AddDetailsProtocol!
+    weak var delegate: AddTagDetailsDelegate?
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -94,6 +100,14 @@ extension AddDetailsViewController: UITableViewDelegate {
                 viewModel.shouldPresentView(at: indexPath.row)
             }
         }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        delegate?.addTagDetailsDidBecomeFirstResponder()
+    }
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
     }
 }
 

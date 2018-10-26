@@ -35,7 +35,7 @@ class TagCreationFrameViewController: UIViewController {
             addTagDetailsViewController.contentHeight
         
         addTagColorsViewController.delegate = self
-//        addTagDetailsViewController.delegate = self
+        addTagDetailsViewController.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -125,6 +125,12 @@ class TagCreationFrameViewController: UIViewController {
 
 extension TagCreationFrameViewController: AddTagColorsDelegate {
     func addTagColorsDidSelectColor() {
+        addTagTitleViewController.tagTitleTextField.resignFirstResponder()
+    }
+}
+
+extension TagCreationFrameViewController: AddTagDetailsDelegate {
+    func addTagDetailsDidBecomeFirstResponder() {
         addTagTitleViewController.tagTitleTextField.resignFirstResponder()
     }
 }
