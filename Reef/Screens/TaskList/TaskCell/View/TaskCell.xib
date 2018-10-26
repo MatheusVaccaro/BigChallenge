@@ -78,6 +78,7 @@
                 <constraints>
                     <constraint firstItem="IZr-Pd-eTx" firstAttribute="leading" secondItem="uR2-n7-Ubs" secondAttribute="leading" constant="16" id="78X-QA-hg0"/>
                     <constraint firstItem="Fn8-Lx-bVj" firstAttribute="leading" secondItem="IZr-Pd-eTx" secondAttribute="trailing" constant="8" id="HNC-to-8Ex"/>
+                    <constraint firstItem="Fn8-Lx-bVj" firstAttribute="top" secondItem="OW8-xT-sLf" secondAttribute="bottom" constant="3.5" id="N07-jO-WYW"/>
                     <constraint firstItem="OW8-xT-sLf" firstAttribute="leading" secondItem="IZr-Pd-eTx" secondAttribute="trailing" constant="8" id="RFL-3h-RgR"/>
                     <constraint firstAttribute="trailing" secondItem="OW8-xT-sLf" secondAttribute="trailing" constant="8" id="W5m-Eo-lFi"/>
                     <constraint firstItem="jMK-pG-tgE" firstAttribute="top" secondItem="OW8-xT-sLf" secondAttribute="bottom" id="YIC-rH-2ss"/>

@@ -81,6 +81,7 @@ class TagCreationFrameViewController: UIViewController {
         tagDetailsView.addSubview(addTagDetailsViewController.view)
         
         addTagDetailsViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        addTagDetailsViewController.tableView.isScrollEnabled = true
         
         NSLayoutConstraint.activate([
             addTagDetailsViewController.view.rightAnchor.constraint(equalTo: tagDetailsView.rightAnchor),

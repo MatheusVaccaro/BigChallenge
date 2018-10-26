@@ -36,9 +36,7 @@ class AddDetailsViewController: UIViewController {
         setupTableView()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-        let pan = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(_:)))
         tableView.addGestureRecognizer(tap)
-        tableView.addGestureRecognizer(pan)
     }
     
     @objc func handleTap(_ sender: UISwipeGestureRecognizer) {
@@ -50,8 +48,9 @@ class AddDetailsViewController: UIViewController {
         delegate?.addTagDetailsDidBecomeFirstResponder()
     }
     
-    @objc func handlePan(_ sender: UISwipeGestureRecognizer) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         delegate?.addTagDetailsDidBecomeFirstResponder()
+        super.touchesMoved(touches, with: event)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
