@@ -231,17 +231,20 @@ extension TaskListViewModel: TaskModelDelegate {
     func taskModel(_ taskModel: TaskModel, didUpdate tasks: [Task]) {
         guard !taskListData.isEmpty else { return }
         
-        var ans: [IndexPath] = []
-        
         for task in tasks {
-            for section in 0...taskListData.count-1 {
+            var section = 0
+            while section < taskListData.count {
                 if let row = taskListData[section].rows.index(of: task) {
-                    ans.append(IndexPath(row: row, section: section))
+                    if taskListData[section].rows.count == 1 {
+                        filterTasks(with: selectedTags, relatedTags: relatedTags)
+                        UIDelegate?.taskListViewModelDidUpdate(self)
+                    } else {
+                        UIDelegate?.taskListViewModel(self, didUpdateAt: [IndexPath(row: row, section: section)])
+                    }
                 }
+                section += 1
             }
         }
-        
-        UIDelegate?.taskListViewModel(self, didUpdateAt: ans)
     }
 }
 
