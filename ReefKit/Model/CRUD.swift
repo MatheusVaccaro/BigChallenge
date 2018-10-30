@@ -10,6 +10,7 @@ import Foundation
 import CoreLocation
 import Persistence
 
+public typealias TaskInformation = [TaskAttributes: Any]
 public enum TaskAttributes {
     case completionDate
     case creationDate
@@ -25,6 +26,7 @@ public enum TaskAttributes {
     case isPinned
 }
 
+public typealias TagInformation = [TagAttributes: Any]
 public enum TagAttributes {
     case colorIndex
     case dueDate
@@ -50,8 +52,7 @@ class TaskCRUD {
         }
     }
     
-    func createTask(with attributes: [TaskAttributes : Any]) -> Task {
-        
+    func createTask(with attributes: TaskInformation) -> Task {
         let title = attributes[.title] as? String ?? ""
         let task: Task = persistence.create(Task.self)
         let id = attributes[.id] as? UUID ?? UUID()
@@ -190,7 +191,7 @@ public class TagCRUD {
         
         let title = attributes[.title] as? String
         let tag = persistence.create(Tag.self)
-        let colorIndex = attributes[.colorIndex] as? Int64 ?? abs(Int64(currentColor))
+        let colorIndex = attributes[.colorIndex] as? Int64 ?? abs(Int64(nextColor))
         let id = attributes[.id] as? UUID ?? UUID()
         let tasks = attributes[.tasks] as? [Task] ?? []
         let arriving = attributes[.isArrivingLocation] as? Bool ?? false
