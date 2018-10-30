@@ -72,6 +72,7 @@ public class TaskModel {
         if shouldPromptReview(information) {
             promptUserReview()
         }
+    }
 
     private func promptUserReview() {
         SKStoreReviewController.requestReview()

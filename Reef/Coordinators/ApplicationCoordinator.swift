@@ -85,6 +85,5 @@ class ApplicationCoordinator: Coordinator {
                                                         remindersImporter: remindersImporter)
         addChild(coordinator: homeScreenCoordinator)
         homeScreenCoordinator.start()
-        remindersImporter.requestAndImport()
     }
 }
