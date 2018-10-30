@@ -205,12 +205,9 @@ class LocalPersistence: PersistenceProtocol {
 
 enum CoreDataError: Error {
     case couldNotCreateObject
-    //    TODO: solve this linter problem with xcode beta
-    //     swiftlint:disable all
     case couldNotFetchObject(reason: String)
     case couldNotSaveContext(reason: String)
     case couldNotDeleteObject(reason: String)
-    //     swiftlint:enable all
 }
 
 extension NSManagedObject: Storable {

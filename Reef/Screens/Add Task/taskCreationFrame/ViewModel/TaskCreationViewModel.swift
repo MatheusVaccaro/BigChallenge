@@ -29,7 +29,7 @@ class TaskCreationViewModel {
     weak var uiDelegate: TaskCreationUIDelegate?
     
     fileprivate var model: TaskModel
-    fileprivate var attributes: [TaskAttributes : Any] = [:]
+    fileprivate var taskInformation: TaskInformation = [:]
     fileprivate let taskDetails: AddTaskDetailsViewModel
     fileprivate let newTaskViewModel: NewTaskViewModel
     fileprivate var task: Task?
@@ -59,7 +59,7 @@ class TaskCreationViewModel {
     
     func set(tags: [Tag]) {
         newTaskViewModel.set(tags)
-        attributes[.tags] = tags
+        taskInformation[.tags] = tags
         taskDetails.set(tags)
         uiDelegate?.taskCreationViewModelDidChangeTaskInfo(self)
     }
@@ -76,19 +76,19 @@ extension TaskCreationViewModel: NewTaskViewModelOutputDelegate {
     
     func didPressCreateTask() {
         if task == nil {
-            model.save(model.createTask(with: attributes))
+            model.save(model.createTask(with: taskInformation))
         } else {
-            model.update(task!, with: attributes)
+            model.update(task!, with: taskInformation)
         }
         
         task = nil
-        attributes = [:]
+        taskInformation = [:]
         
         delegate?.didCreateTask()
     }
     
     func newTask(_ newTaskViewModel: NewTaskViewModel, didUpdateTitle title: String?) {
-        attributes[.title] = title
+        taskInformation[.title] = title
     }
 }
 
@@ -102,10 +102,10 @@ extension TaskCreationViewModel: AddTaskDetailsDelegate {
                        named: String?,
                        arriving: Bool) {
         
-        attributes[.location] = location
-        attributes[.isArrivingLocation] = arriving
+        taskInformation[.location] = location
+        taskInformation[.isArrivingLocation] = arriving
         if let name = named {
-            attributes[.locationName] = name
+            taskInformation[.locationName] = name
         }
     }
     
@@ -113,7 +113,7 @@ extension TaskCreationViewModel: AddTaskDetailsDelegate {
                               dateInputViewModel: DateInputViewModelProtocol,
                               didSelectDate date: Date?) {
         
-        attributes[.dueDate] = date
+        taskInformation[.dueDate] = date
     }
     
     func taskDetailsViewModel(_ taskDetailsViewModel: AddTaskDetailsViewModel,
@@ -124,6 +124,6 @@ extension TaskCreationViewModel: AddTaskDetailsDelegate {
     }
     
     func notesInput(_ notesInputViewModel: NotesInputViewModel, didUpdateNotes notes: String) {
-        attributes[.notes] = notes
+        taskInformation[.notes] = notes
     }
 }

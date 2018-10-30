@@ -21,7 +21,7 @@ class TagCreationViewModel {
     
     fileprivate var model: TagModel
     fileprivate var tag: Tag?
-    fileprivate var attributes: [TagAttributes: Any] = [:]
+    fileprivate var tagInformation: TagInformation = [:]
     
     fileprivate let addTagTitleViewModel: AddTagTitleViewModel
     fileprivate let addTagColorsViewModel: AddTagColorsViewModel
@@ -53,9 +53,9 @@ class TagCreationViewModel {
     
     func saveTag() {
         if tag == nil {
-            model.save(model.createTag(with: attributes))
+            model.save(model.createTag(with: tagInformation))
         } else {
-            model.update(tag!, with: attributes)
+            model.update(tag!, with: tagInformation)
         }
         
         tag = nil
@@ -69,20 +69,20 @@ class TagCreationViewModel {
 
 extension TagCreationViewModel: AddTagTitleViewModelDelegate {
     func addTag(_ addTagTitleViewModel: AddTagTitleViewModel, createdTag title: String?) {
-        attributes[.title] = title
+        tagInformation[.title] = title
         saveTag()
     }
 }
 
 extension TagCreationViewModel: AddTagColorsViewModelDelegate {
     func addTagColorsViewModel(_ addTagColorsViewModel: AddTagColorsViewModel, didUpdateColorIndex colorIndex: Int64) {
-        attributes[.colorIndex] = colorIndex
+        tagInformation[.colorIndex] = colorIndex
     }
 }
 
 extension TagCreationViewModel: AddTagDetailsViewModelDelegate {
     func privateTagViewModel(_ privateTagViewModel: PrivateTagViewModel, didActivate: Bool) {
-        attributes[.requiresAuthentication] = didActivate
+        tagInformation[.requiresAuthentication] = didActivate
     }
     
     func shouldPresent(viewModel: IconCellPresentable) {
@@ -94,15 +94,15 @@ extension TagCreationViewModel: AddTagDetailsViewModelDelegate {
                        named: String?,
                        arriving: Bool) {
         
-        attributes[.location] = location
-        attributes[.isArrivingLocation] = arriving
+        tagInformation[.location] = location
+        tagInformation[.isArrivingLocation] = arriving
         if let name = named {
-            attributes[.locationName] = name
+            tagInformation[.locationName] = name
         }
     }
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol, didSelectDate date: Date?) {
-        attributes[.dueDate] = date
+        tagInformation[.dueDate] = date
     }
     
     func dateInputViewModel(_ dateInputViewModel: DateInputViewModelProtocol,
