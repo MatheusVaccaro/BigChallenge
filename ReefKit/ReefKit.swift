@@ -35,12 +35,12 @@ public class ReefKit {
         taskCRUD.fetchTasks(predicate: predicate) { completionHandler($0) }
     }
     
-    public func createTask(with attributes: [TaskAttributes : Any]) -> Task {
-        let task = taskCRUD.createTask(with:attributes)
+    public func createTask(with information: TaskInformation) -> Task {
+        let task = taskCRUD.createTask(with:information)
         return task
     }
-    public func update(_ task: Task, with attributes: [TaskAttributes : Any]) {
-        taskCRUD.update(task, with: attributes)
+    public func update(_ task: Task, with information: TaskInformation) {
+        taskCRUD.update(task, with: information)
         ReefSpotlight.updateInSpotlight(task: task)
         save(task)
     }
@@ -72,12 +72,12 @@ public class ReefKit {
         tagCRUD.fetchTags(predicate: predicate) { completionHandler($0) }
     }
     
-    public func createTag(with attributes: [TagAttributes : Any]) -> Tag {
-        let tag = tagCRUD.createTag(with: attributes)
+    public func createTag(with information: TagInformation) -> Tag {
+        let tag = tagCRUD.createTag(with: information)
         return tag
     }
-    public func update(_ tag: Tag, with attributes: [TagAttributes : Any]) {
-        tagCRUD.update(tag, with: attributes)
+    public func update(_ tag: Tag, with information: TagInformation) {
+        tagCRUD.update(tag, with: information)
         ReefSpotlight.updateInSpotlight(tag: tag)
         save(tag)
     }
