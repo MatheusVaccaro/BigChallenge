@@ -237,6 +237,18 @@ extension HomeScreenCoordinator: HomeScreenViewControllerDelegate {
 }
 
 extension HomeScreenCoordinator: RemindersImporterDelegate {
+    func remindersImportedDidStartImport(_ remindersImporter: RemindersImporter) {
+        // TODO: Animate import
+    }
+    
+    func remindersImporterWasDeniedPermission(_ remindersImporter: RemindersImporter) {
+        // TODO: Alert user
+    }
+    
+    func remindersImporterWasGrantedPermission(_ remindersImporter: RemindersImporter) {
+        remindersImporter.importIfGranted()
+    }
+    
     func remindersImporterDidFinishImport(_ remindersImporter: RemindersImporter) {
         let importedTags = remindersImporter.consumeNewImportedTags()
         let importedTasks = remindersImporter.consumeNewImportedTasks()

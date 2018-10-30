@@ -12,12 +12,14 @@ import EventKit
 public class RemindersCommunicator {
     
     private let store: EKEventStore
+    private var hasAddedEventStoreObserver: Bool
     
     weak var delegate: RemindersCommunicatorDelegate?
     
     init(delegate: RemindersCommunicatorDelegate? = nil) {
         self.delegate = delegate
         self.store = EKEventStore()
+        self.hasAddedEventStoreObserver = false
     }
     
     deinit {
@@ -31,10 +33,14 @@ public class RemindersCommunicator {
             if granted {
                 self.delegate?.remindersCommunicatorWasGrantedAccessToReminders(self)
                 
-                NotificationCenter.default.addObserver(self,
-                                                    selector: #selector(self.eventStoreChangedNotificationHandler(_:)),
-                                                    name: .EKEventStoreChanged, object: self.store)
-                
+                if !self.hasAddedEventStoreObserver {
+                    self.hasAddedEventStoreObserver = true
+                    
+                    let eventHandler = #selector(self.eventStoreChangedNotificationHandler(_:))
+                    NotificationCenter.default.addObserver(self,
+                                                           selector: eventHandler,
+                                                           name: .EKEventStoreChanged, object: self.store)
+                }
             } else {
                 self.delegate?.remindersCommunicatorWasDeniedAccessToReminders(self)
             }
@@ -56,7 +62,6 @@ public class RemindersCommunicator {
     }
     
     public func fetchReminder(withIdentifier identifier: String) -> Reminder? {
-        // TODO Deal with calendarExternalIdentifier
     	return store.calendarItem(withIdentifier: identifier) as? EKReminder
     }
     
@@ -88,12 +93,8 @@ public class RemindersCommunicator {
         return store.calendars(for: .reminder)
     }
     
-    public func getDefaultCalendar() -> EKCalendar {
-        guard let defaultCalendar = store.defaultCalendarForNewReminders() else {
-            fatalError("No default calendar for new reminders has been set.")
-        }
-        
-        return defaultCalendar
+    public func getDefaultCalendar() -> EKCalendar? {
+        return store.defaultCalendarForNewReminders()
     }
     
     public func save(_ reminder: Reminder) {
