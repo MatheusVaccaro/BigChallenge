@@ -75,8 +75,9 @@ public class RemindersImporter {
             
             // Convert reminders to task and tag data.
             var importedTagsInformation = [TagInformation]()
-            var importedTasksInformation = [(TaskInformation, String)]()
+            var importedTasksInformation = [(TaskInformation, Reminder)]()
             
+            // Parse all reminders that were not yet imported
             for reminder in reminders where !self.checkImportStatus(for: reminder) {
                 
                 let tagInformation = self.convertTagInformation(from: reminder)
@@ -88,20 +89,26 @@ public class RemindersImporter {
                 }
                 
                 let taskInformation = self.convertTaskInformation(from: reminder)
-                importedTasksInformation.append(taskInformation)
+                importedTasksInformation.append((taskInformation, reminder))
             }
             
             // Create tags and tasks and link them properly.
+
             let newTags = importedTagsInformation.map({ self.tagModel.createTag(with: $0) })
-            
+			
             let newTasks = importedTasksInformation.map({ importedTaskData -> Task in
-                var (taskInformation, tagName) = importedTaskData
+                var (taskInformation, reminder) = importedTaskData
+                let tagName = reminder.calendar.title
                 
                 // Retrieve the tag object created above, using its name
                 let tag = newTags.first(where: { $0.title == tagName })!
                 taskInformation[.tags] = [tag]
-            	
-                return self.taskModel.createTask(with: taskInformation)
+                
+                // Create the task and mark it as an imported task
+                let task = self.taskModel.createTask(with: taskInformation)
+                self.taskModel.associate(task, with: reminder.dataPacket)
+                
+                return task
             })
             
             self.lastImportedTags = Set(newTags)
@@ -169,7 +176,7 @@ public class RemindersImporter {
         return equivalentTask
     }
     
-    private func convertTaskInformation(from reminder: Reminder) -> (taskInfo: TaskInformation, tagName: String) {
+    private func convertTaskInformation(from reminder: Reminder) -> TaskInformation {
         let taskInformation: TaskInformation =
             [.title : reminder.title as Any,
              .isCompleted : reminder.isCompleted,
@@ -177,9 +184,7 @@ public class RemindersImporter {
              .dueDate : reminder.completionDate as Any,
              .creationDate : reminder.creationDate as Any]
         
-        let tagName = reminder.calendar.title
-        
-        return (taskInformation, tagName)
+        return taskInformation
     }
     
     private func convertTagInformation(from reminder: Reminder) -> TagInformation {
