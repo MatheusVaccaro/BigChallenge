@@ -129,6 +129,7 @@ class IconTableViewCell: UITableViewCell {
                 tagIcons[index].tintColor =
                     UIColor(cgColor:UIColor.tagColors[info.colorIndex].first!)
                 tagLabels[index].text = info.text
+                tagLabels[index].textColor = ReefColors.cellTagLabel
             } else {
                 tagIcons[index].isHidden = true
                 tagLabels[index].isHidden = true
