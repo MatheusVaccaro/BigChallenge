@@ -14,14 +14,15 @@ public class RemindersImporter {
     
     public static var instance: RemindersImporter?
     
-    var delegate: RemindersImporterDelegate?
+    weak var delegate: RemindersImporterDelegate?
     
 	private let taskModel: TaskModel
     private let tagModel: TagModel
     private let remindersDB: RemindersCommunicator
-    private(set) var isSyncing: Bool
     
+    private(set) var isSyncing: Bool
     private(set) var isImporting: Bool
+    
     private var lastImportedTags: Set<Tag>
     private var lastImportedTasks: Set<Task>
     
@@ -50,9 +51,9 @@ public class RemindersImporter {
     
     /// import from remidners only if permission is already granted
     func importIfGranted() {
-        if EKEventStore.authorizationStatus(for: .reminder) == .authorized {
-            requestAndImport()
-        }
+        guard EKEventStore.authorizationStatus(for: .reminder) == .authorized else { return }
+        
+        importTasksFromReminders()
     }
 
     /**
@@ -60,6 +61,9 @@ public class RemindersImporter {
      converts them to tasks and tags, and then finally saves them to our own store.
      */
     private func importTasksFromReminders() {
+        guard !isImporting else { return }
+        
+        delegate?.remindersImportedDidStartImport(self)
         isImporting = true
         
         remindersDB.fetchAllReminders { allReminders in
@@ -78,7 +82,7 @@ public class RemindersImporter {
                 let tagInformation = self.convertTagInformation(from: reminder)
                 // Check for duplicate tags
                 if let tagTitle = tagInformation[.title] as? String,
-                   !importedTagsInformation.contains(where: { $0[.title] as! String == tagTitle }) {
+                   !importedTagsInformation.compactMap({ $0[.title] as? String }).contains(where: { $0 == tagTitle }) {
         
                     importedTagsInformation.append(tagInformation)
                 }
@@ -292,24 +296,25 @@ public class RemindersImporter {
 }
 
 extension RemindersImporter: RemindersCommunicatorDelegate {
-    //swiftlint:disable line_length
-    func remindersCommunicatorDidDetectEventStoreChange(_ remindersCommunicator: RemindersCommunicator, notification: NSNotification) {
-//        syncWithReminders()
+    func remindersCommunicatorDidDetectEventStoreChange(_ remindersCommunicator: RemindersCommunicator,
+                                                        notification: NSNotification) {
+        //syncWithReminders()
     }
     
     func remindersCommunicatorWasGrantedAccessToReminders(_ remindersCommunicator: RemindersCommunicator) {
-        // TODO Set persistent flag to avoid importing each time the app launches.
-        importTasksFromReminders()
+        delegate?.remindersImporterWasGrantedPermission(self)
     }
     
     func remindersCommunicatorWasDeniedAccessToReminders(_ remindersCommunicator: RemindersCommunicator) {
-        // TODO Handle access denial
-        // Sounds like a great candidate for RX
+        delegate?.remindersImporterWasDeniedPermission(self)
     }
 }
 
-protocol RemindersImporterDelegate {
+protocol RemindersImporterDelegate: class {
+    func remindersImportedDidStartImport(_ remindersImporter: RemindersImporter)
     func remindersImporterDidFinishImport(_ remindersImporter: RemindersImporter)
+    func remindersImporterWasDeniedPermission(_ remindersImporter: RemindersImporter)
+    func remindersImporterWasGrantedPermission(_ remindersImporter: RemindersImporter)
 }
 
 public protocol Reminder: class {
