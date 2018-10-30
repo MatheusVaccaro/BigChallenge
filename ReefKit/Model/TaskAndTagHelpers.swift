@@ -103,6 +103,10 @@ public extension Task {
         return allTags.contains { $0.requiresAuthentication }
     }
     
+    public var isLate: Bool {
+        return !dates.isEmpty && nextDate == nil
+    }
+    
     public func isInside(_ location: CLLocationCoordinate2D) -> Bool {
         for taskLocation in locations where taskLocation.contains( location ) { return true }
         return false

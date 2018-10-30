@@ -29,6 +29,10 @@ public class TaskCellViewModel {
         return task.isPrivate
     }
     
+    var isTaskLate: Bool {
+        return task.isLate
+    }
+    
     var shouldShowLocationIcon: Bool {
         return !task.locations.isEmpty
     }

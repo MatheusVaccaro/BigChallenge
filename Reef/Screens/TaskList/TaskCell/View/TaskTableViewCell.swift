@@ -73,7 +73,13 @@ public class TaskTableViewCell: UITableViewCell {
         }
         
         if viewModel.shouldShowDateIcon {
-            dateStringView.backgroundColor = ReefColors.cellIcons
+            dateStringView.backgroundColor = viewModel.isTaskLate
+                ? ReefColors.deleteRed
+                : ReefColors.cellIcons
+            dateStringLabel.textColor = viewModel.isTaskLate
+                ? UIColor.white
+                : ReefColors.cellTagLabel
+            
             dateStringLabel.text = viewModel.dateString(with: "dd MMM")
             dateStringView.isHidden = false
         } else {
