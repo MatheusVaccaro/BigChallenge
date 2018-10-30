@@ -19,6 +19,7 @@ class ApplicationCoordinator: Coordinator {
     private let reefKit: ReefKit
     private let taskModel: TaskModel
     private let tagModel: TagModel
+    private let remindersImporter: RemindersImporter
     private var selectedTags: [Tag]
     
     init(window: UIWindow) {
@@ -28,6 +29,7 @@ class ApplicationCoordinator: Coordinator {
         self.reefKit = ReefKit()
         self.tagModel = TagModel(reefKit: reefKit)
         self.taskModel = TaskModel(reefKit: reefKit)
+        self.remindersImporter = RemindersImporter(taskModel: taskModel, tagModel: tagModel)
         self.selectedTags = []
         
         configureNavigationController()
@@ -79,8 +81,10 @@ class ApplicationCoordinator: Coordinator {
         let homeScreenCoordinator = HomeScreenCoordinator(presenter: rootViewController,
                                                         taskModel: taskModel,
                                                         tagModel: tagModel,
-                                                        selectedTags: selectedTags)
+                                                        selectedTags: selectedTags,
+                                                        remindersImporter: remindersImporter)
         addChild(coordinator: homeScreenCoordinator)
         homeScreenCoordinator.start()
+        remindersImporter.requestAndImport()
     }
 }

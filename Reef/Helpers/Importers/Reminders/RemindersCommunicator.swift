@@ -35,8 +35,8 @@ public class RemindersCommunicator {
                                                     selector: #selector(self.eventStoreChangedNotificationHandler(_:)),
                                                     name: .EKEventStoreChanged, object: self.store)
                 
-            } else if let error = error {
-                self.delegate?.remindersCommunicatorWasDeniedAccessToReminders(self, error: error)
+            } else {
+                self.delegate?.remindersCommunicatorWasDeniedAccessToReminders(self)
             }
         }
     }
@@ -109,7 +109,7 @@ public class RemindersCommunicator {
 
 protocol RemindersCommunicatorDelegate: class {
     func remindersCommunicatorWasGrantedAccessToReminders(_ remindersCommunicator: RemindersCommunicator)
-    func remindersCommunicatorWasDeniedAccessToReminders(_ remindersCommunicator: RemindersCommunicator, error: Error)
+    func remindersCommunicatorWasDeniedAccessToReminders(_ remindersCommunicator: RemindersCommunicator)
     func remindersCommunicatorDidDetectEventStoreChange(_ remindersCommunicator: RemindersCommunicator,
                                                         notification: NSNotification)
 }

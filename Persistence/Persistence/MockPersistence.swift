@@ -10,8 +10,8 @@ import Foundation
 import CoreData
 
 class MockPersistence: LocalPersistence {
-    override init() {
-        super.init()
+    override init(dispatchQueue: DispatchQueue) {
+        super.init(dispatchQueue: dispatchQueue)
         self.persistentContainer = {
             /* This property is optional since there are legitimate
              error conditions that could cause the creation of the store to fail.

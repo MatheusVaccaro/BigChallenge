@@ -49,6 +49,13 @@ public class TaskModel {
         reefKit.save(task)
     }
     
+    /**
+     Batch save. Intent is to trigger only one persistence change notification.
+     */
+    public func save(_ tasks: [Task]) {
+        reefKit.save(tasks)
+    }
+    
     public func delete(_ task: Task) {
         guard tasks.contains(task) else { print("could not delete \(task) "); return }
         reefKit.delete(task)

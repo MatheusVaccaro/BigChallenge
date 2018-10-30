@@ -48,6 +48,21 @@ public class ReefKit {
         ReefSpotlight.index(task: task)
         taskCRUD.save(task)
     }
+    
+    /**
+     Batch save. Intent is to trigger only one persistence change notification.
+ 	*/
+    public func save(_ tasks: [Task]) {
+        for task in tasks {
+            ReefSpotlight.index(task: task)
+        }
+        if let firstTask = tasks.first {
+            // This is done like this because, as of now, the method below saves the current context. That said:
+            // TODO: Refactor local persistence to support single-task saving, instead of saving all tasks in current context
+            taskCRUD.save(firstTask)
+        }
+    }
+    
     public func delete(_ task: Task) {
         ReefSpotlight.deindex(task: task)
         taskCRUD.delete(task)
@@ -70,6 +85,20 @@ public class ReefKit {
         ReefSpotlight.index(tag: tag)
         tagCRUD.save(tag)
     }
+    /**
+     Batch save. Intent is to trigger only one persistence change notification.
+     */
+    public func save(_ tags: [Tag]) {
+        for tag in tags {
+            ReefSpotlight.index(tag: tag)
+        }
+        if let firstTag = tags.first {
+            // This is done like this because, as of now, the method below saves the current context. That said:
+            // TODO: Refactor local persistence to support single-task saving, instead of saving all tasks in current context
+            tagCRUD.save(firstTag)
+        }
+    }
+    
     public func delete(_ tag: Tag) {
         ReefSpotlight.deindex(tag: tag)
         tagCRUD.delete(tag)
@@ -78,32 +107,38 @@ public class ReefKit {
 
 extension ReefKit: PersistenceDelegate {
     public func persistence(_ persistence: PersistenceProtocol, didInsertObjects objects: [Storable]) {
-        if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {
-            tasksDelegate?.reef(self, didInsertTasks: tasks)
-        }
-
-        if let tags = (objects.filter { $0 is Tag }) as? [Tag], !tags.isEmpty {
-            tagsDelegate?.reef(self, didInsertTags: tags)
+        DispatchQueue.main.async {
+            if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {
+                self.tasksDelegate?.reef(self, didInsertTasks: tasks)
+            }
+            
+            if let tags = (objects.filter { $0 is Tag }) as? [Tag], !tags.isEmpty {
+                self.tagsDelegate?.reef(self, didInsertTags: tags)
+            }
         }
     }
     
     public func persistence(_ persistence: PersistenceProtocol, didUpdateObjects objects: [Storable]) {
-        if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {
-            tasksDelegate?.reef(self, didUpdateTasks: tasks)
-        }
-        
-        if let tags = (objects.filter { $0 is Tag }) as? [Tag], !tags.isEmpty {
-            tagsDelegate?.reef(self, didUpdateTags: tags)
+        DispatchQueue.main.async {
+            if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {
+                self.tasksDelegate?.reef(self, didUpdateTasks: tasks)
+            }
+            
+            if let tags = (objects.filter { $0 is Tag }) as? [Tag], !tags.isEmpty {
+                self.tagsDelegate?.reef(self, didUpdateTags: tags)
+            }
         }
     }
     
     public func persistence(_ persistence: PersistenceProtocol, didDeleteObjects objects: [Storable]) {
-        if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {
-            tasksDelegate?.reef(self, didDeleteTasks: tasks)
-        }
-        
-        if let tags = (objects.filter { $0 is Tag }) as? [Tag], !tags.isEmpty {
-            tagsDelegate?.reef(self, didDeleteTags: tags)
+        DispatchQueue.main.async {
+            if let tasks = (objects.filter { $0 is Task }) as? [Task], !tasks.isEmpty {
+                self.tasksDelegate?.reef(self, didDeleteTasks: tasks)
+            }
+            
+            if let tags = (objects.filter { $0 is Tag }) as? [Tag], !tags.isEmpty {
+                self.tagsDelegate?.reef(self, didDeleteTags: tags)
+            }
         }
     }
 }

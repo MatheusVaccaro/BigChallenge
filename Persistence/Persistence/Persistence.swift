@@ -24,15 +24,19 @@ public class Persistence: PersistenceProtocol {
     private let localPersistence: LocalPersistence
     private let remotePersistence: PersistenceProtocol?
     
+    private let dispatchQueue: DispatchQueue
+    
     // MARK: - Persistence Lifecycle
     
     public init(configuration: Configuration = .inDevice) {
+        dispatchQueue = DispatchQueue(label: "PersistenceThread", qos: .userInitiated)
+        
         switch configuration {
         case .inDevice:
-            localPersistence = LocalPersistence()
+            localPersistence = LocalPersistence(dispatchQueue: dispatchQueue)
             remotePersistence = nil
         case .inMemory:
-            localPersistence = MockPersistence()
+            localPersistence = MockPersistence(dispatchQueue: dispatchQueue)
             remotePersistence = nil
         }
         localPersistence.delegate = self
@@ -61,12 +65,14 @@ public class Persistence: PersistenceProtocol {
     }
     
     public func save() {
-        do {
-            try localPersistence.save()
-        } catch CoreDataError.couldNotSaveContext(let reason) {
-            fatalError(reason)
-        } catch {
-            fatalError("Unexpected error: \(error).")
+        dispatchQueue.async {
+            do {
+                try self.localPersistence.save()
+            } catch CoreDataError.couldNotSaveContext(let reason) {
+                fatalError(reason)
+            } catch {
+                fatalError("Unexpected error: \(error).")
+            }
         }
     }
     

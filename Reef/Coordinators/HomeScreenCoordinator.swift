@@ -34,7 +34,8 @@ class HomeScreenCoordinator: Coordinator {
     init(presenter: UINavigationController,
          taskModel: TaskModel,
          tagModel: TagModel,
-         selectedTags: [Tag]) {
+         selectedTags: [Tag],
+         remindersImporter: RemindersImporter) {
         
         self.presenter = presenter
         self.taskModel = taskModel
@@ -43,7 +44,8 @@ class HomeScreenCoordinator: Coordinator {
         
         self.childrenCoordinators = []
         
-        self.remindersImporter = RemindersImporter(taskModel: taskModel, tagModel: tagModel)
+        self.remindersImporter = remindersImporter
+        remindersImporter.delegate = self
         
         #if DEBUG
         print("+++ INIT HomeScreenCoordinator")
@@ -231,5 +233,15 @@ extension HomeScreenCoordinator: HomeScreenViewControllerDelegate {
             .setupTaskList(viewModel: taskListViewModel, viewController: taskListViewController!)
         homeScreenViewController!
             .setupTagCollection(viewModel: tagCollectionViewModel, viewController: tagCollectionViewController!)
+    }
+}
+
+extension HomeScreenCoordinator: RemindersImporterDelegate {
+    func remindersImporterDidFinishImport(_ remindersImporter: RemindersImporter) {
+        let importedTags = remindersImporter.consumeNewImportedTags()
+        let importedTasks = remindersImporter.consumeNewImportedTasks()
+        
+        tagModel.save(Array(importedTags))
+        taskModel.save(Array(importedTasks))
     }
 }

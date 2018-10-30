@@ -53,6 +53,10 @@ public class TagModel {
         reefKit.save(tag) // delegate manages the array
     }
     
+    public func save(_ tags: [Tag]) {
+        reefKit.save(tags)
+    }
+    
     public func delete(object: Tag) {
         guard tags.contains(object) else { print("could not delete \(object) "); return }
         reefKit.delete(object) // delegate manages the array
