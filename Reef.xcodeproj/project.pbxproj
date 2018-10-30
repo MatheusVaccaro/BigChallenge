@@ -1436,6 +1436,7 @@
 				22FA2834212F7D0600FC74D3 /* Embed App Extensions */,
 				226C31B62123BAC100BC5898 /* Fabric Script */,
 				1628B48820C88A9E0038D65E /* Swift Lint Pod */,
+				227C21C62188C60F00A9C4F6 /* remove settings */,
 			);
 			buildRules = (
 			);
@@ -1653,6 +1654,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 9d0ff1cd027783f4796366946fbc8b3ba7e8d98f f8a001a87ba3f3df88b1c5e0bf98c12873e37cd4eeda5744b8d47dd7bbc4f3dd\n";
+		};
+		227C21C62188C60F00A9C4F6 /* remove settings */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "remove settings";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "BUILD_APP_DIR=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\n\nif [ \"$CONFIGURATION\" == \"Release\" ]; then\nrm -Rf $BUILD_APP_DIR/Settings.bundle\nfi\n";
 		};
 		7B8A3E05277891C7E4FEF6D7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
