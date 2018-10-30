@@ -19,12 +19,12 @@ class ColorCollectionViewCell: UICollectionViewCell {
         didSet {
             isSelected ? select() : deselect()
             CATransaction.disableAnimations {
-                self.layoutIfNeeded()
             }
             
-            UIView.animate(withDuration: 0.3, animations: {
-                self.gradientLayer.frame = self.gradientView.bounds
+            UIView.animate(withDuration: 0, animations: {
+                self.layoutIfNeeded()
                 })
+            self.gradientLayer.frame = self.gradientView.bounds
         }
     }
     
