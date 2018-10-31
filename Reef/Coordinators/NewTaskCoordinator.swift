@@ -52,12 +52,16 @@ class NewTaskCoordinator: NSObject, Coordinator {
         
         tagCollectionViewModel.selectedTags = selectedTags
 
+        #if DEBUG
         print("+++ INIT NewTaskCoordinator")
+        #endif
     }
     
+    #if DEBUG
     deinit {
         print("--- DEINIT NewTaskCoordinator")
     }
+    #endif
     
     func start() {
         tagCollectionViewController = TagCollectionViewController.instantiate()

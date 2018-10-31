@@ -48,14 +48,18 @@ public class TaskListViewModel {
         
         model.delegate = self
         
+        #if DEBUG
         print("+++ INIT TaskListViewModel")
+        #endif
         
         filterTasks(with: selectedTags, relatedTags: relatedTags)
     }
     
+    #if DEBUG
     deinit {
         print("--- DEINIT TaskListViewModel")
     }
+    #endif
     
     private var flatTasks: [Task] {
         return taskListData.flatMap { $0.rows }

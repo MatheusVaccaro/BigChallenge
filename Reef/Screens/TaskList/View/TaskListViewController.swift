@@ -46,12 +46,17 @@ public class TaskListViewController: UIViewController {
         tableView.dataSource = self
         viewModel.UIDelegate = self
         UNUserNotificationCenter.current().delegate = self
+        
+        #if DEBUG
         print("+++ INIT TaskListViewController")
+        #endif
     }
     
+    #if DEBUG
     deinit {
         print("--- DEINIT TaskListViewController")
     }
+    #endif
     
     fileprivate func textHeaderView(with text: String) -> UIView {
         

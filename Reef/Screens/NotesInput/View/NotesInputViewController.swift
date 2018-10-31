@@ -35,12 +35,16 @@ class NotesInputViewController: UIViewController {
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
         
+        #if DEBUG
         print("+++ INIT NotesInputViewController")
+        #endif
     }
     
+    #if DEBUG
     deinit {
         print("--- DEINIT NotesInputViewController")
     }
+    #endif
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize =
