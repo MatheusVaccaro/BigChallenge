@@ -60,7 +60,7 @@ struct Strings {
         
         struct ListScreen {
             static let locationHeader =
-                NSLocalizedString("locationHeader", comment: "header title for recommended by 'location' section")
+                NSLocalizedString("locationSectionHeader", comment: "header title for recommended by 'location' section")
             
             static let lateHeader =
                 NSLocalizedString("lateHeader", comment: "header title for recommended by 'late' section")
