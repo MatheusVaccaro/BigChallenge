@@ -207,10 +207,10 @@
 "task cell voiceOver hint" = "Dê dois toques para editar";
 
 /* meaning to hide something */
-"hide" = "Esconder";
+"hide" = "Esconder Completas";
 
 /* meaning to show something */
-"show" = "Mostrar";
+"show" = "Mostrar Completas";
 
 /* creates a tag in tag screen (voiceOver) */
 "create  action" = "Pronto";
