@@ -223,3 +223,6 @@
 
 /* meaning to complete an action (done creating task) */
 "done" = "Pronto";
+
+/* Location section header */
+"locationSectionHeader" = "Baseado em sua localização";
