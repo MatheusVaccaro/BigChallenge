@@ -72,11 +72,6 @@ class HomeScreenViewModel {
         return activity
     }()
     
-    func updateSelectedTagsIfNeeded(_ tags: [Tag]?) {
-        selectedTags = tags ?? []
-        print("selected tags are: \(selectedTags.map { $0.title })")
-    }
-    
     func updateUserActivity(_ activity: NSUserActivity) {
         guard !selectedTags.isEmpty else { return }
         
@@ -84,6 +79,11 @@ class HomeScreenViewModel {
         activity.title = userActivityTitle
         
         activity.becomeCurrent()
+    }
+    
+    func updateSelectedTagsIfNeeded(_ tags: [Tag]?) {
+        selectedTags = tags ?? []
+        print("selected tags are: \(selectedTags.map { $0.title })")
     }
     
     var emptyStateStreak: Int {

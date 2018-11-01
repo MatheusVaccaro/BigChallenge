@@ -56,13 +56,14 @@ class HomeScreenCoordinator: Coordinator {
         homeScreenViewController = HomeScreenViewController.instantiate()
         
         taskListViewController = TaskListViewController.instantiate()
-        taskListViewModel = TaskListViewModel(model: taskModel)
-        taskListViewController.viewModel = taskListViewModel
-        
         tagCollectionViewController = TagCollectionViewController.instantiate()
+        
         tagCollectionViewModel = TagCollectionViewModel(model: tagModel,
                                                         filtering: true,
                                                         selectedTags: selectedTags)
+        
+        taskListViewModel = TaskListViewModel(model: taskModel,
+                                              selectedTags: selectedTags)
         
         homeScreenViewModel = HomeScreenViewModel(taskModel: taskModel,
                                                   tagModel: tagModel,
@@ -70,6 +71,7 @@ class HomeScreenCoordinator: Coordinator {
                                                   taskListViewModel: taskListViewModel,
                                                   tagCollectionViewModel: tagCollectionViewModel)
         
+        taskListViewController.viewModel = taskListViewModel
         homeScreenViewController.viewModel = homeScreenViewModel
         tagCollectionViewController.viewModel = tagCollectionViewModel
         

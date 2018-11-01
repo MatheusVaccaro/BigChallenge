@@ -56,8 +56,7 @@ class TagCollectionViewModel {
         self.selectedTags = selectedTags
         self.filteredTags = model.tags
         self.filtering = filtering
-
-        
+        reload()
         model.delegate = self
     }
     
