@@ -37,7 +37,9 @@ public class TaskListViewController: UIViewController {
                            forCellReuseIdentifier: TaskTableViewCell.identifier)
         
         tableView.estimatedRowHeight = 66
-        tableView.estimatedSectionHeaderHeight = 50
+        tableView.estimatedSectionHeaderHeight = 25
+        tableView.sectionHeaderHeight = UITableView.automaticDimension
+    
         tableView.contentInset.top = 20
      
         tableView.delegate = self
