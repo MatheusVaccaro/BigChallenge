@@ -87,6 +87,21 @@ public class TaskListViewModel {
         return taskListData[section].header
     }
     
+    func image(forHeaderIn section: Int) -> UIImage? {
+        switch taskListData[section].header {
+        case locationHeader:
+            return UIImage(named: "locationIcon")
+        case lateHeader:
+            return UIImage(named: "dateIcon")
+        case nextHeader:
+            return UIImage(named: "dateIcon")
+        case recentHeader:
+            return UIImage(named: "dateIcon")
+        default:
+            return nil
+        }
+    }
+    
     func isCompleted(_ section: Int) -> Bool {
         guard hasCompletedTasks else { return false }
         return taskListData.count-1 == section
