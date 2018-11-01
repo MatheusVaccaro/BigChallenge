@@ -127,6 +127,11 @@ class TagCreationFrameViewController: UIViewController {
     private func removeBlur() {
         blurView.removeFromSuperview()
     }
+    
+    override func accessibilityPerformEscape() -> Bool {
+        cancelAddTag()
+        return true
+    }
 
 }
 
