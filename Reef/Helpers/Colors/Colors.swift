@@ -23,6 +23,8 @@ protocol Theme {
     static var doneButtonBackground: UIColor { get }
     
     // MARK: - Cell
+    static var sectionHeaderLabel: UIColor { get }
+    static var sectionHeaderIcon: UIColor { get }
     static var iconCellIcon: UIColor { get }
     static var taskTitleLabel: UIColor { get }
     static var cellTagLabel: UIColor { get }
@@ -77,6 +79,8 @@ class ReefColors: Theme {
     static let doneButtonBackground: UIColor = theme.doneButtonBackground
     
     // MARK: - Cell
+    static var sectionHeaderLabel: UIColor = theme.sectionHeaderLabel
+    static var sectionHeaderIcon: UIColor = theme.sectionHeaderIcon
     static let iconCellIcon: UIColor = theme.iconCellIcon
     static let taskTitleLabel: UIColor = theme.taskTitleLabel
     static let cellTagLabel: UIColor = theme.cellTagLabel

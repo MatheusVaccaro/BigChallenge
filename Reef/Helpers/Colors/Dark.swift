@@ -37,6 +37,10 @@ class Dark: Theme {
         [Dark.placeholder.cgColor, Dark.placeholder.cgColor]
     
     // MARK: - Cell
+    static var sectionHeaderLabel: UIColor = .white
+    static var sectionHeaderIcon: UIColor =
+        UIColor(red: 119/255.0, green: 120/255.0, blue: 120/255.0, alpha: 1)
+    
     static let iconCellIcon: UIColor = Dark.placeholder
     static let taskTitleLabel: UIColor = .white
     

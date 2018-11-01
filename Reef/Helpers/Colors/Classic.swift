@@ -37,6 +37,11 @@ class Classic: Theme {
         [UIColor.black.cgColor, UIColor.black.cgColor]
     
     // MARK: - Cell
+    static var sectionHeaderLabel: UIColor =
+         UIColor(red: 63/255.0, green: 69/255.0, blue: 79/255.0, alpha: 1)
+    static var sectionHeaderIcon: UIColor =
+        UIColor(red: 63/255.0, green: 69/255.0, blue: 79/255.0, alpha: 1)
+    
     static let iconCellIcon: UIColor = .black
     static let taskTitleLabel: UIColor = .black
     
