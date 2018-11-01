@@ -100,10 +100,16 @@ public class TaskListViewModel {
         self.taskListData = []
         
         if selectedTags.isEmpty { //RECOMMENDED
-            taskListData.append((rows: model.recommender.recentTasks, header: recentHeader))
             taskListData.append((rows: model.recommender.localTasks, header: locationHeader))
-            taskListData.append((rows: model.recommender.nextTasks, header: nextHeader))
             taskListData.append((rows: model.recommender.lateTasks, header: lateHeader))
+            taskListData.append((rows: model.recommender.nextTasks, header: nextHeader))
+            taskListData.append((rows: model.recommender.recentTasks, header: recentHeader))
+            
+            taskListData = Array(
+                taskListData
+                    .filter { !$0.rows.isEmpty }
+                    .prefix(1)
+            )
         } else { //TASKS FROM TAGS
             let mainTasks = model.tasks.filter { !$0.isCompleted && isMainTask($0) }
             taskListData.append((rows: mainTasks, header: ""))
