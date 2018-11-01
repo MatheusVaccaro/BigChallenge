@@ -246,7 +246,9 @@ extension TaskListViewModel: TaskModelDelegate {
                         UIDelegate?.taskListViewModelDidUpdate(self)
                         return
                     }
-                    UIDelegate?.taskListViewModel(self, didUpdateAt: [IndexPath(row: row, section: section)])
+                    if !isCompleted(section) || !isCompleteSectionCollapsed {
+                        UIDelegate?.taskListViewModel(self, didUpdateAt: [IndexPath(row: row, section: section)])
+                    }
                 }
                 section += 1
             }
