@@ -235,12 +235,12 @@ extension TaskListViewModel: TaskModelDelegate {
             var section = 0
             while section < taskListData.count {
                 if let row = taskListData[section].rows.index(of: task) {
-                    if taskListData[section].rows.count == 1 {
+                    guard taskListData[section].rows.count > 1 else {
                         filterTasks(with: selectedTags, relatedTags: relatedTags)
                         UIDelegate?.taskListViewModelDidUpdate(self)
-                    } else {
-                        UIDelegate?.taskListViewModel(self, didUpdateAt: [IndexPath(row: row, section: section)])
+                        return
                     }
+                    UIDelegate?.taskListViewModel(self, didUpdateAt: [IndexPath(row: row, section: section)])
                 }
                 section += 1
             }
