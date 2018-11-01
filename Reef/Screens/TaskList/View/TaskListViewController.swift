@@ -86,39 +86,65 @@ extension TaskListViewController: UITableViewDelegate {
         viewModel.shouldGoToEdit(task)
     }
     
-    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
-    }
+//    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 50
+//    }
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         headerView.frame = view.frame
         
         let headerLabel = UILabel()
-        headerLabel.text = viewModel.title(forHeaderInSection: section)
-        headerLabel.textColor = ReefColors.taskTitleLabel
-        headerLabel.sizeToFit()
-        headerView.addSubview(headerLabel)
+        headerLabel.font = UIFont.font(sized: 14, weight: .light, with: .headline)
+        headerLabel.textAlignment = .right
         
-        headerLabel.frame.origin.x += 10
-        headerLabel.frame.origin.y =
-            self.tableView(tableView, heightForHeaderInSection: section) - headerLabel.bounds.height - 5
+        var imageView: UIImageView?
         
         if viewModel.isCompleted(section) {
             let tapGesture =
                 UITapGestureRecognizer(target: self, action: #selector(toggleCollapseInCompleteSection))
             headerView.addGestureRecognizer(tapGesture)
             
-            let headerLabel = UILabel()
             headerLabel.text = viewModel.showHideHeader
-            headerLabel.textColor = ReefColors.taskTitleLabel //TODO: fix (this header has its own color)
-            headerLabel.sizeToFit()
-            headerView.addSubview(headerLabel)
+            headerLabel.textColor = ReefColors.theme.cellTagLabel
             
-            headerLabel.frame.origin.x =
-                view.frame.width - headerLabel.bounds.width - 8
-            headerLabel.frame.origin.y =
-                self.tableView(tableView, heightForHeaderInSection: section) - headerLabel.bounds.height - 5
+        } else {
+            if let image = viewModel.image(forHeaderIn: section) {
+                imageView = UIImageView(image: image.withRenderingMode(.alwaysTemplate))
+                imageView?.tintColor = ReefColors.theme.sectionHeaderIcon
+            }
+            
+            headerLabel.text = viewModel.title(forHeaderInSection: section)
+            headerLabel.textColor = ReefColors.theme.sectionHeaderLabel
+            
+        }
+        
+        headerLabel.translatesAutoresizingMaskIntoConstraints = false
+        headerLabel.sizeToFit()
+        headerLabel.adjustsFontSizeToFitWidth = true
+        
+        headerView.addSubview(headerLabel)
+
+        NSLayoutConstraint.activate([
+            headerLabel.rightAnchor.constraint(equalTo: headerView.rightAnchor, constant: -16),
+            headerLabel.topAnchor.constraint(greaterThanOrEqualTo: headerView.topAnchor),
+            headerLabel.leftAnchor.constraint(greaterThanOrEqualTo: headerView.leftAnchor, constant: 16),
+            headerLabel.bottomAnchor.constraint(lessThanOrEqualTo: headerView.bottomAnchor),
+            headerLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+            headerLabel.heightAnchor.constraint(equalToConstant: headerLabel.frame.height)
+            ])
+        
+        if let imageView = imageView {
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            headerView.addSubview(imageView)
+            
+            NSLayoutConstraint.activate([
+                imageView.centerYAnchor.constraint(equalTo: headerLabel.centerYAnchor),
+                imageView.rightAnchor.constraint(equalTo: headerLabel.leftAnchor, constant: -3),
+                imageView.leftAnchor.constraint(greaterThanOrEqualTo: headerView.leftAnchor, constant: 16),
+                imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
+                imageView.heightAnchor.constraint(equalTo: headerLabel.heightAnchor, multiplier: 0.8)
+                ])
         }
         
         return headerView
