@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // MARK: Application Coordinator
-        loadTheme()
         startApplicationCoordinator(with: window, selectedTagIDs: [])
         setNotificationCategories()
         
@@ -50,6 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     startApplicationCoordinator(with: window!, selectedTagIDs: [tagID])
                 }
             }
+        } else {
+            if let ids = userActivity.userInfo?["selectedTagIDs"] as? [String] {
+                startApplicationCoordinator(with: window!, selectedTagIDs: ids)
+            }
         }
         
         return true
@@ -57,6 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Helper Methods
     func startApplicationCoordinator(with window: UIWindow, selectedTagIDs: [String]? = nil, selectedTask: String? = nil) {
+        loadTheme()
         requestAuthorizationForNotifications()
         let applicationCoordinator = ApplicationCoordinator(window: window)
         self.applicationCoordinator = applicationCoordinator

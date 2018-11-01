@@ -40,10 +40,10 @@ public class TaskListViewModel {
     
     private let model: TaskModel
     
-    required public init(model: TaskModel) {
+    required public init(model: TaskModel, selectedTags: [Tag] = []) {
         self.model = model
         self.taskListData = []
-        self.selectedTags = []
+        self.selectedTags = selectedTags
         self.relatedTags = []
         
         model.delegate = self

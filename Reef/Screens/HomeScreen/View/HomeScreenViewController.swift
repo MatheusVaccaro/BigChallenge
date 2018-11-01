@@ -222,13 +222,4 @@ extension HomeScreenViewController {
         viewModel.startAddTask()
         return true
     }
-    
-    override var accessibilityCustomRotors: [UIAccessibilityCustomRotor]? {
-        get {
-            return nil //TODO
-        }
-        set {
-            
-        }
-    }
 }
