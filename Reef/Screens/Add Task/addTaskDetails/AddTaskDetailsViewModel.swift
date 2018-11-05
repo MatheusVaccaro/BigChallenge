@@ -68,17 +68,23 @@ class AddTaskDetailsViewModel {
     
     func edit(task: Task) {
         if task.notes != nil {
-            instantiateCell(ofType: .notesCell)
+            if notesInputViewModel == nil {
+                instantiateCell(ofType: .notesCell)
+            }
             notesInputViewModel?.edit(task)
         }
         
         if task.location != nil {
-            instantiateCell(ofType: .locationCell)
+            if locationInputViewModel == nil {
+                instantiateCell(ofType: .locationCell)
+            }
             locationInputViewModel?.edit(task)
         }
         
         if task.dueDate != nil {
-            instantiateCell(ofType: .dateCell)
+            if dateInputViewModel == nil {
+                qqqinstantiateCell(ofType: .dateCell)
+            }
             dateInputViewModel?.edit(task)
         }
     }
