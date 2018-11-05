@@ -17,6 +17,7 @@ class NotesInputViewController: UIViewController {
     
     // MARK: - IBOutlets
     @IBOutlet weak var notesInputTextView: UITextView!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -25,12 +26,33 @@ class NotesInputViewController: UIViewController {
         view.backgroundColor = ReefColors.background
         configureNavigationBar()
         configureNotesInputTextView()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
         
         print("+++ INIT NotesInputViewController")
     }
     
     deinit {
         print("--- DEINIT NotesInputViewController")
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize =
+            (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?
+            .cgRectValue {
+            let keyboardHeight = keyboardSize.height
+            bottomConstraint.constant += keyboardHeight
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        bottomConstraint.constant = 16
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -48,6 +70,7 @@ class NotesInputViewController: UIViewController {
     // MARK: - Functions
     private func configureNotesInputTextView() {
         notesInputTextView.font = UIFont.font(sized: 22, weight: .semibold, with: .body, fontName: .barlow)
+        notesInputTextView.textColor = ReefColors.taskTitleLabel
         notesInputTextView.keyboardAppearance = ReefColors.keyboardAppearance
         notesInputTextView.placeholder = viewModel.textViewPlaceholder
         notesInputTextView.placeholderColor = ReefColors.placeholder
