@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -73,13 +73,22 @@
                             <constraint firstItem="hD9-vr-2pQ" firstAttribute="height" secondItem="MpC-GV-kct" secondAttribute="height" id="YDt-s1-kKm"/>
                         </constraints>
                     </stackView>
+                    <view alpha="0.55000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QCH-3o-Zk9">
+                        <rect key="frame" x="0.0" y="5" width="28" height="61.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="QCH-3o-Zk9" secondAttribute="bottom" constant="5" id="0jh-Kz-32F"/>
                     <constraint firstItem="IZr-Pd-eTx" firstAttribute="leading" secondItem="uR2-n7-Ubs" secondAttribute="leading" constant="16" id="78X-QA-hg0"/>
+                    <constraint firstItem="QCH-3o-Zk9" firstAttribute="trailing" secondItem="OW8-xT-sLf" secondAttribute="leading" id="BQE-jA-NSa"/>
                     <constraint firstItem="Fn8-Lx-bVj" firstAttribute="leading" secondItem="IZr-Pd-eTx" secondAttribute="trailing" constant="8" id="HNC-to-8Ex"/>
                     <constraint firstItem="Fn8-Lx-bVj" firstAttribute="top" secondItem="OW8-xT-sLf" secondAttribute="bottom" constant="3.5" id="N07-jO-WYW"/>
                     <constraint firstItem="OW8-xT-sLf" firstAttribute="leading" secondItem="IZr-Pd-eTx" secondAttribute="trailing" constant="8" id="RFL-3h-RgR"/>
+                    <constraint firstItem="QCH-3o-Zk9" firstAttribute="top" secondItem="uR2-n7-Ubs" secondAttribute="top" constant="5" id="RW4-2o-RLg"/>
+                    <constraint firstItem="QCH-3o-Zk9" firstAttribute="leading" secondItem="uR2-n7-Ubs" secondAttribute="leading" id="Ud5-ZX-rGe"/>
                     <constraint firstAttribute="trailing" secondItem="OW8-xT-sLf" secondAttribute="trailing" constant="8" id="W5m-Eo-lFi"/>
                     <constraint firstItem="jMK-pG-tgE" firstAttribute="top" secondItem="OW8-xT-sLf" secondAttribute="bottom" id="YIC-rH-2ss"/>
                     <constraint firstAttribute="bottom" secondItem="Fn8-Lx-bVj" secondAttribute="bottom" constant="10" id="ZQ6-74-KSu"/>
@@ -101,6 +110,7 @@
                 <outlet property="gradientSideBar" destination="IZr-Pd-eTx" id="e5T-Vz-grY"/>
                 <outlet property="locationIconImageView" destination="MpC-GV-kct" id="0Iu-Rp-8pi"/>
                 <outlet property="tagsLabel" destination="Fn8-Lx-bVj" id="MQc-Oy-qqr"/>
+                <outlet property="tapView" destination="QCH-3o-Zk9" id="BPL-cQ-QSO"/>
                 <outlet property="taskTitleTextView" destination="OW8-xT-sLf" id="SmA-D6-qM7"/>
             </connections>
             <point key="canvasLocation" x="133.59999999999999" y="152.02398800599701"/>

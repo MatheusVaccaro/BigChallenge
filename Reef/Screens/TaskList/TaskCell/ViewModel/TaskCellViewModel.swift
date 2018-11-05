@@ -82,9 +82,9 @@ public class TaskCellViewModel {
         model.delete(task)
     }
     
-    func completeTask(bool: Bool) {
-        var attributes: [TaskAttributes : Any] = [ .isCompleted : bool ]
-        if bool { attributes[.completionDate] = Date() }
+    func toggleCompleteTask() {
+        var attributes: [TaskAttributes : Any] = [ .isCompleted : !task.isCompleted ]
+        if !task.isCompleted { attributes[.completionDate] = Date() }
         
         model.update(task, with: attributes)
     }

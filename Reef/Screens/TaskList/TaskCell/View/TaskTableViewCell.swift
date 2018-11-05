@@ -33,6 +33,7 @@ public class TaskTableViewCell: UITableViewCell {
     @IBOutlet weak var locationIconImageView: UIImageView!
     @IBOutlet weak var dateStringView: UIView!
     @IBOutlet weak var dateStringLabel: UILabel!
+    @IBOutlet weak var tapView: UIView!
     
     // MARK: - TableViewCell Lifecycle
     override public func awakeFromNib() {
@@ -52,6 +53,9 @@ public class TaskTableViewCell: UITableViewCell {
         
         selectionStyle = .none
         configureAccessibility()
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapGradient))
+        tapView.addGestureRecognizer(tapRecognizer)
     }
     
     public override func layoutSubviews() {
@@ -120,6 +124,11 @@ public class TaskTableViewCell: UITableViewCell {
     fileprivate func configureAccessibility() {
         gradientSideBar.accessibilityIgnoresInvertColors = true
     }
+    
+    @IBAction func didTapGradient(_ sender: UITapGestureRecognizer) {
+        viewModel.toggleCompleteTask()
+    }
+    
 }
 
 extension TaskTableViewCell { // MARK: - Accessibility
@@ -188,6 +197,6 @@ extension TaskTableViewCell { // MARK: - Accessibility
     }
     
     @objc private func toggleCompleteAction() {
-        viewModel.completeTask(bool: !viewModel.taskIsCompleted)
+        viewModel.toggleCompleteTask()
     }
 }
