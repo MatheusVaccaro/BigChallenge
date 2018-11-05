@@ -220,19 +220,67 @@ extension TaskTableViewCell { // MARK: - Accessibility
 extension TaskTableViewCell {
 
     private func addLeftToRightSwipeAnimation(with duration: TimeInterval, completionHandler: (() -> Void)?) {
+        
+        let pullView = UIView(frame: frame)
+        contentView.addSubview(pullView)
+        pullView.frame = CGRect(x: -contentView.frame.width,
+                                y: contentView.frame.minY,
+                                width: contentView.frame.width,
+                                height: contentView.frame.height)
+        
+        pullView.backgroundColor = ReefColors.completeGreen
+        
+        let completeImageView = UIImageView(image: UIImage(named: "complete"))
+        completeImageView.translatesAutoresizingMaskIntoConstraints = false
+        pullView.addSubview(completeImageView)
+        completeImageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
+        completeImageView.centerYAnchor.constraint(equalTo: pullView.centerYAnchor).isActive = true
+        completeImageView.trailingAnchor.constraint(equalTo: pullView.trailingAnchor, constant: -12).isActive = true
+        completeImageView.widthAnchor.constraint(equalTo: completeImageView.heightAnchor, multiplier: 1.5).isActive = true
+        
+        let taskTextLabel = UILabel(frame: CGRect.zero)
+        taskTextLabel.text = "DIDN'T EVEN BREAK A SWEAT"
+        taskTextLabel.textColor = .white
+        taskTextLabel.font = UIFont.font(sized: 17.0,
+                                         weight: FontWeight.mediumItalic,
+                                         with: .body,
+                                         fontName: .barlow)
+        
+        let taskStatusLabel = UILabel(frame: CGRect.zero)
+        taskStatusLabel.text = "TASK COMPLETE"
+        taskStatusLabel.textColor = .white
+        taskStatusLabel.font = UIFont.font(sized: 13.0,
+                                           weight: .medium,
+                                           with: .body,
+                                           fontName: .barlow)
+        
+        let stackView = UIStackView(arrangedSubviews: [taskTextLabel, taskStatusLabel])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .leading
+        stackView.spacing = 3
+        
+        pullView.addSubview(stackView)
+        stackView.centerYAnchor.constraint(equalTo: pullView.centerYAnchor).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: pullView.leadingAnchor, constant: 17).isActive = true
+        stackView.trailingAnchor.constraint(lessThanOrEqualTo: completeImageView.leadingAnchor, constant: -17).isActive = true
+        
         let animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) { [unowned self] in
-            self.contentView.frame.origin.x += self.contentView.frame.width/2
+            self.contentView.frame.origin.x += self.contentView.frame.width
+
         }
         animator.addCompletion { [unowned self] _ in
             completionHandler?()
             self.runningAnimators.removeAll()
+//            pullView.removeFromSuperview()
         }
         runningAnimators.append(animator)
     }
     
     private func addRightToLeftSwipeAnimation(with duration: TimeInterval, completionHandler: (() -> Void)?) {
         let animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) { [unowned self] in
-            self.contentView.frame.origin.x -= self.contentView.frame.width/2
+            self.contentView.frame.origin.x -= self.contentView.frame.width
         }
         animator.addCompletion { [unowned self] _ in
             completionHandler?()
