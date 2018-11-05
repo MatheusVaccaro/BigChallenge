@@ -188,6 +188,6 @@ extension TaskTableViewCell { // MARK: - Accessibility
     }
     
     @objc private func toggleCompleteAction() {
-        viewModel.completeTask(bool: !viewModel.taskIsCompleted)
+        viewModel.toggleCompleteTask()
     }
 }
