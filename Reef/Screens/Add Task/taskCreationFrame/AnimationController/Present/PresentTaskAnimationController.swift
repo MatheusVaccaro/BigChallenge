@@ -30,6 +30,11 @@ class PresentTaskAnimationController: NSObject, UIViewControllerAnimatedTransiti
         let pullDownViewExpandedConstraint: CGFloat =
             taskCreationFrameViewController.taskTitleViewHeight + pullDownViewCollapsedConstraint
         
+        let newTaskViewOrigin =
+            taskCreationFrameViewController.taskTitleViewHeight + taskCreationFrameViewController.taskTitleAndDetailSeparatorHeight
+        let editTaskViewOrigin =
+            newTaskViewOrigin + taskCreationFrameViewController.taskDetailViewHeight
+        
         containerView.addSubview(toViewController.view)
         toViewController.view.layoutIfNeeded()
         
@@ -55,15 +60,17 @@ class PresentTaskAnimationController: NSObject, UIViewControllerAnimatedTransiti
                                             pullDownViewExpandedConstraint
                                         homeScreenViewController.view.layoutIfNeeded()
                                         
-                                        taskCreationFrameViewController.taskContainerView.frame.origin.y +=
-                                            taskCreationFrameViewController.taskTitleViewHeight + taskCreationFrameViewController.taskTitleAndDetailSeparatorHeight
+                                        taskCreationFrameViewController.taskContainerView.frame.origin.y += taskCreationFrameViewController.viewModel.isEditing
+                                            ? editTaskViewOrigin
+                                            : newTaskViewOrigin
                                     }
         }, completion: { _ in
             let transitionCanceled = transitionContext.transitionWasCancelled
             transitionContext.completeTransition(!transitionCanceled)
             
-            taskCreationFrameViewController.taskContainerViewTopConstraint.constant =
-                -taskCreationFrameViewController.taskDetailViewHeight
+            taskCreationFrameViewController.taskContainerViewTopConstraint.constant = taskCreationFrameViewController.viewModel.isEditing
+                ? -taskCreationFrameViewController.taskTitleViewHeight - taskCreationFrameViewController.taskTitleAndDetailSeparatorHeight - taskCreationFrameViewController.taskDetailViewHeight
+                : -taskCreationFrameViewController.taskDetailViewHeight
             
             if transitionCanceled {
                 homeScreenViewController.pullDownViewTopConstraint.constant =

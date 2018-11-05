@@ -83,7 +83,7 @@ class AddTaskDetailsViewModel {
         
         if task.dueDate != nil {
             if dateInputViewModel == nil {
-                qqqinstantiateCell(ofType: .dateCell)
+                instantiateCell(ofType: .dateCell)
             }
             dateInputViewModel?.edit(task)
         }

@@ -105,7 +105,11 @@ class NewTaskViewController: UIViewController {
     }
     
     func start() {
-        taskTitleTextView.becomeFirstResponder()
+        if viewModel.isEditing {
+            presentDetails()
+        } else {
+            taskTitleTextView.becomeFirstResponder()
+        }
     }
     
     private func createTaskIfPossible() -> Bool {

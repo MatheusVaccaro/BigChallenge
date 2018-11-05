@@ -37,6 +37,10 @@ class NewTaskViewModel {
         }
     }
     
+    var isEditing: Bool {
+        return taskTitleText != nil
+    }
+    
     var taskColors: [CGColor] = ReefColors.defaultGradient
     
     func edit(_ task: Task?) {
