@@ -218,56 +218,61 @@ extension TaskTableViewCell { // MARK: - Accessibility
 
 // MARK: - Animations
 extension TaskTableViewCell {
+
+    private func addLeftToRightSwipeAnimation(with duration: TimeInterval, completionHandler: (() -> Void)?) {
+        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) { [unowned self] in
+            self.contentView.frame.origin.x += self.contentView.frame.width/2
+        }
+        animator.addCompletion { [unowned self] _ in
+            completionHandler?()
+            self.runningAnimators.removeAll()
+        }
+        runningAnimators.append(animator)
+    }
     
-    // MARK: Animations
-    //    private func addTaskContainerAnimation(for state: State, with duration: TimeInterval) {
-    //        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) { [unowned self] in
-    //            switch state {
-    //            case .collapsed:
-    //                self.taskContainerViewTopConstraint.constant = -self.taskDetailViewHeight
-    //            case .expanded:
-    //                self.taskContainerViewTopConstraint.constant = 0
-    //
-    //            }
-    //            self.view.layoutIfNeeded()
-    //        }
-    //        animator.addCompletion { [unowned self] status in
-    //            switch status {
-    //            case .end:
-    //                self.state = state
-    //            default:
-    //                break
-    //            }
-    //            self.runningAnimators.removeAll()
-    //        }
-    //        runningAnimators.append(animator)
-    //    }
+    private func addRightToLeftSwipeAnimation(with duration: TimeInterval, completionHandler: (() -> Void)?) {
+        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) { [unowned self] in
+            self.contentView.frame.origin.x -= self.contentView.frame.width/2
+        }
+        animator.addCompletion { [unowned self] _ in
+            completionHandler?()
+            self.runningAnimators.removeAll()
+        }
+        runningAnimators.append(animator)
+    }
+        
     
     // MARK: Gesture Recognizers
     func addGestureRecognizersForAnimations() {
+        animationDistance = contentView.frame.width
 //        contentView.addGestureRecognizer(UITapGestureRecognizer(target: self,
 //                                                                action: #selector(handleTapGesture(_:))))
-        
-        contentView.addGestureRecognizer(UIPanGestureRecognizer(target: self,
-                                                                action: #selector(handlePanGesture(_:))))
+        contentView.addGestureRecognizer(PanDirectionGestureRecognizer(direction: .horizontal,
+                                                                       target: self,
+                                                                       action: #selector(handlePanGesture(_:))))
     }
     
     @objc private func handleTapGesture(_ recognizer: UITapGestureRecognizer) {
         animateOrReverseRunningTransition(swipeDirection: .leftToRight, duration: duration)
     }
     
-    
-    
     @objc private func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
         let translation = recognizer.translation(in: contentView)
-
+        print(translation)
         switch recognizer.state {
         case .began:
-            initialTranslationX = translation.x
+            initialTranslationX = 0
         case .changed:
-            swipeDirection = translation.x >= initialTranslationX ? .leftToRight : .rightToLeft
+            let swipeDirection: SwipeDirection = translation.x >= initialTranslationX ? .leftToRight : .rightToLeft
+            let swipeDirectionChanged: Bool = swipeDirection != self.swipeDirection ? true : false
+            self.swipeDirection = swipeDirection
             if runningAnimators.isEmpty {
                 startInteractiveTransition(swipeDirection: swipeDirection, duration: duration)
+            } else if swipeDirectionChanged {
+                self.runningAnimators.forEach({
+                    $0.stopAnimation(false)
+                    $0.finishAnimation(at: UIViewAnimatingPosition.start)
+                })
             } else {
                 let fraction = fractionComplete(swipeDirection: swipeDirection, translation: translation)
                 updateInteractiveTransition(fractionComplete: fraction)
@@ -285,7 +290,15 @@ extension TaskTableViewCell {
     // Perform all animations with animators if not already running
     private func animateTransitionIfNeeded(swipeDirection: SwipeDirection, duration: TimeInterval) {
         guard runningAnimators.isEmpty else { return }
-        //        addTaskContainerAnimation(for: state, with: duration)
+        
+        switch swipeDirection {
+        case .leftToRight:
+            addLeftToRightSwipeAnimation(with: duration, completionHandler: nil)
+        case .rightToLeft:
+            addRightToLeftSwipeAnimation(with: duration, completionHandler: nil)
+        default:
+            break
+        }
     }
     
     // Starts transition if necessary or reverses it on tap
@@ -315,18 +328,16 @@ extension TaskTableViewCell {
     // Continues or reverse transition on pan .ended
     private func continueInteractiveTransition(fractionComplete: CGFloat) {
         let cancel: Bool = fractionComplete < minimunProgressToCompleteAnimation
-        
+        let timing = UICubicTimingParameters(animationCurve: .easeInOut)
         if cancel {
             runningAnimators.forEach {
                 $0.isReversed = !$0.isReversed
-                $0.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+                $0.continueAnimation(withTimingParameters: timing, durationFactor: 0)
             }
-            return
-        }
-        
-        let timing = UICubicTimingParameters(animationCurve: .easeOut)
-        runningAnimators.forEach {
-            $0.continueAnimation(withTimingParameters: timing, durationFactor: 0)
+        } else {
+            runningAnimators.forEach {
+                $0.continueAnimation(withTimingParameters: timing, durationFactor: 0)
+            }
         }
     }
     
@@ -355,8 +366,6 @@ extension TaskTableViewCell {
         } else {
             translationX = -translation.x
         }
-        print(translationX)
-
         let fractionComplete = translationX / animationDistance + progressWhenInterrupted
         return fractionComplete
     }
