@@ -34,6 +34,10 @@ class TaskCreationViewModel {
     fileprivate let newTaskViewModel: NewTaskViewModel
     fileprivate var task: Task?
     
+    var isEditing: Bool {
+        return task != nil
+    }
+    
     init(taskModel: TaskModel, taskDetails: AddTaskDetailsViewModel, newTaskViewModel: NewTaskViewModel, selectedTags: [Tag]) {
         self.model = taskModel
         self.taskDetails = taskDetails

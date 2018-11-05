@@ -12,6 +12,7 @@ class Dark: Theme {
     
     static let emptyStateOn: UIImage = UIImage(named: "emptyStateOnClassic")!
     static let emptyStateOff: UIImage = UIImage(named: "emptyStateOffClassic")!
+    static let iconName: String = "darkIcon"
     
     static let statusBarStyle: UIStatusBarStyle = .lightContent
     static let keyboardAppearance: UIKeyboardAppearance = .dark

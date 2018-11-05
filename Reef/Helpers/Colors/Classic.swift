@@ -12,6 +12,7 @@ class Classic: Theme {
     
     static let emptyStateOn: UIImage = UIImage(named: "emptyStateOnClassic")!
     static let emptyStateOff: UIImage = UIImage(named: "emptyStateOffClassic")!
+    static let iconName: String = "classicIcon"
     
     static let statusBarStyle: UIStatusBarStyle = .default
     static let keyboardAppearance: UIKeyboardAppearance = .light

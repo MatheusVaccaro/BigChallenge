@@ -82,6 +82,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         UITextField.appearance().keyboardAppearance = ReefColors.theme.keyboardAppearance
+        UIApplication.shared.setAlternateIconName(ReefColors.iconName) { (error) in
+            if let error = error {
+                print("error: \(error)")
+            }
+        }
     }
     
     private func setNotificationCategories() {

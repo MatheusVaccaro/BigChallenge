@@ -12,6 +12,7 @@ protocol Theme {
     static var statusBarStyle: UIStatusBarStyle { get }
     static var keyboardAppearance: UIKeyboardAppearance { get }
     static var blurStyle: UIBlurEffect.Style { get }
+    static var iconName: String { get }
     
     static var defaultGradient: [CGColor] { get }
     static var largeTitle: UIColor { get }
@@ -62,6 +63,7 @@ class ReefColors: Theme {
     static var theme: Theme.Type = Dark.self
     
     // MARK: - Assets
+    static let iconName: String = theme.iconName
     static let emptyStateOn: UIImage = theme.emptyStateOn
     static let emptyStateOff: UIImage = theme.emptyStateOff
 
