@@ -84,6 +84,20 @@ struct Strings {
                 static let locationDescription = NSLocalizedString("locations active", comment: "(voiceOver) description when task in cell contains a location")
                 static let dateDescription = NSLocalizedString("next reminder set to %@", comment: "(VoiceOver) description when task in cell contains a date reminder (says the next date set)")
             }
+            
+            struct Swipe {
+                struct Text {
+                    static let completed = NSLocalizedString("task swipe text completed", comment: "motivational text shown when a task is completed")
+                    static let readmitted = NSLocalizedString("task swipe text readmitted", comment: "motivational text shown when a task is readmitted")
+                    static let deleted = NSLocalizedString("task swipe text deleted", comment: "motivational text shown when a task is deleted")
+                }
+                
+                struct Status {
+                    static let completed = NSLocalizedString("task swipe status completed", comment: "status text shown when a task is completed")
+                    static let readmitted = NSLocalizedString("task swipe status readmitted", comment: "status text shown when a task is readmitted")
+                    static let deleted = NSLocalizedString("task swipe status deleted", comment: "status text shown when a task is deleted")
+                }
+            }
         }
     }
     

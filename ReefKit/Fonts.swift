@@ -21,6 +21,17 @@ public extension UIFont {
         return finalFont
     }
     
+    public static func font(sized size: CGFloat,
+                            weight: String,
+                            with style: UIFont.TextStyle,
+                            fontName: FontName = .system) -> UIFont {
+        let font = UIFont(name: fontName.rawValue + weight, size: size)!
+        
+        let fontMetrics = UIFontMetrics(forTextStyle: style)
+        let finalFont = fontMetrics.scaledFont(for: font)
+        return finalFont
+    }
+    
     public static func fontNamed(name: FontName, weight: UIFont.Weight, size: CGFloat) -> UIFont {
         guard name != FontName.system else { return UIFont.systemFont(ofSize: size, weight: weight)}
         let weightName = fontWeight(for: weight)
@@ -72,21 +83,21 @@ public enum FontName: String {
 }
 
 public struct FontWeight {
-    static let thin = "-Thin"
-    static let extraLight = "-ExtraLight"
-    static let light = "-Light"
-    static let regular = "-Regular"
-    static let medium = "-Medium"
-    static let semiBold = "-SemiBold"
-    static let bold = "-Bold"
-    static let extraBold = "-ExtraBold"
-    static let black = "-Black"
-    static let thinItalic = "-ThinItalic"
-    static let extraLightItalic = "-ExtraLightItalic"
-    static let lightItalic = "-LightItalic"
-    static let italic = "-Italic"
-    static let mediumItalic = "-MediumItalic"
-    static let semiBoldItalic = "-SemiBoldItalic"
-    static let boldItalic = "-BoldItalic"
-    static let extraBoldItalic = "-ExtraBoldItalic"
-    static let blackItalic = "-BlackItalic"}
+    public static let thin = "-Thin"
+    public static let extraLight = "-ExtraLight"
+    public static let light = "-Light"
+    public static let regular = "-Regular"
+    public static let medium = "-Medium"
+    public static let semiBold = "-SemiBold"
+    public static let bold = "-Bold"
+    public static let extraBold = "-ExtraBold"
+    public static let black = "-Black"
+    public static let thinItalic = "-ThinItalic"
+    public static let extraLightItalic = "-ExtraLightItalic"
+    public static let lightItalic = "-LightItalic"
+    public static let italic = "-Italic"
+    public static let mediumItalic = "-MediumItalic"
+    public static let semiBoldItalic = "-SemiBoldItalic"
+    public static let boldItalic = "-BoldItalic"
+    public static let extraBoldItalic = "-ExtraBoldItalic"
+    public static let blackItalic = "-BlackItalic"}

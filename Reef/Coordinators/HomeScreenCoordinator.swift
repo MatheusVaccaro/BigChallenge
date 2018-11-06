@@ -45,12 +45,16 @@ class HomeScreenCoordinator: Coordinator {
         
         self.remindersImporter = RemindersImporter(taskModel: taskModel, tagModel: tagModel)
         
+        #if DEBUG
         print("+++ INIT HomeScreenCoordinator")
+        #endif
     }
     
+    #if DEBUG
     deinit {
         print("--- DEINIT HomeScreenCoordinator")
     }
+    #endif
 
     func start() {
         homeScreenViewController = HomeScreenViewController.instantiate()

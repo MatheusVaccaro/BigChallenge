@@ -226,3 +226,21 @@
 
 /* Location section header */
 "locationSectionHeader" = "Based on your location";
+
+/* motivational text shown when a task is completed */
+"task swipe text completed" = "DIDN'T EVEN BREAK A SWEAT";
+
+/* status text shown when a task is completed */
+"task swipe status completed" = "TASK COMPLETED";
+
+/* motivational text shown when a task is readmitted */
+"task swipe text readmitted" = "LET'S GIVE IT ANOTHER SHOT";
+
+/* status text shown when a task is readmitted */
+"task swipe status readmitted" = "TASK READMITTED";
+
+/* motivational text shown when a task is deleted */
+"task swipe text deleted" = "OOPSIE...";
+
+/* status text shown when a task is deleted */
+"task swipe status deleted" = "TASK DELETED";

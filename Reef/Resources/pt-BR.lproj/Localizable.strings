@@ -226,3 +226,21 @@
 
 /* Location section header */
 "locationSectionHeader" = "Baseado em sua localização";
+
+/* motivational text shown when a task is completed */
+"task swipe text completed" = "NÃO DEU NEM PRA SUAR";
+
+/* status text shown when a task is completed */
+"task swipe status completed" = "TAREFA COMPLETADA";
+
+/* motivational text shown when a task is readmitted */
+"task swipe text readmitted" = "VAMOS DAR OUTRA CHANCE";
+
+/* status text shown when a task is readmitted */
+"task swipe status readmitted" = "TAREFA READMITIDA";
+
+/* motivational text shown when a task is deleted */
+"task swipe text deleted" = "OPS...";
+
+/* status text shown when a task is deleted */
+"task swipe status deleted" = "TAREFA DELETADA";

@@ -46,12 +46,17 @@ public class TaskListViewController: UIViewController {
         tableView.dataSource = self
         viewModel.UIDelegate = self
         UNUserNotificationCenter.current().delegate = self
+        
+        #if DEBUG
         print("+++ INIT TaskListViewController")
+        #endif
     }
     
+    #if DEBUG
     deinit {
         print("--- DEINIT TaskListViewController")
     }
+    #endif
     
     fileprivate func textHeaderView(with text: String) -> UIView {
         
@@ -162,60 +167,6 @@ extension TaskListViewController: UITableViewDelegate {
         }
     }
     
-    public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let completeAction = toggleCompleteAction(forRowAt: indexPath)
-        
-        let actions = [completeAction]
-        
-        return UISwipeActionsConfiguration(actions: actions)
-    }
-    
-    public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = deleteAction(forRowAt: indexPath)
-        
-        let actions = [delete]
-        
-        return UISwipeActionsConfiguration(actions: actions)
-    }
-    
-    func toggleCompleteAction(forRowAt indexPath: IndexPath) -> UIContextualAction {
-        let action = UIContextualAction(style: .normal, title: nil) { (action: UIContextualAction,
-                                            view: UIView,
-                                            completion: (Bool) -> Void) in
-                                            
-            self.viewModel.toggleComplete(taskAt: indexPath)
-            completion(true)
-        }
-        
-        let task = viewModel.task(for: indexPath)
-        
-        action.backgroundColor = task.isCompleted
-            ? ReefColors.uncompleteYellow
-            : ReefColors.completeGreen
-        
-        action.image = task.isCompleted
-            ? UIImage(named: "uncomplete")
-            : UIImage(named: "complete")
-        
-        return action
-    }
-    
-    func deleteAction(forRowAt indexPath: IndexPath) -> UIContextualAction {
-        let action = UIContextualAction(style: .destructive,
-                                        title: nil) { (action: UIContextualAction,
-                                            view: UIView,
-                                            completion: (Bool) -> Void) in
-                                            
-                                            self.viewModel.delete(taskAt: indexPath)
-                                            
-                                            completion(true)
-        }
-        
-        action.backgroundColor = ReefColors.deleteRed
-        
-        action.image = UIImage.init(named: "trash")
-        return action
-    }
 }
 
 extension TaskListViewController: UITableViewDataSource {
@@ -238,6 +189,7 @@ extension TaskListViewController: UITableViewDataSource {
         let taskCellViewModel = self.viewModel.taskCellViewModel(for: indexPath)
         
         cell.configure(with: taskCellViewModel)
+        cell.swipeDelegate = self
         
 //        if !viewModel.selectedTags.contains { $0.requiresAuthentication }, taskCellViewModel.taskIsPrivate {
 //            let blurEffect = UIBlurEffect(style: .regular)
@@ -321,5 +273,18 @@ extension TaskListViewController: StoryboardInstantiable {
     
     static var storyboardIdentifier: String {
         return "TaskList"
+    }
+}
+
+extension TaskListViewController: TaskTableViewCellSwipeDelegate {
+    
+    public func didSwipeFromLeftToRight(in cell: TaskTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        viewModel.toggleComplete(taskAt: indexPath)
+    }
+    
+    public func didSwipeFromRightToLeft(in cell: TaskTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        viewModel.delete(taskAt: indexPath)
     }
 }

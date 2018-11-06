@@ -39,12 +39,16 @@ class LocationInputView: UIViewController {
             segmentedControl.selectedSegmentIndex = viewModel.isArriving ? 0 : 1
         }
         
+        #if DEBUG
         print("+++ INIT LocationInputViewController")
+        #endif
     }
     
+    #if DEBUG
     deinit {
         print("--- DEINIT LocationInputViewController")
     }
+    #endif
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

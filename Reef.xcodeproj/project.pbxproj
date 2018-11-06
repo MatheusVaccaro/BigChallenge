@@ -161,6 +161,7 @@
 		C26EC74721547282000E9CB9 /* Barlow-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC2211205C5004F66D6 /* Barlow-SemiBold.ttf */; };
 		C26EC74821547282000E9CB9 /* Barlow-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC1211205C4004F66D6 /* Barlow-Thin.ttf */; };
 		C26EC74921547282000E9CB9 /* Barlow-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDB6211205C1004F66D6 /* Barlow-ThinItalic.ttf */; };
+		C2851A5D2190B0680001CDC7 /* PanDirectionGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2851A5C2190B0680001CDC7 /* PanDirectionGestureRecognizer.swift */; };
 		C28DC91A20B61CB6007F881A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28DC91920B61CB6007F881A /* AppDelegate.swift */; };
 		C28DC91F20B61CB6007F881A /* TaskList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C28DC91D20B61CB6007F881A /* TaskList.storyboard */; };
 		C28DC92120B61CB9007F881A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C28DC92020B61CB9007F881A /* Assets.xcassets */; };
@@ -423,6 +424,7 @@
 		C26EC73821544D19000E9CB9 /* NotesTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		C26EC73A21545A25000E9CB9 /* NotesInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesInputViewController.swift; sourceTree = "<group>"; };
 		C26EC73C21545A4F000E9CB9 /* NotesInput.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NotesInput.storyboard; sourceTree = "<group>"; };
+		C2851A5C2190B0680001CDC7 /* PanDirectionGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanDirectionGestureRecognizer.swift; sourceTree = "<group>"; };
 		C28DC91620B61CB6007F881A /* Reef.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reef.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C28DC91920B61CB6007F881A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C28DC92020B61CB9007F881A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1125,6 +1127,7 @@
 				C25169942139BD6200999BD0 /* UIViewController+Extension.swift */,
 				C22F6FD3217A5E17007F0309 /* UITableView+ContentSizeDelegate.swift */,
 				C22F6FD5217FA396007F0309 /* VerticallyCenteredTextView.swift */,
+				C2851A5C2190B0680001CDC7 /* PanDirectionGestureRecognizer.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1901,6 +1904,7 @@
 				C21EAD0020B741BC005F0F85 /* HomeScreenCoordinator.swift in Sources */,
 				296424BB21559A7400480CB4 /* CoreAnimation+Extension.swift in Sources */,
 				C2901059211E4492008F2807 /* ColorCollectionViewCell.swift in Sources */,
+				C2851A5D2190B0680001CDC7 /* PanDirectionGestureRecognizer.swift in Sources */,
 				C23753B020B6463700C1CE15 /* ApplicationCoordinator.swift in Sources */,
 				160E628D215923DD001F3D01 /* AddTagTitleViewModel.swift in Sources */,
 				C26EC73721544CFA000E9CB9 /* NotesInputViewModel.swift in Sources */,
