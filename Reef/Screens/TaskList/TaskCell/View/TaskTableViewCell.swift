@@ -17,7 +17,7 @@ public protocol TaskTableViewCellSwipeDelegate: class {
 public class TaskTableViewCell: UITableViewCell {
     
     // MARK: - Animations Properties
-    private let duration: TimeInterval = 0.25
+    private let duration: TimeInterval = 0.5
     private var animationDistance: CGFloat!
     private var runningAnimators = [UIViewPropertyAnimator]()
     private var progressWhenInterrupted: CGFloat = 0
@@ -74,8 +74,8 @@ public class TaskTableViewCell: UITableViewCell {
         selectionStyle = .none
         configureAccessibility()
         
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapGradient))
-        tapView.addGestureRecognizer(tapRecognizer)
+//        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapGradient))
+//        tapView.addGestureRecognizer(tapRecognizer)
         
         addGestureRecognizersForAnimations()
     }
@@ -227,6 +227,10 @@ extension TaskTableViewCell { // MARK: - Accessibility
 extension TaskTableViewCell {
 
     private func addLeftToRightSwipeAnimation(with duration: TimeInterval) {
+        let imageName: String = viewModel.taskIsCompleted ? "uncomplete" : "complete"
+        let backgroundColor: UIColor = viewModel.taskIsCompleted ? ReefColors.uncompleteYellow : ReefColors.completeGreen
+        let taskText: String = viewModel.taskIsCompleted ? "LET'S GIVE IT ANOTHER TRY" : "DIDN'T EVEN BREAK A SWEAT"
+        let taskStatus: String = viewModel.taskIsCompleted ? "TASK READMITTED" : "TASK COMPLETED"
         
         let pullView = UIView(frame: CGRect(x: -contentView.frame.width,
                                             y: contentView.frame.minY,
@@ -234,9 +238,9 @@ extension TaskTableViewCell {
                                             height: contentView.frame.height))
         contentView.addSubview(pullView)
         
-        pullView.backgroundColor = ReefColors.completeGreen
+        pullView.backgroundColor = backgroundColor
         
-        let completeImageView = UIImageView(image: UIImage(named: "complete"))
+        let completeImageView = UIImageView(image: UIImage(named: imageName))
         completeImageView.translatesAutoresizingMaskIntoConstraints = false
         pullView.addSubview(completeImageView)
         completeImageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
@@ -245,7 +249,7 @@ extension TaskTableViewCell {
         completeImageView.widthAnchor.constraint(equalTo: completeImageView.heightAnchor, multiplier: 1.5).isActive = true
         
         let taskTextLabel = UILabel(frame: CGRect.zero)
-        taskTextLabel.text = "DIDN'T EVEN BREAK A SWEAT"
+        taskTextLabel.text = taskText
         taskTextLabel.textColor = .white
         taskTextLabel.font = UIFont.font(sized: 17.0,
                                          weight: FontWeight.mediumItalic,
@@ -253,7 +257,7 @@ extension TaskTableViewCell {
                                          fontName: .barlow)
         
         let taskStatusLabel = UILabel(frame: CGRect.zero)
-        taskStatusLabel.text = "TASK COMPLETE"
+        taskStatusLabel.text = taskStatus
         taskStatusLabel.textColor = .white
         taskStatusLabel.font = UIFont.font(sized: 13.0,
                                            weight: .medium,
@@ -283,36 +287,100 @@ extension TaskTableViewCell {
                                                   y: pullView.bounds.minY - pullView.bounds.midY,
                                                   width: pullView.bounds.width,
                                                   height: pullView.bounds.height/2))
-            topAuxView.backgroundColor = .orange
+            topAuxView.backgroundColor = ReefColors.background
             pullView.addSubview(topAuxView)
             
             let bottomAuxView = UIView(frame: CGRect(x: pullView.bounds.minX,
                                                      y: pullView.bounds.maxY,
                                                      width: pullView.bounds.width,
                                                      height: pullView.bounds.height/2))
-            bottomAuxView.backgroundColor = .orange
+            bottomAuxView.backgroundColor = ReefColors.background
             pullView.addSubview(bottomAuxView)
-            
             let completionAnimator = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut) {
                 topAuxView.frame.origin.y += topAuxView.frame.height
                 bottomAuxView.frame.origin.y -= bottomAuxView.frame.height
             }
             completionAnimator.addCompletion { [unowned self] _ in
                 self.swipeDelegate?.didSwipeFromLeftToRight(in: self)
-//                pullView.removeFromSuperview()
             }
-            completionAnimator.startAnimation()
+            completionAnimator.startAnimation(afterDelay: 0.5)
         }
         runningAnimators.append(animator)
     }
     
     private func addRightToLeftSwipeAnimation(with duration: TimeInterval, completionHandler: (() -> Void)?) {
-        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) { [unowned self] in
+        let pullView = UIView(frame: CGRect(x: contentView.frame.width,
+                                            y: contentView.frame.minY,
+                                            width: contentView.frame.width,
+                                            height: contentView.frame.height))
+        contentView.addSubview(pullView)
+        
+        pullView.backgroundColor = ReefColors.deleteRed
+        
+        let trashImageView = UIImageView(image: UIImage(named: "trash"))
+        trashImageView.translatesAutoresizingMaskIntoConstraints = false
+        pullView.addSubview(trashImageView)
+        trashImageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
+        trashImageView.centerYAnchor.constraint(equalTo: pullView.centerYAnchor).isActive = true
+        trashImageView.leadingAnchor.constraint(equalTo: pullView.leadingAnchor, constant: 12).isActive = true
+        trashImageView.widthAnchor.constraint(equalTo: trashImageView.heightAnchor).isActive = true
+        
+        let taskTextLabel = UILabel(frame: CGRect.zero)
+        taskTextLabel.text = "DEU RUIM MERMÃO"
+        taskTextLabel.textColor = .white
+        taskTextLabel.font = UIFont.font(sized: 17.0,
+                                         weight: FontWeight.mediumItalic,
+                                         with: .body,
+                                         fontName: .barlow)
+        
+        let taskStatusLabel = UILabel(frame: CGRect.zero)
+        taskStatusLabel.text = "TASK DELETED"
+        taskStatusLabel.textColor = .white
+        taskStatusLabel.font = UIFont.font(sized: 13.0,
+                                           weight: .medium,
+                                           with: .body,
+                                           fontName: .barlow)
+        
+        let stackView = UIStackView(arrangedSubviews: [taskTextLabel, taskStatusLabel])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .trailing
+        stackView.spacing = 3
+        
+        pullView.addSubview(stackView)
+        stackView.centerYAnchor.constraint(equalTo: pullView.centerYAnchor).isActive = true
+        stackView.leadingAnchor.constraint(greaterThanOrEqualTo: trashImageView.trailingAnchor, constant: 17).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: pullView.trailingAnchor, constant: -17).isActive = true
+        
+        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeInOut) { [unowned self] in
             self.contentView.frame.origin.x -= self.contentView.frame.width
         }
         animator.addCompletion { [unowned self] _ in
-            completionHandler?()
+            
             self.runningAnimators.removeAll()
+            
+            let topAuxView = UIView(frame: CGRect(x: pullView.bounds.minX,
+                                                  y: pullView.bounds.minY - pullView.bounds.midY,
+                                                  width: pullView.bounds.width,
+                                                  height: pullView.bounds.height/2))
+            topAuxView.backgroundColor = ReefColors.background
+            pullView.addSubview(topAuxView)
+            
+            let bottomAuxView = UIView(frame: CGRect(x: pullView.bounds.minX,
+                                                     y: pullView.bounds.maxY,
+                                                     width: pullView.bounds.width,
+                                                     height: pullView.bounds.height/2))
+            bottomAuxView.backgroundColor = ReefColors.background
+            pullView.addSubview(bottomAuxView)
+            let completionAnimator = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut) {
+                topAuxView.frame.origin.y += topAuxView.frame.height
+                bottomAuxView.frame.origin.y -= bottomAuxView.frame.height
+            }
+            completionAnimator.addCompletion { [unowned self] _ in
+                self.swipeDelegate?.didSwipeFromRightToLeft(in: self)
+            }
+            completionAnimator.startAnimation(afterDelay: 0.5)
         }
         runningAnimators.append(animator)
     }
