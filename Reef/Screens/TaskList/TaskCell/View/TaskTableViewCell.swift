@@ -253,14 +253,14 @@ extension TaskTableViewCell {
     }
 
     private func addLeftToRightSwipeAnimation(with duration: TimeInterval) {
-        let imageName: String =
-            viewModel.taskIsCompleted ? "uncomplete" : "complete"
-        let backgroundColor: UIColor =
-            viewModel.taskIsCompleted ? ReefColors.uncompleteYellow : ReefColors.completeGreen
-        let taskText: String =
-            viewModel.taskIsCompleted ? "LET'S GIVE IT ANOTHER TRY" : "DIDN'T EVEN BREAK A SWEAT"
-        let taskStatus: String =
-            viewModel.taskIsCompleted ? "TASK READMITTED" : "TASK COMPLETED"
+        let imageName: String = viewModel.taskIsCompleted ?
+            "uncomplete" : "complete"
+        let backgroundColor: UIColor = viewModel.taskIsCompleted ?
+            ReefColors.uncompleteYellow : ReefColors.completeGreen
+        let taskText: String = viewModel.taskIsCompleted ?
+            Strings.Task.Cell.Swipe.Text.readmitted : Strings.Task.Cell.Swipe.Text.completed
+        let taskStatus: String = viewModel.taskIsCompleted ?
+            Strings.Task.Cell.Swipe.Status.readmitted : Strings.Task.Cell.Swipe.Status.completed
         
         let pullView = UIView(frame: CGRect(x: -contentView.frame.width,
                                             y: contentView.frame.minY,
@@ -340,7 +340,7 @@ extension TaskTableViewCell {
         trashImageView.widthAnchor.constraint(equalTo: trashImageView.heightAnchor).isActive = true
         
         let taskTextLabel = UILabel(frame: CGRect.zero)
-        taskTextLabel.text = "DEU RUIM MERMÃO"
+        taskTextLabel.text = Strings.Task.Cell.Swipe.Text.deleted
         taskTextLabel.textColor = .white
         taskTextLabel.font = UIFont.font(sized: 17.0,
                                          weight: FontWeight.mediumItalic,
@@ -348,7 +348,7 @@ extension TaskTableViewCell {
                                          fontName: .barlow)
         
         let taskStatusLabel = UILabel(frame: CGRect.zero)
-        taskStatusLabel.text = "TASK DELETED"
+        taskStatusLabel.text = Strings.Task.Cell.Swipe.Status.deleted
         taskStatusLabel.textColor = .white
         taskStatusLabel.font = UIFont.font(sized: 13.0,
                                            weight: .medium,
