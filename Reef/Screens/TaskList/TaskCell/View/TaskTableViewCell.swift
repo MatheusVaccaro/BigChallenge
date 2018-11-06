@@ -227,10 +227,14 @@ extension TaskTableViewCell { // MARK: - Accessibility
 extension TaskTableViewCell {
 
     private func addLeftToRightSwipeAnimation(with duration: TimeInterval) {
-        let imageName: String = viewModel.taskIsCompleted ? "uncomplete" : "complete"
-        let backgroundColor: UIColor = viewModel.taskIsCompleted ? ReefColors.uncompleteYellow : ReefColors.completeGreen
-        let taskText: String = viewModel.taskIsCompleted ? "LET'S GIVE IT ANOTHER TRY" : "DIDN'T EVEN BREAK A SWEAT"
-        let taskStatus: String = viewModel.taskIsCompleted ? "TASK READMITTED" : "TASK COMPLETED"
+        let imageName: String =
+            viewModel.taskIsCompleted ? "uncomplete" : "complete"
+        let backgroundColor: UIColor =
+            viewModel.taskIsCompleted ? ReefColors.uncompleteYellow : ReefColors.completeGreen
+        let taskText: String =
+            viewModel.taskIsCompleted ? "LET'S GIVE IT ANOTHER TRY" : "DIDN'T EVEN BREAK A SWEAT"
+        let taskStatus: String =
+            viewModel.taskIsCompleted ? "TASK READMITTED" : "TASK COMPLETED"
         
         let pullView = UIView(frame: CGRect(x: -contentView.frame.width,
                                             y: contentView.frame.minY,
@@ -245,8 +249,10 @@ extension TaskTableViewCell {
         pullView.addSubview(completeImageView)
         completeImageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
         completeImageView.centerYAnchor.constraint(equalTo: pullView.centerYAnchor).isActive = true
-        completeImageView.trailingAnchor.constraint(equalTo: pullView.trailingAnchor, constant: -12).isActive = true
-        completeImageView.widthAnchor.constraint(equalTo: completeImageView.heightAnchor, multiplier: 1.5).isActive = true
+        completeImageView.trailingAnchor.constraint(equalTo: pullView.trailingAnchor,
+                                                    constant: -12).isActive = true
+        completeImageView.widthAnchor.constraint(equalTo: completeImageView.heightAnchor,
+                                                 multiplier: 1.5).isActive = true
         
         let taskTextLabel = UILabel(frame: CGRect.zero)
         taskTextLabel.text = taskText
@@ -274,7 +280,8 @@ extension TaskTableViewCell {
         pullView.addSubview(stackView)
         stackView.centerYAnchor.constraint(equalTo: pullView.centerYAnchor).isActive = true
         stackView.leadingAnchor.constraint(equalTo: pullView.leadingAnchor, constant: 17).isActive = true
-        stackView.trailingAnchor.constraint(lessThanOrEqualTo: completeImageView.leadingAnchor, constant: -17).isActive = true
+        stackView.trailingAnchor.constraint(lessThanOrEqualTo: completeImageView.leadingAnchor,
+                                            constant: -17).isActive = true
         
         let animator = UIViewPropertyAnimator(duration: duration, curve: .easeInOut) { [unowned self] in
             self.contentView.frame.origin.x += self.contentView.frame.width
@@ -350,7 +357,8 @@ extension TaskTableViewCell {
         
         pullView.addSubview(stackView)
         stackView.centerYAnchor.constraint(equalTo: pullView.centerYAnchor).isActive = true
-        stackView.leadingAnchor.constraint(greaterThanOrEqualTo: trashImageView.trailingAnchor, constant: 17).isActive = true
+        stackView.leadingAnchor.constraint(greaterThanOrEqualTo: trashImageView.trailingAnchor,
+                                           constant: 17).isActive = true
         stackView.trailingAnchor.constraint(equalTo: pullView.trailingAnchor, constant: -17).isActive = true
         
         let animator = UIViewPropertyAnimator(duration: duration, curve: .easeInOut) { [unowned self] in
@@ -384,13 +392,12 @@ extension TaskTableViewCell {
         }
         runningAnimators.append(animator)
     }
-        
     
     // MARK: Gesture Recognizers
     func addGestureRecognizersForAnimations() {
         animationDistance = contentView.frame.width
-//        contentView.addGestureRecognizer(UITapGestureRecognizer(target: self,
-//                                                                action: #selector(handleTapGesture(_:))))
+        tapView.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                                action: #selector(handleTapGesture(_:))))
         contentView.addGestureRecognizer(PanDirectionGestureRecognizer(direction: .horizontal,
                                                                        target: self,
                                                                        action: #selector(handlePanGesture(_:))))
