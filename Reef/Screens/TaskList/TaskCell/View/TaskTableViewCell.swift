@@ -28,6 +28,7 @@ public class TaskTableViewCell: UITableViewCell {
             print(swipeDirection)
         }
     }
+    private var canExecuteAnimationCompletion: Bool = true
     
     weak var swipeDelegate: TaskTableViewCellSwipeDelegate?
     
@@ -225,6 +226,31 @@ extension TaskTableViewCell { // MARK: - Accessibility
 
 // MARK: - Animations
 extension TaskTableViewCell {
+    
+    private func addCellClosingAnimation(with duration: TimeInterval, target: UIView, completion: (() -> Void)?) {
+        let topAuxView = UIView(frame: CGRect(x: target.bounds.minX,
+                                              y: target.bounds.minY - target.bounds.midY,
+                                              width: target.bounds.width,
+                                              height: target.bounds.height/2))
+        topAuxView.backgroundColor = ReefColors.background
+        target.addSubview(topAuxView)
+        
+        let bottomAuxView = UIView(frame: CGRect(x: target.bounds.minX,
+                                                 y: target.bounds.maxY,
+                                                 width: target.bounds.width,
+                                                 height: target.bounds.height/2))
+        bottomAuxView.backgroundColor = ReefColors.background
+        target.addSubview(bottomAuxView)
+        let completionAnimator = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut) {
+            topAuxView.frame.origin.y += topAuxView.frame.height
+            bottomAuxView.frame.origin.y -= bottomAuxView.frame.height
+        }
+        completionAnimator.addCompletion { _ in
+            guard self.canExecuteAnimationCompletion else { return }
+            completion?()
+        }
+        completionAnimator.startAnimation(afterDelay: 0.5)
+    }
 
     private func addLeftToRightSwipeAnimation(with duration: TimeInterval) {
         let imageName: String =
@@ -287,35 +313,16 @@ extension TaskTableViewCell {
             self.contentView.frame.origin.x += self.contentView.frame.width
         }
         animator.addCompletion { [unowned self] _ in
-            
             self.runningAnimators.removeAll()
-            
-            let topAuxView = UIView(frame: CGRect(x: pullView.bounds.minX,
-                                                  y: pullView.bounds.minY - pullView.bounds.midY,
-                                                  width: pullView.bounds.width,
-                                                  height: pullView.bounds.height/2))
-            topAuxView.backgroundColor = ReefColors.background
-            pullView.addSubview(topAuxView)
-            
-            let bottomAuxView = UIView(frame: CGRect(x: pullView.bounds.minX,
-                                                     y: pullView.bounds.maxY,
-                                                     width: pullView.bounds.width,
-                                                     height: pullView.bounds.height/2))
-            bottomAuxView.backgroundColor = ReefColors.background
-            pullView.addSubview(bottomAuxView)
-            let completionAnimator = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut) {
-                topAuxView.frame.origin.y += topAuxView.frame.height
-                bottomAuxView.frame.origin.y -= bottomAuxView.frame.height
-            }
-            completionAnimator.addCompletion { [unowned self] _ in
+            guard self.canExecuteAnimationCompletion else { return }
+            self.addCellClosingAnimation(with: 0.5, target: pullView, completion: { [unowned self] in
                 self.swipeDelegate?.didSwipeFromLeftToRight(in: self)
-            }
-            completionAnimator.startAnimation(afterDelay: 0.5)
+            })
         }
         runningAnimators.append(animator)
     }
     
-    private func addRightToLeftSwipeAnimation(with duration: TimeInterval, completionHandler: (() -> Void)?) {
+    private func addRightToLeftSwipeAnimation(with duration: TimeInterval) {
         let pullView = UIView(frame: CGRect(x: contentView.frame.width,
                                             y: contentView.frame.minY,
                                             width: contentView.frame.width,
@@ -365,30 +372,11 @@ extension TaskTableViewCell {
             self.contentView.frame.origin.x -= self.contentView.frame.width
         }
         animator.addCompletion { [unowned self] _ in
-            
             self.runningAnimators.removeAll()
-            
-            let topAuxView = UIView(frame: CGRect(x: pullView.bounds.minX,
-                                                  y: pullView.bounds.minY - pullView.bounds.midY,
-                                                  width: pullView.bounds.width,
-                                                  height: pullView.bounds.height/2))
-            topAuxView.backgroundColor = ReefColors.background
-            pullView.addSubview(topAuxView)
-            
-            let bottomAuxView = UIView(frame: CGRect(x: pullView.bounds.minX,
-                                                     y: pullView.bounds.maxY,
-                                                     width: pullView.bounds.width,
-                                                     height: pullView.bounds.height/2))
-            bottomAuxView.backgroundColor = ReefColors.background
-            pullView.addSubview(bottomAuxView)
-            let completionAnimator = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut) {
-                topAuxView.frame.origin.y += topAuxView.frame.height
-                bottomAuxView.frame.origin.y -= bottomAuxView.frame.height
-            }
-            completionAnimator.addCompletion { [unowned self] _ in
+            guard self.canExecuteAnimationCompletion else { return }
+            self.addCellClosingAnimation(with: 0.5, target: pullView, completion: { [unowned self] in
                 self.swipeDelegate?.didSwipeFromRightToLeft(in: self)
-            }
-            completionAnimator.startAnimation(afterDelay: 0.5)
+            })
         }
         runningAnimators.append(animator)
     }
@@ -420,10 +408,12 @@ extension TaskTableViewCell {
             if runningAnimators.isEmpty {
                 startInteractiveTransition(swipeDirection: swipeDirection, duration: duration)
             } else if swipeDirectionChanged {
+                canExecuteAnimationCompletion = false
                 self.runningAnimators.forEach({
                     $0.stopAnimation(false)
                     $0.finishAnimation(at: UIViewAnimatingPosition.start)
                 })
+                canExecuteAnimationCompletion = true
             } else {
                 let fraction = fractionComplete(swipeDirection: swipeDirection, translation: translation)
                 updateInteractiveTransition(fractionComplete: fraction)
@@ -446,7 +436,7 @@ extension TaskTableViewCell {
         case .leftToRight:
             addLeftToRightSwipeAnimation(with: duration)
         case .rightToLeft:
-            addRightToLeftSwipeAnimation(with: duration, completionHandler: nil)
+            addRightToLeftSwipeAnimation(with: duration)
         default:
             break
         }
