@@ -98,6 +98,7 @@ class IconTableViewCell: UITableViewCell {
     }
     
     private func reloadData() {
+        configureLayers()
         titleLabel.text = viewModel.title
         subtitleLabel.text = viewModel.subtitle
         icon.image = UIImage(named: viewModel.imageName)!
@@ -120,20 +121,48 @@ class IconTableViewCell: UITableViewCell {
             if viewModel.tagInfo.indices.contains(index) {
                 tagIcons[index].isHidden = false
                 tagLabels[index].isHidden = false
-                
-                let info = viewModel.tagInfo[index]
+                gradientLayers[index].isHidden = false
                 
                 tagIcons[index].image =
                     UIImage(named: viewModel.imageName)!
                         .withRenderingMode(.alwaysTemplate)
-                tagIcons[index].tintColor =
-                    UIColor(cgColor:UIColor.tagColors[info.colorIndex].first!)
-                tagLabels[index].text = info.text
+                
+                gradientLayers[index].colors = UIColor.tagColors[viewModel.tagInfo[index].colorIndex]
+//                gradientLayers[index].mask =÷
+                
+                tagLabels[index].text = viewModel.tagInfo[index].text
                 tagLabels[index].textColor = ReefColors.cellTagLabel
             } else {
                 tagIcons[index].isHidden = true
                 tagLabels[index].isHidden = true
+                gradientLayers[index].isHidden = true
             }
+        }
+    }
+    
+    var firstLayer: CAGradientLayer = CAGradientLayer()
+    var secondLayer: CAGradientLayer = CAGradientLayer()
+    
+    var gradientLayers: [CAGradientLayer] {
+        return [firstLayer, secondLayer]
+    }
+    
+    func configureLayers() {
+        for index in 0...1 {
+            let view = UIView()
+            let layer = gradientLayers[index]
+            let maskView = UIImageView(image: UIImage(named: viewModel.imageName))
+            tagIcons[index].tintColor = .clear
+            
+            view.frame = tagIcons[index].bounds
+            layer.frame = view.bounds
+            maskView.frame = view.bounds
+            maskView.contentMode = .scaleAspectFit
+            
+            view.layer.addSublayer(layer)
+            view.mask = maskView
+            
+            tagIcons[index].addSubview(view)
         }
     }
     
