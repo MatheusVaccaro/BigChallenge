@@ -54,6 +54,16 @@ class HomeScreenViewController: UIViewController {
         delegate?.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        configureSettingsButton()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeSettingsButton()
+    }
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         newTaskLabel.font = UIFont.font(sized: 13, weight: .medium, with: .body)
         emptyStateTitleLabel.font = UIFont.font(sized: 18, weight: .bold, with: .title2)
@@ -140,7 +150,6 @@ class HomeScreenViewController: UIViewController {
         importFromRemindersButton.titleLabel?.numberOfLines = 1
         importFromRemindersButton.setTitle(viewModel.importFromRemindersText, for: .normal)
         
-        
         emptyStateImage.image = viewModel.emptyStateImage(on: on)
         emptyStateTitleLabel.text = viewModel.emptyStateTitle(on: on)
         emptyStateSubtitleLabel.text = viewModel.emptyStateSubtitle(on: on)
@@ -162,6 +171,42 @@ class HomeScreenViewController: UIViewController {
         whiteBackgroundView.layer.shadowColor = ReefColors.shadow
         whiteBackgroundView.layer.shadowOpacity = 1
         whiteBackgroundView.layer.shadowRadius = 10
+    }
+    
+    var settingsButton: UIImageView?
+    
+    fileprivate func configureSettingsButton() {
+        guard settingsButton == nil else {
+            settingsButton?.isHidden = false
+            return
+        }
+        
+        let navBar = navigationController!.navigationBar
+        
+        settingsButton = UIImageView(image: UIImage(named: "AddIcon")?.withRenderingMode(.alwaysTemplate))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedSettings))
+
+        settingsButton!.tintColor = ReefColors.largeTitle
+        settingsButton!.translatesAutoresizingMaskIntoConstraints = false
+        settingsButton!.isUserInteractionEnabled = true
+        settingsButton!.addGestureRecognizer(tapGesture)
+        
+        navBar.addSubview(settingsButton!)
+        
+        NSLayoutConstraint.activate([ //TODO: Check constraints
+            settingsButton!.rightAnchor.constraint(equalTo: navBar.rightAnchor, constant: -25),
+            settingsButton!.bottomAnchor.constraint(equalTo: navBar.bottomAnchor, constant: -16),
+            settingsButton!.heightAnchor.constraint(equalToConstant: 26),
+            settingsButton!.widthAnchor.constraint(equalTo: settingsButton!.heightAnchor)
+            ])
+    }
+    
+    fileprivate func removeSettingsButton() {
+        settingsButton?.isHidden = true
+    }
+    
+    @objc func tappedSettings() {
+        viewModel.startSettings()
     }
     
     override func updateUserActivityState(_ activity: NSUserActivity) {

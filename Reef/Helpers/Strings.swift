@@ -44,6 +44,13 @@ struct Strings {
         }
     }
     
+    struct Settings {
+        struct Theme {
+            static let title =
+                NSLocalizedString("Theme selection screen title", comment: "title of the theme selection screen")
+        }
+    }
+    
     struct Task {
         
         struct CreationScreen {

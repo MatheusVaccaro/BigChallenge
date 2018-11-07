@@ -99,6 +99,13 @@ class HomeScreenCoordinator: Coordinator {
         addChild(coordinator: newTaskCoordinator)
         return newTaskCoordinator
     }()
+    
+    fileprivate func showSettings() {
+        let settingsCoordinator = SettingsCoordinator(presenter: presenter)
+        
+        addChild(coordinator: settingsCoordinator)
+        settingsCoordinator.start()
+    }
 
     fileprivate func showNewTask() {
         let newTaskCoordinator =
@@ -158,6 +165,10 @@ extension HomeScreenCoordinator: CoordinatorDelegate {
 }
 
 extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
+    func homeScreenViewModelDidStartSettings(_ homeScreenViewModel: HomeScreenViewModel) {
+        showSettings()
+    }
+    
     func homeScreenViewModelDidStartAddTask(_ homeScreenViewModel: HomeScreenViewModel) {
         showNewTask()
     }

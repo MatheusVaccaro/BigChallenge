@@ -128,7 +128,6 @@ class IconTableViewCell: UITableViewCell {
                         .withRenderingMode(.alwaysTemplate)
                 
                 gradientLayers[index].colors = UIColor.tagColors[viewModel.tagInfo[index].colorIndex]
-//                gradientLayers[index].mask =÷
                 
                 tagLabels[index].text = viewModel.tagInfo[index].text
                 tagLabels[index].textColor = ReefColors.cellTagLabel
