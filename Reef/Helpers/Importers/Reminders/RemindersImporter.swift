@@ -72,7 +72,7 @@ public class RemindersImporter {
     private func importTasksFromReminders() {
         guard !isImporting else { return }
         
-        delegate?.remindersImportedDidStartImport(self)
+        delegate?.remindersImporterDidStartImport(self)
         isImporting = true
         
         remindersDB.fetchIncompleteReminders { incompleteReminders in
@@ -120,14 +120,18 @@ public class RemindersImporter {
                 return task
             })
             
-            self.lastImportedTags = Set(newTags)
-            self.lastImportedTasks = Set(newTasks)
+            // Import was finished with success
+            self.lastImportedTags = self.lastImportedTags.union(newTags)
+            self.lastImportedTasks = self.lastImportedTasks.union(newTasks)
             self.isImporting = false
             RemindersImporter.hasImportedOnce = true
             self.delegate?.remindersImporterDidFinishImport(self)
         }
     }
     
+    /**
+     Retrieve the last tags that were imported, removing them from the import buffer.
+ 	*/
     func consumeNewImportedTags() -> Set<Tag> {
         let newImportedTags = self.lastImportedTags
         self.lastImportedTags.removeAll()
@@ -135,6 +139,9 @@ public class RemindersImporter {
         return newImportedTags
     }
     
+    /**
+     Consume the last tasks to be imported, removing them from the import buffer.
+ 	*/
     func consumeNewImportedTasks() -> Set<Task> {
         let newImportedTasks = self.lastImportedTasks
         self.lastImportedTasks.removeAll()
@@ -326,7 +333,7 @@ extension RemindersImporter: RemindersCommunicatorDelegate {
 }
 
 protocol RemindersImporterDelegate: class {
-    func remindersImportedDidStartImport(_ remindersImporter: RemindersImporter)
+    func remindersImporterDidStartImport(_ remindersImporter: RemindersImporter)
     func remindersImporterDidFinishImport(_ remindersImporter: RemindersImporter)
     func remindersImporterWasDeniedPermission(_ remindersImporter: RemindersImporter)
     func remindersImporterWasGrantedPermission(_ remindersImporter: RemindersImporter)

@@ -237,7 +237,7 @@ extension HomeScreenCoordinator: HomeScreenViewControllerDelegate {
 }
 
 extension HomeScreenCoordinator: RemindersImporterDelegate {
-    func remindersImportedDidStartImport(_ remindersImporter: RemindersImporter) {
+    func remindersImporterDidStartImport(_ remindersImporter: RemindersImporter) {
         // TODO: Animate import
     }
     

@@ -166,10 +166,12 @@ class LocalPersistence: PersistenceProtocol {
         }
         
         if let updateSet = userInfo[NSUpdatedObjectsKey] as? NSMutableSet {
+            // Make sure the updateSet doesn't trigger update events from insertions
             if let insertSet = userInfo[NSInsertedObjectsKey] as? Set<AnyHashable> {
                 updateSet.minus(insertSet)
             }
             
+            // Convert to an array and check if it's empty, since it could be empty after the filtering above
             if let updateArray = updateSet.allObjects as? [Storable], !updateArray.isEmpty {
                 delegate?.persistence(self, didUpdateObjects: updateArray)
             }
