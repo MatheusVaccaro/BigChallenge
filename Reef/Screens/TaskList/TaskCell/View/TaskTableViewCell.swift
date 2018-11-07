@@ -28,7 +28,6 @@ public class TaskTableViewCell: UITableViewCell {
             print(swipeDirection)
         }
     }
-    private var canExecuteAnimationCompletion: Bool = true
     
     weak var swipeDelegate: TaskTableViewCellSwipeDelegate?
     
@@ -246,7 +245,6 @@ extension TaskTableViewCell {
             bottomAuxView.frame.origin.y -= bottomAuxView.frame.height
         }
         completionAnimator.addCompletion { _ in
-            guard self.canExecuteAnimationCompletion else { return }
             completion?()
         }
         completionAnimator.startAnimation(afterDelay: 0.5)
@@ -312,12 +310,13 @@ extension TaskTableViewCell {
         let animator = UIViewPropertyAnimator(duration: duration, curve: .easeInOut) { [unowned self] in
             self.contentView.frame.origin.x += self.contentView.frame.width
         }
-        animator.addCompletion { [unowned self] _ in
+        animator.addCompletion { [unowned self] status in
             self.runningAnimators.removeAll()
-            guard self.canExecuteAnimationCompletion else { return }
-            self.addCellClosingAnimation(with: 0.5, target: pullView, completion: { [unowned self] in
-                self.swipeDelegate?.didSwipeFromLeftToRight(in: self)
-            })
+            if status == .end {
+                self.addCellClosingAnimation(with: 0.5, target: pullView, completion: { [unowned self] in
+                    self.swipeDelegate?.didSwipeFromLeftToRight(in: self)
+                })
+            }
         }
         runningAnimators.append(animator)
     }
@@ -371,12 +370,13 @@ extension TaskTableViewCell {
         let animator = UIViewPropertyAnimator(duration: duration, curve: .easeInOut) { [unowned self] in
             self.contentView.frame.origin.x -= self.contentView.frame.width
         }
-        animator.addCompletion { [unowned self] _ in
+        animator.addCompletion { [unowned self] status in
             self.runningAnimators.removeAll()
-            guard self.canExecuteAnimationCompletion else { return }
-            self.addCellClosingAnimation(with: 0.5, target: pullView, completion: { [unowned self] in
-                self.swipeDelegate?.didSwipeFromRightToLeft(in: self)
-            })
+            if status == .end {
+                self.addCellClosingAnimation(with: 0.5, target: pullView, completion: { [unowned self] in
+                    self.swipeDelegate?.didSwipeFromRightToLeft(in: self)
+                })
+            }
         }
         runningAnimators.append(animator)
     }
@@ -408,12 +408,10 @@ extension TaskTableViewCell {
             if runningAnimators.isEmpty {
                 startInteractiveTransition(swipeDirection: swipeDirection, duration: duration)
             } else if swipeDirectionChanged {
-                canExecuteAnimationCompletion = false
                 self.runningAnimators.forEach({
                     $0.stopAnimation(false)
                     $0.finishAnimation(at: UIViewAnimatingPosition.start)
                 })
-                canExecuteAnimationCompletion = true
             } else {
                 let fraction = fractionComplete(swipeDirection: swipeDirection, translation: translation)
                 updateInteractiveTransition(fractionComplete: fraction)
