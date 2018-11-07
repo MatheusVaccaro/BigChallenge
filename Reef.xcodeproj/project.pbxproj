@@ -168,6 +168,7 @@
 		C26EC74821547282000E9CB9 /* Barlow-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDC1211205C4004F66D6 /* Barlow-Thin.ttf */; };
 		C26EC74921547282000E9CB9 /* Barlow-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E8DDB6211205C1004F66D6 /* Barlow-ThinItalic.ttf */; };
 		C2851A5D2190B0680001CDC7 /* PanDirectionGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2851A5C2190B0680001CDC7 /* PanDirectionGestureRecognizer.swift */; };
+		C2851A61219350E90001CDC7 /* RandomSwipeTextGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2851A60219350E90001CDC7 /* RandomSwipeTextGenerator.swift */; };
 		C28DC91A20B61CB6007F881A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28DC91920B61CB6007F881A /* AppDelegate.swift */; };
 		C28DC91F20B61CB6007F881A /* TaskList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C28DC91D20B61CB6007F881A /* TaskList.storyboard */; };
 		C28DC92120B61CB9007F881A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C28DC92020B61CB9007F881A /* Assets.xcassets */; };
@@ -437,6 +438,7 @@
 		C26EC73A21545A25000E9CB9 /* NotesInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesInputViewController.swift; sourceTree = "<group>"; };
 		C26EC73C21545A4F000E9CB9 /* NotesInput.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NotesInput.storyboard; sourceTree = "<group>"; };
 		C2851A5C2190B0680001CDC7 /* PanDirectionGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanDirectionGestureRecognizer.swift; sourceTree = "<group>"; };
+		C2851A60219350E90001CDC7 /* RandomSwipeTextGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomSwipeTextGenerator.swift; sourceTree = "<group>"; };
 		C28DC91620B61CB6007F881A /* Reef.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reef.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C28DC91920B61CB6007F881A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C28DC92020B61CB9007F881A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1178,6 +1180,7 @@
 				C22F6FD3217A5E17007F0309 /* UITableView+ContentSizeDelegate.swift */,
 				C22F6FD5217FA396007F0309 /* VerticallyCenteredTextView.swift */,
 				C2851A5C2190B0680001CDC7 /* PanDirectionGestureRecognizer.swift */,
+				C2851A60219350E90001CDC7 /* RandomSwipeTextGenerator.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1988,6 +1991,7 @@
 				221BA8B820F6A1DF00BE2AC1 /* TagCollectionViewController.swift in Sources */,
 				C26EC73921544D19000E9CB9 /* NotesTableViewCellViewModel.swift in Sources */,
 				22F23E9B212E416C0064EE05 /* TaskModel.swift in Sources */,
+				C2851A61219350E90001CDC7 /* RandomSwipeTextGenerator.swift in Sources */,
 				22DE27122141BFF300466187 /* IconTableViewCell.swift in Sources */,
 				29722024211E36CF00CF80CE /* ToggleableLabel.swift in Sources */,
 				226D8609215E529C00DC6E92 /* PrivateTagSwitchVideModel.swift in Sources */,
