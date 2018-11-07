@@ -49,37 +49,44 @@ public class TaskModel {
         reefKit.save(task)
     }
     
+    /**
+     Batch save. Intent is to trigger only one persistence change notification.
+     */
+    public func save(_ tasks: [Task]) {
+        reefKit.save(tasks)
+    }
+    
     public func delete(_ task: Task) {
         guard tasks.contains(task) else { print("could not delete \(task) "); return }
         reefKit.delete(task)
     }
     
-    public func createTask(with attributes: [TaskAttributes : Any]) -> Task {
-        let task = reefKit.createTask(with: attributes)
+    public func createTask(with information: TaskInformation) -> Task {
+        let task = reefKit.createTask(with: information)
         return task
     }
     
-    public func update(_ task: Task, with attributes: [TaskAttributes : Any]) {
-        reefKit.update(task, with: attributes)
-        
-        if shouldPromptReview(attributes) {
+    public func update(_ task: Task, with information: TaskInformation) {
+        reefKit.update(task, with: information)
+
+        if shouldPromptReview(information) {
             promptUserReview()
         }
     }
-    
+
     private func promptUserReview() {
         SKStoreReviewController.requestReview()
         UserDefaults.standard.setValue(true, forKey: "hasPrompedReview")
     }
-    
-    private func shouldPromptReview(_ taskAttributes: [TaskAttributes : Any]) -> Bool {
+
+    private func shouldPromptReview(_ taskInformation: TaskInformation) -> Bool {
         let hasPrompedReview = UserDefaults.standard.value(forKey: "hasPrompedReview") as? Bool ?? false
-        let isTaskBeingCompleted = taskAttributes[.isCompleted] as? Bool ?? false
+        let isTaskBeingCompleted = taskInformation[.isCompleted] as? Bool ?? false
         let hasSomeCompletedTasks = tasks.filter { $0.isCompleted }.count > 10
-        
+
         return !hasPrompedReview && isTaskBeingCompleted && hasSomeCompletedTasks
     }
-    
+
     func taskWith(id: UUID) -> Task? {
         return tasks.first { $0.id! == id }
     }

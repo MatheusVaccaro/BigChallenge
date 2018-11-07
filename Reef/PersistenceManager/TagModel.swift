@@ -53,23 +53,27 @@ public class TagModel {
         reefKit.save(tag) // delegate manages the array
     }
     
+    public func save(_ tags: [Tag]) {
+        reefKit.save(tags)
+    }
+    
     public func delete(object: Tag) {
         guard tags.contains(object) else { print("could not delete \(object) "); return }
         reefKit.delete(object) // delegate manages the array
     }
     
-    public func createTag(with attributes: [TagAttributes : Any]) -> Tag {
-        let title = attributes[.title] as? String ?? ""
+    public func createTag(with information: TagInformation) -> Tag {
+        let title = information[.title] as? String ?? ""
         if let tag = (tags.first { $0.title == title }) {
             return tag
         } else {
-            let tag = reefKit.createTag(with: attributes)
+            let tag = reefKit.createTag(with: information)
             return tag
         }
     }
     
-    public func update(_ tag: Tag, with attributes: [TagAttributes : Any]) {
-        reefKit.update(tag, with: attributes)
+    public func update(_ tag: Tag, with information: TagInformation) {
+        reefKit.update(tag, with: information)
     }
 }
 

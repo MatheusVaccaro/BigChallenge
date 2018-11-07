@@ -34,7 +34,8 @@ class HomeScreenCoordinator: Coordinator {
     init(presenter: UINavigationController,
          taskModel: TaskModel,
          tagModel: TagModel,
-         selectedTags: [Tag]) {
+         selectedTags: [Tag],
+         remindersImporter: RemindersImporter) {
         
         self.presenter = presenter
         self.taskModel = taskModel
@@ -43,7 +44,8 @@ class HomeScreenCoordinator: Coordinator {
         
         self.childrenCoordinators = []
         
-        self.remindersImporter = RemindersImporter(taskModel: taskModel, tagModel: tagModel)
+        self.remindersImporter = remindersImporter
+        remindersImporter.delegate = self
         
         #if DEBUG
         print("+++ INIT HomeScreenCoordinator")
@@ -182,7 +184,7 @@ extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
     }
     
     func homeScreenViewModelShouldShowImportFromRemindersOption(_ homeScreenViewModel: HomeScreenViewModel) -> Bool {
-        return !RemindersImporter.isImportingDefined
+        return !RemindersImporter.hasImportedOnce
     }
 }
 
@@ -231,5 +233,27 @@ extension HomeScreenCoordinator: HomeScreenViewControllerDelegate {
             .setupTaskList(viewModel: taskListViewModel, viewController: taskListViewController!)
         homeScreenViewController!
             .setupTagCollection(viewModel: tagCollectionViewModel, viewController: tagCollectionViewController!)
+    }
+}
+
+extension HomeScreenCoordinator: RemindersImporterDelegate {
+    func remindersImporterDidStartImport(_ remindersImporter: RemindersImporter) {
+        // TODO: Animate import
+    }
+    
+    func remindersImporterWasDeniedPermission(_ remindersImporter: RemindersImporter) {
+        // TODO: Alert user
+    }
+    
+    func remindersImporterWasGrantedPermission(_ remindersImporter: RemindersImporter) {
+        remindersImporter.importIfGranted()
+    }
+    
+    func remindersImporterDidFinishImport(_ remindersImporter: RemindersImporter) {
+        let importedTags = remindersImporter.consumeNewImportedTags()
+        let importedTasks = remindersImporter.consumeNewImportedTasks()
+        
+        tagModel.save(Array(importedTags))
+        taskModel.save(Array(importedTasks))
     }
 }

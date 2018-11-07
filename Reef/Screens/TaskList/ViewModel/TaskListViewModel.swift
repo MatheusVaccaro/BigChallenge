@@ -173,11 +173,11 @@ public class TaskListViewModel {
     
     func completeTask(taskID: UUID) {
         guard let task = model.taskWith(id: taskID) else { return }
-        var taskAttributes: [TaskAttributes : Any] = [:]
+        var taskInformation = TaskInformation()
         
-        taskAttributes[.isCompleted] = true
+        taskInformation[.isCompleted] = true
         
-        model.update(task, with: taskAttributes)
+        model.update(task, with: taskInformation)
     }
     
     // MARK: Helpers
@@ -248,9 +248,9 @@ extension TaskListViewModel: TaskModelDelegate {
     
     func toggleComplete(taskAt indexPath: IndexPath) {
         let task = taskListData[indexPath.section].rows[indexPath.row]
-        let taskAttributes: [TaskAttributes : Any] = [.isCompleted:!task.isCompleted]
+        let taskInformation: TaskInformation = [.isCompleted: !task.isCompleted]
         
-        model.update(task, with: taskAttributes)
+        model.update(task, with: taskInformation)
     }
     
     func taskModel(_ taskModel: TaskModel, didUpdate tasks: [Task]) {

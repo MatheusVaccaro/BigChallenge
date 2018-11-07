@@ -10,6 +10,7 @@ import Foundation
 import CoreLocation
 import Persistence
 
+public typealias TaskInformation = [TaskAttributes: Any]
 public enum TaskAttributes {
     case completionDate
     case creationDate
@@ -25,6 +26,7 @@ public enum TaskAttributes {
     case isPinned
 }
 
+public typealias TagInformation = [TagAttributes: Any]
 public enum TagAttributes {
     case colorIndex
     case dueDate
@@ -50,17 +52,16 @@ class TaskCRUD {
         }
     }
     
-    func createTask(with attributes: [TaskAttributes : Any]) -> Task {
-        
-        let title = attributes[.title] as? String ?? ""
+    func createTask(with information: TaskInformation) -> Task {
+        let title = information[.title] as? String ?? ""
         let task: Task = persistence.create(Task.self)
-        let id = attributes[.id] as? UUID ?? UUID()
-        let notes = attributes[.notes] as? String ?? ""
-        let creationDate = attributes[.creationDate] as? Date ?? Date()
-        let isCompleted = attributes[.isCompleted] as? Bool ?? false
-        let tags = attributes[.tags] as? [Tag] ?? []
-        let isArriving = attributes[.isArrivingLocation] as? Bool ?? true
-        let isPinned = attributes[.isPinned] as? Bool ?? false
+        let id = information[.id] as? UUID ?? UUID()
+        let notes = information[.notes] as? String ?? ""
+        let creationDate = information[.creationDate] as? Date ?? Date()
+        let isCompleted = information[.isCompleted] as? Bool ?? false
+        let tags = information[.tags] as? [Tag] ?? []
+        let isArriving = information[.isArrivingLocation] as? Bool ?? true
+        let isPinned = information[.isPinned] as? Bool ?? false
         
         task.id = id
         task.title = title
@@ -70,16 +71,16 @@ class TaskCRUD {
         task.tags = NSSet(array: tags)
         task.isPinned = isPinned
         
-        if let completionDate = attributes[.completionDate] as? Date {
+        if let completionDate = information[.completionDate] as? Date {
             task.completionDate = completionDate
         }
-        if let dueDate = attributes[.dueDate] as? Date {
+        if let dueDate = information[.dueDate] as? Date {
             task.dueDate = dueDate
         }
-        if let region = attributes[.location] as? CLCircularRegion {
+        if let region = information[.location] as? CLCircularRegion {
             let regionData =
                 NSKeyedArchiver.archivedData(withRootObject: region)
-            let placeName = attributes[.locationName] as! String
+            let placeName = information[.locationName] as! String
             
             task.locationData = regionData
             task.isArrivingLocation = isArriving
@@ -90,20 +91,20 @@ class TaskCRUD {
         return task
     }
     
-    func update(_ task: Task, with attributes: [TaskAttributes : Any]) {
-        if let completionDate = attributes[.completionDate] as? Date {
+    func update(_ task: Task, with taskInformation: TaskInformation) {
+        if let completionDate = taskInformation[.completionDate] as? Date {
             task.completionDate = completionDate
         }
-        if let creationDate = attributes[.creationDate] as? Date {
+        if let creationDate = taskInformation[.creationDate] as? Date {
             task.creationDate = creationDate
         }
-        if let dueDate = attributes[.dueDate] as? Date? {
+        if let dueDate = taskInformation[.dueDate] as? Date? {
             task.dueDate = dueDate
         }
-        if let id = attributes[.id] as? UUID {
+        if let id = taskInformation[.id] as? UUID {
             task.id = id
         }
-        if let isCompleted = attributes[.isCompleted] as? Bool {
+        if let isCompleted = taskInformation[.isCompleted] as? Bool {
             task.isCompleted = isCompleted
             if isCompleted {
                 NotificationManager.removeLocationNotification(for: task)
@@ -111,28 +112,28 @@ class TaskCRUD {
                 NotificationManager.removeAllTagsNotifications(for: task)
             }
         }
-        if let notes = attributes[.notes] as? String {
+        if let notes = taskInformation[.notes] as? String {
             task.notes = notes
         }
-        if let title = attributes[.title] as? String {
+        if let title = taskInformation[.title] as? String {
             task.title = title
         }
-        if let tags = attributes[.tags] as? [Tag] {
+        if let tags = taskInformation[.tags] as? [Tag] {
             task.tags = NSSet(array: tags)
             NotificationManager.addAllTagsNotifications(from: task.allTags)
         }
         
-        if let region = attributes[.location] as? CLCircularRegion {
+        if let region = taskInformation[.location] as? CLCircularRegion {
             let regionData =
                 NSKeyedArchiver.archivedData(withRootObject: region)
-            if let placeName = attributes[.locationName] as? String { task.locationName = placeName }
-            if let isArriving = attributes[.isArrivingLocation] as? Bool { task.isArrivingLocation = isArriving }
+            if let placeName = taskInformation[.locationName] as? String { task.locationName = placeName }
+            if let isArriving = taskInformation[.isArrivingLocation] as? Bool { task.isArrivingLocation = isArriving }
             task.locationData = regionData
         } else {
             task.locationData = nil
         }
         
-        if let isPinned = attributes[.isPinned] as? Bool {
+        if let isPinned = taskInformation[.isPinned] as? Bool {
             task.isPinned = isPinned
         }
         
@@ -186,15 +187,15 @@ public class TagCRUD {
         }
     }
     
-    func createTag(with attributes: [TagAttributes : Any]) -> Tag {
+    func createTag(with information: TagInformation) -> Tag {
         
-        let title = attributes[.title] as? String
+        let title = information[.title] as? String
         let tag = persistence.create(Tag.self)
-        let colorIndex = attributes[.colorIndex] as? Int64 ?? abs(Int64(currentColor))
-        let id = attributes[.id] as? UUID ?? UUID()
-        let tasks = attributes[.tasks] as? [Task] ?? []
-        let arriving = attributes[.isArrivingLocation] as? Bool ?? false
-        let requiresAuthentication = attributes[.requiresAuthentication] as? Bool ?? false
+        let colorIndex = information[.colorIndex] as? Int64 ?? abs(Int64(nextColor))
+        let id = information[.id] as? UUID ?? UUID()
+        let tasks = information[.tasks] as? [Task] ?? []
+        let arriving = information[.isArrivingLocation] as? Bool ?? false
+        let requiresAuthentication = information[.requiresAuthentication] as? Bool ?? false
         
         tag.requiresAuthentication = requiresAuthentication
         tag.colorIndex = colorIndex
@@ -202,13 +203,13 @@ public class TagCRUD {
         tag.title = title
         tag.tasks = NSSet(array: tasks)
         
-        if let dueDate = attributes[.dueDate] as? Date {
+        if let dueDate = information[.dueDate] as? Date {
             tag.dueDate = dueDate
         }
-        if let region = attributes[.location] as? CLCircularRegion {
+        if let region = information[.location] as? CLCircularRegion {
             let regionData =
                 NSKeyedArchiver.archivedData(withRootObject: region)
-            let placeName = attributes[.locationName] as! String
+            let placeName = information[.locationName] as! String
             
             tag.locationName = placeName
             tag.locationData = regionData
@@ -218,35 +219,35 @@ public class TagCRUD {
         return tag
     }
     
-    func update(_ tag: Tag, with attributes: [TagAttributes: Any]) {
-        if let dueDate = attributes[.dueDate] as? Date? {
+    func update(_ tag: Tag, with information: TagInformation) {
+        if let dueDate = information[.dueDate] as? Date? {
             tag.dueDate = dueDate
         }
         
-        if let id = attributes[.id] as? UUID {
+        if let id = information[.id] as? UUID {
             tag.id = id
         }
-        if let title = attributes[.title] as? String {
+        if let title = information[.title] as? String {
             tag.title = title
         }
-        if let tasks = attributes[.tasks] as? [Task] {
+        if let tasks = information[.tasks] as? [Task] {
             tag.tasks = NSSet(array: tasks)
         }
-        if let colorIndex = attributes[.colorIndex] as? Int64 {
+        if let colorIndex = information[.colorIndex] as? Int64 {
             tag.colorIndex = colorIndex
         }
-        if let arriving = attributes[.isArrivingLocation] as? Bool {
+        if let arriving = information[.isArrivingLocation] as? Bool {
             tag.isArrivingLocation = arriving
         }
-        if let requiresAuthentication = attributes[.requiresAuthentication] as? Bool {
+        if let requiresAuthentication = information[.requiresAuthentication] as? Bool {
             tag.requiresAuthentication = requiresAuthentication
         }
-        if let region = attributes[.location] as? CLCircularRegion {
+        if let region = information[.location] as? CLCircularRegion {
             let regionData = NSKeyedArchiver.archivedData(withRootObject: region)
             tag.locationData = regionData
 
-            if let placeName = attributes[.locationName] as? String { tag.locationName = placeName }
-            if let isArriving = attributes[.isArrivingLocation] as? Bool { tag.isArrivingLocation = isArriving }
+            if let placeName = information[.locationName] as? String { tag.locationName = placeName }
+            if let isArriving = information[.isArrivingLocation] as? Bool { tag.isArrivingLocation = isArriving }
         } else {
             tag.locationData = nil
         }

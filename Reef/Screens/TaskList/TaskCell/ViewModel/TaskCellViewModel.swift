@@ -83,10 +83,10 @@ public class TaskCellViewModel {
     }
     
     func toggleCompleteTask() {
-        var attributes: [TaskAttributes : Any] = [ .isCompleted : !task.isCompleted ]
-        if !task.isCompleted { attributes[.completionDate] = Date() }
+        var information: TaskInformation = [ .isCompleted : !task.isCompleted ]
+        if !task.isCompleted { information[.completionDate] = Date() }
         
-        model.update(task, with: attributes)
+        model.update(task, with: information)
     }
     
     // MARK: - Accessibility

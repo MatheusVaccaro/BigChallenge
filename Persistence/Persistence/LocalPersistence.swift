@@ -38,38 +38,43 @@ class LocalPersistence: PersistenceProtocol {
     }()
     
     // MARK: - LocalPersistence Lifecycle
-    
-    init() {
-        self.persistentContainer = {
-            /* This property is optional since there are legitimate
-             error conditions that could cause the creation of the store to fail.
-             */
+    let dispatchQueue: DispatchQueue
+    init(dispatchQueue: DispatchQueue) {
+        self.dispatchQueue = dispatchQueue
+        
+        dispatchQueue.sync {
+            self.persistentContainer = {
+                /* This property is optional since there are legitimate
+                 error conditions that could cause the creation of the store to fail.
+                 */
+                
+                let container = NSPersistentContainer(name: "Model", managedObjectModel: model)
+                
+                let description = NSPersistentStoreDescription()
+                description.url = applicationDocumentsDirectory
+                
+                container.persistentStoreDescriptions = [description]
+                
+                container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+                    if let error = error as NSError? {
+                        // Replace this implementation with code to handle the error appropriately.
+                        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                        
+                        /*
+                         Typical reasons for an error here include:
+                         * The parent directory does not exist, cannot be created, or disallows writing.
+                         * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+                         * The device is out of space.
+                         * The store could not be migrated to the current model version.
+                         Check the error message to determine what the actual problem was.
+                         */
+                        fatalError("Unresolved error \(error), \(error.userInfo)")
+                    }
+                })
+                return container
+            }()
             
-            let container = NSPersistentContainer(name: "Model", managedObjectModel: model)
-            
-            let description = NSPersistentStoreDescription()
-            description.url = applicationDocumentsDirectory
-            
-            container.persistentStoreDescriptions = [description]
-            
-            container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-                if let error = error as NSError? {
-                    // Replace this implementation with code to handle the error appropriately.
-                    // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                    
-                    /*
-                     Typical reasons for an error here include:
-                     * The parent directory does not exist, cannot be created, or disallows writing.
-                     * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                     * The device is out of space.
-                     * The store could not be migrated to the current model version.
-                     Check the error message to determine what the actual problem was.
-                     */
-                    fatalError("Unresolved error \(error), \(error.userInfo)")
-                }
-            })
-            return container
-        }()
+        }
         
         setupContextDidChangeObserver()
         setupContextWillSaveObserver()
@@ -160,9 +165,16 @@ class LocalPersistence: PersistenceProtocol {
             delegate?.persistence(self, didInsertObjects: insertArray)
         }
         
-        if let updateSet = userInfo[NSUpdatedObjectsKey] as? NSSet,
-            let updateArray = updateSet.allObjects as? [Storable] {
-            delegate?.persistence(self, didUpdateObjects: updateArray)
+        if let updateSet = userInfo[NSUpdatedObjectsKey] as? NSMutableSet {
+            // Make sure the updateSet doesn't trigger update events from insertions
+            if let insertSet = userInfo[NSInsertedObjectsKey] as? Set<AnyHashable> {
+                updateSet.minus(insertSet)
+            }
+            
+            // Convert to an array and check if it's empty, since it could be empty after the filtering above
+            if let updateArray = updateSet.allObjects as? [Storable], !updateArray.isEmpty {
+                delegate?.persistence(self, didUpdateObjects: updateArray)
+            }
         }
         
         if let deleteSet = userInfo[NSDeletedObjectsKey] as? NSSet,
@@ -200,12 +212,9 @@ class LocalPersistence: PersistenceProtocol {
 
 enum CoreDataError: Error {
     case couldNotCreateObject
-    //    TODO: solve this linter problem with xcode beta
-    //     swiftlint:disable all
     case couldNotFetchObject(reason: String)
     case couldNotSaveContext(reason: String)
     case couldNotDeleteObject(reason: String)
-    //     swiftlint:enable all
 }
 
 extension NSManagedObject: Storable {

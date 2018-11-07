@@ -10,23 +10,41 @@ import Foundation
 import EventKit
 import ReefKit
 
+struct RemindersImporterUserDefaultsKeys {
+    static let hasImportedOnce = "remindersImporterHasImportedOnce"
+}
+
 public class RemindersImporter {
     
     public static var instance: RemindersImporter?
     
+    weak var delegate: RemindersImporterDelegate?
+    
 	private let taskModel: TaskModel
     private let tagModel: TagModel
     private let remindersDB: RemindersCommunicator
-    private(set) var isImporting: Bool
+    
     private(set) var isSyncing: Bool
+    private(set) var isImporting: Bool
+    
+    private var lastImportedTags: Set<Tag>
+    private var lastImportedTasks: Set<Task>
+    
     static var isImportingDefined: Bool {
         return EKEventStore.authorizationStatus(for: .reminder) != EKAuthorizationStatus.notDetermined
+    }
+    
+    static var hasImportedOnce: Bool {
+        set { UserDefaults.standard.set(newValue, forKey: RemindersImporterUserDefaultsKeys.hasImportedOnce) }
+        get { return UserDefaults.standard.bool(forKey: RemindersImporterUserDefaultsKeys.hasImportedOnce) }
     }
 
     init(taskModel: TaskModel, tagModel: TagModel, communicator: RemindersCommunicator = RemindersCommunicator()) {
         self.taskModel = taskModel
         self.tagModel = tagModel
 		self.remindersDB = communicator
+        self.lastImportedTasks = []
+        self.lastImportedTags = []
         defer { remindersDB.delegate = self }
         self.isImporting = false
         self.isSyncing = false
@@ -42,9 +60,9 @@ public class RemindersImporter {
     
     /// import from remidners only if permission is already granted
     func importIfGranted() {
-        if EKEventStore.authorizationStatus(for: .reminder) == .authorized {
-            requestAndImport()
-        }
+        guard EKEventStore.authorizationStatus(for: .reminder) == .authorized else { return }
+        
+        importTasksFromReminders()
     }
 
     /**
@@ -52,25 +70,83 @@ public class RemindersImporter {
      converts them to tasks and tags, and then finally saves them to our own store.
      */
     private func importTasksFromReminders() {
+        guard !isImporting else { return }
+        
+        delegate?.remindersImporterDidStartImport(self)
         isImporting = true
         
-        remindersDB.fetchAllReminders { allReminders in
-            guard let reminders = allReminders else {
+        remindersDB.fetchIncompleteReminders { incompleteReminders in
+            guard let reminders = incompleteReminders else {
                 self.isImporting = false
                 
                 return
             }
             
+            // Convert reminders to task and tag data.
+            var importedTagsInformation = [TagInformation]()
+            var importedTasksInformation = [(TaskInformation, Reminder)]()
+            
+            // Parse all reminders that were not yet imported
             for reminder in reminders where !self.checkImportStatus(for: reminder) {
                 
-                let (task, tag) = self.convertTaskAndTag(from: reminder)
+                let tagInformation = self.convertTagInformation(from: reminder)
+                // Check for duplicate tags
+                if let tagTitle = tagInformation[.title] as? String,
+                   !importedTagsInformation.compactMap({ $0[.title] as? String }).contains(where: { $0 == tagTitle }) {
+        
+                    importedTagsInformation.append(tagInformation)
+                }
                 
-                self.taskModel.save(task)
-                self.tagModel.save(tag)
+                let taskInformation = self.convertTaskInformation(from: reminder)
+                importedTasksInformation.append((taskInformation, reminder))
             }
             
+            // Create tags and tasks and link them properly.
+
+            let newTags = importedTagsInformation.map({ self.tagModel.createTag(with: $0) })
+			
+            let newTasks = importedTasksInformation.map({ importedTaskData -> Task in
+                var (taskInformation, reminder) = importedTaskData
+                let tagName = reminder.calendar.title
+                
+                // Retrieve the tag object created above, using its name
+                let tag = newTags.first(where: { $0.title == tagName })!
+                taskInformation[.tags] = [tag]
+                
+                // Create the task and mark it as an imported task
+                let task = self.taskModel.createTask(with: taskInformation)
+                self.taskModel.associate(task, with: reminder.dataPacket)
+                
+                return task
+            })
+            
+            // Import was finished with success
+            self.lastImportedTags = self.lastImportedTags.union(newTags)
+            self.lastImportedTasks = self.lastImportedTasks.union(newTasks)
             self.isImporting = false
+            RemindersImporter.hasImportedOnce = true
+            self.delegate?.remindersImporterDidFinishImport(self)
         }
+    }
+    
+    /**
+     Retrieve the last tags that were imported, removing them from the import buffer.
+ 	*/
+    func consumeNewImportedTags() -> Set<Tag> {
+        let newImportedTags = self.lastImportedTags
+        self.lastImportedTags.removeAll()
+        
+        return newImportedTags
+    }
+    
+    /**
+     Consume the last tasks to be imported, removing them from the import buffer.
+ 	*/
+    func consumeNewImportedTasks() -> Set<Task> {
+        let newImportedTasks = self.lastImportedTasks
+        self.lastImportedTasks.removeAll()
+        
+        return newImportedTasks
     }
     
     /**
@@ -117,20 +193,38 @@ public class RemindersImporter {
         return equivalentTask
     }
     
+    private func convertTaskInformation(from reminder: Reminder) -> TaskInformation {
+        let taskInformation: TaskInformation =
+            [.title : reminder.title as Any,
+             .isCompleted : reminder.isCompleted,
+             .completionDate : reminder.completionDate as Any,
+             .dueDate : reminder.completionDate as Any,
+             .creationDate : reminder.creationDate as Any]
+        
+        return taskInformation
+    }
+    
+    private func convertTagInformation(from reminder: Reminder) -> TagInformation {
+        let tagInformation: TagInformation =
+            [.title : reminder.calendar.title as Any]
+        
+        return tagInformation
+    }
+    
     // Convert a reminder to a Task and a Tag
     private func convertTaskAndTag(from reminder: Reminder) -> (task: Task, tag: Tag) {
-        let tagAttributes: [TagAttributes : Any] =
+        let tagInformation: TagInformation =
             [.title : reminder.calendar.title as Any]
-        let tag = tagModel.createTag(with: tagAttributes)
+        let tag = tagModel.createTag(with: tagInformation)
         
-        let taskAttributes: [TaskAttributes : Any] =
+        let taskInformation: TaskInformation =
             [.title : reminder.title as Any,
              .isCompleted : reminder.isCompleted,
              .completionDate : reminder.completionDate as Any,
              .dueDate : reminder.completionDate as Any,
              .creationDate : reminder.creationDate as Any,
              .tags : [tag] as Any]
-        let task = taskModel.createTask(with: taskAttributes)
+        let task = taskModel.createTask(with: taskInformation)
         
         taskModel.associate(task, with: reminder.dataPacket)
 	
@@ -212,11 +306,11 @@ public class RemindersImporter {
             })
             let modelSet = Set(self.taskModel.tasks.filter({ $0.importData?.remindersImportData != nil }))
             
-            let newTasks = remindersSet.subtracting(modelSet)		// New reminders not yet imported.
-            newTasks.forEach({ self.taskModel.save($0) })
-            
-            let tasksToDelete = modelSet.subtracting(remindersSet)	// Reminders that were deleted in Reminders
+            let tasksToDelete = modelSet.subtracting(remindersSet)    // Reminders that were deleted in Reminders
             tasksToDelete.forEach({ self.taskModel.delete($0) })
+            
+            let newTasks = remindersSet.subtracting(modelSet)        // New reminders not yet imported.
+            newTasks.forEach({ self.taskModel.save($0) })
             
             self.isSyncing = false
         }
@@ -224,20 +318,25 @@ public class RemindersImporter {
 }
 
 extension RemindersImporter: RemindersCommunicatorDelegate {
-    //swiftlint:disable line_length
-    func remindersCommunicatorDidDetectEventStoreChange(_ remindersCommunicator: RemindersCommunicator, notification: NSNotification) {
-        syncWithReminders()
+    func remindersCommunicatorDidDetectEventStoreChange(_ remindersCommunicator: RemindersCommunicator,
+                                                        notification: NSNotification) {
+        //syncWithReminders()
     }
     
     func remindersCommunicatorWasGrantedAccessToReminders(_ remindersCommunicator: RemindersCommunicator) {
-        // TODO Set persistent flag to avoid importing each time the app launches.
-        importTasksFromReminders()
+        delegate?.remindersImporterWasGrantedPermission(self)
     }
     
-    func remindersCommunicatorWasDeniedAccessToReminders(_ remindersCommunicator: RemindersCommunicator, error: Error) {
-        // TODO Handle access denial
-        // Sounds like a great candidate for RX
+    func remindersCommunicatorWasDeniedAccessToReminders(_ remindersCommunicator: RemindersCommunicator) {
+        delegate?.remindersImporterWasDeniedPermission(self)
     }
+}
+
+protocol RemindersImporterDelegate: class {
+    func remindersImporterDidStartImport(_ remindersImporter: RemindersImporter)
+    func remindersImporterDidFinishImport(_ remindersImporter: RemindersImporter)
+    func remindersImporterWasDeniedPermission(_ remindersImporter: RemindersImporter)
+    func remindersImporterWasGrantedPermission(_ remindersImporter: RemindersImporter)
 }
 
 public protocol Reminder: class {
