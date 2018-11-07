@@ -184,7 +184,7 @@ extension HomeScreenCoordinator: HomeScreenViewModelDelegate {
     }
     
     func homeScreenViewModelShouldShowImportFromRemindersOption(_ homeScreenViewModel: HomeScreenViewModel) -> Bool {
-        return !RemindersImporter.isImportingDefined
+        return !RemindersImporter.hasImportedOnce
     }
 }
 
