@@ -10,6 +10,10 @@ import Foundation
 import EventKit
 import ReefKit
 
+struct RemindersImporterUserDefaultsKeys {
+    static let hasImportedOnce = "remindersImporterHasImportedOnce"
+}
+
 public class RemindersImporter {
     
     public static var instance: RemindersImporter?
@@ -28,6 +32,11 @@ public class RemindersImporter {
     
     static var isImportingDefined: Bool {
         return EKEventStore.authorizationStatus(for: .reminder) != EKAuthorizationStatus.notDetermined
+    }
+    
+    static var hasImportedOnce: Bool {
+        set { UserDefaults.standard.set(newValue, forKey: RemindersImporterUserDefaultsKeys.hasImportedOnce) }
+        get { return UserDefaults.standard.bool(forKey: RemindersImporterUserDefaultsKeys.hasImportedOnce) }
     }
 
     init(taskModel: TaskModel, tagModel: TagModel, communicator: RemindersCommunicator = RemindersCommunicator()) {
@@ -66,8 +75,8 @@ public class RemindersImporter {
         delegate?.remindersImportedDidStartImport(self)
         isImporting = true
         
-        remindersDB.fetchAllReminders { allReminders in
-            guard let reminders = allReminders else {
+        remindersDB.fetchIncompleteReminders { incompleteReminders in
+            guard let reminders = incompleteReminders else {
                 self.isImporting = false
                 
                 return
@@ -114,6 +123,7 @@ public class RemindersImporter {
             self.lastImportedTags = Set(newTags)
             self.lastImportedTasks = Set(newTasks)
             self.isImporting = false
+            RemindersImporter.hasImportedOnce = true
             self.delegate?.remindersImporterDidFinishImport(self)
         }
     }
