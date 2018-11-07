@@ -165,9 +165,14 @@ class LocalPersistence: PersistenceProtocol {
             delegate?.persistence(self, didInsertObjects: insertArray)
         }
         
-        if let updateSet = userInfo[NSUpdatedObjectsKey] as? NSSet,
-            let updateArray = updateSet.allObjects as? [Storable] {
-            delegate?.persistence(self, didUpdateObjects: updateArray)
+        if let updateSet = userInfo[NSUpdatedObjectsKey] as? NSMutableSet {
+            if let insertSet = userInfo[NSInsertedObjectsKey] as? Set<AnyHashable> {
+                updateSet.minus(insertSet)
+            }
+            
+            if let updateArray = updateSet.allObjects as? [Storable], !updateArray.isEmpty {
+                delegate?.persistence(self, didUpdateObjects: updateArray)
+            }
         }
         
         if let deleteSet = userInfo[NSDeletedObjectsKey] as? NSSet,
