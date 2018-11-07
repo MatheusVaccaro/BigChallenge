@@ -8,7 +8,14 @@
 
 import UIKit
 
+protocol InAppPurchase {
+    static var name: String { get }
+    // ...
+}
+
 protocol Theme {
+    static var name: String { get }
+    
     static var statusBarStyle: UIStatusBarStyle { get }
     static var keyboardAppearance: UIKeyboardAppearance { get }
     static var blurStyle: UIBlurEffect.Style { get }
@@ -61,6 +68,8 @@ extension Theme {
 class ReefColors: Theme {
     
     static var theme: Theme.Type = Dark.self
+    
+    static let name: String = theme.name
     
     // MARK: - Assets
     static let iconName: String = theme.iconName

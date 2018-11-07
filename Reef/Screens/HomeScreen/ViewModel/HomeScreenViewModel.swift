@@ -11,7 +11,9 @@ import ReefKit
 
 protocol HomeScreenViewModelDelegate: class {
     func homeScreenViewModelDidStartAddTask(_ homeScreenViewModel: HomeScreenViewModel)
+    func homeScreenViewModelDidStartSettings(_ homeScreenViewModel: HomeScreenViewModel)
     func homeScreenViewModel(_ homeScreenViewModel: HomeScreenViewModel, willEdit task: Task)
+    
     
     func homeScreenViewModelWillImportFromReminders(_ homeScreenViewModel: HomeScreenViewModel)
     func homeScreenViewModelShouldShowImportFromRemindersOption(_ homeScreenViewModel: HomeScreenViewModel) -> Bool
@@ -41,6 +43,10 @@ class HomeScreenViewModel {
         
     func startAddTask() {
         delegate?.homeScreenViewModelDidStartAddTask(self)
+    }
+    
+    func startSettings() {
+        delegate?.homeScreenViewModelDidStartSettings(self)
     }
     
     fileprivate var userActivityTitle: String {

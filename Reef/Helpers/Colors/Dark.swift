@@ -10,6 +10,8 @@ import UIKit
 
 class Dark: Theme {
     
+    static let name: String = "Deep Sea"
+    
     static let emptyStateOn: UIImage = UIImage(named: "emptyStateOnClassic")!
     static let emptyStateOff: UIImage = UIImage(named: "emptyStateOffClassic")!
     static let iconName: String = "darkIcon"
@@ -38,8 +40,8 @@ class Dark: Theme {
         [Dark.placeholder.cgColor, Dark.placeholder.cgColor]
     
     // MARK: - Cell
-    static var sectionHeaderLabel: UIColor = .white
-    static var sectionHeaderIcon: UIColor =
+    static let sectionHeaderLabel: UIColor = .white
+    static let sectionHeaderIcon: UIColor =
         UIColor(red: 119/255.0, green: 120/255.0, blue: 120/255.0, alpha: 1)
     
     static let iconCellIcon: UIColor = Dark.placeholder
