@@ -61,7 +61,6 @@ class TagCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         tagUILabel.font = UIFont.font(sized: 19, weight: .medium, with: .title3)
         
-        layer.backgroundColor = ReefColors.tagsBackground.cgColor
         layer.borderColor = UIColor.clear.cgColor
         
         layer.cornerRadius = 6.3
@@ -71,7 +70,6 @@ class TagCollectionViewCell: UICollectionViewCell {
         layer.shadowRadius = 6.3
         layer.shadowOffset = CGSize(width: 0, height: 5)
         layer.masksToBounds = false
-        layer.shadowColor = ReefColors.shadow
         layer.shadowOpacity = 1
         layer.shadowRadius = 5
         
@@ -84,10 +82,16 @@ class TagCollectionViewCell: UICollectionViewCell {
         kind = .tag
         
         longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        configureColors()
     }
     
     deinit {
         removeGestureRecognizer(longPressRecognizer)
+    }
+    
+    func configureColors() {
+        layer.backgroundColor = ReefColors.tagsBackground.cgColor
+        layer.shadowColor = ReefColors.shadow
     }
     
     @objc private func handleLongPress() {

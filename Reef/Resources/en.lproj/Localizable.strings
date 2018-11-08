@@ -271,3 +271,9 @@
 
 /* title of the theme selection screen */
 "Theme selection screen title" = "Themes";
+
+/* title of the 'classic' theme */
+"Classic theme title" = "Classic";
+
+/* title of the 'Deep Sea' theme */
+"dark theme title" = "Deep Sea";

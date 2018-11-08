@@ -48,6 +48,10 @@ struct Strings {
         struct Theme {
             static let title =
                 NSLocalizedString("Theme selection screen title", comment: "title of the theme selection screen")
+            static let classicTitle =
+                NSLocalizedString("Classic theme title", comment: "title of the 'classic' theme")
+            static let darkTitle =
+                NSLocalizedString("dark theme title", comment: "title of the 'Deep Sea' theme")
         }
     }
     

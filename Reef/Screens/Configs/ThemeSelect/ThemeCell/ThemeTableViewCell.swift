@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import ReefKit
 
 class ThemeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var topBackground: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var selectedView: UIView!
+    @IBOutlet weak var selectedImageView: UIImageView!
     @IBOutlet weak var background: UIView!
     
     static let identifier: String = "ThemeCell"
@@ -28,7 +29,8 @@ class ThemeTableViewCell: UITableViewCell {
         super.awakeFromNib()
         selectionStyle = .none
         
-        selectedView.isHidden = true
+        selectedImageView.contentMode = .center
+        selectedImageView.isHidden = true
         backgroundColor = .clear
         
         topBackground.layer.maskedCorners = [ .layerMinXMinYCorner, .layerMaxXMinYCorner ]
@@ -40,38 +42,44 @@ class ThemeTableViewCell: UITableViewCell {
         layer.shadowRadius = 6.3
         layer.shadowOffset = CGSize(width: 0, height: 5)
         layer.masksToBounds = false
-        layer.shadowColor = ReefColors.shadow
         layer.shadowOpacity = 1
         layer.shadowRadius = 10
         
         layer.cornerRadius = 6.3
     }
     
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        //set fonts
-    }
-
     override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        selectedView.isHidden = false
-        
-        // buy
+        selectedImageView.isHidden = !selected
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        titleLabel.font = UIFont.font(sized: 18, weight: .medium, with: .title3)
+        priceLabel.font = UIFont.font(sized: 13, weight: .regular, with: .body)
+        selectedImageView.setNeedsLayout()
+        selectedImageView.layoutIfNeeded()
+    }
+    
+    override func layoutIfNeeded() {
+        layer.shadowColor = ReefColors.shadow
+        super.layoutIfNeeded()
     }
     
     private func reloadData() {
         titleLabel.text = "titlePlaceholder"
         priceLabel.text = "price"
         
-        configureTexts()
+        configureContent()
         configureColors()
         createTags()
     }
     
-    private func configureTexts() {
+    private func configureContent() {
         titleLabel.text = viewModel.theme.name
+        selectedImageView.image = UIImage(named: viewModel.selectedImageName)?.withRenderingMode(.alwaysTemplate)
     }
     
     private func configureColors() {
+        selectedImageView.tintColor = viewModel.theme.largeTitle
         titleLabel.textColor = viewModel.theme.largeTitle
         priceLabel.textColor = viewModel.theme.largeTitle
         topBackground.backgroundColor = viewModel.theme.tagsBackground
@@ -79,6 +87,36 @@ class ThemeTableViewCell: UITableViewCell {
     }
     
     private func createTags() {
+        let initialOriginX = 10
         
+        for index in 0..<UIColor.tagColors.count+1 {
+            let view = UIView()
+            
+            let width = 28
+            let originX = initialOriginX + (index * (initialOriginX + width))
+            
+            view.frame = CGRect(x: originX, y: 10, width: width, height: width)
+            
+            view.layer.shadowRadius = 6.3
+            view.layer.shadowOffset = CGSize(width: 0, height: 5)
+            view.layer.masksToBounds = false
+            view.layer.shadowColor = ReefColors.shadow
+            view.layer.shadowOpacity = 1
+            view.layer.shadowRadius = 5
+
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.cornerRadius = 6.3
+            gradientLayer.frame = view.bounds
+            gradientLayer.masksToBounds = true
+            gradientLayer.startPoint = CGPoint(x: 0, y: 1)
+            gradientLayer.endPoint = CGPoint(x: 1, y: 0)
+            gradientLayer.colors = index == 0
+                ? ReefColors.defaultGradient
+                : UIColor.tagColors[index-1]
+            
+            view.layer.addSublayer(gradientLayer)
+            
+            background.addSubview(view)
+        }
     }
 }

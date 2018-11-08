@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Helper Methods
     func startApplicationCoordinator(with window: UIWindow, selectedTagIDs: [String]? = nil, selectedTask: String? = nil) {
-        loadTheme()
+        ReefColors.loadTheme()
         requestAuthorizationForNotifications()
         let applicationCoordinator = ApplicationCoordinator(window: window)
         self.applicationCoordinator = applicationCoordinator
@@ -69,24 +69,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func requestAuthorizationForNotifications() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in })
-    }
-    
-    private func loadTheme() {
-        let theme = UserDefaults.standard.value(forKey: "ThemeMultiValue") as? Int ?? 0
-        
-        switch theme {
-        case 1:
-            ReefColors.theme = Dark.self
-        default:
-            ReefColors.theme = Classic.self
-        }
-        
-        UITextField.appearance().keyboardAppearance = ReefColors.theme.keyboardAppearance
-        UIApplication.shared.setAlternateIconName(ReefColors.iconName) { (error) in
-            if let error = error {
-                print("error: \(error)")
-            }
-        }
     }
     
     private func setNotificationCategories() {

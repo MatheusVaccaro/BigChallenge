@@ -35,6 +35,12 @@ class TagCollectionViewController: UIViewController {
         tagsCollectionView.isAccessibilityElement = true
     }
     
+    func configureColors() {
+        for cell in tagsCollectionView.visibleCells as! [TagCollectionViewCell] {
+            cell.configureColors()
+        }
+    }
+    
     func presentActionSheet(for tag: Tag) {
         guard !viewModel.presentingActionSheet else { return }
         viewModel.presentingActionSheet = true

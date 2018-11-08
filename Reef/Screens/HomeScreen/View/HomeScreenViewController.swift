@@ -43,15 +43,20 @@ class HomeScreenViewController: UIViewController {
         super.viewDidLoad()
         title = Strings.bigTitleText
         
-        view.backgroundColor = ReefColors.background
-        
         configureWhiteBackgroundView()
         configureEmptyState(streak: viewModel.emptyStateStreak)
         newTaskLabel.text = Strings.Task.CreationScreen.taskTitlePlaceholder
         userActivity = viewModel.userActivity
         
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
+        
         configurePullDownView()
         delegate?.viewDidLoad()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        configureColors()
+        super.viewWillLayoutSubviews()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -64,6 +69,11 @@ class HomeScreenViewController: UIViewController {
         removeSettingsButton()
     }
     
+    func reloadColors() {
+        taskListViewController?.tableView.reloadData()
+        tagCollectionViewController?.configureColors()
+    }
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         newTaskLabel.font = UIFont.font(sized: 13, weight: .medium, with: .body)
         emptyStateTitleLabel.font = UIFont.font(sized: 18, weight: .bold, with: .title2)
@@ -72,6 +82,25 @@ class HomeScreenViewController: UIViewController {
         importFromRemindersButton.titleLabel?.font = UIFont.font(sized: 14, weight: .light, with: .caption2)
         
         taskListContainerTopConstraint.constant = pullDownStackView.frame.height + 12 + 16
+    }
+    
+    private func configureColors() {
+        emptyStateImage.tintColor = ReefColors.largeTitle
+        emptyStateTitleLabel.textColor = ReefColors.largeTitle
+        emptyStateSubtitleLabel.textColor = ReefColors.largeTitle
+        
+        whiteBackgroundView.backgroundColor = ReefColors.tagsBackground
+        whiteBackgroundView.layer.shadowColor = ReefColors.shadow
+        
+        navigationItem.backBarButtonItem?.tintColor = ReefColors.largeTitle
+        settingsButton?.tintColor = ReefColors.largeTitle
+        
+        pullDownView.backgroundColor = ReefColors.tagsBackground
+        pullDownArrowImage.tintColor = ReefColors.placeholder
+        pullDownView.layer.shadowColor = ReefColors.shadow
+        newTaskLabel.textColor = ReefColors.placeholder
+        
+        view.backgroundColor = ReefColors.background
     }
     
     func setupTaskList(viewModel: TaskListViewModel, viewController: TaskListViewController) {
@@ -136,10 +165,6 @@ class HomeScreenViewController: UIViewController {
         
         let on = streak > 2
         
-        emptyStateImage.tintColor = ReefColors.largeTitle
-        emptyStateTitleLabel.textColor = ReefColors.largeTitle
-        emptyStateSubtitleLabel.textColor = ReefColors.largeTitle
-        
         [emptyStateTitleLabel,
          emptyStateSubtitleLabel,
          emptyStateOrLabel].forEach {
@@ -163,12 +188,10 @@ class HomeScreenViewController: UIViewController {
     fileprivate func configureWhiteBackgroundView() {
         whiteBackgroundView.layer.cornerRadius = 6.3
         whiteBackgroundView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-        whiteBackgroundView.backgroundColor = ReefColors.tagsBackground
         
         whiteBackgroundView.layer.shadowRadius = 6.3
         whiteBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 10)
         whiteBackgroundView.layer.masksToBounds = false
-        whiteBackgroundView.layer.shadowColor = ReefColors.shadow
         whiteBackgroundView.layer.shadowOpacity = 1
         whiteBackgroundView.layer.shadowRadius = 10
     }
@@ -217,15 +240,11 @@ class HomeScreenViewController: UIViewController {
         pullDownView.backgroundColor = .white
         pullDownView.layer.cornerRadius = 6.3
         pullDownView.layer.maskedCorners = [ .layerMaxXMaxYCorner, .layerMinXMaxYCorner ]
-        pullDownView.backgroundColor = ReefColors.tagsBackground
-        pullDownArrowImage.tintColor = ReefColors.placeholder
-        newTaskLabel.textColor = ReefColors.placeholder
         pullDownArrowImage.image = UIImage(named: "pullDownArrow")?.withRenderingMode(.alwaysTemplate)
         
         pullDownView.layer.shadowRadius = 6.3
         pullDownView.layer.shadowOffset = CGSize(width: 0, height: 0)
         pullDownView.layer.masksToBounds = false
-        pullDownView.layer.shadowColor = ReefColors.shadow
         pullDownView.layer.shadowOpacity = 1
         pullDownView.layer.shadowRadius = 10
         
