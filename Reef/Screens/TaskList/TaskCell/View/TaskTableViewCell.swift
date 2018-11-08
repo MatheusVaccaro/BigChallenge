@@ -256,7 +256,8 @@ extension TaskTableViewCell {
         let backgroundColor: UIColor = viewModel.taskIsCompleted ?
             ReefColors.uncompleteYellow : ReefColors.completeGreen
         let taskText: String = viewModel.taskIsCompleted ?
-            Strings.Task.Cell.Swipe.Text.readmitted : Strings.Task.Cell.Swipe.Text.completed
+            RandomSwipeTextGenerator.shared.nextText(forTask: .readmitted):
+            RandomSwipeTextGenerator.shared.nextText(forTask: .completed)
         let taskStatus: String = viewModel.taskIsCompleted ?
             Strings.Task.Cell.Swipe.Status.readmitted : Strings.Task.Cell.Swipe.Status.completed
         
@@ -339,7 +340,7 @@ extension TaskTableViewCell {
         trashImageView.widthAnchor.constraint(equalTo: trashImageView.heightAnchor).isActive = true
         
         let taskTextLabel = UILabel(frame: CGRect.zero)
-        taskTextLabel.text = Strings.Task.Cell.Swipe.Text.deleted
+        taskTextLabel.text = RandomSwipeTextGenerator.shared.nextText(forTask: .deleted)
         taskTextLabel.textColor = .white
         taskTextLabel.font = UIFont.font(sized: 17.0,
                                          weight: FontWeight.mediumItalic,

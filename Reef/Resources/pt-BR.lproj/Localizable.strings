@@ -225,19 +225,40 @@
 "locationSectionHeader" = "Baseado em sua localização";
 
 /* motivational text shown when a task is completed */
-"task swipe text completed" = "NÃO DEU NEM PRA SUAR";
+"task swipe text completed 1" = "MOLE QUE NEM PUDIM";
+
+/* motivational text shown when a task is completed */
+"task swipe text completed 2" = "SEM PROBLEMA ALGUM";
+
+/* motivational text shown when a task is completed */
+"task swipe text completed 3" = "FEITO. FECHADO. COMPLETO.";
+
+/* motivational text shown when a task is completed */
+"task swipe text completed 4" = "FÁCIL ATÉ DEMAIS";
+
+/* motivational text shown when a task is completed */
+"task swipe text completed 5" = "PRONTÍSSIMO!";
 
 /* status text shown when a task is completed */
 "task swipe status completed" = "TAREFA COMPLETADA";
 
 /* motivational text shown when a task is readmitted */
-"task swipe text readmitted" = "VAMOS DAR OUTRA CHANCE";
+"task swipe text readmitted 1" = "TENTE OUTRA VEZ";
+
+/* motivational text shown when a task is readmitted */
+"task swipe text readmitted 2" = "VAMOS DE NOVO";
+
+/* motivational text shown when a task is readmitted */
+"task swipe text readmitted 3" = "DE NOVO! DE NOVO!";
+
+/* motivational text shown when a task is readmitted */
+"task swipe text readmitted 4" = "A SEGUNDA VEZ É MAIS FÁCIL";
 
 /* status text shown when a task is readmitted */
 "task swipe status readmitted" = "TAREFA READMITIDA";
 
 /* motivational text shown when a task is deleted */
-"task swipe text deleted" = "OPS...";
+"task swipe text deleted 1" = "OPS...";
 
 /* status text shown when a task is deleted */
 "task swipe status deleted" = "TAREFA DELETADA";

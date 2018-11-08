@@ -94,9 +94,16 @@ struct Strings {
             
             struct Swipe {
                 struct Text {
-                    static let completed = NSLocalizedString("task swipe text completed", comment: "motivational text shown when a task is completed")
-                    static let readmitted = NSLocalizedString("task swipe text readmitted", comment: "motivational text shown when a task is readmitted")
-                    static let deleted = NSLocalizedString("task swipe text deleted", comment: "motivational text shown when a task is deleted")
+                    static let completed1 = NSLocalizedString("task swipe text completed 1", comment: "motivational text shown when a task is completed")
+                    static let completed2 = NSLocalizedString("task swipe text completed 2", comment: "motivational text shown when a task is completed")
+                    static let completed3 = NSLocalizedString("task swipe text completed 3", comment: "motivational text shown when a task is completed")
+                    static let completed4 = NSLocalizedString("task swipe text completed 4", comment: "motivational text shown when a task is completed")
+                    static let completed5 = NSLocalizedString("task swipe text completed 5", comment: "motivational text shown when a task is completed")
+                    static let readmitted1 = NSLocalizedString("task swipe text readmitted 1", comment: "motivational text shown when a task is readmitted")
+                    static let readmitted2 = NSLocalizedString("task swipe text readmitted 2", comment: "motivational text shown when a task is readmitted")
+                    static let readmitted3 = NSLocalizedString("task swipe text readmitted 3", comment: "motivational text shown when a task is readmitted")
+                    static let readmitted4 = NSLocalizedString("task swipe text readmitted 4", comment: "motivational text shown when a task is readmitted")
+                    static let deleted1 = NSLocalizedString("task swipe text deleted 1", comment: "motivational text shown when a task is deleted")
                 }
                 
                 struct Status {
