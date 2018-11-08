@@ -67,9 +67,6 @@ public class TaskTableViewCell: UITableViewCell {
         taskTitleTextView.textContainer.lineFragmentPadding = 0
         
         dateStringView.layer.cornerRadius = dateStringView.frame.height * 0.1
-        dateStringLabel.textColor = ReefColors.cellTagLabel
-        
-        tagsLabel.textColor = ReefColors.cellTagLabel
         
         selectionStyle = .none
         configureAccessibility()
@@ -81,7 +78,13 @@ public class TaskTableViewCell: UITableViewCell {
     }
     
     public override func layoutSubviews() {
+        super.layoutSubviews()
         gradientLayer.frame = bounds
+    }
+    
+    func configureColors() {
+        dateStringLabel.textColor = ReefColors.cellTagLabel
+        tagsLabel.textColor = ReefColors.cellTagLabel
     }
     
     // MARK: - Functions

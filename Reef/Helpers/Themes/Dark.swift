@@ -10,7 +10,7 @@ import UIKit
 
 class Dark: Theme {
     
-    static let name: String = "Deep Sea"
+    static let name: String = Strings.Settings.Theme.darkTitle
     
     static let emptyStateOn: UIImage = UIImage(named: "emptyStateOnClassic")!
     static let emptyStateOff: UIImage = UIImage(named: "emptyStateOffClassic")!

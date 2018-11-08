@@ -160,6 +160,9 @@ class TaskCreationFrameViewController: UIViewController {
         viewModel.delegate?.viewDidLoad()
         taskDetailViewController.accessibilityElementsHidden = true
         
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = ReefColors.largeTitle
+        
         addGestureRecognizersForAnimations()
     }
     

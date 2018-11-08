@@ -34,6 +34,9 @@ class TagCreationFrameViewController: UIViewController {
         detailsTableHeightConstraint.constant =
             addTagDetailsViewController.contentHeight
         
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = ReefColors.largeTitle
+        
         addTagColorsViewController.delegate = self
         addTagDetailsViewController.delegate = self
     }

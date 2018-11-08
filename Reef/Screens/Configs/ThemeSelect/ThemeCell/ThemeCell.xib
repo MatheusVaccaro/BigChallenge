@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bLJ-WE-cNx">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
+                        <rect key="frame" x="16" y="0.0" width="343" height="42"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NrD-lE-MT4">
                                 <rect key="frame" x="8" y="8" width="42" height="26"/>
@@ -28,13 +28,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwR-1o-JUA">
-                                <rect key="frame" x="325" y="12" width="42" height="18"/>
+                                <rect key="frame" x="293" y="12" width="42" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ylt-FV-drp">
-                                <rect key="frame" x="336" y="0.0" width="39" height="42"/>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="themeSelectedImage" translatesAutoresizingMaskIntoConstraints="NO" id="Ylt-FV-drp">
+                                <rect key="frame" x="304" y="0.0" width="39" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="39" id="f3X-A0-0Qb"/>
                                 </constraints>
@@ -54,31 +54,36 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ito-oF-UGR">
-                        <rect key="frame" x="0.0" y="42" width="375" height="50.5"/>
+                        <rect key="frame" x="16" y="42" width="343" height="50.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50.5" id="JBT-H8-nFc"/>
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="Ito-oF-UGR" secondAttribute="trailing" id="2oR-h4-xYy"/>
+                    <constraint firstAttribute="trailing" secondItem="Ito-oF-UGR" secondAttribute="trailing" constant="16" id="2oR-h4-xYy"/>
                     <constraint firstAttribute="bottom" secondItem="Ito-oF-UGR" secondAttribute="bottom" constant="24" id="3mm-gN-fb7"/>
-                    <constraint firstItem="bLJ-WE-cNx" firstAttribute="leading" secondItem="Ghm-5r-41T" secondAttribute="leading" id="7gU-hB-Rvt"/>
-                    <constraint firstAttribute="trailing" secondItem="bLJ-WE-cNx" secondAttribute="trailing" id="AIg-za-cwe"/>
+                    <constraint firstItem="bLJ-WE-cNx" firstAttribute="leading" secondItem="Ghm-5r-41T" secondAttribute="leading" constant="16" id="7gU-hB-Rvt"/>
+                    <constraint firstAttribute="trailing" secondItem="bLJ-WE-cNx" secondAttribute="trailing" constant="16" id="AIg-za-cwe"/>
                     <constraint firstItem="Ito-oF-UGR" firstAttribute="top" secondItem="bLJ-WE-cNx" secondAttribute="bottom" id="WdJ-Kl-MHU"/>
-                    <constraint firstItem="Ito-oF-UGR" firstAttribute="leading" secondItem="Ghm-5r-41T" secondAttribute="leading" id="euT-mE-hEz"/>
+                    <constraint firstItem="Ito-oF-UGR" firstAttribute="leading" secondItem="Ghm-5r-41T" secondAttribute="leading" constant="16" id="euT-mE-hEz"/>
                     <constraint firstItem="bLJ-WE-cNx" firstAttribute="top" secondItem="Ghm-5r-41T" secondAttribute="top" id="y7F-rC-8P7"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="background" destination="Ito-oF-UGR" id="yKG-Np-UXK"/>
                 <outlet property="priceLabel" destination="wwR-1o-JUA" id="fvm-xe-Prr"/>
-                <outlet property="selectedView" destination="bLJ-WE-cNx" id="6B0-4L-gCJ"/>
+                <outlet property="selectedImageView" destination="Ylt-FV-drp" id="XuU-Zz-E0a"/>
                 <outlet property="titleLabel" destination="NrD-lE-MT4" id="5Mk-9T-WIH"/>
                 <outlet property="topBackground" destination="bLJ-WE-cNx" id="LAB-es-Agc"/>
             </connections>
             <point key="canvasLocation" x="-858.39999999999998" y="-77.811094452773617"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="themeSelectedImage" width="12" height="9"/>
+    </resources>
 </document>

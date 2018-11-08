@@ -74,6 +74,15 @@
 		228082092136D482003FD3DE /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0C0720E529D600CF39ED /* Persistence.swift */; };
 		2280820A2136D486003FD3DE /* MockPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1113A20B8791E00ABB161 /* MockPersistence.swift */; };
 		2280820B2136D489003FD3DE /* LocalPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C0BE020E4449C00CF39ED /* LocalPersistence.swift */; };
+		2282D4702193B399005D386F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2282D46F2193B399005D386F /* StoreKit.framework */; };
+		2282D47421947651005D386F /* ReefStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2282D47321947651005D386F /* ReefStore.swift */; };
+		2282D47621947F41005D386F /* ThemeSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2282D47521947F41005D386F /* ThemeSelectionViewModel.swift */; };
+		2282D47C2194A70D005D386F /* iconDark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2282D4782194A70C005D386F /* iconDark@3x.png */; };
+		2282D47D2194A70D005D386F /* iconDark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2282D4792194A70C005D386F /* iconDark@2x.png */; };
+		2282D47E2194A70D005D386F /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2282D47A2194A70C005D386F /* icon@2x.png */; };
+		2282D47F2194A70D005D386F /* icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2282D47B2194A70D005D386F /* icon@3x.png */; };
+		2282D4812194A8F1005D386F /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2282D4802194A8F0005D386F /* icon.png */; };
+		2282D4832194A8FB005D386F /* iconDark.png in Resources */ = {isa = PBXBuildFile; fileRef = 2282D4822194A8FB005D386F /* iconDark.png */; };
 		228946392113F1A4009D05CB /* InvertedCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228946382113F1A4009D05CB /* InvertedCircle.swift */; };
 		229780AA217EA0B700CDB484 /* Classic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229780A9217EA0B700CDB484 /* Classic.swift */; };
 		229780AD217EA0E900CDB484 /* Dark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229780AC217EA0E900CDB484 /* Dark.swift */; };
@@ -340,6 +349,15 @@
 		226CEA0420E17E87008CEB97 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		226D8608215E529C00DC6E92 /* PrivateTagSwitchVideModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateTagSwitchVideModel.swift; sourceTree = "<group>"; };
 		228082052136D421003FD3DE /* RemotePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotePersistence.swift; sourceTree = "<group>"; };
+		2282D46F2193B399005D386F /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		2282D47321947651005D386F /* ReefStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReefStore.swift; sourceTree = "<group>"; };
+		2282D47521947F41005D386F /* ThemeSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectionViewModel.swift; sourceTree = "<group>"; };
+		2282D4782194A70C005D386F /* iconDark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconDark@3x.png"; sourceTree = "<group>"; };
+		2282D4792194A70C005D386F /* iconDark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconDark@2x.png"; sourceTree = "<group>"; };
+		2282D47A2194A70C005D386F /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		2282D47B2194A70D005D386F /* icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@3x.png"; sourceTree = "<group>"; };
+		2282D4802194A8F0005D386F /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		2282D4822194A8FB005D386F /* iconDark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconDark.png; sourceTree = "<group>"; };
 		2286A71520E3DF2100BE92AA /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		228946382113F1A4009D05CB /* InvertedCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertedCircle.swift; sourceTree = "<group>"; };
 		228BAD432108C22400E74AA9 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -514,6 +532,7 @@
 			files = (
 				2241C39B213615AE001AAC28 /* CloudKit.framework in Frameworks */,
 				EE3649E90DE055B9D5168F01 /* Pods_Reef.framework in Frameworks */,
+				2282D4702193B399005D386F /* StoreKit.framework in Frameworks */,
 				22F23E81212E3E800064EE05 /* ReefKit.framework in Frameworks */,
 				22656931212F718F009714BC /* Persistence.framework in Frameworks */,
 			);
@@ -745,6 +764,7 @@
 			isa = PBXGroup;
 			children = (
 				22253D58219237BE00159CD5 /* ThemeSelectViewController.swift */,
+				2282D47521947F41005D386F /* ThemeSelectionViewModel.swift */,
 			);
 			path = ThemeTableView;
 			sourceTree = "<group>";
@@ -824,6 +844,19 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
+		2282D4772194A68F005D386F /* App Icons */ = {
+			isa = PBXGroup;
+			children = (
+				2282D4822194A8FB005D386F /* iconDark.png */,
+				2282D4792194A70C005D386F /* iconDark@2x.png */,
+				2282D4782194A70C005D386F /* iconDark@3x.png */,
+				2282D4802194A8F0005D386F /* icon.png */,
+				2282D47A2194A70C005D386F /* icon@2x.png */,
+				2282D47B2194A70D005D386F /* icon@3x.png */,
+			);
+			path = "App Icons";
+			sourceTree = "<group>";
+		};
 		229780A6217D0E3400CDB484 /* cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -833,14 +866,15 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
-		229780AB217EA0C800CDB484 /* Colors */ = {
+		229780AB217EA0C800CDB484 /* Themes */ = {
 			isa = PBXGroup;
 			children = (
 				22F23E9F212E452E0064EE05 /* Colors.swift */,
 				229780A9217EA0B700CDB484 /* Classic.swift */,
 				229780AC217EA0E900CDB484 /* Dark.swift */,
+				2282D47321947651005D386F /* ReefStore.swift */,
 			);
-			path = Colors;
+			path = Themes;
 			sourceTree = "<group>";
 		};
 		22D84C5E210BEFE4004B8969 /* LocationInput */ = {
@@ -1062,6 +1096,7 @@
 		45EE167F10EAE72CE5635B25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2282D46F2193B399005D386F /* StoreKit.framework */,
 				2241C39A213615AE001AAC28 /* CloudKit.framework */,
 				22FEEA9A213345BA00D8B049 /* RxSwift.framework */,
 				22F23E96212E3F1B0064EE05 /* RxSwift.framework */,
@@ -1169,7 +1204,7 @@
 			children = (
 				222BFF9520EDB83B001B6BBF /* Importers */,
 				16E8DD8C2110F5B9004F66D6 /* Fonts */,
-				229780AB217EA0C800CDB484 /* Colors */,
+				229780AB217EA0C800CDB484 /* Themes */,
 				C21EAD0A20B74F01005F0F85 /* StoryboardInstantiable.swift */,
 				22456D2820DC3BB000168894 /* Date+Extension.swift */,
 				29BA68A52120E147009B4AB9 /* Calendar+Extension.swift */,
@@ -1277,6 +1312,7 @@
 		C28DC91820B61CB6007F881A /* Reef */ = {
 			isa = PBXGroup;
 			children = (
+				2282D4772194A68F005D386F /* App Icons */,
 				2241C3992136157E001AAC28 /* Reef.entitlements */,
 				22F23E9A212E41550064EE05 /* PersistenceManager */,
 				C28DC91920B61CB6007F881A /* AppDelegate.swift */,
@@ -1542,6 +1578,9 @@
 					C28DC91520B61CB6007F881A = {
 						CreatedOnToolsVersion = 9.3;
 						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -1631,19 +1670,24 @@
 				220BB94A2146F1C2004A8309 /* TaskCreation.storyboard in Resources */,
 				29722022211CD1AE00CF80CE /* DateInput.storyboard in Resources */,
 				C2A1114720B9F6EF00ABB161 /* NewTask.storyboard in Resources */,
+				2282D4812194A8F1005D386F /* icon.png in Resources */,
 				22DE27102141BC6700466187 /* IconCell.xib in Resources */,
 				C28DC92420B61CB9007F881A /* LaunchScreen.storyboard in Resources */,
 				16EC4CCB2125207600B8256D /* InfoPlist.strings in Resources */,
 				C26EC73E21547282000E9CB9 /* Barlow-BlackItalic.ttf in Resources */,
 				C26EC74121547282000E9CB9 /* Barlow-ExtraLight.ttf in Resources */,
 				C26EC74321547282000E9CB9 /* Barlow-Italic.ttf in Resources */,
+				2282D47E2194A70D005D386F /* icon@2x.png in Resources */,
 				C26EC74021547282000E9CB9 /* Barlow-ExtraBold.ttf in Resources */,
+				2282D4832194A8FB005D386F /* iconDark.png in Resources */,
 				C26EC74821547282000E9CB9 /* Barlow-Thin.ttf in Resources */,
 				16E8DDCE211205E8004F66D6 /* Barlow-ExtraBoldItalic.ttf in Resources */,
+				2282D47C2194A70D005D386F /* iconDark@3x.png in Resources */,
 				C26EC74721547282000E9CB9 /* Barlow-SemiBold.ttf in Resources */,
 				22AA87EA217FAD9700046800 /* Settings.bundle in Resources */,
 				C26EC74621547282000E9CB9 /* Barlow-Regular.ttf in Resources */,
 				C26EC74521547282000E9CB9 /* Barlow-LightItalic.ttf in Resources */,
+				2282D47F2194A70D005D386F /* icon@3x.png in Resources */,
 				22E3E307215525DC00D6EF32 /* TaskCell.xib in Resources */,
 				22253D5B2192DF4B00159CD5 /* ThemeSelection.storyboard in Resources */,
 				221BA8AF20F6991200BE2AC1 /* HomeScreen.storyboard in Resources */,
@@ -1651,6 +1695,7 @@
 				16E8DDCB211205E8004F66D6 /* Barlow-Bold.ttf in Resources */,
 				29BA689D2120C345009B4AB9 /* Calendar.storyboard in Resources */,
 				C28DC92120B61CB9007F881A /* Assets.xcassets in Resources */,
+				2282D47D2194A70D005D386F /* iconDark@2x.png in Resources */,
 				16E8DDD8211205E8004F66D6 /* Barlow-SemiBoldItalic.ttf in Resources */,
 				160E628B215923C4001F3D01 /* AddTagTitle.storyboard in Resources */,
 				C26EC73F21547282000E9CB9 /* Barlow-BoldItalic.ttf in Resources */,
@@ -1908,6 +1953,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C22F6FD4217A5E17007F0309 /* UITableView+ContentSizeDelegate.swift in Sources */,
+				2282D47421947651005D386F /* ReefStore.swift in Sources */,
 				C2C231C520FD41AE002A2371 /* NewTagCoordinator.swift in Sources */,
 				22E3E306215525DC00D6EF32 /* TaskCellViewModel.swift in Sources */,
 				C2C79D2D2123E7D70058F228 /* DateInputViewModel+Extension.swift in Sources */,
@@ -1987,6 +2033,7 @@
 				C21EAD0720B74757005F0F85 /* TaskListViewController.swift in Sources */,
 				16294E3A213F0C190092DEA2 /* Authentication.swift in Sources */,
 				C26EC73B21545A25000E9CB9 /* NotesInputViewController.swift in Sources */,
+				2282D47621947F41005D386F /* ThemeSelectionViewModel.swift in Sources */,
 				C29742D2211257A600A1D213 /* TimeTableViewCellViewModel.swift in Sources */,
 				221BA8B820F6A1DF00BE2AC1 /* TagCollectionViewController.swift in Sources */,
 				C26EC73921544D19000E9CB9 /* NotesTableViewCellViewModel.swift in Sources */,

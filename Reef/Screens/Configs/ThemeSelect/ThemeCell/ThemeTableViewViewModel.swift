@@ -15,4 +15,6 @@ class ThemeTableViewModel {
     init(theme: Theme.Type) {
         self.theme = theme
     }
+    
+    var selectedImageName: String = "themeSelectedImage"
 }

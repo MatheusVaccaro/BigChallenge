@@ -18,16 +18,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TZe-dZ-jI9">
-                                <rect key="frame" x="16" y="36" width="343" height="615"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emptyStateOffClassic" translatesAutoresizingMaskIntoConstraints="NO" id="2AF-eq-5h9">
+                                <rect key="frame" x="0.0" y="491" width="375" height="231"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="231" id="fbU-Ak-q2b"/>
+                                </constraints>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TZe-dZ-jI9">
+                                <rect key="frame" x="0.0" y="36" width="375" height="615"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="TZe-dZ-jI9" firstAttribute="leading" secondItem="0dn-z3-tKX" secondAttribute="leading" constant="16" id="S8q-fq-v1M"/>
+                            <constraint firstItem="TZe-dZ-jI9" firstAttribute="leading" secondItem="0dn-z3-tKX" secondAttribute="leading" id="S8q-fq-v1M"/>
+                            <constraint firstItem="2AF-eq-5h9" firstAttribute="leading" secondItem="crR-8c-5mE" secondAttribute="leading" id="Sn6-Aj-LZO"/>
+                            <constraint firstItem="0dn-z3-tKX" firstAttribute="bottom" secondItem="2AF-eq-5h9" secondAttribute="bottom" constant="-55" id="ap1-nL-8d0"/>
+                            <constraint firstItem="0dn-z3-tKX" firstAttribute="trailing" secondItem="2AF-eq-5h9" secondAttribute="trailing" id="dOB-PD-0yd"/>
                             <constraint firstItem="TZe-dZ-jI9" firstAttribute="top" secondItem="0dn-z3-tKX" secondAttribute="top" constant="16" id="e75-Rc-f2p"/>
-                            <constraint firstItem="0dn-z3-tKX" firstAttribute="trailing" secondItem="TZe-dZ-jI9" secondAttribute="trailing" constant="16" id="eWQ-cc-erq"/>
+                            <constraint firstItem="0dn-z3-tKX" firstAttribute="trailing" secondItem="TZe-dZ-jI9" secondAttribute="trailing" id="eWQ-cc-erq"/>
                             <constraint firstItem="0dn-z3-tKX" firstAttribute="bottom" secondItem="TZe-dZ-jI9" secondAttribute="bottom" constant="16" id="ozo-Xk-lhe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0dn-z3-tKX"/>
@@ -41,4 +50,7 @@
             <point key="canvasLocation" x="130" y="170"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="emptyStateOffClassic" width="178" height="110"/>
+    </resources>
 </document>

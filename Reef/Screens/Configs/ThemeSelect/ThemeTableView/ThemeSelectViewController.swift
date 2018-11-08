@@ -16,7 +16,12 @@ class ThemeSelectViewController: UIViewController {
         super.viewDidLoad()
         configureTableView()
         
-        view.backgroundColor = ReefColors.background
+        configureColors()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        configureColors()
     }
     
     func configureTableView() {
@@ -31,6 +36,10 @@ class ThemeSelectViewController: UIViewController {
         tableView.backgroundColor = .clear
         tableView.isScrollEnabled = false
         tableView.separatorStyle = .none
+    }
+    
+    func configureColors() {
+        view.backgroundColor = ReefColors.background
     }
 }
 
@@ -54,7 +63,22 @@ extension ThemeSelectViewController: UITableViewDataSource {
 }
 
 extension ThemeSelectViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let theme = (tableView.cellForRow(at: indexPath) as! ThemeTableViewCell).viewModel.theme
+        
+        ReefColors.set(theme: theme)
+        
+        navigationController?.navigationBar.largeTitleTextAttributes?[NSAttributedString.Key.foregroundColor] = ReefColors.largeTitle
+        //TODO: color back item
+        
+        for vc in navigationController!.viewControllers {
+            vc.view.setNeedsLayout()
+            vc.view.layoutIfNeeded()
+            if let homescreen = vc as? HomeScreenViewController {
+                homescreen.reloadColors()
+            }
+        }
+    }
 }
 
 extension ThemeSelectViewController: StoryboardInstantiable {
