@@ -225,19 +225,40 @@
 "locationSectionHeader" = "Based on your location";
 
 /* motivational text shown when a task is completed */
-"task swipe text completed" = "DIDN'T EVEN BREAK A SWEAT";
+"task swipe text completed 1" = "DIDN'T EVEN BREAK A SWEAT";
+
+/* motivational text shown when a task is completed */
+"task swipe text completed 2" = "DUST IN THE WIND...";
+
+/* motivational text shown when a task is completed */
+"task swipe text completed 3" = "DONE. DONE. AND DONE.";
+
+/* motivational text shown when a task is completed */
+"task swipe text completed 4" = "PIECE OF CAKE";
+
+/* motivational text shown when a task is completed */
+"task swipe text completed 5" = "NO PROBLEM.";
 
 /* status text shown when a task is completed */
 "task swipe status completed" = "TASK COMPLETED";
 
 /* motivational text shown when a task is readmitted */
-"task swipe text readmitted" = "LET'S GIVE IT ANOTHER SHOT";
+"task swipe text readmitted 1" = "LET'S GIVE IT ANOTHER TRY";
+
+/* motivational text shown when a task is readmitted */
+"task swipe text readmitted 2" = "GIVE IT ANOTHER SHOT";
+
+/* motivational text shown when a task is readmitted */
+"task swipe text readmitted 3" = "AGAIN! AGAIN!";
+
+/* motivational text shown when a task is readmitted */
+"task swipe text readmitted 4" = "SECOND TIME'S THE CHARM";
 
 /* status text shown when a task is readmitted */
 "task swipe status readmitted" = "TASK READMITTED";
 
 /* motivational text shown when a task is deleted */
-"task swipe text deleted" = "OOPSIE...";
+"task swipe text deleted 1" = "OOPSIE...";
 
 /* status text shown when a task is deleted */
 "task swipe status deleted" = "TASK DELETED";
