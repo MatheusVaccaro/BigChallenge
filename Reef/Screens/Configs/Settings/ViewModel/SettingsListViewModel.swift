@@ -68,4 +68,30 @@ class SettingsListViewModel {
     func numberOfSections() -> Int {
         return 3
     }
+    
+    func nameFor(_ section: Int) -> String {
+        switch section {
+        case 0:
+            return Strings.Settings.Theme.sectionTitle
+        case 1:
+            return Strings.Settings.Social.sectionTitle
+        case 2:
+            return Strings.Settings.System.sectionTitle
+        default:
+            return Strings.Settings.System.sectionTitle
+        }
+    }
+    
+    func sectionImageNameFor(_ section: Int) -> String {
+        switch section {
+        case 0:
+            return Strings.Settings.Theme.sectionImage
+        case 1:
+            return Strings.Settings.Social.sectionImage
+        case 2:
+            return Strings.Settings.System.sectionImage
+        default:
+            return Strings.Settings.System.sectionImage
+        }
+    }
 }
