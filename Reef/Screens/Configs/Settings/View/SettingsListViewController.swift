@@ -63,17 +63,17 @@ extension SettingsListViewController: UITableViewDelegate {
         headerView.frame = view.frame
         
         let headerLabel = UILabel()
-        headerLabel.font = UIFont.font(sized: 14, weight: .light, with: .headline)
-        headerLabel.textAlignment = .right
+        headerLabel.font = UIFont.font(sized: 19, weight: .medium, with: .headline)
+        headerLabel.textAlignment = .left
         
         var imageView: UIImageView?
         
-        if let image = UIImage(named: "dateIcon") {
+        if let image = UIImage(named: viewModel.sectionImageNameFor(section)) {
             imageView = UIImageView(image: image.withRenderingMode(.alwaysTemplate))
             imageView?.tintColor = ReefColors.theme.sectionHeaderIcon
         }
         
-        headerLabel.text = "Section \(section)"
+        headerLabel.text = viewModel.nameFor(section)
         headerLabel.textColor = ReefColors.theme.sectionHeaderLabel
         
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
