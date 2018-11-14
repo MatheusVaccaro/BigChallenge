@@ -34,6 +34,8 @@ class SettingsCell: UITableViewCell {
         self.viewModel = viewModel
         
         titleText.text = viewModel.title
+        titleText.font = UIFont.font(sized: 15, weight: .regular, with: .body)
+        titleText.textColor = ReefColors.theme.cellTagLabel
         if viewModel.type == .selection {
             rightArrow.isHidden = false
         }
