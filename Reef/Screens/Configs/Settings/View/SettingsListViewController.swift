@@ -27,7 +27,9 @@ class SettingsListViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
-        // Do any additional setup after loading the view.
+        
+        tableView.estimatedSectionHeaderHeight = 25
+        tableView.sectionHeaderHeight = UITableView.automaticDimension
     }
 }
 
@@ -83,10 +85,10 @@ extension SettingsListViewController: UITableViewDelegate {
         headerView.addSubview(headerLabel)
         
         NSLayoutConstraint.activate([
-            headerLabel.rightAnchor.constraint(equalTo: headerView.rightAnchor, constant: -16),
-            headerLabel.topAnchor.constraint(greaterThanOrEqualTo: headerView.topAnchor),
+            headerLabel.rightAnchor.constraint(greaterThanOrEqualTo: headerView.rightAnchor, constant: -33),
+            headerLabel.topAnchor.constraint(greaterThanOrEqualTo: headerView.topAnchor, constant: 8),
             headerLabel.leftAnchor.constraint(greaterThanOrEqualTo: headerView.leftAnchor, constant: 16),
-            headerLabel.bottomAnchor.constraint(lessThanOrEqualTo: headerView.bottomAnchor),
+            headerLabel.bottomAnchor.constraint(lessThanOrEqualTo: headerView.bottomAnchor, constant: -8),
             headerLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
             headerLabel.heightAnchor.constraint(equalToConstant: headerLabel.frame.height)
             ])
@@ -97,13 +99,12 @@ extension SettingsListViewController: UITableViewDelegate {
             
             NSLayoutConstraint.activate([
                 imageView.centerYAnchor.constraint(equalTo: headerLabel.centerYAnchor),
-                imageView.rightAnchor.constraint(equalTo: headerLabel.leftAnchor, constant: -3),
-                imageView.leftAnchor.constraint(greaterThanOrEqualTo: headerView.leftAnchor, constant: 16),
+                imageView.rightAnchor.constraint(equalTo: headerLabel.leftAnchor, constant: -4),
+                imageView.leftAnchor.constraint(equalTo: headerView.leftAnchor, constant: 8),
                 imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
                 imageView.heightAnchor.constraint(equalTo: headerLabel.heightAnchor, multiplier: 0.8)
                 ])
         }
-        
         return headerView
     }
 }
