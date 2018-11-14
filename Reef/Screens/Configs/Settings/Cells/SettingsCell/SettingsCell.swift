@@ -29,15 +29,25 @@ class SettingsCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        titleText.font = UIFont.font(sized: 15, weight: .regular, with: .body)
+        titleText.textColor = ReefColors.theme.cellTagLabel
+        setNeedsLayout()
+        layoutIfNeeded()
+    }
+    
     func configWith(_ viewModel: SettingsCellViewModel) {
         
         self.viewModel = viewModel
         
         titleText.text = viewModel.title
-        titleText.font = UIFont.font(sized: 15, weight: .regular, with: .body)
-        titleText.textColor = ReefColors.theme.cellTagLabel
+        
         if viewModel.type == .selection {
             rightArrow.isHidden = false
+            NSLayoutConstraint.activate([
+                rightArrow.leftAnchor.constraint(equalTo: titleText.rightAnchor, constant: 8)
+                ])
         }
     }
 }

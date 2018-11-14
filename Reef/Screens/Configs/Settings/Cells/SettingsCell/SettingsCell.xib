@@ -19,26 +19,28 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ivZ-gt-SO3">
-                        <rect key="frame" x="32" y="8" width="42" height="27.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" text="Label" textAlignment="natural" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ivZ-gt-SO3">
+                        <rect key="frame" x="32" y="8" width="37.5" height="27.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightArrow" translatesAutoresizingMaskIntoConstraints="NO" id="lP0-ls-RVx">
-                        <rect key="frame" x="288" y="16.5" width="8" height="11"/>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="rightArrow" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lP0-ls-RVx">
+                        <rect key="frame" x="286" y="15" width="10" height="13.5"/>
                         <constraints>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="18" id="81r-HE-rXR"/>
                             <constraint firstAttribute="width" secondItem="lP0-ls-RVx" secondAttribute="height" multiplier="8:11" id="ZXn-co-tST"/>
+                            <constraint firstAttribute="width" priority="751" constant="10" id="oKn-Sz-G8s"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="ivZ-gt-SO3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="4EF-L8-aHj"/>
-                    <constraint firstItem="lP0-ls-RVx" firstAttribute="height" secondItem="ivZ-gt-SO3" secondAttribute="height" multiplier="0.4" id="4m0-SK-A8K"/>
                     <constraint firstAttribute="bottom" secondItem="ivZ-gt-SO3" secondAttribute="bottom" constant="8" id="P3P-Zx-DO0"/>
                     <constraint firstItem="lP0-ls-RVx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="RPb-ZZ-s5c"/>
                     <constraint firstAttribute="trailing" secondItem="lP0-ls-RVx" secondAttribute="trailing" constant="24" id="RsQ-VH-GMZ"/>
                     <constraint firstItem="ivZ-gt-SO3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="V0N-t3-Vc7"/>
+                    <constraint firstItem="ivZ-gt-SO3" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="trailing" constant="24" id="fw2-if-ZH7"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
