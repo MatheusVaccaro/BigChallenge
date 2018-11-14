@@ -58,6 +58,7 @@ struct Strings {
                 NSLocalizedString("restore purchases cell name", comment: "title of the theme selection screen")
             static let sectionTitle =
                 NSLocalizedString("Theme section title", comment: "title of theme section in settings list screen")
+            static let sectionImage = "themeIcon"
         }
         struct Social {
             static let rateReef =
@@ -68,7 +69,7 @@ struct Strings {
                 NSLocalizedString("share reef cell name", comment: "title of the theme selection screen")
             static let sectionTitle =
                 NSLocalizedString("Social section title", comment: "title of social section in settings list screen")
-            
+            static let sectionImage = "socialIcon"
         }
         struct System {
             static let remindersSync =
@@ -79,7 +80,9 @@ struct Strings {
                 NSLocalizedString("terms of service cell name", comment: "title of the theme selection screen")
             static let sectionTitle =
                 NSLocalizedString("System section title", comment: "title of system section in settings list screen")
+            static let sectionImage = "systemIcon"
         }
+        static let closeImage = "closeButton"
     }
     
     struct Task {
