@@ -55,12 +55,14 @@ class AddTagDetailsViewModel {
         self.locationInputViewModelType = LocationInputViewModel.self
         self.dateInputViewModelType = DateInputViewModel.self
         self.privateTagViewModelType = PrivateTagViewModel.self
-        
         self.privateTagViewModel = privateTagViewModelType.init()
+        
         // Cell view models are only instantiated when they are needed
         self.cells = [.privateTagCell: privateTagViewModel!]
         self.placeholderCells = [.locationCell: StaticIconCellPresentable.defaultLocationInputIconCellPresentable(),
                                  .dateCell: StaticIconCellPresentable.defaultDateInputIconCellPresentable()]
+        
+        privateTagViewModel!.delegate = self
     }
     
     func edit(_ tag: Tag?) {
@@ -94,8 +96,7 @@ extension AddTagDetailsViewModel: AddDetailsProtocol {
     func viewModelForCell(at row: Int) -> IconCellPresentable {
         if let tagDetailsCellType = TagDetailsCellType.init(rawValue: row),
            let cellViewModel = cells[tagDetailsCellType] ?? placeholderCells[tagDetailsCellType] {
-            return cellViewModel
-            
+            return cellViewModel     
         } else {
             return placeholderCells.values.first!
         }

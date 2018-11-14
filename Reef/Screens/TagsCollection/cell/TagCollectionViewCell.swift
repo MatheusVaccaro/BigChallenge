@@ -83,6 +83,7 @@ class TagCollectionViewCell: UICollectionViewCell {
         
         longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         configureColors()
+        configureLocked()
     }
     
     deinit {
@@ -112,6 +113,8 @@ class TagCollectionViewCell: UICollectionViewCell {
         tagUILabel.text = viewModel.tagTitle
         maskLabel.text = viewModel.tagTitle
         gradientLayer.colors = viewModel.colors
+        lockerGradientLayer.colors = viewModel.colors
+        lockerGradientLayer.isHidden = !viewModel.tag.requiresAuthentication
         kind = .tag
     }
     
@@ -124,6 +127,29 @@ class TagCollectionViewCell: UICollectionViewCell {
         contentView.mask = maskLabel
         tagUILabel.isHidden = true
         kind = .add
+    }
+    
+    private var lockerGradientLayer: CAGradientLayer = CAGradientLayer()
+    private var lockerView: UIView = UIView()
+    
+    private func configureLocked() {
+        guard !lockerView.isDescendant(of: self) else {
+            return
+        }
+        
+        let maskView = UIImageView(image: UIImage(named: "lockIcon"))
+        
+        lockerView.frame = CGRect(x: frame.width-7, y: -6, width: 10, height: 14)
+        lockerGradientLayer.frame = lockerView.bounds
+        maskView.frame = lockerView.bounds
+        maskView.contentMode = .scaleAspectFit
+        
+        lockerView.layer.addSublayer(lockerGradientLayer)
+        lockerView.mask = maskView
+        
+        clipsToBounds = false
+        addSubview(lockerView)
+        lockerGradientLayer.isHidden = true
     }
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) ->
@@ -146,6 +172,8 @@ class TagCollectionViewCell: UICollectionViewCell {
             gradientLayer.frame = bounds
             maskLabel.frame = bounds
             contentView.frame = bounds
+            lockerView.frame = CGRect(x: frame.width-7, y: -6, width: 10, height: 14)
+            lockerGradientLayer.frame = lockerView.bounds
         }
     }
     
