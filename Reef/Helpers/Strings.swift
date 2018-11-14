@@ -52,6 +52,33 @@ struct Strings {
                 NSLocalizedString("Classic theme title", comment: "title of the 'classic' theme")
             static let darkTitle =
                 NSLocalizedString("dark theme title", comment: "title of the 'Deep Sea' theme")
+            static let chooseTheme =
+                NSLocalizedString("theme cell name", comment: "title of the theme selection screen")
+            static let restorePurchases =
+                NSLocalizedString("restore purchases cell name", comment: "title of the theme selection screen")
+            static let sectionTitle =
+                NSLocalizedString("Theme section title", comment: "title of theme section in settings list screen")
+        }
+        struct Social {
+            static let rateReef =
+                NSLocalizedString("rate reef cell name", comment: "title of the theme selection screen")
+            static let reefSubreddit =
+                NSLocalizedString("reefs subreddit cell name", comment: "title of the theme selection screen")
+            static let shareReef =
+                NSLocalizedString("share reef cell name", comment: "title of the theme selection screen")
+            static let sectionTitle =
+                NSLocalizedString("Social section title", comment: "title of social section in settings list screen")
+            
+        }
+        struct System {
+            static let remindersSync =
+                NSLocalizedString("reminders sync cell name", comment: "title of the theme selection screen")
+            static let language =
+                NSLocalizedString("language cell name", comment: "title of the theme selection screen")
+            static let termsOfService =
+                NSLocalizedString("terms of service cell name", comment: "title of the theme selection screen")
+            static let sectionTitle =
+                NSLocalizedString("System section title", comment: "title of system section in settings list screen")
         }
     }
     
