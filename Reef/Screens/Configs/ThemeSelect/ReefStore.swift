@@ -14,8 +14,7 @@ extension Notification.Name {
     static let IAPHelperPurchaseNotification = Notification.Name("IAPHelperPurchaseNotification")
 }
 
-open class ReefStore: NSObject  {
-    
+open class ReefStore: NSObject {
     private let productIdentifiers: Set<String>
     private var purchasedProductIdentifiers: Set<String> = []
     private var productsRequest: SKProductsRequest?
@@ -33,7 +32,6 @@ open class ReefStore: NSObject  {
             }
         }
         super.init()
-        
         SKPaymentQueue.default().add(self)
     }
 }
@@ -52,7 +50,6 @@ extension ReefStore {
     
     public func buyProduct(_ product: SKProduct) {
         print("Buying \(product.productIdentifier)...")
-        
         let payment = SKPayment(product: product)
         SKPaymentQueue.default().add(payment)
     }
@@ -71,14 +68,15 @@ extension ReefStore {
 }
 
 // MARK: - SKProductsRequestDelegate
-
 extension ReefStore: SKProductsRequestDelegate {
-    
     public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        print("Loaded list of products...")
         let products = response.products
         productsRequestCompletionHandler?(true, products)
         clearRequestAndHandler()
+        
+        for identifier in response.invalidProductIdentifiers {
+            print("invalid product ids: \(identifier)")
+        }
         
         for product in products {
             print("Found product: \(product.productIdentifier) \(product.localizedTitle) \(product.price.floatValue)")
@@ -99,7 +97,6 @@ extension ReefStore: SKProductsRequestDelegate {
 }
 
 // MARK: - SKPaymentTransactionObserver
-
 extension ReefStore: SKPaymentTransactionObserver {
     
     public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
@@ -107,13 +104,10 @@ extension ReefStore: SKPaymentTransactionObserver {
             switch (transaction.transactionState) {
             case .purchased:
                 complete(transaction: transaction)
-                break
             case .failed:
                 fail(transaction: transaction)
-                break
             case .restored:
                 restore(transaction: transaction)
-                break
             case .deferred:
                 break
             case .purchasing:

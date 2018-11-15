@@ -831,7 +831,7 @@
 		22253D562192377700159CD5 /* ThemeSelect */ = {
 			isa = PBXGroup;
 			children = (
-				22253D5A2192DF4B00159CD5 /* ThemeSelection.storyboard */,
+				2282D47321947651005D386F /* ReefStore.swift */,
 				22253D572192379A00159CD5 /* ThemeTableView */,
 				22253D4F21921F5A00159CD5 /* ThemeCell */,
 			);
@@ -841,6 +841,7 @@
 		22253D572192379A00159CD5 /* ThemeTableView */ = {
 			isa = PBXGroup;
 			children = (
+				22253D5A2192DF4B00159CD5 /* ThemeSelection.storyboard */,
 				22253D58219237BE00159CD5 /* ThemeSelectViewController.swift */,
 				2282D47521947F41005D386F /* ThemeSelectionViewModel.swift */,
 			);
@@ -950,7 +951,6 @@
 				22F23E9F212E452E0064EE05 /* Colors.swift */,
 				229780A9217EA0B700CDB484 /* Classic.swift */,
 				229780AC217EA0E900CDB484 /* Dark.swift */,
-				2282D47321947651005D386F /* ReefStore.swift */,
 			);
 			path = Themes;
 			sourceTree = "<group>";

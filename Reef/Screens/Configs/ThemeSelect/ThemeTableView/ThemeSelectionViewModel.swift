@@ -9,18 +9,33 @@
 import Foundation
 import StoreKit
 
+protocol ThemeSelectionViewModelDelegate: class {
+    func didLoadProducts()
+}
+
 class ThemeSelectionViewModel {
-    var themes: [(product: SKProduct, theme: Theme)]
+    var data: [(product: SKProduct?, theme: Theme.Type)]
+    
+    weak var delegate: ThemeSelectionViewModelDelegate?
     
     let store: ReefStore
     
     init() {
-        self.themes = []
-        self.store = ReefStore(productIds: Set())
+        self.data = [(nil, Classic.self)]
+        self.store = ReefStore(productIds: Set([Dark.identifier]))
+        //TODO (needs cloudkit): fetch product IDs
         
         store.requestProducts { (success, products) in
             if success {
-                let products = products!
+                //TODO (needs cloudkit): fetch themes based on product identifier from cloudkit
+                let themes: [Theme.Type] = [Classic.self, Dark.self]
+                
+                for product in products! {
+                    if let theme = themes.first(where: { $0.identifier == product.productIdentifier }) {
+                        self.data.append((product: product, theme: theme))
+                    }
+                }
+                self.delegate?.didLoadProducts()
             }
         }
     }

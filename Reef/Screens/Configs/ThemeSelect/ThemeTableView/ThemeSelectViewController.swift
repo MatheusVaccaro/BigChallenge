@@ -11,6 +11,7 @@ import UIKit
 class ThemeSelectViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    var viewModel: ThemeSelectionViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +20,6 @@ class ThemeSelectViewController: UIViewController {
         navigationController?.navigationBar.tintColor = ReefColors.theme.largeTitle
         
         configureTableView()
-        
         configureColors()
     }
     
@@ -49,16 +49,14 @@ class ThemeSelectViewController: UIViewController {
 
 extension ThemeSelectViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return viewModel.data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ThemeTableViewCell.identifier,
                                                     for: indexPath) as! ThemeTableViewCell
         
-        let theme: Theme.Type = indexPath.row == 0
-            ? Classic.self
-            : Dark.self
+        let theme = viewModel.data[indexPath.row].theme
         
         cell.viewModel = ThemeTableViewModel(theme: theme)
         
@@ -68,7 +66,7 @@ extension ThemeSelectViewController: UITableViewDataSource {
 
 extension ThemeSelectViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let theme = (tableView.cellForRow(at: indexPath) as! ThemeTableViewCell).viewModel.theme
+        let theme = viewModel.data[indexPath.row].theme
         
         ReefColors.set(theme: theme)
         
@@ -82,6 +80,12 @@ extension ThemeSelectViewController: UITableViewDelegate {
                 homescreen.reloadColors()
             }
         }
+    }
+}
+
+extension ThemeSelectViewController: ThemeSelectionViewModelDelegate {
+    func didLoadProducts() {
+        tableView.reloadData()
     }
 }
 
