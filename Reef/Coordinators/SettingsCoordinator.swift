@@ -35,6 +35,7 @@ class SettingsCoordinator: Coordinator {
         let settingsViewModel = SettingsListViewModel()
         
         settingsViewController.viewModel = settingsViewModel
+        settingsViewController.delegate = self
         
         settingsViewController.title = "Settings" // TODO: Localize this
         
@@ -46,5 +47,11 @@ class SettingsCoordinator: Coordinator {
         presenter.view.layer.add(transition, forKey: nil)
         
         presenter.pushViewController(settingsViewController, animated: false)
+    }
+}
+
+extension SettingsCoordinator: SettingsListViewControllerDelegate {
+    func didPressThemeCell() {
+        showThemeSelection()
     }
 }
