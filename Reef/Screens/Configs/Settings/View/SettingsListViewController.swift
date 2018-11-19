@@ -93,7 +93,7 @@ class SettingsListViewController: UIViewController {
         transition.type = CATransitionType.reveal
         transition.subtype = CATransitionSubtype.fromBottom
         navigationController?.view.layer.add(transition, forKey: nil)
-        _ = navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: false)
     }
 }
 
