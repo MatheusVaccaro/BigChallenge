@@ -21,6 +21,8 @@ class SettingsCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        contentView.backgroundColor = ReefColors.background
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

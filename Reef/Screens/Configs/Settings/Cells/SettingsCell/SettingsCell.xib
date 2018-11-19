@@ -34,6 +34,7 @@
                         </constraints>
                     </imageView>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="ivZ-gt-SO3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="4EF-L8-aHj"/>
                     <constraint firstAttribute="bottom" secondItem="ivZ-gt-SO3" secondAttribute="bottom" constant="8" id="P3P-Zx-DO0"/>
