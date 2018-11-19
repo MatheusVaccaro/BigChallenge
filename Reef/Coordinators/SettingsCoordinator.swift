@@ -38,6 +38,13 @@ class SettingsCoordinator: Coordinator {
         
         settingsViewController.title = "Settings" // TODO: Localize this
         
-        presenter.pushViewController(settingsViewController, animated: true)
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.moveIn
+        transition.subtype = CATransitionSubtype.fromTop
+        presenter.view.layer.add(transition, forKey: nil)
+        
+        presenter.pushViewController(settingsViewController, animated: false)
     }
 }
