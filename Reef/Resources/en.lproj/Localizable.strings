@@ -269,6 +269,15 @@
 /* title of empty state on taskList */
 "emptyStateStreakTitle" = "";
 
+
+// MARK: - Settings
+
+/* title of settings list screen */
+"Settings screen title" = "Settings";
+
+
+/** Theme **/
+
 /* title of the theme selection screen */
 "Theme selection screen title" = "Themes";
 
@@ -277,3 +286,42 @@
 
 /* title of the 'Deep Sea' theme */
 "dark theme title" = "Deep Sea";
+
+/* title of choose theme cell on settings list */
+"theme cell name" = "Choose Theme";
+
+/* title of restore purchases cell on settings list */
+"restore purchases cell name" = "Restore Purchases";
+
+/* title of theme section in settings list screen */
+"Theme section title" = "Themes";
+
+
+/** Social **/
+
+/* title of rate reef cell on settings list */
+"rate reef cell name" = "Rate Reef on the Appstore";
+
+/* title of reef's subreddit cell on settings list */
+"reefs subreddit cell name" = "Reef's Subreddit";
+
+/* title of share reef cell on settings list */
+"share reef cell name" = "Share Reef";
+
+/* title of social section in settings list screen */
+"Social section title" = "Social";
+
+
+/** System **/
+
+/* title of reminders sync cell on settings list */
+"reminders sync cell name" = "Reminders Sync";
+
+/* title of language cell on settings list */
+"language cell name" = "Language";
+
+/* title terms of service cell on settings list */
+"terms of service cell name" = "Terms of Service";
+
+/* title of system section in settings list screen */
+"System section title" = "System";
