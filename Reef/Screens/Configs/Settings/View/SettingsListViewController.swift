@@ -16,6 +16,8 @@ class SettingsListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    private var closeButton: UIImageView?
+    
     var viewModel: SettingsListViewModel!
     
     weak var delegate: SettingsListViewControllerDelegate?
@@ -28,7 +30,7 @@ class SettingsListViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        navigationItem.hidesBackButton = true 
+        navigationItem.hidesBackButton = true
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -43,6 +45,55 @@ class SettingsListViewController: UIViewController {
         
         tableView.estimatedSectionHeaderHeight = 25
         tableView.sectionHeaderHeight = UITableView.automaticDimension
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        configureCloseButton()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        removeCloseButton()
+    }
+    
+    fileprivate func configureCloseButton() {
+        guard closeButton == nil else {
+            closeButton?.isHidden = false
+            return
+        }
+        
+        let navBar = navigationController!.navigationBar
+        
+        closeButton = UIImageView(image: UIImage(named: "closeButton")?.withRenderingMode(.alwaysTemplate))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(closeSettings))
+        
+        closeButton!.tintColor = ReefColors.largeTitle
+        closeButton!.translatesAutoresizingMaskIntoConstraints = false
+        closeButton!.isUserInteractionEnabled = true
+        closeButton!.addGestureRecognizer(tapGesture)
+        
+        navBar.addSubview(closeButton!)
+        
+        NSLayoutConstraint.activate([ //TODO: Check constraints
+            closeButton!.rightAnchor.constraint(equalTo: navBar.rightAnchor, constant: -25),
+//            closeButton.bottomAnchor.constraint(equalTo: navBar.bottomAnchor, constant: -16),
+            closeButton!.centerYAnchor.constraint(equalTo: navBar.centerYAnchor),
+            closeButton!.heightAnchor.constraint(equalTo: navBar.heightAnchor, multiplier: 0.3),
+            closeButton!.widthAnchor.constraint(equalTo: closeButton!.heightAnchor)
+            ])
+    }
+    
+    private func removeCloseButton() {
+        closeButton?.isHidden = true
+    }
+    
+    @objc func closeSettings() {
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.reveal
+        transition.subtype = CATransitionSubtype.fromBottom
+        navigationController?.view.layer.add(transition, forKey: nil)
+        _ = navigationController?.popViewController(animated: true)
     }
 }
 
