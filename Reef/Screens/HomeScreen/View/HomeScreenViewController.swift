@@ -206,7 +206,7 @@ class HomeScreenViewController: UIViewController {
         
         let navBar = navigationController!.navigationBar
         
-        settingsButton = UIImageView(image: UIImage(named: "AddIcon")?.withRenderingMode(.alwaysTemplate))
+        settingsButton = UIImageView(image: UIImage(named: "settingsIcon")?.withRenderingMode(.alwaysTemplate))
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedSettings))
 
         settingsButton!.tintColor = ReefColors.largeTitle

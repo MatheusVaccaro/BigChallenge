@@ -31,7 +31,6 @@ class IconTableViewCell: UITableViewCell {
         return [firstTagLabel, secondTagLabel]
     }
     
-    
     var titleFontSize: CGFloat = 18 {
         didSet {
             titleLabel.font = UIFont.font(sized: titleFontSize, weight: .medium, with: .title1, fontName: .barlow)

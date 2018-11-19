@@ -50,7 +50,7 @@ protocol Theme {
     static var dateOffCurrentMonth: UIColor { get }
     static var unselectableDate: UIColor { get }
     
-    // MARK - Empty State
+    // MARK: - Empty State
     static var emptyStateOff: UIImage { get }
     static var emptyStateOn: UIImage { get }
 }

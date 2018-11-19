@@ -31,7 +31,7 @@ public class TaskListViewController: UIViewController {
         
         // config tableView to autolayout constraints to resize the tableCells height
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.sectionHeaderHeight = UITableView.automaticDimension
+        
         tableView.sectionFooterHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "TaskCell", bundle: nil),
                            forCellReuseIdentifier: TaskTableViewCell.identifier)
@@ -202,7 +202,7 @@ extension TaskListViewController: UITableViewDataSource {
     }
 }
 
-extension TaskListViewController: taskListViewModelUIDelegate {    
+extension TaskListViewController: taskListViewModelUIDelegate {
     func taskListViewModel(_ taskListViewModel: TaskListViewModel, didUpdateAt indexPaths: [IndexPath]) {
         tableView.reloadRows(at: indexPaths, with: .automatic)
     }
