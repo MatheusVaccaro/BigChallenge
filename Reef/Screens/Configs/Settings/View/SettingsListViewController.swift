@@ -122,6 +122,9 @@ extension SettingsListViewController: UITableViewDataSource {
 extension SettingsListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("selected row at \(indexPath.row)")
+        if indexPath.section == 0, indexPath.row == 0 {
+            delegate?.didPressThemeCell()
+        }
     }
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
