@@ -50,6 +50,10 @@ class SettingsCell: UITableViewCell {
             NSLayoutConstraint.activate([
                 rightArrow.leftAnchor.constraint(equalTo: titleText.rightAnchor, constant: 8)
                 ])
+//            if let image = UIImage(named: viewModel.rightArrowImageName) {
+//                rightArrow.image = image.withRenderingMode(.alwaysTemplate)
+//                imageView?.tintColor = ReefColors.theme.cellTagLabel
+//            }
         }
     }
 }
