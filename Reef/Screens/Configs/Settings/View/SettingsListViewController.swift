@@ -8,14 +8,27 @@
 
 import UIKit
 
+protocol SettingsListViewControllerDelegate: class {
+    func didPressThemeCell()
+}
+
 class SettingsListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
     var viewModel: SettingsListViewModel!
     
+    weak var delegate: SettingsListViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = ReefColors.background
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        navigationItem.hidesBackButton = true 
         
         tableView.delegate = self
         tableView.dataSource = self
