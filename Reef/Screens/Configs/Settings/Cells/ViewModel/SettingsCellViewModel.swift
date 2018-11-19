@@ -13,6 +13,8 @@ class SettingsCellViewModel {
     private(set) var type: SettingsCellType
     private(set) var title: String
     
+    let rightArrowImageName = "rightArrow"
+    
     init(type: SettingsCellType, title: String) {
         self.type = type
         self.title = title
