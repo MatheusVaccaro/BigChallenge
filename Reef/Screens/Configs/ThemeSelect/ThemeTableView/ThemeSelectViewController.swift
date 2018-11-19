@@ -56,9 +56,7 @@ extension ThemeSelectViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: ThemeTableViewCell.identifier,
                                                     for: indexPath) as! ThemeTableViewCell
         
-        let theme = viewModel.data[indexPath.row].theme
-        
-        cell.viewModel = ThemeTableViewModel(theme: theme)
+        cell.viewModel = viewModel.viewModelForCell(at: indexPath)
         
         return cell
     }
@@ -66,17 +64,18 @@ extension ThemeSelectViewController: UITableViewDataSource {
 
 extension ThemeSelectViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let theme = viewModel.data[indexPath.row].theme
+        let item = viewModel.data[indexPath.row]
         
-        ReefColors.set(theme: theme)
+        ReefColors.set(theme: item.theme)
         
-        navigationController?.navigationBar.largeTitleTextAttributes?[NSAttributedString.Key.foregroundColor] = ReefColors.largeTitle
-        //TODO: color back item
+        navigationController?
+            .navigationBar
+            .largeTitleTextAttributes?[NSAttributedString.Key.foregroundColor] = ReefColors.largeTitle
         
-        for vc in navigationController!.viewControllers {
-            vc.view.setNeedsLayout()
-            vc.view.layoutIfNeeded()
-            if let homescreen = vc as? HomeScreenViewController {
+        for viewController in navigationController!.viewControllers {
+            viewController.view.setNeedsLayout()
+            viewController.view.layoutIfNeeded()
+            if let homescreen = viewController as? HomeScreenViewController {
                 homescreen.reloadColors()
             }
         }

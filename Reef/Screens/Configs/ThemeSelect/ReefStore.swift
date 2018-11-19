@@ -49,7 +49,6 @@ extension ReefStore {
     }
     
     public func buyProduct(_ product: SKProduct) {
-        print("Buying \(product.productIdentifier)...")
         let payment = SKPayment(product: product)
         SKPaymentQueue.default().add(payment)
     }
@@ -98,7 +97,6 @@ extension ReefStore: SKProductsRequestDelegate {
 
 // MARK: - SKPaymentTransactionObserver
 extension ReefStore: SKPaymentTransactionObserver {
-    
     public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
             switch (transaction.transactionState) {

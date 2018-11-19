@@ -17,7 +17,6 @@ class ThemeSelectionViewModel {
     var data: [(product: SKProduct?, theme: Theme.Type)]
     
     weak var delegate: ThemeSelectionViewModelDelegate?
-    
     let store: ReefStore
     
     init() {
@@ -38,5 +37,11 @@ class ThemeSelectionViewModel {
                 self.delegate?.didLoadProducts()
             }
         }
+    }
+    
+    func viewModelForCell(at indexPath: IndexPath) -> ThemeTableViewModel {
+        let item = data[indexPath.row]
+        
+        return ThemeTableViewModel(theme: item.theme, product: item.product, store: store)
     }
 }
