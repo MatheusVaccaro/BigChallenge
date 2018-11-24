@@ -45,6 +45,31 @@ class ThemeSelectViewController: UIViewController {
     func configureColors() {
         view.backgroundColor = ReefColors.background
     }
+    
+    lazy var blurView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: ReefColors.blurStyle)
+        let blur = UIVisualEffectView(effect: blurEffect)
+        
+        blur.frame = view.bounds
+        
+        return blur
+    }()
+    
+    private func applyBlur() {
+        //only apply the blur if the user hasn't disabled transparency effects
+        if UIAccessibility.isReduceTransparencyEnabled {
+            blurView.tintColor = ReefColors.cellIcons
+        }
+        
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        if !blurView.isDescendant(of: view) {
+            view.addSubview(blurView)
+        }
+    }
+    
+    private func removeBlur() {
+        blurView.removeFromSuperview()
+    }
 }
 
 extension ThemeSelectViewController: UITableViewDataSource {
@@ -83,6 +108,26 @@ extension ThemeSelectViewController: UITableViewDelegate {
 }
 
 extension ThemeSelectViewController: ThemeSelectionViewModelDelegate {
+    func didStartPurchasingItem() {
+        applyBlur()
+    }
+    
+    func didCompletePurchasingItem() {
+        removeBlur()
+    }
+    
+    func didFailPurchasingItem() {
+        removeBlur()
+    }
+    
+    func didRestorePurchasingItem() {
+        
+    }
+    
+    func didDeferPurchasingItem() {
+        
+    }
+    
     func didLoadProducts() {
         tableView.reloadData()
     }

@@ -9,18 +9,24 @@
 import Foundation
 import StoreKit
 
+protocol ThemeTableViewModelDelegate: class {
+    func isProductPurchased(_ product: SKProduct) -> Bool
+    func themeTableViewModelDelegate(_ themeTableViewModel: ThemeTableViewModel,
+                                     shouldPromptProductPurchase product: SKProduct)
+}
+
 class ThemeTableViewModel {
     
     private(set) var theme: Theme.Type
-    
     private(set) var product: SKProduct?
-    private var store: ReefStore
+    
+    weak var delegate: ThemeTableViewModelDelegate!
     
     var selectedImageName: String = "themeSelectedImage"
     
     var priceText: String {
         guard let product = product,
-            !store.isProductPurchased(product.productIdentifier) else { return "" }
+            !delegate.isProductPurchased(product) else { return "" }
         
         let formatter = NumberFormatter()
         formatter.formatterBehavior = NumberFormatter.Behavior.behavior10_4
@@ -31,18 +37,17 @@ class ThemeTableViewModel {
     }
     
     var canSelect: Bool {
-        guard product != nil else { return true }
-        return store.isProductPurchased(product!.productIdentifier)
+        guard let product = product else { return true }
+        return delegate.isProductPurchased(product)
     }
     
-    init(theme: Theme.Type, product: SKProduct?, store: ReefStore) {
+    init(theme: Theme.Type, product: SKProduct?) {
         self.theme = theme
         self.product = product
-        self.store = store
     }
     
     func buy() {
         guard let product = product else { return }
-        store.buyProduct(product)
+        delegate.themeTableViewModelDelegate(self, shouldPromptProductPurchase: product)
     }
 }

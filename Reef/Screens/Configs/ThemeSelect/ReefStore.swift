@@ -10,11 +10,17 @@ import StoreKit
 
 public typealias ProductsRequestCompletionHandler = (_ success: Bool, _ products: [SKProduct]?) -> Void
 
-extension Notification.Name {
-    static let IAPHelperPurchaseNotification = Notification.Name("IAPHelperPurchaseNotification")
+protocol StoreKitTransactionDelegate: class {
+    func didStartPurchasingItem()
+    func didCompletePurchasingItem()
+    func didFailPurchasingItem()
+    func didRestorePurchasingItem()
+    func didDeferPurchasingItem()
 }
 
 open class ReefStore: NSObject {
+    weak var delegate: StoreKitTransactionDelegate?
+    
     private let productIdentifiers: Set<String>
     private var purchasedProductIdentifiers: Set<String> = []
     private var productsRequest: SKProductsRequest?
@@ -107,25 +113,25 @@ extension ReefStore: SKPaymentTransactionObserver {
             case .restored:
                 restore(transaction: transaction)
             case .deferred:
-                break
+                deferred(transaction: transaction)
             case .purchasing:
-                break
+                purchasing(transaction: transaction)
             }
         }
     }
     
     private func complete(transaction: SKPaymentTransaction) {
         print("complete...")
-        deliverPurchaseNotificationFor(identifier: transaction.payment.productIdentifier)
         SKPaymentQueue.default().finishTransaction(transaction)
+        delegate?.didCompletePurchasingItem()
     }
     
     private func restore(transaction: SKPaymentTransaction) {
         guard let productIdentifier = transaction.original?.payment.productIdentifier else { return }
         
         print("restore... \(productIdentifier)")
-        deliverPurchaseNotificationFor(identifier: productIdentifier)
         SKPaymentQueue.default().finishTransaction(transaction)
+        delegate?.didRestorePurchasingItem()
     }
     
     private func fail(transaction: SKPaymentTransaction) {
@@ -137,13 +143,16 @@ extension ReefStore: SKPaymentTransactionObserver {
         }
         
         SKPaymentQueue.default().finishTransaction(transaction)
+        delegate?.didFailPurchasingItem()
     }
     
-    private func deliverPurchaseNotificationFor(identifier: String?) {
-        guard let identifier = identifier else { return }
-        
-        purchasedProductIdentifiers.insert(identifier)
-        UserDefaults.standard.set(true, forKey: identifier)
-        NotificationCenter.default.post(name: .IAPHelperPurchaseNotification, object: identifier)
+    private func deferred(transaction: SKPaymentTransaction) {
+        print("deffered")
+        delegate?.didDeferPurchasingItem()
+    }
+    
+    private func purchasing(transaction: SKPaymentTransaction) {
+        print("purchasing")
+        delegate?.didStartPurchasingItem()
     }
 }

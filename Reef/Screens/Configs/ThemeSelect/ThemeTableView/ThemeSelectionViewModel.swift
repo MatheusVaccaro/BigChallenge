@@ -11,6 +11,11 @@ import StoreKit
 
 protocol ThemeSelectionViewModelDelegate: class {
     func didLoadProducts()
+    func didStartPurchasingItem()
+    func didCompletePurchasingItem()
+    func didFailPurchasingItem()
+    func didRestorePurchasingItem()
+    func didDeferPurchasingItem()
 }
 
 class ThemeSelectionViewModel {
@@ -22,6 +27,7 @@ class ThemeSelectionViewModel {
     init() {
         self.data = [(nil, Classic.self)]
         self.store = ReefStore(productIds: Set([Dark.identifier]))
+        store.delegate = self
         //TODO (needs cloudkit): fetch product IDs
         
         store.requestProducts { (success, products) in
@@ -41,7 +47,40 @@ class ThemeSelectionViewModel {
     
     func viewModelForCell(at indexPath: IndexPath) -> ThemeTableViewModel {
         let item = data[indexPath.row]
-        
-        return ThemeTableViewModel(theme: item.theme, product: item.product, store: store)
+        let viewModel = ThemeTableViewModel(theme: item.theme, product: item.product)
+        viewModel.delegate = self
+        return viewModel
+    }
+}
+
+extension ThemeSelectionViewModel: ThemeTableViewModelDelegate {
+    func isProductPurchased(_ product: SKProduct) -> Bool {
+        return store.isProductPurchased(product.productIdentifier)
+    }
+    
+    func themeTableViewModelDelegate(_ themeTableViewModel: ThemeTableViewModel, shouldPromptProductPurchase product: SKProduct) {
+        store.buyProduct(product)
+    }
+}
+
+extension ThemeSelectionViewModel: StoreKitTransactionDelegate {
+    func didStartPurchasingItem() {
+        delegate?.didStartPurchasingItem()
+    }
+    
+    func didCompletePurchasingItem() {
+        delegate?.didCompletePurchasingItem()
+    }
+    
+    func didFailPurchasingItem() {
+        delegate?.didFailPurchasingItem()
+    }
+    
+    func didRestorePurchasingItem() {
+        delegate?.didRestorePurchasingItem()
+    }
+    
+    func didDeferPurchasingItem() {
+        delegate?.didDeferPurchasingItem()
     }
 }
