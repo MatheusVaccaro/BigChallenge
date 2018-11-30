@@ -25,8 +25,6 @@ class SettingsListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = ReefColors.background
-        
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
         
@@ -43,6 +41,8 @@ class SettingsListViewController: UIViewController {
         
         tableView.estimatedSectionHeaderHeight = 25
         tableView.sectionHeaderHeight = UITableView.automaticDimension
+        
+        reloadColors()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -129,6 +129,10 @@ extension SettingsListViewController: UITableViewDelegate {
         if indexPath.section == 0, indexPath.row == 0 {
             delegate?.didPressThemeCell()
         }
+        if indexPath.section == 0, indexPath.row == 1 {
+            ReefStore.restorePurchases()
+            //do something else
+        }
     }
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -189,5 +193,13 @@ extension SettingsListViewController: StoryboardInstantiable {
     
     static var storyboardIdentifier: String {
         return "SettingsList"
+    }
+}
+
+extension SettingsListViewController: ThemeCompatible {
+    func reloadColors() {
+        tableView.reloadData()
+        view.backgroundColor = ReefColors.background
+        closeButton?.tintColor = ReefColors.largeTitle
     }
 }

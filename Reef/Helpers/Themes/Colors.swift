@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ThemeCompatible {
+    func reloadColors()
+}
+
 protocol Theme {
     
     static var identifier: String { get }
