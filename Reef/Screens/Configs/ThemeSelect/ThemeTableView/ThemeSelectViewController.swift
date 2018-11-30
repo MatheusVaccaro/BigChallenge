@@ -14,6 +14,10 @@ class ThemeSelectViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        navigationController?.navigationBar.tintColor = ReefColors.theme.largeTitle
+        
         configureTableView()
         
         configureColors()

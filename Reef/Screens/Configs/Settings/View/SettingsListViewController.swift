@@ -29,8 +29,6 @@ class SettingsListViewController: UIViewController {
         
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        navigationItem.hidesBackButton = true
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -48,10 +46,16 @@ class SettingsListViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        navigationItem.hidesBackButton = true
         configureCloseButton()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
         removeCloseButton()
     }
     
