@@ -37,7 +37,7 @@ class SettingsCoordinator: Coordinator {
         settingsViewController.viewModel = settingsViewModel
         settingsViewController.delegate = self
         
-        settingsViewController.title = "Settings" // TODO: Localize this
+        settingsViewController.title = Strings.Settings.title
         
         let transition = CATransition()
         transition.duration = 0.5
