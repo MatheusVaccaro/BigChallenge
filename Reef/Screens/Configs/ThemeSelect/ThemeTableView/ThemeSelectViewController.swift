@@ -62,13 +62,29 @@ class ThemeSelectViewController: UIViewController {
         }
         
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        if !blurView.isDescendant(of: view) {
-            view.addSubview(blurView)
+        if !blurView.isDescendant(of: navigationController!.view) {
+            navigationController!.view.addSubview(blurView)
         }
     }
     
     private func removeBlur() {
         blurView.removeFromSuperview()
+    }
+    
+    private func set(_ theme: Theme.Type) {
+        ReefColors.set(theme: theme)
+        
+        navigationController?
+            .navigationBar
+            .largeTitleTextAttributes?[NSAttributedString.Key.foregroundColor] = ReefColors.largeTitle
+        
+        for viewController in navigationController!.viewControllers {
+            viewController.view.setNeedsLayout()
+            viewController.view.layoutIfNeeded()
+            if let viewController = viewController as? ThemeCompatible {
+                viewController.reloadColors()
+            }
+        }
     }
 }
 
@@ -90,46 +106,42 @@ extension ThemeSelectViewController: UITableViewDataSource {
 extension ThemeSelectViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = viewModel.data[indexPath.row]
-        
-        ReefColors.set(theme: item.theme)
-        
-        navigationController?
-            .navigationBar
-            .largeTitleTextAttributes?[NSAttributedString.Key.foregroundColor] = ReefColors.largeTitle
-        
-        for viewController in navigationController!.viewControllers {
-            viewController.view.setNeedsLayout()
-            viewController.view.layoutIfNeeded()
-            if let homescreen = viewController as? HomeScreenViewController {
-                homescreen.reloadColors()
-            }
-        }
+        set(item.theme)
     }
 }
 
 extension ThemeSelectViewController: ThemeSelectionViewModelDelegate {
-    func didStartPurchasingItem() {
+    func didStartPurchasing(product productID: String) {
         applyBlur()
     }
     
-    func didCompletePurchasingItem() {
+    func didCompletePurchasing(product productID: String) {
+        removeBlur()
+        select(productID)
+    }
+    
+    func didFailPurchasing(product productID: String) {
         removeBlur()
     }
     
-    func didFailPurchasingItem() {
+    func didRestorePurchasing(product productID: String) {
         removeBlur()
+        select(productID)
     }
     
-    func didRestorePurchasingItem() {
-        
-    }
-    
-    func didDeferPurchasingItem() {
-        
+    func didDeferPurchasing(product productID: String) {
+        //code
     }
     
     func didLoadProducts() {
         tableView.reloadData()
+    }
+    
+    func select(_ productID: String) {
+        if let row = (viewModel.data.firstIndex{ $0.product?.productIdentifier == productID }) {
+            tableView.selectRow(at: IndexPath(row: row, section: 0), animated: false, scrollPosition: .none)
+            set(viewModel.data[row].theme)
+        }
     }
 }
 

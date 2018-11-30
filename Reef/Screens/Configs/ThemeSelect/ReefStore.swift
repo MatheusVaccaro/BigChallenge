@@ -11,11 +11,11 @@ import StoreKit
 public typealias ProductsRequestCompletionHandler = (_ success: Bool, _ products: [SKProduct]?) -> Void
 
 protocol StoreKitTransactionDelegate: class {
-    func didStartPurchasingItem()
-    func didCompletePurchasingItem()
-    func didFailPurchasingItem()
-    func didRestorePurchasingItem()
-    func didDeferPurchasingItem()
+    func didStartPurchasing(product productID: String)
+    func didCompletePurchasing(product productID: String)
+    func didFailPurchasing(product productID: String)
+    func didRestorePurchasing(product productID: String)
+    func didDeferPurchasing(product productID: String)
 }
 
 open class ReefStore: NSObject {
@@ -29,7 +29,7 @@ open class ReefStore: NSObject {
     public init(productIds: Set<String>) {
         productIdentifiers = productIds
         for productIdentifier in productIds {
-            let purchased = UserDefaults.standard.bool(forKey: productIdentifier) //TODO: save on coredata
+            let purchased = false //UserDefaults.standard.bool(forKey: productIdentifier) //TODO: save on coredata
             if purchased {
                 purchasedProductIdentifiers.insert(productIdentifier)
                 print("Previously purchased: \(productIdentifier)")
@@ -44,7 +44,6 @@ open class ReefStore: NSObject {
 
 // MARK: - StoreKit API
 extension ReefStore {
-    
     public func requestProducts(_ completionHandler: @escaping ProductsRequestCompletionHandler) {
         productsRequest?.cancel()
         productsRequestCompletionHandler = completionHandler
@@ -67,7 +66,7 @@ extension ReefStore {
         return SKPaymentQueue.canMakePayments()
     }
     
-    public func restorePurchases() {
+    public static func restorePurchases() {
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
 }
@@ -123,15 +122,20 @@ extension ReefStore: SKPaymentTransactionObserver {
     private func complete(transaction: SKPaymentTransaction) {
         print("complete...")
         SKPaymentQueue.default().finishTransaction(transaction)
-        delegate?.didCompletePurchasingItem()
+        addPurchase(productID: transaction.payment.productIdentifier)
+        delegate?.didCompletePurchasing(product: transaction.payment.productIdentifier)
+    }
+    
+    func addPurchase(productID: String) {
+        UserDefaults.standard.set(true, forKey: productID)
     }
     
     private func restore(transaction: SKPaymentTransaction) {
         guard let productIdentifier = transaction.original?.payment.productIdentifier else { return }
-        
         print("restore... \(productIdentifier)")
         SKPaymentQueue.default().finishTransaction(transaction)
-        delegate?.didRestorePurchasingItem()
+        addPurchase(productID: productIdentifier)
+        delegate?.didRestorePurchasing(product: transaction.payment.productIdentifier)
     }
     
     private func fail(transaction: SKPaymentTransaction) {
@@ -143,16 +147,16 @@ extension ReefStore: SKPaymentTransactionObserver {
         }
         
         SKPaymentQueue.default().finishTransaction(transaction)
-        delegate?.didFailPurchasingItem()
+        delegate?.didFailPurchasing(product: transaction.payment.productIdentifier)
     }
     
     private func deferred(transaction: SKPaymentTransaction) {
         print("deffered")
-        delegate?.didDeferPurchasingItem()
+        delegate?.didDeferPurchasing(product: transaction.payment.productIdentifier)
     }
     
     private func purchasing(transaction: SKPaymentTransaction) {
         print("purchasing")
-        delegate?.didStartPurchasingItem()
+        delegate?.didStartPurchasing(product: transaction.payment.productIdentifier)
     }
 }

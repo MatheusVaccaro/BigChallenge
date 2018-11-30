@@ -11,11 +11,11 @@ import StoreKit
 
 protocol ThemeSelectionViewModelDelegate: class {
     func didLoadProducts()
-    func didStartPurchasingItem()
-    func didCompletePurchasingItem()
-    func didFailPurchasingItem()
-    func didRestorePurchasingItem()
-    func didDeferPurchasingItem()
+    func didStartPurchasing(product productID: String)
+    func didCompletePurchasing(product productID: String)
+    func didFailPurchasing(product productID: String)
+    func didRestorePurchasing(product productID: String)
+    func didDeferPurchasing(product productID: String)
 }
 
 class ThemeSelectionViewModel {
@@ -64,23 +64,23 @@ extension ThemeSelectionViewModel: ThemeTableViewModelDelegate {
 }
 
 extension ThemeSelectionViewModel: StoreKitTransactionDelegate {
-    func didStartPurchasingItem() {
-        delegate?.didStartPurchasingItem()
+    func didStartPurchasing(product productID: String) {
+        delegate?.didStartPurchasing(product: productID)
     }
     
-    func didCompletePurchasingItem() {
-        delegate?.didCompletePurchasingItem()
+    func didCompletePurchasing(product productID: String) {
+        delegate?.didCompletePurchasing(product: productID)
     }
     
-    func didFailPurchasingItem() {
-        delegate?.didFailPurchasingItem()
+    func didFailPurchasing(product productID: String) {
+        delegate?.didFailPurchasing(product: productID)
     }
     
-    func didRestorePurchasingItem() {
-        delegate?.didRestorePurchasingItem()
+    func didRestorePurchasing(product productID: String) {
+        delegate?.didRestorePurchasing(product: productID)
     }
     
-    func didDeferPurchasingItem() {
-        delegate?.didDeferPurchasingItem()
+    func didDeferPurchasing(product productID: String) {
+        delegate?.didDeferPurchasing(product: productID)
     }
 }
