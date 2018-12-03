@@ -10,8 +10,11 @@ import UIKit
 import ReefKit
 
 public protocol TaskTableViewCellSwipeDelegate: class {
-    func didSwipeFromLeftToRight(in cell: TaskTableViewCell)
-    func didSwipeFromRightToLeft(in cell: TaskTableViewCell)
+    func didStartSwipeFromLeftToRight(in cell: TaskTableViewCell)
+    func didCancelSwipeFromLeftToRight(in cell: TaskTableViewCell)
+    func didFinishSwipeFromLeftToRight(in cell: TaskTableViewCell)
+    
+    func didFinishSwipeFromRightToLeft(in cell: TaskTableViewCell)
 }
 
 public class TaskTableViewCell: UITableViewCell {
@@ -23,11 +26,7 @@ public class TaskTableViewCell: UITableViewCell {
     private var progressWhenInterrupted: CGFloat = 0
     private let minimunProgressToCompleteAnimation: CGFloat = 0.15
     private var initialTranslationX: CGFloat!
-    private var swipeDirection: SwipeDirection = .none {
-        didSet {
-            print(swipeDirection)
-        }
-    }
+    private var swipeDirection: SwipeDirection = .none
     
     weak var swipeDelegate: TaskTableViewCellSwipeDelegate?
     
@@ -312,14 +311,17 @@ extension TaskTableViewCell {
                                             constant: -17).isActive = true
         
         let animator = UIViewPropertyAnimator(duration: duration, curve: .easeInOut) { [unowned self] in
+            self.swipeDelegate?.didStartSwipeFromLeftToRight(in: self)
             self.contentView.frame.origin.x += self.contentView.frame.width
         }
         animator.addCompletion { [unowned self] status in
             self.runningAnimators.removeAll()
             if status == .end {
                 self.addCellClosingAnimation(with: 0.5, target: pullView, completion: { [unowned self] in
-                    self.swipeDelegate?.didSwipeFromLeftToRight(in: self)
+                    self.swipeDelegate?.didFinishSwipeFromLeftToRight(in: self)
                 })
+            } else {
+                self.swipeDelegate?.didCancelSwipeFromLeftToRight(in: self)
             }
         }
         runningAnimators.append(animator)
@@ -378,7 +380,7 @@ extension TaskTableViewCell {
             self.runningAnimators.removeAll()
             if status == .end {
                 self.addCellClosingAnimation(with: 0.5, target: pullView, completion: { [unowned self] in
-                    self.swipeDelegate?.didSwipeFromRightToLeft(in: self)
+                    self.swipeDelegate?.didFinishSwipeFromRightToLeft(in: self)
                 })
             }
         }
@@ -401,7 +403,6 @@ extension TaskTableViewCell {
     
     @objc private func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
         let translation = recognizer.translation(in: contentView)
-        print(translation)
         switch recognizer.state {
         case .began:
             initialTranslationX = 0

@@ -19,6 +19,40 @@ public class TaskListViewController: UIViewController {
     fileprivate var heightOfHeaderTag: CGFloat!
     private var alsoTaggedHeader: UIView!
     
+    // MARK: - Swipe Control
+    
+    private var isCleaningQueues: Bool = false
+    
+    private var leftToRightSwipeCompletedQueue: [TaskTableViewCell] = [] {
+        didSet {
+            completeLeftToRightSwipesIfPossible()
+            print("completed queue:\n\(leftToRightSwipeCompletedQueue)")
+        }
+    }
+    
+    private var leftToRightSwipeUpdateQueue: [TaskTableViewCell] = [] {
+        didSet {
+            completeLeftToRightSwipesIfPossible()
+            print("update queue:\n\(leftToRightSwipeUpdateQueue)")
+        }
+    }
+    
+    private func completeLeftToRightSwipesIfPossible() {
+        guard !isCleaningQueues else { return }
+        guard leftToRightSwipeCompletedQueue.count == leftToRightSwipeUpdateQueue.count else { return }
+        leftToRightSwipeCompletedQueue.forEach {
+            guard leftToRightSwipeUpdateQueue.contains($0) else { return }
+        }
+        leftToRightSwipeCompletedQueue.forEach {
+            guard let index = tableView.indexPath(for: $0) else { return }
+            viewModel.toggleComplete(taskAt: index)
+        }
+        isCleaningQueues = true
+        leftToRightSwipeCompletedQueue.removeAll()
+        leftToRightSwipeUpdateQueue.removeAll()
+        isCleaningQueues = false
+    }
+
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
     
@@ -278,12 +312,21 @@ extension TaskListViewController: StoryboardInstantiable {
 
 extension TaskListViewController: TaskTableViewCellSwipeDelegate {
     
-    public func didSwipeFromLeftToRight(in cell: TaskTableViewCell) {
-        guard let indexPath = tableView.indexPath(for: cell) else { return }
-        viewModel.toggleComplete(taskAt: indexPath)
+    public func didStartSwipeFromLeftToRight(in cell: TaskTableViewCell) {
+        guard !leftToRightSwipeUpdateQueue.contains(cell) else { return }
+        leftToRightSwipeUpdateQueue.append(cell)
     }
     
-    public func didSwipeFromRightToLeft(in cell: TaskTableViewCell) {
+    public func didCancelSwipeFromLeftToRight(in cell: TaskTableViewCell) {
+        guard let index = leftToRightSwipeUpdateQueue.firstIndex(of: cell) else { return }
+        leftToRightSwipeUpdateQueue.remove(at: index)
+    }
+    
+    public func didFinishSwipeFromLeftToRight(in cell: TaskTableViewCell) {
+        leftToRightSwipeCompletedQueue.append(cell)
+    }
+    
+    public func didFinishSwipeFromRightToLeft(in cell: TaskTableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         viewModel.delete(taskAt: indexPath)
     }
