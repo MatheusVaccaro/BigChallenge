@@ -14,6 +14,8 @@ public protocol TaskTableViewCellSwipeDelegate: class {
     func didCancelSwipeFromLeftToRight(in cell: TaskTableViewCell)
     func didFinishSwipeFromLeftToRight(in cell: TaskTableViewCell)
     
+    func didStartSwipeFromRightToLeft(in cell: TaskTableViewCell)
+    func didCancelSwipeFromRightToLeft(in cell: TaskTableViewCell)
     func didFinishSwipeFromRightToLeft(in cell: TaskTableViewCell)
 }
 
@@ -374,6 +376,7 @@ extension TaskTableViewCell {
         stackView.trailingAnchor.constraint(equalTo: pullView.trailingAnchor, constant: -17).isActive = true
         
         let animator = UIViewPropertyAnimator(duration: duration, curve: .easeInOut) { [unowned self] in
+            self.swipeDelegate?.didStartSwipeFromRightToLeft(in: self)
             self.contentView.frame.origin.x -= self.contentView.frame.width
         }
         animator.addCompletion { [unowned self] status in
@@ -382,6 +385,8 @@ extension TaskTableViewCell {
                 self.addCellClosingAnimation(with: 0.5, target: pullView, completion: { [unowned self] in
                     self.swipeDelegate?.didFinishSwipeFromRightToLeft(in: self)
                 })
+            } else {
+                self.swipeDelegate?.didCancelSwipeFromRightToLeft(in: self)
             }
         }
         runningAnimators.append(animator)
@@ -515,7 +520,7 @@ extension TaskTableViewCell {
     }
 }
 
-private enum SwipeDirection {
+enum SwipeDirection {
     case rightToLeft
     case leftToRight
     case none
