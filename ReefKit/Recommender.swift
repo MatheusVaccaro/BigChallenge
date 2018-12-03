@@ -26,7 +26,7 @@ public class Recommender {
     
     public init(tasks: [Task]) {
         var toDo = tasks
-            .filter { !$0.isCompleted && !$0.isPrivate }
+            .filter { !$0.isCompleted && !$0.isPrivate && !$0.isFault}
         
         toDo = toDo.filter {
             if $0.isPinned { pinnedTasks.append($0); return false }
