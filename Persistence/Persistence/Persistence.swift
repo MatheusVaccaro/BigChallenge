@@ -65,14 +65,12 @@ public class Persistence: PersistenceProtocol {
     }
     
     public func save() {
-        dispatchQueue.async {
-            do {
-                try self.localPersistence.save()
-            } catch CoreDataError.couldNotSaveContext(let reason) {
-                fatalError(reason)
-            } catch {
-                fatalError("Unexpected error: \(error).")
-            }
+        do {
+            try self.localPersistence.save()
+        } catch CoreDataError.couldNotSaveContext(let reason) {
+            fatalError(reason)
+        } catch {
+            print("Unexpected error: \(error).")
         }
     }
     
