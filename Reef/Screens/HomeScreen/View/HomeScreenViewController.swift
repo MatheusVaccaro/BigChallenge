@@ -69,11 +69,6 @@ class HomeScreenViewController: UIViewController {
         removeSettingsButton()
     }
     
-    func reloadColors() {
-        taskListViewController?.tableView.reloadData()
-        tagCollectionViewController?.configureColors()
-    }
-    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         newTaskLabel.font = UIFont.font(sized: 13, weight: .medium, with: .body)
         emptyStateTitleLabel.font = UIFont.font(sized: 18, weight: .bold, with: .title2)
@@ -285,5 +280,12 @@ extension HomeScreenViewController {
     override func accessibilityPerformMagicTap() -> Bool {
         viewModel.startAddTask()
         return true
+    }
+}
+
+extension HomeScreenViewController: ThemeCompatible {
+    func reloadColors() {
+        taskListViewController?.tableView.reloadData()
+        tagCollectionViewController?.configureColors()
     }
 }

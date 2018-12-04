@@ -9,7 +9,7 @@
 import UIKit
 
 class Dark: Theme {
-    
+    static let identifier: String = "com.bigBeanie.finalChallenge.darkTheme"
     static let name: String = Strings.Settings.Theme.darkTitle
     
     static let emptyStateOn: UIImage = UIImage(named: "emptyStateOnClassic")!

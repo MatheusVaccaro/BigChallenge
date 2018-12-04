@@ -44,6 +44,7 @@
                     <constraint firstItem="ivZ-gt-SO3" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="trailing" constant="24" id="fw2-if-ZH7"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="rightArrow" destination="lP0-ls-RVx" id="y0p-aK-AsO"/>

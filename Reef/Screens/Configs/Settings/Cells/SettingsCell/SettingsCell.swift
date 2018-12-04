@@ -22,7 +22,7 @@ class SettingsCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentView.backgroundColor = ReefColors.background
+        backgroundView?.backgroundColor = .clear
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

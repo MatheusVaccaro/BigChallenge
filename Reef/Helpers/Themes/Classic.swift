@@ -9,7 +9,7 @@
 import UIKit
 
 class Classic: Theme {
-    
+    static let identifier: String = "Classic"
     static let name: String = Strings.Settings.Theme.classicTitle
     
     static let emptyStateOn: UIImage = UIImage(named: "emptyStateOnClassic")!

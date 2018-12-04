@@ -48,8 +48,17 @@ class ThemeTableViewCell: UITableViewCell {
         layer.cornerRadius = 6.3
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if viewModel.canSelect {
+            super.touchesBegan(touches, with: event)
+        } else {
+            viewModel.buy()
+        }
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         selectedImageView.isHidden = !selected
+        priceLabel.isHidden = selected
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -65,9 +74,6 @@ class ThemeTableViewCell: UITableViewCell {
     }
     
     private func reloadData() {
-        titleLabel.text = "titlePlaceholder"
-        priceLabel.text = "price"
-        
         configureContent()
         configureColors()
         createTags()
@@ -75,6 +81,8 @@ class ThemeTableViewCell: UITableViewCell {
     
     private func configureContent() {
         titleLabel.text = viewModel.theme.name
+        priceLabel.text = viewModel.priceText
+        
         selectedImageView.image = UIImage(named: viewModel.selectedImageName)?.withRenderingMode(.alwaysTemplate)
     }
     

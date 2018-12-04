@@ -8,12 +8,13 @@
 
 import UIKit
 
-protocol InAppPurchase {
-    static var name: String { get }
-    // ...
+protocol ThemeCompatible {
+    func reloadColors()
 }
 
 protocol Theme {
+    
+    static var identifier: String { get }
     static var name: String { get }
     
     static var statusBarStyle: UIStatusBarStyle { get }
@@ -68,6 +69,10 @@ extension Theme {
 class ReefColors: Theme {
     
     static var theme: Theme.Type = Dark.self
+    
+    static var identifier: String {
+        return theme.identifier
+    }
     
     static var name: String {
         return theme.name

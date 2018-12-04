@@ -24,10 +24,13 @@ class SettingsCoordinator: Coordinator {
     }
     
     private func showThemeSelection() {
-        let settingsViewController = ThemeSelectViewController.instantiate()
-        settingsViewController.title = Strings.Settings.Theme.title
+        let themeSelectionViewController = ThemeSelectViewController.instantiate()
         
-        presenter.pushViewController(settingsViewController, animated: true)
+        themeSelectionViewController.viewModel = ThemeSelectionViewModel()
+        themeSelectionViewController.viewModel.delegate = themeSelectionViewController
+        
+        themeSelectionViewController.title = Strings.Settings.Theme.title
+        presenter.pushViewController(themeSelectionViewController, animated: true)
     }
     
     private func showSettings() {
