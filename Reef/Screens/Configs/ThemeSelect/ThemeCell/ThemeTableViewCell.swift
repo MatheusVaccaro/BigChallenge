@@ -69,7 +69,7 @@ class ThemeTableViewCell: UITableViewCell {
     }
     
     override func layoutIfNeeded() {
-        layer.shadowColor = ReefColors.shadow
+        layer.shadowColor = viewModel.theme.shadow
         super.layoutIfNeeded()
     }
     
@@ -108,7 +108,7 @@ class ThemeTableViewCell: UITableViewCell {
             view.layer.shadowRadius = 6.3
             view.layer.shadowOffset = CGSize(width: 0, height: 5)
             view.layer.masksToBounds = false
-            view.layer.shadowColor = ReefColors.shadow
+            view.layer.shadowColor = viewModel.theme.shadow
             view.layer.shadowOpacity = 1
             view.layer.shadowRadius = 5
 
@@ -119,12 +119,15 @@ class ThemeTableViewCell: UITableViewCell {
             gradientLayer.startPoint = CGPoint(x: 0, y: 1)
             gradientLayer.endPoint = CGPoint(x: 1, y: 0)
             gradientLayer.colors = index == 0
-                ? ReefColors.defaultGradient
+                ? viewModel.theme
+                    .defaultGradient
                 : UIColor.tagColors[index-1]
             
             view.layer.addSublayer(gradientLayer)
             
-            background.addSubview(view)
+            if !view.isDescendant(of: background) {
+                background.addSubview(view)
+            }
         }
     }
 }

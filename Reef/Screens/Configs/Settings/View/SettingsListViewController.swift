@@ -201,5 +201,6 @@ extension SettingsListViewController: ThemeCompatible {
         tableView.reloadData()
         view.backgroundColor = ReefColors.background
         closeButton?.tintColor = ReefColors.largeTitle
+        navigationItem.backBarButtonItem?.tintColor = ReefColors.largeTitle
     }
 }
