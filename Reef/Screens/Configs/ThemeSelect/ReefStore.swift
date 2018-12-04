@@ -29,7 +29,7 @@ open class ReefStore: NSObject {
     public init(productIds: Set<String>) {
         productIdentifiers = productIds
         for productIdentifier in productIds {
-            let purchased = false //UserDefaults.standard.bool(forKey: productIdentifier) //TODO: save on coredata
+            let purchased = UserDefaults.standard.bool(forKey: productIdentifier) //TODO: save on coredata
             if purchased {
                 purchasedProductIdentifiers.insert(productIdentifier)
                 print("Previously purchased: \(productIdentifier)")
