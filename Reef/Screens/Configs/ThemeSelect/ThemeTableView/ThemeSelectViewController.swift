@@ -40,6 +40,10 @@ class ThemeSelectViewController: UIViewController {
         tableView.backgroundColor = .clear
         tableView.isScrollEnabled = false
         tableView.separatorStyle = .none
+        
+        if let row = viewModel.data.firstIndex(where: { $0.theme == ReefColors.theme }) {
+            tableView.selectRow(at: IndexPath(row: row, section: 0), animated: false, scrollPosition: .none)
+        }
     }
     
     func configureColors() {
@@ -135,6 +139,9 @@ extension ThemeSelectViewController: ThemeSelectionViewModelDelegate {
     
     func didLoadProducts() {
         tableView.reloadData()
+        if let row = viewModel.data.firstIndex(where: { $0.theme == ReefColors.theme }) {        
+            tableView.selectRow(at: IndexPath(row: row, section: 0), animated: false, scrollPosition: .none)
+        }
     }
     
     func select(_ productID: String) {
