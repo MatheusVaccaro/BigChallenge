@@ -285,6 +285,7 @@ extension HomeScreenViewController {
 
 extension HomeScreenViewController: ThemeCompatible {
     func reloadColors() {
+        configureColors()
         taskListViewController?.tableView.reloadData()
         tagCollectionViewController?.configureColors()
     }
