@@ -27,12 +27,15 @@ class SettingsToggleableCell: SettingsCell {
         
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         
-        RemindersImporter.shared().isSyncingEnabled = !cellSwitch.isOn
-        cellSwitch.setOn(!cellSwitch.isOn, animated: true)
+        if touches.count < 2 {
+            RemindersImporter.shared().isSyncingEnabled.toggle()
+            cellSwitch.setOn(RemindersImporter.shared().isSyncingEnabled, animated: true)
+        }
     }
+    
     
     override func configWith(_ viewModel: SettingsCellViewModel) {
         super.configWith(viewModel)
