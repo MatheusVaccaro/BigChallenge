@@ -245,19 +245,19 @@ extension TaskListViewController: UITableViewDataSource {
 
 extension TaskListViewController: taskListViewModelUIDelegate {
     func taskListViewModel(_ taskListViewModel: TaskListViewModel, didUpdateAt indexPaths: [IndexPath]) {
-        tableView.reloadRows(at: indexPaths, with: .automatic)
+        tableView.reloadRows(at: indexPaths, with: .fade)
     }
     
     func taskListViewModel(_ taskListViewModel: TaskListViewModel, didInsertAt indexPaths: [IndexPath]) {
-        tableView.insertRows(at: indexPaths, with: .automatic)
+        tableView.insertRows(at: indexPaths, with: .fade)
     }
     
     func taskListViewModel(_ taskListViewModel: TaskListViewModel, didDeleteRowsAt indexPaths: [IndexPath]) {
-        tableView.deleteRows(at: indexPaths, with: .automatic)
+        tableView.deleteRows(at: indexPaths, with: .fade)
     }
     
     func taskListViewModel(_ taskListViewModel: TaskListViewModel, didDeleteSection section: Int) {
-        tableView.deleteSections([section], with: .automatic)
+        tableView.deleteSections([section], with: .fade)
     }
     
     func taskListViewModelDidUpdate(_ taskListViewModel: TaskListViewModel) {
