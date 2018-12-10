@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 
 protocol SettingsListViewControllerDelegate: class {
     func didPressThemeCell()
@@ -131,6 +132,9 @@ extension SettingsListViewController: UITableViewDelegate {
         print("selected row at \(indexPath.row)")
         if indexPath.section == 0, indexPath.row == 0 {
             delegate?.didPressThemeCell()
+        }
+        if indexPath.section == 1, indexPath.row == 0 {
+            SKStoreReviewController.requestReview()
         }
     }
     
