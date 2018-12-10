@@ -13,6 +13,10 @@ class SettingsCellViewModel {
     private(set) var type: SettingsCellType
     private(set) var title: String
     
+    var cellIdentifier: String {
+        return type == .toggleable ? "SettingsToggleableTableViewCell" : "SettingsTableViewCell"
+    }
+    
     let rightArrowImageName = "rightArrow"
     
     init(type: SettingsCellType, title: String) {
