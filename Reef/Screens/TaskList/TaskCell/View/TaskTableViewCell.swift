@@ -32,6 +32,8 @@ public class TaskTableViewCell: UITableViewCell {
     private var deleteButtonState: DeleteButtonState = .collapsed
     var deleteButton: UIButton?
     
+    private var canTriggerHaptic: Bool = false
+    
     weak var swipeDelegate: TaskTableViewCellSwipeDelegate?
     
     // MARK: - Properties
@@ -404,6 +406,7 @@ extension TaskTableViewCell {
         switch recognizer.state {
         case .began:
             initialTranslationX = 0
+            canTriggerHaptic = true
         case .changed:
             let swipeDirection: SwipeDirection = translation.x >= initialTranslationX ? .leftToRight : .rightToLeft
             let swipeDirectionChanged: Bool = swipeDirection != self.swipeDirection ? true : false
@@ -418,6 +421,7 @@ extension TaskTableViewCell {
             } else {
                 let fraction = fractionComplete(swipeDirection: swipeDirection, translation: translation)
                 updateInteractiveTransition(fractionComplete: fraction)
+                triggetHapticIfPossible(fractionComplete: fraction)
             }
         case .ended:
             let fraction = fractionComplete(swipeDirection: swipeDirection, translation: translation)
@@ -516,6 +520,18 @@ extension TaskTableViewCell {
         }
         let fractionComplete = translationX / animationDistance + progressWhenInterrupted
         return fractionComplete
+    }
+    
+    // MARK: - Haptic
+    
+    private func triggetHapticIfPossible(fractionComplete: CGFloat) {
+        if canTriggerHaptic && fractionComplete >= minimunProgressToCompleteAnimation {
+            UISelectionFeedbackGenerator().selectionChanged()
+            canTriggerHaptic.toggle()
+        } else if !canTriggerHaptic && fractionComplete < minimunProgressToCompleteAnimation {
+            UISelectionFeedbackGenerator().selectionChanged()
+            canTriggerHaptic.toggle()
+        }
     }
 }
 
