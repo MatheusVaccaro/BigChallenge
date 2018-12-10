@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 
 protocol SettingsListViewControllerDelegate: class {
     func didPressThemeCell()
@@ -32,7 +33,10 @@ class SettingsListViewController: UIViewController {
         tableView.dataSource = self
         
         tableView.register(UINib(nibName: "SettingsCell", bundle: nil),
-                           forCellReuseIdentifier: SettingsCell.reuseIdentifier)
+                           forCellReuseIdentifier: "SettingsTableViewCell")
+        
+        tableView.register(UINib(nibName: "SettingsToggleableCell", bundle: nil),
+                           forCellReuseIdentifier: "SettingsToggleableTableViewCell")
         
         tableView.estimatedRowHeight = 34
         tableView.rowHeight = UITableView.automaticDimension
@@ -114,9 +118,9 @@ extension SettingsListViewController: UITableViewDataSource {
         guard let cellViewModel = viewModel.viewModelForCellIn(indexPath) else {
             return UITableViewCell()
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.reuseIdentifier,
-                                                 for: indexPath) as! SettingsCell
         
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellViewModel.cellIdentifier,
+                                                 for: indexPath) as! SettingsCell
         cell.configWith(cellViewModel)
         
         return cell
@@ -132,6 +136,9 @@ extension SettingsListViewController: UITableViewDelegate {
         if indexPath.section == 0, indexPath.row == 1 {
             ReefStore.restorePurchases()
             //do something else
+        }
+        if indexPath.section == 1, indexPath.row == 0 {
+            SKStoreReviewController.requestReview()
         }
     }
     

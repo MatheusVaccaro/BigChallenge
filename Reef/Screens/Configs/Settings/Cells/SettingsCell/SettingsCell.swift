@@ -9,8 +9,6 @@
 import UIKit
 
 class SettingsCell: UITableViewCell {
-
-    static var reuseIdentifier: String = "SettingsTableViewCell"
     
     // MARK: - IBOutlets
     
@@ -32,6 +30,7 @@ class SettingsCell: UITableViewCell {
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(false, animated: false)
     }
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         titleText.font = UIFont.font(sized: 15, weight: .regular, with: .body)

@@ -30,9 +30,9 @@ class SettingsListViewModel {
             case 0:
                 return SettingsCellViewModel(type: .singleAction, title: Strings.Settings.Social.rateReef)
             case 1:
-                return SettingsCellViewModel(type: .singleAction, title: Strings.Settings.Social.reefSubreddit)
-            case 2:
                 return SettingsCellViewModel(type: .selection, title: Strings.Settings.Social.shareReef)
+            case 2:
+                return SettingsCellViewModel(type: .singleAction, title: Strings.Settings.Social.reefSubreddit)
             default:
                 return nil
             }
@@ -57,9 +57,9 @@ class SettingsListViewModel {
         case 0:
             return 2
         case 1:
-            return 3
+            return 1
         case 2:
-            return 2
+            return 1
         default:
             return 0
         }

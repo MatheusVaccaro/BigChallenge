@@ -22,6 +22,8 @@
 		16294E38213F0B860092DEA2 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16294E37213F0B860092DEA2 /* TodayViewModel.swift */; };
 		16294E3A213F0C190092DEA2 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16294E39213F0C190092DEA2 /* Authentication.swift */; };
 		1629967C2135D407008144CE /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FDC13B210F809A008FA931 /* NotificationManager.swift */; };
+		16E514D621B1F3DE004B1FB2 /* SettingsToggleableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16E8258D219A19250007C02A /* SettingsToggleableCell.xib */; };
+		16E514D721B1F3FB004B1FB2 /* SettingsToggleableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E8258C219A19250007C02A /* SettingsToggleableCell.swift */; };
 		16E8257D2193601E0007C02A /* SettingsList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16E8257C2193601E0007C02A /* SettingsList.storyboard */; };
 		16E8257F2193603B0007C02A /* SettingsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E8257E2193603B0007C02A /* SettingsListViewController.swift */; };
 		16E82581219374790007C02A /* SettingsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E82580219374790007C02A /* SettingsListViewModel.swift */; };
@@ -1768,6 +1770,7 @@
 				C26EC74521547282000E9CB9 /* Barlow-LightItalic.ttf in Resources */,
 				2282D47F2194A70D005D386F /* icon@3x.png in Resources */,
 				22E3E307215525DC00D6EF32 /* TaskCell.xib in Resources */,
+				16E514D621B1F3DE004B1FB2 /* SettingsToggleableCell.xib in Resources */,
 				22253D5B2192DF4B00159CD5 /* ThemeSelection.storyboard in Resources */,
 				221BA8AF20F6991200BE2AC1 /* HomeScreen.storyboard in Resources */,
 				16E8DDD4211205E8004F66D6 /* Barlow-Medium.ttf in Resources */,
@@ -2061,6 +2064,7 @@
 				22F23E9C212E41700064EE05 /* TagModel.swift in Sources */,
 				220BB94C2146FAF9004A8309 /* TaskCreationViewModel.swift in Sources */,
 				C2A1115320BA036800ABB161 /* NewTaskCoordinator.swift in Sources */,
+				16E514D721B1F3FB004B1FB2 /* SettingsToggleableCell.swift in Sources */,
 				22205ADD20FF7ADF007689D7 /* BigTagCollectionViewController.swift in Sources */,
 				C23753AE20B6461E00C1CE15 /* Coordinator.swift in Sources */,
 				293204332136329E00E23E72 /* HomeScreenViewModel.swift in Sources */,

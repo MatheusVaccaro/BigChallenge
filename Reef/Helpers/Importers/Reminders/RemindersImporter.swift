@@ -12,11 +12,12 @@ import ReefKit
 
 struct RemindersImporterUserDefaultsKeys {
     static let hasImportedOnce = "remindersImporterHasImportedOnce"
+    static let isSyncingEnabled = "remindersSyncEnabled"
 }
 
 public class RemindersImporter {
     
-    public static var instance: RemindersImporter?
+    private static var instance: RemindersImporter!
     
     weak var delegate: RemindersImporterDelegate?
     
@@ -24,8 +25,8 @@ public class RemindersImporter {
     private let tagModel: TagModel
     private let remindersDB: RemindersCommunicator
     
-    private(set) var isSyncing: Bool
-    private(set) var isImporting: Bool
+    private var isSyncing: Bool
+    private var isImporting: Bool
     
     private var lastImportedTags: Set<Tag>
     private var lastImportedTasks: Set<Task>
@@ -35,8 +36,13 @@ public class RemindersImporter {
     }
     
     static var hasImportedOnce: Bool {
-        set { UserDefaults.standard.set(newValue, forKey: RemindersImporterUserDefaultsKeys.hasImportedOnce) }
         get { return UserDefaults.standard.bool(forKey: RemindersImporterUserDefaultsKeys.hasImportedOnce) }
+        set { UserDefaults.standard.set(newValue, forKey: RemindersImporterUserDefaultsKeys.hasImportedOnce) }
+    }
+    
+    var isSyncingEnabled: Bool {
+        get { return UserDefaults.standard.bool(forKey: RemindersImporterUserDefaultsKeys.isSyncingEnabled) }
+        set { UserDefaults.standard.set(newValue, forKey: RemindersImporterUserDefaultsKeys.isSyncingEnabled) }
     }
 
     init(taskModel: TaskModel, tagModel: TagModel, communicator: RemindersCommunicator = RemindersCommunicator()) {
@@ -48,6 +54,13 @@ public class RemindersImporter {
         defer { remindersDB.delegate = self }
         self.isImporting = false
         self.isSyncing = false
+        self.isSyncingEnabled = false
+        
+        RemindersImporter.instance = self
+    }
+    
+    class func shared() -> RemindersImporter {
+        return instance
     }
     
     /**
@@ -315,12 +328,18 @@ public class RemindersImporter {
             self.isSyncing = false
         }
     }
+    
+    func attemptToSync() {
+        guard isSyncingEnabled else { return }
+        
+        syncWithReminders()
+    }
 }
 
 extension RemindersImporter: RemindersCommunicatorDelegate {
     func remindersCommunicatorDidDetectEventStoreChange(_ remindersCommunicator: RemindersCommunicator,
                                                         notification: NSNotification) {
-        //syncWithReminders()
+        attemptToSync()
     }
     
     func remindersCommunicatorWasGrantedAccessToReminders(_ remindersCommunicator: RemindersCommunicator) {
