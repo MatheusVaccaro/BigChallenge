@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 
 protocol SettingsListViewControllerDelegate: class {
     func didPressThemeCell()
@@ -135,6 +136,9 @@ extension SettingsListViewController: UITableViewDelegate {
         if indexPath.section == 0, indexPath.row == 1 {
             ReefStore.restorePurchases()
             //do something else
+        }
+        if indexPath.section == 1, indexPath.row == 0 {
+            SKStoreReviewController.requestReview()
         }
     }
     
