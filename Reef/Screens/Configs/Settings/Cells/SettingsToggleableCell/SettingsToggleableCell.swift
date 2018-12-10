@@ -8,30 +8,34 @@
 
 import UIKit
 
-class SettingsToggleableCell: UITableViewCell {
-
-    static var reuseIdentifier: String = "SettingsToggleableTableViewCell"
+class SettingsToggleableCell: SettingsCell {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var titleText: UILabel!
+    @IBOutlet weak var cellSwitch: UISwitch!
     
     private var viewModel: SettingsCellViewModel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        cellSwitch.transform = CGAffineTransform.init(scaleX: 0.75, y: 0.75)
+        cellSwitch.thumbTintColor = ReefColors.theme.cellTagLabel
+        cellSwitch.onTintColor = ReefColors.theme.largeTitle
+        
+        cellSwitch.isOn = RemindersImporter.shared().isSyncingEnabled
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
 //        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
+        RemindersImporter.shared().isSyncingEnabled = !cellSwitch.isOn
+        cellSwitch.setOn(!cellSwitch.isOn, animated: true)
     }
     
-    func configWith(_ viewModel: SettingsCellViewModel) {
+    override func configWith(_ viewModel: SettingsCellViewModel) {
+        super.configWith(viewModel)
         
-        self.viewModel = viewModel
-        
-        titleText.text = viewModel.title
     }
 }
