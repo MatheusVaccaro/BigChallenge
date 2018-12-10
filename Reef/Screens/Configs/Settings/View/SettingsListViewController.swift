@@ -135,7 +135,10 @@ extension SettingsListViewController: UITableViewDelegate {
         }
         if indexPath.section == 0, indexPath.row == 1 {
             ReefStore.restorePurchases()
-            //do something else
+            let action = UIAlertController(title: Strings.Settings.Theme.restorePurchases, message: Strings.General.completeActionTitle, preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+            action.addAction(okButton)
+            self.present(action, animated: true, completion: nil)
         }
         if indexPath.section == 1, indexPath.row == 0 {
             SKStoreReviewController.requestReview()
