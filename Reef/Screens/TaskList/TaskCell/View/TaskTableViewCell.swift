@@ -27,6 +27,7 @@ public class TaskTableViewCell: UITableViewCell {
     private var runningAnimators = [UIViewPropertyAnimator]()
     private var progressWhenInterrupted: CGFloat = 0
     private let minimunProgressToCompleteAnimation: CGFloat = 0.15
+    private let minimunProgressToDeleteAnimation: CGFloat = 0.5
     private var initialTranslationX: CGFloat!
     private var swipeDirection: SwipeDirection = .none
     private var deleteButtonState: DeleteButtonState = .collapsed
@@ -334,57 +335,96 @@ extension TaskTableViewCell {
     }
     
     private func addDeleteButtonAnimation(for state: DeleteButtonState, with duration: TimeInterval) {
+        //        let pullView = UIView(frame: CGRect(x: contentView.frame.width,
+        //                                            y: contentView.frame.minY,
+        //                                            width: contentView.frame.width * 0.2,
+        //                                            height: contentView.frame.height))
         let pullView = UIView(frame: CGRect(x: contentView.frame.width,
                                             y: contentView.frame.minY,
-                                            width: contentView.frame.width * 0.2,
+                                            width: contentView.frame.width,
                                             height: contentView.frame.height))
         contentView.addSubview(pullView)
         
-        pullView.backgroundColor = .clear
+        //        pullView.backgroundColor = .clear
+        pullView.backgroundColor = ReefColors.deleteRed
         
-        let trashImage = UIImage(named: "redTrashIcon")
-        let button = UIButton(frame: CGRect(origin: CGPoint.zero, size: trashImage!.size))
-        button.layer.zPosition = 100
-        pullView.addSubview(button)
-        self.deleteButton = button
-        button.setImage(trashImage, for: .normal)
-        button.addTarget(self, action: #selector(didTapDeleteButton), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.adjustsImageSizeForAccessibilityContentSizeCategory = true
-        button.topAnchor.constraint(equalTo: pullView.topAnchor, constant: 10).isActive = true
-        button.bottomAnchor.constraint(equalTo: pullView.bottomAnchor, constant: -10).isActive = true
-        button.centerXAnchor.constraint(equalTo: pullView.centerXAnchor).isActive = true
-        button.widthAnchor.constraint(equalTo: button.heightAnchor).isActive = true
+        let trashImageView = UIImageView(image: UIImage(named: "trash"))
+        trashImageView.translatesAutoresizingMaskIntoConstraints = false
+        pullView.addSubview(trashImageView)
+        trashImageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
+        trashImageView.centerYAnchor.constraint(equalTo: pullView.centerYAnchor).isActive = true
+        trashImageView.leadingAnchor.constraint(equalTo: pullView.leadingAnchor, constant: 12).isActive = true
+        trashImageView.widthAnchor.constraint(equalTo: trashImageView.heightAnchor).isActive = true
+        trashImageView.widthAnchor.constraint(equalToConstant: trashImageView.frame.width * 1.5).isActive = true
+        
+        let taskTextLabel = UILabel(frame: CGRect.zero)
+        taskTextLabel.text = RandomSwipeTextGenerator.shared.nextText(forTask: .deleted)
+        taskTextLabel.textColor = .white
+        taskTextLabel.font = UIFont.font(sized: 17.0,
+                                         weight: FontWeight.mediumItalic,
+                                         with: .body,
+                                         fontName: .barlow)
+        
+        let taskStatusLabel = UILabel(frame: CGRect.zero)
+        taskStatusLabel.text = Strings.Task.Cell.Swipe.Status.deleted
+        taskStatusLabel.textColor = .white
+        taskStatusLabel.font = UIFont.font(sized: 13.0,
+                                           weight: .medium,
+                                           with: .body,
+                                           fontName: .barlow)
+        
+        let stackView = UIStackView(arrangedSubviews: [taskTextLabel, taskStatusLabel])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .trailing
+        stackView.spacing = 3
+        
+        pullView.addSubview(stackView)
+        stackView.centerYAnchor.constraint(equalTo: pullView.centerYAnchor).isActive = true
+        stackView.leadingAnchor.constraint(greaterThanOrEqualTo: trashImageView.trailingAnchor,
+                                           constant: 17).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: pullView.trailingAnchor, constant: -17).isActive = true
+        
+        //        let trashImage = UIImage(named: "redTrashIcon")
+        //        let button = UIButton(frame: CGRect(origin: CGPoint.zero, size: trashImage!.size))
+        //        button.layer.zPosition = 100
+        //        pullView.addSubview(button)
+        //        self.deleteButton = button
+        //        button.setImage(trashImage, for: .normal)
+        //        button.addTarget(self, action: #selector(didTapDeleteButton), for: .touchUpInside)
+        //        button.translatesAutoresizingMaskIntoConstraints = false
+        //        button.adjustsImageSizeForAccessibilityContentSizeCategory = true
+        //        button.topAnchor.constraint(equalTo: pullView.topAnchor, constant: 10).isActive = true
+        //        button.bottomAnchor.constraint(equalTo: pullView.bottomAnchor, constant: -10).isActive = true
+        //        button.centerXAnchor.constraint(equalTo: pullView.centerXAnchor).isActive = true
+        //        button.widthAnchor.constraint(equalTo: button.heightAnchor).isActive = true
         
         let animator = UIViewPropertyAnimator(duration: duration, curve: .easeInOut) { [unowned self] in
             self.swipeDelegate?.didStartSwipeFromRightToLeft(in: self)
-            switch state {
-            case .collapsed:
-                self.contentView.frame.origin.x += pullView.frame.width
-            case .expanded:
-                self.contentView.frame.origin.x -= pullView.frame.width
-            }
-            
+            self.contentView.frame.origin.x -= self.contentView.frame.width
+            //            switch state {
+            //            case .collapsed:
+            //                self.contentView.frame.origin.x += pullView.frame.width
+            //            case .expanded:
+            //                self.contentView.frame.origin.x -= pullView.frame.width
+            //            }
         }
         animator.addCompletion { [unowned self] status in
             self.runningAnimators.removeAll()
             if status == .end {
-                self.deleteButtonState = state
-                if state == .collapsed {
-                    self.swipeDelegate?.didCancelSwipeFromRightToLeft(in: self)
-                }
-                //                self.addCellClosingAnimation(with: 0.5, target: pullView, completion: { [unowned self] in
-                //                    self.swipeDelegate?.didFinishSwipeFromRightToLeft(in: self)
-                //                })
-                //            } else {
-                //
+                //                self.deleteButtonState = state
+                //                if state == .collapsed {
+                //                    self.swipeDelegate?.didCancelSwipeFromRightToLeft(in: self)
+                //                }
+                self.addCellClosingAnimation(with: 0.5, target: pullView, completion: { [unowned self] in
+                    self.swipeDelegate?.didFinishSwipeFromRightToLeft(in: self)
+                })
+            } else {
+                self.swipeDelegate?.didCancelSwipeFromRightToLeft(in: self)
             }
         }
         runningAnimators.append(animator)
-    }
-    
-    @objc private func didTapDeleteButton() {
-        print("cu")
     }
     
     // MARK: Gesture Recognizers
@@ -421,11 +461,11 @@ extension TaskTableViewCell {
             } else {
                 let fraction = fractionComplete(swipeDirection: swipeDirection, translation: translation)
                 updateInteractiveTransition(fractionComplete: fraction)
-                triggetHapticIfPossible(fractionComplete: fraction)
+                triggetHapticIfPossible(fractionComplete: fraction, swipeDirection: swipeDirection)
             }
         case .ended:
             let fraction = fractionComplete(swipeDirection: swipeDirection, translation: translation)
-            continueInteractiveTransition(fractionComplete: fraction)
+            continueInteractiveTransition(fractionComplete: fraction, swipeDirection: swipeDirection)
             swipeDirection = .none
         default:
             break
@@ -478,8 +518,17 @@ extension TaskTableViewCell {
     }
     
     // Continues or reverse transition on pan .ended
-    private func continueInteractiveTransition(fractionComplete: CGFloat) {
-        let cancel: Bool = fractionComplete < minimunProgressToCompleteAnimation
+    private func continueInteractiveTransition(fractionComplete: CGFloat, swipeDirection: SwipeDirection) {
+        let progress: CGFloat
+        switch swipeDirection {
+        case .leftToRight:
+            progress = minimunProgressToCompleteAnimation
+        case .rightToLeft:
+            progress = minimunProgressToDeleteAnimation
+        default:
+            return
+        }
+        let cancel: Bool = fractionComplete < progress
         let timing = UICubicTimingParameters(animationCurve: .easeInOut)
         if cancel {
             runningAnimators.forEach {
@@ -524,11 +573,20 @@ extension TaskTableViewCell {
     
     // MARK: - Haptic
     
-    private func triggetHapticIfPossible(fractionComplete: CGFloat) {
-        if canTriggerHaptic && fractionComplete >= minimunProgressToCompleteAnimation {
+    private func triggetHapticIfPossible(fractionComplete: CGFloat, swipeDirection: SwipeDirection) {
+        let progress: CGFloat
+        switch swipeDirection {
+        case .leftToRight:
+            progress = minimunProgressToCompleteAnimation
+        case .rightToLeft:
+            progress = minimunProgressToDeleteAnimation
+        default:
+            return
+        }
+        if canTriggerHaptic && fractionComplete >= progress {
             UISelectionFeedbackGenerator().selectionChanged()
             canTriggerHaptic.toggle()
-        } else if !canTriggerHaptic && fractionComplete < minimunProgressToCompleteAnimation {
+        } else if !canTriggerHaptic && fractionComplete < progress {
             UISelectionFeedbackGenerator().selectionChanged()
             canTriggerHaptic.toggle()
         }
