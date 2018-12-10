@@ -29,6 +29,7 @@
                         <rect key="frame" x="246" y="6.5" width="51" height="31"/>
                     </switch>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="ivZ-gt-SO3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="4EF-L8-aHj"/>
                     <constraint firstAttribute="bottom" secondItem="ivZ-gt-SO3" secondAttribute="bottom" constant="8" id="P3P-Zx-DO0"/>
@@ -37,6 +38,7 @@
                     <constraint firstAttribute="trailing" secondItem="yqN-t2-ncj" secondAttribute="trailing" constant="25" id="h1x-j6-0yp"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="cellSwitch" destination="yqN-t2-ncj" id="FmT-9G-Z4w"/>
